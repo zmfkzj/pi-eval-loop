@@ -1,0 +1,124 @@
+{
+  "base": "33ef7f2",
+  "tsc": "Version 5.9.3",
+  "scope": [
+    "pi-eval-loop/src",
+    "pi-eval-loop/bin",
+    "pi-eval-loop/test",
+    "pi-eval-loop/extension",
+    "pi-eval-loop/scripts"
+  ],
+  "configs": {
+    "plain": {
+      "base": {
+        "total": 363,
+        "syntax": 0
+      },
+      "final": {
+        "total": 209,
+        "syntax": 0
+      },
+      "added": 29,
+      "resolved": 183,
+      "addedByFile": {
+        "pi-eval-loop/bin/eval-loop.mjs": 1,
+        "pi-eval-loop/scripts/audit-records.mjs": 8,
+        "pi-eval-loop/scripts/checkjs-compare.mjs": 9,
+        "pi-eval-loop/test/critical-exploration.test.mjs": 7,
+        "pi-eval-loop/test/records-audit.test.mjs": 4
+      },
+      "resolvedByFile": {
+        "pi-eval-loop/bin/eval-loop.mjs": 5,
+        "pi-eval-loop/src/ablation.mjs": 2,
+        "pi-eval-loop/src/app.mjs": 3,
+        "pi-eval-loop/src/evaluator.mjs": 27,
+        "pi-eval-loop/src/gate.mjs": 6,
+        "pi-eval-loop/src/loop.mjs": 101,
+        "pi-eval-loop/src/report.mjs": 1,
+        "pi-eval-loop/src/stats.mjs": 2,
+        "pi-eval-loop/test/ablation.test.mjs": 3,
+        "pi-eval-loop/test/deploy.test.mjs": 2,
+        "pi-eval-loop/test/helpers.mjs": 1,
+        "pi-eval-loop/test/loop.test.mjs": 17,
+        "pi-eval-loop/test/stats-gate.test.mjs": 13
+      },
+      "finalByFile": {
+        "pi-eval-loop/bin/eval-loop.mjs": 21,
+        "pi-eval-loop/extension/index.js": 4,
+        "pi-eval-loop/scripts/audit-records.mjs": 8,
+        "pi-eval-loop/scripts/checkjs-compare.mjs": 9,
+        "pi-eval-loop/src/ablation.mjs": 2,
+        "pi-eval-loop/src/app.mjs": 3,
+        "pi-eval-loop/src/archive.mjs": 2,
+        "pi-eval-loop/src/checks.mjs": 3,
+        "pi-eval-loop/src/datasets.mjs": 6,
+        "pi-eval-loop/src/deploy.mjs": 30,
+        "pi-eval-loop/src/evaluator.mjs": 3,
+        "pi-eval-loop/src/faux-upstream.mjs": 7,
+        "pi-eval-loop/src/grader.mjs": 6,
+        "pi-eval-loop/src/integrity.mjs": 1,
+        "pi-eval-loop/src/loop.mjs": 4,
+        "pi-eval-loop/src/proposer.mjs": 3,
+        "pi-eval-loop/src/protocol.mjs": 7,
+        "pi-eval-loop/src/report.mjs": 2,
+        "pi-eval-loop/src/rng.mjs": 1,
+        "pi-eval-loop/src/runner.mjs": 5,
+        "pi-eval-loop/src/sandbox.mjs": 13,
+        "pi-eval-loop/src/selftest.mjs": 6,
+        "pi-eval-loop/src/util.mjs": 8,
+        "pi-eval-loop/src/worktree.mjs": 4,
+        "pi-eval-loop/test/ablation.test.mjs": 4,
+        "pi-eval-loop/test/critical-exploration.test.mjs": 7,
+        "pi-eval-loop/test/deploy.test.mjs": 6,
+        "pi-eval-loop/test/extension.test.mjs": 4,
+        "pi-eval-loop/test/helpers.mjs": 6,
+        "pi-eval-loop/test/integrity.test.mjs": 6,
+        "pi-eval-loop/test/isolation.test.mjs": 6,
+        "pi-eval-loop/test/loop.test.mjs": 6,
+        "pi-eval-loop/test/records-audit.test.mjs": 4,
+        "pi-eval-loop/test/stats-gate.test.mjs": 2
+      }
+    },
+    "node": {
+      "base": {
+        "total": 232,
+        "syntax": 0
+      },
+      "final": {
+        "total": 49,
+        "syntax": 0
+      },
+      "added": 0,
+      "resolved": 183,
+      "addedByFile": {},
+      "resolvedByFile": {
+        "pi-eval-loop/bin/eval-loop.mjs": 5,
+        "pi-eval-loop/src/ablation.mjs": 2,
+        "pi-eval-loop/src/app.mjs": 3,
+        "pi-eval-loop/src/evaluator.mjs": 27,
+        "pi-eval-loop/src/gate.mjs": 6,
+        "pi-eval-loop/src/loop.mjs": 101,
+        "pi-eval-loop/src/report.mjs": 1,
+        "pi-eval-loop/src/stats.mjs": 2,
+        "pi-eval-loop/test/ablation.test.mjs": 3,
+        "pi-eval-loop/test/deploy.test.mjs": 2,
+        "pi-eval-loop/test/helpers.mjs": 1,
+        "pi-eval-loop/test/loop.test.mjs": 17,
+        "pi-eval-loop/test/stats-gate.test.mjs": 13
+      },
+      "finalByFile": {
+        "pi-eval-loop/src/datasets.mjs": 2,
+        "pi-eval-loop/src/deploy.mjs": 27,
+        "pi-eval-loop/src/faux-upstream.mjs": 4,
+        "pi-eval-loop/src/grader.mjs": 4,
+        "pi-eval-loop/src/protocol.mjs": 2,
+        "pi-eval-loop/src/runner.mjs": 1,
+        "pi-eval-loop/src/sandbox.mjs": 2,
+        "pi-eval-loop/src/selftest.mjs": 1,
+        "pi-eval-loop/test/deploy.test.mjs": 2,
+        "pi-eval-loop/test/integrity.test.mjs": 2,
+        "pi-eval-loop/test/loop.test.mjs": 2
+      }
+    }
+  }
+}

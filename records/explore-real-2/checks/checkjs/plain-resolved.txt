@@ -1,0 +1,183 @@
+pi-eval-loop/bin/eval-loop.mjs | TS2353 | Object literal may only specify known properties, and 'protocolPath' does not exist in type '{ stateDir?: any; strategy?: string; env?: { node: any; nodeDir: any; piCli: any; piModules: any; provider: any; agentDir: any; upstream: any; bwrap: any; orche: any; }; pids?: Set<any>; }'.
+pi-eval-loop/bin/eval-loop.mjs | TS2353 | Object literal may only specify known properties, and 'protocolPath' does not exist in type '{ stateDir?: any; strategy?: string; env?: { node: any; nodeDir: any; piCli: any; piModules: any; provider: any; agentDir: any; upstream: any; bwrap: any; orche: any; }; pids?: Set<any>; }'.
+pi-eval-loop/bin/eval-loop.mjs | TS2353 | Object literal may only specify known properties, and 'protocolPath' does not exist in type '{ stateDir?: any; strategy?: string; env?: { node: any; nodeDir: any; piCli: any; piModules: any; provider: any; agentDir: any; upstream: any; bwrap: any; orche: any; }; pids?: Set<any>; }'.
+pi-eval-loop/bin/eval-loop.mjs | TS2345 | Argument of type '{ tasks: { id: any; source: string; dir: any; repo: any; hidden: any; customGrader: any; family: any; tier: any; hard: boolean; instruction: any; timeoutSec: any; provenance: any; }[]; }' is not assignable to parameter of type '{ tasks: any; split?: string; repeats: any; }'.
+pi-eval-loop/bin/eval-loop.mjs | TS2345 | Argument of type '{ stateDir: any; protocolPath: any; pids: Set<any>; }' is not assignable to parameter of type '{ stateDir: any; loopFactory: any; protocolPath: any; pids: any; log?: () => void; }'.
+pi-eval-loop/src/ablation.mjs | TS2353 | Object literal may only specify known properties, and 'seed' does not exist in type '{ draws?: number; level?: string; }'.
+pi-eval-loop/src/ablation.mjs | TS2322 | Type '(d: any) => boolean' is not assignable to type 'string'.
+pi-eval-loop/src/app.mjs | TS2339 | Property 'protocolPath' does not exist on type '{ stateDir?: any; strategy?: string; env?: { node: any; nodeDir: any; piCli: any; piModules: any; provider: any; agentDir: any; upstream: any; bwrap: any; orche: any; }; pids?: Set<any>; }'.
+pi-eval-loop/src/app.mjs | TS2339 | Property 'log' does not exist on type '{ stateDir?: any; strategy?: string; env?: { node: any; nodeDir: any; piCli: any; piModules: any; provider: any; agentDir: any; upstream: any; bwrap: any; orche: any; }; pids?: Set<any>; }'.
+pi-eval-loop/src/app.mjs | TS2339 | Property 'protocol' does not exist on type '{ stateDir?: any; strategy?: string; env?: { node: any; nodeDir: any; piCli: any; piModules: any; provider: any; agentDir: any; upstream: any; bwrap: any; orche: any; }; pids?: Set<any>; }'.
+pi-eval-loop/src/evaluator.mjs | TS2339 | Property 'protocolDigest' does not exist on type 'Evaluator'.
+pi-eval-loop/src/evaluator.mjs | TS2339 | Property 'protocolDigest' does not exist on type 'Evaluator'.
+pi-eval-loop/src/evaluator.mjs | TS2339 | Property 'protocolDigest' does not exist on type 'Evaluator'.
+pi-eval-loop/src/evaluator.mjs | TS2339 | Property 'protocolDigest' does not exist on type 'Evaluator'.
+pi-eval-loop/src/evaluator.mjs | TS2339 | Property 'tasksById' does not exist on type 'Evaluator'.
+pi-eval-loop/src/evaluator.mjs | TS2339 | Property 'tasksById' does not exist on type 'Evaluator'.
+pi-eval-loop/src/evaluator.mjs | TS2339 | Property 'tasksById' does not exist on type 'Evaluator'.
+pi-eval-loop/src/evaluator.mjs | TS2339 | Property 'tasksById' does not exist on type 'Evaluator'.
+pi-eval-loop/src/evaluator.mjs | TS2339 | Property 'tasksById' does not exist on type 'Evaluator'.
+pi-eval-loop/src/evaluator.mjs | TS2339 | Property 'protocol' does not exist on type 'Evaluator'.
+pi-eval-loop/src/evaluator.mjs | TS2339 | Property 'protocol' does not exist on type 'Evaluator'.
+pi-eval-loop/src/evaluator.mjs | TS2339 | Property 'protocol' does not exist on type 'Evaluator'.
+pi-eval-loop/src/evaluator.mjs | TS2339 | Property 'protocol' does not exist on type 'Evaluator'.
+pi-eval-loop/src/evaluator.mjs | TS2339 | Property 'protocol' does not exist on type 'Evaluator'.
+pi-eval-loop/src/evaluator.mjs | TS2339 | Property 'protocol' does not exist on type 'Evaluator'.
+pi-eval-loop/src/evaluator.mjs | TS2339 | Property 'protocol' does not exist on type 'Evaluator'.
+pi-eval-loop/src/evaluator.mjs | TS2339 | Property 'protocol' does not exist on type 'Evaluator'.
+pi-eval-loop/src/evaluator.mjs | TS2339 | Property 'protocol' does not exist on type 'Evaluator'.
+pi-eval-loop/src/evaluator.mjs | TS2339 | Property 'envDigest' does not exist on type 'Evaluator'.
+pi-eval-loop/src/evaluator.mjs | TS2339 | Property 'envDigest' does not exist on type 'Evaluator'.
+pi-eval-loop/src/evaluator.mjs | TS2339 | Property 'envDigest' does not exist on type 'Evaluator'.
+pi-eval-loop/src/evaluator.mjs | TS2339 | Property 'stateDir' does not exist on type 'Evaluator'.
+pi-eval-loop/src/evaluator.mjs | TS2339 | Property 'backend' does not exist on type 'Evaluator'.
+pi-eval-loop/src/evaluator.mjs | TS2339 | Property 'backend' does not exist on type 'Evaluator'.
+pi-eval-loop/src/evaluator.mjs | TS2339 | Property 'backend' does not exist on type 'Evaluator'.
+pi-eval-loop/src/evaluator.mjs | TS2339 | Property 'grading' does not exist on type 'Evaluator'.
+pi-eval-loop/src/evaluator.mjs | TS2339 | Property 'log' does not exist on type 'Evaluator'.
+pi-eval-loop/src/gate.mjs | TS2339 | Property 'reference' does not exist on type '{}'.
+pi-eval-loop/src/gate.mjs | TS2339 | Property 'units' does not exist on type '{}'.
+pi-eval-loop/src/gate.mjs | TS2353 | Object literal may only specify known properties, and 'seed' does not exist in type '{ draws?: number; level?: string; event?: string; eps?: {}; minGain?: {}; lossThreshold?: number; familyLossThreshold?: number; }'.
+pi-eval-loop/src/gate.mjs | TS2353 | Object literal may only specify known properties, and 'seed' does not exist in type '{ draws?: number; level?: string; event?: string; eps?: {}; minGain?: {}; lossThreshold?: number; familyLossThreshold?: number; }'.
+pi-eval-loop/src/gate.mjs | TS2353 | Object literal may only specify known properties, and 'seed' does not exist in type '{ draws?: number; level?: string; event?: string; eps?: {}; minGain?: {}; lossThreshold?: number; familyLossThreshold?: number; }'.
+pi-eval-loop/src/gate.mjs | TS2353 | Object literal may only specify known properties, and 'seed' does not exist in type '{ draws?: number; level?: string; event?: string; eps?: {}; minGain?: {}; lossThreshold?: number; familyLossThreshold?: number; }'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'strategy' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'strategy' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'strategy' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'strategy' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'strategy' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'strategy' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'strategy' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'strategy' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'umbrella' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'umbrella' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'umbrella' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'umbrella' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'orche' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'orche' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'orche' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'orche' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'orche' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'orche' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'orche' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'orche' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'orche' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'orche' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'orche' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'orche' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'log' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'log' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'log' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'stateDir' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'stateDir' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'stateDir' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'stateDir' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'stateDir' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'stateDir' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'stateDir' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'stateDir' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'stateDir' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'stateDir' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'stateDir' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'stateDir' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'stateDir' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'stateDir' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'stateDir' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'stateDir' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'stateDir' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'stateDir' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'stateDir' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'stateDir' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'stateDir' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'protocol' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'protocol' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'protocol' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'protocol' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'protocol' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'protocol' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'protocol' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'protocol' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'protocol' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'protocol' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'protocol' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'protocol' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'protocol' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'protocol' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'protocol' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'protocol' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'protocol' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'protocol' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'protocol' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'protocol' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'protocol' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'protocol' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'protocol' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'protocol' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'protocol' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'protocol' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'protocol' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'protocol' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'protocol' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'protocol' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'prerequisites' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'prerequisites' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'datasets' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'validateGrader' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'validateGrader' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'envDigest' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'envDigest' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'backend' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2353 | Object literal may only specify known properties, and 'seed' does not exist in type '{ draws?: number; level?: string; }'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'idPrefix' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'proposer' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'env' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'checks' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'checks' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'checks' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'checks' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'checks' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'holdoutLedgerPath' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'holdoutLedgerPath' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'fault' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'fault' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'stopBefore' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs | TS2339 | Property 'stopBefore' does not exist on type 'Loop'.
+pi-eval-loop/src/report.mjs | TS2353 | Object literal may only specify known properties, and 'seed' does not exist in type '{ draws?: number; level?: string; }'.
+pi-eval-loop/src/stats.mjs | TS2339 | Property 'seed' does not exist on type '{ draws?: number; level?: string; event?: string; eps?: {}; minGain?: {}; lossThreshold?: number; familyLossThreshold?: number; }'.
+pi-eval-loop/src/stats.mjs | TS2339 | Property 'seed' does not exist on type '{ draws?: number; level?: string; }'.
+pi-eval-loop/test/ablation.test.mjs | TS2345 | Argument of type '{ root: any; fixtures: { tasks: any; holdout: { dir: any; tasks: any; }; umbrella: any; orche: any; base: any; }; stateName: any; strategy: any; entries: any; }' is not assignable to parameter of type '{ root: any; protocol?: any; entries: any; skill?: (harness: any) => { p: number; crash?: undefined; } | { p: number; crash: boolean; }; strategy?: string; prerequisites: any; checks: any; backend: any; stateName?: string; fixtures: any; fault: any; }'.
+pi-eval-loop/test/ablation.test.mjs | TS2345 | Argument of type '{ stateDir: any; loopFactory: ({ stateDir, strategy }: { stateDir: any; strategy: any; }) => Promise<Loop>; }' is not assignable to parameter of type '{ stateDir: any; loopFactory: any; protocolPath: any; pids: any; log?: () => void; }'.
+pi-eval-loop/test/ablation.test.mjs | TS2345 | Argument of type '{ stateDir: any; loopFactory: ({ stateDir, strategy }: { stateDir: any; strategy: any; }) => Promise<Loop>; }' is not assignable to parameter of type '{ stateDir: any; loopFactory: any; protocolPath: any; pids: any; log?: () => void; }'.
+pi-eval-loop/test/deploy.test.mjs | TS2345 | Argument of type '{ root: any; fixtures: { tasks: any; holdout: { dir: any; tasks: any; }; umbrella: any; orche: any; base: any; }; entries: { hypothesis: string; targetFailureClass: string; edit: (dir: any) => any; }[]; fault: (name: any) => void; }' is not assignable to parameter of type '{ root: any; protocol?: any; entries: any; skill?: (harness: any) => { p: number; crash?: undefined; } | { p: number; crash: boolean; }; strategy?: string; prerequisites: any; checks: any; backend: any; stateName?: string; fixtures: any; fault: any; }'.
+pi-eval-loop/test/deploy.test.mjs | TS2345 | Argument of type '{ root: any; fixtures: { tasks: any; holdout: { dir: any; tasks: any; }; umbrella: any; orche: any; base: any; }; entries: undefined[]; }' is not assignable to parameter of type '{ root: any; protocol?: any; entries: any; skill?: (harness: any) => { p: number; crash?: undefined; } | { p: number; crash: boolean; }; strategy?: string; prerequisites: any; checks: any; backend: any; stateName?: string; fixtures: any; fault: any; }'.
+pi-eval-loop/test/helpers.mjs | TS2554 | Expected 0-1 arguments, but got 2.
+pi-eval-loop/test/loop.test.mjs | TS2345 | Argument of type '{ root: any; entries: { hypothesis: string; targetFailureClass: string; edit: (dir: any) => any; }[]; }' is not assignable to parameter of type '{ root: any; protocol?: any; entries: any; skill?: (harness: any) => { p: number; crash?: undefined; } | { p: number; crash: boolean; }; strategy?: string; prerequisites: any; checks: any; backend: any; stateName?: string; fixtures: any; fault: any; }'.
+pi-eval-loop/test/loop.test.mjs | TS2345 | Argument of type '{ root: any; entries: { hypothesis: string; targetFailureClass: string; edit: (dir: any) => any; }[]; }' is not assignable to parameter of type '{ root: any; protocol?: any; entries: any; skill?: (harness: any) => { p: number; crash?: undefined; } | { p: number; crash: boolean; }; strategy?: string; prerequisites: any; checks: any; backend: any; stateName?: string; fixtures: any; fault: any; }'.
+pi-eval-loop/test/loop.test.mjs | TS2345 | Argument of type '{ root: any; entries: { hypothesis: string; targetFailureClass: string; edit: (dir: any) => any; }[]; }' is not assignable to parameter of type '{ root: any; protocol?: any; entries: any; skill?: (harness: any) => { p: number; crash?: undefined; } | { p: number; crash: boolean; }; strategy?: string; prerequisites: any; checks: any; backend: any; stateName?: string; fixtures: any; fault: any; }'.
+pi-eval-loop/test/loop.test.mjs | TS2345 | Argument of type '{ root: any; entries: { hypothesis: string; targetFailureClass: string; edit: (dir: any) => any; }[]; }' is not assignable to parameter of type '{ root: any; protocol?: any; entries: any; skill?: (harness: any) => { p: number; crash?: undefined; } | { p: number; crash: boolean; }; strategy?: string; prerequisites: any; checks: any; backend: any; stateName?: string; fixtures: any; fault: any; }'.
+pi-eval-loop/test/loop.test.mjs | TS2339 | Property 'stateDir' does not exist on type 'Loop'.
+pi-eval-loop/test/loop.test.mjs | TS2339 | Property 'stateDir' does not exist on type 'Loop'.
+pi-eval-loop/test/loop.test.mjs | TS2339 | Property 'stateDir' does not exist on type 'Loop'.
+pi-eval-loop/test/loop.test.mjs | TS2345 | Argument of type '{ root: any; entries: { hypothesis: string; targetFailureClass: string; edit: (dir: any) => any; }[]; fixtures: any; stateName: string; }' is not assignable to parameter of type '{ root: any; protocol?: any; entries: any; skill?: (harness: any) => { p: number; crash?: undefined; } | { p: number; crash: boolean; }; strategy?: string; prerequisites: any; checks: any; backend: any; stateName?: string; fixtures: any; fault: any; }'.
+pi-eval-loop/test/loop.test.mjs | TS2345 | Argument of type '{ root: any; entries: { hypothesis: string; targetFailureClass: string; edit: (dir: any) => any; }[]; prerequisites: () => Promise<{ name: string; ok: boolean; detail: string; }[]>; }' is not assignable to parameter of type '{ root: any; protocol?: any; entries: any; skill?: (harness: any) => { p: number; crash?: undefined; } | { p: number; crash: boolean; }; strategy?: string; prerequisites: any; checks: any; backend: any; stateName?: string; fixtures: any; fault: any; }'.
+pi-eval-loop/test/loop.test.mjs | TS2345 | Argument of type '{ root: any; entries: { hypothesis: string; targetFailureClass: string; edit: (dir: any) => any; }[]; backend: { simulated: boolean; run: (input: any) => Promise<{ schema: string; run_id: any; unit_key: any; attempt: any; ... 35 more ...; simulated: boolean; }>; }; protocol: any; }' is not assignable to parameter of type '{ root: any; protocol?: any; entries: any; skill?: (harness: any) => { p: number; crash?: undefined; } | { p: number; crash: boolean; }; strategy?: string; prerequisites: any; checks: any; backend: any; stateName?: string; fixtures: any; fault: any; }'.
+pi-eval-loop/test/loop.test.mjs | TS2345 | Argument of type '{ root: any; entries: { hypothesis: string; targetFailureClass: string; edit: (dir: any) => any; }[]; fixtures: any; protocol: any; }' is not assignable to parameter of type '{ root: any; protocol?: any; entries: any; skill?: (harness: any) => { p: number; crash?: undefined; } | { p: number; crash: boolean; }; strategy?: string; prerequisites: any; checks: any; backend: any; stateName?: string; fixtures: any; fault: any; }'.
+pi-eval-loop/test/loop.test.mjs | TS2345 | Argument of type '{ root: any; entries: undefined[]; }' is not assignable to parameter of type '{ root: any; protocol?: any; entries: any; skill?: (harness: any) => { p: number; crash?: undefined; } | { p: number; crash: boolean; }; strategy?: string; prerequisites: any; checks: any; backend: any; stateName?: string; fixtures: any; fault: any; }'.
+pi-eval-loop/test/loop.test.mjs | TS2345 | Argument of type '{ root: any; entries: undefined[]; fixtures: any; protocol: any; }' is not assignable to parameter of type '{ root: any; protocol?: any; entries: any; skill?: (harness: any) => { p: number; crash?: undefined; } | { p: number; crash: boolean; }; strategy?: string; prerequisites: any; checks: any; backend: any; stateName?: string; fixtures: any; fault: any; }'.
+pi-eval-loop/test/loop.test.mjs | TS2345 | Argument of type '{ root: any; entries: { hypothesis: string; targetFailureClass: string; edit: (dir: any) => any; }[]; protocol: any; }' is not assignable to parameter of type '{ root: any; protocol?: any; entries: any; skill?: (harness: any) => { p: number; crash?: undefined; } | { p: number; crash: boolean; }; strategy?: string; prerequisites: any; checks: any; backend: any; stateName?: string; fixtures: any; fault: any; }'.
+pi-eval-loop/test/loop.test.mjs | TS2345 | Argument of type '{ root: any; entries: undefined[]; skill: (h: any) => { p: number; crash?: undefined; } | { p: number; crash: boolean; }; }' is not assignable to parameter of type '{ root: any; protocol?: any; entries: any; skill?: (harness: any) => { p: number; crash?: undefined; } | { p: number; crash: boolean; }; strategy?: string; prerequisites: any; checks: any; backend: any; stateName?: string; fixtures: any; fault: any; }'.
+pi-eval-loop/test/loop.test.mjs | TS2345 | Argument of type '{ root: any; entries: { hypothesis: string; targetFailureClass: string; edit: (dir: any) => any; }[]; strategy: string; stateName: string; }' is not assignable to parameter of type '{ root: any; protocol?: any; entries: any; skill?: (harness: any) => { p: number; crash?: undefined; } | { p: number; crash: boolean; }; strategy?: string; prerequisites: any; checks: any; backend: any; stateName?: string; fixtures: any; fault: any; }'.
+pi-eval-loop/test/loop.test.mjs | TS2345 | Argument of type '{ root: any; protocol: any; entries: { hypothesis: string; targetFailureClass: string; edit: (dir: any) => any; }[]; }' is not assignable to parameter of type '{ root: any; protocol?: any; entries: any; skill?: (harness: any) => { p: number; crash?: undefined; } | { p: number; crash: boolean; }; strategy?: string; prerequisites: any; checks: any; backend: any; stateName?: string; fixtures: any; fault: any; }'.
+pi-eval-loop/test/stats-gate.test.mjs | TS2353 | Object literal may only specify known properties, and 'seed' does not exist in type '{ draws?: number; level?: string; event?: string; eps?: {}; minGain?: {}; lossThreshold?: number; familyLossThreshold?: number; }'.
+pi-eval-loop/test/stats-gate.test.mjs | TS2353 | Object literal may only specify known properties, and 'seed' does not exist in type '{ draws?: number; level?: string; event?: string; eps?: {}; minGain?: {}; lossThreshold?: number; familyLossThreshold?: number; }'.
+pi-eval-loop/test/stats-gate.test.mjs | TS2353 | Object literal may only specify known properties, and 'seed' does not exist in type '{ draws?: number; level?: string; event?: string; eps?: {}; minGain?: {}; lossThreshold?: number; familyLossThreshold?: number; }'.
+pi-eval-loop/test/stats-gate.test.mjs | TS2353 | Object literal may only specify known properties, and 'seed' does not exist in type '{ draws?: number; level?: string; event?: string; eps?: {}; minGain?: {}; lossThreshold?: number; familyLossThreshold?: number; }'.
+pi-eval-loop/test/stats-gate.test.mjs | TS2353 | Object literal may only specify known properties, and 'seed' does not exist in type '{ draws?: number; level?: string; event?: string; eps?: {}; minGain?: {}; lossThreshold?: number; familyLossThreshold?: number; }'.
+pi-eval-loop/test/stats-gate.test.mjs | TS2353 | Object literal may only specify known properties, and 'seed' does not exist in type '{ draws?: number; level?: string; event?: string; eps?: {}; minGain?: {}; lossThreshold?: number; familyLossThreshold?: number; }'.
+pi-eval-loop/test/stats-gate.test.mjs | TS2353 | Object literal may only specify known properties, and 'seed' does not exist in type '{ draws?: number; level?: string; event?: string; eps?: {}; minGain?: {}; lossThreshold?: number; familyLossThreshold?: number; }'.
+pi-eval-loop/test/stats-gate.test.mjs | TS2353 | Object literal may only specify known properties, and 'seed' does not exist in type '{ draws?: number; level?: string; event?: string; eps?: {}; minGain?: {}; lossThreshold?: number; familyLossThreshold?: number; }'.
+pi-eval-loop/test/stats-gate.test.mjs | TS2353 | Object literal may only specify known properties, and 'seed' does not exist in type '{ draws?: number; level?: string; event?: string; eps?: {}; minGain?: {}; lossThreshold?: number; familyLossThreshold?: number; }'.
+pi-eval-loop/test/stats-gate.test.mjs | TS2353 | Object literal may only specify known properties, and 'seed' does not exist in type '{ draws?: number; level?: string; event?: string; eps?: {}; minGain?: {}; lossThreshold?: number; familyLossThreshold?: number; }'.
+pi-eval-loop/test/stats-gate.test.mjs | TS2353 | Object literal may only specify known properties, and 'seed' does not exist in type '{ draws?: number; level?: string; event?: string; eps?: {}; minGain?: {}; lossThreshold?: number; familyLossThreshold?: number; }'.
+pi-eval-loop/test/stats-gate.test.mjs | TS2353 | Object literal may only specify known properties, and 'seed' does not exist in type '{ draws?: number; level?: string; event?: string; eps?: {}; minGain?: {}; lossThreshold?: number; familyLossThreshold?: number; }'.
+pi-eval-loop/test/stats-gate.test.mjs | TS2353 | Object literal may only specify known properties, and 'seed' does not exist in type '{ draws?: number; level?: string; event?: string; eps?: {}; minGain?: {}; lossThreshold?: number; familyLossThreshold?: number; }'.

@@ -37,7 +37,7 @@
       "cwd": "/home/arthur/Code/oh-my-pi-extensions",
       "status": 0,
       "signal": null,
-      "log": "/var/tmp/pi-arthur/omp-compat-Y7E65W/root.log",
+      "log": "/var/tmp/pi-arthur/omp-compat-XmEMHa/root.log",
       "summary": [
         "ℹ tests 74",
         "ℹ pass 74",
@@ -52,7 +52,7 @@
       "cwd": "/home/arthur/Code/oh-my-pi-extensions/orche",
       "status": 0,
       "signal": null,
-      "log": "/var/tmp/pi-arthur/omp-compat-Y7E65W/orche-typecheck.log",
+      "log": "/var/tmp/pi-arthur/omp-compat-XmEMHa/orche-typecheck.log",
       "summary": []
     },
     {
@@ -61,13 +61,13 @@
       "cwd": "/home/arthur/Code/oh-my-pi-extensions/orche",
       "status": 0,
       "signal": null,
-      "log": "/var/tmp/pi-arthur/omp-compat-Y7E65W/orche.log",
+      "log": "/var/tmp/pi-arthur/omp-compat-XmEMHa/orche.log",
       "summary": [
-        "2026-11-04T14:08:17.998Z END c1/C/r2 failed (exit 1: boom: harness failure); the next driver start keeps this attempt as .interrupted-<n> and reruns the unit",
-        " ✓ test/experiments/cb-ab.test.ts (27 tests | 2 skipped) 2024ms",
-        " ✓ test/experiments/mdsd-ab.test.ts (11 tests | 1 skipped) 347ms",
-        " ✓ test/experiments/cb-ab-sol.test.ts (11 tests | 1 skipped) 182ms",
-        " ✓ test/orchestration/scratch.test.ts (5 tests | 1 skipped) 24ms",
+        "2026-11-04T14:57:56.948Z END c1/C/r2 failed (exit 1: boom: harness failure); the next driver start keeps this attempt as .interrupted-<n> and reruns the unit",
+        " ✓ test/experiments/cb-ab.test.ts (27 tests | 2 skipped) 1872ms",
+        " ✓ test/experiments/mdsd-ab.test.ts (11 tests | 1 skipped) 333ms",
+        " ✓ test/experiments/cb-ab-sol.test.ts (11 tests | 1 skipped) 197ms",
+        " ✓ test/orchestration/scratch.test.ts (5 tests | 1 skipped) 45ms",
         " ↓ test/live/generate-image.live.test.ts (1 test | 1 skipped)",
         " Test Files  167 passed | 1 skipped (168)",
         "      Tests  3039 passed | 6 skipped (3045)"
@@ -79,7 +79,7 @@
       "cwd": "/home/arthur/Code/oh-my-pi-extensions/browser",
       "status": 0,
       "signal": null,
-      "log": "/var/tmp/pi-arthur/omp-compat-Y7E65W/browser-typecheck.log",
+      "log": "/var/tmp/pi-arthur/omp-compat-XmEMHa/browser-typecheck.log",
       "summary": []
     },
     {
@@ -88,10 +88,10 @@
       "cwd": "/home/arthur/Code/oh-my-pi-extensions/browser",
       "status": 0,
       "signal": null,
-      "log": "/var/tmp/pi-arthur/omp-compat-Y7E65W/browser.log",
+      "log": "/var/tmp/pi-arthur/omp-compat-XmEMHa/browser.log",
       "summary": [
-        " ↓ test/e2e.test.ts (3 tests | 3 skipped)",
         " ↓ test/e2e-chrome.test.ts (1 test | 1 skipped)",
+        " ↓ test/e2e.test.ts (3 tests | 3 skipped)",
         " Test Files  20 passed | 2 skipped (22)",
         "      Tests  537 passed | 4 skipped (541)"
       ]
@@ -102,7 +102,7 @@
       "cwd": "/home/arthur/Code/oh-my-pi-extensions/pi-gui",
       "status": 0,
       "signal": null,
-      "log": "/var/tmp/pi-arthur/omp-compat-Y7E65W/pi-gui-typecheck.log",
+      "log": "/var/tmp/pi-arthur/omp-compat-XmEMHa/pi-gui-typecheck.log",
       "summary": []
     },
     {
@@ -111,9 +111,9 @@
       "cwd": "/home/arthur/Code/oh-my-pi-extensions/pi-gui",
       "status": 0,
       "signal": null,
-      "log": "/var/tmp/pi-arthur/omp-compat-Y7E65W/pi-gui.log",
+      "log": "/var/tmp/pi-arthur/omp-compat-XmEMHa/pi-gui.log",
       "summary": [
-        "﹣ the in-snap script survives the real systemd-run unchanged (stand-in snap environment, no browser) (0.05295ms) # no user systemd with --expand-environment",
+        "﹣ the in-snap script survives the real systemd-run unchanged (stand-in snap environment, no browser) (0.066264ms) # no user systemd with --expand-environment",
         "ℹ tests 102",
         "ℹ pass 101",
         "ℹ fail 0",
@@ -127,7 +127,7 @@
       "cwd": "/home/arthur/Code/oh-my-pi-extensions/pi-commit",
       "status": 0,
       "signal": null,
-      "log": "/var/tmp/pi-arthur/omp-compat-Y7E65W/pi-commit-typecheck.log",
+      "log": "/var/tmp/pi-arthur/omp-compat-XmEMHa/pi-commit-typecheck.log",
       "summary": []
     },
     {
@@ -136,7 +136,7 @@
       "cwd": "/home/arthur/Code/oh-my-pi-extensions/pi-commit",
       "status": 0,
       "signal": null,
-      "log": "/var/tmp/pi-arthur/omp-compat-Y7E65W/pi-commit.log",
+      "log": "/var/tmp/pi-arthur/omp-compat-XmEMHa/pi-commit.log",
       "summary": [
         " 193 pass",
         " 0 fail"
@@ -148,7 +148,7 @@
       "cwd": "/home/arthur/Code/oh-my-pi-extensions/session-bus",
       "status": 0,
       "signal": null,
-      "log": "/var/tmp/pi-arthur/omp-compat-Y7E65W/session-bus-typecheck.log",
+      "log": "/var/tmp/pi-arthur/omp-compat-XmEMHa/session-bus-typecheck.log",
       "summary": []
     },
     {
@@ -157,7 +157,7 @@
       "cwd": "/home/arthur/Code/oh-my-pi-extensions/session-bus",
       "status": 0,
       "signal": null,
-      "log": "/var/tmp/pi-arthur/omp-compat-Y7E65W/session-bus.log",
+      "log": "/var/tmp/pi-arthur/omp-compat-XmEMHa/session-bus.log",
       "summary": [
         "ℹ tests 328",
         "ℹ pass 328",
@@ -172,7 +172,7 @@
       "cwd": "/home/arthur/Code/oh-my-pi-extensions/images",
       "status": 0,
       "signal": null,
-      "log": "/var/tmp/pi-arthur/omp-compat-Y7E65W/images-typecheck.log",
+      "log": "/var/tmp/pi-arthur/omp-compat-XmEMHa/images-typecheck.log",
       "summary": []
     },
     {
@@ -181,7 +181,7 @@
       "cwd": "/home/arthur/Code/oh-my-pi-extensions/images",
       "status": 0,
       "signal": null,
-      "log": "/var/tmp/pi-arthur/omp-compat-Y7E65W/images.log",
+      "log": "/var/tmp/pi-arthur/omp-compat-XmEMHa/images.log",
       "summary": [
         " ↓ test/images.live.test.ts (1 test | 1 skipped)",
         " Test Files  7 passed | 1 skipped (8)",
@@ -194,7 +194,7 @@
       "cwd": "/home/arthur/Code/oh-my-pi-extensions/codegraph",
       "status": 0,
       "signal": null,
-      "log": "/var/tmp/pi-arthur/omp-compat-Y7E65W/codegraph-typecheck.log",
+      "log": "/var/tmp/pi-arthur/omp-compat-XmEMHa/codegraph-typecheck.log",
       "summary": []
     },
     {
@@ -203,7 +203,7 @@
       "cwd": "/home/arthur/Code/oh-my-pi-extensions/codegraph",
       "status": 0,
       "signal": null,
-      "log": "/var/tmp/pi-arthur/omp-compat-Y7E65W/codegraph.log",
+      "log": "/var/tmp/pi-arthur/omp-compat-XmEMHa/codegraph.log",
       "summary": [
         "ℹ tests 39",
         "ℹ pass 39",
@@ -218,7 +218,7 @@
       "cwd": "/home/arthur/Code/oh-my-pi-extensions/cliproxyapi",
       "status": 0,
       "signal": null,
-      "log": "/var/tmp/pi-arthur/omp-compat-Y7E65W/cliproxyapi-typecheck.log",
+      "log": "/var/tmp/pi-arthur/omp-compat-XmEMHa/cliproxyapi-typecheck.log",
       "summary": []
     },
     {
@@ -227,7 +227,7 @@
       "cwd": "/home/arthur/Code/oh-my-pi-extensions/cliproxyapi",
       "status": 0,
       "signal": null,
-      "log": "/var/tmp/pi-arthur/omp-compat-Y7E65W/cliproxyapi.log",
+      "log": "/var/tmp/pi-arthur/omp-compat-XmEMHa/cliproxyapi.log",
       "summary": [
         "ℹ tests 51",
         "ℹ pass 51",
@@ -242,7 +242,7 @@
       "cwd": "/home/arthur/Code/oh-my-pi-extensions/pi-workbench",
       "status": 0,
       "signal": null,
-      "log": "/var/tmp/pi-arthur/omp-compat-Y7E65W/workbench.log",
+      "log": "/var/tmp/pi-arthur/omp-compat-XmEMHa/workbench.log",
       "summary": [
         "ℹ tests 75",
         "ℹ pass 75",
@@ -257,7 +257,7 @@
       "cwd": "/home/arthur/Code/oh-my-pi-extensions/pi-workbench",
       "status": 0,
       "signal": null,
-      "log": "/var/tmp/pi-arthur/omp-compat-Y7E65W/workbench-session.log",
+      "log": "/var/tmp/pi-arthur/omp-compat-XmEMHa/workbench-session.log",
       "summary": [
         "  \"ok\": true,"
       ]
@@ -268,7 +268,7 @@
       "cwd": "/home/arthur/Code/oh-my-pi-extensions/pi-workbench",
       "status": 0,
       "signal": null,
-      "log": "/var/tmp/pi-arthur/omp-compat-Y7E65W/workbench-editor.log",
+      "log": "/var/tmp/pi-arthur/omp-compat-XmEMHa/workbench-editor.log",
       "summary": [
         "  \"ok\": true,"
       ]
@@ -279,10 +279,10 @@
       "cwd": "/home/arthur/Code/oh-my-pi-extensions/pi-eval-loop",
       "status": 0,
       "signal": null,
-      "log": "/var/tmp/pi-arthur/omp-compat-Y7E65W/pi-eval-loop.log",
+      "log": "/var/tmp/pi-arthur/omp-compat-XmEMHa/pi-eval-loop.log",
       "summary": [
-        "ℹ tests 47",
-        "ℹ pass 47",
+        "ℹ tests 55",
+        "ℹ pass 55",
         "ℹ fail 0",
         "ℹ cancelled 0",
         "ℹ skipped 0"

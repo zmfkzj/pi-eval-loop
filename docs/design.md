@@ -31,10 +31,15 @@ prepare -> baselines -> search (repeat: parent -> analysis -> proposal -> integr
 
 Search stop (protocol-2, pre-registered): the search cycle ends after **10 consecutive candidates without meaningful progress**
 (the user's default). Progress means: Pareto loop, a development-qualified, critical-clean candidate that no other development-set
-member weakly dominates (an exact tie is not progress); quality-only loop, a new single best. The other rules are safety stops,
-none motivated by cost or time:
-- a failure class is exhausted after 10 failed proposals targeting it (the same patience; identical patches and near-identical
-  failed hypotheses are refused anyway) — the cycle ends when no addressable class remains;
+member weakly dominates (a tie is not progress); quality-only loop, a new single best. Point comparisons use a 1e-9 tolerance
+(`POINT_EPS`, `src/archive.mjs`), so identical outcomes summed in another order are a tie, never progress, domination or a win over
+stable. The other rules are safety stops, none motivated by cost or time:
+- a failure class is exhausted after `maxFailuresPerClass` failed proposals targeting it among the consecutive no-progress
+  candidates since the last progress (or the cycle start). Every counted failure is a no-progress candidate, so exhaustion can
+  never end a cycle before the patience. With the defaults (10 and 10) it cannot fire first at all: it only blocks a class and
+  rotates the target when a protocol sets it below `noProgressCandidates` (identical patches and near-identical failed
+  hypotheses are refused anyway; the cycle ends when no addressable class remains). The explore-real-2 run used the earlier
+  cumulative-per-cycle count; there both stops fell on the same candidate;
 - a runaway backstop of 200 candidates per cycle (a fully evaluated candidate keeps ≤ ~90 MB of worktree and evidence);
 - a 72 h cycle hang watchdog;
 - 5 consecutive infrastructure-tainted candidates; a trust-boundary breach halts at once.
@@ -140,7 +145,7 @@ Mechanical enforcement:
 |---|---|---|
 | Task agents see only their workspace and the harness runtime (`src`, `prompts`, `package.json`, `tsconfig.json`). Not visible: orche fixtures (train/dev hidden tests, references), tests, experiments, `.git`. | bwrap: host read-only, `/home /tmp /var/tmp /run /opt /mnt /media /srv /root` replaced by tmpfs, no network; `agentBinds` | `test/isolation.test.mjs` (probes from inside a real sandbox, including planted symlinks into credentials, holdout and suite) |
 | The model is reachable only through a unix socket: an endpoint gate allows the model list and Responses only, in front of witness-replay's fail-closed pinned-route proxy (real key swapped in on the host; the sandbox holds a placeholder) | `src/sandbox.mjs` `startModelPath`, `ALLOWED` | real smoke runs; proxy refusals become `route_violation` |
-| The proposer edits a COPY of the harness runtime. The trusted host copies regular-file changes back (symlinks refused). Then patch integrity checks them: allowed paths `src/`, `prompts/`; tests, runner/module config, package.json and env files are protected even there; no test-environment detection or forced exits, no evaluation-aware or task-specific content, no new network access; at most 4 files and 200 lines | `src/proposer.mjs`, `src/integrity.mjs` `patchIntegrity` | `test/integrity.test.mjs` |
+| The proposer edits a COPY of the harness runtime. The trusted host copies regular-file changes back (symlinks refused). Then patch integrity checks them (changed paths listed with rename detection off, so a moved file reports its deleted source too, and a rename counts both paths and the whole file against the 4-file / 200-line limits): allowed paths `src/`, `prompts/`; tests, runner/module config, package.json and env files are protected even there; no test-environment detection or forced exits, no evaluation-aware or task-specific content, no new network access; at most 4 files and 200 lines | `src/proposer.mjs`, `src/integrity.mjs` `patchIntegrity` | `test/integrity.test.mjs` |
 | The evaluator, grader, protocol, splits, baseline snapshot, results and holdout seal are outside every candidate sandbox. Their digests are compared before and after each proposal: a change halts the loop as a trust-boundary breach. | `protectedState`, `lockProtocol` | `test/loop.test.mjs` |
 | Grading runs in its own sandbox on a disposable copy (visible, hidden, custom). The hidden test count must equal the reference count. | `src/grader.mjs` | grader validation in prepare |
 | Workspace integrity (ultra-ab rules reused) plus symlinks, module rewiring, runner injection, test detection and grading-material references. protocol-2: a task-agent violation, leak attempt, route violation or harness crash in ANY run attempt under a candidate is critical and rejects it at screening, development, selection and adoption, whatever the baseline did (the reference count is reported as context only). Harness-candidate violations (its patch) are rejected at proposal time. The stable incumbent's own violations are reported, not excused. | `workspaceIntegrity`, `criticalProblems` | `test/integrity.test.mjs`, `test/critical-exploration.test.mjs` |

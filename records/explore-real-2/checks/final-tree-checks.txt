@@ -1,0 +1,25 @@
+Checks on the final tree of the R24-R27 correction (umbrella working tree on top of 667fac7, before the commit that adds this file;
+the commit adds only this file, compat-results.json and install-artifact.json on top of the checked tree). Run 2026-11-04.
+
+pi-eval-loop: EL_TEST_TMP=<scratch> npm test -> exit 0
+ℹ tests 55
+ℹ pass 55
+ℹ fail 0
+ℹ skipped 0
+ℹ duration_ms 25529.535649
+umbrella root: npm test -> exit 0
+ℹ tests 74
+ℹ pass 74
+ℹ fail 0
+ℹ skipped 0
+ℹ duration_ms 13870.694256
+umbrella root: npm run test:compat -> exit 0; Pi 1.4.0 gate: 21/21 commands passed. (results: compat-results.json)
+   Test Files 167 passed | 1 skipped (168); Tests 3039 passed | 6 skipped (3045); Test Files 20 passed | 2 skipped (22); Tests 537 passed | 4 skipped (541); Test Files 7 passed | 1 skipped (8); Tests 141 passed | 1 skipped (142)
+umbrella root: OMP_INSTALL_NPM_CACHE=<scratch copy of ~/.npm> OMP_INSTALL_TEST_DIR=<scratch> npm run test:install -> exit 0
+  fresh: production install + 7 real-host test files passed; source identity preserved;reinstall-after-clean: production install + 7 real-host test files passed; source identity preserved (artifact: install-artifact.json)
+  Without OMP_INSTALL_NPM_CACHE the offline install fails ENOTCACHED (the sandbox has an empty npm cache); that is an environment
+  prerequisite, not a product failure.
+checkJs: node pi-eval-loop/scripts/checkjs-compare.mjs 33ef7f2 pi-eval-loop/records/explore-real-2/checks/checkjs -> see diagnostics.txt
+  node types: 232 -> 49, 0 added, 183 resolved; plain (types: []): 363 -> 209, 29 added (TS2307 17, TS2591 12; Node builtins only).
+Independent verification: round 1 FAIL (3 confirmed defects + 1 doubt, all fixed with regression tests); round 2 PASS (no high or
+medium defects; low findings addressed). Details: docs/results-explore-real-2.md "Defects found by the independent verification".

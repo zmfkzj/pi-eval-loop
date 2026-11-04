@@ -1,19 +1,22 @@
-checkJs diagnostics (tsc 5.9.3 --allowJs --checkJs --noEmit, types:[], over pi-eval-loop/{src,bin,test,extension})
-baseline 33ef7f2: 363 errors, 0 syntax (TS1xxx)
-final tree: 388 errors, 0 syntax (TS1xxx)
-codes (final):
-     98 TS2307
-      2 TS2322
-    184 TS2339
-     35 TS2345
-     24 TS2353
-      1 TS2551
-      2 TS2554
-     41 TS2591
-      1 TS2741
-per-file delta (baseline -> final):
-<       4 pi-eval-loop/src/ablation.mjs
->       6 pi-eval-loop/src/ablation.mjs
-<     105 pi-eval-loop/src/loop.mjs
->     108 pi-eval-loop/src/loop.mjs
->      20 pi-eval-loop/test/critical-exploration.test.mjs
+checkJs diagnostics of pi-eval-loop: baseline umbrella commit 33ef7f2 vs the final working tree of this task.
+The package has no typecheck script; reproduce with:
+  node pi-eval-loop/scripts/checkjs-compare.mjs 33ef7f2 <out-dir>
+(tsc 5.9.3 from orche/node_modules/typescript, --allowJs --checkJs --noEmit, target es2022, module nodenext, skipLibCheck,
+ scope pi-eval-loop/{src,bin,test,extension,scripts}; diagnostics compared as a multiset of file|code|message without positions.)
+Full outputs, added and resolved lists, per-file counts: checkjs/{plain,node}-{base,final,added,resolved}.txt, checkjs/summary.json.
+
+Superseded figure: the protocol-2 report (commit 667fac7) gave 363 -> 388 for the "plain" configuration. Those were 25 task-introduced
+diagnostics: Loop option fields, describeArm/compare options, simulatedBackend skill arity, makeLoop/runAblation optional
+options, test table inference, and unresolved Node builtins in the new test file.
+
+Final (this tree):
+- "node" configuration (@types/node from orche/node_modules/@types; Node builtins resolved): 232 -> 49, 0 added, 183 resolved,
+  0 syntax errors. The 49 remaining are all present at baseline. Files: src/deploy.mjs 27 (Deployer Object.assign fields),
+  src/grader.mjs 4, src/faux-upstream.mjs 4, src/datasets.mjs 2, src/protocol.mjs 2 (lockProtocol option destructuring, outside the
+  lines this task changed), src/sandbox.mjs 2, src/runner.mjs 1, src/selftest.mjs 1, test/deploy.test.mjs 2,
+  test/integrity.test.mjs 2, test/loop.test.mjs 2.
+- "plain" configuration (types: [], the configuration of the superseded figure): 363 -> 209, 29 added, 183 resolved, 0 syntax
+  errors. All 29 added are TS2307 "Cannot find module 'node:...'" (17) or TS2591 "Cannot find name 'process'" (12). They come from
+  the new files (scripts/*.mjs, test/critical-exploration.test.mjs, test/records-audit.test.mjs) and one new `process` use in
+  bin/eval-loop.mjs. Every pre-existing file has the same artifact under types: []. They vanish when Node types are available
+  (the "node" row: 0 added).

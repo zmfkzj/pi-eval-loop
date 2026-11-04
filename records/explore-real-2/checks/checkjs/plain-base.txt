@@ -1,0 +1,390 @@
+pi-eval-loop/bin/eval-loop.mjs(6,28): error TS2307: Cannot find module 'node:fs' or its corresponding type declarations.
+pi-eval-loop/bin/eval-loop.mjs(7,25): error TS2307: Cannot find module 'node:path' or its corresponding type declarations.
+pi-eval-loop/bin/eval-loop.mjs(8,27): error TS2307: Cannot find module 'node:util' or its corresponding type declarations.
+pi-eval-loop/bin/eval-loop.mjs(21,20): error TS2591: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/bin/eval-loop.mjs(25,3): error TS2591: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/bin/eval-loop.mjs(28,98): error TS2591: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/bin/eval-loop.mjs(29,115): error TS2591: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/bin/eval-loop.mjs(30,80): error TS2591: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/bin/eval-loop.mjs(31,122): error TS2591: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/bin/eval-loop.mjs(31,187): error TS2591: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/bin/eval-loop.mjs(36,57): error TS2591: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/bin/eval-loop.mjs(37,55): error TS2591: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/bin/eval-loop.mjs(40,3): error TS2591: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/bin/eval-loop.mjs(42,1): error TS2591: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/bin/eval-loop.mjs(46,33): error TS2353: Object literal may only specify known properties, and 'protocolPath' does not exist in type '{ stateDir?: any; strategy?: string; env?: { node: any; nodeDir: any; piCli: any; piModules: any; provider: any; agentDir: any; upstream: any; bwrap: any; orche: any; }; pids?: Set<any>; }'.
+pi-eval-loop/bin/eval-loop.mjs(48,18): error TS2591: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/bin/eval-loop.mjs(51,114): error TS2591: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/bin/eval-loop.mjs(52,33): error TS2353: Object literal may only specify known properties, and 'protocolPath' does not exist in type '{ stateDir?: any; strategy?: string; env?: { node: any; nodeDir: any; piCli: any; piModules: any; provider: any; agentDir: any; upstream: any; bwrap: any; orche: any; }; pids?: Set<any>; }'.
+pi-eval-loop/bin/eval-loop.mjs(53,61): error TS2591: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/bin/eval-loop.mjs(54,33): error TS2345: Argument of type '{ tasks: { id: any; source: string; dir: any; repo: any; hidden: any; customGrader: any; family: any; tier: any; hard: boolean; instruction: any; timeoutSec: any; provenance: any; }[]; }' is not assignable to parameter of type '{ tasks: any; split?: string; repeats: any; }'.
+  Property 'repeats' is missing in type '{ tasks: { id: any; source: string; dir: any; repo: any; hidden: any; customGrader: any; family: any; tier: any; hard: boolean; instruction: any; timeoutSec: any; provenance: any; }[]; }' but required in type '{ tasks: any; split?: string; repeats: any; }'.
+pi-eval-loop/bin/eval-loop.mjs(54,80): error TS2591: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/bin/eval-loop.mjs(56,115): error TS2345: Argument of type '{ stateDir: any; protocolPath: any; pids: Set<any>; }' is not assignable to parameter of type '{ stateDir: any; loopFactory: any; protocolPath: any; pids: any; log?: () => void; }'.
+  Property 'loopFactory' is missing in type '{ stateDir: any; protocolPath: any; pids: Set<any>; }' but required in type '{ stateDir: any; loopFactory: any; protocolPath: any; pids: any; log?: () => void; }'.
+pi-eval-loop/bin/eval-loop.mjs(56,183): error TS2591: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/bin/eval-loop.mjs(60,31): error TS2353: Object literal may only specify known properties, and 'protocolPath' does not exist in type '{ stateDir?: any; strategy?: string; env?: { node: any; nodeDir: any; piCli: any; piModules: any; provider: any; agentDir: any; upstream: any; bwrap: any; orche: any; }; pids?: Set<any>; }'.
+pi-eval-loop/bin/eval-loop.mjs(74,89): error TS2591: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/extension/index.js(4,26): error TS2307: Cannot find module 'node:child_process' or its corresponding type declarations.
+pi-eval-loop/extension/index.js(5,31): error TS2307: Cannot find module 'node:url' or its corresponding type declarations.
+pi-eval-loop/extension/index.js(37,60): error TS2591: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/extension/index.js(39,91): error TS2591: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/src/ablation.mjs(10,47): error TS2307: Cannot find module 'node:fs' or its corresponding type declarations.
+pi-eval-loop/src/ablation.mjs(11,22): error TS2307: Cannot find module 'node:path' or its corresponding type declarations.
+pi-eval-loop/src/ablation.mjs(81,85): error TS2353: Object literal may only specify known properties, and 'seed' does not exist in type '{ draws?: number; level?: string; }'.
+pi-eval-loop/src/ablation.mjs(87,311): error TS2322: Type '(d: any) => boolean' is not assignable to type 'string'.
+pi-eval-loop/src/app.mjs(2,22): error TS2307: Cannot find module 'node:path' or its corresponding type declarations.
+pi-eval-loop/src/app.mjs(10,37): error TS2307: Cannot find module 'node:fs' or its corresponding type declarations.
+pi-eval-loop/src/app.mjs(11,24): error TS2307: Cannot find module 'node:os' or its corresponding type declarations.
+pi-eval-loop/src/app.mjs(16,54): error TS2339: Property 'protocolPath' does not exist on type '{ stateDir?: any; strategy?: string; env?: { node: any; nodeDir: any; piCli: any; piModules: any; provider: any; agentDir: any; upstream: any; bwrap: any; orche: any; }; pids?: Set<any>; }'.
+pi-eval-loop/src/app.mjs(16,132): error TS2339: Property 'log' does not exist on type '{ stateDir?: any; strategy?: string; env?: { node: any; nodeDir: any; piCli: any; piModules: any; provider: any; agentDir: any; upstream: any; bwrap: any; orche: any; }; pids?: Set<any>; }'.
+pi-eval-loop/src/app.mjs(16,137): error TS2339: Property 'protocol' does not exist on type '{ stateDir?: any; strategy?: string; env?: { node: any; nodeDir: any; piCli: any; piModules: any; provider: any; agentDir: any; upstream: any; bwrap: any; orche: any; }; pids?: Set<any>; }'.
+pi-eval-loop/src/archive.mjs(3,41): error TS2307: Cannot find module 'node:fs' or its corresponding type declarations.
+pi-eval-loop/src/archive.mjs(4,22): error TS2307: Cannot find module 'node:path' or its corresponding type declarations.
+pi-eval-loop/src/checks.mjs(3,64): error TS2307: Cannot find module 'node:fs' or its corresponding type declarations.
+pi-eval-loop/src/checks.mjs(4,24): error TS2307: Cannot find module 'node:os' or its corresponding type declarations.
+pi-eval-loop/src/checks.mjs(5,22): error TS2307: Cannot find module 'node:path' or its corresponding type declarations.
+pi-eval-loop/src/datasets.mjs(6,73): error TS2307: Cannot find module 'node:fs' or its corresponding type declarations.
+pi-eval-loop/src/datasets.mjs(7,32): error TS2307: Cannot find module 'node:path' or its corresponding type declarations.
+pi-eval-loop/src/datasets.mjs(8,30): error TS2307: Cannot find module 'node:child_process' or its corresponding type declarations.
+pi-eval-loop/src/datasets.mjs(149,62): error TS2339: Property 'orcheDir' does not exist on type '{}'.
+pi-eval-loop/src/datasets.mjs(149,72): error TS2339: Property 'ledgerPath' does not exist on type '{}'.
+pi-eval-loop/src/datasets.mjs(169,20): error TS2591: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/src/deploy.mjs(6,88): error TS2307: Cannot find module 'node:fs' or its corresponding type declarations.
+pi-eval-loop/src/deploy.mjs(7,24): error TS2307: Cannot find module 'node:os' or its corresponding type declarations.
+pi-eval-loop/src/deploy.mjs(8,22): error TS2307: Cannot find module 'node:path' or its corresponding type declarations.
+pi-eval-loop/src/deploy.mjs(55,34): error TS2339: Property 'umbrella' does not exist on type 'Deployer'.
+pi-eval-loop/src/deploy.mjs(55,49): error TS2339: Property 'orchePath' does not exist on type 'Deployer'.
+pi-eval-loop/src/deploy.mjs(56,59): error TS2339: Property 'umbrella' does not exist on type 'Deployer'.
+pi-eval-loop/src/deploy.mjs(56,85): error TS2339: Property 'orchePath' does not exist on type 'Deployer'.
+pi-eval-loop/src/deploy.mjs(56,109): error TS2339: Property 'branch' does not exist on type 'Deployer'.
+pi-eval-loop/src/deploy.mjs(64,48): error TS2339: Property 'branch' does not exist on type 'Deployer'.
+pi-eval-loop/src/deploy.mjs(66,75): error TS2339: Property 'branch' does not exist on type 'Deployer'.
+pi-eval-loop/src/deploy.mjs(67,49): error TS2339: Property 'branch' does not exist on type 'Deployer'.
+pi-eval-loop/src/deploy.mjs(77,115): error TS2339: Property 'branch' does not exist on type 'Deployer'.
+pi-eval-loop/src/deploy.mjs(84,16): error TS2339: Property 'mode' does not exist on type 'Deployer'.
+pi-eval-loop/src/deploy.mjs(85,33): error TS2339: Property 'mode' does not exist on type 'Deployer'.
+pi-eval-loop/src/deploy.mjs(85,77): error TS2339: Property 'umbrella' does not exist on type 'Deployer'.
+pi-eval-loop/src/deploy.mjs(85,116): error TS2339: Property 'orchePath' does not exist on type 'Deployer'.
+pi-eval-loop/src/deploy.mjs(88,10): error TS2339: Property 'fault' does not exist on type 'Deployer'.
+pi-eval-loop/src/deploy.mjs(90,14): error TS2339: Property 'mode' does not exist on type 'Deployer'.
+pi-eval-loop/src/deploy.mjs(92,10): error TS2339: Property 'fault' does not exist on type 'Deployer'.
+pi-eval-loop/src/deploy.mjs(93,23): error TS2339: Property 'umbrella' does not exist on type 'Deployer'.
+pi-eval-loop/src/deploy.mjs(94,10): error TS2339: Property 'fault' does not exist on type 'Deployer'.
+pi-eval-loop/src/deploy.mjs(109,14): error TS2339: Property 'reason' does not exist on type '{}'.
+pi-eval-loop/src/deploy.mjs(109,22): error TS2339: Property 'target' does not exist on type '{}'.
+pi-eval-loop/src/deploy.mjs(114,14): error TS2339: Property 'mode' does not exist on type 'Deployer'.
+pi-eval-loop/src/deploy.mjs(115,32): error TS2339: Property 'branch' does not exist on type 'Deployer'.
+pi-eval-loop/src/deploy.mjs(116,12): error TS2339: Property 'fault' does not exist on type 'Deployer'.
+pi-eval-loop/src/deploy.mjs(117,20): error TS2339: Property 'umbrella' does not exist on type 'Deployer'.
+pi-eval-loop/src/deploy.mjs(117,35): error TS2339: Property 'branch' does not exist on type 'Deployer'.
+pi-eval-loop/src/deploy.mjs(126,14): error TS2339: Property 'mode' does not exist on type 'Deployer'.
+pi-eval-loop/src/deploy.mjs(131,40): error TS2339: Property 'umbrella' does not exist on type 'Deployer'.
+pi-eval-loop/src/evaluator.mjs(5,62): error TS2307: Cannot find module 'node:fs' or its corresponding type declarations.
+pi-eval-loop/src/evaluator.mjs(6,24): error TS2307: Cannot find module 'node:os' or its corresponding type declarations.
+pi-eval-loop/src/evaluator.mjs(7,22): error TS2307: Cannot find module 'node:path' or its corresponding type declarations.
+pi-eval-loop/src/evaluator.mjs(26,109): error TS2339: Property 'protocolDigest' does not exist on type 'Evaluator'.
+pi-eval-loop/src/evaluator.mjs(44,67): error TS2339: Property 'tasksById' does not exist on type 'Evaluator'.
+pi-eval-loop/src/evaluator.mjs(44,112): error TS2339: Property 'tasksById' does not exist on type 'Evaluator'.
+pi-eval-loop/src/evaluator.mjs(45,28): error TS2339: Property 'protocol' does not exist on type 'Evaluator'.
+pi-eval-loop/src/evaluator.mjs(45,60): error TS2339: Property 'protocol' does not exist on type 'Evaluator'.
+pi-eval-loop/src/evaluator.mjs(45,106): error TS2339: Property 'protocol' does not exist on type 'Evaluator'.
+pi-eval-loop/src/evaluator.mjs(45,154): error TS2339: Property 'envDigest' does not exist on type 'Evaluator'.
+pi-eval-loop/src/evaluator.mjs(45,187): error TS2339: Property 'protocolDigest' does not exist on type 'Evaluator'.
+pi-eval-loop/src/evaluator.mjs(64,70): error TS2339: Property 'protocol' does not exist on type 'Evaluator'.
+pi-eval-loop/src/evaluator.mjs(76,77): error TS2339: Property 'protocol' does not exist on type 'Evaluator'.
+pi-eval-loop/src/evaluator.mjs(80,36): error TS2339: Property 'stateDir' does not exist on type 'Evaluator'.
+pi-eval-loop/src/evaluator.mjs(81,297): error TS2339: Property 'backend' does not exist on type 'Evaluator'.
+pi-eval-loop/src/evaluator.mjs(84,31): error TS2339: Property 'backend' does not exist on type 'Evaluator'.
+pi-eval-loop/src/evaluator.mjs(84,65): error TS2339: Property 'tasksById' does not exist on type 'Evaluator'.
+pi-eval-loop/src/evaluator.mjs(84,151): error TS2339: Property 'protocol' does not exist on type 'Evaluator'.
+pi-eval-loop/src/evaluator.mjs(84,182): error TS2339: Property 'protocolDigest' does not exist on type 'Evaluator'.
+pi-eval-loop/src/evaluator.mjs(84,214): error TS2339: Property 'envDigest' does not exist on type 'Evaluator'.
+pi-eval-loop/src/evaluator.mjs(84,334): error TS2339: Property 'grading' does not exist on type 'Evaluator'.
+pi-eval-loop/src/evaluator.mjs(89,235): error TS2339: Property 'tasksById' does not exist on type 'Evaluator'.
+pi-eval-loop/src/evaluator.mjs(89,276): error TS2339: Property 'tasksById' does not exist on type 'Evaluator'.
+pi-eval-loop/src/evaluator.mjs(90,34): error TS2339: Property 'protocol' does not exist on type 'Evaluator'.
+pi-eval-loop/src/evaluator.mjs(90,66): error TS2339: Property 'protocol' does not exist on type 'Evaluator'.
+pi-eval-loop/src/evaluator.mjs(90,112): error TS2339: Property 'protocol' does not exist on type 'Evaluator'.
+pi-eval-loop/src/evaluator.mjs(90,160): error TS2339: Property 'envDigest' does not exist on type 'Evaluator'.
+pi-eval-loop/src/evaluator.mjs(90,193): error TS2339: Property 'protocolDigest' does not exist on type 'Evaluator'.
+pi-eval-loop/src/evaluator.mjs(91,253): error TS2339: Property 'backend' does not exist on type 'Evaluator'.
+pi-eval-loop/src/evaluator.mjs(95,14): error TS2339: Property 'log' does not exist on type 'Evaluator'.
+pi-eval-loop/src/faux-upstream.mjs(9,18): error TS2307: Cannot find module 'node:http' or its corresponding type declarations.
+pi-eval-loop/src/faux-upstream.mjs(10,18): error TS2307: Cannot find module 'node:zlib' or its corresponding type declarations.
+pi-eval-loop/src/faux-upstream.mjs(11,55): error TS2307: Cannot find module 'node:fs' or its corresponding type declarations.
+pi-eval-loop/src/faux-upstream.mjs(12,32): error TS2307: Cannot find module 'node:path' or its corresponding type declarations.
+pi-eval-loop/src/faux-upstream.mjs(43,81): error TS2591: Cannot find name 'Buffer'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/src/faux-upstream.mjs(65,21): error TS2345: Argument of type '{ type: string; output_index: number; item: { arguments: string; type: string; id: string; call_id: string; name: any; status: string; }; }' is not assignable to parameter of type '{ type: string; response: { id: string; model: any; status: string; }; }'.
+  Property 'response' is missing in type '{ type: string; output_index: number; item: { arguments: string; type: string; id: string; call_id: string; name: any; status: string; }; }' but required in type '{ type: string; response: { id: string; model: any; status: string; }; }'.
+pi-eval-loop/src/faux-upstream.mjs(68,21): error TS2345: Argument of type '{ type: string; output_index: number; item: { type: string; id: string; role: string; content: undefined[]; }; }' is not assignable to parameter of type '{ type: string; response: { id: string; model: any; status: string; }; }'.
+  Property 'response' is missing in type '{ type: string; output_index: number; item: { type: string; id: string; role: string; content: undefined[]; }; }' but required in type '{ type: string; response: { id: string; model: any; status: string; }; }'.
+pi-eval-loop/src/gate.mjs(30,58): error TS2339: Property 'reference' does not exist on type '{}'.
+pi-eval-loop/src/gate.mjs(30,69): error TS2339: Property 'units' does not exist on type '{}'.
+pi-eval-loop/src/gate.mjs(86,110): error TS2353: Object literal may only specify known properties, and 'seed' does not exist in type '{ draws?: number; level?: string; event?: string; eps?: {}; minGain?: {}; lossThreshold?: number; familyLossThreshold?: number; }'.
+pi-eval-loop/src/gate.mjs(87,112): error TS2353: Object literal may only specify known properties, and 'seed' does not exist in type '{ draws?: number; level?: string; event?: string; eps?: {}; minGain?: {}; lossThreshold?: number; familyLossThreshold?: number; }'.
+pi-eval-loop/src/gate.mjs(88,112): error TS2353: Object literal may only specify known properties, and 'seed' does not exist in type '{ draws?: number; level?: string; event?: string; eps?: {}; minGain?: {}; lossThreshold?: number; familyLossThreshold?: number; }'.
+pi-eval-loop/src/gate.mjs(89,109): error TS2353: Object literal may only specify known properties, and 'seed' does not exist in type '{ draws?: number; level?: string; event?: string; eps?: {}; minGain?: {}; lossThreshold?: number; familyLossThreshold?: number; }'.
+pi-eval-loop/src/grader.mjs(5,67): error TS2307: Cannot find module 'node:fs' or its corresponding type declarations.
+pi-eval-loop/src/grader.mjs(6,32): error TS2307: Cannot find module 'node:path' or its corresponding type declarations.
+pi-eval-loop/src/grader.mjs(59,32): error TS2339: Property 'hiddenTests' does not exist on type '{}'.
+pi-eval-loop/src/grader.mjs(59,85): error TS2339: Property 'hiddenTests' does not exist on type '{}'.
+pi-eval-loop/src/grader.mjs(60,238): error TS2339: Property 'hiddenTests' does not exist on type '{}'.
+pi-eval-loop/src/grader.mjs(61,116): error TS2339: Property 'hiddenTests' does not exist on type '{}'.
+pi-eval-loop/src/integrity.mjs(5,22): error TS2307: Cannot find module 'node:path' or its corresponding type declarations.
+pi-eval-loop/src/loop.mjs(8,57): error TS2307: Cannot find module 'node:fs' or its corresponding type declarations.
+pi-eval-loop/src/loop.mjs(9,31): error TS2307: Cannot find module 'node:path' or its corresponding type declarations.
+pi-eval-loop/src/loop.mjs(35,10): error TS2339: Property 'strategy' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(36,10): error TS2339: Property 'umbrella' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(37,10): error TS2339: Property 'orche' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(37,30): error TS2339: Property 'umbrella' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(38,10): error TS2339: Property 'log' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(38,28): error TS2591: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/src/loop.mjs(39,20): error TS2339: Property 'stateDir' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(40,40): error TS2339: Property 'stateDir' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(41,37): error TS2339: Property 'stateDir' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(42,51): error TS2339: Property 'umbrella' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(42,76): error TS2339: Property 'stateDir' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(42,99): error TS2339: Property 'protocol' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(42,134): error TS2339: Property 'protocol' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(45,34): error TS2339: Property 'stateDir' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(46,112): error TS2339: Property 'strategy' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(49,143): error TS2339: Property 'log' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(53,20): error TS2339: Property 'protocol' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(54,25): error TS2339: Property 'prerequisites' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(54,52): error TS2339: Property 'prerequisites' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(58,23): error TS2339: Property 'datasets' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(60,35): error TS2339: Property 'stateDir' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(64,31): error TS2339: Property 'validateGrader' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(64,59): error TS2339: Property 'validateGrader' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(78,73): error TS2339: Property 'stateDir' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(78,145): error TS2339: Property 'orche' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(80,31): error TS2339: Property 'stateDir' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(83,53): error TS2339: Property 'stateDir' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(83,129): error TS2339: Property 'envDigest' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(83,174): error TS2339: Property 'backend' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(83,193): error TS2339: Property 'log' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(87,59): error TS2339: Property 'orche' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(87,182): error TS2339: Property 'orche' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(97,39): error TS2339: Property 'orche' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(97,84): error TS2339: Property 'protocol' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(97,118): error TS2339: Property 'protocol' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(97,170): error TS2339: Property 'protocol' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(98,50): error TS2339: Property 'protocol' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(103,58): error TS2339: Property 'orche' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(103,83): error TS2339: Property 'stateDir' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(106,99): error TS2339: Property 'protocol' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(108,62): error TS2339: Property 'protocol' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(111,20): error TS2339: Property 'protocol' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(114,30): error TS2339: Property 'protocol' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(123,20): error TS2339: Property 'protocol' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(138,56): error TS2339: Property 'protocol' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(138,82): error TS2353: Object literal may only specify known properties, and 'seed' does not exist in type '{ draws?: number; level?: string; }'.
+pi-eval-loop/src/loop.mjs(138,96): error TS2339: Property 'protocol' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(141,67): error TS2339: Property 'protocol' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(147,20): error TS2339: Property 'protocol' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(173,74): error TS2339: Property 'protocol' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(179,20): error TS2339: Property 'protocol' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(182,63): error TS2339: Property 'strategy' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(184,26): error TS2339: Property 'strategy' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(190,41): error TS2339: Property 'idPrefix' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(191,27): error TS2339: Property 'stateDir' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(192,36): error TS2339: Property 'orche' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(192,79): error TS2339: Property 'stateDir' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(193,31): error TS2339: Property 'stateDir' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(196,84): error TS2339: Property 'strategy' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(205,31): error TS2339: Property 'proposer' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(205,104): error TS2339: Property 'env' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(228,24): error TS2339: Property 'checks' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(228,44): error TS2339: Property 'checks' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(249,20): error TS2339: Property 'protocol' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(278,20): error TS2339: Property 'protocol' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(291,14): error TS2339: Property 'strategy' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(303,43): error TS2339: Property 'protocol' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(310,34): error TS2339: Property 'orche' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(311,46): error TS2339: Property 'orche' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(312,37): error TS2339: Property 'umbrella' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(313,65): error TS2339: Property 'orche' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(314,53): error TS2339: Property 'stateDir' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(323,20): error TS2339: Property 'protocol' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(331,23): error TS2339: Property 'strategy' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(336,31): error TS2339: Property 'stateDir' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(342,20): error TS2339: Property 'protocol' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(343,139): error TS2339: Property 'orche' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(343,163): error TS2339: Property 'holdoutLedgerPath' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(345,74): error TS2339: Property 'holdoutLedgerPath' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(348,87): error TS2339: Property 'stateDir' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(374,14): error TS2339: Property 'checks' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(375,39): error TS2339: Property 'checks' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(375,107): error TS2339: Property 'stateDir' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(376,37): error TS2339: Property 'checks' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(376,109): error TS2339: Property 'stateDir' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(389,149): error TS2339: Property 'stateDir' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(389,236): error TS2339: Property 'stateDir' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(390,10): error TS2339: Property 'fault' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(391,137): error TS2339: Property 'protocol' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(391,174): error TS2339: Property 'protocol' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(392,10): error TS2339: Property 'fault' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(420,106): error TS2339: Property 'protocol' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(422,75): error TS2339: Property 'protocol' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(426,82): error TS2339: Property 'protocol' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(426,100): error TS2339: Property 'protocol' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(427,44): error TS2339: Property 'protocol' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(436,40): error TS2339: Property 'orche' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(436,112): error TS2339: Property 'stateDir' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(436,163): error TS2339: Property 'envDigest' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(443,77): error TS2339: Property 'strategy' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(454,26): error TS2339: Property 'stopBefore' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(459,31): error TS2339: Property 'stopBefore' does not exist on type 'Loop'.
+pi-eval-loop/src/loop.mjs(470,30): error TS2307: Cannot find module 'node:child_process' or its corresponding type declarations.
+pi-eval-loop/src/proposer.mjs(7,122): error TS2307: Cannot find module 'node:fs' or its corresponding type declarations.
+pi-eval-loop/src/proposer.mjs(8,24): error TS2307: Cannot find module 'node:os' or its corresponding type declarations.
+pi-eval-loop/src/proposer.mjs(9,31): error TS2307: Cannot find module 'node:path' or its corresponding type declarations.
+pi-eval-loop/src/protocol.mjs(4,42): error TS2307: Cannot find module 'node:fs' or its corresponding type declarations.
+pi-eval-loop/src/protocol.mjs(5,40): error TS2307: Cannot find module 'node:path' or its corresponding type declarations.
+pi-eval-loop/src/protocol.mjs(6,31): error TS2307: Cannot find module 'node:url' or its corresponding type declarations.
+pi-eval-loop/src/protocol.mjs(11,25): error TS2591: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/src/protocol.mjs(11,66): error TS2591: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/src/protocol.mjs(86,52): error TS2339: Property 'datasetDigest' does not exist on type '{}'.
+pi-eval-loop/src/protocol.mjs(86,67): error TS2339: Property 'orcheDir' does not exist on type '{}'.
+pi-eval-loop/src/report.mjs(2,42): error TS2307: Cannot find module 'node:fs' or its corresponding type declarations.
+pi-eval-loop/src/report.mjs(3,22): error TS2307: Cannot find module 'node:path' or its corresponding type declarations.
+pi-eval-loop/src/report.mjs(33,51): error TS2353: Object literal may only specify known properties, and 'seed' does not exist in type '{ draws?: number; level?: string; }'.
+pi-eval-loop/src/rng.mjs(2,28): error TS2307: Cannot find module 'node:crypto' or its corresponding type declarations.
+pi-eval-loop/src/runner.mjs(5,113): error TS2307: Cannot find module 'node:fs' or its corresponding type declarations.
+pi-eval-loop/src/runner.mjs(6,24): error TS2307: Cannot find module 'node:os' or its corresponding type declarations.
+pi-eval-loop/src/runner.mjs(7,22): error TS2307: Cannot find module 'node:path' or its corresponding type declarations.
+pi-eval-loop/src/runner.mjs(8,30): error TS2307: Cannot find module 'node:child_process' or its corresponding type declarations.
+pi-eval-loop/src/runner.mjs(159,49): error TS2741: Property 'hiddenPass' is missing in type '{ visible: any; hidden: any; custom: any; correctness: number; }' but required in type '{ hiddenPass: boolean; }'.
+pi-eval-loop/src/sandbox.mjs(4,37): error TS2307: Cannot find module 'node:child_process' or its corresponding type declarations.
+pi-eval-loop/src/sandbox.mjs(5,65): error TS2307: Cannot find module 'node:fs' or its corresponding type declarations.
+pi-eval-loop/src/sandbox.mjs(6,18): error TS2307: Cannot find module 'node:http' or its corresponding type declarations.
+pi-eval-loop/src/sandbox.mjs(7,25): error TS2307: Cannot find module 'node:os' or its corresponding type declarations.
+pi-eval-loop/src/sandbox.mjs(8,31): error TS2307: Cannot find module 'node:path' or its corresponding type declarations.
+pi-eval-loop/src/sandbox.mjs(35,17): error TS2591: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/src/sandbox.mjs(38,11): error TS2591: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/src/sandbox.mjs(38,46): error TS2591: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/src/sandbox.mjs(39,15): error TS2591: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/src/sandbox.mjs(40,15): error TS2591: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/src/sandbox.mjs(41,15): error TS2591: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/src/sandbox.mjs(52,25): error TS2591: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/src/sandbox.mjs(108,23): error TS2591: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/src/selftest.mjs(5,97): error TS2307: Cannot find module 'node:fs' or its corresponding type declarations.
+pi-eval-loop/src/selftest.mjs(6,24): error TS2307: Cannot find module 'node:os' or its corresponding type declarations.
+pi-eval-loop/src/selftest.mjs(7,22): error TS2307: Cannot find module 'node:path' or its corresponding type declarations.
+pi-eval-loop/src/selftest.mjs(8,30): error TS2307: Cannot find module 'node:child_process' or its corresponding type declarations.
+pi-eval-loop/src/selftest.mjs(23,71): error TS2591: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/src/selftest.mjs(34,64): error TS2339: Property 'root' does not exist on type '{ log?: () => void; keep?: boolean; }'.
+pi-eval-loop/src/stats.mjs(81,50): error TS2339: Property 'seed' does not exist on type '{ draws?: number; level?: string; event?: string; eps?: {}; minGain?: {}; lossThreshold?: number; familyLossThreshold?: number; }'.
+pi-eval-loop/src/stats.mjs(123,54): error TS2339: Property 'seed' does not exist on type '{ draws?: number; level?: string; }'.
+pi-eval-loop/src/util.mjs(2,41): error TS2307: Cannot find module 'node:crypto' or its corresponding type declarations.
+pi-eval-loop/src/util.mjs(3,179): error TS2307: Cannot find module 'node:fs' or its corresponding type declarations.
+pi-eval-loop/src/util.mjs(4,41): error TS2307: Cannot find module 'node:path' or its corresponding type declarations.
+pi-eval-loop/src/util.mjs(21,31): error TS2591: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/src/util.mjs(65,32): error TS2591: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/src/util.mjs(73,43): error TS2591: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/src/util.mjs(75,139): error TS2591: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/src/util.mjs(79,55): error TS2591: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/src/worktree.mjs(5,30): error TS2307: Cannot find module 'node:child_process' or its corresponding type declarations.
+pi-eval-loop/src/worktree.mjs(6,47): error TS2307: Cannot find module 'node:fs' or its corresponding type declarations.
+pi-eval-loop/src/worktree.mjs(7,22): error TS2307: Cannot find module 'node:path' or its corresponding type declarations.
+pi-eval-loop/src/worktree.mjs(10,93): error TS2591: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/test/ablation.test.mjs(1,22): error TS2307: Cannot find module 'node:test' or its corresponding type declarations.
+pi-eval-loop/test/ablation.test.mjs(2,20): error TS2307: Cannot find module 'node:assert/strict' or its corresponding type declarations.
+pi-eval-loop/test/ablation.test.mjs(3,42): error TS2307: Cannot find module 'node:fs' or its corresponding type declarations.
+pi-eval-loop/test/ablation.test.mjs(4,22): error TS2307: Cannot find module 'node:path' or its corresponding type declarations.
+pi-eval-loop/test/ablation.test.mjs(20,23): error TS2345: Argument of type '{ root: any; fixtures: { tasks: any; holdout: { dir: any; tasks: any; }; umbrella: any; orche: any; base: any; }; stateName: any; strategy: any; entries: any; }' is not assignable to parameter of type '{ root: any; protocol?: any; entries: any; skill?: (harness: any) => { p: number; crash?: undefined; } | { p: number; crash: boolean; }; strategy?: string; prerequisites: any; checks: any; backend: any; stateName?: string; fixtures: any; fault: any; }'.
+  Type '{ root: any; fixtures: { tasks: any; holdout: { dir: any; tasks: any; }; umbrella: any; orche: any; base: any; }; stateName: any; strategy: any; entries: any; }' is missing the following properties from type '{ root: any; protocol?: any; entries: any; skill?: (harness: any) => { p: number; crash?: undefined; } | { p: number; crash: boolean; }; strategy?: string; prerequisites: any; checks: any; backend: any; stateName?: string; fixtures: any; fault: any; }': prerequisites, checks, backend, fault
+pi-eval-loop/test/ablation.test.mjs(22,38): error TS2345: Argument of type '{ stateDir: any; loopFactory: ({ stateDir, strategy }: { stateDir: any; strategy: any; }) => Promise<Loop>; }' is not assignable to parameter of type '{ stateDir: any; loopFactory: any; protocolPath: any; pids: any; log?: () => void; }'.
+  Type '{ stateDir: any; loopFactory: ({ stateDir, strategy }: { stateDir: any; strategy: any; }) => Promise<Loop>; }' is missing the following properties from type '{ stateDir: any; loopFactory: any; protocolPath: any; pids: any; log?: () => void; }': protocolPath, pids
+pi-eval-loop/test/ablation.test.mjs(36,23): error TS2345: Argument of type '{ stateDir: any; loopFactory: ({ stateDir, strategy }: { stateDir: any; strategy: any; }) => Promise<Loop>; }' is not assignable to parameter of type '{ stateDir: any; loopFactory: any; protocolPath: any; pids: any; log?: () => void; }'.
+  Type '{ stateDir: any; loopFactory: ({ stateDir, strategy }: { stateDir: any; strategy: any; }) => Promise<Loop>; }' is missing the following properties from type '{ stateDir: any; loopFactory: any; protocolPath: any; pids: any; log?: () => void; }': protocolPath, pids
+pi-eval-loop/test/deploy.test.mjs(3,22): error TS2307: Cannot find module 'node:test' or its corresponding type declarations.
+pi-eval-loop/test/deploy.test.mjs(4,20): error TS2307: Cannot find module 'node:assert/strict' or its corresponding type declarations.
+pi-eval-loop/test/deploy.test.mjs(5,45): error TS2307: Cannot find module 'node:fs' or its corresponding type declarations.
+pi-eval-loop/test/deploy.test.mjs(6,22): error TS2307: Cannot find module 'node:path' or its corresponding type declarations.
+pi-eval-loop/test/deploy.test.mjs(32,30): error TS2345: Argument of type '{ umbrella: any; stateDir: any; }' is not assignable to parameter of type '{ umbrella: any; stateDir: any; branch?: string; orchePath?: string; mode?: string; fault: any; }'.
+  Property 'fault' is missing in type '{ umbrella: any; stateDir: any; }' but required in type '{ umbrella: any; stateDir: any; branch?: string; orchePath?: string; mode?: string; fault: any; }'.
+pi-eval-loop/test/deploy.test.mjs(66,38): error TS2345: Argument of type '{ umbrella: any; stateDir: any; }' is not assignable to parameter of type '{ umbrella: any; stateDir: any; branch?: string; orchePath?: string; mode?: string; fault: any; }'.
+  Property 'fault' is missing in type '{ umbrella: any; stateDir: any; }' but required in type '{ umbrella: any; stateDir: any; branch?: string; orchePath?: string; mode?: string; fault: any; }'.
+pi-eval-loop/test/deploy.test.mjs(78,33): error TS2345: Argument of type '{ root: any; fixtures: { tasks: any; holdout: { dir: any; tasks: any; }; umbrella: any; orche: any; base: any; }; entries: { hypothesis: string; targetFailureClass: string; edit: (dir: any) => any; }[]; fault: (name: any) => void; }' is not assignable to parameter of type '{ root: any; protocol?: any; entries: any; skill?: (harness: any) => { p: number; crash?: undefined; } | { p: number; crash: boolean; }; strategy?: string; prerequisites: any; checks: any; backend: any; stateName?: string; fixtures: any; fault: any; }'.
+  Type '{ root: any; fixtures: { tasks: any; holdout: { dir: any; tasks: any; }; umbrella: any; orche: any; base: any; }; entries: { hypothesis: string; targetFailureClass: string; edit: (dir: any) => any; }[]; fault: (name: any) => void; }' is missing the following properties from type '{ root: any; protocol?: any; entries: any; skill?: (harness: any) => { p: number; crash?: undefined; } | { p: number; crash: boolean; }; strategy?: string; prerequisites: any; checks: any; backend: any; stateName?: string; fixtures: any; fault: any; }': prerequisites, checks, backend
+pi-eval-loop/test/deploy.test.mjs(81,42): error TS2345: Argument of type '{ root: any; fixtures: { tasks: any; holdout: { dir: any; tasks: any; }; umbrella: any; orche: any; base: any; }; entries: undefined[]; }' is not assignable to parameter of type '{ root: any; protocol?: any; entries: any; skill?: (harness: any) => { p: number; crash?: undefined; } | { p: number; crash: boolean; }; strategy?: string; prerequisites: any; checks: any; backend: any; stateName?: string; fixtures: any; fault: any; }'.
+  Type '{ root: any; fixtures: { tasks: any; holdout: { dir: any; tasks: any; }; umbrella: any; orche: any; base: any; }; entries: undefined[]; }' is missing the following properties from type '{ root: any; protocol?: any; entries: any; skill?: (harness: any) => { p: number; crash?: undefined; } | { p: number; crash: boolean; }; strategy?: string; prerequisites: any; checks: any; backend: any; stateName?: string; fixtures: any; fault: any; }': prerequisites, checks, backend, fault
+pi-eval-loop/test/extension.test.mjs(1,22): error TS2307: Cannot find module 'node:test' or its corresponding type declarations.
+pi-eval-loop/test/extension.test.mjs(2,20): error TS2307: Cannot find module 'node:assert/strict' or its corresponding type declarations.
+pi-eval-loop/test/extension.test.mjs(3,42): error TS2307: Cannot find module 'node:fs' or its corresponding type declarations.
+pi-eval-loop/test/extension.test.mjs(4,22): error TS2307: Cannot find module 'node:path' or its corresponding type declarations.
+pi-eval-loop/test/helpers.mjs(3,30): error TS2307: Cannot find module 'node:child_process' or its corresponding type declarations.
+pi-eval-loop/test/helpers.mjs(4,89): error TS2307: Cannot find module 'node:fs' or its corresponding type declarations.
+pi-eval-loop/test/helpers.mjs(5,24): error TS2307: Cannot find module 'node:os' or its corresponding type declarations.
+pi-eval-loop/test/helpers.mjs(6,22): error TS2307: Cannot find module 'node:path' or its corresponding type declarations.
+pi-eval-loop/test/helpers.mjs(13,18): error TS2591: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/test/helpers.mjs(16,72): error TS2591: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/test/helpers.mjs(90,70): error TS2554: Expected 0-1 arguments, but got 2.
+pi-eval-loop/test/integrity.test.mjs(3,22): error TS2307: Cannot find module 'node:test' or its corresponding type declarations.
+pi-eval-loop/test/integrity.test.mjs(4,20): error TS2307: Cannot find module 'node:assert/strict' or its corresponding type declarations.
+pi-eval-loop/test/integrity.test.mjs(5,109): error TS2307: Cannot find module 'node:fs' or its corresponding type declarations.
+pi-eval-loop/test/integrity.test.mjs(6,22): error TS2307: Cannot find module 'node:path' or its corresponding type declarations.
+pi-eval-loop/test/integrity.test.mjs(40,158): error TS2339: Property 'test' does not exist on type 'RegExp | string[]'.
+  Property 'test' does not exist on type 'string[]'.
+pi-eval-loop/test/integrity.test.mjs(79,147): error TS2339: Property 'test' does not exist on type 'RegExp | { results: { typecheck: { pass: boolean; }; test: any; }; } | { results: { typecheck: { pass: boolean; }; }; } | { results: { test: { pass: boolean; exit: number; failing: any[]; tail: any; }; }; }'.
+  Property 'test' does not exist on type '{ results: { typecheck: { pass: boolean; }; test: any; }; }'.
+pi-eval-loop/test/isolation.test.mjs(4,22): error TS2307: Cannot find module 'node:test' or its corresponding type declarations.
+pi-eval-loop/test/isolation.test.mjs(5,20): error TS2307: Cannot find module 'node:assert/strict' or its corresponding type declarations.
+pi-eval-loop/test/isolation.test.mjs(6,30): error TS2307: Cannot find module 'node:child_process' or its corresponding type declarations.
+pi-eval-loop/test/isolation.test.mjs(7,67): error TS2307: Cannot find module 'node:fs' or its corresponding type declarations.
+pi-eval-loop/test/isolation.test.mjs(8,26): error TS2307: Cannot find module 'node:os' or its corresponding type declarations.
+pi-eval-loop/test/isolation.test.mjs(9,22): error TS2307: Cannot find module 'node:path' or its corresponding type declarations.
+pi-eval-loop/test/loop.test.mjs(4,22): error TS2307: Cannot find module 'node:test' or its corresponding type declarations.
+pi-eval-loop/test/loop.test.mjs(5,20): error TS2307: Cannot find module 'node:assert/strict' or its corresponding type declarations.
+pi-eval-loop/test/loop.test.mjs(6,57): error TS2307: Cannot find module 'node:fs' or its corresponding type declarations.
+pi-eval-loop/test/loop.test.mjs(7,22): error TS2307: Cannot find module 'node:path' or its corresponding type declarations.
+pi-eval-loop/test/loop.test.mjs(24,35): error TS2345: Argument of type '{ root: any; entries: { hypothesis: string; targetFailureClass: string; edit: (dir: any) => any; }[]; }' is not assignable to parameter of type '{ root: any; protocol?: any; entries: any; skill?: (harness: any) => { p: number; crash?: undefined; } | { p: number; crash: boolean; }; strategy?: string; prerequisites: any; checks: any; backend: any; stateName?: string; fixtures: any; fault: any; }'.
+  Type '{ root: any; entries: { hypothesis: string; targetFailureClass: string; edit: (dir: any) => any; }[]; }' is missing the following properties from type '{ root: any; protocol?: any; entries: any; skill?: (harness: any) => { p: number; crash?: undefined; } | { p: number; crash: boolean; }; strategy?: string; prerequisites: any; checks: any; backend: any; stateName?: string; fixtures: any; fault: any; }': prerequisites, checks, backend, fixtures, fault
+pi-eval-loop/test/loop.test.mjs(59,37): error TS2339: Property 'stateDir' does not exist on type 'Loop'.
+pi-eval-loop/test/loop.test.mjs(73,35): error TS2345: Argument of type '{ root: any; entries: { hypothesis: string; targetFailureClass: string; edit: (dir: any) => any; }[]; }' is not assignable to parameter of type '{ root: any; protocol?: any; entries: any; skill?: (harness: any) => { p: number; crash?: undefined; } | { p: number; crash: boolean; }; strategy?: string; prerequisites: any; checks: any; backend: any; stateName?: string; fixtures: any; fault: any; }'.
+  Type '{ root: any; entries: { hypothesis: string; targetFailureClass: string; edit: (dir: any) => any; }[]; }' is missing the following properties from type '{ root: any; protocol?: any; entries: any; skill?: (harness: any) => { p: number; crash?: undefined; } | { p: number; crash: boolean; }; strategy?: string; prerequisites: any; checks: any; backend: any; stateName?: string; fixtures: any; fault: any; }': prerequisites, checks, backend, fixtures, fault
+pi-eval-loop/test/loop.test.mjs(87,28): error TS2345: Argument of type '{ root: any; entries: { hypothesis: string; targetFailureClass: string; edit: (dir: any) => any; }[]; }' is not assignable to parameter of type '{ root: any; protocol?: any; entries: any; skill?: (harness: any) => { p: number; crash?: undefined; } | { p: number; crash: boolean; }; strategy?: string; prerequisites: any; checks: any; backend: any; stateName?: string; fixtures: any; fault: any; }'.
+  Type '{ root: any; entries: { hypothesis: string; targetFailureClass: string; edit: (dir: any) => any; }[]; }' is missing the following properties from type '{ root: any; protocol?: any; entries: any; skill?: (harness: any) => { p: number; crash?: undefined; } | { p: number; crash: boolean; }; strategy?: string; prerequisites: any; checks: any; backend: any; stateName?: string; fixtures: any; fault: any; }': prerequisites, checks, backend, fixtures, fault
+pi-eval-loop/test/loop.test.mjs(90,29): error TS2345: Argument of type '{ root: any; entries: { hypothesis: string; targetFailureClass: string; edit: (dir: any) => any; }[]; fixtures: any; stateName: string; }' is not assignable to parameter of type '{ root: any; protocol?: any; entries: any; skill?: (harness: any) => { p: number; crash?: undefined; } | { p: number; crash: boolean; }; strategy?: string; prerequisites: any; checks: any; backend: any; stateName?: string; fixtures: any; fault: any; }'.
+  Type '{ root: any; entries: { hypothesis: string; targetFailureClass: string; edit: (dir: any) => any; }[]; fixtures: any; stateName: string; }' is missing the following properties from type '{ root: any; protocol?: any; entries: any; skill?: (harness: any) => { p: number; crash?: undefined; } | { p: number; crash: boolean; }; strategy?: string; prerequisites: any; checks: any; backend: any; stateName?: string; fixtures: any; fault: any; }': prerequisites, checks, backend, fault
+pi-eval-loop/test/loop.test.mjs(100,35): error TS2345: Argument of type '{ root: any; entries: { hypothesis: string; targetFailureClass: string; edit: (dir: any) => any; }[]; }' is not assignable to parameter of type '{ root: any; protocol?: any; entries: any; skill?: (harness: any) => { p: number; crash?: undefined; } | { p: number; crash: boolean; }; strategy?: string; prerequisites: any; checks: any; backend: any; stateName?: string; fixtures: any; fault: any; }'.
+  Type '{ root: any; entries: { hypothesis: string; targetFailureClass: string; edit: (dir: any) => any; }[]; }' is missing the following properties from type '{ root: any; protocol?: any; entries: any; skill?: (harness: any) => { p: number; crash?: undefined; } | { p: number; crash: boolean; }; strategy?: string; prerequisites: any; checks: any; backend: any; stateName?: string; fixtures: any; fault: any; }': prerequisites, checks, backend, fixtures, fault
+pi-eval-loop/test/loop.test.mjs(113,31): error TS2345: Argument of type '{ root: any; entries: { hypothesis: string; targetFailureClass: string; edit: (dir: any) => any; }[]; prerequisites: () => Promise<{ name: string; ok: boolean; detail: string; }[]>; }' is not assignable to parameter of type '{ root: any; protocol?: any; entries: any; skill?: (harness: any) => { p: number; crash?: undefined; } | { p: number; crash: boolean; }; strategy?: string; prerequisites: any; checks: any; backend: any; stateName?: string; fixtures: any; fault: any; }'.
+  Type '{ root: any; entries: { hypothesis: string; targetFailureClass: string; edit: (dir: any) => any; }[]; prerequisites: () => Promise<{ name: string; ok: boolean; detail: string; }[]>; }' is missing the following properties from type '{ root: any; protocol?: any; entries: any; skill?: (harness: any) => { p: number; crash?: undefined; } | { p: number; crash: boolean; }; strategy?: string; prerequisites: any; checks: any; backend: any; stateName?: string; fixtures: any; fault: any; }': checks, backend, fixtures, fault
+pi-eval-loop/test/loop.test.mjs(117,39): error TS2339: Property 'stateDir' does not exist on type 'Loop'.
+pi-eval-loop/test/loop.test.mjs(118,35): error TS2339: Property 'stateDir' does not exist on type 'Loop'.
+pi-eval-loop/test/loop.test.mjs(127,136): error TS2339: Property 'fatal' does not exist on type 'Error'.
+pi-eval-loop/test/loop.test.mjs(128,35): error TS2345: Argument of type '{ root: any; entries: { hypothesis: string; targetFailureClass: string; edit: (dir: any) => any; }[]; backend: { simulated: boolean; run: (input: any) => Promise<{ schema: string; run_id: any; unit_key: any; attempt: any; ... 35 more ...; simulated: boolean; }>; }; protocol: any; }' is not assignable to parameter of type '{ root: any; protocol?: any; entries: any; skill?: (harness: any) => { p: number; crash?: undefined; } | { p: number; crash: boolean; }; strategy?: string; prerequisites: any; checks: any; backend: any; stateName?: string; fixtures: any; fault: any; }'.
+  Type '{ root: any; entries: { hypothesis: string; targetFailureClass: string; edit: (dir: any) => any; }[]; backend: { simulated: boolean; run: (input: any) => Promise<{ schema: string; run_id: any; unit_key: any; attempt: any; ... 35 more ...; simulated: boolean; }>; }; protocol: any; }' is missing the following properties from type '{ root: any; protocol?: any; entries: any; skill?: (harness: any) => { p: number; crash?: undefined; } | { p: number; crash: boolean; }; strategy?: string; prerequisites: any; checks: any; backend: any; stateName?: string; fixtures: any; fault: any; }': prerequisites, checks, fixtures, fault
+pi-eval-loop/test/loop.test.mjs(130,27): error TS2551: Property 'evaluate' does not exist on type 'Loop'. Did you mean 'evaluator'?
+pi-eval-loop/test/loop.test.mjs(142,30): error TS2345: Argument of type '{ root: any; entries: { hypothesis: string; targetFailureClass: string; edit: (dir: any) => any; }[]; fixtures: any; protocol: any; }' is not assignable to parameter of type '{ root: any; protocol?: any; entries: any; skill?: (harness: any) => { p: number; crash?: undefined; } | { p: number; crash: boolean; }; strategy?: string; prerequisites: any; checks: any; backend: any; stateName?: string; fixtures: any; fault: any; }'.
+  Type '{ root: any; entries: { hypothesis: string; targetFailureClass: string; edit: (dir: any) => any; }[]; fixtures: any; protocol: any; }' is missing the following properties from type '{ root: any; protocol?: any; entries: any; skill?: (harness: any) => { p: number; crash?: undefined; } | { p: number; crash: boolean; }; strategy?: string; prerequisites: any; checks: any; backend: any; stateName?: string; fixtures: any; fault: any; }': prerequisites, checks, backend, fault
+pi-eval-loop/test/loop.test.mjs(161,35): error TS2345: Argument of type '{ root: any; entries: undefined[]; }' is not assignable to parameter of type '{ root: any; protocol?: any; entries: any; skill?: (harness: any) => { p: number; crash?: undefined; } | { p: number; crash: boolean; }; strategy?: string; prerequisites: any; checks: any; backend: any; stateName?: string; fixtures: any; fault: any; }'.
+  Type '{ root: any; entries: undefined[]; }' is missing the following properties from type '{ root: any; protocol?: any; entries: any; skill?: (harness: any) => { p: number; crash?: undefined; } | { p: number; crash: boolean; }; strategy?: string; prerequisites: any; checks: any; backend: any; stateName?: string; fixtures: any; fault: any; }': prerequisites, checks, backend, fixtures, fault
+pi-eval-loop/test/loop.test.mjs(163,30): error TS2345: Argument of type '{ root: any; entries: undefined[]; fixtures: any; protocol: any; }' is not assignable to parameter of type '{ root: any; protocol?: any; entries: any; skill?: (harness: any) => { p: number; crash?: undefined; } | { p: number; crash: boolean; }; strategy?: string; prerequisites: any; checks: any; backend: any; stateName?: string; fixtures: any; fault: any; }'.
+  Type '{ root: any; entries: undefined[]; fixtures: any; protocol: any; }' is missing the following properties from type '{ root: any; protocol?: any; entries: any; skill?: (harness: any) => { p: number; crash?: undefined; } | { p: number; crash: boolean; }; strategy?: string; prerequisites: any; checks: any; backend: any; stateName?: string; fixtures: any; fault: any; }': prerequisites, checks, backend, fault
+pi-eval-loop/test/loop.test.mjs(178,31): error TS2345: Argument of type '{ root: any; entries: { hypothesis: string; targetFailureClass: string; edit: (dir: any) => any; }[]; protocol: any; }' is not assignable to parameter of type '{ root: any; protocol?: any; entries: any; skill?: (harness: any) => { p: number; crash?: undefined; } | { p: number; crash: boolean; }; strategy?: string; prerequisites: any; checks: any; backend: any; stateName?: string; fixtures: any; fault: any; }'.
+  Type '{ root: any; entries: { hypothesis: string; targetFailureClass: string; edit: (dir: any) => any; }[]; protocol: any; }' is missing the following properties from type '{ root: any; protocol?: any; entries: any; skill?: (harness: any) => { p: number; crash?: undefined; } | { p: number; crash: boolean; }; strategy?: string; prerequisites: any; checks: any; backend: any; stateName?: string; fixtures: any; fault: any; }': prerequisites, checks, backend, fixtures, fault
+pi-eval-loop/test/loop.test.mjs(190,31): error TS2345: Argument of type '{ root: any; entries: undefined[]; skill: (h: any) => { p: number; crash?: undefined; } | { p: number; crash: boolean; }; }' is not assignable to parameter of type '{ root: any; protocol?: any; entries: any; skill?: (harness: any) => { p: number; crash?: undefined; } | { p: number; crash: boolean; }; strategy?: string; prerequisites: any; checks: any; backend: any; stateName?: string; fixtures: any; fault: any; }'.
+  Type '{ root: any; entries: undefined[]; skill: (h: any) => { p: number; crash?: undefined; } | { p: number; crash: boolean; }; }' is missing the following properties from type '{ root: any; protocol?: any; entries: any; skill?: (harness: any) => { p: number; crash?: undefined; } | { p: number; crash: boolean; }; strategy?: string; prerequisites: any; checks: any; backend: any; stateName?: string; fixtures: any; fault: any; }': prerequisites, checks, backend, fixtures, fault
+pi-eval-loop/test/loop.test.mjs(203,24): error TS2345: Argument of type '{ root: any; entries: { hypothesis: string; targetFailureClass: string; edit: (dir: any) => any; }[]; strategy: string; stateName: string; }' is not assignable to parameter of type '{ root: any; protocol?: any; entries: any; skill?: (harness: any) => { p: number; crash?: undefined; } | { p: number; crash: boolean; }; strategy?: string; prerequisites: any; checks: any; backend: any; stateName?: string; fixtures: any; fault: any; }'.
+  Type '{ root: any; entries: { hypothesis: string; targetFailureClass: string; edit: (dir: any) => any; }[]; strategy: string; stateName: string; }' is missing the following properties from type '{ root: any; protocol?: any; entries: any; skill?: (harness: any) => { p: number; crash?: undefined; } | { p: number; crash: boolean; }; strategy?: string; prerequisites: any; checks: any; backend: any; stateName?: string; fixtures: any; fault: any; }': prerequisites, checks, backend, fixtures, fault
+pi-eval-loop/test/loop.test.mjs(214,31): error TS2345: Argument of type '{ root: any; protocol: any; entries: { hypothesis: string; targetFailureClass: string; edit: (dir: any) => any; }[]; }' is not assignable to parameter of type '{ root: any; protocol?: any; entries: any; skill?: (harness: any) => { p: number; crash?: undefined; } | { p: number; crash: boolean; }; strategy?: string; prerequisites: any; checks: any; backend: any; stateName?: string; fixtures: any; fault: any; }'.
+  Type '{ root: any; protocol: any; entries: { hypothesis: string; targetFailureClass: string; edit: (dir: any) => any; }[]; }' is missing the following properties from type '{ root: any; protocol?: any; entries: any; skill?: (harness: any) => { p: number; crash?: undefined; } | { p: number; crash: boolean; }; strategy?: string; prerequisites: any; checks: any; backend: any; stateName?: string; fixtures: any; fault: any; }': prerequisites, checks, backend, fixtures, fault
+pi-eval-loop/test/stats-gate.test.mjs(2,22): error TS2307: Cannot find module 'node:test' or its corresponding type declarations.
+pi-eval-loop/test/stats-gate.test.mjs(3,20): error TS2307: Cannot find module 'node:assert/strict' or its corresponding type declarations.
+pi-eval-loop/test/stats-gate.test.mjs(24,58): error TS2353: Object literal may only specify known properties, and 'seed' does not exist in type '{ draws?: number; level?: string; event?: string; eps?: {}; minGain?: {}; lossThreshold?: number; familyLossThreshold?: number; }'.
+pi-eval-loop/test/stats-gate.test.mjs(29,43): error TS2353: Object literal may only specify known properties, and 'seed' does not exist in type '{ draws?: number; level?: string; event?: string; eps?: {}; minGain?: {}; lossThreshold?: number; familyLossThreshold?: number; }'.
+pi-eval-loop/test/stats-gate.test.mjs(34,42): error TS2353: Object literal may only specify known properties, and 'seed' does not exist in type '{ draws?: number; level?: string; event?: string; eps?: {}; minGain?: {}; lossThreshold?: number; familyLossThreshold?: number; }'.
+pi-eval-loop/test/stats-gate.test.mjs(34,93): error TS2353: Object literal may only specify known properties, and 'seed' does not exist in type '{ draws?: number; level?: string; event?: string; eps?: {}; minGain?: {}; lossThreshold?: number; familyLossThreshold?: number; }'.
+pi-eval-loop/test/stats-gate.test.mjs(35,63): error TS2353: Object literal may only specify known properties, and 'seed' does not exist in type '{ draws?: number; level?: string; event?: string; eps?: {}; minGain?: {}; lossThreshold?: number; familyLossThreshold?: number; }'.
+pi-eval-loop/test/stats-gate.test.mjs(36,48): error TS2353: Object literal may only specify known properties, and 'seed' does not exist in type '{ draws?: number; level?: string; event?: string; eps?: {}; minGain?: {}; lossThreshold?: number; familyLossThreshold?: number; }'.
+pi-eval-loop/test/stats-gate.test.mjs(43,44): error TS2353: Object literal may only specify known properties, and 'seed' does not exist in type '{ draws?: number; level?: string; event?: string; eps?: {}; minGain?: {}; lossThreshold?: number; familyLossThreshold?: number; }'.
+pi-eval-loop/test/stats-gate.test.mjs(44,44): error TS2353: Object literal may only specify known properties, and 'seed' does not exist in type '{ draws?: number; level?: string; event?: string; eps?: {}; minGain?: {}; lossThreshold?: number; familyLossThreshold?: number; }'.
+pi-eval-loop/test/stats-gate.test.mjs(45,100): error TS2353: Object literal may only specify known properties, and 'seed' does not exist in type '{ draws?: number; level?: string; event?: string; eps?: {}; minGain?: {}; lossThreshold?: number; familyLossThreshold?: number; }'.
+pi-eval-loop/test/stats-gate.test.mjs(55,46): error TS2353: Object literal may only specify known properties, and 'seed' does not exist in type '{ draws?: number; level?: string; event?: string; eps?: {}; minGain?: {}; lossThreshold?: number; familyLossThreshold?: number; }'.
+pi-eval-loop/test/stats-gate.test.mjs(58,45): error TS2353: Object literal may only specify known properties, and 'seed' does not exist in type '{ draws?: number; level?: string; event?: string; eps?: {}; minGain?: {}; lossThreshold?: number; familyLossThreshold?: number; }'.
+pi-eval-loop/test/stats-gate.test.mjs(76,45): error TS2353: Object literal may only specify known properties, and 'seed' does not exist in type '{ draws?: number; level?: string; event?: string; eps?: {}; minGain?: {}; lossThreshold?: number; familyLossThreshold?: number; }'.
+pi-eval-loop/test/stats-gate.test.mjs(88,75): error TS2353: Object literal may only specify known properties, and 'seed' does not exist in type '{ draws?: number; level?: string; event?: string; eps?: {}; minGain?: {}; lossThreshold?: number; familyLossThreshold?: number; }'.

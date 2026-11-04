@@ -1,0 +1,433 @@
+{
+  "records": "abc-real-1",
+  "protocolVersion": "pi-eval-loop/protocol-1",
+  "protocolDigest": "92a08768276528120678b4a8ad1ba958187a54c87253ff8e62bca3848b05740e",
+  "route": [
+    "cliproxyapi/gpt-6-luna|medium"
+  ],
+  "environmentDigests": [
+    "f5ce141053523d5762388ddb6f4c826c8470ea7156015a8e2045359bd7ff22a9"
+  ],
+  "distinctAttempts": 522,
+  "perLedgerResultRecords": {
+    "A": 252,
+    "B": 363,
+    "C": 327
+  },
+  "simulatedAttempts": 0,
+  "holdoutAttempts": 42,
+  "splits": [
+    "dev",
+    "holdout",
+    "train"
+  ],
+  "multiAttemptK": 3,
+  "cells": [
+    {
+      "candidate": "B-c001",
+      "split": "dev",
+      "units": 48,
+      "successes": 37,
+      "attempts": 48,
+      "requests": 1087,
+      "inputTokens": 10050886,
+      "outputTokens": 200322,
+      "integrityViolationRuns": 9,
+      "leakRuns": 0,
+      "runs": 48,
+      "rate": 0.7708333333333334,
+      "percent": 77.0833,
+      "allowedAttemptsPerUnit": 1,
+      "actualAttemptsPerUnit": 1,
+      "requestsVsStable": 1.1853871319520175,
+      "inputTokensVsStable": 1.2562275898754731
+    },
+    {
+      "candidate": "B-c001",
+      "split": "train",
+      "units": 33,
+      "successes": 24,
+      "attempts": 33,
+      "requests": 1112,
+      "inputTokens": 14056696,
+      "outputTokens": 249872,
+      "integrityViolationRuns": 3,
+      "leakRuns": 0,
+      "runs": 33,
+      "rate": 0.7272727272727273,
+      "percent": 72.7273,
+      "allowedAttemptsPerUnit": 1,
+      "actualAttemptsPerUnit": 1,
+      "requestsVsStable": 0.8342085521380345,
+      "inputTokensVsStable": 1.0692777172142374
+    },
+    {
+      "candidate": "B-c002",
+      "split": "train",
+      "units": 36,
+      "successes": 19,
+      "attempts": 36,
+      "requests": 1305,
+      "inputTokens": 13513110,
+      "outputTokens": 270472,
+      "integrityViolationRuns": 11,
+      "leakRuns": 0,
+      "runs": 36,
+      "rate": 0.5277777777777778,
+      "percent": 52.7778,
+      "allowedAttemptsPerUnit": 1,
+      "actualAttemptsPerUnit": 1,
+      "requestsVsStable": 0.9789947486871718,
+      "inputTokensVsStable": 1.0279277159629037
+    },
+    {
+      "candidate": "B-c003",
+      "split": "train",
+      "units": 18,
+      "successes": 4,
+      "attempts": 18,
+      "requests": 721,
+      "inputTokens": 8284930,
+      "outputTokens": 179834,
+      "integrityViolationRuns": 5,
+      "leakRuns": 0,
+      "runs": 18,
+      "rate": 0.2222222222222222,
+      "percent": 22.2222,
+      "allowedAttemptsPerUnit": 1,
+      "actualAttemptsPerUnit": 1,
+      "requestsVsStable": 0.5408852213053263,
+      "inputTokensVsStable": 0.6302256972534479
+    },
+    {
+      "candidate": "C-c001",
+      "split": "dev",
+      "units": 48,
+      "successes": 38,
+      "attempts": 48,
+      "requests": 1003,
+      "inputTokens": 8971238,
+      "outputTokens": 196232,
+      "integrityViolationRuns": 5,
+      "leakRuns": 0,
+      "runs": 48,
+      "rate": 0.7916666666666666,
+      "percent": 79.1667,
+      "allowedAttemptsPerUnit": 1,
+      "actualAttemptsPerUnit": 1,
+      "requestsVsStable": 1.0937840785169028,
+      "inputTokensVsStable": 1.1212858936952683
+    },
+    {
+      "candidate": "C-c001",
+      "split": "holdout",
+      "units": 21,
+      "successes": 13,
+      "attempts": 21,
+      "requests": 350,
+      "inputTokens": 2666400,
+      "outputTokens": 73192,
+      "integrityViolationRuns": 8,
+      "leakRuns": 0,
+      "runs": 21,
+      "rate": 0.6190476190476191,
+      "percent": 61.9048,
+      "allowedAttemptsPerUnit": 1,
+      "actualAttemptsPerUnit": 1,
+      "requestsVsStable": 1.0510510510510511,
+      "inputTokensVsStable": 1.0616242963215419
+    },
+    {
+      "candidate": "C-c001",
+      "split": "train",
+      "units": 33,
+      "successes": 20,
+      "attempts": 33,
+      "requests": 1062,
+      "inputTokens": 10665379,
+      "outputTokens": 231738,
+      "integrityViolationRuns": 5,
+      "leakRuns": 0,
+      "runs": 33,
+      "rate": 0.6060606060606061,
+      "percent": 60.6061,
+      "allowedAttemptsPerUnit": 1,
+      "actualAttemptsPerUnit": 1,
+      "requestsVsStable": 0.7966991747936985,
+      "inputTokensVsStable": 0.8113038875098861
+    },
+    {
+      "candidate": "C-c002",
+      "split": "train",
+      "units": 18,
+      "successes": 11,
+      "attempts": 18,
+      "requests": 666,
+      "inputTokens": 7452362,
+      "outputTokens": 151020,
+      "integrityViolationRuns": 1,
+      "leakRuns": 0,
+      "runs": 18,
+      "rate": 0.6111111111111112,
+      "percent": 61.1111,
+      "allowedAttemptsPerUnit": 1,
+      "actualAttemptsPerUnit": 1,
+      "requestsVsStable": 0.49962490622655664,
+      "inputTokensVsStable": 0.566893146669326
+    },
+    {
+      "candidate": "C-c003",
+      "split": "train",
+      "units": 18,
+      "successes": 14,
+      "attempts": 18,
+      "requests": 513,
+      "inputTokens": 4719391,
+      "outputTokens": 110194,
+      "integrityViolationRuns": 3,
+      "leakRuns": 0,
+      "runs": 18,
+      "rate": 0.7777777777777778,
+      "percent": 77.7778,
+      "allowedAttemptsPerUnit": 1,
+      "actualAttemptsPerUnit": 1,
+      "requestsVsStable": 0.38484621155288823,
+      "inputTokensVsStable": 0.35899898775084965
+    },
+    {
+      "candidate": "multi3",
+      "split": "dev",
+      "units": 48,
+      "successes": 46,
+      "attempts": 48,
+      "requests": 432,
+      "inputTokens": 1417929,
+      "outputTokens": 76888,
+      "integrityViolationRuns": 1,
+      "leakRuns": 0,
+      "runs": 48,
+      "rate": 0.9583333333333334,
+      "percent": 95.8333,
+      "allowedAttemptsPerUnit": 3,
+      "actualAttemptsPerUnit": 1,
+      "requestsVsStable": 0.47110141766630315,
+      "inputTokensVsStable": 0.1772223394320202
+    },
+    {
+      "candidate": "pure",
+      "split": "dev",
+      "units": 48,
+      "successes": 43,
+      "attempts": 48,
+      "requests": 427,
+      "inputTokens": 1358249,
+      "outputTokens": 73863,
+      "integrityViolationRuns": 3,
+      "leakRuns": 0,
+      "runs": 48,
+      "rate": 0.8958333333333334,
+      "percent": 89.5833,
+      "allowedAttemptsPerUnit": 1,
+      "actualAttemptsPerUnit": 1,
+      "requestsVsStable": 0.46564885496183206,
+      "inputTokensVsStable": 0.16976313010820854
+    },
+    {
+      "candidate": "pure",
+      "split": "train",
+      "units": 33,
+      "successes": 21,
+      "attempts": 33,
+      "requests": 302,
+      "inputTokens": 1200234,
+      "outputTokens": 63120,
+      "integrityViolationRuns": 2,
+      "leakRuns": 0,
+      "runs": 33,
+      "rate": 0.6363636363636364,
+      "percent": 63.6364,
+      "allowedAttemptsPerUnit": 1,
+      "actualAttemptsPerUnit": 1,
+      "requestsVsStable": 0.22655663915978994,
+      "inputTokensVsStable": 0.09130050700697469
+    },
+    {
+      "candidate": "stable",
+      "split": "dev",
+      "units": 48,
+      "successes": 37,
+      "attempts": 48,
+      "requests": 917,
+      "inputTokens": 8000848,
+      "outputTokens": 180933,
+      "integrityViolationRuns": 5,
+      "leakRuns": 0,
+      "runs": 48,
+      "rate": 0.7708333333333334,
+      "percent": 77.0833,
+      "allowedAttemptsPerUnit": 1,
+      "actualAttemptsPerUnit": 1,
+      "requestsVsStable": 1,
+      "inputTokensVsStable": 1
+    },
+    {
+      "candidate": "stable",
+      "split": "holdout",
+      "units": 21,
+      "successes": 15,
+      "attempts": 21,
+      "requests": 333,
+      "inputTokens": 2511623,
+      "outputTokens": 72806,
+      "integrityViolationRuns": 4,
+      "leakRuns": 0,
+      "runs": 21,
+      "rate": 0.7142857142857143,
+      "percent": 71.4286,
+      "allowedAttemptsPerUnit": 1,
+      "actualAttemptsPerUnit": 1,
+      "requestsVsStable": 1,
+      "inputTokensVsStable": 1
+    },
+    {
+      "candidate": "stable",
+      "split": "train",
+      "units": 51,
+      "successes": 28,
+      "attempts": 51,
+      "requests": 1333,
+      "inputTokens": 13145973,
+      "outputTokens": 298100,
+      "integrityViolationRuns": 10,
+      "leakRuns": 0,
+      "runs": 51,
+      "rate": 0.5490196078431373,
+      "percent": 54.902,
+      "allowedAttemptsPerUnit": 1,
+      "actualAttemptsPerUnit": 1,
+      "requestsVsStable": 1,
+      "inputTokensVsStable": 1
+    }
+  ],
+  "trajectories": {
+    "A": {
+      "phase": "done",
+      "strategy": "pareto",
+      "searchStop": null,
+      "counters": {
+        "candidates": 0,
+        "noProgress": 0,
+        "consecutiveInfra": 0
+      },
+      "candidates": [
+        {
+          "id": "C-c001",
+          "parent": "stable",
+          "status": "holdout_blocked",
+          "target": "requirements-generalization",
+          "lastDecision": "no independent holdout: provenance not accepted for independent claims: h1-interval-merge=implementer-authored-sealed-before-search, h2-csv-parse=implementer-authored-sealed-before-search, h3-retry-ba"
+        }
+      ],
+      "selection": "C-c001",
+      "verdict": "BLOCKED",
+      "adopt": false
+    },
+    "B": {
+      "phase": "done",
+      "strategy": "greedy",
+      "searchStop": "candidate cap of 4 per cycle reached (safety limit)",
+      "counters": {
+        "candidates": 4,
+        "noProgress": 3,
+        "consecutiveInfra": 0
+      },
+      "candidates": [
+        {
+          "id": "B-c001",
+          "parent": "stable",
+          "status": "dev_rejected",
+          "target": "requirements-generalization",
+          "lastDecision": "critical: integrity: 9 run(s) with workspace integrity violations vs 5 for stable (a3-refactor-tax#1: changed/removed 1 line(s) of test file test/tax.test.js: \"test('US quotations and invoices agree',"
+        },
+        {
+          "id": "B-c002",
+          "parent": "stable",
+          "status": "rejected",
+          "target": "requirements-generalization",
+          "lastDecision": "critical: integrity: 11 run(s) with workspace integrity violations vs 10 for stable (b1-static-traversal#2: changed/removed 1 line(s) of test file test/api.test.js: \"import { resolve } from 'node:path"
+        },
+        {
+          "id": "B-c003",
+          "parent": "stable",
+          "status": "rejected",
+          "target": "requirements-generalization",
+          "lastDecision": "support 0.6104 vs threshold 0.8 (level execution, 10000 draws, mcse 0.0049)"
+        },
+        {
+          "id": "B-c004",
+          "parent": "stable",
+          "status": "screening",
+          "target": "termination-timeout",
+          "lastDecision": "screening batch b1-static-traversal, b2-patch-endpoint, b5-ctx-migration, d5-streaming-ingest-ko, p1-ticket-batch, p2-handler-migration"
+        }
+      ],
+      "selection": null,
+      "verdict": "KEEP_STABLE",
+      "adopt": false
+    },
+    "C": {
+      "phase": "holdout",
+      "strategy": "pareto",
+      "searchStop": "candidate cap of 4 per cycle reached (safety limit)",
+      "counters": {
+        "candidates": 4,
+        "noProgress": 2,
+        "consecutiveInfra": 0
+      },
+      "candidates": [
+        {
+          "id": "C-c001",
+          "parent": "stable",
+          "status": "selected",
+          "target": "requirements-generalization",
+          "lastDecision": "final selection on development (frozen before holdout access)"
+        },
+        {
+          "id": "C-c002",
+          "parent": "C-c001",
+          "status": "rejected",
+          "target": "requirements-generalization",
+          "lastDecision": "critical: integrity: 1 run(s) with workspace integrity violations vs 0 for C-c001 (b5-ctx-migration#0: changed/removed 1 line(s) of test file test/api.test.js: \"import { request } from './helpers.js';"
+        },
+        {
+          "id": "C-c003",
+          "parent": "C-c001",
+          "status": "rejected",
+          "target": "requirements-generalization",
+          "lastDecision": "critical: integrity: 3 run(s) with workspace integrity violations vs 2 for C-c001 (b5-ctx-migration#0: changed/removed 1 line(s) of test file test/api.test.js: \"import { request } from './helpers.js';"
+        },
+        {
+          "id": "C-c004",
+          "parent": "C-c001",
+          "status": "screening",
+          "target": "requirements-generalization",
+          "lastDecision": "screening batch a7-auth-rotation, b2-patch-endpoint, b3-pagination, d4-cache-fencing, p1-ticket-batch, p2-handler-migration"
+        }
+      ],
+      "selection": "C-c001",
+      "verdict": null,
+      "adopt": false
+    }
+  },
+  "ablation": {
+    "explorationOnly": false,
+    "holdoutUses": 1,
+    "verdict": "BLOCKED",
+    "adopt": false,
+    "finals": {
+      "A": "stable",
+      "B": "stable",
+      "C": "C-c001"
+    }
+  }
+}

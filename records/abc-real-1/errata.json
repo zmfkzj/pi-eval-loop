@@ -1,0 +1,39 @@
+{
+  "records": "abc-real-1",
+  "status": "truncated-exploratory-evidence",
+  "addedAt": "2026-11-04",
+  "originalArtifactsUnchanged": true,
+  "audit": "audit.json",
+  "errata": [
+    {
+      "id": 0,
+      "artifact": ["B/state.json:searchStop", "C/state.json:searchStop", "ablation.json:conditions.*.searchStop"],
+      "original": "candidate cap of 4 per cycle reached (safety limit)",
+      "correction": "The 4-candidate cap was set for the implementing session's wall time (protocols/abc-real-1.json notes), not as a safety limit. The user forbade time- or cost-motivated low limits. The search never reached its no-progress stop: the run is truncated exploratory evidence. Only 3 candidates per arm were evaluated (the 4th was left in screening by a boundary bug fixed later)."
+    },
+    {
+      "id": 1,
+      "artifact": ["A/report.md", "B/report.md", "C/report.md", "ablation.md", "ablation.json"],
+      "original": "Q columns report the Monte Carlo mean of the task-level bootstrap as the point estimate",
+      "correction": "Exact empirical rates (final attempt per unit): stable dev 37/48 = 77.0833%, pure dev 43/48 = 89.5833%, multi3 dev 46/48 = 95.8333%, B-c001 dev 37/48 = 77.0833% (identical to stable), C-c001 dev 38/48 = 79.1667%, stable holdout 15/21 = 71.4286%, C-c001 holdout 13/21 = 61.9048%. protocol-2 uses exact plug-in points."
+    },
+    {
+      "id": 2,
+      "artifact": ["A/report.md", "docs/results-abc-real-1.md (before 667fac7)"],
+      "original": "multi3 presented as the baseline that separates extra compute from harness effects",
+      "correction": "multi3 allows up to 3 pure-Pi attempts per unit but used exactly 1 attempt in all 48 dev units (432 requests vs stable 917; input tokens 0.18x). It is a second single-attempt sample of pure Pi, not an equal-compute or opportunity-matched control."
+    },
+    {
+      "id": 3,
+      "artifact": ["C/candidates/C-c001/candidate.json", "selection.json"],
+      "original": "C-c001 development-qualified and selected (protocol-1 relative integrity rule)",
+      "correction": "All of C-c001's violations were task-agent edits of existing test files (no leak, route violation, crash or patch violation): 3 screening runs, 5 dev runs (stable 5), 2 development-train runs (unchecked by protocol-1), 8 holdout runs (stable 4). protocol-2 treats any such run as critical regardless of the baseline and would have rejected C-c001 at screening."
+    },
+    {
+      "id": 4,
+      "artifact": ["datasets/holdout-v1/USES.jsonl"],
+      "original": "holdout-v1 used once by this run",
+      "correction": "holdout-v1 is implementer-authored and consumed. It is not independent, is not reused for tuning, and was neither loaded nor shown to the optimizer in explore-real-2."
+    }
+  ]
+}

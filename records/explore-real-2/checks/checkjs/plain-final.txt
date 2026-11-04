@@ -1,0 +1,215 @@
+pi-eval-loop/bin/eval-loop.mjs(6,28): error TS2307: Cannot find module 'node:fs' or its corresponding type declarations.
+pi-eval-loop/bin/eval-loop.mjs(7,25): error TS2307: Cannot find module 'node:path' or its corresponding type declarations.
+pi-eval-loop/bin/eval-loop.mjs(8,27): error TS2307: Cannot find module 'node:util' or its corresponding type declarations.
+pi-eval-loop/bin/eval-loop.mjs(21,20): error TS2591: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/bin/eval-loop.mjs(25,3): error TS2591: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/bin/eval-loop.mjs(28,98): error TS2591: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/bin/eval-loop.mjs(29,115): error TS2591: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/bin/eval-loop.mjs(30,80): error TS2591: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/bin/eval-loop.mjs(31,122): error TS2591: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/bin/eval-loop.mjs(31,187): error TS2591: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/bin/eval-loop.mjs(36,57): error TS2591: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/bin/eval-loop.mjs(37,55): error TS2591: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/bin/eval-loop.mjs(40,3): error TS2591: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/bin/eval-loop.mjs(42,1): error TS2591: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/bin/eval-loop.mjs(48,18): error TS2591: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/bin/eval-loop.mjs(51,114): error TS2591: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/bin/eval-loop.mjs(53,61): error TS2591: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/bin/eval-loop.mjs(54,80): error TS2591: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/bin/eval-loop.mjs(56,183): error TS2591: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/bin/eval-loop.mjs(61,119): error TS2591: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/bin/eval-loop.mjs(76,89): error TS2591: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/extension/index.js(4,26): error TS2307: Cannot find module 'node:child_process' or its corresponding type declarations.
+pi-eval-loop/extension/index.js(5,31): error TS2307: Cannot find module 'node:url' or its corresponding type declarations.
+pi-eval-loop/extension/index.js(37,60): error TS2591: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/extension/index.js(39,91): error TS2591: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/scripts/audit-records.mjs(8,70): error TS2307: Cannot find module 'node:fs' or its corresponding type declarations.
+pi-eval-loop/scripts/audit-records.mjs(9,41): error TS2307: Cannot find module 'node:path' or its corresponding type declarations.
+pi-eval-loop/scripts/audit-records.mjs(10,31): error TS2307: Cannot find module 'node:url' or its corresponding type declarations.
+pi-eval-loop/scripts/audit-records.mjs(64,5): error TS2591: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/scripts/audit-records.mjs(64,32): error TS2591: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/scripts/audit-records.mjs(65,22): error TS2591: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/scripts/audit-records.mjs(66,83): error TS2591: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/scripts/audit-records.mjs(69,43): error TS2591: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/scripts/checkjs-compare.mjs(9,41): error TS2307: Cannot find module 'node:child_process' or its corresponding type declarations.
+pi-eval-loop/scripts/checkjs-compare.mjs(10,83): error TS2307: Cannot find module 'node:fs' or its corresponding type declarations.
+pi-eval-loop/scripts/checkjs-compare.mjs(11,31): error TS2307: Cannot find module 'node:path' or its corresponding type declarations.
+pi-eval-loop/scripts/checkjs-compare.mjs(12,24): error TS2307: Cannot find module 'node:os' or its corresponding type declarations.
+pi-eval-loop/scripts/checkjs-compare.mjs(14,24): error TS2591: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/scripts/checkjs-compare.mjs(15,94): error TS2591: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/scripts/checkjs-compare.mjs(22,31): error TS2591: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/scripts/checkjs-compare.mjs(30,32): error TS2591: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/scripts/checkjs-compare.mjs(39,29): error TS2591: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/src/ablation.mjs(10,47): error TS2307: Cannot find module 'node:fs' or its corresponding type declarations.
+pi-eval-loop/src/ablation.mjs(11,22): error TS2307: Cannot find module 'node:path' or its corresponding type declarations.
+pi-eval-loop/src/app.mjs(2,22): error TS2307: Cannot find module 'node:path' or its corresponding type declarations.
+pi-eval-loop/src/app.mjs(10,37): error TS2307: Cannot find module 'node:fs' or its corresponding type declarations.
+pi-eval-loop/src/app.mjs(11,24): error TS2307: Cannot find module 'node:os' or its corresponding type declarations.
+pi-eval-loop/src/archive.mjs(3,41): error TS2307: Cannot find module 'node:fs' or its corresponding type declarations.
+pi-eval-loop/src/archive.mjs(4,22): error TS2307: Cannot find module 'node:path' or its corresponding type declarations.
+pi-eval-loop/src/checks.mjs(3,64): error TS2307: Cannot find module 'node:fs' or its corresponding type declarations.
+pi-eval-loop/src/checks.mjs(4,24): error TS2307: Cannot find module 'node:os' or its corresponding type declarations.
+pi-eval-loop/src/checks.mjs(5,22): error TS2307: Cannot find module 'node:path' or its corresponding type declarations.
+pi-eval-loop/src/datasets.mjs(6,73): error TS2307: Cannot find module 'node:fs' or its corresponding type declarations.
+pi-eval-loop/src/datasets.mjs(7,32): error TS2307: Cannot find module 'node:path' or its corresponding type declarations.
+pi-eval-loop/src/datasets.mjs(8,30): error TS2307: Cannot find module 'node:child_process' or its corresponding type declarations.
+pi-eval-loop/src/datasets.mjs(149,62): error TS2339: Property 'orcheDir' does not exist on type '{}'.
+pi-eval-loop/src/datasets.mjs(149,72): error TS2339: Property 'ledgerPath' does not exist on type '{}'.
+pi-eval-loop/src/datasets.mjs(169,20): error TS2591: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/src/deploy.mjs(6,88): error TS2307: Cannot find module 'node:fs' or its corresponding type declarations.
+pi-eval-loop/src/deploy.mjs(7,24): error TS2307: Cannot find module 'node:os' or its corresponding type declarations.
+pi-eval-loop/src/deploy.mjs(8,22): error TS2307: Cannot find module 'node:path' or its corresponding type declarations.
+pi-eval-loop/src/deploy.mjs(55,34): error TS2339: Property 'umbrella' does not exist on type 'Deployer'.
+pi-eval-loop/src/deploy.mjs(55,49): error TS2339: Property 'orchePath' does not exist on type 'Deployer'.
+pi-eval-loop/src/deploy.mjs(56,59): error TS2339: Property 'umbrella' does not exist on type 'Deployer'.
+pi-eval-loop/src/deploy.mjs(56,85): error TS2339: Property 'orchePath' does not exist on type 'Deployer'.
+pi-eval-loop/src/deploy.mjs(56,109): error TS2339: Property 'branch' does not exist on type 'Deployer'.
+pi-eval-loop/src/deploy.mjs(64,48): error TS2339: Property 'branch' does not exist on type 'Deployer'.
+pi-eval-loop/src/deploy.mjs(66,75): error TS2339: Property 'branch' does not exist on type 'Deployer'.
+pi-eval-loop/src/deploy.mjs(67,49): error TS2339: Property 'branch' does not exist on type 'Deployer'.
+pi-eval-loop/src/deploy.mjs(77,115): error TS2339: Property 'branch' does not exist on type 'Deployer'.
+pi-eval-loop/src/deploy.mjs(84,16): error TS2339: Property 'mode' does not exist on type 'Deployer'.
+pi-eval-loop/src/deploy.mjs(85,33): error TS2339: Property 'mode' does not exist on type 'Deployer'.
+pi-eval-loop/src/deploy.mjs(85,77): error TS2339: Property 'umbrella' does not exist on type 'Deployer'.
+pi-eval-loop/src/deploy.mjs(85,116): error TS2339: Property 'orchePath' does not exist on type 'Deployer'.
+pi-eval-loop/src/deploy.mjs(88,10): error TS2339: Property 'fault' does not exist on type 'Deployer'.
+pi-eval-loop/src/deploy.mjs(90,14): error TS2339: Property 'mode' does not exist on type 'Deployer'.
+pi-eval-loop/src/deploy.mjs(92,10): error TS2339: Property 'fault' does not exist on type 'Deployer'.
+pi-eval-loop/src/deploy.mjs(93,23): error TS2339: Property 'umbrella' does not exist on type 'Deployer'.
+pi-eval-loop/src/deploy.mjs(94,10): error TS2339: Property 'fault' does not exist on type 'Deployer'.
+pi-eval-loop/src/deploy.mjs(109,14): error TS2339: Property 'reason' does not exist on type '{}'.
+pi-eval-loop/src/deploy.mjs(109,22): error TS2339: Property 'target' does not exist on type '{}'.
+pi-eval-loop/src/deploy.mjs(114,14): error TS2339: Property 'mode' does not exist on type 'Deployer'.
+pi-eval-loop/src/deploy.mjs(115,32): error TS2339: Property 'branch' does not exist on type 'Deployer'.
+pi-eval-loop/src/deploy.mjs(116,12): error TS2339: Property 'fault' does not exist on type 'Deployer'.
+pi-eval-loop/src/deploy.mjs(117,20): error TS2339: Property 'umbrella' does not exist on type 'Deployer'.
+pi-eval-loop/src/deploy.mjs(117,35): error TS2339: Property 'branch' does not exist on type 'Deployer'.
+pi-eval-loop/src/deploy.mjs(126,14): error TS2339: Property 'mode' does not exist on type 'Deployer'.
+pi-eval-loop/src/deploy.mjs(131,40): error TS2339: Property 'umbrella' does not exist on type 'Deployer'.
+pi-eval-loop/src/evaluator.mjs(5,62): error TS2307: Cannot find module 'node:fs' or its corresponding type declarations.
+pi-eval-loop/src/evaluator.mjs(6,24): error TS2307: Cannot find module 'node:os' or its corresponding type declarations.
+pi-eval-loop/src/evaluator.mjs(7,22): error TS2307: Cannot find module 'node:path' or its corresponding type declarations.
+pi-eval-loop/src/faux-upstream.mjs(9,18): error TS2307: Cannot find module 'node:http' or its corresponding type declarations.
+pi-eval-loop/src/faux-upstream.mjs(10,18): error TS2307: Cannot find module 'node:zlib' or its corresponding type declarations.
+pi-eval-loop/src/faux-upstream.mjs(11,55): error TS2307: Cannot find module 'node:fs' or its corresponding type declarations.
+pi-eval-loop/src/faux-upstream.mjs(12,32): error TS2307: Cannot find module 'node:path' or its corresponding type declarations.
+pi-eval-loop/src/faux-upstream.mjs(43,81): error TS2591: Cannot find name 'Buffer'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/src/faux-upstream.mjs(65,21): error TS2345: Argument of type '{ type: string; output_index: number; item: { arguments: string; type: string; id: string; call_id: string; name: any; status: string; }; }' is not assignable to parameter of type '{ type: string; response: { id: string; model: any; status: string; }; }'.
+  Property 'response' is missing in type '{ type: string; output_index: number; item: { arguments: string; type: string; id: string; call_id: string; name: any; status: string; }; }' but required in type '{ type: string; response: { id: string; model: any; status: string; }; }'.
+pi-eval-loop/src/faux-upstream.mjs(68,21): error TS2345: Argument of type '{ type: string; output_index: number; item: { type: string; id: string; role: string; content: undefined[]; }; }' is not assignable to parameter of type '{ type: string; response: { id: string; model: any; status: string; }; }'.
+  Property 'response' is missing in type '{ type: string; output_index: number; item: { type: string; id: string; role: string; content: undefined[]; }; }' but required in type '{ type: string; response: { id: string; model: any; status: string; }; }'.
+pi-eval-loop/src/grader.mjs(5,67): error TS2307: Cannot find module 'node:fs' or its corresponding type declarations.
+pi-eval-loop/src/grader.mjs(6,32): error TS2307: Cannot find module 'node:path' or its corresponding type declarations.
+pi-eval-loop/src/grader.mjs(59,32): error TS2339: Property 'hiddenTests' does not exist on type '{}'.
+pi-eval-loop/src/grader.mjs(59,85): error TS2339: Property 'hiddenTests' does not exist on type '{}'.
+pi-eval-loop/src/grader.mjs(60,238): error TS2339: Property 'hiddenTests' does not exist on type '{}'.
+pi-eval-loop/src/grader.mjs(61,116): error TS2339: Property 'hiddenTests' does not exist on type '{}'.
+pi-eval-loop/src/integrity.mjs(5,22): error TS2307: Cannot find module 'node:path' or its corresponding type declarations.
+pi-eval-loop/src/loop.mjs(8,57): error TS2307: Cannot find module 'node:fs' or its corresponding type declarations.
+pi-eval-loop/src/loop.mjs(9,31): error TS2307: Cannot find module 'node:path' or its corresponding type declarations.
+pi-eval-loop/src/loop.mjs(77,28): error TS2591: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/src/loop.mjs(540,30): error TS2307: Cannot find module 'node:child_process' or its corresponding type declarations.
+pi-eval-loop/src/proposer.mjs(7,122): error TS2307: Cannot find module 'node:fs' or its corresponding type declarations.
+pi-eval-loop/src/proposer.mjs(8,24): error TS2307: Cannot find module 'node:os' or its corresponding type declarations.
+pi-eval-loop/src/proposer.mjs(9,31): error TS2307: Cannot find module 'node:path' or its corresponding type declarations.
+pi-eval-loop/src/protocol.mjs(4,42): error TS2307: Cannot find module 'node:fs' or its corresponding type declarations.
+pi-eval-loop/src/protocol.mjs(5,40): error TS2307: Cannot find module 'node:path' or its corresponding type declarations.
+pi-eval-loop/src/protocol.mjs(6,31): error TS2307: Cannot find module 'node:url' or its corresponding type declarations.
+pi-eval-loop/src/protocol.mjs(11,25): error TS2591: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/src/protocol.mjs(11,66): error TS2591: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/src/protocol.mjs(93,52): error TS2339: Property 'datasetDigest' does not exist on type '{}'.
+pi-eval-loop/src/protocol.mjs(93,67): error TS2339: Property 'orcheDir' does not exist on type '{}'.
+pi-eval-loop/src/report.mjs(2,42): error TS2307: Cannot find module 'node:fs' or its corresponding type declarations.
+pi-eval-loop/src/report.mjs(3,22): error TS2307: Cannot find module 'node:path' or its corresponding type declarations.
+pi-eval-loop/src/rng.mjs(2,28): error TS2307: Cannot find module 'node:crypto' or its corresponding type declarations.
+pi-eval-loop/src/runner.mjs(5,113): error TS2307: Cannot find module 'node:fs' or its corresponding type declarations.
+pi-eval-loop/src/runner.mjs(6,24): error TS2307: Cannot find module 'node:os' or its corresponding type declarations.
+pi-eval-loop/src/runner.mjs(7,22): error TS2307: Cannot find module 'node:path' or its corresponding type declarations.
+pi-eval-loop/src/runner.mjs(8,30): error TS2307: Cannot find module 'node:child_process' or its corresponding type declarations.
+pi-eval-loop/src/runner.mjs(159,49): error TS2741: Property 'hiddenPass' is missing in type '{ visible: any; hidden: any; custom: any; correctness: number; }' but required in type '{ hiddenPass: boolean; }'.
+pi-eval-loop/src/sandbox.mjs(4,37): error TS2307: Cannot find module 'node:child_process' or its corresponding type declarations.
+pi-eval-loop/src/sandbox.mjs(5,65): error TS2307: Cannot find module 'node:fs' or its corresponding type declarations.
+pi-eval-loop/src/sandbox.mjs(6,18): error TS2307: Cannot find module 'node:http' or its corresponding type declarations.
+pi-eval-loop/src/sandbox.mjs(7,25): error TS2307: Cannot find module 'node:os' or its corresponding type declarations.
+pi-eval-loop/src/sandbox.mjs(8,31): error TS2307: Cannot find module 'node:path' or its corresponding type declarations.
+pi-eval-loop/src/sandbox.mjs(35,17): error TS2591: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/src/sandbox.mjs(38,11): error TS2591: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/src/sandbox.mjs(38,46): error TS2591: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/src/sandbox.mjs(39,15): error TS2591: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/src/sandbox.mjs(40,15): error TS2591: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/src/sandbox.mjs(41,15): error TS2591: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/src/sandbox.mjs(52,25): error TS2591: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/src/sandbox.mjs(108,23): error TS2591: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/src/selftest.mjs(5,97): error TS2307: Cannot find module 'node:fs' or its corresponding type declarations.
+pi-eval-loop/src/selftest.mjs(6,24): error TS2307: Cannot find module 'node:os' or its corresponding type declarations.
+pi-eval-loop/src/selftest.mjs(7,22): error TS2307: Cannot find module 'node:path' or its corresponding type declarations.
+pi-eval-loop/src/selftest.mjs(8,30): error TS2307: Cannot find module 'node:child_process' or its corresponding type declarations.
+pi-eval-loop/src/selftest.mjs(23,71): error TS2591: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/src/selftest.mjs(34,64): error TS2339: Property 'root' does not exist on type '{ log?: () => void; keep?: boolean; }'.
+pi-eval-loop/src/util.mjs(2,41): error TS2307: Cannot find module 'node:crypto' or its corresponding type declarations.
+pi-eval-loop/src/util.mjs(3,179): error TS2307: Cannot find module 'node:fs' or its corresponding type declarations.
+pi-eval-loop/src/util.mjs(4,41): error TS2307: Cannot find module 'node:path' or its corresponding type declarations.
+pi-eval-loop/src/util.mjs(21,31): error TS2591: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/src/util.mjs(65,32): error TS2591: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/src/util.mjs(73,43): error TS2591: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/src/util.mjs(75,139): error TS2591: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/src/util.mjs(79,55): error TS2591: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/src/worktree.mjs(5,30): error TS2307: Cannot find module 'node:child_process' or its corresponding type declarations.
+pi-eval-loop/src/worktree.mjs(6,47): error TS2307: Cannot find module 'node:fs' or its corresponding type declarations.
+pi-eval-loop/src/worktree.mjs(7,22): error TS2307: Cannot find module 'node:path' or its corresponding type declarations.
+pi-eval-loop/src/worktree.mjs(10,93): error TS2591: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/test/ablation.test.mjs(1,22): error TS2307: Cannot find module 'node:test' or its corresponding type declarations.
+pi-eval-loop/test/ablation.test.mjs(2,20): error TS2307: Cannot find module 'node:assert/strict' or its corresponding type declarations.
+pi-eval-loop/test/ablation.test.mjs(3,42): error TS2307: Cannot find module 'node:fs' or its corresponding type declarations.
+pi-eval-loop/test/ablation.test.mjs(4,22): error TS2307: Cannot find module 'node:path' or its corresponding type declarations.
+pi-eval-loop/test/critical-exploration.test.mjs(4,22): error TS2307: Cannot find module 'node:test' or its corresponding type declarations.
+pi-eval-loop/test/critical-exploration.test.mjs(5,20): error TS2307: Cannot find module 'node:assert/strict' or its corresponding type declarations.
+pi-eval-loop/test/critical-exploration.test.mjs(6,54): error TS2307: Cannot find module 'node:fs' or its corresponding type declarations.
+pi-eval-loop/test/critical-exploration.test.mjs(7,27): error TS2307: Cannot find module 'node:child_process' or its corresponding type declarations.
+pi-eval-loop/test/critical-exploration.test.mjs(8,31): error TS2307: Cannot find module 'node:url' or its corresponding type declarations.
+pi-eval-loop/test/critical-exploration.test.mjs(9,22): error TS2307: Cannot find module 'node:path' or its corresponding type declarations.
+pi-eval-loop/test/critical-exploration.test.mjs(172,25): error TS2591: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/test/deploy.test.mjs(3,22): error TS2307: Cannot find module 'node:test' or its corresponding type declarations.
+pi-eval-loop/test/deploy.test.mjs(4,20): error TS2307: Cannot find module 'node:assert/strict' or its corresponding type declarations.
+pi-eval-loop/test/deploy.test.mjs(5,45): error TS2307: Cannot find module 'node:fs' or its corresponding type declarations.
+pi-eval-loop/test/deploy.test.mjs(6,22): error TS2307: Cannot find module 'node:path' or its corresponding type declarations.
+pi-eval-loop/test/deploy.test.mjs(32,30): error TS2345: Argument of type '{ umbrella: any; stateDir: any; }' is not assignable to parameter of type '{ umbrella: any; stateDir: any; branch?: string; orchePath?: string; mode?: string; fault: any; }'.
+  Property 'fault' is missing in type '{ umbrella: any; stateDir: any; }' but required in type '{ umbrella: any; stateDir: any; branch?: string; orchePath?: string; mode?: string; fault: any; }'.
+pi-eval-loop/test/deploy.test.mjs(66,38): error TS2345: Argument of type '{ umbrella: any; stateDir: any; }' is not assignable to parameter of type '{ umbrella: any; stateDir: any; branch?: string; orchePath?: string; mode?: string; fault: any; }'.
+  Property 'fault' is missing in type '{ umbrella: any; stateDir: any; }' but required in type '{ umbrella: any; stateDir: any; branch?: string; orchePath?: string; mode?: string; fault: any; }'.
+pi-eval-loop/test/extension.test.mjs(1,22): error TS2307: Cannot find module 'node:test' or its corresponding type declarations.
+pi-eval-loop/test/extension.test.mjs(2,20): error TS2307: Cannot find module 'node:assert/strict' or its corresponding type declarations.
+pi-eval-loop/test/extension.test.mjs(3,42): error TS2307: Cannot find module 'node:fs' or its corresponding type declarations.
+pi-eval-loop/test/extension.test.mjs(4,22): error TS2307: Cannot find module 'node:path' or its corresponding type declarations.
+pi-eval-loop/test/helpers.mjs(3,30): error TS2307: Cannot find module 'node:child_process' or its corresponding type declarations.
+pi-eval-loop/test/helpers.mjs(4,89): error TS2307: Cannot find module 'node:fs' or its corresponding type declarations.
+pi-eval-loop/test/helpers.mjs(5,24): error TS2307: Cannot find module 'node:os' or its corresponding type declarations.
+pi-eval-loop/test/helpers.mjs(6,22): error TS2307: Cannot find module 'node:path' or its corresponding type declarations.
+pi-eval-loop/test/helpers.mjs(13,18): error TS2591: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/test/helpers.mjs(16,72): error TS2591: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/test/integrity.test.mjs(3,22): error TS2307: Cannot find module 'node:test' or its corresponding type declarations.
+pi-eval-loop/test/integrity.test.mjs(4,20): error TS2307: Cannot find module 'node:assert/strict' or its corresponding type declarations.
+pi-eval-loop/test/integrity.test.mjs(5,109): error TS2307: Cannot find module 'node:fs' or its corresponding type declarations.
+pi-eval-loop/test/integrity.test.mjs(6,22): error TS2307: Cannot find module 'node:path' or its corresponding type declarations.
+pi-eval-loop/test/integrity.test.mjs(40,158): error TS2339: Property 'test' does not exist on type 'RegExp | string[]'.
+  Property 'test' does not exist on type 'string[]'.
+pi-eval-loop/test/integrity.test.mjs(79,147): error TS2339: Property 'test' does not exist on type 'RegExp | { results: { typecheck: { pass: boolean; }; test: any; }; } | { results: { typecheck: { pass: boolean; }; }; } | { results: { test: { pass: boolean; exit: number; failing: any[]; tail: any; }; }; }'.
+  Property 'test' does not exist on type '{ results: { typecheck: { pass: boolean; }; test: any; }; }'.
+pi-eval-loop/test/isolation.test.mjs(4,22): error TS2307: Cannot find module 'node:test' or its corresponding type declarations.
+pi-eval-loop/test/isolation.test.mjs(5,20): error TS2307: Cannot find module 'node:assert/strict' or its corresponding type declarations.
+pi-eval-loop/test/isolation.test.mjs(6,30): error TS2307: Cannot find module 'node:child_process' or its corresponding type declarations.
+pi-eval-loop/test/isolation.test.mjs(7,67): error TS2307: Cannot find module 'node:fs' or its corresponding type declarations.
+pi-eval-loop/test/isolation.test.mjs(8,26): error TS2307: Cannot find module 'node:os' or its corresponding type declarations.
+pi-eval-loop/test/isolation.test.mjs(9,22): error TS2307: Cannot find module 'node:path' or its corresponding type declarations.
+pi-eval-loop/test/loop.test.mjs(4,22): error TS2307: Cannot find module 'node:test' or its corresponding type declarations.
+pi-eval-loop/test/loop.test.mjs(5,20): error TS2307: Cannot find module 'node:assert/strict' or its corresponding type declarations.
+pi-eval-loop/test/loop.test.mjs(6,57): error TS2307: Cannot find module 'node:fs' or its corresponding type declarations.
+pi-eval-loop/test/loop.test.mjs(7,22): error TS2307: Cannot find module 'node:path' or its corresponding type declarations.
+pi-eval-loop/test/loop.test.mjs(127,136): error TS2339: Property 'fatal' does not exist on type 'Error'.
+pi-eval-loop/test/loop.test.mjs(130,27): error TS2551: Property 'evaluate' does not exist on type 'Loop'. Did you mean 'evaluator'?
+pi-eval-loop/test/records-audit.test.mjs(3,22): error TS2307: Cannot find module 'node:test' or its corresponding type declarations.
+pi-eval-loop/test/records-audit.test.mjs(4,20): error TS2307: Cannot find module 'node:assert/strict' or its corresponding type declarations.
+pi-eval-loop/test/records-audit.test.mjs(5,28): error TS2307: Cannot find module 'node:fs' or its corresponding type declarations.
+pi-eval-loop/test/records-audit.test.mjs(6,31): error TS2307: Cannot find module 'node:url' or its corresponding type declarations.
+pi-eval-loop/test/stats-gate.test.mjs(2,22): error TS2307: Cannot find module 'node:test' or its corresponding type declarations.
+pi-eval-loop/test/stats-gate.test.mjs(3,20): error TS2307: Cannot find module 'node:assert/strict' or its corresponding type declarations.

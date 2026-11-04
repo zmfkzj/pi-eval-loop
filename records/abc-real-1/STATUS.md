@@ -1,8 +1,11 @@
 # Status of `abc-real-1`: TRUNCATED EXPLORATORY EVIDENCE (immutable)
 
 Added 2026-11-04 by the follow-up correction. Every other file in this directory is the original artifact of the run and is kept
-byte-for-byte (ledgers, archive, generated `report.md`/`ablation.md`, the locked protocol `protocols/abc-real-1.json`). This file
-is the only addition. It does not change any measurement.
+byte-for-byte (ledgers, archive, generated `report.md`/`ablation.md`, the locked protocol `protocols/abc-real-1.json`). The only
+additions are this file, `errata.json` (the same corrections, machine-readable) and `audit.json` (exact counts, rates and
+opportunities recomputed from the raw ledgers by `scripts/audit-records.mjs`; asserted by `test/records-audit.test.mjs`). None of
+them changes a measurement. The raw `state.json` of B and C says "candidate cap of 4 per cycle reached (safety limit)": that
+label is wrong, because the cap was set for session time, not for safety (erratum 0 in `errata.json`).
 
 ## Why it is truncated
 

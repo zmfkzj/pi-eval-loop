@@ -1,0 +1,61 @@
+pi-eval-loop/src/datasets.mjs(149,62): error TS2339: Property 'orcheDir' does not exist on type '{}'.
+pi-eval-loop/src/datasets.mjs(149,72): error TS2339: Property 'ledgerPath' does not exist on type '{}'.
+pi-eval-loop/src/deploy.mjs(55,34): error TS2339: Property 'umbrella' does not exist on type 'Deployer'.
+pi-eval-loop/src/deploy.mjs(55,49): error TS2339: Property 'orchePath' does not exist on type 'Deployer'.
+pi-eval-loop/src/deploy.mjs(56,59): error TS2339: Property 'umbrella' does not exist on type 'Deployer'.
+pi-eval-loop/src/deploy.mjs(56,85): error TS2339: Property 'orchePath' does not exist on type 'Deployer'.
+pi-eval-loop/src/deploy.mjs(56,109): error TS2339: Property 'branch' does not exist on type 'Deployer'.
+pi-eval-loop/src/deploy.mjs(64,48): error TS2339: Property 'branch' does not exist on type 'Deployer'.
+pi-eval-loop/src/deploy.mjs(66,75): error TS2339: Property 'branch' does not exist on type 'Deployer'.
+pi-eval-loop/src/deploy.mjs(67,49): error TS2339: Property 'branch' does not exist on type 'Deployer'.
+pi-eval-loop/src/deploy.mjs(77,115): error TS2339: Property 'branch' does not exist on type 'Deployer'.
+pi-eval-loop/src/deploy.mjs(84,16): error TS2339: Property 'mode' does not exist on type 'Deployer'.
+pi-eval-loop/src/deploy.mjs(85,33): error TS2339: Property 'mode' does not exist on type 'Deployer'.
+pi-eval-loop/src/deploy.mjs(85,77): error TS2339: Property 'umbrella' does not exist on type 'Deployer'.
+pi-eval-loop/src/deploy.mjs(85,116): error TS2339: Property 'orchePath' does not exist on type 'Deployer'.
+pi-eval-loop/src/deploy.mjs(88,10): error TS2339: Property 'fault' does not exist on type 'Deployer'.
+pi-eval-loop/src/deploy.mjs(90,14): error TS2339: Property 'mode' does not exist on type 'Deployer'.
+pi-eval-loop/src/deploy.mjs(92,10): error TS2339: Property 'fault' does not exist on type 'Deployer'.
+pi-eval-loop/src/deploy.mjs(93,23): error TS2339: Property 'umbrella' does not exist on type 'Deployer'.
+pi-eval-loop/src/deploy.mjs(94,10): error TS2339: Property 'fault' does not exist on type 'Deployer'.
+pi-eval-loop/src/deploy.mjs(109,14): error TS2339: Property 'reason' does not exist on type '{}'.
+pi-eval-loop/src/deploy.mjs(109,22): error TS2339: Property 'target' does not exist on type '{}'.
+pi-eval-loop/src/deploy.mjs(114,14): error TS2339: Property 'mode' does not exist on type 'Deployer'.
+pi-eval-loop/src/deploy.mjs(115,32): error TS2339: Property 'branch' does not exist on type 'Deployer'.
+pi-eval-loop/src/deploy.mjs(116,12): error TS2339: Property 'fault' does not exist on type 'Deployer'.
+pi-eval-loop/src/deploy.mjs(117,20): error TS2339: Property 'umbrella' does not exist on type 'Deployer'.
+pi-eval-loop/src/deploy.mjs(117,35): error TS2339: Property 'branch' does not exist on type 'Deployer'.
+pi-eval-loop/src/deploy.mjs(126,14): error TS2339: Property 'mode' does not exist on type 'Deployer'.
+pi-eval-loop/src/deploy.mjs(131,40): error TS2339: Property 'umbrella' does not exist on type 'Deployer'.
+pi-eval-loop/src/faux-upstream.mjs(65,21): error TS2345: Argument of type '{ type: string; output_index: number; item: { arguments: string; type: string; id: string; call_id: string; name: any; status: string; }; }' is not assignable to parameter of type '{ type: string; response: { id: string; model: any; status: string; }; }'.
+  Property 'response' is missing in type '{ type: string; output_index: number; item: { arguments: string; type: string; id: string; call_id: string; name: any; status: string; }; }' but required in type '{ type: string; response: { id: string; model: any; status: string; }; }'.
+pi-eval-loop/src/faux-upstream.mjs(68,21): error TS2345: Argument of type '{ type: string; output_index: number; item: { type: string; id: string; role: string; content: undefined[]; }; }' is not assignable to parameter of type '{ type: string; response: { id: string; model: any; status: string; }; }'.
+  Property 'response' is missing in type '{ type: string; output_index: number; item: { type: string; id: string; role: string; content: undefined[]; }; }' but required in type '{ type: string; response: { id: string; model: any; status: string; }; }'.
+pi-eval-loop/src/faux-upstream.mjs(77,47): error TS2769: No overload matches this call.
+  The last overload gave the following error.
+    Argument of type 'string' is not assignable to parameter of type 'number'.
+pi-eval-loop/src/faux-upstream.mjs(78,54): error TS2339: Property 'port' does not exist on type 'string | AddressInfo'.
+  Property 'port' does not exist on type 'string'.
+pi-eval-loop/src/grader.mjs(59,32): error TS2339: Property 'hiddenTests' does not exist on type '{}'.
+pi-eval-loop/src/grader.mjs(59,85): error TS2339: Property 'hiddenTests' does not exist on type '{}'.
+pi-eval-loop/src/grader.mjs(60,238): error TS2339: Property 'hiddenTests' does not exist on type '{}'.
+pi-eval-loop/src/grader.mjs(61,116): error TS2339: Property 'hiddenTests' does not exist on type '{}'.
+pi-eval-loop/src/protocol.mjs(93,52): error TS2339: Property 'datasetDigest' does not exist on type '{}'.
+pi-eval-loop/src/protocol.mjs(93,67): error TS2339: Property 'orcheDir' does not exist on type '{}'.
+pi-eval-loop/src/runner.mjs(159,49): error TS2741: Property 'hiddenPass' is missing in type '{ visible: any; hidden: any; custom: any; correctness: number; }' but required in type '{ hiddenPass: boolean; }'.
+pi-eval-loop/src/sandbox.mjs(62,69): error TS2339: Property 'code' does not exist on type 'Error'.
+pi-eval-loop/src/sandbox.mjs(129,51): error TS2769: No overload matches this call.
+  The last overload gave the following error.
+    Argument of type '(value: any) => void' is not assignable to parameter of type '() => void'.
+      Target signature provides too few arguments. Expected 1 or more, but got 0.
+pi-eval-loop/src/selftest.mjs(34,64): error TS2339: Property 'root' does not exist on type '{ log?: () => void; keep?: boolean; }'.
+pi-eval-loop/test/deploy.test.mjs(32,30): error TS2345: Argument of type '{ umbrella: string; stateDir: string; }' is not assignable to parameter of type '{ umbrella: any; stateDir: any; branch?: string; orchePath?: string; mode?: string; fault: any; }'.
+  Property 'fault' is missing in type '{ umbrella: string; stateDir: string; }' but required in type '{ umbrella: any; stateDir: any; branch?: string; orchePath?: string; mode?: string; fault: any; }'.
+pi-eval-loop/test/deploy.test.mjs(66,38): error TS2345: Argument of type '{ umbrella: string; stateDir: string; }' is not assignable to parameter of type '{ umbrella: any; stateDir: any; branch?: string; orchePath?: string; mode?: string; fault: any; }'.
+  Property 'fault' is missing in type '{ umbrella: string; stateDir: string; }' but required in type '{ umbrella: any; stateDir: any; branch?: string; orchePath?: string; mode?: string; fault: any; }'.
+pi-eval-loop/test/integrity.test.mjs(40,158): error TS2339: Property 'test' does not exist on type 'RegExp | string[]'.
+  Property 'test' does not exist on type 'string[]'.
+pi-eval-loop/test/integrity.test.mjs(79,147): error TS2339: Property 'test' does not exist on type 'RegExp | { results: { typecheck: { pass: boolean; }; test: any; }; } | { results: { typecheck: { pass: boolean; }; }; } | { results: { test: { pass: boolean; exit: number; failing: any[]; tail: any; }; }; }'.
+  Property 'test' does not exist on type '{ results: { typecheck: { pass: boolean; }; test: any; }; }'.
+pi-eval-loop/test/loop.test.mjs(127,136): error TS2339: Property 'fatal' does not exist on type 'Error'.
+pi-eval-loop/test/loop.test.mjs(130,27): error TS2551: Property 'evaluate' does not exist on type 'Loop'. Did you mean 'evaluator'?

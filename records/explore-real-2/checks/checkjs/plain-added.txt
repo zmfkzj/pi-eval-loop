@@ -1,0 +1,29 @@
+pi-eval-loop/bin/eval-loop.mjs | TS2591 | Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/scripts/audit-records.mjs | TS2307 | Cannot find module 'node:fs' or its corresponding type declarations.
+pi-eval-loop/scripts/audit-records.mjs | TS2307 | Cannot find module 'node:path' or its corresponding type declarations.
+pi-eval-loop/scripts/audit-records.mjs | TS2307 | Cannot find module 'node:url' or its corresponding type declarations.
+pi-eval-loop/scripts/audit-records.mjs | TS2591 | Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/scripts/audit-records.mjs | TS2591 | Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/scripts/audit-records.mjs | TS2591 | Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/scripts/audit-records.mjs | TS2591 | Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/scripts/audit-records.mjs | TS2591 | Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/scripts/checkjs-compare.mjs | TS2307 | Cannot find module 'node:child_process' or its corresponding type declarations.
+pi-eval-loop/scripts/checkjs-compare.mjs | TS2307 | Cannot find module 'node:fs' or its corresponding type declarations.
+pi-eval-loop/scripts/checkjs-compare.mjs | TS2307 | Cannot find module 'node:path' or its corresponding type declarations.
+pi-eval-loop/scripts/checkjs-compare.mjs | TS2307 | Cannot find module 'node:os' or its corresponding type declarations.
+pi-eval-loop/scripts/checkjs-compare.mjs | TS2591 | Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/scripts/checkjs-compare.mjs | TS2591 | Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/scripts/checkjs-compare.mjs | TS2591 | Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/scripts/checkjs-compare.mjs | TS2591 | Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/scripts/checkjs-compare.mjs | TS2591 | Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/test/critical-exploration.test.mjs | TS2307 | Cannot find module 'node:test' or its corresponding type declarations.
+pi-eval-loop/test/critical-exploration.test.mjs | TS2307 | Cannot find module 'node:assert/strict' or its corresponding type declarations.
+pi-eval-loop/test/critical-exploration.test.mjs | TS2307 | Cannot find module 'node:fs' or its corresponding type declarations.
+pi-eval-loop/test/critical-exploration.test.mjs | TS2307 | Cannot find module 'node:child_process' or its corresponding type declarations.
+pi-eval-loop/test/critical-exploration.test.mjs | TS2307 | Cannot find module 'node:url' or its corresponding type declarations.
+pi-eval-loop/test/critical-exploration.test.mjs | TS2307 | Cannot find module 'node:path' or its corresponding type declarations.
+pi-eval-loop/test/critical-exploration.test.mjs | TS2591 | Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+pi-eval-loop/test/records-audit.test.mjs | TS2307 | Cannot find module 'node:test' or its corresponding type declarations.
+pi-eval-loop/test/records-audit.test.mjs | TS2307 | Cannot find module 'node:assert/strict' or its corresponding type declarations.
+pi-eval-loop/test/records-audit.test.mjs | TS2307 | Cannot find module 'node:fs' or its corresponding type declarations.
+pi-eval-loop/test/records-audit.test.mjs | TS2307 | Cannot find module 'node:url' or its corresponding type declarations.
