@@ -7,11 +7,12 @@ pi-eval-loop is a headless, resumable program. It improves the pi-orche harness 
 patches, screening, development, a quality Pareto archive, one final holdout, an adoption gate and rollback. No user takes part. Every
 required piece of state lives on disk. Nothing depends on an LLM conversation.
 
-It is an **in-umbrella subextension**: the directory `pi-eval-loop/` of the oh-my-pi-extensions umbrella, listed in the umbrella's Pi
-manifest. It is **not (yet) a standalone Git submodule**. A submodule needs its own remote repository, and creating or pushing one
-was not authorized. A gitlink without a reachable remote would break every other clone (bootstrap/install). Turning it into a
-submodule later takes four steps: create the remote, `git subtree split -P pi-eval-loop`, push, then replace the directory with a
-submodule.
+It is a **Git submodule** of the oh-my-pi-extensions umbrella: path `pi-eval-loop/`, repository `zmfkzj/pi-eval-loop`, branch
+`main`. The umbrella lists it in its Pi manifest. It was first developed as an umbrella-tracked directory. Its submodule history
+continues that work: each umbrella commit that touched `pi-eval-loop/` after the repository's first commit was imported with an
+identical tree and an `Imported-From:` trailer. The package is not standalone: it evaluates the sibling `../orche` checkout and
+reuses that checkout's sandbox helpers (`EVAL_LOOP_UMBRELLA` points a frozen copy at the live umbrella). The deploy snapshots
+record every umbrella gitlink, so this submodule's own gitlink is recorded and verified like the others.
 
 ## 1. Loop and phases
 

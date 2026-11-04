@@ -1,8 +1,9 @@
 # pi-eval-loop
 
-A headless, resumable optimization loop for the pi-orche harness that puts quality first. It is an **in-umbrella Pi
-subextension**: listed in the umbrella's `package.json` `pi.extensions`. It is not yet a standalone Git submodule, because creating
-a remote repository was not authorized; see `docs/design.md`.
+A headless, resumable optimization loop for the pi-orche harness that puts quality first. It is a **Pi subextension bundled as
+the Git submodule `pi-eval-loop/`** of the oh-my-pi-extensions umbrella (repository `zmfkzj/pi-eval-loop`, branch `main`). The
+umbrella lists it in `package.json` `pi.extensions`. It expects the umbrella layout around it: `../orche` is the target harness and
+the sandbox helpers come from there; see `docs/design.md`.
 
 It runs:
 - baselines;
@@ -49,7 +50,7 @@ ends as `BLOCKED` and is recorded as such. No simulated result is ever presented
 | Operational limits | Cost and time are not optimization targets; safety limits only: 200 candidates/cycle backstop, 72 h hang watchdog, 10 failed proposals per failure class since the last progress (cannot fire before the 10-candidate patience with the defaults), infra stops, 120 requests / 30 min per proposer session, 4 files / 200 diff lines per patch, 20 min / 150 requests per task unit (exact list: `docs/results-explore-real-2.md`) |
 | Exploration quality | Not demonstrated: the 20 explore-real-2 proposals were variants of one hypothesis, and none targeted the integrity class that rejected them all |
 | Diagnostics | No package typecheck script; `node pi-eval-loop/scripts/checkjs-compare.mjs <base> <out>` compares tsc checkJs output (record: `records/explore-real-2/checks/checkjs/`) |
-| Packaging | Tracked as an ordinary directory of the umbrella repository (not a submodule; no remote was created by this work). A separate `pi-eval-loop/.git` with its own history exists in this workspace; this work neither uses nor modifies it |
+| Packaging | Git submodule `pi-eval-loop/` of the umbrella (`zmfkzj/pi-eval-loop`, branch `main`). Its history continues the umbrella-directory commits it was converted from (`Imported-From:` trailers). The pinned commit must be pushed before fresh clones can initialize it |
 
 ## Layout
 
