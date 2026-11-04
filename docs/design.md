@@ -43,7 +43,8 @@ stable. The other rules are safety stops, none motivated by cost or time:
   cumulative-per-cycle count; there both stops fell on the same candidate;
 - a runaway backstop of 200 candidates per cycle (a fully evaluated candidate keeps ≤ ~90 MB of worktree and evidence);
 - a 72 h cycle hang watchdog;
-- 5 consecutive infrastructure-tainted candidates; a trust-boundary breach halts at once.
+- 5 consecutive infrastructure-tainted candidates; a trust-boundary breach halts at once (`state.halted`, terminal for the state
+  directory: no later invocation explores, selects, consumes the holdout, adopts or starts a cycle; A/B/C siblings halt too).
 
 The stop reason and the failed proposals per class are recorded (`state.searchStop`, `state.classFailures`, the report). The
 candidate cap never interrupts an in-flight candidate. protocol-1's measured run `abc-real-1` used a 4-candidate cap set by session
@@ -55,11 +56,18 @@ deployment **BLOCKED** (recorded separately from the exploration outcome); `--ab
 holdout pass. This is how train/dev search continues after the only holdout was consumed (`protocols/explore-real-2.json`).
 
 Persistence: `state.json` and `selection.json` are written atomically (tmp + fsync + rename). `runs.jsonl`, `events.jsonl`,
-`stable-history.jsonl` and `USES.jsonl` are append-only hash chains (`Ledger.verify`). A pid lock prevents duplicate runs. Every
+`stable-history.jsonl` and `USES.jsonl` are append-only hash chains (`Ledger.verify`). `state.json` exists from the first step;
+records without it are a lost state that no invocation re-initializes (`src/contract.mjs` `inspectState`). A controller lock
+with host, boot id, PID namespace, pid start time and token prevents duplicate runs; only verified-dead or reused-pid locks are recovered,
+under a reclaim guard (`src/util.mjs` `acquireLock`). Every
 unit is journaled (`dispatch`, with run id and control dir) before its model requests. After a crash, reconcile reads the proxy's
 wire journal. If any model call completed, the run is recorded as `aborted` (a failure in the denominator, never redrawn).
-Otherwise it is `infra_error` and may be retried (`infra.maxRetries` = 1). On SIGINT/SIGTERM/SIGHUP the CLI kills every sandbox
-process group.
+Otherwise it is `infra_error` and may be retried (`infra.maxRetries` = 1). On SIGINT/SIGTERM/SIGHUP the CLI kills every running
+sandbox process group and route proxy, records `state.lastInterruption` (history only) and exits 130. A BLOCKED state records
+the phase it interrupted (`blocked.resumePhase`) and resumes there when the cause clears, so a finished, adopting or
+post-adoption cycle is never re-run and a holdout-use record is never re-associated with another selection; the holdout
+phase recomputes the frozen selection digest before any holdout access (a mismatch halts).
+The supervisor contract (outcomes, exit codes, summary) is in the README.
 
 ## 2. Metrics
 

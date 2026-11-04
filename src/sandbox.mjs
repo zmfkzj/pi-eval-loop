@@ -94,6 +94,15 @@ export function catalogPrices(agentDir, model) {
 }
 
 /**
+ * Route-proxy children of this process that have not exited (evaluator and proposer model paths). The proxy runs in the
+ * controller's process group (bwrap sandboxes have their own session and --die-with-parent); stopProxies() is the CLI's signal
+ * and exit cleanup for them.
+ * @type {Set<import("node:child_process").ChildProcess>}
+ */
+export const proxyChildren = new Set();
+export function stopProxies(/** @type {any} */ signal = "SIGTERM") { for (const child of proxyChildren) { try { child.kill(signal); } catch { /* gone */ } } }
+
+/**
  * Start the route proxy (orche proxy.mjs: pinned model+effort, request budget, key substitution, wire journal) on a private unix
  * socket, and the endpoint gate on the socket the sandbox gets. Resolves with { socket, wireLog, totals(), stop() }.
  */
@@ -106,15 +115,19 @@ export async function startModelPath({ dir, route, maxRequests, upstream, agentD
   writeFileSync(keyFile, key, { mode: 0o600 });
   writeFileSync(envelope, JSON.stringify({ route: { model: route.model, effort: route.effort }, maxRequests, placeholderKey: PLACEHOLDER_KEY, prices: catalogPrices(agentDir, route.model) }));
   const child = spawn(process.execPath, [PROXY, "--listen", proxySocket, "--target", upstream, "--log", wireLog, "--envelope", envelope, "--key-file", keyFile], { stdio: ["ignore", "pipe", "pipe"], detached: false });
+  proxyChildren.add(child);
+  child.once("exit", () => proxyChildren.delete(child));
+  child.once("error", () => proxyChildren.delete(child));
   try {
     await new Promise((ok, fail) => {
       let text = "";
       const timer = setTimeout(() => fail(new Error(`proxy did not start: ${text}`)), 15_000);
       child.stdout.on("data", c => { text += c; if (/LISTENING /.test(text)) { clearTimeout(timer); ok(); } });
       child.stderr.on("data", c => { text += c; });
+      child.once("error", error => { clearTimeout(timer); fail(error); });
       child.once("exit", code => { clearTimeout(timer); fail(new Error(`proxy exited ${code}: ${text}`)); });
     });
-  } finally { rmSync(keyFile, { force: true }); }
+  } catch (error) { try { child.kill("SIGKILL"); } catch { /* gone */ } throw error; } finally { rmSync(keyFile, { force: true }); }
   const gateLog = [];
   const gate = http.createServer((req, res) => {
     const allowed = ALLOWED.some(a => a.method === req.method && a.path.test(req.url ?? ""));
@@ -129,10 +142,12 @@ export async function startModelPath({ dir, route, maxRequests, upstream, agentD
   await new Promise(ok => gate.listen(gateSocket, ok));
   const totals = () => { try { return JSON.parse(readFileSync(`${wireLog}.totals.json`, "utf8")); } catch { return {}; } };
   const stop = async () => {
+    // Drop idle keep-alive connections first: gate.close() alone waits for them and could hang the cleanup.
+    gate.closeAllConnections();
     await new Promise(ok => gate.close(() => ok()));
     child.kill("SIGTERM");
     await new Promise(ok => setTimeout(ok, 300));
-    if (child.exitCode === null) child.kill("SIGKILL");
+    if (child.exitCode === null && child.signalCode === null) child.kill("SIGKILL");
   };
   return { socket: gateSocket, wireLog, totals, gateRefusals: () => [...gateLog], stop, pid: child.pid };
 }

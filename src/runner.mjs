@@ -106,10 +106,14 @@ async function piAttempt({ harness, task, route, unit, env, box, evidence, sessi
   };
   const eventsPath = join(evidence, `events-${sessionId}.jsonl`), stderrPath = join(evidence, `stderr-${sessionId}.txt`);
   const started = Date.now();
-  let run;
+  let run, sandboxPid;
   try {
-    run = await runSandboxed({ binds, env: sandboxEnv, cwd: inside(ws), command: ["/bin/sh", MOUNTS.launch, env.node, ...piArgs] }, { guardMs: unit.wallMs, stdout: eventsPath, stderr: stderrPath, keep: 64 * 1024, onSpawn: pid => signalPids?.add(pid) });
-  } finally { await model.stop(); }
+    run = await runSandboxed({ binds, env: sandboxEnv, cwd: inside(ws), command: ["/bin/sh", MOUNTS.launch, env.node, ...piArgs] }, { guardMs: unit.wallMs, stdout: eventsPath, stderr: stderrPath, keep: 64 * 1024, onSpawn: pid => { sandboxPid = pid; signalPids?.add(pid); } });
+  } finally {
+    // A finished sandbox's process-group id may be reused later: the signal cleanup must never target it.
+    if (sandboxPid !== undefined) signalPids?.delete(sandboxPid);
+    await model.stop();
+  }
   const wire = wireEntries(model.wireLog);
   const totals = model.totals();
   cpSync(model.wireLog, join(evidence, `wire-${sessionId}.jsonl`), { force: true });

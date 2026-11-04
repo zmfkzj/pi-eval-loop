@@ -22,10 +22,11 @@ The loop adapts ParetoSaddler (arXiv:2611.02079) to quality-only objectives. It 
 
 ```bash
 npm run eval:loop -- --once        # one cycle (prepare -> baselines -> search -> select -> holdout -> adoption gate)
-npm run eval:loop -- --resume      # continue an interrupted cycle from its state directory
+npm run eval:loop -- --resume      # continue an interrupted or blocked cycle from its state directory
+npm run eval:loop -- --resume --require-state   # same, but refuse to initialize when no loop state exists (supervisors)
 npm run eval:loop -- --daemon      # keep running; a finished cycle restarts only after a substantive change
 npm run eval:report                # write report.md / report.json of the state
-npm run eval:loop -- --status | --doctor | --rollback [--reason R] | --verify-stable --tasks DIR
+npm run eval:loop -- --status [--summary] | --doctor | --rollback [--reason R] | --verify-stable --tasks DIR
 npm run eval:loop -- --ablation    # A (stable) / B (quality-only greedy loop) / C (quality-first Pareto loop)
 npm run eval:loop -- --ablation --state pi-eval-loop/state/explore-real-2 --protocol pi-eval-loop/protocols/explore-real-2.json
                                    # exploration-only A/B/C: train/dev search, no holdout, deployment BLOCKED
@@ -37,6 +38,99 @@ Inside Pi: `/eval-loop status|report|doctor|help`. The loop itself never runs in
 
 If a prerequisite is missing (bwrap with namespaces, Pi CLI, provider, orche, git, credentials, model catalog, upstream), the run
 ends as `BLOCKED` and is recorded as such. No simulated result is ever presented as a measurement.
+
+## Unattended operation contract
+
+For cron, systemd or a Temporal activity that calls the CLI repeatedly. Schemas and codes are defined in `src/contract.mjs`.
+
+**Invocation.** Run `eval-loop --resume --require-state --state DIR` from the umbrella root. Start a new experiment once
+with `--once --state NEW_DIR` or `--resume --state NEW_DIR`, on a directory that does not exist or is empty. An invocation
+runs at most one cycle. When the cycle is already done, it starts the next one only after a substantive change; otherwise
+it reports `idle`. A supervisor's own schedule replaces `--daemon`. The CLI never waits for input.
+
+**Outcome line.** Every lock-taking mode ends with one single-line JSON object on stdout:
+
+- Lock-taking modes: `--once`, `--resume`, `--daemon`, `--rollback`, `--verify-stable`, `--ablation`.
+- In `--daemon`, one line per finished cycle; the last line belongs to the invocation.
+- Logs go to stderr.
+
+Fields:
+`{"schema":"pi-eval-loop/outcome@1","outcome","exitCode","stateDir","phase","cycle","status":<summary or null>,"at", ...}`.
+
+Extra fields:
+
+| Field | Present when |
+|---|---|
+| `mode`, `note` | Applicable to the mode / outcome |
+| `initialized: true` | A fresh directory started a loop |
+| `health`, `detail` | `state_error` |
+| `lock: {state, why, owner: {pid, host, startTime, at}}` | `busy` |
+| `signal` | `interrupted` |
+| `error: {name, code}` | `error`; the message and stack go to stderr |
+
+| outcome | exit | meaning | supervisor action |
+|---|---|---|---|
+| `idle` | 0 | Finished cycle, no substantive change since | Schedule the next check |
+| `cycle_done` | 0 | A cycle reached phase `done` in this invocation. The deployment verdict is `status.final.verdict`; an exploration-only protocol finishes `cycle_done` with verdict `BLOCKED` and `explorationOnly: true` | Report the verdict |
+| `ok` | 0 | `--rollback`, `--verify-stable` or `--ablation` finished | — |
+| `blocked` | 2 | A prerequisite, split or protocol-lock problem stopped the loop. `status.blocked.retryable` is true only for missing prerequisites. The state resumes at `status.resumePhase` | Retry later when retryable; otherwise a human must act (a changed protocol or evaluator needs a new state directory) |
+| `halted` | 3 | Trust-boundary breach or state-integrity violation; terminal for the directory | Never retry; human review |
+| `state_error` | 4 | `state.json` is missing (records exist), unreadable, invalid, or absent under `--require-state`. Nothing was changed | Never retry; restore the state or start a new directory |
+| `busy` | 75 | Another controller lock is held or cannot be verified. `lock.state`: `live`, `foreign-host` or `unverifiable`; `contended` (another process is recovering it, or it changed during recovery); `stale-guard` (a recoverer died holding `DIR/.lock.reclaim`; a human removes the guard after checking that no controller runs) | Retry later (a persistent `unverifiable`/`stale-guard` needs a human); never kill the owner on the PID alone |
+| `interrupted` | 130 | SIGINT/SIGTERM/SIGHUP | Rerun `--resume` |
+| `incomplete` / `error` | 1 | The loop returned before `done` without one of the reasons above / an unexpected exception, including file-system errors before or after the lock and uncaught exceptions or rejections (same cleanup as a signal) | Bounded retries, then a human |
+| `usage` | 64 | Bad arguments (an unknown `--strategy` is now 64, formerly 2), or a lock-taking mode other than `--rollback` (including `--ablation`) on a trajectory `DIR/A|B|C` of an ablation (use `--ablation` on the parent) | Fix the call |
+
+**Status summary.** `eval-loop --status --summary --state DIR` is read-only and takes no lock. It prints one line:
+`{"schema":"pi-eval-loop/status@1","stateDir","layout":"loop"|"ablation","health":"fresh"|"present"|"missing"|"corrupt","condition","lock",...}`.
+
+- `condition` is one of `none`, `in_progress`, `blocked`, `halted`, `cycle_complete`, `state_error`.
+- `lock` is `{state: absent|live|stale|foreign-host|unverifiable, pid, host, at, guard?: held|stale-guard}`, the lock that
+  governs the directory (a trajectory reports its ablation's lock); the token is never printed.
+- For a present state it adds `phase`, `cycle`, `strategy`, `resumePhase`,
+  `blocked{reason,retryable,missing[names],problemCount}`, `halted{reason,at}`, `cycleComplete`, `searchStop` (null while
+  searching), `counters{candidates,noProgress}`, `final{verdict,candidate,adopt,explorationOnly,rolledBack,reasonCount}`,
+  `adopted{at}`, `doneAt`, `updatedAt` and `lastInterruption{at,signal}`.
+- An ablation directory lists `trajectories.A/B/C`.
+- The summary never carries prompts, task or holdout content, problem texts, gate reasons or credentials.
+- `lastInterruption` is history only. Older states' `interrupted` field is migrated to it, and neither decides an outcome.
+- Exit 4 when the health is `missing` or `corrupt`, else 0.
+- Plain `--status` still prints the full `state.json`.
+
+**Locks.** The controller lock is `DIR/.lock`. An ablation and all its trajectories share the ablation directory's lock (a
+`--rollback --state DIR/A` takes `DIR/.lock`).
+
+- It records pid, host, boot id, PID namespace (`/proc/self/ns/pid`), `/proc` start time and a token, and is created
+  atomically.
+- It is recovered only when the owner provably no longer runs: same host and an earlier boot, or same host and PID namespace
+  with a dead pid or a pid whose start time differs (reused).
+- Recovery holds `DIR/.lock.reclaim` and re-reads the record first, so a newly acquired lock is never removed.
+- These locks stay busy: foreign hosts, another PID namespace (a container or `bwrap --unshare-pid` on the same host),
+  records without host, namespace or start time (older format), unreadable records, and running pids whose start time
+  cannot be read. Remove such a lock by hand only after checking that no controller runs.
+- The CLI does not know about supervisor locks (for example agent_workflow maintenance or target locks). The supervisor
+  holds those around the invocation.
+
+**Supervisor duties.**
+
+- Send SIGTERM to the controller. Its handler kills the registered sandbox process groups and the route proxies, writes the
+  report and prints the `interrupted` line.
+- If the controller does not exit within a grace period, send SIGKILL to its whole process group:
+  - Sandboxes are bwrap with `--die-with-parent`, `--new-session` and `--unshare-pid`, so they end with the controller.
+  - The route proxy runs in the controller's process group, so it survives a SIGKILL of the controller pid alone. The group
+    kill is needed for it.
+  - No further cleanup hook is needed.
+- Never relaunch while `busy`.
+- Run with the same `--state` and `--protocol` every time. Keep `HOME`, `PATH` and the credentials of the original run.
+- Do not commit, push or deploy on the CLI's behalf. Adoption only moves the local `eval-loop/stable` refs after the gates.
+
+**Recovery.** Nothing clears a halt, a lost state or a protocol-lock BLOCKED automatically, and there is no override flag.
+`--rollback` is the exception by design: it restores the previous local `eval-loop/stable` refs on any state, including
+halted, lost or corrupt ones, and never evaluates or adopts. On a trajectory it holds the ablation's lock.
+A human reviews the records (`report.md`, `events.jsonl`), then continues in a new state directory. Use a new protocol
+version if needed; the holdout ledger and its once-only rule still apply. Every file in `src/` is part of the locked
+evaluator. A state directory locked before an evaluator change therefore resumes as `blocked` ("evaluator file changed").
+This is intentional: continue in a new state directory, and never rewrite a recorded lock.
 
 ## Status: what is done and what the evidence does not show
 
@@ -56,7 +150,9 @@ ends as `BLOCKED` and is recorded as such. No simulated result is ever presented
 
 | Path | Contents |
 |---|---|
-| `bin/eval-loop.mjs` | CLI: lock, signals, child cleanup |
+| `bin/eval-loop.mjs` | CLI entry |
+| `src/cli.mjs` | CLI modes, preflight, supervised step, lock, signal/exit cleanup |
+| `src/contract.mjs` | Outcome/exit-code table, state health, public status summary |
 | `extension/index.js` | Pi command |
 | `src/loop.mjs` | Phases, state machine, watchdog |
 | `src/protocol.mjs` | Pre-registered defaults and the lock |
@@ -78,4 +174,5 @@ ends as `BLOCKED` and is recorded as such. No simulated result is ever presented
 | `protocols/` | Recorded protocol overrides of measured runs |
 | `records/` | Committed records of measured runs |
 
-Tests: `npm test` in this directory (`EL_TEST_TMP` sets the temp root). Root `npm run test:compat` runs them too.
+Tests: `npm test` in this directory (`EL_TEST_TMP` sets the temp root). Root `npm run test:compat` runs them too. The
+unattended contract is covered by `test/lifecycle.test.mjs`, `test/lock.test.mjs` and `test/cli-contract.test.mjs`.

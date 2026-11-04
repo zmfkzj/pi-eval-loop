@@ -4,7 +4,9 @@
 //   -> search: select parent -> failure analysis -> candidate patch (isolated worktree) -> patch/build checks -> screening
 //      (matched repeats, adaptive) -> development -> archive / Pareto front -> watchdog
 //   -> final selection (development) -> holdout (once) -> adoption gate -> adopt (local refs) / keep stable -> post-adoption check
-// Every step is recorded on disk; a crash resumes at the recorded phase and reuses completed units.
+// Every step is recorded on disk; a crash resumes at the recorded phase and reuses completed units. A BLOCKED state keeps the phase
+// it interrupted (blocked.resumePhase) and resumes there once the cause clears; a HALTED state (trust boundary or state integrity)
+// is terminal for its state directory: nothing explores, selects, consumes the holdout or adopts again.
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { Archive, patchKey, pointDesc, pointGt, selectParent } from "./archive.mjs";
@@ -24,6 +26,19 @@ import { writeEvidence } from "./proposer.mjs";
 import { compareChecks } from "./checks.mjs";
 
 export const PHASES = ["prepare", "baselines", "search", "select", "holdout", "adopt", "post-adopt", "done", "blocked"];
+
+/** Refusal to act on a halted state directory (trust-boundary breach or state-integrity violation; terminal, never auto-cleared). */
+export class HaltedError extends Error {
+  /** @param {string} reason @param {string} action */
+  constructor(reason, action) { super(`state is HALTED (${reason}); refusing ${action}`); this.code = "EHALTED"; this.reason = reason; }
+}
+
+const LEGACY_BLOCKED = "blocked state without a recorded resume phase after selection/holdout/adoption (older format): resuming could repeat a decided cycle; continue in a new state directory";
+/** Resume phase of an older blocked state that did not record one: only states without any decision of the cycle may restart at prepare. */
+function legacyResumePhase(state) {
+  const decided = state.selection || state.final || state.holdoutUse || state.adoption || state.cycleFingerprint;
+  return decided ? undefined : "prepare";
+}
 
 /**
  * @typedef {object} LoopOptions
@@ -45,6 +60,7 @@ export const PHASES = ["prepare", "baselines", "search", "select", "holdout", "a
  * @property {string} [idPrefix] candidate id prefix (A/B/C trajectories)
  * @property {string} [stopBefore] phase at which runCycle returns (A/B/C freezing, tests)
  * @property {any} [fault] fault injection for deployment tests
+ * @property {{ halted?: { stateDir: string, reason: string } | null }} [haltGroup] shared by sibling trajectories (A/B/C): one halt stops all
  */
 
 export class Loop {
@@ -66,6 +82,7 @@ export class Loop {
   /** @type {string | undefined} */ idPrefix;
   /** @type {string | undefined} */ stopBefore;
   /** @type {any} */ fault;
+  /** @type {LoopOptions["haltGroup"]} */ haltGroup;
   /** @type {any} */ _state;
 
   /** @param {LoopOptions} opts */
@@ -82,18 +99,59 @@ export class Loop {
     this.stopping = false;
   }
   statePath() { return join(this.stateDir, "state.json"); }
-  get state() { return this._state ??= readJson(this.statePath(), { phase: "prepare", cycle: 1, strategy: this.strategy, counters: { candidates: 0, noProgress: 0, consecutiveInfra: 0 }, startedAt: new Date().toISOString() }); }
+  get state() {
+    if (!this._state) {
+      this._state = readJson(this.statePath(), { phase: "prepare", cycle: 1, strategy: this.strategy, counters: { candidates: 0, noProgress: 0, consecutiveInfra: 0 }, startedAt: new Date().toISOString() });
+      // Older states kept the last signal as `interrupted`; it is history, never the outcome of a later invocation.
+      if (this._state.interrupted) { this._state.lastInterruption ??= this._state.interrupted; delete this._state.interrupted; }
+    }
+    return this._state;
+  }
   save() { this.state.updatedAt = new Date().toISOString(); atomicWriteJson(this.statePath(), this.state); }
   event(type, data = {}) { this.events.append({ type, ...data }); }
   setPhase(phase, extra = {}) { Object.assign(this.state, extra); this.state.phase = phase; this.save(); this.event("phase", { phase }); this.log(`phase -> ${phase}`); }
 
+  /** Record BLOCKED, keeping the phase to resume once the cause clears (a repeated block keeps the original resume phase). */
+  block(blocked) {
+    const resumePhase = this.state.phase === "blocked" ? this.state.blocked?.resumePhase : this.state.phase;
+    this.setPhase("blocked", { blocked: { retryable: false, ...blocked, resumePhase, at: new Date().toISOString() } });
+    return false;
+  }
+  /** Terminal stop of this state directory (trust boundary or state integrity). Recorded once; later calls keep the first reason. */
+  halt(reason, data = {}) {
+    this.stopping = true;
+    if (!this.state.halted) { this.state.halted = reason; this.state.haltedAt = new Date().toISOString(); }
+    this.save();
+    this.event("halted", { reason, ...data });
+    this.log(`HALTED: ${reason}`);
+    if (this.haltGroup && !this.haltGroup.halted) this.haltGroup.halted = { stateDir: this.stateDir, reason };
+  }
+  /** True when this state is halted; a halt of a sibling trajectory (shared haltGroup) halts this one too. */
+  haltedNow() {
+    const peer = this.haltGroup?.halted;
+    if (!this.state.halted && peer && peer.stateDir !== this.stateDir) this.halt(`halted with sibling trajectory ${peer.stateDir}: ${peer.reason}`);
+    return Boolean(this.state.halted);
+  }
+  /** @param {string} action */
+  assertNotHalted(action) { if (this.state.halted) throw new HaltedError(this.state.halted, action); }
+
   // ---------------------------------------------------------------------------------------------------------------------- prepare
   async prepare() {
+    this.assertNotHalted("prepare");
     const p = this.protocol;
+    // The state file exists from the first step on: records without state.json always mean a lost state (see contract.mjs).
+    if (!existsSync(this.statePath())) this.save();
+    let restored;
+    if (this.state.phase === "blocked") {
+      const back = this.state.blocked?.resumePhase ?? legacyResumePhase(this.state);
+      if (!back || back === "blocked" || !PHASES.includes(back)) { this.state.blocked = { ...this.state.blocked, reason: LEGACY_BLOCKED, retryable: false }; this.save(); return false; }
+      // Restored in memory; persisted when prepare succeeds, or kept as blocked.resumePhase when it blocks again.
+      restored = back; this.state.phase = back; delete this.state.blocked;
+    }
     const prereq = this.prerequisites ? await this.prerequisites() : [];
     const missing = prereq.filter(x => !x.ok);
     this.state.prerequisites = prereq;
-    if (missing.length) { this.setPhase("blocked", { blocked: { reason: "missing prerequisites", missing } }); return false; }
+    if (missing.length) return this.block({ reason: "missing prerequisites", missing, retryable: true });
     const injected = this.datasets ?? this.loadDatasets();
     // An exploration-only protocol never loads, grades or splits a holdout, even when one is injected.
     const data = p.datasets.holdout ? injected : { ...injected, holdoutDir: undefined, holdoutTasks: [] };
@@ -114,10 +172,10 @@ export class Loop {
     const holdout = data.holdoutTasks.filter(t => grading[t.id].ok).map(t => t.id).sort();
     const tasksById = Object.fromEntries([...data.tasks, ...data.holdoutTasks].map(t => [t.id, t]));
     const problems = validateSplits(tasksById, { train: split.train, dev: split.dev, holdout });
-    if (problems.length) { this.setPhase("blocked", { blocked: { reason: "split validation failed", problems } }); return false; }
+    if (problems.length) return this.block({ reason: "split validation failed", problems });
     const datasetManifest = { train: split.train, dev: split.dev, holdout, excluded, digests: Object.fromEntries(Object.values(tasksById).map(t => [t.id, taskDigest(t)])), holdoutSeal: data.holdoutDir ? verifySeal(data.holdoutDir).seal?.digest ?? null : null, meta: Object.fromEntries(Object.values(tasksById).map(t => [t.id, { family: t.family, tier: t.tier, hard: t.hard, source: t.source, provenance: t.provenance }])) };
     const { lock, problems: lockProblems, created } = lockProtocol(this.stateDir, p, { datasetDigest: digestOf(datasetManifest), orcheDir: this.orche });
-    if (lockProblems.length) { this.setPhase("blocked", { blocked: { reason: "protocol/evaluator/dataset changed since the lock: start a new protocol version in a new state directory", problems: lockProblems } }); return false; }
+    if (lockProblems.length) return this.block({ reason: "protocol/evaluator/dataset changed since the lock: start a new protocol version in a new state directory", problems: lockProblems });
     atomicWriteJson(join(this.stateDir, "datasets.json"), datasetManifest);
     this.protocolDigest = lock.protocolDigest;
     this.tasksById = tasksById; this.split = { ...split, holdout }; this.grading = grading; this.holdoutDir = data.holdoutDir;
@@ -131,6 +189,7 @@ export class Loop {
     }
     if (!this.archive.get("stable")) this.archive.create({ id: "stable", parent: null, status: "baseline", origin: "baseline", commit: this.state.stable.commit, hypothesis: null });
     this.harnesses = this.baselineHarnesses();
+    if (restored) { this.save(); this.event("unblocked", { phase: restored }); this.log(`unblocked -> ${restored}`); }
     return true;
   }
 
@@ -202,8 +261,11 @@ export class Loop {
   async search() {
     this.state.cycleStartedAt ??= new Date().toISOString();
     while (true) {
+      if (this.haltedNow()) return;
       const stop = this.watchdog();
-      if (stop) { this.event("search-stopped", { reason: stop, classFailures: this.classFailures() }); this.state.searchStop = stop; this.state.classFailures = this.classFailures(); this.save(); if (stop !== "interrupted") this.setPhase("select"); return; }
+      // An interruption is not a stop reason of the search: the phase stays "search" and a resume continues it.
+      if (stop === "interrupted") { this.event("search-interrupted", {}); return; }
+      if (stop) { this.event("search-stopped", { reason: stop, classFailures: this.classFailures() }); this.state.searchStop = stop; this.state.classFailures = this.classFailures(); this.save(); this.setPhase("select"); return; }
       const current = this.state.current;
       if (current) await this.continueCandidate(current.id);
       else if (!(await this.newCandidate())) { this.state.searchStop = `no addressable failure class left (each remaining class exhausted after ${this.protocol.watchdog.maxFailuresPerClass} failed targeted proposals since the last progress, or no train failure to target)`; this.state.classFailures = this.classFailures(); this.event("search-stopped", { reason: this.state.searchStop, classFailures: this.state.classFailures }); this.setPhase("select"); return; }
@@ -256,8 +318,9 @@ export class Loop {
     this.archive.put(c);
     if (breached.length) {
       this.archive.decide(id, "rejected_patch", `TRUST BOUNDARY: protected state changed during candidate generation: ${breached.join(", ")}`);
-      this.state.current = null; this.stopping = true; this.state.halted = `trust boundary breach: ${breached.join(", ")}`; this.save();
+      this.state.current = null;
       this.event("trust-boundary-breach", { id, breached });
+      this.halt(`trust boundary breach: ${breached.join(", ")}`, { id });
       return true;
     }
     if (!result.ok) { this.archive.decide(id, "rejected_patch", `proposer: ${result.detail}`, { hypothesis: { text: "", targetFailureClass: target.class } }); this.endCandidate(false); return true; }
@@ -377,6 +440,9 @@ export class Loop {
 
   // ----------------------------------------------------------------------------------------------------------- select & holdout
   select() {
+    this.assertNotHalted("selection");
+    // A cycle selects once: after a holdout use or a final decision, a new selection would re-associate decided evidence.
+    if (this.state.holdoutUse || this.state.final) { this.halt("state integrity: selection requested after this cycle's holdout use or final decision"); return; }
     const a = this.protocol.adoption;
     const qualified = this.archive.all().filter(c => c.status === "dev_qualified" || (c.status === "selected" && c.development?.qualified));
     // Defense in depth: a candidate with ANY critical problem in its non-holdout runs is never selected (whatever stable did).
@@ -400,7 +466,15 @@ export class Loop {
   }
 
   async holdout() {
+    this.assertNotHalted("holdout evaluation");
     const p = this.protocol, sel = this.state.selection;
+    // Defense in depth (contract.mjs validates the same): the holdout is only ever measured for a frozen selection.
+    if (!sel?.frozenDigest || (sel.selected !== null && (typeof sel.selected !== "string" || !sel.selected || !sel.commit))) { this.halt("state integrity: holdout phase without a frozen selection"); return; }
+    // The frozen digest is recomputed from the selection it froze (a single selection, or the A/B/C finals of an ablation).
+    const frozen = sel.ablation ? digestOf({ finals: sel.ablation, protocol: this.protocolDigest }) : digestOf({ id: sel.selected, commit: sel.commit, protocol: this.protocolDigest });
+    const finalsC = sel.ablation?.C, fromFinals = finalsC && finalsC.id !== "stable" ? finalsC.id : null;
+    const ablationConsistent = !sel.ablation || (sel.selected === fromFinals && (fromFinals ? sel.commit === finalsC.commit : !sel.commit) && (sel.extraArms ?? []).every(id => [sel.ablation.B?.id, sel.ablation.C?.id].includes(id)));
+    if (frozen !== sel.frozenDigest || !ablationConsistent) { this.halt("state integrity: the selection differs from the one frozen before holdout access"); return; }
     if (!p.datasets.holdout) {
       // Exploration-only protocol: nothing is evaluated here, no holdout ledger is touched and nothing can be deployed.
       const final = explorationOnlyFinal(sel);
@@ -411,7 +485,13 @@ export class Loop {
     const status = this.holdoutDir ? holdoutStatus(this.split.holdout.map(id => this.tasksById[id]), this.holdoutDir, p, { orcheDir: this.orche, ledgerPath: this.holdoutLedgerPath }) : { independent: false, why: "no holdout dataset" };
     // Consume BEFORE the first holdout run (a crash still consumes it); a resumed holdout phase reuses its own recorded use.
     const ledger = this.holdoutDir ? holdoutLedger(this.holdoutDir, this.holdoutLedgerPath) : undefined;
-    if (!this.state.holdoutUse) {
+    const use = this.state.holdoutUse;
+    if (use && !use.none && (use.stateDir !== this.stateDir || use.protocolDigest !== this.protocolDigest || use.selected !== sel.selected || use.commit !== sel.commit || use.frozenDigest !== sel.frozenDigest)) {
+      // A recorded use belongs to exactly one frozen selection (incl. A/B/C extra arms via frozenDigest); it is never reused for another.
+      this.halt("holdout integrity: the recorded holdout use does not match the frozen selection/protocol of this cycle", { use: use.seq });
+      return;
+    }
+    if (!use) {
       this.state.holdoutIndependentAtStart = status;
       if (ledger) this.state.holdoutUse = ledger.append({ type: "use", stateDir: this.stateDir, protocolDigest: this.protocolDigest, selected: sel.selected, commit: sel.commit, frozenDigest: sel.frozenDigest, independentBefore: status.independent, why: status.why });
       else this.state.holdoutUse = { none: true };
@@ -454,7 +534,9 @@ export class Loop {
   }
 
   adopt() {
+    this.assertNotHalted("adoption");
     const sel = this.state.selection, final = this.state.final;
+    if (!final?.adopt || final.candidate !== sel?.selected) { this.halt("state integrity: adoption requested without an ADOPT decision for the frozen selection"); return; }
     const result = this.deployer.adopt({ commit: sel.commit, candidateId: sel.selected, evaluation: { holdout: final.holdout, reportPath: join(this.stateDir, "report.md"), protocolDigest: this.protocolDigest }, configFiles: [join(this.stateDir, "protocol.lock.json")] });
     this.fault?.("loop:after-deploy");
     if (this.archive.get(sel.selected).status !== "adopted") this.archive.decide(sel.selected, "adopted", `adopted on local refs ${this.protocol.deploy.branch} (mode ${this.protocol.deploy.mode})`);
@@ -482,6 +564,7 @@ export class Loop {
    * @param {{ tasks: any[], split?: string, repeats?: number }} options repeats defaults to the protocol's holdout repeats
    */
   async verifyStable({ tasks, split = "verify", repeats }) {
+    this.assertNotHalted("stable verification");
     const prev = this.deployer.previousStable();
     if (!prev) return { verdict: "NOTHING_TO_VERIFY" };
     const current = this.deployer.current();
@@ -508,6 +591,7 @@ export class Loop {
 
   /** Start the next cycle after a finished one (new stable = the eval-loop/stable ref when an adoption happened). */
   nextCycle() {
+    this.assertNotHalted("a new cycle");
     const prev = this.state;
     const history = [...(prev.history ?? []), { cycle: prev.cycle, final: prev.final, selection: prev.selection, searchStop: prev.searchStop, doneAt: prev.doneAt, fingerprint: prev.cycleFingerprint }];
     this._state = { phase: "prepare", cycle: prev.cycle + 1, strategy: this.strategy, counters: { candidates: 0, noProgress: 0, consecutiveInfra: 0 }, startedAt: new Date().toISOString(), history };
@@ -515,11 +599,12 @@ export class Loop {
     this.event("cycle-start", { cycle: this._state.cycle });
   }
 
-  /** Run until the cycle is done (or blocked/interrupted). Returns the state. */
+  /** Run until the cycle is done (or blocked/halted/interrupted). Returns the state. A blocked state resumes at its recorded phase. */
   async runCycle() {
-    if (this.state.phase === "blocked") { delete this.state.blocked; this.state.phase = "prepare"; }
+    if (this.haltedNow()) return this.state;
     if (!(await this.prepare())) return this.state;
     for (let guard = 0; guard < 10_000 && !this.stopping; guard++) {
+      if (this.haltedNow()) break;
       const phase = this.state.phase;
       if (phase === this.stopBefore) break;
       if (phase === "prepare") this.setPhase("baselines");

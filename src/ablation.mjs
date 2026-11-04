@@ -9,6 +9,7 @@
 // the same adoption gate, adoption, post-adoption check and rollback as a normal cycle.
 import { cpSync, existsSync, mkdirSync } from "node:fs";
 import { join } from "node:path";
+import { inspectAblation, inspectState } from "./contract.mjs";
 import { holdoutLedger } from "./datasets.mjs";
 import { criticalProblems } from "./gate.mjs";
 import { explorationOnlyFinal } from "./loop.mjs";
@@ -20,34 +21,51 @@ const SHARED = ["runs.jsonl", "grading.json", "protocol.lock.json", "datasets.js
 
 function seedTrajectory(fromDir, toDir, baseState) {
   mkdirSync(toDir, { recursive: true });
-  if (existsSync(join(toDir, "state.json"))) return;
+  const health = inspectState(toDir).health;
+  if (health === "present") return;
+  // Records without a state file are a lost trajectory: never overwrite them with a fresh seed.
+  if (health !== "fresh") throw new Error(`trajectory ${toDir}: state ${health}; refusing to re-seed over existing records`);
   for (const f of SHARED) if (existsSync(join(fromDir, f))) cpSync(join(fromDir, f), join(toDir, f));
   cpSync(join(fromDir, "candidates"), join(toDir, "candidates"), { recursive: true });
   atomicWriteJson(join(toDir, "state.json"), { phase: "search", cycle: 1, counters: { candidates: 0, noProgress: 0, consecutiveInfra: 0 }, stable: baseState.stable, startedAt: new Date().toISOString(), sharedBaselineFrom: fromDir });
 }
 
 /**
- * loopFactory({ stateDir, strategy }) -> Loop. Returns { ok, summary }. Resumable: every trajectory keeps its own state.
+ * loopFactory({ stateDir, strategy }) -> Loop. Returns { ok, outcome, summary } (outcome: ok | blocked | halted | state_error |
+ * incomplete). Resumable: every trajectory keeps its own state. A halted trajectory halts its siblings and ends every later run
+ * before any work.
  * @param {{ stateDir: string, loopFactory?: (opts: { stateDir: string, strategy: "pareto" | "greedy" }) => Promise<import("./loop.mjs").Loop>,
  *   protocolPath?: string, pids?: any, log?: (line: string) => void }} options
  */
 export async function runAblation({ stateDir, loopFactory, protocolPath, pids, log = () => {} }) {
+  const pre = inspectAblation(stateDir);
+  if (pre.health === "missing" || pre.health === "corrupt") return { ok: false, outcome: "state_error", summary: { health: pre.health, detail: pre.detail } };
+  if (pre.halted) return { ok: false, outcome: "halted", summary: { phase: `${pre.halted.arm}: halted`, halted: pre.halted.reason } };
   loopFactory ??= async (opts) => (await import("./app.mjs")).realLoop({ ...opts, protocolPath, pids });
+  const haltGroup = { halted: null };
   const A = await loopFactory({ stateDir: join(stateDir, "A"), strategy: "pareto" });
-  if (!(await A.prepare())) return { ok: false, summary: { phase: "blocked", blocked: A.state.blocked } };
+  A.haltGroup = haltGroup;
+  if (!(await A.prepare())) return { ok: false, outcome: "blocked", summary: { phase: "blocked", blocked: A.state.blocked } };
   if (["prepare", "baselines"].includes(A.state.phase)) { A.setPhase("baselines"); await A.baselines(); }
   A.state.role = "A (baseline, no optimization)"; A.save();
   const trajectories = {};
   for (const [name, strategy] of /** @type {const} */ ([["B", "greedy"], ["C", "pareto"]])) {
     seedTrajectory(A.stateDir, join(stateDir, name), A.state);
     const loop = await loopFactory({ stateDir: join(stateDir, name), strategy });
+    loop.haltGroup = haltGroup;
     loop.idPrefix = `${name}-c`;
     loop.stopBefore = "holdout";
     loop.state.strategy = strategy; loop.state.role = name === "B" ? "B (quality-only loop)" : "C (quality-first Pareto loop)"; loop.save();
     trajectories[name] = loop;
   }
   await Promise.all(Object.values(trajectories).map(loop => loop.runCycle()));
-  for (const [name, loop] of Object.entries(trajectories)) if (!["holdout", "done"].includes(loop.state.phase)) return { ok: false, summary: { phase: `${name}: ${loop.state.phase}`, blocked: loop.state.blocked, halted: loop.state.halted } };
+  // A halt in any trajectory is recorded in all of them (haltedNow propagates it) before reporting.
+  const halted = Object.entries({ A, ...trajectories }).filter(([, loop]) => loop.haltedNow());
+  if (halted.length) {
+    const [name, origin] = halted.find(([, loop]) => loop.stateDir === haltGroup.halted?.stateDir) ?? halted[0];
+    return { ok: false, outcome: "halted", summary: { phase: `${name}: ${origin.state.phase}`, halted: origin.state.halted, haltedArms: halted.map(([n]) => n) } };
+  }
+  for (const [name, loop] of Object.entries(trajectories)) if (!["holdout", "done"].includes(loop.state.phase)) return { ok: false, outcome: loop.state.phase === "blocked" ? "blocked" : "incomplete", summary: { phase: `${name}: ${loop.state.phase}`, blocked: loop.state.blocked } };
   // Freeze every condition's final harness (no selection = the stable harness itself) BEFORE any holdout access, then run the ONE
   // joint holdout pass through A's ordinary trusted path: holdout -> adoption gate (C vs A) -> adopt -> post-adoption check.
   const finals = {};
@@ -74,7 +92,8 @@ export async function runAblation({ stateDir, loopFactory, protocolPath, pids, l
     else A.setPhase("done", { selection, final: { verdict: "KEEP_STABLE", adopt: false, reasons: ["neither B nor C selected a candidate on development; the holdout was not consumed"] } });
   }
   if (!explorationOnly) await A.runCycle();
-  if (A.state.phase !== "done") return { ok: false, summary: { phase: `A: ${A.state.phase}`, blocked: A.state.blocked, halted: A.state.halted } };
+  if (A.state.halted) return { ok: false, outcome: "halted", summary: { phase: `A: ${A.state.phase}`, halted: A.state.halted } };
+  if (A.state.phase !== "done") return { ok: false, outcome: A.state.phase === "blocked" ? "blocked" : "incomplete", summary: { phase: `A: ${A.state.phase}`, blocked: A.state.blocked } };
   const p = A.protocol;
   const arms = { A: { id: "stable", commit: A.state.stable.commit }, B: finals.B, C: finals.C };
   const records = A.records();
@@ -110,7 +129,7 @@ export async function runAblation({ stateDir, loopFactory, protocolPath, pids, l
   const resultPath = join(stateDir, "ablation.json");
   atomicWriteJson(resultPath, result);
   atomicWrite(join(stateDir, "ablation.md"), ablationMarkdown(result), 0o644);
-  return { ok: true, summary: { arms, comparisons: Object.fromEntries(Object.entries(comparisons).map(([k, v]) => [k, v.identical ? v.note : v.notMeasured ? "holdout not measured" : `support ${v.support.toFixed(3)}, delta ${v.delta.overall.mean.toFixed(3)}`])), adoption: { verdict: result.adoption?.verdict, reasons: result.adoption?.reasons }, report: join(stateDir, "ablation.md") } };
+  return { ok: true, outcome: "ok", summary: { arms, comparisons: Object.fromEntries(Object.entries(comparisons).map(([k, v]) => [k, v.identical ? v.note : v.notMeasured ? "holdout not measured" : `support ${v.support.toFixed(3)}, delta ${v.delta.overall.mean.toFixed(3)}`])), adoption: { verdict: result.adoption?.verdict, reasons: result.adoption?.reasons }, report: join(stateDir, "ablation.md") } };
 }
 
 const pct = (x) => (x === undefined || x === null || Number.isNaN(x) ? "–" : `${(100 * x).toFixed(1)}%`);

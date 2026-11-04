@@ -1,6 +1,7 @@
 // Small shared helpers: hashing, canonical JSON, atomic files, append-only hash-chained ledgers, process locks.
 import { createHash, randomBytes } from "node:crypto";
-import { closeSync, existsSync, fsyncSync, mkdirSync, openSync, readFileSync, readdirSync, renameSync, rmSync, statSync, writeFileSync, writeSync, lstatSync, readlinkSync } from "node:fs";
+import { closeSync, existsSync, fsyncSync, linkSync, mkdirSync, openSync, readFileSync, readdirSync, renameSync, rmSync, statSync, unlinkSync, writeFileSync, writeSync, lstatSync, readlinkSync } from "node:fs";
+import { hostname } from "node:os";
 import { dirname, join, relative } from "node:path";
 
 export const sha256 = (data) => createHash("sha256").update(data).digest("hex");
@@ -64,23 +65,129 @@ export class Ledger {
 
 const alive = (pid) => { try { process.kill(pid, 0); return true; } catch (error) { return error.code === "EPERM"; } };
 
-/** Exclusive controller lock (one loop per state directory). A lock of a dead process is taken over and reported. */
-export function acquireLock(path) {
-  ensureDir(dirname(path));
-  for (let attempt = 0; attempt < 2; attempt++) {
-    try {
-      const fd = openSync(path, "wx", 0o600);
-      writeSync(fd, JSON.stringify({ pid: process.pid, at: new Date().toISOString() })); closeSync(fd);
-      let released = false;
-      return { stale: attempt > 0, release() { if (released) return; released = true; try { const held = readJson(path); if (held.pid === process.pid) rmSync(path, { force: true }); } catch { /* gone */ } } };
-    } catch (error) {
-      if (error.code !== "EEXIST") throw error;
-      let held; try { held = readJson(path); } catch { held = {}; }
-      if (held.pid && alive(held.pid) && held.pid !== process.pid) throw new Error(`state is locked by running process ${held.pid} (${path})`);
-      rmSync(path, { force: true });
-    }
+/** Boot identity of this host (Linux /proc); undefined where unavailable. */
+export function bootId() { try { return readFileSync("/proc/sys/kernel/random/boot_id", "utf8").trim() || undefined; } catch { return undefined; } }
+/** PID-namespace identity of this process (readlink /proc/self/ns/pid); undefined where unavailable. */
+export function pidNamespace() { try { return readlinkSync("/proc/self/ns/pid"); } catch { return undefined; } }
+/** Start time of a process (clock ticks since boot, /proc/<pid>/stat field 22); undefined when it cannot be read. */
+export function processStart(pid) {
+  try { const stat = readFileSync(`/proc/${pid}/stat`, "utf8"); return stat.slice(stat.lastIndexOf(")") + 2).split(" ")[19] || undefined; } catch { return undefined; }
+}
+const readRaw = (path) => { try { return readFileSync(path, "utf8"); } catch (error) { if (error.code === "ENOENT") return undefined; throw error; } };
+const parseLock = (raw) => { try { return JSON.parse(raw); } catch { return undefined; } };
+/** Lock owner fields safe to print (the ownership token stays in the file). */
+export const lockOwner = (held) => held && typeof held === "object" ? { pid: held.pid, host: held.host, startTime: held.startTime, at: held.at } : undefined;
+
+/** Contention for the controller lock: a live, foreign-host, unverifiable or concurrently changing owner. */
+export class LockBusyError extends Error {
+  /** @param {string} path @param {{ state: string, why: string }} verdict @param {any} owner */
+  constructor(path, verdict, owner) {
+    super(`state is locked (${verdict.state}: ${verdict.why}) (${path})`);
+    this.code = "ELOCKBUSY"; this.path = path; this.verdict = verdict; this.owner = owner;
   }
-  throw new Error(`cannot acquire lock ${path}`);
+}
+
+/**
+ * Classify a lock record. Only "stale" may be reclaimed: same host and either an earlier boot, or - in the same PID namespace - a
+ * pid that no longer runs or whose start time differs from the recorded one (reused pid). A running pid whose start time cannot
+ * be compared, a record of another PID namespace (container, bwrap --unshare-pid: its pid means nothing here), a record without
+ * host or namespace identity (older format) and a record of another host are never reclaimed.
+ * @returns {{ state: "live" | "stale" | "foreign-host" | "unverifiable", why: string }}
+ */
+export function classifyLock(held, { host = hostname(), boot = bootId(), pidNs = pidNamespace() } = {}) {
+  if (!held || typeof held !== "object" || !Number.isInteger(held.pid) || held.pid <= 0) return { state: "unverifiable", why: "unreadable or incomplete lock record" };
+  if (!held.host) return { state: "unverifiable", why: `lock record of pid ${held.pid} has no host identity (older format)` };
+  if (held.host !== host) return { state: "foreign-host", why: `held by pid ${held.pid} on host ${held.host}` };
+  if (held.bootId && boot && held.bootId !== boot) return { state: "stale", why: `pid ${held.pid} ran before the last reboot` };
+  if (!held.pidNs || !pidNs) return { state: "unverifiable", why: `the PID namespace of pid ${held.pid} cannot be compared` };
+  if (held.pidNs !== pidNs) return { state: "unverifiable", why: `pid ${held.pid} belongs to another PID namespace (${held.pidNs})` };
+  if (!alive(held.pid)) return { state: "stale", why: `pid ${held.pid} is not running` };
+  const start = processStart(held.pid);
+  if (!held.startTime || !start) return { state: "unverifiable", why: `pid ${held.pid} is running and its start time cannot be compared` };
+  if (start !== held.startTime) return { state: "stale", why: `pid ${held.pid} now belongs to another process (start time differs)` };
+  return { state: "live", why: `pid ${held.pid} is running` };
+}
+
+/**
+ * Read-only view of a lock file.
+ * @returns {{ present: boolean, owner?: ReturnType<typeof lockOwner>, state?: string, why?: string }}
+ */
+export function inspectLock(path) {
+  const raw = readRaw(path);
+  if (raw === undefined) return { present: false };
+  const held = parseLock(raw);
+  return { present: true, owner: lockOwner(held), ...classifyLock(held) };
+}
+
+/**
+ * A reclaim guard is written complete (link of a written file) and held for a few synchronous steps: a guard whose record is
+ * unreadable or whose owner provably no longer runs is "stale-guard" (left by a recoverer that died; needs an operator);
+ * otherwise "held".
+ */
+export function classifyGuard(g) {
+  if (!g || typeof g !== "object" || !Number.isInteger(g.pid)) return { state: "stale-guard", why: "is unreadable" };
+  const verdict = classifyLock(g);
+  return verdict.state === "stale" ? { state: "stale-guard", why: `was left by a recoverer that is not running (${verdict.why})` } : { state: "held", why: verdict.why };
+}
+/** Read-only view of the reclaim guard of a lock: { present: false } or { present: true, state: "stale-guard" | "held", why }. */
+export function inspectGuard(path) {
+  const raw = readRaw(`${path}.reclaim`);
+  return raw === undefined ? { present: false } : { present: true, ...classifyGuard(parseLock(raw)) };
+}
+
+/**
+ * Exclusive controller lock (one loop per state directory). The record (pid, host, boot id, PID namespace, process start time,
+ * token) is created atomically with its content (hard link of a written temp file; fails when a lock exists). Removal invariant:
+ * the lock file is removed only (a) by its owner, while it still carries the owner's token, or (b) by a recoverer that holds the
+ * reclaim guard `<lock>.reclaim` (also created by an exclusive link) and has re-read, under the guard, the same stale record it
+ * classified. A new owner can only create the lock while no file exists, so a recoverer never removes a newly acquired lock.
+ * Anything but a stale record (see classifyLock) or a record that changed throws LockBusyError; a held guard is "contended", a
+ * guard left by a recoverer that died within its few synchronous steps is "stale-guard" (never removed automatically, since
+ * removing it could break the guard's exclusivity; an operator removes it after checking that no controller runs).
+ * @param {string} path
+ * @param {{ beforeReclaim?: () => void }} [hooks] test hook run after a record was judged stale, before the guard is taken
+ */
+export function acquireLock(path, { beforeReclaim } = {}) {
+  ensureDir(dirname(path));
+  const record = { pid: process.pid, host: hostname(), bootId: bootId(), pidNs: pidNamespace(), startTime: processStart(process.pid), token: randomBytes(12).toString("hex"), at: new Date().toISOString() };
+  const temp = `${path}.new-${record.token}`, guard = `${path}.reclaim`;
+  const fd = openSync(temp, "wx", 0o600);
+  try { writeSync(fd, JSON.stringify(record)); fsyncSync(fd); } finally { closeSync(fd); }
+  const mine = (file) => parseLock(readRaw(file) ?? "")?.token === record.token;
+  /** @type {any[]} */ const recovered = [];
+  try {
+    for (let attempt = 0; attempt < 4; attempt++) {
+      try { linkSync(temp, path); } catch (error) {
+        if (error.code !== "EEXIST") throw error;
+        const raw = readRaw(path);
+        if (raw === undefined) continue;
+        const held = parseLock(raw);
+        const verdict = classifyLock(held);
+        if (verdict.state !== "stale") throw new LockBusyError(path, verdict, lockOwner(held));
+        beforeReclaim?.();
+        try { linkSync(temp, guard); } catch (guardError) {
+          if (guardError.code !== "EEXIST") throw guardError;
+          const g = parseLock(readRaw(guard) ?? "");
+          const guardState = classifyGuard(g);
+          if (guardState.state === "stale-guard") throw new LockBusyError(path, { state: "stale-guard", why: `the reclaim guard ${guard} ${guardState.why}: remove it after checking that no controller runs` }, lockOwner(g));
+          throw new LockBusyError(path, { state: "contended", why: `another process holds the reclaim guard ${guard}` }, lockOwner(g));
+        }
+        try {
+          const now = readRaw(path);
+          if (now !== undefined && now !== raw) throw new LockBusyError(path, { state: "contended", why: "the lock changed while a stale record was being recovered" }, lockOwner(parseLock(now)));
+          if (now !== undefined) unlinkSync(path);
+        } finally { if (mine(guard)) unlinkSync(guard); }
+        recovered.push({ ...lockOwner(held), why: verdict.why });
+        continue;
+      }
+      let released = false;
+      return {
+        stale: recovered.length > 0, recovered, owner: lockOwner(record),
+        release() { if (released) return; released = true; try { if (mine(path)) unlinkSync(path); } catch { /* gone */ } },
+      };
+    }
+    throw new LockBusyError(path, { state: "contended", why: "the lock kept changing" }, undefined);
+  } finally { rmSync(temp, { force: true }); }
 }
 
 /** Files of a tree (relative paths), skipping the named directory components; symlinks are reported, never followed. */

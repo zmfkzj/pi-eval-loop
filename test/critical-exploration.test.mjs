@@ -170,8 +170,9 @@ test("CLI: an unknown --strategy is refused before any loop starts (no silent fa
   try {
     const cli = fileURLToPath(new URL("../bin/eval-loop.mjs", import.meta.url));
     const r = spawnSync(process.execPath, [cli, "--once", "--state", join(root, "s"), "--strategy", "quality"], { encoding: "utf8", timeout: 60_000 });
-    assert.equal(r.status, 2, r.stdout + r.stderr);
+    assert.equal(r.status, 64, r.stdout + r.stderr);
     assert.match(r.stdout, /--strategy must be pareto or greedy/);
+    assert.equal(JSON.parse(r.stdout.trim().split("\n").at(-1)).outcome, "usage");
     assert.equal(existsSync(join(root, "s", "state.json")), false);
   } finally { rmSync(root, { recursive: true, force: true }); }
 });
@@ -244,6 +245,8 @@ test("ties within floating-point noise: never progress, never domination, never 
         // Selection order: a real Q_hard gain wins over an Q_overall "lead" that is only rounding noise.
         const s = stable.development.point, up = s.overall + 1 / 48;
         loop.archive.put({ ...loop.archive.get("c001"), status: "dev_qualified", development: { ...c.development, qualified: true, point: { ...s, overall: up + 4 * Number.EPSILON } } });
+        // Unit check of the ordering only: a real cycle selects once (select() refuses after a final decision).
+        delete loop.state.final; loop.state.phase = "select";
         loop.archive.create({ id: "c009", status: "dev_qualified", parent: "stable", commit: c.commit, development: { ...c.development, qualified: true, point: { ...s, overall: up, hard: (s.hard ?? 0) + 1 / 24 } } });
         loop.select();
         assert.equal(loop.state.selection.selected, "c009", JSON.stringify(loop.state.selection));
