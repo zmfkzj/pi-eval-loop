@@ -10,6 +10,7 @@
 import { cpSync, existsSync, mkdirSync } from "node:fs";
 import { join } from "node:path";
 import { holdoutLedger } from "./datasets.mjs";
+import { criticalProblems } from "./gate.mjs";
 import { explorationOnlyFinal } from "./loop.mjs";
 import { finalAttempts, pairsOf, summarize } from "./metrics.mjs";
 import { compare, describeArm } from "./stats.mjs";
@@ -27,6 +28,8 @@ function seedTrajectory(fromDir, toDir, baseState) {
 
 /**
  * loopFactory({ stateDir, strategy }) -> Loop. Returns { ok, summary }. Resumable: every trajectory keeps its own state.
+ * @param {{ stateDir: string, loopFactory?: (opts: { stateDir: string, strategy: "pareto" | "greedy" }) => Promise<import("./loop.mjs").Loop>,
+ *   protocolPath?: string, pids?: any, log?: (line: string) => void }} options
  */
 export async function runAblation({ stateDir, loopFactory, protocolPath, pids, log = () => {} }) {
   loopFactory ??= async (opts) => (await import("./app.mjs")).realLoop({ ...opts, protocolPath, pids });
@@ -35,7 +38,7 @@ export async function runAblation({ stateDir, loopFactory, protocolPath, pids, l
   if (["prepare", "baselines"].includes(A.state.phase)) { A.setPhase("baselines"); await A.baselines(); }
   A.state.role = "A (baseline, no optimization)"; A.save();
   const trajectories = {};
-  for (const [name, strategy] of [["B", "greedy"], ["C", "pareto"]]) {
+  for (const [name, strategy] of /** @type {const} */ ([["B", "greedy"], ["C", "pareto"]])) {
     seedTrajectory(A.stateDir, join(stateDir, name), A.state);
     const loop = await loopFactory({ stateDir: join(stateDir, name), strategy });
     loop.idPrefix = `${name}-c`;
@@ -48,8 +51,13 @@ export async function runAblation({ stateDir, loopFactory, protocolPath, pids, l
   // Freeze every condition's final harness (no selection = the stable harness itself) BEFORE any holdout access, then run the ONE
   // joint holdout pass through A's ordinary trusted path: holdout -> adoption gate (C vs A) -> adopt -> post-adoption check.
   const finals = {};
+  const criticalExcluded = [];
   for (const [name, loop] of Object.entries(trajectories)) {
-    const id = loop.state.selection?.selected ?? null;
+    let id = loop.state.selection?.selected ?? null;
+    // Defense in depth: A's adoption gate sees only A's ledger, so a trajectory's selection is re-checked here against ITS OWN
+    // train/dev records (every attempt) before it can reach the joint holdout.
+    const critical = id ? criticalProblems(loop.records().filter(r => r.split !== "holdout"), id, { reference: "stable" }) : [];
+    if (critical.length) { criticalExcluded.push({ arm: name, id, critical: critical.slice(0, 3) }); id = null; }
     finals[name] = id ? { id, commit: loop.archive.get(id).commit } : { id: "stable", commit: A.state.stable.commit };
     if (id && !A.archive.get(id)) A.archive.put({ ...loop.archive.get(id), copiedFrom: loop.stateDir });
   }
@@ -57,7 +65,7 @@ export async function runAblation({ stateDir, loopFactory, protocolPath, pids, l
   if (!A.state.selection) {
     const measured = [finals.B.id, finals.C.id].filter(id => id !== "stable");
     const selected = finals.C.id === "stable" ? null : finals.C.id;
-    const selection = { at: new Date().toISOString(), selected, commit: selected ? finals.C.commit : undefined, extraArms: measured.filter(id => id !== selected), ablation: finals, frozenDigest: digestOf({ finals, protocol: A.protocolDigest }) };
+    const selection = { at: new Date().toISOString(), selected, commit: selected ? finals.C.commit : undefined, extraArms: measured.filter(id => id !== selected), ablation: finals, criticalExcluded, frozenDigest: digestOf({ finals, protocol: A.protocolDigest }), reason: selected ? undefined : `the C trajectory selected no candidate on development${measured.length ? "" : "; neither did B"}${criticalExcluded.length ? ` (excluded as critical: ${criticalExcluded.map(c => c.id).join(", ")})` : ""}` };
     atomicWriteJson(join(A.stateDir, "selection.json"), selection);
     A.event("selection", selection);
     // Exploration-only: the finals are frozen and recorded; no holdout, adoption gate, adoption or ref change follows.

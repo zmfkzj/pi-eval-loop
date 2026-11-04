@@ -76,7 +76,7 @@ export function buildReport(stateDir) {
   L.push("## Pareto front (development: Q_overall, Q_hard, Q_consistency)", "", archive.front().map(id => `- ${id}: ${(() => { const p = archive.get(id).development.point; return `overall ${pct(p.overall)}, hard ${pct(p.hard)}, consistency ${pct(p.consistency)}`; })()}`).join("\n") || "- (none)", "");
   L.push("## Search, selection, holdout and adoption", "");
   L.push(`- search stop: ${state.searchStop ?? "–"}; candidates this cycle: ${state.counters?.candidates ?? 0}; consecutive no-progress: ${state.counters?.noProgress ?? 0}`);
-  if (state.classFailures) L.push(`- failed targeted proposals per failure class: ${Object.entries(state.classFailures).map(([k, v]) => `${k} ${v}`).join(", ") || "none"}`);
+  if (state.classFailures) L.push(`- failed targeted proposals per failure class since the last progress: ${Object.entries(state.classFailures).map(([k, v]) => `${k} ${v}`).join(", ") || "none"}`);
   if (state.selection) L.push(`- selection: ${state.selection.selected ?? "none"}${state.selection.reason ? ` (${state.selection.reason})` : ""}${state.selection.criticalExcluded?.length ? `; excluded as critical: ${state.selection.criticalExcluded.map(c => c.id).join(", ")}` : ""}`);
   if (state.final) {
     L.push(`- **deployment verdict: ${state.final.verdict}**${state.final.candidate ? ` for ${state.final.candidate}` : ""}`);

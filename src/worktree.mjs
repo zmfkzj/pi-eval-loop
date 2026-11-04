@@ -37,11 +37,15 @@ export function snapshotWorktree(repo, commit, dir) {
   return { dir, reused: false };
 }
 
-/** Changed paths and the diff of a worktree against `base` (working tree, untracked files included, node_modules excluded). */
+/**
+ * Changed paths and the diff of a worktree against `base` (working tree, untracked files included, node_modules excluded).
+ * Rename/copy detection is OFF: a moved file lists BOTH its deleted source and its new path, so moving a protected file into an
+ * allowed directory is still seen as a change of the protected path.
+ */
 export function changes(dir, base) {
   git(dir, ["add", "-A", "--", "."]);
-  const files = git(dir, ["diff", "--cached", "--name-only", base]).split("\n").filter(Boolean);
-  const patch = git(dir, ["diff", "--cached", "--no-color", base]);
+  const files = git(dir, ["diff", "--cached", "--no-renames", "--name-only", base]).split("\n").filter(Boolean);
+  const patch = git(dir, ["diff", "--cached", "--no-renames", "--no-color", base]);
   return { files, patch };
 }
 

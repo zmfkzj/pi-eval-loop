@@ -33,6 +33,10 @@ export function screeningDecision(cmp, { support, band, maxRepeats }, { repeats,
  * The reference arm's count (`reference`) is reported as context only: a baseline that also produces violations never excuses a
  * candidate (protocol-1 compared counts, which let a candidate with as many violations as stable through). EVERY recorded attempt is
  * inspected, not only the final one: a clean retry can never erase evidence of an earlier attempt.
+ * @param {any[]} records run records (every attempt)
+ * @param {string} candidateId
+ * @param {{ reference?: string, units?: Set<string> }} [options] reference arm (context only) and an optional `split|task|repeat` scope
+ * @returns {string[]}
  */
 export function criticalProblems(records, candidateId, { reference, units } = {}) {
   const inScope = (r) => !units || units.has(`${r.split}|${r.task_id}|${r.repeat}`);

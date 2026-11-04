@@ -12,7 +12,11 @@ import { tmpdir } from "node:os";
 
 export const DEFAULT_STATE = join(PACKAGE_DIR, "state", "default");
 
-/** A Loop on the real backend. `pids` collects sandbox process-group ids for cleanup on signals. */
+/**
+ * A Loop on the real backend. `pids` collects sandbox process-group ids for cleanup on signals.
+ * @param {{ stateDir?: string, protocolPath?: string, strategy?: "pareto" | "greedy", env?: ReturnType<typeof hostEnvironment>, pids?: Set<number>,
+ *   log?: (line: string) => void, protocol?: any }} [options]
+ */
 export function realLoop({ stateDir = DEFAULT_STATE, protocolPath, strategy = "pareto", env = hostEnvironment(), pids = new Set(), log, protocol } = {}) {
   protocol ??= loadProtocol(protocolPath);
   const backend = realBackend(env);

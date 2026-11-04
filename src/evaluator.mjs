@@ -16,6 +16,18 @@ export function wireJournals(controlDir) {
 }
 
 export class Evaluator {
+  /** @type {string} */ stateDir;
+  /** @type {any} */ protocol;
+  /** @type {string} */ protocolDigest;
+  /** @type {string | undefined} */ envDigest;
+  /** @type {Record<string, any>} */ tasksById;
+  /** @type {any} */ grading;
+  /** @type {{ run(input: any): Promise<any>, simulated?: boolean }} */ backend;
+  /** @type {(line: string) => void} */ log;
+  /**
+   * @param {{ stateDir: string, protocol: any, protocolDigest: string, envDigest?: string, tasksById: Record<string, any>, grading?: any,
+   *   backend: { run(input: any): Promise<any>, simulated?: boolean }, log?: (line: string) => void }} options
+   */
   constructor({ stateDir, protocol, protocolDigest, envDigest, tasksById, grading, backend, log = () => {} }) {
     Object.assign(this, { stateDir, protocol, protocolDigest, envDigest, tasksById, grading, backend, log });
     this.ledger = new Ledger(join(stateDir, "runs.jsonl"));
@@ -114,7 +126,9 @@ export function realBackend(env) {
 
 /**
  * Deterministic simulated backend for tests and dry runs (records marked `simulated`, never reported as measurements):
- * success ~ Bernoulli(p(harness, task)) seeded by the unit key and attempt. `skill(harness, task)` returns { p, crash?, violation?, infra? }.
+ * success ~ Bernoulli(p(harness, task)) seeded by the unit key and attempt. `skill(harness, task, info)` returns { p, crash?, violation?, infra? };
+ * info = { repeat, attempt, split, context } lets tests target one phase (e.g. a candidate's `develop:*:train` runs).
+ * @param {{ skill: (harness: any, task: any, info?: { repeat: number, attempt: number, split: string, context?: string }) => { p: number, crash?: boolean, violation?: boolean, infra?: boolean, failureClass?: string }, seed?: string }} options
  */
 export function simulatedBackend({ skill, seed = "sim" }) {
   return {

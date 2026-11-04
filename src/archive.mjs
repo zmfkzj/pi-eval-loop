@@ -23,9 +23,22 @@ export function similarity(a, b) {
 export function paretoFront(points) {
   const keys = ["overall", "hard", "consistency"];
   const value = (p, k) => (Number.isFinite(p[k]) ? p[k] : 0);
-  const dominates = (p, q) => keys.every(k => value(p, k) >= value(q, k)) && keys.some(k => value(p, k) > value(q, k));
+  const dominates = (p, q) => keys.every(k => pointGe(value(p, k), value(q, k))) && keys.some(k => pointGt(value(p, k), value(q, k)));
   return points.filter(q => !points.some(p => p !== q && dominates(p, q)));
 }
+
+/**
+ * Point comparisons with a tolerance far below any real difference of the objectives (binary outcomes over T tasks and R repeats
+ * differ by at least 1/(T*R^2), about 1e-6 for 1000 tasks and 30 repeats) and far above floating-point summation noise (~1e-16):
+ * identical outcomes summed in another order are a tie, never progress, domination or a win over stable.
+ */
+export const POINT_EPS = 1e-9;
+/** @param {number} a @param {number} b */
+export const pointGt = (a, b) => a > b + POINT_EPS;
+/** @param {number} a @param {number} b */
+export const pointGe = (a, b) => a >= b - POINT_EPS;
+/** Descending order of a point value with ties within POINT_EPS (for sort comparators). @param {number} a @param {number} b */
+export const pointDesc = (a, b) => (Math.abs(a - b) <= POINT_EPS ? 0 : b - a);
 
 export class Archive {
   constructor(stateDir) { this.dir = ensureDir(join(stateDir, "candidates")); }
@@ -57,7 +70,7 @@ export class Archive {
     const value = (p, k) => (Number.isFinite(p[k]) ? p[k] : 0);
     const me = this.get(id)?.development?.point;
     if (!me) return true;
-    return this.developmentSet().some(c => c.id !== id && ["overall", "hard", "consistency"].every(k => value(c.development.point, k) >= value(me, k)));
+    return this.developmentSet().some(c => c.id !== id && ["overall", "hard", "consistency"].every(k => pointGe(value(c.development.point, k), value(me, k))));
   }
 
   /** Duplicate guard: same normalized patch, or a hypothesis close to an earlier failed one for the same failure class. */
@@ -70,10 +83,18 @@ export class Archive {
     }
     return undefined;
   }
-  /** Failed proposals per target failure class (to stop retrying a class that keeps failing). */
-  failuresByClass() {
+  /**
+   * Failed proposals per target failure class among candidates created after `since` (ISO time: the cycle start or the last
+   * progress) and, when `last` is given, among only the `last` most recently created of them (the consecutive no-progress
+   * candidates; this bound also holds for states written before `lastProgressAt` existed and under clock skew). Every counted
+   * failure is a no-progress candidate, so exhausting a class can never end a search before the no-progress patience.
+   * @param {{ since?: string, last?: number }} [options]
+   */
+  failuresByClass({ since, last } = {}) {
     const out = {};
-    for (const c of this.all()) if (c.hypothesis?.targetFailureClass && ["rejected", "rejected_patch", "build_failed", "dev_rejected", "duplicate"].includes(c.status)) out[c.hypothesis.targetFailureClass] = (out[c.hypothesis.targetFailureClass] ?? 0) + 1;
+    let pool = this.all().filter(c => !since || (c.createdAt ?? "") > since);
+    if (last !== undefined) pool = pool.sort((x, y) => (x.createdAt ?? "").localeCompare(y.createdAt ?? "") || x.id.localeCompare(y.id)).slice(Math.max(0, pool.length - last));
+    for (const c of pool) if (c.hypothesis?.targetFailureClass && ["rejected", "rejected_patch", "build_failed", "dev_rejected", "duplicate"].includes(c.status)) out[c.hypothesis.targetFailureClass] = (out[c.hypothesis.targetFailureClass] ?? 0) + 1;
     return out;
   }
   childFailures(parentId) { return this.all().filter(c => c.parent === parentId && ["rejected", "rejected_patch", "build_failed", "dev_rejected", "duplicate", "inconclusive"].includes(c.status)).length; }

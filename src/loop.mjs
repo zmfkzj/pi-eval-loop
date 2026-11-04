@@ -7,7 +7,7 @@
 // Every step is recorded on disk; a crash resumes at the recorded phase and reuses completed units.
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
-import { Archive, patchKey, selectParent } from "./archive.mjs";
+import { Archive, patchKey, pointDesc, pointGt, selectParent } from "./archive.mjs";
 import { analyze } from "./analysis.mjs";
 import { Deployer } from "./deploy.mjs";
 import { Evaluator } from "./evaluator.mjs";
@@ -25,11 +25,50 @@ import { compareChecks } from "./checks.mjs";
 
 export const PHASES = ["prepare", "baselines", "search", "select", "holdout", "adopt", "post-adopt", "done", "blocked"];
 
+/**
+ * @typedef {object} LoopOptions
+ * @property {string} stateDir state directory of this trajectory
+ * @property {any} protocol resolved protocol (DEFAULT_PROTOCOL merged with overrides)
+ * @property {{ run(input: any): Promise<any>, simulated?: boolean }} [backend] task-run backend (real Pi or simulated)
+ * @property {Record<string, string>} [env] environment for proposer sessions
+ * @property {string} [envDigest] digest of the pinned task environment
+ * @property {{ kind?: string, propose(input: any): Promise<any> }} [proposer] candidate proposer
+ * @property {"pareto" | "greedy"} [strategy] Pareto loop (C) or quality-only greedy loop (B)
+ * @property {(worktree: string, which?: string[], logDir?: string) => Promise<any>} [checks] harness checks of a candidate worktree
+ * @property {() => Promise<Array<{ name: string, ok: boolean, detail?: string }>>} [prerequisites] environment prerequisites
+ * @property {{ tasks: any[], holdoutDir?: string, holdoutTasks: any[] }} [datasets] injected datasets (tests)
+ * @property {(dir: string) => any} [validateGrader] grader validation hook
+ * @property {string} [umbrella] umbrella repository root
+ * @property {string} [orche] orche repository (target harness)
+ * @property {(line: string) => void} [log] progress log
+ * @property {string} [holdoutLedgerPath] holdout use ledger (defaults to the holdout directory)
+ * @property {string} [idPrefix] candidate id prefix (A/B/C trajectories)
+ * @property {string} [stopBefore] phase at which runCycle returns (A/B/C freezing, tests)
+ * @property {any} [fault] fault injection for deployment tests
+ */
+
 export class Loop {
-  /**
-   * opts: { stateDir, protocol, backend, env, envDigest, proposer, strategy ("pareto"|"greedy"), checks(worktree, which) -> {pass},
-   *         prerequisites() -> [{name, ok}], datasets? (injected for tests: { tasks, holdoutDir, holdoutTasks }), umbrella, orche, log }
-   */
+  /** @type {string} */ stateDir;
+  /** @type {any} */ protocol;
+  /** @type {LoopOptions["backend"]} */ backend;
+  /** @type {LoopOptions["env"]} */ env;
+  /** @type {string | undefined} */ envDigest;
+  /** @type {LoopOptions["proposer"]} */ proposer;
+  /** @type {"pareto" | "greedy"} */ strategy;
+  /** @type {LoopOptions["checks"]} */ checks;
+  /** @type {LoopOptions["prerequisites"]} */ prerequisites;
+  /** @type {LoopOptions["datasets"]} */ datasets;
+  /** @type {LoopOptions["validateGrader"]} */ validateGrader;
+  /** @type {string} */ umbrella;
+  /** @type {string} */ orche;
+  /** @type {(line: string) => void} */ log;
+  /** @type {string | undefined} */ holdoutLedgerPath;
+  /** @type {string | undefined} */ idPrefix;
+  /** @type {string | undefined} */ stopBefore;
+  /** @type {any} */ fault;
+  /** @type {any} */ _state;
+
+  /** @param {LoopOptions} opts */
   constructor(opts) {
     Object.assign(this, opts);
     this.strategy ??= "pareto";
@@ -164,10 +203,10 @@ export class Loop {
     this.state.cycleStartedAt ??= new Date().toISOString();
     while (true) {
       const stop = this.watchdog();
-      if (stop) { this.event("search-stopped", { reason: stop, classFailures: this.archive.failuresByClass() }); this.state.searchStop = stop; this.state.classFailures = this.archive.failuresByClass(); this.save(); if (stop !== "interrupted") this.setPhase("select"); return; }
+      if (stop) { this.event("search-stopped", { reason: stop, classFailures: this.classFailures() }); this.state.searchStop = stop; this.state.classFailures = this.classFailures(); this.save(); if (stop !== "interrupted") this.setPhase("select"); return; }
       const current = this.state.current;
       if (current) await this.continueCandidate(current.id);
-      else if (!(await this.newCandidate())) { this.state.searchStop = `no addressable failure class left (each remaining class exhausted after ${this.protocol.watchdog.maxFailuresPerClass} failed targeted proposals, or no train failure to target)`; this.state.classFailures = this.archive.failuresByClass(); this.event("search-stopped", { reason: this.state.searchStop, classFailures: this.state.classFailures }); this.setPhase("select"); return; }
+      else if (!(await this.newCandidate())) { this.state.searchStop = `no addressable failure class left (each remaining class exhausted after ${this.protocol.watchdog.maxFailuresPerClass} failed targeted proposals since the last progress, or no train failure to target)`; this.state.classFailures = this.classFailures(); this.event("search-stopped", { reason: this.state.searchStop, classFailures: this.state.classFailures }); this.setPhase("select"); return; }
     }
   }
 
@@ -175,7 +214,7 @@ export class Loop {
     const recs = finalAttempts(this.records().filter(r => r.candidate_id === parentId && r.split === "train"));
     const reference = finalAttempts(this.records().filter(r => r.candidate_id === "pure" && r.split === "train"));
     const analysis = analyze(recs, { reference });
-    const failures = this.archive.failuresByClass();
+    const failures = this.classFailures();
     const blocked = Object.entries(failures).filter(([, n]) => n >= this.protocol.watchdog.maxFailuresPerClass).map(([c]) => c);
     // Integrity failures are targetable: removing a failure type (e.g. task agents editing existing tests) is quality progress.
     const target = analysis.hypotheses.find(h => !blocked.includes(h.class));
@@ -299,7 +338,7 @@ export class Loop {
       // Quality-only ablation: the single current best by development Q_overall replaces the parent; no archive of alternatives.
       // Progress = a new best (no Pareto bookkeeping in this arm).
       const best = this.archive.get(this.state.greedyBest ?? "stable");
-      progress = decision.qualified && this.archive.get(id).development.point.overall > best.development.point.overall;
+      progress = greedyProgress(decision.qualified, this.archive.get(id).development.point, best.development.point);
       if (progress) this.state.greedyBest = id;
     } else {
       // Pareto loop: progress = a development-qualified candidate that no other development-set member weakly dominates (a point
@@ -311,9 +350,13 @@ export class Loop {
     this.endCandidate(progress, 0);
   }
 
+  /** Failed targeted proposals per class among the consecutive no-progress candidates since the last progress (or the cycle start). */
+  classFailures() { return this.archive.failuresByClass({ since: this.state.lastProgressAt ?? this.state.startedAt, last: this.state.counters?.noProgress ?? 0 }); }
+
   endCandidate(progress, infraRate = 0) {
     const c = this.state.counters;
     c.noProgress = progress ? 0 : c.noProgress + 1;
+    if (progress) this.state.lastProgressAt = new Date().toISOString();
     c.consecutiveInfra = infraRate > this.protocol.watchdog.maxInfraRate ? c.consecutiveInfra + 1 : 0;
     this.state.current = null;
     this.save();
@@ -344,11 +387,11 @@ export class Loop {
       const fam = c.development?.vsStable?.familyDelta ?? {};
       return !Object.values(fam).some(d => d.probBelow >= a.familyRegressionSupport);
     });
-    const order = (x, y) => (y.development.point.overall - x.development.point.overall) || ((y.development.point.hard ?? 0) - (x.development.point.hard ?? 0)) || ((y.development.point.consistency ?? 0) - (x.development.point.consistency ?? 0)) || x.id.localeCompare(y.id);
+    const order = (x, y) => pointDesc(x.development.point.overall, y.development.point.overall) || pointDesc(x.development.point.hard ?? 0, y.development.point.hard ?? 0) || pointDesc(x.development.point.consistency ?? 0, y.development.point.consistency ?? 0) || x.id.localeCompare(y.id);
     // Quality-only ablation (greedy): its single current best; Pareto loop: the best development-qualified candidate of the archive.
     const best = this.strategy === "greedy" ? eligible.find(c => c.id === this.state.greedyBest) : [...eligible].sort(order)[0];
     const stable = this.archive.get("stable");
-    const selection = { at: new Date().toISOString(), considered: qualified.map(c => c.id), eligible: eligible.map(c => c.id), criticalExcluded: qualified.filter(c => criticalOf[c.id].length).map(c => ({ id: c.id, critical: criticalOf[c.id].slice(0, 3) })), selected: best && best.development.point.overall > stable.development.point.overall ? best.id : null };
+    const selection = { at: new Date().toISOString(), considered: qualified.map(c => c.id), eligible: eligible.map(c => c.id), criticalExcluded: qualified.filter(c => criticalOf[c.id].length).map(c => ({ id: c.id, critical: criticalOf[c.id].slice(0, 3) })), selected: best && pointGt(best.development.point.overall, stable.development.point.overall) ? best.id : null };
     if (!selection.selected) selection.reason = eligible.length ? "no development-qualified candidate beats the stable harness on development Q_overall" : "no development-qualified, critical-clean candidate without family regression";
     else { selection.commit = this.archive.get(selection.selected).commit; selection.frozenDigest = digestOf({ id: selection.selected, commit: selection.commit, protocol: this.protocolDigest }); this.archive.decide(selection.selected, "selected", "final selection on development (frozen before holdout access)"); }
     atomicWriteJson(join(this.stateDir, "selection.json"), selection);
@@ -436,6 +479,7 @@ export class Loop {
   /**
    * Independent regression check of the current stable against the snapshot before the latest adoption, on a sealed task set
    * the selection never saw; a supported regression rolls back automatically.
+   * @param {{ tasks: any[], split?: string, repeats?: number }} options repeats defaults to the protocol's holdout repeats
    */
   async verifyStable({ tasks, split = "verify", repeats }) {
     const prev = this.deployer.previousStable();
@@ -495,6 +539,13 @@ export class Loop {
 
 import { execFileSync } from "node:child_process";
 function execGit(cwd, args) { return execFileSync("git", args, { cwd, stdio: ["ignore", "pipe", "pipe"] }).toString().trim(); }
+
+/**
+ * Quality-only (greedy) progress: a development-qualified candidate whose exact Q_overall beats the current best by more than
+ * floating-point noise (POINT_EPS).
+ * @param {boolean} qualified @param {{ overall: number }} point @param {{ overall: number }} bestPoint
+ */
+export const greedyProgress = (qualified, point, bestPoint) => Boolean(qualified) && pointGt(point.overall, bestPoint.overall);
 
 /** Final state of an exploration-only cycle: deployment BLOCKED (no holdout), recorded separately from the exploration outcome. */
 export function explorationOnlyFinal(selection) {

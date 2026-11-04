@@ -76,7 +76,10 @@ export function adoptionEvent(delta, { eps, minGain }, available) {
 /**
  * Paired bootstrap comparison of arm `a` (parent / stable) and arm `b` (candidate) over the same tasks.
  * tasks: [{ task, family, hard, a: number[], b: number[] }] (values in [0,1]; both arms need >= 1 value per task).
- * Returns support for `event` (promotion|adoption), per-objective delta summaries and per-family deltas.
+ * Returns support for `event` (promotion|adoption|custom predicate), per-objective delta summaries and per-family deltas.
+ * @param {Array<{ task: string, family?: string, hard?: boolean, a: number[], b: number[] }>} tasks
+ * @param {{ draws?: number, seed?: string, level?: string, event?: "promotion" | "adoption" | ((delta: Record<string, number>) => boolean),
+ *   eps?: Record<string, number>, minGain?: Record<string, number>, lossThreshold?: number, familyLossThreshold?: number }} [options]
  */
 export function compare(tasks, { draws = 10_000, seed, level = "task", event = "promotion", eps = {}, minGain = {}, lossThreshold = 0.03, familyLossThreshold = 0.15 } = {}) {
   if (!tasks.length) throw new Error("compare: no tasks");
@@ -119,7 +122,11 @@ export function compare(tasks, { draws = 10_000, seed, level = "task", event = "
   };
 }
 
-/** One arm's posterior summary (task-level bootstrap) for reports. */
+/**
+ * One arm's posterior summary (task-level bootstrap) for reports.
+ * @param {Array<{ task: string, family?: string, hard?: boolean, a: number[], b?: number[] }>} tasks
+ * @param {{ draws?: number, seed?: string, level?: string }} [options]
+ */
 export function describeArm(tasks, { draws = 10_000, seed, level = "task" } = {}) {
   const rng = createRng(`${seed}:describe:${level}`);
   const available = OBJECTIVES.filter(o => o !== "hard" || tasks.some(t => t.hard));

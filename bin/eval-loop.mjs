@@ -57,7 +57,9 @@ try {
 
   if (values.resume && !existsSync(`${stateDir}/state.json`)) { out(`--resume: no state in ${stateDir}; starting a new loop (same as --once)`); }
   const maxCycles = values.daemon ? Number(values["max-cycles"] ?? Infinity) : 1;
-  loop = realLoop({ stateDir, protocolPath: values.protocol, strategy: values.strategy, pids });
+  const strategy = values.strategy ?? "pareto";
+  if (strategy !== "pareto" && strategy !== "greedy") { out(`--strategy must be pareto or greedy (got ${strategy})`); process.exit(2); }
+  loop = realLoop({ stateDir, protocolPath: values.protocol, strategy, pids });
   for (let cycle = 0; cycle < maxCycles && !loop.stopping; cycle++) {
     if (loop.state.phase === "done") {
       // A finished cycle restarts only on a substantive change (tasks, harness code, environment, protocol inputs).

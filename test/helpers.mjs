@@ -83,6 +83,11 @@ export function testProtocol(overrides = {}) {
 
 export const edit = (text) => (dir) => writeFileSync(join(dir, "src/skill.txt"), `${text}\n`);
 
+/**
+ * @param {{ root: string, protocol?: any, entries?: any[], skill?: (harness: any, task?: any, info?: any) => { p: number, crash?: boolean, violation?: boolean, infra?: boolean },
+ *   strategy?: "pareto" | "greedy", prerequisites?: () => Promise<Array<{ name: string, ok: boolean }>>, checks?: (worktree: string, which?: string[], logDir?: string) => Promise<any>,
+ *   backend?: { run(input: any): Promise<any>, simulated?: boolean }, stateName?: string, fixtures?: any, fault?: any }} options
+ */
 export function makeLoop({ root, protocol = testProtocol(), entries, skill = skillOf, strategy = "pareto", prerequisites, checks, backend, stateName = "state", fixtures, fault }) {
   const fx = fixtures ?? (() => { const u = makeUmbrella(root); const tasks = makeTasks(root, TRAIN_DEV); const holdout = makeHoldout(root, HOLDOUT); return { ...u, tasks, holdout }; })();
   const loop = new Loop({
