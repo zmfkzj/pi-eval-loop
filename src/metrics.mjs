@@ -85,6 +85,8 @@ export function summarize(records, candidateId, split) {
     hard_task_success_rate: hard.length ? hard.filter(r => r.task_success).length / hard.length : null,
     regression_count: sum("regression_count"), critical_failure_count: sum("critical_failure_count"),
     integrity_violations: runs.reduce((s, r) => s + (r.integrity?.violations?.length ?? 0), 0),
+    integrity_violation_runs: count(r => (r.integrity?.violations?.length ?? 0) > 0),
+    attempts_used: sum("attempts_used"),
     terminal: Object.fromEntries(Object.entries(runs.reduce((acc, r) => { acc[r.terminal_status] = (acc[r.terminal_status] ?? 0) + 1; return acc; }, {})).sort()),
     infra_rate: runs.length ? count(r => r.terminal_status === "infra_error" || r.terminal_status === "model_unavailable") / runs.length : 0,
     input_tokens: sum("input_tokens"), output_tokens: sum("output_tokens"), cache_tokens: sum("cache_tokens"), model_requests: sum("model_requests"), wall_time_ms: sum("wall_time"),

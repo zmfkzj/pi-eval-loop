@@ -87,7 +87,7 @@ export function makeLoop({ root, protocol = testProtocol(), entries, skill = ski
   const fx = fixtures ?? (() => { const u = makeUmbrella(root); const tasks = makeTasks(root, TRAIN_DEV); const holdout = makeHoldout(root, HOLDOUT); return { ...u, tasks, holdout }; })();
   const loop = new Loop({
     stateDir: join(root, stateName), protocol, strategy, umbrella: fx.umbrella, orche: fx.orche, envDigest: "test-env", log: () => {},
-    backend: backend ?? simulatedBackend({ skill: (h, t) => skill(h, t), seed: "test" }),
+    backend: backend ?? simulatedBackend({ skill: (h, t, info) => skill(h, t, info), seed: "test" }),
     proposer: scriptedProposer(entries ?? []), prerequisites: prerequisites ?? (async () => [{ name: "sim", ok: true }]),
     checks: checks ?? (async () => passingChecks()),
     datasets: { tasks: fx.tasks, holdoutDir: fx.holdout.dir, holdoutTasks: fx.holdout.tasks }, fault,

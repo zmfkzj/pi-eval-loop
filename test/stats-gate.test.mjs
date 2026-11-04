@@ -103,8 +103,10 @@ test("records: failures stay in the denominator, the last attempt is authoritati
   const leak = rec({ integrity: { violations: [], leakHits: ["read /opt/grader/task"] } });
   assert.ok(criticalProblems([leak], "c1").some(p => /leak/.test(p)));
   const v = (id, n) => rec({ candidate_id: id, task_id: `t${n}`, integrity: { violations: ["test weakened"] } });
-  assert.equal(criticalProblems([v("c1", 1), v("stable", 1)], "c1", { reference: "stable" }).length, 0, "agent-level integrity failures in both arms are task failures");
-  assert.equal(criticalProblems([v("c1", 1), v("c1", 2), v("stable", 1)], "c1", { reference: "stable" }).length, 1);
+  // protocol-2: any task-agent integrity violation of the candidate is critical, whatever the reference arm did.
+  assert.ok(criticalProblems([v("c1", 1), v("stable", 1)], "c1", { reference: "stable" }).length > 0, "equal baseline violations never excuse the candidate");
+  assert.ok(criticalProblems([v("c1", 1), v("stable", 1), v("stable", 2), v("stable", 3)], "c1", { reference: "stable" }).length > 0, "a worse baseline never excuses the candidate");
+  assert.equal(criticalProblems([v("stable", 1)], "c1", { reference: "stable" }).length, 0, "baseline-only violations are not the candidate's");
 });
 
 test("Pareto front keeps non-dominated quality points over overall, hard and consistency", () => {

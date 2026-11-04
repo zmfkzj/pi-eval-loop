@@ -59,7 +59,7 @@ export function proposerPrompt({ parentId, targetClass, protocol, blockedClasses
 /** Evidence files for the proposer: train failures (hidden test CONTENT is never included) and development aggregates. */
 export function writeEvidence(dir, { trainRecords, analysis, devSummary, tasksById }) {
   ensureDir(dir);
-  const failures = trainRecords.filter(r => !r.task_success).map(r => ({ task: tasksById[r.task_id]?.instruction?.slice(0, 1500), terminal: r.terminal_status, detail: String(r.terminal_detail ?? "").slice(0, 300), failureClass: r.failure_class, visibleTestsPass: r.visible_test_pass, hiddenTestsPass: r.hidden_test_pass, finalMessage: String(r.final_text_excerpt ?? "").slice(0, 600), modelRequests: r.model_requests }));
+  const failures = trainRecords.filter(r => !r.task_success).map(r => ({ task: tasksById[r.task_id]?.instruction?.slice(0, 1500), terminal: r.terminal_status, detail: String(r.terminal_detail ?? "").slice(0, 300), failureClass: r.failure_class, visibleTestsPass: r.visible_test_pass, hiddenTestsPass: r.hidden_test_pass, integrityViolations: (r.integrity?.violations ?? []).slice(0, 3).map(v => String(v).slice(0, 300)), finalMessage: String(r.final_text_excerpt ?? "").slice(0, 600), modelRequests: r.model_requests }));
   writeFileSync(join(dir, "failures.json"), JSON.stringify(failures, null, 2));
   writeFileSync(join(dir, "analysis.json"), JSON.stringify(analysis.hypotheses, null, 2));
   writeFileSync(join(dir, "development.json"), JSON.stringify(devSummary, null, 2));

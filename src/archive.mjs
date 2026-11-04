@@ -52,6 +52,13 @@ export class Archive {
   /** Development-evaluated candidates with their dev point estimates (never removed). */
   developmentSet() { return this.all().filter(c => c.development?.point && (c.status === "baseline" || c.development.qualified)); }
   front() { return paretoFront(this.developmentSet().map(c => ({ id: c.id, ...c.development.point }))).map(p => p.id); }
+  /** Is `id`'s development point weakly dominated (>= on every objective, ties included) by ANOTHER development-set member? */
+  weaklyDominated(id) {
+    const value = (p, k) => (Number.isFinite(p[k]) ? p[k] : 0);
+    const me = this.get(id)?.development?.point;
+    if (!me) return true;
+    return this.developmentSet().some(c => c.id !== id && ["overall", "hard", "consistency"].every(k => value(c.development.point, k) >= value(me, k)));
+  }
 
   /** Duplicate guard: same normalized patch, or a hypothesis close to an earlier failed one for the same failure class. */
   duplicateOf(patch, hypothesis, threshold) {

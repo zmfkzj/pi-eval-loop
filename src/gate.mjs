@@ -23,26 +23,35 @@ export function screeningDecision(cmp, { support, band, maxRepeats }, { repeats,
 }
 
 /**
- * Critical problems that reject a candidate at once, whatever the statistics. Always critical: grading-material/credential leak
- * attempts, route violations and harness crashes. Workspace integrity violations (an agent weakening tests) are task failures in
- * every arm; they become critical for the candidate when it produces MORE of them than the reference arm on the same units.
+ * Critical problems that reject a candidate at once, whatever the statistics and WHATEVER THE REFERENCE ARM DID (protocol-2):
+ *  - task-agent workspace integrity violations in a run under the candidate harness (test files deleted/changed, skip markers,
+ *    runner injection, module rewiring, test detection, grading-material references, symlinks);
+ *  - task-agent leak attempts (grading material, credentials, controller paths);
+ *  - route violations and harness crashes.
+ * Harness-candidate violations (the candidate's own patch touching protected files, evaluation-aware content, forged checks,
+ * trust-boundary breaches) are rejected earlier, at proposal time (`patchIntegrity`, `protectedState`, `compareChecks`).
+ * The reference arm's count (`reference`) is reported as context only: a baseline that also produces violations never excuses a
+ * candidate (protocol-1 compared counts, which let a candidate with as many violations as stable through). EVERY recorded attempt is
+ * inspected, not only the final one: a clean retry can never erase evidence of an earlier attempt.
  */
 export function criticalProblems(records, candidateId, { reference, units } = {}) {
   const inScope = (r) => !units || units.has(`${r.split}|${r.task_id}|${r.repeat}`);
-  const own = finalOf(records.filter(r => r.candidate_id === candidateId && inScope(r)));
+  const own = records.filter(r => r.candidate_id === candidateId && inScope(r));
   const problems = [];
-  let violations = 0;
-  for (const r of own) {
-    violations += r.integrity?.violations?.length ? 1 : 0;
-    for (const h of r.integrity?.leakHits ?? []) problems.push(`leak ${r.task_id}#${r.repeat}: ${h}`);
-    if (r.terminal_status === "route_violation") problems.push(`route violation ${r.task_id}#${r.repeat}: ${r.terminal_detail}`);
-    if (r.terminal_status === "harness_crash") problems.push(`harness crash ${r.task_id}#${r.repeat}: ${r.terminal_detail}`);
+  const tag = (r) => `${r.split}/${r.task_id}#${r.repeat}${r.attempt > 1 ? ` attempt ${r.attempt}` : ""}`;
+  const violating = own.filter(r => r.integrity?.violations?.length);
+  if (violating.length) {
+    const refViolations = reference ? records.filter(r => r.candidate_id === reference && inScope(r) && r.integrity?.violations?.length).length : null;
+    problems.push(`integrity: ${violating.length} run attempt(s) under ${candidateId} with task-agent workspace integrity violations${refViolations === null ? "" : ` (reference ${reference}: ${refViolations} in the same scope; context only, never an excuse)`}`);
+    for (const r of violating) problems.push(`task-agent integrity violation ${tag(r)}: ${r.integrity.violations[0]}`);
   }
-  const refViolations = reference ? finalOf(records.filter(r => r.candidate_id === reference && inScope(r))).filter(r => r.integrity?.violations?.length).length : 0;
-  if (violations > refViolations) problems.push(`integrity: ${violations} run(s) with workspace integrity violations vs ${refViolations} for ${reference ?? "no reference"} (${own.filter(r => r.integrity?.violations?.length).map(r => `${r.task_id}#${r.repeat}: ${r.integrity.violations[0]}`).slice(0, 3).join("; ")})`);
+  for (const r of own) {
+    for (const h of r.integrity?.leakHits ?? []) problems.push(`task-agent leak attempt ${tag(r)}: ${h}`);
+    if (r.terminal_status === "route_violation") problems.push(`route violation ${tag(r)}: ${r.terminal_detail}`);
+    if (r.terminal_status === "harness_crash") problems.push(`harness crash ${tag(r)}: ${r.terminal_detail}`);
+  }
   return problems;
 }
-const finalOf = (records) => { const m = new Map(); for (const r of records) { const p = m.get(r.unit_key); if (!p || r.attempt >= p.attempt) m.set(r.unit_key, r); } return [...m.values()]; };
 
 /**
  * Development qualification against the stable baseline on the development split: completed, critical-clean, not credibly worse

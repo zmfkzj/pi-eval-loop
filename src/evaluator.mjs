@@ -122,7 +122,7 @@ export function simulatedBackend({ skill, seed = "sim" }) {
     async run({ harness, task, repeat, split, context, protocol, protocolDigest, envDigest, attempt, unitKey, runId }) {
       const { createRng } = await import("./rng.mjs");
       const rng = createRng(`${seed}:${harness.id}:${task.id}:${split}:${repeat}:${attempt}`);
-      const s = skill(harness, task, { repeat, attempt });
+      const s = skill(harness, task, { repeat, attempt, split, context });
       const pass = rng.next() < s.p;
       const terminal = s.infra && attempt === 1 ? "infra_error" : s.crash ? "harness_crash" : "completed";
       return makeRecord({ run_id: runId, unit_key: unitKey, attempt, candidate_id: harness.id, harness_kind: harness.kind, harness_commit: harness.commit, mode: harness.mode, task_id: task.id, split, family: task.family, hard: task.hard, repeat, context,

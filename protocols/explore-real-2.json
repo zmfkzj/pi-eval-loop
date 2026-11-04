@@ -1,0 +1,5 @@
+{
+  "notes": "Exploration-only TRAIN/DEVELOPMENT search for B (quality-only, greedy) and C (quality-first Pareto) under protocol-2. No holdout: holdout-v1 was consumed by abc-real-1 and is implementer-authored, so it is neither loaded, graded nor used; deployment is BLOCKED by construction. Search stop = the pre-registered defaults: 10 consecutive candidates without meaningful progress; safety stops only (class exhaustion after 10 failed targeted proposals, 200-candidate runaway backstop, 72 h hang watchdog, 5 consecutive infra-tainted candidates). Same agent route/effort, proposer route/effort, seed (same train/dev split) and parallelism as abc-real-1. Operational setting: 6 parallel units per trajectory (resource use, not a quality or search limit).",
+  "parallelism": 6,
+  "datasets": { "holdout": null }
+}

@@ -55,7 +55,9 @@ export class Loop {
     const missing = prereq.filter(x => !x.ok);
     this.state.prerequisites = prereq;
     if (missing.length) { this.setPhase("blocked", { blocked: { reason: "missing prerequisites", missing } }); return false; }
-    const data = this.datasets ?? this.loadDatasets();
+    const injected = this.datasets ?? this.loadDatasets();
+    // An exploration-only protocol never loads, grades or splits a holdout, even when one is injected.
+    const data = p.datasets.holdout ? injected : { ...injected, holdoutDir: undefined, holdoutTasks: [] };
     // Grader validation (model-free): original must fail, reference must pass. Failing tasks are excluded by this rule only.
     const gradingPath = join(this.stateDir, "grading.json");
     const grading = readJson(gradingPath, {});
@@ -95,6 +97,8 @@ export class Loop {
 
   loadDatasets() {
     const tasks = loadSuite(join(this.orche, "fixtures/suite")).filter(t => (!this.protocol.datasets.include || this.protocol.datasets.include.includes(t.id)) && !(this.protocol.datasets.exclude ?? []).includes(t.id));
+    // datasets.holdout = null: an exploration-only protocol (train/dev search and selection; no holdout is loaded, graded or used).
+    if (!this.protocol.datasets.holdout) return { tasks, holdoutDir: undefined, holdoutTasks: [] };
     const holdoutDir = resolve(PACKAGE_DIR, this.protocol.datasets.holdout);
     const holdoutTasks = existsSync(holdoutDir) ? loadLocal(holdoutDir) : [];
     return { tasks, holdoutDir: existsSync(holdoutDir) ? holdoutDir : undefined, holdoutTasks };
@@ -136,7 +140,9 @@ export class Loop {
   recordDevelopment(id, decision, cmp) {
     const pairs = this.devPairs(id, id).map(t => ({ ...t, a: t.b }));
     const described = describeArm(pairs, { draws: this.protocol.bootstrap.draws, seed: `${this.protocol.seed}:dev:${id}` });
-    const point = Object.fromEntries(Object.entries(described).map(([k, v]) => [k, v.mean]));
+    // Exact plug-in point estimates (uniform task weights, raw repeat means), never the Monte Carlo posterior mean: identical
+    // outcomes must give identical points, or bootstrap noise would decide the Pareto front, progress and selection.
+    const point = Object.fromEntries(Object.entries(described).map(([k, v]) => [k, v.point]));
     const c = this.archive.get(id);
     c.development = { tasks: this.split.dev.length, repeats: this.protocol.development.repeats, point, posterior: described, qualified: decision.qualified, reasons: decision.reasons, vsStable: cmp ? { support: cmp.support, lossSupport: cmp.lossSupport, delta: cmp.delta, familyDelta: cmp.familyDelta } : undefined, summary: summarize(this.records(), id, "dev") };
     this.archive.put(c);
@@ -158,10 +164,10 @@ export class Loop {
     this.state.cycleStartedAt ??= new Date().toISOString();
     while (true) {
       const stop = this.watchdog();
-      if (stop) { this.event("search-stopped", { reason: stop }); this.state.searchStop = stop; this.save(); if (stop !== "interrupted") this.setPhase("select"); return; }
+      if (stop) { this.event("search-stopped", { reason: stop, classFailures: this.archive.failuresByClass() }); this.state.searchStop = stop; this.state.classFailures = this.archive.failuresByClass(); this.save(); if (stop !== "interrupted") this.setPhase("select"); return; }
       const current = this.state.current;
       if (current) await this.continueCandidate(current.id);
-      else if (!(await this.newCandidate())) { this.state.searchStop = "no addressable failure class left"; this.event("search-stopped", { reason: this.state.searchStop }); this.setPhase("select"); return; }
+      else if (!(await this.newCandidate())) { this.state.searchStop = `no addressable failure class left (each remaining class exhausted after ${this.protocol.watchdog.maxFailuresPerClass} failed targeted proposals, or no train failure to target)`; this.state.classFailures = this.archive.failuresByClass(); this.event("search-stopped", { reason: this.state.searchStop, classFailures: this.state.classFailures }); this.setPhase("select"); return; }
     }
   }
 
@@ -171,7 +177,8 @@ export class Loop {
     const analysis = analyze(recs, { reference });
     const failures = this.archive.failuresByClass();
     const blocked = Object.entries(failures).filter(([, n]) => n >= this.protocol.watchdog.maxFailuresPerClass).map(([c]) => c);
-    const target = analysis.hypotheses.find(h => !blocked.includes(h.class) && h.class !== "integrity");
+    // Integrity failures are targetable: removing a failure type (e.g. task agents editing existing tests) is quality progress.
+    const target = analysis.hypotheses.find(h => !blocked.includes(h.class));
     return { analysis, target, blocked, recs };
   }
 
@@ -281,18 +288,25 @@ export class Loop {
     // Its own train runs: the evidence when it becomes a parent.
     await this.evaluator.evaluate(cand, this.units("train", p.screening.minRepeats), `develop:${id}:train`);
     const records = this.records();
-    const critical = criticalProblems(records, id, { reference: "stable", units: new Set(this.units("dev", p.development.repeats).map(u => `dev|${u.task}|${u.repeat}`)) });
+    // Every run of the candidate outside the holdout (screening, development and its own train runs) must be critical-clean.
+    const critical = criticalProblems(records.filter(r => r.split !== "holdout"), id, { reference: "stable" });
     const cmp = developmentCompare(this.devPairs("stable", id), p, `${p.seed}:dev:${id}`);
     const decision = developmentDecision(cmp, p, critical);
     this.recordDevelopment(id, decision, cmp);
     this.archive.decide(id, decision.qualified ? "dev_qualified" : "dev_rejected", decision.reasons.join("; "));
-    const front = this.archive.front();
-    const progress = decision.qualified && front.includes(id);
-    if (this.strategy === "greedy" && decision.qualified) {
+    let progress;
+    if (this.strategy === "greedy") {
       // Quality-only ablation: the single current best by development Q_overall replaces the parent; no archive of alternatives.
+      // Progress = a new best (no Pareto bookkeeping in this arm).
       const best = this.archive.get(this.state.greedyBest ?? "stable");
-      if (this.archive.get(id).development.point.overall > best.development.point.overall) this.state.greedyBest = id;
+      progress = decision.qualified && this.archive.get(id).development.point.overall > best.development.point.overall;
+      if (progress) this.state.greedyBest = id;
+    } else {
+      // Pareto loop: progress = a development-qualified candidate that no other development-set member weakly dominates (a point
+      // identical to an existing one is not progress).
+      progress = decision.qualified && !this.archive.weaklyDominated(id);
     }
+    const front = this.archive.front();
     this.event("development", { id, qualified: decision.qualified, front, progress });
     this.endCandidate(progress, 0);
   }
@@ -322,7 +336,11 @@ export class Loop {
   select() {
     const a = this.protocol.adoption;
     const qualified = this.archive.all().filter(c => c.status === "dev_qualified" || (c.status === "selected" && c.development?.qualified));
+    // Defense in depth: a candidate with ANY critical problem in its non-holdout runs is never selected (whatever stable did).
+    const nonHoldout = this.records().filter(r => r.split !== "holdout");
+    const criticalOf = Object.fromEntries(qualified.map(c => [c.id, criticalProblems(nonHoldout, c.id, { reference: "stable" })]));
     const eligible = qualified.filter(c => {
+      if (criticalOf[c.id].length) return false;
       const fam = c.development?.vsStable?.familyDelta ?? {};
       return !Object.values(fam).some(d => d.probBelow >= a.familyRegressionSupport);
     });
@@ -330,16 +348,23 @@ export class Loop {
     // Quality-only ablation (greedy): its single current best; Pareto loop: the best development-qualified candidate of the archive.
     const best = this.strategy === "greedy" ? eligible.find(c => c.id === this.state.greedyBest) : [...eligible].sort(order)[0];
     const stable = this.archive.get("stable");
-    const selection = { at: new Date().toISOString(), considered: qualified.map(c => c.id), eligible: eligible.map(c => c.id), selected: best && best.development.point.overall > stable.development.point.overall ? best.id : null };
-    if (!selection.selected) selection.reason = eligible.length ? "no development-qualified candidate beats the stable harness on development Q_overall" : "no development-qualified candidate without family regression";
+    const selection = { at: new Date().toISOString(), considered: qualified.map(c => c.id), eligible: eligible.map(c => c.id), criticalExcluded: qualified.filter(c => criticalOf[c.id].length).map(c => ({ id: c.id, critical: criticalOf[c.id].slice(0, 3) })), selected: best && best.development.point.overall > stable.development.point.overall ? best.id : null };
+    if (!selection.selected) selection.reason = eligible.length ? "no development-qualified candidate beats the stable harness on development Q_overall" : "no development-qualified, critical-clean candidate without family regression";
     else { selection.commit = this.archive.get(selection.selected).commit; selection.frozenDigest = digestOf({ id: selection.selected, commit: selection.commit, protocol: this.protocolDigest }); this.archive.decide(selection.selected, "selected", "final selection on development (frozen before holdout access)"); }
     atomicWriteJson(join(this.stateDir, "selection.json"), selection);
     this.event("selection", selection);
-    this.setPhase(selection.selected ? "holdout" : "done", { selection, final: selection.selected ? undefined : { verdict: "KEEP_STABLE", reasons: [selection.reason] } });
+    this.setPhase(selection.selected ? "holdout" : "done", { selection, final: selection.selected ? undefined : this.protocol.datasets.holdout ? { verdict: "KEEP_STABLE", reasons: [selection.reason] } : explorationOnlyFinal(selection) });
   }
 
   async holdout() {
     const p = this.protocol, sel = this.state.selection;
+    if (!p.datasets.holdout) {
+      // Exploration-only protocol: nothing is evaluated here, no holdout ledger is touched and nothing can be deployed.
+      const final = explorationOnlyFinal(sel);
+      this.event("adoption-decision", final);
+      this.setPhase("done", { final });
+      return;
+    }
     const status = this.holdoutDir ? holdoutStatus(this.split.holdout.map(id => this.tasksById[id]), this.holdoutDir, p, { orcheDir: this.orche, ledgerPath: this.holdoutLedgerPath }) : { independent: false, why: "no holdout dataset" };
     // Consume BEFORE the first holdout run (a crash still consumes it); a resumed holdout phase reuses its own recorded use.
     const ledger = this.holdoutDir ? holdoutLedger(this.holdoutDir, this.holdoutLedgerPath) : undefined;
@@ -367,7 +392,8 @@ export class Loop {
       return;
     }
     const holdRecs = finalAttempts(records.filter(r => r.split === "holdout"));
-    const critical = criticalProblems(records.filter(r => r.split === "holdout"), sel.selected, { reference: "stable" });
+    // Critical problems anywhere in the candidate's record (train, dev and holdout, every attempt) block deployment.
+    const critical = criticalProblems(records, sel.selected, { reference: "stable" });
     const envs = new Set(holdRecs.map(r => r.environment_digest));
     const routeOk = holdRecs.length > 0 && envs.size === 1 && holdRecs.every(r => r.terminal_status !== "route_violation");
     let checks = { pass: false, results: {}, problems: ["no checks runner"] };
@@ -469,4 +495,13 @@ export class Loop {
 
 import { execFileSync } from "node:child_process";
 function execGit(cwd, args) { return execFileSync("git", args, { cwd, stdio: ["ignore", "pipe", "pipe"] }).toString().trim(); }
+
+/** Final state of an exploration-only cycle: deployment BLOCKED (no holdout), recorded separately from the exploration outcome. */
+export function explorationOnlyFinal(selection) {
+  return {
+    candidate: selection?.selected ?? null, verdict: "BLOCKED", adopt: false, explorationOnly: true,
+    exploration: selection?.selected ? `selected on development and frozen: ${selection.selected}` : `no candidate selected (${selection?.reason ?? "none"})`,
+    reasons: ["exploration-only protocol (datasets.holdout = null): no unconsumed independent holdout is available, so no candidate can be validated or deployed; a development selection is not evidence of improvement"],
+  };
+}
 export { readFileSync };

@@ -7,8 +7,10 @@ import { describeArm } from "./stats.mjs";
 import { Ledger, atomicWrite, atomicWriteJson, readJson } from "./util.mjs";
 
 const pct = (x) => (x === null || x === undefined || Number.isNaN(x) ? "–" : `${(100 * x).toFixed(1)}%`);
+const pct2 = (x) => (x === null || x === undefined || Number.isNaN(x) ? "–" : `${(100 * x).toFixed(2)}%`);
 const num = (x, d = 3) => (x === null || x === undefined || Number.isNaN(x) ? "–" : Number(x).toFixed(d));
-const interval = (v) => v ? `${pct(v.mean)} [${pct(v.lo95)}, ${pct(v.hi95)}]` : "–";
+/** Exact plug-in point (uniform task weights, raw repeat means) with the bootstrap 95% interval; the MC posterior mean is not the point. */
+const interval = (v) => v ? `${pct2(v.point ?? v.mean)} [${pct(v.lo95)}, ${pct(v.hi95)}]` : "–";
 
 export function buildReport(stateDir) {
   const state = readJson(join(stateDir, "state.json"), null);
@@ -52,9 +54,18 @@ export function buildReport(stateDir) {
     L.push("");
   }
   if (armRows.length) {
-    L.push("## Arms (posterior means with 95% task-level Bayesian-bootstrap intervals; descriptive)", "", "| arm | split | runs | success | Q_overall | Q_hard | Q_consistency (pass^2) | terminal | critical | in/out tokens | wall s |", "|---|---|---:|---:|---|---|---|---|---:|---|---:|");
-    for (const row of armRows) { const s = row.summary; L.push(`| ${row.arm} | ${row.split} | ${s.runs} | ${s.task_success}/${s.runs} | ${interval(row.posterior.overall)} | ${interval(row.posterior.hard)} | ${interval(row.posterior.consistency)} | ${Object.entries(s.terminal).map(([k, v]) => `${k}:${v}`).join(" ")} | ${s.critical_failure_count} | ${s.input_tokens}/${s.output_tokens} | ${(s.wall_time_ms / 1000).toFixed(0)} |`); }
+    L.push("## Arms (exact plug-in points with 95% task-level Bayesian-bootstrap intervals; descriptive)", "", "| arm | split | runs | success | Q_overall | Q_hard | Q_consistency (pass^2) | terminal | runs with integrity violations | critical | in/out tokens | wall s |", "|---|---|---:|---:|---|---|---|---|---:|---:|---|---:|");
+    for (const row of armRows) { const s = row.summary; L.push(`| ${row.arm} | ${row.split} | ${s.runs} | ${s.task_success}/${s.runs} (${pct2(s.success_rate)}) | ${interval(row.posterior.overall)} | ${interval(row.posterior.hard)} | ${interval(row.posterior.consistency)} | ${Object.entries(s.terminal).map(([k, v]) => `${k}:${v}`).join(" ")} | ${s.integrity_violation_runs} | ${s.critical_failure_count} | ${s.input_tokens}/${s.output_tokens} | ${(s.wall_time_ms / 1000).toFixed(0)} |`); }
     L.push("", "Tokens and wall time are recorded and never used by any gate.", "");
+    // Measured execution opportunities: an arm is called opportunity-matched to another only when the measurements say so.
+    const k = lock?.protocol?.baselines?.multiAttempt?.k ?? 1;
+    L.push("### Measured execution opportunities", "", "| arm | split | allowed attempts/unit | actual attempts/unit | model requests/unit | input tokens/unit | requests vs stable | input tokens vs stable |", "|---|---|---:|---:|---:|---:|---:|---:|");
+    for (const row of armRows) {
+      const s = row.summary, ref = armRows.find(x => x.arm === "stable" && x.split === row.split)?.summary;
+      const per = (v) => s.runs ? v / s.runs : NaN, ratio = (a, b) => (ref && b ? (a / b).toFixed(2) : "–");
+      L.push(`| ${row.arm} | ${row.split} | ${row.arm.startsWith("multi") ? k : 1} | ${num(per(s.attempts_used), 2)} | ${num(per(s.model_requests), 1)} | ${num(per(s.input_tokens), 0)} | ${ratio(s.model_requests, ref?.model_requests)} | ${ratio(s.input_tokens, ref?.input_tokens)} |`);
+    }
+    L.push("", "A k-attempt arm stops at the first attempt whose visible tests pass, so its allowed attempts are an upper bound; only the actual attempts, requests and tokens describe the compute it used. No arm is labelled compute- or opportunity-matched unless these ratios are close to 1.", "");
   }
   const cands = candidates.filter(c => c.origin === "proposer");
   if (cands.length) {
@@ -65,10 +76,13 @@ export function buildReport(stateDir) {
   L.push("## Pareto front (development: Q_overall, Q_hard, Q_consistency)", "", archive.front().map(id => `- ${id}: ${(() => { const p = archive.get(id).development.point; return `overall ${pct(p.overall)}, hard ${pct(p.hard)}, consistency ${pct(p.consistency)}`; })()}`).join("\n") || "- (none)", "");
   L.push("## Search, selection, holdout and adoption", "");
   L.push(`- search stop: ${state.searchStop ?? "–"}; candidates this cycle: ${state.counters?.candidates ?? 0}; consecutive no-progress: ${state.counters?.noProgress ?? 0}`);
-  if (state.selection) L.push(`- selection: ${state.selection.selected ?? "none"}${state.selection.reason ? ` (${state.selection.reason})` : ""}`);
+  if (state.classFailures) L.push(`- failed targeted proposals per failure class: ${Object.entries(state.classFailures).map(([k, v]) => `${k} ${v}`).join(", ") || "none"}`);
+  if (state.selection) L.push(`- selection: ${state.selection.selected ?? "none"}${state.selection.reason ? ` (${state.selection.reason})` : ""}${state.selection.criticalExcluded?.length ? `; excluded as critical: ${state.selection.criticalExcluded.map(c => c.id).join(", ")}` : ""}`);
   if (state.final) {
-    L.push(`- **verdict: ${state.final.verdict}**${state.final.candidate ? ` for ${state.final.candidate}` : ""}`);
+    L.push(`- **deployment verdict: ${state.final.verdict}**${state.final.candidate ? ` for ${state.final.candidate}` : ""}`);
+    if (state.final.exploration) L.push(`  - exploration outcome (separate from deployment): ${state.final.exploration}`);
     for (const r of state.final.reasons ?? []) L.push(`  - ${r}`);
+    if (state.final.explorationOnly) L.push("  - exploration-only protocol: no holdout was loaded, graded or consumed in this state directory");
     if (state.final.independence) L.push(`  - holdout independence at first use: ${state.final.independence.independent ? "yes" : "NO"} (${state.final.independence.why})`);
     if (state.final.holdout) L.push(`  - holdout overall delta ${num(state.final.holdout.delta.overall.mean)} [${num(state.final.holdout.delta.overall.lo95)}, ${num(state.final.holdout.delta.overall.hi95)}], adoption support ${num(state.final.holdout.support)} over ${state.final.holdout.tasks} tasks / ${state.final.holdout.families} families`);
     if (state.final.rolledBack) L.push(`  - automatic rollback at ${state.final.rolledBack.at}`);

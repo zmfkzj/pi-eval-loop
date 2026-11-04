@@ -11,7 +11,9 @@ export const PACKAGE_DIR = resolve(dirname(fileURLToPath(import.meta.url)), ".."
 export const UMBRELLA = process.env.EVAL_LOOP_UMBRELLA ? resolve(process.env.EVAL_LOOP_UMBRELLA) : resolve(PACKAGE_DIR, "..");
 
 export const DEFAULT_PROTOCOL = Object.freeze({
-  version: "pi-eval-loop/protocol-1",
+  // protocol-2: any task-agent integrity violation / leak / route violation / crash of a candidate is critical regardless of the
+  // baseline; exact development points; class-exhaustion and candidate backstops sized as safety limits (see docs/design.md §1).
+  version: "pi-eval-loop/protocol-2",
   seed: "pi-eval-loop-2026-11-04",
   // The harness being optimized: pi-orche in this mode. Every compared harness runs on this ONE agent route (model and effort).
   target: { harness: "orche", mode: "single" },
@@ -30,9 +32,14 @@ export const DEFAULT_PROTOCOL = Object.freeze({
   gate: { eps: { overall: 0.03, hard: 0.05, consistency: 0.05 }, minGain: { overall: 0, hard: 0, consistency: 0 } },
   adoption: { support: 0.95, level: "task", eps: { hard: 0.02, consistency: 0.02 }, minGain: { overall: 0 }, familyRegression: 0.15, familyRegressionSupport: 0.80, requireHardStratum: true, requireChecks: true },
   baselines: { pure: true, stable: true, targetMode: true, multiAttempt: { k: 3 } },
-  watchdog: { noProgressCandidates: 10, maxCandidatesPerCycle: 40, maxCycleWallMs: 72 * 3600_000, maxConsecutiveInfra: 5, maxInfraRate: 0.10, maxFailuresPerClass: 3, maxChildFailuresPerParent: 5, daemonPollMs: 10 * 60_000, hypothesisSimilarity: 0.8 },
+  // Search stop: 10 consecutive candidates without meaningful progress (the user's default). Safety stops only: a failure class is
+  // exhausted after as many failed targeted proposals as the no-progress patience (10; identical patches/hypotheses are refused
+  // anyway); a runaway backstop of 200 candidates per cycle (disk: <= ~90 MB per fully evaluated candidate); a 72 h hang watchdog;
+  // consecutive infrastructure failures. None of them is a cost or time objective.
+  watchdog: { noProgressCandidates: 10, maxCandidatesPerCycle: 200, maxCycleWallMs: 72 * 3600_000, maxConsecutiveInfra: 5, maxInfraRate: 0.10, maxFailuresPerClass: 10, maxChildFailuresPerParent: 5, daemonPollMs: 10 * 60_000, hypothesisSimilarity: 0.8 },
   infra: { maxRetries: 1 },
   parallelism: 3,
+  // datasets.holdout = null selects an exploration-only protocol (no holdout loaded, graded or consumed; deployment BLOCKED).
   datasets: { source: "suite", trainShare: 0.45, holdout: "datasets/holdout-v1" },
   deploy: { mode: "refs", branch: "eval-loop/stable" },
 });
