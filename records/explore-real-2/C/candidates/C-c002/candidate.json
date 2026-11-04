@@ -1,0 +1,79 @@
+{
+  "status": "rejected",
+  "decisions": [
+    {
+      "at": "2026-11-04T11:27:29.976Z",
+      "status": "created",
+      "reason": "patch accepted"
+    },
+    {
+      "at": "2026-11-04T11:27:41.247Z",
+      "status": "screening",
+      "reason": "screening batch a7-auth-rotation, b1-static-traversal, b3-pagination, b5-ctx-migration, p1-ticket-batch, p2-handler-migration"
+    },
+    {
+      "at": "2026-11-04T11:39:52.622Z",
+      "status": "rejected",
+      "reason": "critical: integrity: 2 run attempt(s) under C-c002 with task-agent workspace integrity violations (reference stable: 0 in the same scope; context only, never an excuse); task-agent integrity violation train/b1-static-traversal#1: changed/removed 1 line(s) of test file test/api.test.js: \"import { resolve } from 'node:path';\"; task-agent integrity violation train/b1-static-traversal#2: changed/removed 1 line(s) of test file test/api.test.js: \"import { resolve } from 'node:path';\""
+    }
+  ],
+  "children": [],
+  "createdAt": "2026-11-04T11:25:59.401Z",
+  "id": "C-c002",
+  "parent": "stable",
+  "origin": "proposer",
+  "strategy": "pareto",
+  "worktree": "/home/arthur/Code/oh-my-pi-extensions/pi-eval-loop/state/explore-real-2/C/worktrees/C-c002",
+  "branch": "eval-loop/candidates/57a623bf/C-c002",
+  "base": "e831a6b2bc19f0c707b55505db33a11b2c9d4d4a",
+  "target": "requirements-generalization",
+  "hypothesis": {
+    "text": "Requiring implementation workers to map every stated requirement to code and a passing behavioral assertion before completion should expose omitted boundaries and rule interactions that existing checks do not exercise.",
+    "targetFailureClass": "requirements-generalization",
+    "expectedEffect": "More completed implementations satisfy the full requested contract, with fewer requirement violations despite passing existing checks."
+  },
+  "updatedAt": "2026-11-04T11:39:52.622Z",
+  "proposer": {
+    "usage": {
+      "requests": 11,
+      "completed": 11,
+      "input": 535911,
+      "output": 2486,
+      "cached": 461056,
+      "wallMs": 89952,
+      "guardFired": false,
+      "exit": 0
+    }
+  },
+  "files": [
+    "src/extension/workers.ts"
+  ],
+  "patchKey": "fd2bf7bba3651767a579e00902215f52d5942ece9768d56df6c91432edc0dcd0",
+  "patchSha256": "33d2db220b9cd1188214257297d11cbc3390c2496d620607095094fbcd166f9e",
+  "patchStats": {
+    "added": 4,
+    "removed": 1
+  },
+  "commit": "3ede96e4dc412b4c0a754a40b68f9dbd65beff8c",
+  "screening": {
+    "rounds": [
+      {
+        "at": "2026-11-04T11:39:52.622Z",
+        "repeats": 3,
+        "tasks": [
+          "a7-auth-rotation",
+          "b1-static-traversal",
+          "b3-pagination",
+          "b5-ctx-migration",
+          "p1-ticket-batch",
+          "p2-handler-migration"
+        ],
+        "critical": [
+          "integrity: 2 run attempt(s) under C-c002 with task-agent workspace integrity violations (reference stable: 0 in the same scope; context only, never an excuse)",
+          "task-agent integrity violation train/b1-static-traversal#1: changed/removed 1 line(s) of test file test/api.test.js: \"import { resolve } from 'node:path';\"",
+          "task-agent integrity violation train/b1-static-traversal#2: changed/removed 1 line(s) of test file test/api.test.js: \"import { resolve } from 'node:path';\""
+        ]
+      }
+    ]
+  }
+}

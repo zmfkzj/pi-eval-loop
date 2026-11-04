@@ -1,0 +1,2169 @@
+{
+  "generatedAt": "2026-11-04T14:05:16.230Z",
+  "stateDir": "/home/arthur/Code/oh-my-pi-extensions/pi-eval-loop/state/explore-real-2/C",
+  "simulated": false,
+  "phase": "done",
+  "cycle": 1,
+  "strategy": "pareto",
+  "protocolDigest": "393f3019e86013bff6509a1ee801e8852d81312fcf81de9da3b2f95ffe99ee4b",
+  "protocol": {
+    "version": "pi-eval-loop/protocol-2",
+    "seed": "pi-eval-loop-2026-11-04",
+    "target": {
+      "harness": "orche",
+      "mode": "single"
+    },
+    "route": {
+      "provider": "cliproxyapi",
+      "model": "gpt-6-luna",
+      "effort": "medium"
+    },
+    "proposer": {
+      "kind": "pi",
+      "route": {
+        "provider": "cliproxyapi",
+        "model": "gpt-6.1-sol",
+        "effort": "high"
+      },
+      "maxRequests": 120,
+      "wallMs": 1800000,
+      "allowedPaths": [
+        "src/",
+        "prompts/"
+      ],
+      "maxChangedFiles": 4,
+      "maxDiffLines": 200
+    },
+    "unit": {
+      "wallMs": 1200000,
+      "maxRequests": 150,
+      "graderMs": 120000
+    },
+    "bootstrap": {
+      "draws": 10000
+    },
+    "screening": {
+      "tasks": 6,
+      "minRepeats": 3,
+      "maxRepeats": 9,
+      "step": 3,
+      "support": 0.8,
+      "band": 0.1,
+      "level": "execution"
+    },
+    "development": {
+      "repeats": 3,
+      "level": "task",
+      "support": 0.8
+    },
+    "holdout": {
+      "repeats": 3,
+      "maxUses": 1,
+      "minTasks": 6,
+      "minFamilies": 4,
+      "requireIndependent": true,
+      "acceptedProvenance": [
+        "external"
+      ]
+    },
+    "gate": {
+      "eps": {
+        "overall": 0.03,
+        "hard": 0.05,
+        "consistency": 0.05
+      },
+      "minGain": {
+        "overall": 0,
+        "hard": 0,
+        "consistency": 0
+      }
+    },
+    "adoption": {
+      "support": 0.95,
+      "level": "task",
+      "eps": {
+        "hard": 0.02,
+        "consistency": 0.02
+      },
+      "minGain": {
+        "overall": 0
+      },
+      "familyRegression": 0.15,
+      "familyRegressionSupport": 0.8,
+      "requireHardStratum": true,
+      "requireChecks": true
+    },
+    "baselines": {
+      "pure": true,
+      "stable": true,
+      "targetMode": true,
+      "multiAttempt": {
+        "k": 3
+      }
+    },
+    "watchdog": {
+      "noProgressCandidates": 10,
+      "maxCandidatesPerCycle": 200,
+      "maxCycleWallMs": 259200000,
+      "maxConsecutiveInfra": 5,
+      "maxInfraRate": 0.1,
+      "maxFailuresPerClass": 10,
+      "maxChildFailuresPerParent": 5,
+      "daemonPollMs": 600000,
+      "hypothesisSimilarity": 0.8
+    },
+    "infra": {
+      "maxRetries": 1
+    },
+    "parallelism": 6,
+    "datasets": {
+      "source": "suite",
+      "trainShare": 0.45,
+      "holdout": null
+    },
+    "deploy": {
+      "mode": "refs",
+      "branch": "eval-loop/stable"
+    },
+    "notes": "Exploration-only TRAIN/DEVELOPMENT search for B (quality-only, greedy) and C (quality-first Pareto) under protocol-2. No holdout: holdout-v1 was consumed by abc-real-1 and is implementer-authored, so it is neither loaded, graded nor used; deployment is BLOCKED by construction. Search stop = the pre-registered defaults: 10 consecutive candidates without meaningful progress; safety stops only (class exhaustion after 10 failed targeted proposals, 200-candidate runaway backstop, 72 h hang watchdog, 5 consecutive infra-tainted candidates). Same agent route/effort, proposer route/effort, seed (same train/dev split) and parallelism as abc-real-1. Operational setting: 6 parallel units per trajectory (resource use, not a quality or search limit)."
+  },
+  "prerequisites": [
+    {
+      "name": "bwrap",
+      "ok": true,
+      "detail": "bubblewrap 0.11.1"
+    },
+    {
+      "name": "bwrap-namespaces",
+      "ok": true,
+      "detail": "user/net/pid namespaces usable"
+    },
+    {
+      "name": "pi-cli",
+      "ok": true,
+      "detail": "/home/arthur/.bun/install/global/node_modules/@earendil-works/pi-coding-agent/dist/bundle/cli.js"
+    },
+    {
+      "name": "provider",
+      "ok": true,
+      "detail": "/home/arthur/Code/oh-my-pi-extensions/cliproxyapi/node_modules/@router-for-me/pi-cliproxyapi-provider"
+    },
+    {
+      "name": "orche",
+      "ok": true,
+      "detail": "/home/arthur/Code/oh-my-pi-extensions/orche"
+    },
+    {
+      "name": "git",
+      "ok": true,
+      "detail": "git version 2.53.0"
+    },
+    {
+      "name": "credentials",
+      "ok": true,
+      "detail": "cliproxyapi.json apiKey: set"
+    },
+    {
+      "name": "model-catalog",
+      "ok": true,
+      "detail": "/home/arthur/.pi/agent/cliproxyapi-models.json"
+    },
+    {
+      "name": "upstream",
+      "ok": true,
+      "detail": "http://127.0.0.1:8317 answered 401"
+    }
+  ],
+  "datasets": {
+    "train": [
+      "a7-auth-rotation",
+      "b1-static-traversal",
+      "b2-patch-endpoint",
+      "b3-pagination",
+      "b5-ctx-migration",
+      "b6-route-cache",
+      "d4-cache-fencing",
+      "d5-streaming-ingest-ko",
+      "p1-ticket-batch",
+      "p2-handler-migration",
+      "p3-library-features-ko"
+    ],
+    "dev": [
+      "a1-rounding",
+      "a2-discount-codes",
+      "a3-refactor-tax",
+      "a4-tests-fx",
+      "a6-typo-message",
+      "c1-timezone",
+      "c2-since-flag-ko",
+      "c4-malformed-lines",
+      "c5-aggregate-perf",
+      "c6-csv-export",
+      "d1-transactional-outbox",
+      "d2-keyed-queue",
+      "d3-money-migration-ko",
+      "d6-snapshot-pagination",
+      "d7-config-reload",
+      "d8-build-graph"
+    ],
+    "holdout": [],
+    "excluded": [],
+    "digests": {
+      "a1-rounding": "66dc1f2237f51f28596b2beb1c98367a0dcde491379c97e13c7667df228e583d",
+      "a2-discount-codes": "f4af636843804b529d68c537c3d9f6752db72dda6e430834ab30b7b946613547",
+      "a3-refactor-tax": "783a3f7993829a083cec4e7c51ade90378669fa6a2faa0e6572a095dbc7c9c1b",
+      "a4-tests-fx": "7876a5f1ca6c63d46aff6164f380ca28b988d2bac115075a721fc7e7142cce25",
+      "a6-typo-message": "66b7800e6e7f5b29fa84a0d55dcb34353f9c30cb4679e390fb7fc7022473e194",
+      "a7-auth-rotation": "b628aedb0b37f999afb9d828c57b43da7a4b1dbd8aa021398400f37af3514add",
+      "b1-static-traversal": "71187d345dd11c45d4e82f61220a5994574eb15d1aae3efe6a31b80ba7b230ad",
+      "b2-patch-endpoint": "1aa0776a526a50ae8ab347b2db30f6468f5602385fc0ccf15c82c11514dd9a28",
+      "b3-pagination": "aeae308bfb617a64ad981ec8e89330a1e2b92b83423156adefcd0ed33d7b2099",
+      "b5-ctx-migration": "0804db6f0b832962a3882f16926cc94017c4f3eeda9e20b0156b802375cdc7ad",
+      "b6-route-cache": "d6b72f998c1e8a1d035eca4c946ae4112470e0f1cba0fc89f13793acf47b9bb2",
+      "c1-timezone": "eea00bbb2bfb76a86ac6c9a3e7fdc17d0ae92e69c3277eb1232d9aeb7771708b",
+      "c2-since-flag-ko": "7e185f7ba2ff425a83b313f6c811813bfd3fc48c11bf3f9084553b7fe2230503",
+      "c4-malformed-lines": "f969cfcdd17884e25a7ef16d7ff1a27f63205b6c31cbd2ea4e7f2373c5128db7",
+      "c5-aggregate-perf": "5f743480dc71400d1ab31259fdbef468d1fac9699aa566e8fae71b8834a724de",
+      "c6-csv-export": "a04385ea74936ac0b7d80bc3be5b4404a04012aff1efcb7998834900b2d83cde",
+      "d1-transactional-outbox": "898cd696f0c9aebe6ebf35248a98f965fb2927328df8556a7c3485cc4278db4d",
+      "d2-keyed-queue": "63ff8c9ce8e4b3d8daab8cf77213589c7d61628240bf357552e2e8d18b41a643",
+      "d3-money-migration-ko": "9eb4dc02ef69842ade67506dffacc89840ce9ebea0358056fc6a91ba345fee76",
+      "d4-cache-fencing": "2b371bf7359a500b3c16feeaebe9fa35e8ce594207900c37e276f242fef0f102",
+      "d5-streaming-ingest-ko": "31d6ce9331e329d50065054e1f4cd24d02c60bb7c2f0b906ce4a1caf6df69b45",
+      "d6-snapshot-pagination": "69404b511703b8d9e1cb22d668291f142f29d11ba880a271501d871da0da6664",
+      "d7-config-reload": "4d0c0a0c87517eb23466838f65e5375d11160f5602e4062065a394e684282e23",
+      "d8-build-graph": "579b81ef90a39b26d7d42f7dd3bb5041bd760218b855ee08e6788cc95559f15e",
+      "p1-ticket-batch": "12e9f5919ed365333fa7f2ccb42dce4968722fb4a19a7d99eeb8e985284d066e",
+      "p2-handler-migration": "625bd2d7c94e45f42fa6ae70b98c4e0d04fe14fbf89420a3bb9d967842a817f6",
+      "p3-library-features-ko": "64099bf7f8f8c53ec6cf146b2dd4e3ad86f0067434e10e9696d0207ff54d33b3"
+    },
+    "holdoutSeal": null,
+    "meta": {
+      "a1-rounding": {
+        "family": "pkg:ledger",
+        "tier": "easy",
+        "hard": false,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "a2-discount-codes": {
+        "family": "pkg:ledger",
+        "tier": "easy",
+        "hard": false,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "a3-refactor-tax": {
+        "family": "pkg:ledger",
+        "tier": "easy",
+        "hard": false,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "a4-tests-fx": {
+        "family": "pkg:ledger",
+        "tier": "easy",
+        "hard": false,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "a6-typo-message": {
+        "family": "pkg:ledger",
+        "tier": "easy",
+        "hard": false,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "a7-auth-rotation": {
+        "family": "pkg:invoice-sync",
+        "tier": "easy",
+        "hard": false,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "b1-static-traversal": {
+        "family": "pkg:minihttp",
+        "tier": "medium",
+        "hard": false,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "b2-patch-endpoint": {
+        "family": "pkg:minihttp",
+        "tier": "medium",
+        "hard": false,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "b3-pagination": {
+        "family": "pkg:minihttp",
+        "tier": "medium",
+        "hard": false,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "b5-ctx-migration": {
+        "family": "pkg:minihttp",
+        "tier": "medium",
+        "hard": false,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "b6-route-cache": {
+        "family": "pkg:minihttp",
+        "tier": "medium",
+        "hard": false,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "c1-timezone": {
+        "family": "pkg:logtool",
+        "tier": "medium",
+        "hard": false,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "c2-since-flag-ko": {
+        "family": "pkg:logtool",
+        "tier": "medium",
+        "hard": false,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "c4-malformed-lines": {
+        "family": "pkg:logtool",
+        "tier": "medium",
+        "hard": false,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "c5-aggregate-perf": {
+        "family": "pkg:logtool",
+        "tier": "medium",
+        "hard": false,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "c6-csv-export": {
+        "family": "pkg:logtool",
+        "tier": "medium",
+        "hard": false,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "d1-transactional-outbox": {
+        "family": "pkg:d1-transactional-outbox",
+        "tier": "hard",
+        "hard": true,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "d2-keyed-queue": {
+        "family": "pkg:d2-keyed-queue",
+        "tier": "hard",
+        "hard": true,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "d3-money-migration-ko": {
+        "family": "pkg:d3-money-migration-ko",
+        "tier": "hard",
+        "hard": true,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "d4-cache-fencing": {
+        "family": "pkg:d4-cache-fencing",
+        "tier": "hard",
+        "hard": true,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "d5-streaming-ingest-ko": {
+        "family": "pkg:d5-streaming-ingest-ko",
+        "tier": "hard",
+        "hard": true,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "d6-snapshot-pagination": {
+        "family": "pkg:d6-snapshot-pagination",
+        "tier": "hard",
+        "hard": true,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "d7-config-reload": {
+        "family": "pkg:d7-config-reload",
+        "tier": "hard",
+        "hard": true,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "d8-build-graph": {
+        "family": "pkg:d8-build-graph",
+        "tier": "hard",
+        "hard": true,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "p1-ticket-batch": {
+        "family": "p-series",
+        "tier": "hard",
+        "hard": true,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "p2-handler-migration": {
+        "family": "p-series",
+        "tier": "hard",
+        "hard": true,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "p3-library-features-ko": {
+        "family": "p-series",
+        "tier": "hard",
+        "hard": true,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      }
+    }
+  },
+  "arms": [
+    {
+      "arm": "C-c001",
+      "split": "train",
+      "posterior": {
+        "overall": {
+          "point": 0.5555555555555556,
+          "mean": 0.5570614307053533,
+          "lo95": 0.22273764228603,
+          "hi95": 0.8642056511410078
+        },
+        "hard": {
+          "point": 0.2222222222222222,
+          "mean": 0.22404729029511655,
+          "lo95": 0.007074290635359746,
+          "hi95": 0.6823057323638716
+        },
+        "consistency": {
+          "point": 0.48148148148148145,
+          "mean": 0.5012920540558115,
+          "lo95": 0.17183956790034013,
+          "hi95": 0.8332081317332592
+        }
+      },
+      "summary": {
+        "candidate_id": "C-c001",
+        "split": "train",
+        "runs": 18,
+        "tasks": 6,
+        "task_success": 10,
+        "success_rate": 0.5555555555555556,
+        "hidden_test_pass": 14,
+        "mean_correctness": 0.8799427446770441,
+        "repeat_success_rate": 0.48148148148148157,
+        "all_repeats_pass_tasks": 2,
+        "hard_task_success_rate": 0.2222222222222222,
+        "regression_count": 0,
+        "critical_failure_count": 4,
+        "integrity_violations": 4,
+        "integrity_violation_runs": 4,
+        "attempts_used": 18,
+        "terminal": {
+          "completed": 17,
+          "timeout": 1
+        },
+        "infra_rate": 0,
+        "input_tokens": 8144235,
+        "output_tokens": 152037,
+        "cache_tokens": 7136768,
+        "model_requests": 646,
+        "wall_time_ms": 4577242,
+        "simulated_runs": 0
+      }
+    },
+    {
+      "arm": "C-c002",
+      "split": "train",
+      "posterior": {
+        "overall": {
+          "point": 0.5555555555555555,
+          "mean": 0.5522421323660932,
+          "lo95": 0.19852199875462734,
+          "hi95": 0.8801775692497708
+        },
+        "hard": {
+          "point": 0,
+          "mean": 0,
+          "lo95": 0,
+          "hi95": 0
+        },
+        "consistency": {
+          "point": 0.5185185185185185,
+          "mean": 0.5245126865753837,
+          "lo95": 0.17252123234702288,
+          "hi95": 0.8658077906791994
+        }
+      },
+      "summary": {
+        "candidate_id": "C-c002",
+        "split": "train",
+        "runs": 18,
+        "tasks": 6,
+        "task_success": 10,
+        "success_rate": 0.5555555555555556,
+        "hidden_test_pass": 12,
+        "mean_correctness": 0.8159722222222222,
+        "repeat_success_rate": 0.5185185185185185,
+        "all_repeats_pass_tasks": 3,
+        "hard_task_success_rate": 0,
+        "regression_count": 0,
+        "critical_failure_count": 2,
+        "integrity_violations": 2,
+        "integrity_violation_runs": 2,
+        "attempts_used": 18,
+        "terminal": {
+          "completed": 18
+        },
+        "infra_rate": 0,
+        "input_tokens": 5583990,
+        "output_tokens": 114329,
+        "cache_tokens": 4731776,
+        "model_requests": 505,
+        "wall_time_ms": 2809036,
+        "simulated_runs": 0
+      }
+    },
+    {
+      "arm": "C-c003",
+      "split": "train",
+      "posterior": {
+        "overall": {
+          "point": 0.7222222222222222,
+          "mean": 0.7224962070252381,
+          "lo95": 0.35628095144339644,
+          "hi95": 0.9604721300006137
+        },
+        "hard": {
+          "point": 0.16666666666666666,
+          "mean": 0.16975544776405113,
+          "lo95": 0.0018034482579576238,
+          "hi95": 0.6252070305948465
+        },
+        "consistency": {
+          "point": 0.6851851851851851,
+          "mean": 0.6945609861287587,
+          "lo95": 0.3174312422090054,
+          "hi95": 0.9526532887677239
+        }
+      },
+      "summary": {
+        "candidate_id": "C-c003",
+        "split": "train",
+        "runs": 18,
+        "tasks": 6,
+        "task_success": 13,
+        "success_rate": 0.7222222222222222,
+        "hidden_test_pass": 15,
+        "mean_correctness": 0.9927536231884058,
+        "repeat_success_rate": 0.6851851851851851,
+        "all_repeats_pass_tasks": 4,
+        "hard_task_success_rate": 0.16666666666666666,
+        "regression_count": 0,
+        "critical_failure_count": 2,
+        "integrity_violations": 2,
+        "integrity_violation_runs": 2,
+        "attempts_used": 18,
+        "terminal": {
+          "completed": 18
+        },
+        "infra_rate": 0,
+        "input_tokens": 3453000,
+        "output_tokens": 78862,
+        "cache_tokens": 2826368,
+        "model_requests": 390,
+        "wall_time_ms": 2435334,
+        "simulated_runs": 0
+      }
+    },
+    {
+      "arm": "C-c004",
+      "split": "train",
+      "posterior": {
+        "overall": {
+          "point": 0.5555555555555556,
+          "mean": 0.555963774476103,
+          "lo95": 0.19651575761871581,
+          "hi95": 0.8790746790971266
+        },
+        "hard": {
+          "point": 0.1111111111111111,
+          "mean": 0.1124589405031391,
+          "lo95": 0.0010857101529903618,
+          "hi95": 0.46952872218376374
+        },
+        "consistency": {
+          "point": 0.5185185185185185,
+          "mean": 0.5281562799809868,
+          "lo95": 0.17272143446481864,
+          "hi95": 0.8642384587480214
+        }
+      },
+      "summary": {
+        "candidate_id": "C-c004",
+        "split": "train",
+        "runs": 18,
+        "tasks": 6,
+        "task_success": 10,
+        "success_rate": 0.5555555555555556,
+        "hidden_test_pass": 12,
+        "mean_correctness": 0.8229166666666666,
+        "repeat_success_rate": 0.5185185185185185,
+        "all_repeats_pass_tasks": 3,
+        "hard_task_success_rate": 0.1111111111111111,
+        "regression_count": 0,
+        "critical_failure_count": 2,
+        "integrity_violations": 2,
+        "integrity_violation_runs": 2,
+        "attempts_used": 18,
+        "terminal": {
+          "completed": 18
+        },
+        "infra_rate": 0,
+        "input_tokens": 5923804,
+        "output_tokens": 126794,
+        "cache_tokens": 4973184,
+        "model_requests": 475,
+        "wall_time_ms": 3390767,
+        "simulated_runs": 0
+      }
+    },
+    {
+      "arm": "C-c005",
+      "split": "train",
+      "posterior": {
+        "overall": {
+          "point": 0.611111111111111,
+          "mean": 0.6112907300366508,
+          "lo95": 0.2645189488630004,
+          "hi95": 0.8969463107618882
+        },
+        "hard": {
+          "point": 0.16666666666666666,
+          "mean": 0.16664435538938657,
+          "lo95": 0.001990907887024132,
+          "hi95": 0.607487627140714
+        },
+        "consistency": {
+          "point": 0.537037037037037,
+          "mean": 0.5557314938438459,
+          "lo95": 0.20061536210877418,
+          "hi95": 0.8737274617802
+        }
+      },
+      "summary": {
+        "candidate_id": "C-c005",
+        "split": "train",
+        "runs": 18,
+        "tasks": 6,
+        "task_success": 11,
+        "success_rate": 0.6111111111111112,
+        "hidden_test_pass": 13,
+        "mean_correctness": 0.9743357487922706,
+        "repeat_success_rate": 0.5370370370370371,
+        "all_repeats_pass_tasks": 3,
+        "hard_task_success_rate": 0.16666666666666666,
+        "regression_count": 1,
+        "critical_failure_count": 1,
+        "integrity_violations": 1,
+        "integrity_violation_runs": 1,
+        "attempts_used": 18,
+        "terminal": {
+          "completed": 18
+        },
+        "infra_rate": 0,
+        "input_tokens": 7262484,
+        "output_tokens": 133903,
+        "cache_tokens": 6257024,
+        "model_requests": 619,
+        "wall_time_ms": 3643753,
+        "simulated_runs": 0
+      }
+    },
+    {
+      "arm": "C-c006",
+      "split": "train",
+      "posterior": {
+        "overall": {
+          "point": 0.7777777777777777,
+          "mean": 0.7769322690241525,
+          "lo95": 0.4305612449312062,
+          "hi95": 0.9776316798220462
+        },
+        "hard": {
+          "point": 0.3333333333333333,
+          "mean": 0.33083628960446193,
+          "lo95": 0.012458882981385548,
+          "hi95": 0.8371070167992477
+        },
+        "consistency": {
+          "point": 0.7407407407407407,
+          "mean": 0.7490445398164854,
+          "lo95": 0.38480799946128225,
+          "hi95": 0.9712810659137411
+        }
+      },
+      "summary": {
+        "candidate_id": "C-c006",
+        "split": "train",
+        "runs": 18,
+        "tasks": 6,
+        "task_success": 14,
+        "success_rate": 0.7777777777777778,
+        "hidden_test_pass": 15,
+        "mean_correctness": 0.9861111111111112,
+        "repeat_success_rate": 0.7407407407407408,
+        "all_repeats_pass_tasks": 4,
+        "hard_task_success_rate": 0.3333333333333333,
+        "regression_count": 0,
+        "critical_failure_count": 1,
+        "integrity_violations": 1,
+        "integrity_violation_runs": 1,
+        "attempts_used": 18,
+        "terminal": {
+          "completed": 18
+        },
+        "infra_rate": 0,
+        "input_tokens": 5316325,
+        "output_tokens": 103578,
+        "cache_tokens": 4499740,
+        "model_requests": 467,
+        "wall_time_ms": 2969046,
+        "simulated_runs": 0
+      }
+    },
+    {
+      "arm": "C-c007",
+      "split": "train",
+      "posterior": {
+        "overall": {
+          "point": 0.5,
+          "mean": 0.4992879631219896,
+          "lo95": 0.18534563114969493,
+          "hi95": 0.8187218767368963
+        },
+        "hard": {
+          "point": 0.2222222222222222,
+          "mean": 0.22207841591369942,
+          "lo95": 0.018552220787371745,
+          "hi95": 0.6083292491937735
+        },
+        "consistency": {
+          "point": 0.38888888888888884,
+          "mean": 0.4160862454715826,
+          "lo95": 0.11407158342391006,
+          "hi95": 0.7692865681271317
+        }
+      },
+      "summary": {
+        "candidate_id": "C-c007",
+        "split": "train",
+        "runs": 18,
+        "tasks": 6,
+        "task_success": 9,
+        "success_rate": 0.5,
+        "hidden_test_pass": 11,
+        "mean_correctness": 0.9621829710144928,
+        "repeat_success_rate": 0.3888888888888889,
+        "all_repeats_pass_tasks": 2,
+        "hard_task_success_rate": 0.2222222222222222,
+        "regression_count": 0,
+        "critical_failure_count": 4,
+        "integrity_violations": 4,
+        "integrity_violation_runs": 4,
+        "attempts_used": 18,
+        "terminal": {
+          "completed": 18
+        },
+        "infra_rate": 0,
+        "input_tokens": 5053578,
+        "output_tokens": 102782,
+        "cache_tokens": 4336896,
+        "model_requests": 437,
+        "wall_time_ms": 2896552,
+        "simulated_runs": 0
+      }
+    },
+    {
+      "arm": "C-c008",
+      "split": "train",
+      "posterior": {
+        "overall": {
+          "point": 0.6111111111111112,
+          "mean": 0.613628223763751,
+          "lo95": 0.2837336832664849,
+          "hi95": 0.8870792080246753
+        },
+        "hard": {
+          "point": 0.16666666666666666,
+          "mean": 0.168478072417548,
+          "lo95": 0.0020970328455389084,
+          "hi95": 0.6079720050331071
+        },
+        "consistency": {
+          "point": 0.4999999999999999,
+          "mean": 0.5298224618954936,
+          "lo95": 0.1980525297468659,
+          "hi95": 0.8440526747509798
+        }
+      },
+      "summary": {
+        "candidate_id": "C-c008",
+        "split": "train",
+        "runs": 18,
+        "tasks": 6,
+        "task_success": 11,
+        "success_rate": 0.6111111111111112,
+        "hidden_test_pass": 14,
+        "mean_correctness": 0.8860596707818931,
+        "repeat_success_rate": 0.5000000000000001,
+        "all_repeats_pass_tasks": 2,
+        "hard_task_success_rate": 0.16666666666666666,
+        "regression_count": 0,
+        "critical_failure_count": 3,
+        "integrity_violations": 3,
+        "integrity_violation_runs": 3,
+        "attempts_used": 18,
+        "terminal": {
+          "completed": 18
+        },
+        "infra_rate": 0,
+        "input_tokens": 6554127,
+        "output_tokens": 118285,
+        "cache_tokens": 5564544,
+        "model_requests": 584,
+        "wall_time_ms": 4133432,
+        "simulated_runs": 0
+      }
+    },
+    {
+      "arm": "C-c009",
+      "split": "train",
+      "posterior": {
+        "overall": {
+          "point": 0.49999999999999994,
+          "mean": 0.5008790588474912,
+          "lo95": 0.17422975157528092,
+          "hi95": 0.8276953528716176
+        },
+        "hard": {
+          "point": 0.2222222222222222,
+          "mean": 0.22103581296877128,
+          "lo95": 0.005669475403029361,
+          "hi95": 0.6761263030694433
+        },
+        "consistency": {
+          "point": 0.42592592592592593,
+          "mean": 0.4452735850196591,
+          "lo95": 0.1260870143774369,
+          "hi95": 0.7934279159805533
+        }
+      },
+      "summary": {
+        "candidate_id": "C-c009",
+        "split": "train",
+        "runs": 18,
+        "tasks": 6,
+        "task_success": 9,
+        "success_rate": 0.5,
+        "hidden_test_pass": 13,
+        "mean_correctness": 0.8356481481481481,
+        "repeat_success_rate": 0.4259259259259259,
+        "all_repeats_pass_tasks": 2,
+        "hard_task_success_rate": 0.2222222222222222,
+        "regression_count": 0,
+        "critical_failure_count": 5,
+        "integrity_violations": 5,
+        "integrity_violation_runs": 5,
+        "attempts_used": 18,
+        "terminal": {
+          "completed": 18
+        },
+        "infra_rate": 0,
+        "input_tokens": 7551790,
+        "output_tokens": 137589,
+        "cache_tokens": 6457344,
+        "model_requests": 676,
+        "wall_time_ms": 3593132,
+        "simulated_runs": 0
+      }
+    },
+    {
+      "arm": "C-c010",
+      "split": "train",
+      "posterior": {
+        "overall": {
+          "point": 0.611111111111111,
+          "mean": 0.6125065724225733,
+          "lo95": 0.24610985949094777,
+          "hi95": 0.9099978996397828
+        },
+        "hard": {
+          "point": 0,
+          "mean": 0,
+          "lo95": 0,
+          "hi95": 0
+        },
+        "consistency": {
+          "point": 0.5740740740740741,
+          "mean": 0.5851724726737614,
+          "lo95": 0.21947503293178014,
+          "hi95": 0.8969043395890601
+        }
+      },
+      "summary": {
+        "candidate_id": "C-c010",
+        "split": "train",
+        "runs": 18,
+        "tasks": 6,
+        "task_success": 11,
+        "success_rate": 0.6111111111111112,
+        "hidden_test_pass": 12,
+        "mean_correctness": 0.8722993827160495,
+        "repeat_success_rate": 0.5740740740740741,
+        "all_repeats_pass_tasks": 3,
+        "hard_task_success_rate": 0,
+        "regression_count": 0,
+        "critical_failure_count": 1,
+        "integrity_violations": 1,
+        "integrity_violation_runs": 1,
+        "attempts_used": 18,
+        "terminal": {
+          "completed": 18
+        },
+        "infra_rate": 0,
+        "input_tokens": 7167363,
+        "output_tokens": 136243,
+        "cache_tokens": 5944576,
+        "model_requests": 645,
+        "wall_time_ms": 3286500,
+        "simulated_runs": 0
+      }
+    },
+    {
+      "arm": "multi3",
+      "split": "dev",
+      "posterior": {
+        "overall": {
+          "point": 0.9166666666666665,
+          "mean": 0.9166581976776997,
+          "lo95": 0.783746605384693,
+          "hi95": 0.9852949848282686
+        },
+        "hard": {
+          "point": 0.8888888888888888,
+          "mean": 0.8885518879077343,
+          "lo95": 0.641932555579015,
+          "hi95": 0.9927883919585886
+        },
+        "consistency": {
+          "point": 0.8611111111111112,
+          "mean": 0.8750559824325577,
+          "lo95": 0.6996120027889319,
+          "hi95": 0.9751668453308655
+        }
+      },
+      "summary": {
+        "candidate_id": "multi3",
+        "split": "dev",
+        "runs": 48,
+        "tasks": 16,
+        "task_success": 44,
+        "success_rate": 0.9166666666666666,
+        "hidden_test_pass": 45,
+        "mean_correctness": 0.9817708333333334,
+        "repeat_success_rate": 0.8611111111111112,
+        "all_repeats_pass_tasks": 12,
+        "hard_task_success_rate": 0.8888888888888888,
+        "regression_count": 0,
+        "critical_failure_count": 2,
+        "integrity_violations": 2,
+        "integrity_violation_runs": 2,
+        "attempts_used": 49,
+        "terminal": {
+          "completed": 48
+        },
+        "infra_rate": 0,
+        "input_tokens": 1456402,
+        "output_tokens": 76098,
+        "cache_tokens": 870784,
+        "model_requests": 447,
+        "wall_time_ms": 2276504,
+        "simulated_runs": 0
+      }
+    },
+    {
+      "arm": "pure",
+      "split": "train",
+      "posterior": {
+        "overall": {
+          "point": 0.6666666666666665,
+          "mean": 0.6658064850442323,
+          "lo95": 0.4074013322049956,
+          "hi95": 0.879168963535056
+        },
+        "hard": {
+          "point": 0.39999999999999997,
+          "mean": 0.3990626780898786,
+          "lo95": 0.10681690771791214,
+          "hi95": 0.7462405179848901
+        },
+        "consistency": {
+          "point": 0.585858585858586,
+          "mean": 0.6053880170625912,
+          "lo95": 0.3343483507663296,
+          "hi95": 0.8450859894522555
+        }
+      },
+      "summary": {
+        "candidate_id": "pure",
+        "split": "train",
+        "runs": 33,
+        "tasks": 11,
+        "task_success": 22,
+        "success_rate": 0.6666666666666666,
+        "hidden_test_pass": 24,
+        "mean_correctness": 0.8890398550724636,
+        "repeat_success_rate": 0.5858585858585859,
+        "all_repeats_pass_tasks": 5,
+        "hard_task_success_rate": 0.4,
+        "regression_count": 3,
+        "critical_failure_count": 2,
+        "integrity_violations": 2,
+        "integrity_violation_runs": 2,
+        "attempts_used": 33,
+        "terminal": {
+          "completed": 33
+        },
+        "infra_rate": 0,
+        "input_tokens": 1142298,
+        "output_tokens": 62904,
+        "cache_tokens": 737664,
+        "model_requests": 295,
+        "wall_time_ms": 1705581,
+        "simulated_runs": 0
+      }
+    },
+    {
+      "arm": "pure",
+      "split": "dev",
+      "posterior": {
+        "overall": {
+          "point": 0.8749999999999999,
+          "mean": 0.8743425759569494,
+          "lo95": 0.7097374355863293,
+          "hi95": 0.9698782521664491
+        },
+        "hard": {
+          "point": 0.7777777777777777,
+          "mean": 0.7775628629425355,
+          "lo95": 0.46864155155113196,
+          "hi95": 0.9643440130428045
+        },
+        "consistency": {
+          "point": 0.8055555555555556,
+          "mean": 0.822061158847549,
+          "lo95": 0.6234429402318907,
+          "hi95": 0.9517988373969645
+        }
+      },
+      "summary": {
+        "candidate_id": "pure",
+        "split": "dev",
+        "runs": 48,
+        "tasks": 16,
+        "task_success": 42,
+        "success_rate": 0.875,
+        "hidden_test_pass": 44,
+        "mean_correctness": 0.9826388888888887,
+        "repeat_success_rate": 0.8055555555555556,
+        "all_repeats_pass_tasks": 11,
+        "hard_task_success_rate": 0.7777777777777778,
+        "regression_count": 0,
+        "critical_failure_count": 2,
+        "integrity_violations": 2,
+        "integrity_violation_runs": 2,
+        "attempts_used": 48,
+        "terminal": {
+          "completed": 48
+        },
+        "infra_rate": 0,
+        "input_tokens": 1526956,
+        "output_tokens": 77023,
+        "cache_tokens": 966272,
+        "model_requests": 456,
+        "wall_time_ms": 2325787,
+        "simulated_runs": 0
+      }
+    },
+    {
+      "arm": "stable",
+      "split": "train",
+      "posterior": {
+        "overall": {
+          "point": 0.6060606060606062,
+          "mean": 0.6076434854177167,
+          "lo95": 0.3219813351952759,
+          "hi95": 0.8550972512362103
+        },
+        "hard": {
+          "point": 0.13333333333333333,
+          "mean": 0.13240332673301183,
+          "lo95": 0.0032394096712842356,
+          "hi95": 0.45803756111878485
+        },
+        "consistency": {
+          "point": 0.585858585858586,
+          "mean": 0.5927076053542351,
+          "lo95": 0.3060133063608367,
+          "hi95": 0.84665549041693
+        }
+      },
+      "summary": {
+        "candidate_id": "stable",
+        "split": "train",
+        "runs": 33,
+        "tasks": 11,
+        "task_success": 20,
+        "success_rate": 0.6060606060606061,
+        "hidden_test_pass": 24,
+        "mean_correctness": 0.8952980895915679,
+        "repeat_success_rate": 0.5858585858585859,
+        "all_repeats_pass_tasks": 6,
+        "hard_task_success_rate": 0.13333333333333333,
+        "regression_count": 6,
+        "critical_failure_count": 4,
+        "integrity_violations": 4,
+        "integrity_violation_runs": 4,
+        "attempts_used": 33,
+        "terminal": {
+          "agent_error": 2,
+          "completed": 31
+        },
+        "infra_rate": 0,
+        "input_tokens": 10376660,
+        "output_tokens": 231223,
+        "cache_tokens": 8313472,
+        "model_requests": 1090,
+        "wall_time_ms": 6782048,
+        "simulated_runs": 0
+      }
+    },
+    {
+      "arm": "stable",
+      "split": "dev",
+      "posterior": {
+        "overall": {
+          "point": 0.8125,
+          "mean": 0.8118686300379101,
+          "lo95": 0.6280417526278275,
+          "hi95": 0.938468434977884
+        },
+        "hard": {
+          "point": 0.5555555555555555,
+          "mean": 0.5541816256376239,
+          "lo95": 0.26160261185185,
+          "hi95": 0.8269300439343813
+        },
+        "consistency": {
+          "point": 0.7291666666666666,
+          "mean": 0.7491481868239196,
+          "lo95": 0.536288144420406,
+          "hi95": 0.9098751017035254
+        }
+      },
+      "summary": {
+        "candidate_id": "stable",
+        "split": "dev",
+        "runs": 48,
+        "tasks": 16,
+        "task_success": 39,
+        "success_rate": 0.8125,
+        "hidden_test_pass": 46,
+        "mean_correctness": 0.9869791666666666,
+        "repeat_success_rate": 0.7291666666666666,
+        "all_repeats_pass_tasks": 10,
+        "hard_task_success_rate": 0.5555555555555556,
+        "regression_count": 0,
+        "critical_failure_count": 7,
+        "integrity_violations": 7,
+        "integrity_violation_runs": 7,
+        "attempts_used": 48,
+        "terminal": {
+          "completed": 48
+        },
+        "infra_rate": 0,
+        "input_tokens": 7502081,
+        "output_tokens": 172695,
+        "cache_tokens": 6112000,
+        "model_requests": 889,
+        "wall_time_ms": 5029415,
+        "simulated_runs": 0
+      }
+    }
+  ],
+  "candidates": [
+    {
+      "status": "rejected",
+      "decisions": [
+        {
+          "at": "2026-11-04T10:58:57.518Z",
+          "status": "created",
+          "reason": "patch accepted"
+        },
+        {
+          "at": "2026-11-04T10:59:08.734Z",
+          "status": "screening",
+          "reason": "screening batch b1-static-traversal, b3-pagination, b6-route-cache, d5-streaming-ingest-ko, p1-ticket-batch, p3-library-features-ko"
+        },
+        {
+          "at": "2026-11-04T11:25:59.205Z",
+          "status": "rejected",
+          "reason": "critical: integrity: 4 run attempt(s) under C-c001 with task-agent workspace integrity violations (reference stable: 1 in the same scope; context only, never an excuse); task-agent integrity violation train/b1-static-traversal#2: changed/removed 1 line(s) of test file test/api.test.js: \"import { resolve } from 'node:path';\"; task-agent integrity violation train/d5-streaming-ingest-ko#0: changed/removed 1 line(s) of test file test/smoke.test.mjs: \"import test from 'node:test';import assert from 'node:assert/strict';import {rea\"; task-agent integrity violation train/d5-streaming-ingest-ko#1: changed/removed 1 line(s) of test file test/smoke.test.mjs: \"import test from 'node:test';import assert from 'node:assert/strict';import {rea\""
+        }
+      ],
+      "children": [],
+      "createdAt": "2026-11-04T10:57:21.987Z",
+      "id": "C-c001",
+      "parent": "stable",
+      "origin": "proposer",
+      "strategy": "pareto",
+      "worktree": "/home/arthur/Code/oh-my-pi-extensions/pi-eval-loop/state/explore-real-2/C/worktrees/C-c001",
+      "branch": "eval-loop/candidates/57a623bf/C-c001",
+      "base": "e831a6b2bc19f0c707b55505db33a11b2c9d4d4a",
+      "target": "requirements-generalization",
+      "hypothesis": {
+        "text": "Requiring implementation workers to audit every original behavioral clause against concrete assertions before completion should expose omitted requirements that passing checks alone miss.",
+        "targetFailureClass": "requirements-generalization",
+        "expectedEffect": "More requested boundary, exception and interaction behaviors are exercised and corrected before completion, improving full-contract correctness even when existing checks already pass."
+      },
+      "updatedAt": "2026-11-04T11:25:59.205Z",
+      "proposer": {
+        "usage": {
+          "requests": 11,
+          "completed": 11,
+          "input": 546560,
+          "output": 2393,
+          "cached": 470912,
+          "wallMs": 94927,
+          "guardFired": false,
+          "exit": 0
+        }
+      },
+      "files": [
+        "src/extension/workers.ts"
+      ],
+      "patchKey": "7f97c55ea76950658685b257138fdc7ab387cfd863f0ae9b98b99b3dd6b54275",
+      "patchSha256": "cc50ead20a916def6212d6031908f5a9b8d6816d68c25b11fa0fd10c7e8f1bc4",
+      "patchStats": {
+        "added": 4,
+        "removed": 1
+      },
+      "commit": "77a9116116914eb5dee89edd97e42a9bb879940a",
+      "screening": {
+        "rounds": [
+          {
+            "at": "2026-11-04T11:25:59.205Z",
+            "repeats": 3,
+            "tasks": [
+              "b1-static-traversal",
+              "b3-pagination",
+              "b6-route-cache",
+              "d5-streaming-ingest-ko",
+              "p1-ticket-batch",
+              "p3-library-features-ko"
+            ],
+            "critical": [
+              "integrity: 4 run attempt(s) under C-c001 with task-agent workspace integrity violations (reference stable: 1 in the same scope; context only, never an excuse)",
+              "task-agent integrity violation train/b1-static-traversal#2: changed/removed 1 line(s) of test file test/api.test.js: \"import { resolve } from 'node:path';\"",
+              "task-agent integrity violation train/d5-streaming-ingest-ko#0: changed/removed 1 line(s) of test file test/smoke.test.mjs: \"import test from 'node:test';import assert from 'node:assert/strict';import {rea\"",
+              "task-agent integrity violation train/d5-streaming-ingest-ko#1: changed/removed 1 line(s) of test file test/smoke.test.mjs: \"import test from 'node:test';import assert from 'node:assert/strict';import {rea\"",
+              "task-agent integrity violation train/d5-streaming-ingest-ko#2: changed/removed 1 line(s) of test file test/smoke.test.mjs: \"import test from 'node:test';import assert from 'node:assert/strict';import {rea\""
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "status": "rejected",
+      "decisions": [
+        {
+          "at": "2026-11-04T11:27:29.976Z",
+          "status": "created",
+          "reason": "patch accepted"
+        },
+        {
+          "at": "2026-11-04T11:27:41.247Z",
+          "status": "screening",
+          "reason": "screening batch a7-auth-rotation, b1-static-traversal, b3-pagination, b5-ctx-migration, p1-ticket-batch, p2-handler-migration"
+        },
+        {
+          "at": "2026-11-04T11:39:52.622Z",
+          "status": "rejected",
+          "reason": "critical: integrity: 2 run attempt(s) under C-c002 with task-agent workspace integrity violations (reference stable: 0 in the same scope; context only, never an excuse); task-agent integrity violation train/b1-static-traversal#1: changed/removed 1 line(s) of test file test/api.test.js: \"import { resolve } from 'node:path';\"; task-agent integrity violation train/b1-static-traversal#2: changed/removed 1 line(s) of test file test/api.test.js: \"import { resolve } from 'node:path';\""
+        }
+      ],
+      "children": [],
+      "createdAt": "2026-11-04T11:25:59.401Z",
+      "id": "C-c002",
+      "parent": "stable",
+      "origin": "proposer",
+      "strategy": "pareto",
+      "worktree": "/home/arthur/Code/oh-my-pi-extensions/pi-eval-loop/state/explore-real-2/C/worktrees/C-c002",
+      "branch": "eval-loop/candidates/57a623bf/C-c002",
+      "base": "e831a6b2bc19f0c707b55505db33a11b2c9d4d4a",
+      "target": "requirements-generalization",
+      "hypothesis": {
+        "text": "Requiring implementation workers to map every stated requirement to code and a passing behavioral assertion before completion should expose omitted boundaries and rule interactions that existing checks do not exercise.",
+        "targetFailureClass": "requirements-generalization",
+        "expectedEffect": "More completed implementations satisfy the full requested contract, with fewer requirement violations despite passing existing checks."
+      },
+      "updatedAt": "2026-11-04T11:39:52.622Z",
+      "proposer": {
+        "usage": {
+          "requests": 11,
+          "completed": 11,
+          "input": 535911,
+          "output": 2486,
+          "cached": 461056,
+          "wallMs": 89952,
+          "guardFired": false,
+          "exit": 0
+        }
+      },
+      "files": [
+        "src/extension/workers.ts"
+      ],
+      "patchKey": "fd2bf7bba3651767a579e00902215f52d5942ece9768d56df6c91432edc0dcd0",
+      "patchSha256": "33d2db220b9cd1188214257297d11cbc3390c2496d620607095094fbcd166f9e",
+      "patchStats": {
+        "added": 4,
+        "removed": 1
+      },
+      "commit": "3ede96e4dc412b4c0a754a40b68f9dbd65beff8c",
+      "screening": {
+        "rounds": [
+          {
+            "at": "2026-11-04T11:39:52.622Z",
+            "repeats": 3,
+            "tasks": [
+              "a7-auth-rotation",
+              "b1-static-traversal",
+              "b3-pagination",
+              "b5-ctx-migration",
+              "p1-ticket-batch",
+              "p2-handler-migration"
+            ],
+            "critical": [
+              "integrity: 2 run attempt(s) under C-c002 with task-agent workspace integrity violations (reference stable: 0 in the same scope; context only, never an excuse)",
+              "task-agent integrity violation train/b1-static-traversal#1: changed/removed 1 line(s) of test file test/api.test.js: \"import { resolve } from 'node:path';\"",
+              "task-agent integrity violation train/b1-static-traversal#2: changed/removed 1 line(s) of test file test/api.test.js: \"import { resolve } from 'node:path';\""
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "status": "rejected",
+      "decisions": [
+        {
+          "at": "2026-11-04T11:41:29.243Z",
+          "status": "created",
+          "reason": "patch accepted"
+        },
+        {
+          "at": "2026-11-04T11:41:40.197Z",
+          "status": "screening",
+          "reason": "screening batch a7-auth-rotation, b2-patch-endpoint, b5-ctx-migration, b6-route-cache, d4-cache-fencing, p3-library-features-ko"
+        },
+        {
+          "at": "2026-11-04T11:50:05.554Z",
+          "status": "rejected",
+          "reason": "critical: integrity: 2 run attempt(s) under C-c003 with task-agent workspace integrity violations (reference stable: 3 in the same scope; context only, never an excuse); task-agent integrity violation train/d4-cache-fencing#0: changed/removed 1 line(s) of test file test/smoke.test.mjs: \"import test from 'node:test';import assert from 'node:assert/strict';import {cre\"; task-agent integrity violation train/d4-cache-fencing#2: changed/removed 1 line(s) of test file test/smoke.test.mjs: \"import test from 'node:test';import assert from 'node:assert/strict';import {cre\""
+        }
+      ],
+      "children": [],
+      "createdAt": "2026-11-04T11:39:52.824Z",
+      "id": "C-c003",
+      "parent": "stable",
+      "origin": "proposer",
+      "strategy": "pareto",
+      "worktree": "/home/arthur/Code/oh-my-pi-extensions/pi-eval-loop/state/explore-real-2/C/worktrees/C-c003",
+      "branch": "eval-loop/candidates/57a623bf/C-c003",
+      "base": "e831a6b2bc19f0c707b55505db33a11b2c9d4d4a",
+      "target": "requirements-generalization",
+      "hypothesis": {
+        "text": "Requiring implementation workers to derive behavioral checks from every requested clause before completion should expose omitted boundaries and rule interactions that passing existing tests alone does not reveal.",
+        "targetFailureClass": "requirements-generalization",
+        "expectedEffect": "More complete contract implementations, with additional requirement-derived checks catching omissions before completion."
+      },
+      "updatedAt": "2026-11-04T11:50:05.554Z",
+      "proposer": {
+        "usage": {
+          "requests": 10,
+          "completed": 10,
+          "input": 443857,
+          "output": 2260,
+          "cached": 379136,
+          "wallMs": 95772,
+          "guardFired": false,
+          "exit": 0
+        }
+      },
+      "files": [
+        "src/extension/workers.ts"
+      ],
+      "patchKey": "92996597e06bebbaf2894ae091128dee3b88a76412e947de2753c7a6dcef8825",
+      "patchSha256": "4b5243979a955fc2926b8a576aaace8c59d75c3ec52352048242b5ff12b7ede8",
+      "patchStats": {
+        "added": 3,
+        "removed": 0
+      },
+      "commit": "8413d1359a9d6cdfa96136117e66cfc607c81073",
+      "screening": {
+        "rounds": [
+          {
+            "at": "2026-11-04T11:50:05.554Z",
+            "repeats": 3,
+            "tasks": [
+              "a7-auth-rotation",
+              "b2-patch-endpoint",
+              "b5-ctx-migration",
+              "b6-route-cache",
+              "d4-cache-fencing",
+              "p3-library-features-ko"
+            ],
+            "critical": [
+              "integrity: 2 run attempt(s) under C-c003 with task-agent workspace integrity violations (reference stable: 3 in the same scope; context only, never an excuse)",
+              "task-agent integrity violation train/d4-cache-fencing#0: changed/removed 1 line(s) of test file test/smoke.test.mjs: \"import test from 'node:test';import assert from 'node:assert/strict';import {cre\"",
+              "task-agent integrity violation train/d4-cache-fencing#2: changed/removed 1 line(s) of test file test/smoke.test.mjs: \"import test from 'node:test';import assert from 'node:assert/strict';import {cre\""
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "status": "rejected",
+      "decisions": [
+        {
+          "at": "2026-11-04T11:52:09.029Z",
+          "status": "created",
+          "reason": "patch accepted"
+        },
+        {
+          "at": "2026-11-04T11:52:20.313Z",
+          "status": "screening",
+          "reason": "screening batch a7-auth-rotation, b2-patch-endpoint, b3-pagination, d4-cache-fencing, p1-ticket-batch, p2-handler-migration"
+        },
+        {
+          "at": "2026-11-04T12:07:20.970Z",
+          "status": "rejected",
+          "reason": "critical: integrity: 2 run attempt(s) under C-c004 with task-agent workspace integrity violations (reference stable: 3 in the same scope; context only, never an excuse); task-agent integrity violation train/d4-cache-fencing#2: changed/removed 1 line(s) of test file test/smoke.test.mjs: \"import test from 'node:test';import assert from 'node:assert/strict';import {cre\"; task-agent integrity violation train/d4-cache-fencing#0: changed/removed 1 line(s) of test file test/smoke.test.mjs: \"import test from 'node:test';import assert from 'node:assert/strict';import {cre\""
+        }
+      ],
+      "children": [],
+      "createdAt": "2026-11-04T11:50:05.754Z",
+      "id": "C-c004",
+      "parent": "stable",
+      "origin": "proposer",
+      "strategy": "pareto",
+      "worktree": "/home/arthur/Code/oh-my-pi-extensions/pi-eval-loop/state/explore-real-2/C/worktrees/C-c004",
+      "branch": "eval-loop/candidates/57a623bf/C-c004",
+      "base": "e831a6b2bc19f0c707b55505db33a11b2c9d4d4a",
+      "target": "requirements-generalization",
+      "hypothesis": {
+        "text": "Requiring implementation workers to reconcile every original-request clause with code and request-derived behavioral checks before completion should prevent passing suites from masking omitted contract requirements.",
+        "targetFailureClass": "requirements-generalization",
+        "expectedEffect": "More complete satisfaction of stated contracts, including specified boundaries, invalid inputs and interactions, with fewer completed implementations that omit requirements despite passing their existing checks."
+      },
+      "updatedAt": "2026-11-04T12:07:20.970Z",
+      "proposer": {
+        "usage": {
+          "requests": 12,
+          "completed": 12,
+          "input": 372242,
+          "output": 2416,
+          "cached": 328192,
+          "wallMs": 122624,
+          "guardFired": false,
+          "exit": 0
+        }
+      },
+      "files": [
+        "src/extension/workers.ts"
+      ],
+      "patchKey": "5db40088712cbb8f37c84c7629704b89eeeec9173673a1e1a9d027a76dd1f4b3",
+      "patchSha256": "758fcc8ad774cae21fdd3515c6ca2526606039b6b93349f977a4ee34ba094d85",
+      "patchStats": {
+        "added": 1,
+        "removed": 0
+      },
+      "commit": "e773add4e7daa5b9c8a5b0483a73aae2aeb194aa",
+      "screening": {
+        "rounds": [
+          {
+            "at": "2026-11-04T12:07:20.970Z",
+            "repeats": 3,
+            "tasks": [
+              "a7-auth-rotation",
+              "b2-patch-endpoint",
+              "b3-pagination",
+              "d4-cache-fencing",
+              "p1-ticket-batch",
+              "p2-handler-migration"
+            ],
+            "critical": [
+              "integrity: 2 run attempt(s) under C-c004 with task-agent workspace integrity violations (reference stable: 3 in the same scope; context only, never an excuse)",
+              "task-agent integrity violation train/d4-cache-fencing#2: changed/removed 1 line(s) of test file test/smoke.test.mjs: \"import test from 'node:test';import assert from 'node:assert/strict';import {cre\"",
+              "task-agent integrity violation train/d4-cache-fencing#0: changed/removed 1 line(s) of test file test/smoke.test.mjs: \"import test from 'node:test';import assert from 'node:assert/strict';import {cre\""
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "status": "rejected",
+      "decisions": [
+        {
+          "at": "2026-11-04T12:08:49.148Z",
+          "status": "created",
+          "reason": "patch accepted"
+        },
+        {
+          "at": "2026-11-04T12:09:00.377Z",
+          "status": "screening",
+          "reason": "screening batch a7-auth-rotation, b1-static-traversal, b5-ctx-migration, b6-route-cache, p2-handler-migration, p3-library-features-ko"
+        },
+        {
+          "at": "2026-11-04T12:21:28.728Z",
+          "status": "rejected",
+          "reason": "critical: integrity: 1 run attempt(s) under C-c005 with task-agent workspace integrity violations (reference stable: 0 in the same scope; context only, never an excuse); task-agent integrity violation train/b1-static-traversal#2: changed/removed 1 line(s) of test file test/api.test.js: \"import { resolve } from 'node:path';\""
+        }
+      ],
+      "children": [],
+      "createdAt": "2026-11-04T12:07:21.182Z",
+      "id": "C-c005",
+      "parent": "stable",
+      "origin": "proposer",
+      "strategy": "pareto",
+      "worktree": "/home/arthur/Code/oh-my-pi-extensions/pi-eval-loop/state/explore-real-2/C/worktrees/C-c005",
+      "branch": "eval-loop/candidates/57a623bf/C-c005",
+      "base": "e831a6b2bc19f0c707b55505db33a11b2c9d4d4a",
+      "target": "requirements-generalization",
+      "hypothesis": {
+        "text": "Requiring implementers to map each original requirement clause to implementation and behavioral evidence before completion should expose contract omissions that broad passing checks miss.",
+        "targetFailureClass": "requirements-generalization",
+        "expectedEffect": "More explicit requirement clauses exercised by focused checks and fewer completed implementations with contract violations despite passing project checks."
+      },
+      "updatedAt": "2026-11-04T12:21:28.728Z",
+      "proposer": {
+        "usage": {
+          "requests": 11,
+          "completed": 11,
+          "input": 565737,
+          "output": 2340,
+          "cached": 490496,
+          "wallMs": 87305,
+          "guardFired": false,
+          "exit": 0
+        }
+      },
+      "files": [
+        "src/extension/workers.ts"
+      ],
+      "patchKey": "dda16308d402003dbc53cc581d819b95c01dc3116c18ae9b3d32dfdfed9bb24e",
+      "patchSha256": "3ae982b510fcd99772bd00495613c9ed94b7552dfd841b96e115abcafb81bb5f",
+      "patchStats": {
+        "added": 3,
+        "removed": 1
+      },
+      "commit": "1f365f185de48474f82114e83063819455044ee3",
+      "screening": {
+        "rounds": [
+          {
+            "at": "2026-11-04T12:21:28.728Z",
+            "repeats": 3,
+            "tasks": [
+              "a7-auth-rotation",
+              "b1-static-traversal",
+              "b5-ctx-migration",
+              "b6-route-cache",
+              "p2-handler-migration",
+              "p3-library-features-ko"
+            ],
+            "critical": [
+              "integrity: 1 run attempt(s) under C-c005 with task-agent workspace integrity violations (reference stable: 0 in the same scope; context only, never an excuse)",
+              "task-agent integrity violation train/b1-static-traversal#2: changed/removed 1 line(s) of test file test/api.test.js: \"import { resolve } from 'node:path';\""
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "status": "rejected",
+      "decisions": [
+        {
+          "at": "2026-11-04T12:23:14.782Z",
+          "status": "created",
+          "reason": "patch accepted"
+        },
+        {
+          "at": "2026-11-04T12:23:25.850Z",
+          "status": "screening",
+          "reason": "screening batch a7-auth-rotation, b1-static-traversal, b2-patch-endpoint, b3-pagination, d5-streaming-ingest-ko, p2-handler-migration"
+        },
+        {
+          "at": "2026-11-04T12:35:50.983Z",
+          "status": "rejected",
+          "reason": "critical: integrity: 1 run attempt(s) under C-c006 with task-agent workspace integrity violations (reference stable: 1 in the same scope; context only, never an excuse); task-agent integrity violation train/d5-streaming-ingest-ko#0: changed/removed 1 line(s) of test file test/smoke.test.mjs: \"import test from 'node:test';import assert from 'node:assert/strict';import {rea\""
+        }
+      ],
+      "children": [],
+      "createdAt": "2026-11-04T12:21:28.922Z",
+      "id": "C-c006",
+      "parent": "stable",
+      "origin": "proposer",
+      "strategy": "pareto",
+      "worktree": "/home/arthur/Code/oh-my-pi-extensions/pi-eval-loop/state/explore-real-2/C/worktrees/C-c006",
+      "branch": "eval-loop/candidates/57a623bf/C-c006",
+      "base": "e831a6b2bc19f0c707b55505db33a11b2c9d4d4a",
+      "target": "requirements-generalization",
+      "hypothesis": {
+        "text": "Requiring implementation workers to audit every requested behavioral clause against implementation and request-derived checks before completion should catch omitted boundaries and requirement interactions that passing project checks alone miss.",
+        "targetFailureClass": "requirements-generalization",
+        "expectedEffect": "More completed implementations satisfy the full requested behavior, with fewer untested clauses and overlooked edge cases despite passing project checks."
+      },
+      "updatedAt": "2026-11-04T12:35:50.983Z",
+      "proposer": {
+        "usage": {
+          "requests": 12,
+          "completed": 12,
+          "input": 530505,
+          "output": 2401,
+          "cached": 456448,
+          "wallMs": 105208,
+          "guardFired": false,
+          "exit": 0
+        }
+      },
+      "files": [
+        "src/extension/workers.ts"
+      ],
+      "patchKey": "0bd35671f70f95d52336ec0bd93499e9c41b60a88161afc853b1b0fb50befce6",
+      "patchSha256": "4a1fb6d73a8ed955e691ae33ae597e39661371c74a1e72872f345216e1905b98",
+      "patchStats": {
+        "added": 3,
+        "removed": 0
+      },
+      "commit": "22f8f7efc4bab87afcdde621bd4adc5b9348d909",
+      "screening": {
+        "rounds": [
+          {
+            "at": "2026-11-04T12:35:50.983Z",
+            "repeats": 3,
+            "tasks": [
+              "a7-auth-rotation",
+              "b1-static-traversal",
+              "b2-patch-endpoint",
+              "b3-pagination",
+              "d5-streaming-ingest-ko",
+              "p2-handler-migration"
+            ],
+            "critical": [
+              "integrity: 1 run attempt(s) under C-c006 with task-agent workspace integrity violations (reference stable: 1 in the same scope; context only, never an excuse)",
+              "task-agent integrity violation train/d5-streaming-ingest-ko#0: changed/removed 1 line(s) of test file test/smoke.test.mjs: \"import test from 'node:test';import assert from 'node:assert/strict';import {rea\""
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "status": "rejected",
+      "decisions": [
+        {
+          "at": "2026-11-04T12:37:32.970Z",
+          "status": "created",
+          "reason": "patch accepted"
+        },
+        {
+          "at": "2026-11-04T12:37:44.493Z",
+          "status": "screening",
+          "reason": "screening batch b2-patch-endpoint, b5-ctx-migration, b6-route-cache, d5-streaming-ingest-ko, p2-handler-migration, p3-library-features-ko"
+        },
+        {
+          "at": "2026-11-04T12:48:12.501Z",
+          "status": "rejected",
+          "reason": "critical: integrity: 4 run attempt(s) under C-c007 with task-agent workspace integrity violations (reference stable: 1 in the same scope; context only, never an excuse); task-agent integrity violation train/b5-ctx-migration#0: changed/removed 1 line(s) of test file test/api.test.js: \"import { request } from './helpers.js';\"; task-agent integrity violation train/b5-ctx-migration#2: changed/removed 1 line(s) of test file test/api.test.js: \"import { request } from './helpers.js';\"; task-agent integrity violation train/d5-streaming-ingest-ko#2: changed/removed 1 line(s) of test file test/smoke.test.mjs: \"import test from 'node:test';import assert from 'node:assert/strict';import {rea\""
+        }
+      ],
+      "children": [],
+      "createdAt": "2026-11-04T12:35:51.189Z",
+      "id": "C-c007",
+      "parent": "stable",
+      "origin": "proposer",
+      "strategy": "pareto",
+      "worktree": "/home/arthur/Code/oh-my-pi-extensions/pi-eval-loop/state/explore-real-2/C/worktrees/C-c007",
+      "branch": "eval-loop/candidates/57a623bf/C-c007",
+      "base": "e831a6b2bc19f0c707b55505db33a11b2c9d4d4a",
+      "target": "requirements-generalization",
+      "hypothesis": {
+        "text": "Requiring implementation workers to audit every original requirement clause against code and executed assertions before completion should expose omitted behaviors that passing suites alone leave unchecked.",
+        "targetFailureClass": "requirements-generalization",
+        "expectedEffect": "More stated behaviors receive requirement-derived checks and fixes before completion, reducing contract violations despite passing existing checks."
+      },
+      "updatedAt": "2026-11-04T12:48:12.501Z",
+      "proposer": {
+        "usage": {
+          "requests": 12,
+          "completed": 12,
+          "input": 543224,
+          "output": 2188,
+          "cached": 477440,
+          "wallMs": 101116,
+          "guardFired": false,
+          "exit": 0
+        }
+      },
+      "files": [
+        "src/extension/workers.ts"
+      ],
+      "patchKey": "835ec055c6c1a8fe0758cea5b70b43de35319411694970478b9403a246f25612",
+      "patchSha256": "53ad85cad80a9cd81f1eb592b49b356b63d2cfc43f25189f621d108e32a4e0d5",
+      "patchStats": {
+        "added": 1,
+        "removed": 0
+      },
+      "commit": "8da2d2b62e814c8b98a949fcd2b0df06755a1f4b",
+      "screening": {
+        "rounds": [
+          {
+            "at": "2026-11-04T12:48:12.501Z",
+            "repeats": 3,
+            "tasks": [
+              "b2-patch-endpoint",
+              "b5-ctx-migration",
+              "b6-route-cache",
+              "d5-streaming-ingest-ko",
+              "p2-handler-migration",
+              "p3-library-features-ko"
+            ],
+            "critical": [
+              "integrity: 4 run attempt(s) under C-c007 with task-agent workspace integrity violations (reference stable: 1 in the same scope; context only, never an excuse)",
+              "task-agent integrity violation train/b5-ctx-migration#0: changed/removed 1 line(s) of test file test/api.test.js: \"import { request } from './helpers.js';\"",
+              "task-agent integrity violation train/b5-ctx-migration#2: changed/removed 1 line(s) of test file test/api.test.js: \"import { request } from './helpers.js';\"",
+              "task-agent integrity violation train/d5-streaming-ingest-ko#2: changed/removed 1 line(s) of test file test/smoke.test.mjs: \"import test from 'node:test';import assert from 'node:assert/strict';import {rea\"",
+              "task-agent integrity violation train/d5-streaming-ingest-ko#1: changed/removed 1 line(s) of test file test/smoke.test.mjs: \"import test from 'node:test';import assert from 'node:assert/strict';import {rea\""
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "status": "rejected",
+      "decisions": [
+        {
+          "at": "2026-11-04T12:50:41.655Z",
+          "status": "created",
+          "reason": "patch accepted"
+        },
+        {
+          "at": "2026-11-04T12:50:52.807Z",
+          "status": "screening",
+          "reason": "screening batch b1-static-traversal, b3-pagination, b5-ctx-migration, b6-route-cache, d5-streaming-ingest-ko, p1-ticket-batch"
+        },
+        {
+          "at": "2026-11-04T13:07:03.280Z",
+          "status": "rejected",
+          "reason": "critical: integrity: 3 run attempt(s) under C-c008 with task-agent workspace integrity violations (reference stable: 1 in the same scope; context only, never an excuse); task-agent integrity violation train/b1-static-traversal#0: changed/removed 1 line(s) of test file test/api.test.js: \"import { resolve } from 'node:path';\"; task-agent integrity violation train/b5-ctx-migration#0: changed/removed 1 line(s) of test file test/api.test.js: \"import { request } from './helpers.js';\"; task-agent integrity violation train/d5-streaming-ingest-ko#2: changed/removed 1 line(s) of test file test/smoke.test.mjs: \"import test from 'node:test';import assert from 'node:assert/strict';import {rea\""
+        }
+      ],
+      "children": [],
+      "createdAt": "2026-11-04T12:48:12.719Z",
+      "id": "C-c008",
+      "parent": "stable",
+      "origin": "proposer",
+      "strategy": "pareto",
+      "worktree": "/home/arthur/Code/oh-my-pi-extensions/pi-eval-loop/state/explore-real-2/C/worktrees/C-c008",
+      "branch": "eval-loop/candidates/57a623bf/C-c008",
+      "base": "e831a6b2bc19f0c707b55505db33a11b2c9d4d4a",
+      "target": "requirements-generalization",
+      "hypothesis": {
+        "text": "Requiring implementation workers to check every requested behavior against request-derived executable checks before completion should expose contract gaps that passing existing tests leave undetected.",
+        "targetFailureClass": "requirements-generalization",
+        "expectedEffect": "Completed changes should satisfy more of the stated behavioral contract, with fewer uncovered boundary and requirement-interaction failures despite passing local checks."
+      },
+      "updatedAt": "2026-11-04T13:07:03.280Z",
+      "proposer": {
+        "usage": {
+          "requests": 18,
+          "completed": 18,
+          "input": 796523,
+          "output": 2997,
+          "cached": 717952,
+          "wallMs": 148236,
+          "guardFired": false,
+          "exit": 0
+        }
+      },
+      "files": [
+        "src/extension/workers.ts"
+      ],
+      "patchKey": "4471b4dff7cf27177a50392d16b69be6e8f48dc6c7c4167155432af93bff1772",
+      "patchSha256": "a1de37a4e57f992df7b995925961f84b05ae2209c8a3dd311347a4fbd3b27ac7",
+      "patchStats": {
+        "added": 1,
+        "removed": 0
+      },
+      "commit": "724eb9a141f53810646030b82366641aa90f600f",
+      "screening": {
+        "rounds": [
+          {
+            "at": "2026-11-04T13:07:03.280Z",
+            "repeats": 3,
+            "tasks": [
+              "b1-static-traversal",
+              "b3-pagination",
+              "b5-ctx-migration",
+              "b6-route-cache",
+              "d5-streaming-ingest-ko",
+              "p1-ticket-batch"
+            ],
+            "critical": [
+              "integrity: 3 run attempt(s) under C-c008 with task-agent workspace integrity violations (reference stable: 1 in the same scope; context only, never an excuse)",
+              "task-agent integrity violation train/b1-static-traversal#0: changed/removed 1 line(s) of test file test/api.test.js: \"import { resolve } from 'node:path';\"",
+              "task-agent integrity violation train/b5-ctx-migration#0: changed/removed 1 line(s) of test file test/api.test.js: \"import { request } from './helpers.js';\"",
+              "task-agent integrity violation train/d5-streaming-ingest-ko#2: changed/removed 1 line(s) of test file test/smoke.test.mjs: \"import test from 'node:test';import assert from 'node:assert/strict';import {rea\""
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "status": "rejected",
+      "decisions": [
+        {
+          "at": "2026-11-04T13:08:44.187Z",
+          "status": "created",
+          "reason": "patch accepted"
+        },
+        {
+          "at": "2026-11-04T13:08:55.252Z",
+          "status": "screening",
+          "reason": "screening batch b1-static-traversal, b2-patch-endpoint, b5-ctx-migration, d4-cache-fencing, d5-streaming-ingest-ko, p1-ticket-batch"
+        },
+        {
+          "at": "2026-11-04T13:27:40.655Z",
+          "status": "rejected",
+          "reason": "critical: integrity: 5 run attempt(s) under C-c009 with task-agent workspace integrity violations (reference stable: 4 in the same scope; context only, never an excuse); task-agent integrity violation train/b5-ctx-migration#0: changed/removed 1 line(s) of test file test/api.test.js: \"import { request } from './helpers.js';\"; task-agent integrity violation train/d4-cache-fencing#1: changed/removed 1 line(s) of test file test/smoke.test.mjs: \"import test from 'node:test';import assert from 'node:assert/strict';import {cre\"; task-agent integrity violation train/d5-streaming-ingest-ko#0: changed/removed 1 line(s) of test file test/smoke.test.mjs: \"import test from 'node:test';import assert from 'node:assert/strict';import {rea\""
+        }
+      ],
+      "children": [],
+      "createdAt": "2026-11-04T13:07:03.481Z",
+      "id": "C-c009",
+      "parent": "stable",
+      "origin": "proposer",
+      "strategy": "pareto",
+      "worktree": "/home/arthur/Code/oh-my-pi-extensions/pi-eval-loop/state/explore-real-2/C/worktrees/C-c009",
+      "branch": "eval-loop/candidates/57a623bf/C-c009",
+      "base": "e831a6b2bc19f0c707b55505db33a11b2c9d4d4a",
+      "target": "requirements-generalization",
+      "hypothesis": {
+        "text": "Requiring implementation workers to audit every requested behavioral clause against code and request-derived executed assertions before completion should expose contract gaps that passing existing tests leave undetected.",
+        "targetFailureClass": "requirements-generalization",
+        "expectedEffect": "More completed implementations satisfy the full requested contract, with fewer missed boundaries, rejection cases and requirement interactions despite passing project checks."
+      },
+      "updatedAt": "2026-11-04T13:27:40.655Z",
+      "proposer": {
+        "usage": {
+          "requests": 13,
+          "completed": 13,
+          "input": 651081,
+          "output": 1961,
+          "cached": 578048,
+          "wallMs": 99984,
+          "guardFired": false,
+          "exit": 0
+        }
+      },
+      "files": [
+        "src/extension/workers.ts"
+      ],
+      "patchKey": "db52a13ea13f3a6ae19484dfe67edd7d560db4c65375675503bf1818661eca4f",
+      "patchSha256": "823a3ead9d8d1383a631f53f2b3eefac7e508317ac6da14db262b319d1cfc1a3",
+      "patchStats": {
+        "added": 1,
+        "removed": 0
+      },
+      "commit": "d2950493890a565c6613e1f4314b5cdf37046345",
+      "screening": {
+        "rounds": [
+          {
+            "at": "2026-11-04T13:27:40.655Z",
+            "repeats": 3,
+            "tasks": [
+              "b1-static-traversal",
+              "b2-patch-endpoint",
+              "b5-ctx-migration",
+              "d4-cache-fencing",
+              "d5-streaming-ingest-ko",
+              "p1-ticket-batch"
+            ],
+            "critical": [
+              "integrity: 5 run attempt(s) under C-c009 with task-agent workspace integrity violations (reference stable: 4 in the same scope; context only, never an excuse)",
+              "task-agent integrity violation train/b5-ctx-migration#0: changed/removed 1 line(s) of test file test/api.test.js: \"import { request } from './helpers.js';\"",
+              "task-agent integrity violation train/d4-cache-fencing#1: changed/removed 1 line(s) of test file test/smoke.test.mjs: \"import test from 'node:test';import assert from 'node:assert/strict';import {cre\"",
+              "task-agent integrity violation train/d5-streaming-ingest-ko#0: changed/removed 1 line(s) of test file test/smoke.test.mjs: \"import test from 'node:test';import assert from 'node:assert/strict';import {rea\"",
+              "task-agent integrity violation train/d5-streaming-ingest-ko#1: changed/removed 1 line(s) of test file test/smoke.test.mjs: \"import test from 'node:test';import assert from 'node:assert/strict';import {rea\"",
+              "task-agent integrity violation train/d5-streaming-ingest-ko#2: changed/removed 1 line(s) of test file test/smoke.test.mjs: \"import test from 'node:test';import assert from 'node:assert/strict';import {rea\""
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "status": "rejected",
+      "decisions": [
+        {
+          "at": "2026-11-04T13:29:20.642Z",
+          "status": "created",
+          "reason": "patch accepted"
+        },
+        {
+          "at": "2026-11-04T13:29:31.691Z",
+          "status": "screening",
+          "reason": "screening batch b1-static-traversal, b2-patch-endpoint, b3-pagination, b5-ctx-migration, p1-ticket-batch, p2-handler-migration"
+        },
+        {
+          "at": "2026-11-04T13:44:03.042Z",
+          "status": "rejected",
+          "reason": "critical: integrity: 1 run attempt(s) under C-c010 with task-agent workspace integrity violations (reference stable: 0 in the same scope; context only, never an excuse); task-agent integrity violation train/b1-static-traversal#0: changed/removed 1 line(s) of test file test/api.test.js: \"import { resolve } from 'node:path';\""
+        }
+      ],
+      "children": [],
+      "createdAt": "2026-11-04T13:27:40.857Z",
+      "id": "C-c010",
+      "parent": "stable",
+      "origin": "proposer",
+      "strategy": "pareto",
+      "worktree": "/home/arthur/Code/oh-my-pi-extensions/pi-eval-loop/state/explore-real-2/C/worktrees/C-c010",
+      "branch": "eval-loop/candidates/57a623bf/C-c010",
+      "base": "e831a6b2bc19f0c707b55505db33a11b2c9d4d4a",
+      "target": "requirements-generalization",
+      "hypothesis": {
+        "text": "Requiring implementation workers to derive checks from every behavioral clause of the original request and close boundary and rule-interaction gaps before completion should prevent passing suites from masking incomplete implementations.",
+        "targetFailureClass": "requirements-generalization",
+        "expectedEffect": "More requested behaviors, boundary cases and rule interactions work correctly even when the existing suite does not exercise them."
+      },
+      "updatedAt": "2026-11-04T13:44:03.042Z",
+      "proposer": {
+        "usage": {
+          "requests": 10,
+          "completed": 10,
+          "input": 260743,
+          "output": 1816,
+          "cached": 220544,
+          "wallMs": 99087,
+          "guardFired": false,
+          "exit": 0
+        }
+      },
+      "files": [
+        "src/orchestration/prompts.ts"
+      ],
+      "patchKey": "6c14fc644c97303b8252543b4b29e3a5c16a1b017d696009a8e6122241462e0c",
+      "patchSha256": "87a335d10bc8ffcddfce07cf67931ec0266388836b1e7793943f726e0a6a929e",
+      "patchStats": {
+        "added": 2,
+        "removed": 1
+      },
+      "commit": "7964058c69dba766ecaee9f85b8dbb42c4ec365d",
+      "screening": {
+        "rounds": [
+          {
+            "at": "2026-11-04T13:44:03.042Z",
+            "repeats": 3,
+            "tasks": [
+              "b1-static-traversal",
+              "b2-patch-endpoint",
+              "b3-pagination",
+              "b5-ctx-migration",
+              "p1-ticket-batch",
+              "p2-handler-migration"
+            ],
+            "critical": [
+              "integrity: 1 run attempt(s) under C-c010 with task-agent workspace integrity violations (reference stable: 0 in the same scope; context only, never an excuse)",
+              "task-agent integrity violation train/b1-static-traversal#0: changed/removed 1 line(s) of test file test/api.test.js: \"import { resolve } from 'node:path';\""
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "status": "baseline",
+      "decisions": [],
+      "children": [],
+      "createdAt": "2026-11-04T10:01:21.141Z",
+      "id": "multi3",
+      "parent": null,
+      "origin": "control",
+      "kind": "control",
+      "harness": {
+        "id": "multi3",
+        "kind": "multi",
+        "k": 3
+      },
+      "hypothesis": null,
+      "updatedAt": "2026-11-04T10:01:21.141Z"
+    },
+    {
+      "status": "baseline",
+      "decisions": [],
+      "children": [],
+      "createdAt": "2026-11-04T10:01:21.137Z",
+      "id": "pure",
+      "parent": null,
+      "origin": "control",
+      "kind": "control",
+      "harness": {
+        "id": "pure",
+        "kind": "pure"
+      },
+      "hypothesis": null,
+      "updatedAt": "2026-11-04T10:01:21.137Z"
+    },
+    {
+      "status": "baseline",
+      "decisions": [],
+      "children": [
+        "C-c001",
+        "C-c002",
+        "C-c003",
+        "C-c004",
+        "C-c005",
+        "C-c006",
+        "C-c007",
+        "C-c008",
+        "C-c009",
+        "C-c010"
+      ],
+      "createdAt": "2026-11-04T10:01:21.134Z",
+      "id": "stable",
+      "parent": null,
+      "origin": "baseline",
+      "commit": "e831a6b2bc19f0c707b55505db33a11b2c9d4d4a",
+      "hypothesis": null,
+      "updatedAt": "2026-11-04T13:27:40.861Z",
+      "development": {
+        "tasks": 16,
+        "repeats": 3,
+        "point": {
+          "overall": 0.8125,
+          "hard": 0.5555555555555555,
+          "consistency": 0.7291666666666666
+        },
+        "posterior": {
+          "overall": {
+            "point": 0.8125,
+            "mean": 0.8113733619369942,
+            "lo95": 0.6239345786607347,
+            "hi95": 0.9385695303070737
+          },
+          "hard": {
+            "point": 0.5555555555555555,
+            "mean": 0.5544095253523946,
+            "lo95": 0.25954682608320845,
+            "hi95": 0.8287331245129108
+          },
+          "consistency": {
+            "point": 0.7291666666666666,
+            "mean": 0.7489307693184887,
+            "lo95": 0.5329595739219662,
+            "hi95": 0.9098109265283525
+          }
+        },
+        "qualified": true,
+        "reasons": [
+          "baseline"
+        ],
+        "summary": {
+          "candidate_id": "stable",
+          "split": "dev",
+          "runs": 48,
+          "tasks": 16,
+          "task_success": 39,
+          "success_rate": 0.8125,
+          "hidden_test_pass": 46,
+          "mean_correctness": 0.9869791666666666,
+          "repeat_success_rate": 0.7291666666666666,
+          "all_repeats_pass_tasks": 10,
+          "hard_task_success_rate": 0.5555555555555556,
+          "regression_count": 0,
+          "critical_failure_count": 7,
+          "integrity_violations": 7,
+          "integrity_violation_runs": 7,
+          "attempts_used": 48,
+          "terminal": {
+            "completed": 48
+          },
+          "infra_rate": 0,
+          "input_tokens": 7502081,
+          "output_tokens": 172695,
+          "cache_tokens": 6112000,
+          "model_requests": 889,
+          "wall_time_ms": 5029415,
+          "simulated_runs": 0
+        }
+      }
+    }
+  ],
+  "front": [
+    "stable"
+  ],
+  "selection": {
+    "at": "2026-11-04T13:44:03.069Z",
+    "considered": [],
+    "eligible": [],
+    "criticalExcluded": [],
+    "selected": null,
+    "reason": "no development-qualified, critical-clean candidate without family regression"
+  },
+  "final": {
+    "candidate": null,
+    "verdict": "BLOCKED",
+    "adopt": false,
+    "explorationOnly": true,
+    "exploration": "no candidate selected (no development-qualified, critical-clean candidate without family regression)",
+    "reasons": [
+      "exploration-only protocol (datasets.holdout = null): no unconsumed independent holdout is available, so no candidate can be validated or deployed; a development selection is not evidence of improvement"
+    ]
+  },
+  "searchStop": "no meaningful progress in 10 consecutive candidates",
+  "counters": {
+    "candidates": 10,
+    "noProgress": 10,
+    "consecutiveInfra": 0
+  },
+  "deployHistory": [],
+  "proposerUsage": {
+    "requests": 120,
+    "input": 5246383,
+    "output": 23258
+  },
+  "ledgerIntegrity": {
+    "runsLedger": [],
+    "events": []
+  },
+  "runs": 390
+}

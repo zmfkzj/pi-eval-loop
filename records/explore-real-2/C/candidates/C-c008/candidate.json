@@ -1,0 +1,80 @@
+{
+  "status": "rejected",
+  "decisions": [
+    {
+      "at": "2026-11-04T12:50:41.655Z",
+      "status": "created",
+      "reason": "patch accepted"
+    },
+    {
+      "at": "2026-11-04T12:50:52.807Z",
+      "status": "screening",
+      "reason": "screening batch b1-static-traversal, b3-pagination, b5-ctx-migration, b6-route-cache, d5-streaming-ingest-ko, p1-ticket-batch"
+    },
+    {
+      "at": "2026-11-04T13:07:03.280Z",
+      "status": "rejected",
+      "reason": "critical: integrity: 3 run attempt(s) under C-c008 with task-agent workspace integrity violations (reference stable: 1 in the same scope; context only, never an excuse); task-agent integrity violation train/b1-static-traversal#0: changed/removed 1 line(s) of test file test/api.test.js: \"import { resolve } from 'node:path';\"; task-agent integrity violation train/b5-ctx-migration#0: changed/removed 1 line(s) of test file test/api.test.js: \"import { request } from './helpers.js';\"; task-agent integrity violation train/d5-streaming-ingest-ko#2: changed/removed 1 line(s) of test file test/smoke.test.mjs: \"import test from 'node:test';import assert from 'node:assert/strict';import {rea\""
+    }
+  ],
+  "children": [],
+  "createdAt": "2026-11-04T12:48:12.719Z",
+  "id": "C-c008",
+  "parent": "stable",
+  "origin": "proposer",
+  "strategy": "pareto",
+  "worktree": "/home/arthur/Code/oh-my-pi-extensions/pi-eval-loop/state/explore-real-2/C/worktrees/C-c008",
+  "branch": "eval-loop/candidates/57a623bf/C-c008",
+  "base": "e831a6b2bc19f0c707b55505db33a11b2c9d4d4a",
+  "target": "requirements-generalization",
+  "hypothesis": {
+    "text": "Requiring implementation workers to check every requested behavior against request-derived executable checks before completion should expose contract gaps that passing existing tests leave undetected.",
+    "targetFailureClass": "requirements-generalization",
+    "expectedEffect": "Completed changes should satisfy more of the stated behavioral contract, with fewer uncovered boundary and requirement-interaction failures despite passing local checks."
+  },
+  "updatedAt": "2026-11-04T13:07:03.280Z",
+  "proposer": {
+    "usage": {
+      "requests": 18,
+      "completed": 18,
+      "input": 796523,
+      "output": 2997,
+      "cached": 717952,
+      "wallMs": 148236,
+      "guardFired": false,
+      "exit": 0
+    }
+  },
+  "files": [
+    "src/extension/workers.ts"
+  ],
+  "patchKey": "4471b4dff7cf27177a50392d16b69be6e8f48dc6c7c4167155432af93bff1772",
+  "patchSha256": "a1de37a4e57f992df7b995925961f84b05ae2209c8a3dd311347a4fbd3b27ac7",
+  "patchStats": {
+    "added": 1,
+    "removed": 0
+  },
+  "commit": "724eb9a141f53810646030b82366641aa90f600f",
+  "screening": {
+    "rounds": [
+      {
+        "at": "2026-11-04T13:07:03.280Z",
+        "repeats": 3,
+        "tasks": [
+          "b1-static-traversal",
+          "b3-pagination",
+          "b5-ctx-migration",
+          "b6-route-cache",
+          "d5-streaming-ingest-ko",
+          "p1-ticket-batch"
+        ],
+        "critical": [
+          "integrity: 3 run attempt(s) under C-c008 with task-agent workspace integrity violations (reference stable: 1 in the same scope; context only, never an excuse)",
+          "task-agent integrity violation train/b1-static-traversal#0: changed/removed 1 line(s) of test file test/api.test.js: \"import { resolve } from 'node:path';\"",
+          "task-agent integrity violation train/b5-ctx-migration#0: changed/removed 1 line(s) of test file test/api.test.js: \"import { request } from './helpers.js';\"",
+          "task-agent integrity violation train/d5-streaming-ingest-ko#2: changed/removed 1 line(s) of test file test/smoke.test.mjs: \"import test from 'node:test';import assert from 'node:assert/strict';import {rea\""
+        ]
+      }
+    ]
+  }
+}

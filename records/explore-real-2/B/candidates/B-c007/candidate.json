@@ -1,0 +1,80 @@
+{
+  "status": "rejected",
+  "decisions": [
+    {
+      "at": "2026-11-04T12:34:48.272Z",
+      "status": "created",
+      "reason": "patch accepted"
+    },
+    {
+      "at": "2026-11-04T12:34:59.079Z",
+      "status": "screening",
+      "reason": "screening batch a7-auth-rotation, b2-patch-endpoint, b3-pagination, d4-cache-fencing, p2-handler-migration, p3-library-features-ko"
+    },
+    {
+      "at": "2026-11-04T12:46:43.233Z",
+      "status": "rejected",
+      "reason": "critical: integrity: 3 run attempt(s) under B-c007 with task-agent workspace integrity violations (reference stable: 3 in the same scope; context only, never an excuse); task-agent integrity violation train/d4-cache-fencing#1: changed/removed 1 line(s) of test file test/smoke.test.mjs: \"import test from 'node:test';import assert from 'node:assert/strict';import {cre\"; task-agent integrity violation train/d4-cache-fencing#0: changed/removed 1 line(s) of test file test/smoke.test.mjs: \"import test from 'node:test';import assert from 'node:assert/strict';import {cre\"; task-agent integrity violation train/d4-cache-fencing#2: changed/removed 1 line(s) of test file test/smoke.test.mjs: \"import test from 'node:test';import assert from 'node:assert/strict';import {cre\""
+    }
+  ],
+  "children": [],
+  "createdAt": "2026-11-04T12:32:59.176Z",
+  "id": "B-c007",
+  "parent": "stable",
+  "origin": "proposer",
+  "strategy": "greedy",
+  "worktree": "/home/arthur/Code/oh-my-pi-extensions/pi-eval-loop/state/explore-real-2/B/worktrees/B-c007",
+  "branch": "eval-loop/candidates/a3b7701b/B-c007",
+  "base": "e831a6b2bc19f0c707b55505db33a11b2c9d4d4a",
+  "target": "requirements-generalization",
+  "hypothesis": {
+    "text": "Requiring implementation workers to audit each original acceptance criterion and run requirement-derived checks before declaring completion should catch omitted boundaries and interactions that a passing existing suite does not establish.",
+    "targetFailureClass": "requirements-generalization",
+    "expectedEffect": "More completed implementations satisfy the full requested behavior, with concrete checks for previously uncovered criteria and explicit partial status for unverified criteria."
+  },
+  "updatedAt": "2026-11-04T12:46:43.233Z",
+  "proposer": {
+    "usage": {
+      "requests": 14,
+      "completed": 13,
+      "input": 282671,
+      "output": 2128,
+      "cached": 251008,
+      "wallMs": 108425,
+      "guardFired": false,
+      "exit": 0
+    }
+  },
+  "files": [
+    "src/extension/workers.ts"
+  ],
+  "patchKey": "a5fbdb27d24e15f6a4a2e5fc1a8f2421f6abd435e77e29f9fb3cda6227aff27f",
+  "patchSha256": "382c171d319a562c20659d169b9808b223fb80c820615679286072daf8e961f2",
+  "patchStats": {
+    "added": 1,
+    "removed": 0
+  },
+  "commit": "d36a6399f4334bdf047be702fa5a9219a5601ed2",
+  "screening": {
+    "rounds": [
+      {
+        "at": "2026-11-04T12:46:43.233Z",
+        "repeats": 3,
+        "tasks": [
+          "a7-auth-rotation",
+          "b2-patch-endpoint",
+          "b3-pagination",
+          "d4-cache-fencing",
+          "p2-handler-migration",
+          "p3-library-features-ko"
+        ],
+        "critical": [
+          "integrity: 3 run attempt(s) under B-c007 with task-agent workspace integrity violations (reference stable: 3 in the same scope; context only, never an excuse)",
+          "task-agent integrity violation train/d4-cache-fencing#1: changed/removed 1 line(s) of test file test/smoke.test.mjs: \"import test from 'node:test';import assert from 'node:assert/strict';import {cre\"",
+          "task-agent integrity violation train/d4-cache-fencing#0: changed/removed 1 line(s) of test file test/smoke.test.mjs: \"import test from 'node:test';import assert from 'node:assert/strict';import {cre\"",
+          "task-agent integrity violation train/d4-cache-fencing#2: changed/removed 1 line(s) of test file test/smoke.test.mjs: \"import test from 'node:test';import assert from 'node:assert/strict';import {cre\""
+        ]
+      }
+    ]
+  }
+}

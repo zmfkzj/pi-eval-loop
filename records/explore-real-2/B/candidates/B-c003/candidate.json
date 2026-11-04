@@ -1,0 +1,83 @@
+{
+  "status": "rejected",
+  "decisions": [
+    {
+      "at": "2026-11-04T11:28:08.958Z",
+      "status": "created",
+      "reason": "patch accepted"
+    },
+    {
+      "at": "2026-11-04T11:28:19.612Z",
+      "status": "screening",
+      "reason": "screening batch b5-ctx-migration, d4-cache-fencing, d5-streaming-ingest-ko, p1-ticket-batch, p2-handler-migration, p3-library-features-ko"
+    },
+    {
+      "at": "2026-11-04T11:44:40.941Z",
+      "status": "rejected",
+      "reason": "critical: integrity: 6 run attempt(s) under B-c003 with task-agent workspace integrity violations (reference stable: 4 in the same scope; context only, never an excuse); task-agent integrity violation train/d4-cache-fencing#2: changed/removed 1 line(s) of test file test/smoke.test.mjs: \"import test from 'node:test';import assert from 'node:assert/strict';import {cre\"; task-agent integrity violation train/d4-cache-fencing#1: changed/removed 1 line(s) of test file test/smoke.test.mjs: \"import test from 'node:test';import assert from 'node:assert/strict';import {cre\"; task-agent integrity violation train/b5-ctx-migration#0: changed/removed 1 line(s) of test file test/api.test.js: \"import { request } from './helpers.js';\""
+    }
+  ],
+  "children": [],
+  "createdAt": "2026-11-04T11:26:20.781Z",
+  "id": "B-c003",
+  "parent": "stable",
+  "origin": "proposer",
+  "strategy": "greedy",
+  "worktree": "/home/arthur/Code/oh-my-pi-extensions/pi-eval-loop/state/explore-real-2/B/worktrees/B-c003",
+  "branch": "eval-loop/candidates/a3b7701b/B-c003",
+  "base": "e831a6b2bc19f0c707b55505db33a11b2c9d4d4a",
+  "target": "requirements-generalization",
+  "hypothesis": {
+    "text": "Requiring implementation workers to audit every original requirement against code and request-derived assertions before completion should catch contract omissions that passing existing checks leave unexercised.",
+    "targetFailureClass": "requirements-generalization",
+    "expectedEffect": "More completed changes satisfy the full requested contract, with fewer missed boundary, invalid-input, failure-path and interaction behaviors despite passing existing checks."
+  },
+  "updatedAt": "2026-11-04T11:44:40.941Z",
+  "proposer": {
+    "usage": {
+      "requests": 12,
+      "completed": 11,
+      "input": 443753,
+      "output": 1741,
+      "cached": 375424,
+      "wallMs": 107555,
+      "guardFired": false,
+      "exit": 0
+    }
+  },
+  "files": [
+    "src/extension/workers.ts"
+  ],
+  "patchKey": "9d4f7861848b424201d87586dbd69d9abf17f48e63d6e1434544fbcc10d09374",
+  "patchSha256": "5c3ee27a5d9b633eb65feb8782a865dda0f7751b7f5a35f5fea3901d9894b9e9",
+  "patchStats": {
+    "added": 2,
+    "removed": 0
+  },
+  "commit": "a652769f6be95b9236d8f64cc71d808372ff6215",
+  "screening": {
+    "rounds": [
+      {
+        "at": "2026-11-04T11:44:40.941Z",
+        "repeats": 3,
+        "tasks": [
+          "b5-ctx-migration",
+          "d4-cache-fencing",
+          "d5-streaming-ingest-ko",
+          "p1-ticket-batch",
+          "p2-handler-migration",
+          "p3-library-features-ko"
+        ],
+        "critical": [
+          "integrity: 6 run attempt(s) under B-c003 with task-agent workspace integrity violations (reference stable: 4 in the same scope; context only, never an excuse)",
+          "task-agent integrity violation train/d4-cache-fencing#2: changed/removed 1 line(s) of test file test/smoke.test.mjs: \"import test from 'node:test';import assert from 'node:assert/strict';import {cre\"",
+          "task-agent integrity violation train/d4-cache-fencing#1: changed/removed 1 line(s) of test file test/smoke.test.mjs: \"import test from 'node:test';import assert from 'node:assert/strict';import {cre\"",
+          "task-agent integrity violation train/b5-ctx-migration#0: changed/removed 1 line(s) of test file test/api.test.js: \"import { request } from './helpers.js';\"",
+          "task-agent integrity violation train/d4-cache-fencing#0: changed/removed 1 line(s) of test file test/smoke.test.mjs: \"import test from 'node:test';import assert from 'node:assert/strict';import {cre\"",
+          "task-agent integrity violation train/d5-streaming-ingest-ko#0: changed/removed 1 line(s) of test file test/smoke.test.mjs: \"import test from 'node:test';import assert from 'node:assert/strict';import {rea\"",
+          "task-agent integrity violation train/d5-streaming-ingest-ko#2: changed/removed 1 line(s) of test file test/smoke.test.mjs: \"import test from 'node:test';import assert from 'node:assert/strict';import {rea\""
+        ]
+      }
+    ]
+  }
+}

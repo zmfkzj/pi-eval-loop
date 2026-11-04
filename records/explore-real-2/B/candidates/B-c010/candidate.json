@@ -1,0 +1,79 @@
+{
+  "status": "rejected",
+  "decisions": [
+    {
+      "at": "2026-11-04T13:20:35.453Z",
+      "status": "created",
+      "reason": "patch accepted"
+    },
+    {
+      "at": "2026-11-04T13:20:46.387Z",
+      "status": "screening",
+      "reason": "screening batch a7-auth-rotation, b6-route-cache, d4-cache-fencing, d5-streaming-ingest-ko, p1-ticket-batch, p2-handler-migration"
+    },
+    {
+      "at": "2026-11-04T13:35:14.046Z",
+      "status": "rejected",
+      "reason": "critical: integrity: 2 run attempt(s) under B-c010 with task-agent workspace integrity violations (reference stable: 4 in the same scope; context only, never an excuse); task-agent integrity violation train/d4-cache-fencing#2: changed/removed 1 line(s) of test file test/smoke.test.mjs: \"import test from 'node:test';import assert from 'node:assert/strict';import {cre\"; task-agent integrity violation train/d5-streaming-ingest-ko#1: changed/removed 1 line(s) of test file test/smoke.test.mjs: \"import test from 'node:test';import assert from 'node:assert/strict';import {rea\""
+    }
+  ],
+  "children": [],
+  "createdAt": "2026-11-04T13:18:19.598Z",
+  "id": "B-c010",
+  "parent": "stable",
+  "origin": "proposer",
+  "strategy": "greedy",
+  "worktree": "/home/arthur/Code/oh-my-pi-extensions/pi-eval-loop/state/explore-real-2/B/worktrees/B-c010",
+  "branch": "eval-loop/candidates/a3b7701b/B-c010",
+  "base": "e831a6b2bc19f0c707b55505db33a11b2c9d4d4a",
+  "target": "requirements-generalization",
+  "hypothesis": {
+    "text": "Requiring implementation workers to audit every original-request behavioral clause and exercise uncovered clauses before completion should prevent passing suites from masking incomplete contract implementations.",
+    "targetFailureClass": "requirements-generalization",
+    "expectedEffect": "More completed implementations satisfy the full requested behavior, with executed checks covering previously unexercised boundaries, rejection cases and interactions."
+  },
+  "updatedAt": "2026-11-04T13:35:14.046Z",
+  "proposer": {
+    "usage": {
+      "requests": 16,
+      "completed": 16,
+      "input": 822060,
+      "output": 2421,
+      "cached": 742656,
+      "wallMs": 135121,
+      "guardFired": false,
+      "exit": 0
+    }
+  },
+  "files": [
+    "src/extension/workers.ts"
+  ],
+  "patchKey": "9ab2199d25f7af4967996e7ca0aff9daf80ffe6396e3f3056b8c006fc94b4357",
+  "patchSha256": "f3461c57ec19f8ea38935c552f119d4ddd31f6bbab4185e09898de886678888f",
+  "patchStats": {
+    "added": 2,
+    "removed": 0
+  },
+  "commit": "f54377a7a4b043d7eb39b9048044fa91593effa1",
+  "screening": {
+    "rounds": [
+      {
+        "at": "2026-11-04T13:35:14.046Z",
+        "repeats": 3,
+        "tasks": [
+          "a7-auth-rotation",
+          "b6-route-cache",
+          "d4-cache-fencing",
+          "d5-streaming-ingest-ko",
+          "p1-ticket-batch",
+          "p2-handler-migration"
+        ],
+        "critical": [
+          "integrity: 2 run attempt(s) under B-c010 with task-agent workspace integrity violations (reference stable: 4 in the same scope; context only, never an excuse)",
+          "task-agent integrity violation train/d4-cache-fencing#2: changed/removed 1 line(s) of test file test/smoke.test.mjs: \"import test from 'node:test';import assert from 'node:assert/strict';import {cre\"",
+          "task-agent integrity violation train/d5-streaming-ingest-ko#1: changed/removed 1 line(s) of test file test/smoke.test.mjs: \"import test from 'node:test';import assert from 'node:assert/strict';import {rea\""
+        ]
+      }
+    ]
+  }
+}

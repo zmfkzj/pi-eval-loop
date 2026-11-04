@@ -1,0 +1,78 @@
+{
+  "status": "rejected",
+  "decisions": [
+    {
+      "at": "2026-11-04T12:08:49.148Z",
+      "status": "created",
+      "reason": "patch accepted"
+    },
+    {
+      "at": "2026-11-04T12:09:00.377Z",
+      "status": "screening",
+      "reason": "screening batch a7-auth-rotation, b1-static-traversal, b5-ctx-migration, b6-route-cache, p2-handler-migration, p3-library-features-ko"
+    },
+    {
+      "at": "2026-11-04T12:21:28.728Z",
+      "status": "rejected",
+      "reason": "critical: integrity: 1 run attempt(s) under C-c005 with task-agent workspace integrity violations (reference stable: 0 in the same scope; context only, never an excuse); task-agent integrity violation train/b1-static-traversal#2: changed/removed 1 line(s) of test file test/api.test.js: \"import { resolve } from 'node:path';\""
+    }
+  ],
+  "children": [],
+  "createdAt": "2026-11-04T12:07:21.182Z",
+  "id": "C-c005",
+  "parent": "stable",
+  "origin": "proposer",
+  "strategy": "pareto",
+  "worktree": "/home/arthur/Code/oh-my-pi-extensions/pi-eval-loop/state/explore-real-2/C/worktrees/C-c005",
+  "branch": "eval-loop/candidates/57a623bf/C-c005",
+  "base": "e831a6b2bc19f0c707b55505db33a11b2c9d4d4a",
+  "target": "requirements-generalization",
+  "hypothesis": {
+    "text": "Requiring implementers to map each original requirement clause to implementation and behavioral evidence before completion should expose contract omissions that broad passing checks miss.",
+    "targetFailureClass": "requirements-generalization",
+    "expectedEffect": "More explicit requirement clauses exercised by focused checks and fewer completed implementations with contract violations despite passing project checks."
+  },
+  "updatedAt": "2026-11-04T12:21:28.728Z",
+  "proposer": {
+    "usage": {
+      "requests": 11,
+      "completed": 11,
+      "input": 565737,
+      "output": 2340,
+      "cached": 490496,
+      "wallMs": 87305,
+      "guardFired": false,
+      "exit": 0
+    }
+  },
+  "files": [
+    "src/extension/workers.ts"
+  ],
+  "patchKey": "dda16308d402003dbc53cc581d819b95c01dc3116c18ae9b3d32dfdfed9bb24e",
+  "patchSha256": "3ae982b510fcd99772bd00495613c9ed94b7552dfd841b96e115abcafb81bb5f",
+  "patchStats": {
+    "added": 3,
+    "removed": 1
+  },
+  "commit": "1f365f185de48474f82114e83063819455044ee3",
+  "screening": {
+    "rounds": [
+      {
+        "at": "2026-11-04T12:21:28.728Z",
+        "repeats": 3,
+        "tasks": [
+          "a7-auth-rotation",
+          "b1-static-traversal",
+          "b5-ctx-migration",
+          "b6-route-cache",
+          "p2-handler-migration",
+          "p3-library-features-ko"
+        ],
+        "critical": [
+          "integrity: 1 run attempt(s) under C-c005 with task-agent workspace integrity violations (reference stable: 0 in the same scope; context only, never an excuse)",
+          "task-agent integrity violation train/b1-static-traversal#2: changed/removed 1 line(s) of test file test/api.test.js: \"import { resolve } from 'node:path';\""
+        ]
+      }
+    ]
+  }
+}

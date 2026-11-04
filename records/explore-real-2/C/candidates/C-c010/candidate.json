@@ -1,0 +1,78 @@
+{
+  "status": "rejected",
+  "decisions": [
+    {
+      "at": "2026-11-04T13:29:20.642Z",
+      "status": "created",
+      "reason": "patch accepted"
+    },
+    {
+      "at": "2026-11-04T13:29:31.691Z",
+      "status": "screening",
+      "reason": "screening batch b1-static-traversal, b2-patch-endpoint, b3-pagination, b5-ctx-migration, p1-ticket-batch, p2-handler-migration"
+    },
+    {
+      "at": "2026-11-04T13:44:03.042Z",
+      "status": "rejected",
+      "reason": "critical: integrity: 1 run attempt(s) under C-c010 with task-agent workspace integrity violations (reference stable: 0 in the same scope; context only, never an excuse); task-agent integrity violation train/b1-static-traversal#0: changed/removed 1 line(s) of test file test/api.test.js: \"import { resolve } from 'node:path';\""
+    }
+  ],
+  "children": [],
+  "createdAt": "2026-11-04T13:27:40.857Z",
+  "id": "C-c010",
+  "parent": "stable",
+  "origin": "proposer",
+  "strategy": "pareto",
+  "worktree": "/home/arthur/Code/oh-my-pi-extensions/pi-eval-loop/state/explore-real-2/C/worktrees/C-c010",
+  "branch": "eval-loop/candidates/57a623bf/C-c010",
+  "base": "e831a6b2bc19f0c707b55505db33a11b2c9d4d4a",
+  "target": "requirements-generalization",
+  "hypothesis": {
+    "text": "Requiring implementation workers to derive checks from every behavioral clause of the original request and close boundary and rule-interaction gaps before completion should prevent passing suites from masking incomplete implementations.",
+    "targetFailureClass": "requirements-generalization",
+    "expectedEffect": "More requested behaviors, boundary cases and rule interactions work correctly even when the existing suite does not exercise them."
+  },
+  "updatedAt": "2026-11-04T13:44:03.042Z",
+  "proposer": {
+    "usage": {
+      "requests": 10,
+      "completed": 10,
+      "input": 260743,
+      "output": 1816,
+      "cached": 220544,
+      "wallMs": 99087,
+      "guardFired": false,
+      "exit": 0
+    }
+  },
+  "files": [
+    "src/orchestration/prompts.ts"
+  ],
+  "patchKey": "6c14fc644c97303b8252543b4b29e3a5c16a1b017d696009a8e6122241462e0c",
+  "patchSha256": "87a335d10bc8ffcddfce07cf67931ec0266388836b1e7793943f726e0a6a929e",
+  "patchStats": {
+    "added": 2,
+    "removed": 1
+  },
+  "commit": "7964058c69dba766ecaee9f85b8dbb42c4ec365d",
+  "screening": {
+    "rounds": [
+      {
+        "at": "2026-11-04T13:44:03.042Z",
+        "repeats": 3,
+        "tasks": [
+          "b1-static-traversal",
+          "b2-patch-endpoint",
+          "b3-pagination",
+          "b5-ctx-migration",
+          "p1-ticket-batch",
+          "p2-handler-migration"
+        ],
+        "critical": [
+          "integrity: 1 run attempt(s) under C-c010 with task-agent workspace integrity violations (reference stable: 0 in the same scope; context only, never an excuse)",
+          "task-agent integrity violation train/b1-static-traversal#0: changed/removed 1 line(s) of test file test/api.test.js: \"import { resolve } from 'node:path';\""
+        ]
+      }
+    ]
+  }
+}

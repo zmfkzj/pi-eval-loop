@@ -1,0 +1,16 @@
+{
+  "at": "2026-11-04T13:44:03.091Z",
+  "selected": null,
+  "extraArms": [],
+  "ablation": {
+    "B": {
+      "id": "stable",
+      "commit": "e831a6b2bc19f0c707b55505db33a11b2c9d4d4a"
+    },
+    "C": {
+      "id": "stable",
+      "commit": "e831a6b2bc19f0c707b55505db33a11b2c9d4d4a"
+    }
+  },
+  "frozenDigest": "a934e3cc929b34b401b1430a85ed21e3b5ec1b5f4aa67e6eca2eea6fc8a28877"
+}

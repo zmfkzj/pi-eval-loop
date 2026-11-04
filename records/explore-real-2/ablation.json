@@ -1,0 +1,287 @@
+{
+  "generatedAt": "2026-11-04T13:44:03.213Z",
+  "explorationOnly": true,
+  "arms": {
+    "A": {
+      "id": "stable",
+      "commit": "e831a6b2bc19f0c707b55505db33a11b2c9d4d4a"
+    },
+    "B": {
+      "id": "stable",
+      "commit": "e831a6b2bc19f0c707b55505db33a11b2c9d4d4a"
+    },
+    "C": {
+      "id": "stable",
+      "commit": "e831a6b2bc19f0c707b55505db33a11b2c9d4d4a"
+    }
+  },
+  "conditions": {
+    "A": {
+      "final": "stable",
+      "commit": "e831a6b2bc19f0c707b55505db33a11b2c9d4d4a",
+      "holdout": null,
+      "holdoutSummary": null,
+      "development": {
+        "overall": {
+          "point": 0.8125,
+          "mean": 0.8121279291670742,
+          "lo95": 0.6310702398813578,
+          "hi95": 0.9394655286502421
+        },
+        "hard": {
+          "point": 0.5555555555555555,
+          "mean": 0.5563625173149634,
+          "lo95": 0.26370042274654815,
+          "hi95": 0.8249304937000463
+        },
+        "consistency": {
+          "point": 0.7291666666666666,
+          "mean": 0.7498262254285123,
+          "lo95": 0.5415493441737312,
+          "hi95": 0.9092373548475694
+        }
+      },
+      "developmentSummary": {
+        "candidate_id": "stable",
+        "split": "dev",
+        "runs": 48,
+        "tasks": 16,
+        "task_success": 39,
+        "success_rate": 0.8125,
+        "hidden_test_pass": 46,
+        "mean_correctness": 0.9869791666666666,
+        "repeat_success_rate": 0.7291666666666666,
+        "all_repeats_pass_tasks": 10,
+        "hard_task_success_rate": 0.5555555555555556,
+        "regression_count": 0,
+        "critical_failure_count": 7,
+        "integrity_violations": 7,
+        "integrity_violation_runs": 7,
+        "attempts_used": 48,
+        "terminal": {
+          "completed": 48
+        },
+        "infra_rate": 0,
+        "input_tokens": 7502081,
+        "output_tokens": 172695,
+        "cache_tokens": 6112000,
+        "model_requests": 889,
+        "wall_time_ms": 5029415,
+        "simulated_runs": 0
+      },
+      "candidatesProposed": 0,
+      "candidateStatuses": {},
+      "optimizationRuns": 0,
+      "optimizationTokens": {
+        "input": 0,
+        "output": 0,
+        "cache": 0,
+        "requests": 0
+      },
+      "proposerUsage": {
+        "requests": 0,
+        "input": 0,
+        "output": 0
+      },
+      "searchStop": null,
+      "selection": null
+    },
+    "B": {
+      "final": "stable",
+      "commit": "e831a6b2bc19f0c707b55505db33a11b2c9d4d4a",
+      "holdout": null,
+      "holdoutSummary": null,
+      "development": {
+        "overall": {
+          "point": 0.8125,
+          "mean": 0.8132544901300829,
+          "lo95": 0.627665973344802,
+          "hi95": 0.9395639043840164
+        },
+        "hard": {
+          "point": 0.5555555555555555,
+          "mean": 0.5561629346450263,
+          "lo95": 0.26598409082669944,
+          "hi95": 0.827238577653852
+        },
+        "consistency": {
+          "point": 0.7291666666666666,
+          "mean": 0.750846833470379,
+          "lo95": 0.5324270731142068,
+          "hi95": 0.9115250906756135
+        }
+      },
+      "developmentSummary": {
+        "candidate_id": "stable",
+        "split": "dev",
+        "runs": 48,
+        "tasks": 16,
+        "task_success": 39,
+        "success_rate": 0.8125,
+        "hidden_test_pass": 46,
+        "mean_correctness": 0.9869791666666666,
+        "repeat_success_rate": 0.7291666666666666,
+        "all_repeats_pass_tasks": 10,
+        "hard_task_success_rate": 0.5555555555555556,
+        "regression_count": 0,
+        "critical_failure_count": 7,
+        "integrity_violations": 7,
+        "integrity_violation_runs": 7,
+        "attempts_used": 48,
+        "terminal": {
+          "completed": 48
+        },
+        "infra_rate": 0,
+        "input_tokens": 7502081,
+        "output_tokens": 172695,
+        "cache_tokens": 6112000,
+        "model_requests": 889,
+        "wall_time_ms": 5029415,
+        "simulated_runs": 0
+      },
+      "candidatesProposed": 10,
+      "candidateStatuses": {
+        "rejected": 10
+      },
+      "optimizationRuns": 180,
+      "optimizationTokens": {
+        "input": 67351303,
+        "output": 1352625,
+        "cache": 57150672,
+        "requests": 5955
+      },
+      "proposerUsage": {
+        "requests": 129,
+        "input": 5050974,
+        "output": 22727
+      },
+      "searchStop": "no meaningful progress in 10 consecutive candidates",
+      "selection": {
+        "at": "2026-11-04T13:35:14.071Z",
+        "considered": [],
+        "eligible": [],
+        "criticalExcluded": [],
+        "selected": null,
+        "reason": "no development-qualified, critical-clean candidate without family regression"
+      }
+    },
+    "C": {
+      "final": "stable",
+      "commit": "e831a6b2bc19f0c707b55505db33a11b2c9d4d4a",
+      "holdout": null,
+      "holdoutSummary": null,
+      "development": {
+        "overall": {
+          "point": 0.8125,
+          "mean": 0.811431394082155,
+          "lo95": 0.6246599755410165,
+          "hi95": 0.9394226804170844
+        },
+        "hard": {
+          "point": 0.5555555555555555,
+          "mean": 0.5521742824853926,
+          "lo95": 0.2618604756841407,
+          "hi95": 0.8281168587608575
+        },
+        "consistency": {
+          "point": 0.7291666666666666,
+          "mean": 0.7488788772582082,
+          "lo95": 0.5326418947643086,
+          "hi95": 0.9114465713144072
+        }
+      },
+      "developmentSummary": {
+        "candidate_id": "stable",
+        "split": "dev",
+        "runs": 48,
+        "tasks": 16,
+        "task_success": 39,
+        "success_rate": 0.8125,
+        "hidden_test_pass": 46,
+        "mean_correctness": 0.9869791666666666,
+        "repeat_success_rate": 0.7291666666666666,
+        "all_repeats_pass_tasks": 10,
+        "hard_task_success_rate": 0.5555555555555556,
+        "regression_count": 0,
+        "critical_failure_count": 7,
+        "integrity_violations": 7,
+        "integrity_violation_runs": 7,
+        "attempts_used": 48,
+        "terminal": {
+          "completed": 48
+        },
+        "infra_rate": 0,
+        "input_tokens": 7502081,
+        "output_tokens": 172695,
+        "cache_tokens": 6112000,
+        "model_requests": 889,
+        "wall_time_ms": 5029415,
+        "simulated_runs": 0
+      },
+      "candidatesProposed": 10,
+      "candidateStatuses": {
+        "rejected": 10
+      },
+      "optimizationRuns": 180,
+      "optimizationTokens": {
+        "input": 62010696,
+        "output": 1204402,
+        "cache": 52728220,
+        "requests": 5444
+      },
+      "proposerUsage": {
+        "requests": 120,
+        "input": 5246383,
+        "output": 23258
+      },
+      "searchStop": "no meaningful progress in 10 consecutive candidates",
+      "selection": {
+        "at": "2026-11-04T13:44:03.069Z",
+        "considered": [],
+        "eligible": [],
+        "criticalExcluded": [],
+        "selected": null,
+        "reason": "no development-qualified, critical-clean candidate without family regression"
+      }
+    }
+  },
+  "comparisons": {
+    "B vs A (loop effect, quality-only)": {
+      "notMeasured": true
+    },
+    "C vs A (loop effect, Pareto)": {
+      "notMeasured": true
+    },
+    "C vs B (added effect of Pareto exploration)": {
+      "notMeasured": true
+    }
+  },
+  "developmentComparisons": {
+    "B vs A": {
+      "identical": true,
+      "note": "A and B are the same harness (stable)"
+    },
+    "C vs A": {
+      "identical": true,
+      "note": "A and C are the same harness (stable)"
+    },
+    "C vs B": {
+      "identical": true,
+      "note": "B and C are the same harness (stable)"
+    }
+  },
+  "adoption": {
+    "candidate": null,
+    "verdict": "BLOCKED",
+    "adopt": false,
+    "explorationOnly": true,
+    "exploration": "no candidate selected (none)",
+    "reasons": [
+      "exploration-only protocol (datasets.holdout = null): no unconsumed independent holdout is available, so no candidate can be validated or deployed; a development selection is not evidence of improvement"
+    ]
+  },
+  "independence": null,
+  "holdoutUses": 0,
+  "rolledBack": null,
+  "simulated": false
+}

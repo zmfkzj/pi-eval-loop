@@ -1,0 +1,17 @@
+{
+  "status": "baseline",
+  "decisions": [],
+  "children": [],
+  "createdAt": "2026-11-04T10:01:21.141Z",
+  "id": "multi3",
+  "parent": null,
+  "origin": "control",
+  "kind": "control",
+  "harness": {
+    "id": "multi3",
+    "kind": "multi",
+    "k": 3
+  },
+  "hypothesis": null,
+  "updatedAt": "2026-11-04T10:01:21.141Z"
+}

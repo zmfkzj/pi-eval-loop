@@ -26,6 +26,8 @@ npm run eval:loop -- --daemon      # keep running; a finished cycle restarts onl
 npm run eval:report                # write report.md / report.json of the state
 npm run eval:loop -- --status | --doctor | --rollback [--reason R] | --verify-stable --tasks DIR
 npm run eval:loop -- --ablation    # A (stable) / B (quality-only greedy loop) / C (quality-first Pareto loop)
+npm run eval:loop -- --ablation --state pi-eval-loop/state/explore-real-2 --protocol pi-eval-loop/protocols/explore-real-2.json
+                                   # exploration-only A/B/C: train/dev search, no holdout, deployment BLOCKED
 npm run eval:loop -- --selftest    # credential-free end-to-end run with a faux model (SIMULATED; plumbing only)
 # options: --state DIR (default pi-eval-loop/state/default, git-ignored)  --protocol FILE (overrides; locked at first run)
 ```
@@ -34,6 +36,17 @@ Inside Pi: `/eval-loop status|report|doctor|help`. The loop itself never runs in
 
 If a prerequisite is missing (bwrap with namespaces, Pi CLI, provider, orche, git, credentials, model catalog, upstream), the run
 ends as `BLOCKED` and is recorded as such. No simulated result is ever presented as a measurement.
+
+## Status: what is done and what the evidence does not show
+
+| Item | Status |
+|---|---|
+| Loop, CLI (`--once/--resume/--daemon/--report`), Pi command, isolation, gates, archive, adoption/rollback, A/B/C | Implemented and covered by `npm test` (faux/simulated runs are plumbing checks, never measurements) |
+| Critical integrity rule | protocol-2: any task-agent integrity violation, leak, route violation or crash under a candidate rejects it, whatever the baseline did |
+| Real measurements | `abc-real-1` (protocol-1): truncated exploratory evidence (time-motivated 4-candidate cap, 3 evaluated per arm). `explore-real-2` (protocol-2): exploration-only train/dev search to the pre-registered stop; see `docs/results-explore-real-2.md` |
+| Holdout | `holdout-v1` is implementer-authored and was consumed once by `abc-real-1`; it is not independent and is not reused |
+| Deployment | **BLOCKED**: no externally curated independent holdout exists. No adoption and no real performance improvement are claimed |
+| Packaging | In-umbrella subextension directory, not a standalone submodule (no remote was authorized) |
 
 ## Layout
 

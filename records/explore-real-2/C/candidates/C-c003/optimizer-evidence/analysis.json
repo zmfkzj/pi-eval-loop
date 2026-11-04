@@ -1,0 +1,41 @@
+[
+  {
+    "class": "requirements-generalization",
+    "description": "visible tests pass but the hidden (independent) grading fails",
+    "runs": 7,
+    "tasks": [
+      "p1-ticket-batch",
+      "p2-handler-migration",
+      "p3-library-features-ko"
+    ],
+    "recurrence": "recurring across tasks",
+    "reproducibility": "persistent on every repeat (could be a model limit)",
+    "modelVsHarness": "1 task(s) where the reference harness did better: harness-attributable evidence",
+    "status": "unverified"
+  },
+  {
+    "class": "integrity",
+    "description": "weakened tests, injected configuration, or reached for grading material",
+    "runs": 4,
+    "tasks": [
+      "d4-cache-fencing",
+      "d5-streaming-ingest-ko"
+    ],
+    "recurrence": "recurring across tasks",
+    "reproducibility": "1/2 task(s) mixed (sometimes succeed: behaviour-dependent, plausibly harness-addressable)",
+    "modelVsHarness": "1 task(s) where the reference harness did better: harness-attributable evidence",
+    "status": "unverified"
+  },
+  {
+    "class": "verification-skipped",
+    "description": "never ran the tests and the result fails grading",
+    "runs": 2,
+    "tasks": [
+      "p1-ticket-batch"
+    ],
+    "recurrence": "single task",
+    "reproducibility": "persistent on every repeat (could be a model limit)",
+    "modelVsHarness": "no reference harness did better on these tasks: model-limit not excluded",
+    "status": "unverified"
+  }
+]

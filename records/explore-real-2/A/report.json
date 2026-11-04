@@ -1,0 +1,849 @@
+{
+  "generatedAt": "2026-11-04T14:05:15.493Z",
+  "stateDir": "/home/arthur/Code/oh-my-pi-extensions/pi-eval-loop/state/explore-real-2/A",
+  "simulated": false,
+  "phase": "done",
+  "cycle": 1,
+  "strategy": "pareto",
+  "protocolDigest": "393f3019e86013bff6509a1ee801e8852d81312fcf81de9da3b2f95ffe99ee4b",
+  "protocol": {
+    "version": "pi-eval-loop/protocol-2",
+    "seed": "pi-eval-loop-2026-11-04",
+    "target": {
+      "harness": "orche",
+      "mode": "single"
+    },
+    "route": {
+      "provider": "cliproxyapi",
+      "model": "gpt-6-luna",
+      "effort": "medium"
+    },
+    "proposer": {
+      "kind": "pi",
+      "route": {
+        "provider": "cliproxyapi",
+        "model": "gpt-6.1-sol",
+        "effort": "high"
+      },
+      "maxRequests": 120,
+      "wallMs": 1800000,
+      "allowedPaths": [
+        "src/",
+        "prompts/"
+      ],
+      "maxChangedFiles": 4,
+      "maxDiffLines": 200
+    },
+    "unit": {
+      "wallMs": 1200000,
+      "maxRequests": 150,
+      "graderMs": 120000
+    },
+    "bootstrap": {
+      "draws": 10000
+    },
+    "screening": {
+      "tasks": 6,
+      "minRepeats": 3,
+      "maxRepeats": 9,
+      "step": 3,
+      "support": 0.8,
+      "band": 0.1,
+      "level": "execution"
+    },
+    "development": {
+      "repeats": 3,
+      "level": "task",
+      "support": 0.8
+    },
+    "holdout": {
+      "repeats": 3,
+      "maxUses": 1,
+      "minTasks": 6,
+      "minFamilies": 4,
+      "requireIndependent": true,
+      "acceptedProvenance": [
+        "external"
+      ]
+    },
+    "gate": {
+      "eps": {
+        "overall": 0.03,
+        "hard": 0.05,
+        "consistency": 0.05
+      },
+      "minGain": {
+        "overall": 0,
+        "hard": 0,
+        "consistency": 0
+      }
+    },
+    "adoption": {
+      "support": 0.95,
+      "level": "task",
+      "eps": {
+        "hard": 0.02,
+        "consistency": 0.02
+      },
+      "minGain": {
+        "overall": 0
+      },
+      "familyRegression": 0.15,
+      "familyRegressionSupport": 0.8,
+      "requireHardStratum": true,
+      "requireChecks": true
+    },
+    "baselines": {
+      "pure": true,
+      "stable": true,
+      "targetMode": true,
+      "multiAttempt": {
+        "k": 3
+      }
+    },
+    "watchdog": {
+      "noProgressCandidates": 10,
+      "maxCandidatesPerCycle": 200,
+      "maxCycleWallMs": 259200000,
+      "maxConsecutiveInfra": 5,
+      "maxInfraRate": 0.1,
+      "maxFailuresPerClass": 10,
+      "maxChildFailuresPerParent": 5,
+      "daemonPollMs": 600000,
+      "hypothesisSimilarity": 0.8
+    },
+    "infra": {
+      "maxRetries": 1
+    },
+    "parallelism": 6,
+    "datasets": {
+      "source": "suite",
+      "trainShare": 0.45,
+      "holdout": null
+    },
+    "deploy": {
+      "mode": "refs",
+      "branch": "eval-loop/stable"
+    },
+    "notes": "Exploration-only TRAIN/DEVELOPMENT search for B (quality-only, greedy) and C (quality-first Pareto) under protocol-2. No holdout: holdout-v1 was consumed by abc-real-1 and is implementer-authored, so it is neither loaded, graded nor used; deployment is BLOCKED by construction. Search stop = the pre-registered defaults: 10 consecutive candidates without meaningful progress; safety stops only (class exhaustion after 10 failed targeted proposals, 200-candidate runaway backstop, 72 h hang watchdog, 5 consecutive infra-tainted candidates). Same agent route/effort, proposer route/effort, seed (same train/dev split) and parallelism as abc-real-1. Operational setting: 6 parallel units per trajectory (resource use, not a quality or search limit)."
+  },
+  "prerequisites": [
+    {
+      "name": "bwrap",
+      "ok": true,
+      "detail": "bubblewrap 0.11.1"
+    },
+    {
+      "name": "bwrap-namespaces",
+      "ok": true,
+      "detail": "user/net/pid namespaces usable"
+    },
+    {
+      "name": "pi-cli",
+      "ok": true,
+      "detail": "/home/arthur/.bun/install/global/node_modules/@earendil-works/pi-coding-agent/dist/bundle/cli.js"
+    },
+    {
+      "name": "provider",
+      "ok": true,
+      "detail": "/home/arthur/Code/oh-my-pi-extensions/cliproxyapi/node_modules/@router-for-me/pi-cliproxyapi-provider"
+    },
+    {
+      "name": "orche",
+      "ok": true,
+      "detail": "/home/arthur/Code/oh-my-pi-extensions/orche"
+    },
+    {
+      "name": "git",
+      "ok": true,
+      "detail": "git version 2.53.0"
+    },
+    {
+      "name": "credentials",
+      "ok": true,
+      "detail": "cliproxyapi.json apiKey: set"
+    },
+    {
+      "name": "model-catalog",
+      "ok": true,
+      "detail": "/home/arthur/.pi/agent/cliproxyapi-models.json"
+    },
+    {
+      "name": "upstream",
+      "ok": true,
+      "detail": "http://127.0.0.1:8317 answered 401"
+    }
+  ],
+  "datasets": {
+    "train": [
+      "a7-auth-rotation",
+      "b1-static-traversal",
+      "b2-patch-endpoint",
+      "b3-pagination",
+      "b5-ctx-migration",
+      "b6-route-cache",
+      "d4-cache-fencing",
+      "d5-streaming-ingest-ko",
+      "p1-ticket-batch",
+      "p2-handler-migration",
+      "p3-library-features-ko"
+    ],
+    "dev": [
+      "a1-rounding",
+      "a2-discount-codes",
+      "a3-refactor-tax",
+      "a4-tests-fx",
+      "a6-typo-message",
+      "c1-timezone",
+      "c2-since-flag-ko",
+      "c4-malformed-lines",
+      "c5-aggregate-perf",
+      "c6-csv-export",
+      "d1-transactional-outbox",
+      "d2-keyed-queue",
+      "d3-money-migration-ko",
+      "d6-snapshot-pagination",
+      "d7-config-reload",
+      "d8-build-graph"
+    ],
+    "holdout": [],
+    "excluded": [],
+    "digests": {
+      "a1-rounding": "66dc1f2237f51f28596b2beb1c98367a0dcde491379c97e13c7667df228e583d",
+      "a2-discount-codes": "f4af636843804b529d68c537c3d9f6752db72dda6e430834ab30b7b946613547",
+      "a3-refactor-tax": "783a3f7993829a083cec4e7c51ade90378669fa6a2faa0e6572a095dbc7c9c1b",
+      "a4-tests-fx": "7876a5f1ca6c63d46aff6164f380ca28b988d2bac115075a721fc7e7142cce25",
+      "a6-typo-message": "66b7800e6e7f5b29fa84a0d55dcb34353f9c30cb4679e390fb7fc7022473e194",
+      "a7-auth-rotation": "b628aedb0b37f999afb9d828c57b43da7a4b1dbd8aa021398400f37af3514add",
+      "b1-static-traversal": "71187d345dd11c45d4e82f61220a5994574eb15d1aae3efe6a31b80ba7b230ad",
+      "b2-patch-endpoint": "1aa0776a526a50ae8ab347b2db30f6468f5602385fc0ccf15c82c11514dd9a28",
+      "b3-pagination": "aeae308bfb617a64ad981ec8e89330a1e2b92b83423156adefcd0ed33d7b2099",
+      "b5-ctx-migration": "0804db6f0b832962a3882f16926cc94017c4f3eeda9e20b0156b802375cdc7ad",
+      "b6-route-cache": "d6b72f998c1e8a1d035eca4c946ae4112470e0f1cba0fc89f13793acf47b9bb2",
+      "c1-timezone": "eea00bbb2bfb76a86ac6c9a3e7fdc17d0ae92e69c3277eb1232d9aeb7771708b",
+      "c2-since-flag-ko": "7e185f7ba2ff425a83b313f6c811813bfd3fc48c11bf3f9084553b7fe2230503",
+      "c4-malformed-lines": "f969cfcdd17884e25a7ef16d7ff1a27f63205b6c31cbd2ea4e7f2373c5128db7",
+      "c5-aggregate-perf": "5f743480dc71400d1ab31259fdbef468d1fac9699aa566e8fae71b8834a724de",
+      "c6-csv-export": "a04385ea74936ac0b7d80bc3be5b4404a04012aff1efcb7998834900b2d83cde",
+      "d1-transactional-outbox": "898cd696f0c9aebe6ebf35248a98f965fb2927328df8556a7c3485cc4278db4d",
+      "d2-keyed-queue": "63ff8c9ce8e4b3d8daab8cf77213589c7d61628240bf357552e2e8d18b41a643",
+      "d3-money-migration-ko": "9eb4dc02ef69842ade67506dffacc89840ce9ebea0358056fc6a91ba345fee76",
+      "d4-cache-fencing": "2b371bf7359a500b3c16feeaebe9fa35e8ce594207900c37e276f242fef0f102",
+      "d5-streaming-ingest-ko": "31d6ce9331e329d50065054e1f4cd24d02c60bb7c2f0b906ce4a1caf6df69b45",
+      "d6-snapshot-pagination": "69404b511703b8d9e1cb22d668291f142f29d11ba880a271501d871da0da6664",
+      "d7-config-reload": "4d0c0a0c87517eb23466838f65e5375d11160f5602e4062065a394e684282e23",
+      "d8-build-graph": "579b81ef90a39b26d7d42f7dd3bb5041bd760218b855ee08e6788cc95559f15e",
+      "p1-ticket-batch": "12e9f5919ed365333fa7f2ccb42dce4968722fb4a19a7d99eeb8e985284d066e",
+      "p2-handler-migration": "625bd2d7c94e45f42fa6ae70b98c4e0d04fe14fbf89420a3bb9d967842a817f6",
+      "p3-library-features-ko": "64099bf7f8f8c53ec6cf146b2dd4e3ad86f0067434e10e9696d0207ff54d33b3"
+    },
+    "holdoutSeal": null,
+    "meta": {
+      "a1-rounding": {
+        "family": "pkg:ledger",
+        "tier": "easy",
+        "hard": false,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "a2-discount-codes": {
+        "family": "pkg:ledger",
+        "tier": "easy",
+        "hard": false,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "a3-refactor-tax": {
+        "family": "pkg:ledger",
+        "tier": "easy",
+        "hard": false,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "a4-tests-fx": {
+        "family": "pkg:ledger",
+        "tier": "easy",
+        "hard": false,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "a6-typo-message": {
+        "family": "pkg:ledger",
+        "tier": "easy",
+        "hard": false,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "a7-auth-rotation": {
+        "family": "pkg:invoice-sync",
+        "tier": "easy",
+        "hard": false,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "b1-static-traversal": {
+        "family": "pkg:minihttp",
+        "tier": "medium",
+        "hard": false,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "b2-patch-endpoint": {
+        "family": "pkg:minihttp",
+        "tier": "medium",
+        "hard": false,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "b3-pagination": {
+        "family": "pkg:minihttp",
+        "tier": "medium",
+        "hard": false,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "b5-ctx-migration": {
+        "family": "pkg:minihttp",
+        "tier": "medium",
+        "hard": false,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "b6-route-cache": {
+        "family": "pkg:minihttp",
+        "tier": "medium",
+        "hard": false,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "c1-timezone": {
+        "family": "pkg:logtool",
+        "tier": "medium",
+        "hard": false,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "c2-since-flag-ko": {
+        "family": "pkg:logtool",
+        "tier": "medium",
+        "hard": false,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "c4-malformed-lines": {
+        "family": "pkg:logtool",
+        "tier": "medium",
+        "hard": false,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "c5-aggregate-perf": {
+        "family": "pkg:logtool",
+        "tier": "medium",
+        "hard": false,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "c6-csv-export": {
+        "family": "pkg:logtool",
+        "tier": "medium",
+        "hard": false,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "d1-transactional-outbox": {
+        "family": "pkg:d1-transactional-outbox",
+        "tier": "hard",
+        "hard": true,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "d2-keyed-queue": {
+        "family": "pkg:d2-keyed-queue",
+        "tier": "hard",
+        "hard": true,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "d3-money-migration-ko": {
+        "family": "pkg:d3-money-migration-ko",
+        "tier": "hard",
+        "hard": true,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "d4-cache-fencing": {
+        "family": "pkg:d4-cache-fencing",
+        "tier": "hard",
+        "hard": true,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "d5-streaming-ingest-ko": {
+        "family": "pkg:d5-streaming-ingest-ko",
+        "tier": "hard",
+        "hard": true,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "d6-snapshot-pagination": {
+        "family": "pkg:d6-snapshot-pagination",
+        "tier": "hard",
+        "hard": true,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "d7-config-reload": {
+        "family": "pkg:d7-config-reload",
+        "tier": "hard",
+        "hard": true,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "d8-build-graph": {
+        "family": "pkg:d8-build-graph",
+        "tier": "hard",
+        "hard": true,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "p1-ticket-batch": {
+        "family": "p-series",
+        "tier": "hard",
+        "hard": true,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "p2-handler-migration": {
+        "family": "p-series",
+        "tier": "hard",
+        "hard": true,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "p3-library-features-ko": {
+        "family": "p-series",
+        "tier": "hard",
+        "hard": true,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      }
+    }
+  },
+  "arms": [
+    {
+      "arm": "multi3",
+      "split": "dev",
+      "posterior": {
+        "overall": {
+          "point": 0.9166666666666665,
+          "mean": 0.9166581976776997,
+          "lo95": 0.783746605384693,
+          "hi95": 0.9852949848282686
+        },
+        "hard": {
+          "point": 0.8888888888888888,
+          "mean": 0.8885518879077343,
+          "lo95": 0.641932555579015,
+          "hi95": 0.9927883919585886
+        },
+        "consistency": {
+          "point": 0.8611111111111112,
+          "mean": 0.8750559824325577,
+          "lo95": 0.6996120027889319,
+          "hi95": 0.9751668453308655
+        }
+      },
+      "summary": {
+        "candidate_id": "multi3",
+        "split": "dev",
+        "runs": 48,
+        "tasks": 16,
+        "task_success": 44,
+        "success_rate": 0.9166666666666666,
+        "hidden_test_pass": 45,
+        "mean_correctness": 0.9817708333333334,
+        "repeat_success_rate": 0.8611111111111112,
+        "all_repeats_pass_tasks": 12,
+        "hard_task_success_rate": 0.8888888888888888,
+        "regression_count": 0,
+        "critical_failure_count": 2,
+        "integrity_violations": 2,
+        "integrity_violation_runs": 2,
+        "attempts_used": 49,
+        "terminal": {
+          "completed": 48
+        },
+        "infra_rate": 0,
+        "input_tokens": 1456402,
+        "output_tokens": 76098,
+        "cache_tokens": 870784,
+        "model_requests": 447,
+        "wall_time_ms": 2276504,
+        "simulated_runs": 0
+      }
+    },
+    {
+      "arm": "pure",
+      "split": "train",
+      "posterior": {
+        "overall": {
+          "point": 0.6666666666666665,
+          "mean": 0.6658064850442323,
+          "lo95": 0.4074013322049956,
+          "hi95": 0.879168963535056
+        },
+        "hard": {
+          "point": 0.39999999999999997,
+          "mean": 0.3990626780898786,
+          "lo95": 0.10681690771791214,
+          "hi95": 0.7462405179848901
+        },
+        "consistency": {
+          "point": 0.585858585858586,
+          "mean": 0.6053880170625912,
+          "lo95": 0.3343483507663296,
+          "hi95": 0.8450859894522555
+        }
+      },
+      "summary": {
+        "candidate_id": "pure",
+        "split": "train",
+        "runs": 33,
+        "tasks": 11,
+        "task_success": 22,
+        "success_rate": 0.6666666666666666,
+        "hidden_test_pass": 24,
+        "mean_correctness": 0.8890398550724636,
+        "repeat_success_rate": 0.5858585858585859,
+        "all_repeats_pass_tasks": 5,
+        "hard_task_success_rate": 0.4,
+        "regression_count": 3,
+        "critical_failure_count": 2,
+        "integrity_violations": 2,
+        "integrity_violation_runs": 2,
+        "attempts_used": 33,
+        "terminal": {
+          "completed": 33
+        },
+        "infra_rate": 0,
+        "input_tokens": 1142298,
+        "output_tokens": 62904,
+        "cache_tokens": 737664,
+        "model_requests": 295,
+        "wall_time_ms": 1705581,
+        "simulated_runs": 0
+      }
+    },
+    {
+      "arm": "pure",
+      "split": "dev",
+      "posterior": {
+        "overall": {
+          "point": 0.8749999999999999,
+          "mean": 0.8743425759569494,
+          "lo95": 0.7097374355863293,
+          "hi95": 0.9698782521664491
+        },
+        "hard": {
+          "point": 0.7777777777777777,
+          "mean": 0.7775628629425355,
+          "lo95": 0.46864155155113196,
+          "hi95": 0.9643440130428045
+        },
+        "consistency": {
+          "point": 0.8055555555555556,
+          "mean": 0.822061158847549,
+          "lo95": 0.6234429402318907,
+          "hi95": 0.9517988373969645
+        }
+      },
+      "summary": {
+        "candidate_id": "pure",
+        "split": "dev",
+        "runs": 48,
+        "tasks": 16,
+        "task_success": 42,
+        "success_rate": 0.875,
+        "hidden_test_pass": 44,
+        "mean_correctness": 0.9826388888888887,
+        "repeat_success_rate": 0.8055555555555556,
+        "all_repeats_pass_tasks": 11,
+        "hard_task_success_rate": 0.7777777777777778,
+        "regression_count": 0,
+        "critical_failure_count": 2,
+        "integrity_violations": 2,
+        "integrity_violation_runs": 2,
+        "attempts_used": 48,
+        "terminal": {
+          "completed": 48
+        },
+        "infra_rate": 0,
+        "input_tokens": 1526956,
+        "output_tokens": 77023,
+        "cache_tokens": 966272,
+        "model_requests": 456,
+        "wall_time_ms": 2325787,
+        "simulated_runs": 0
+      }
+    },
+    {
+      "arm": "stable",
+      "split": "train",
+      "posterior": {
+        "overall": {
+          "point": 0.6060606060606062,
+          "mean": 0.6076434854177167,
+          "lo95": 0.3219813351952759,
+          "hi95": 0.8550972512362103
+        },
+        "hard": {
+          "point": 0.13333333333333333,
+          "mean": 0.13240332673301183,
+          "lo95": 0.0032394096712842356,
+          "hi95": 0.45803756111878485
+        },
+        "consistency": {
+          "point": 0.585858585858586,
+          "mean": 0.5927076053542351,
+          "lo95": 0.3060133063608367,
+          "hi95": 0.84665549041693
+        }
+      },
+      "summary": {
+        "candidate_id": "stable",
+        "split": "train",
+        "runs": 33,
+        "tasks": 11,
+        "task_success": 20,
+        "success_rate": 0.6060606060606061,
+        "hidden_test_pass": 24,
+        "mean_correctness": 0.8952980895915679,
+        "repeat_success_rate": 0.5858585858585859,
+        "all_repeats_pass_tasks": 6,
+        "hard_task_success_rate": 0.13333333333333333,
+        "regression_count": 6,
+        "critical_failure_count": 4,
+        "integrity_violations": 4,
+        "integrity_violation_runs": 4,
+        "attempts_used": 33,
+        "terminal": {
+          "agent_error": 2,
+          "completed": 31
+        },
+        "infra_rate": 0,
+        "input_tokens": 10376660,
+        "output_tokens": 231223,
+        "cache_tokens": 8313472,
+        "model_requests": 1090,
+        "wall_time_ms": 6782048,
+        "simulated_runs": 0
+      }
+    },
+    {
+      "arm": "stable",
+      "split": "dev",
+      "posterior": {
+        "overall": {
+          "point": 0.8125,
+          "mean": 0.8118686300379101,
+          "lo95": 0.6280417526278275,
+          "hi95": 0.938468434977884
+        },
+        "hard": {
+          "point": 0.5555555555555555,
+          "mean": 0.5541816256376239,
+          "lo95": 0.26160261185185,
+          "hi95": 0.8269300439343813
+        },
+        "consistency": {
+          "point": 0.7291666666666666,
+          "mean": 0.7491481868239196,
+          "lo95": 0.536288144420406,
+          "hi95": 0.9098751017035254
+        }
+      },
+      "summary": {
+        "candidate_id": "stable",
+        "split": "dev",
+        "runs": 48,
+        "tasks": 16,
+        "task_success": 39,
+        "success_rate": 0.8125,
+        "hidden_test_pass": 46,
+        "mean_correctness": 0.9869791666666666,
+        "repeat_success_rate": 0.7291666666666666,
+        "all_repeats_pass_tasks": 10,
+        "hard_task_success_rate": 0.5555555555555556,
+        "regression_count": 0,
+        "critical_failure_count": 7,
+        "integrity_violations": 7,
+        "integrity_violation_runs": 7,
+        "attempts_used": 48,
+        "terminal": {
+          "completed": 48
+        },
+        "infra_rate": 0,
+        "input_tokens": 7502081,
+        "output_tokens": 172695,
+        "cache_tokens": 6112000,
+        "model_requests": 889,
+        "wall_time_ms": 5029415,
+        "simulated_runs": 0
+      }
+    }
+  ],
+  "candidates": [
+    {
+      "status": "baseline",
+      "decisions": [],
+      "children": [],
+      "createdAt": "2026-11-04T10:01:21.141Z",
+      "id": "multi3",
+      "parent": null,
+      "origin": "control",
+      "kind": "control",
+      "harness": {
+        "id": "multi3",
+        "kind": "multi",
+        "k": 3
+      },
+      "hypothesis": null,
+      "updatedAt": "2026-11-04T10:01:21.141Z"
+    },
+    {
+      "status": "baseline",
+      "decisions": [],
+      "children": [],
+      "createdAt": "2026-11-04T10:01:21.137Z",
+      "id": "pure",
+      "parent": null,
+      "origin": "control",
+      "kind": "control",
+      "harness": {
+        "id": "pure",
+        "kind": "pure"
+      },
+      "hypothesis": null,
+      "updatedAt": "2026-11-04T10:01:21.137Z"
+    },
+    {
+      "status": "baseline",
+      "decisions": [],
+      "children": [],
+      "createdAt": "2026-11-04T10:01:21.134Z",
+      "id": "stable",
+      "parent": null,
+      "origin": "baseline",
+      "commit": "e831a6b2bc19f0c707b55505db33a11b2c9d4d4a",
+      "hypothesis": null,
+      "updatedAt": "2026-11-04T10:57:21.120Z",
+      "development": {
+        "tasks": 16,
+        "repeats": 3,
+        "point": {
+          "overall": 0.8125,
+          "hard": 0.5555555555555555,
+          "consistency": 0.7291666666666666
+        },
+        "posterior": {
+          "overall": {
+            "point": 0.8125,
+            "mean": 0.8113733619369942,
+            "lo95": 0.6239345786607347,
+            "hi95": 0.9385695303070737
+          },
+          "hard": {
+            "point": 0.5555555555555555,
+            "mean": 0.5544095253523946,
+            "lo95": 0.25954682608320845,
+            "hi95": 0.8287331245129108
+          },
+          "consistency": {
+            "point": 0.7291666666666666,
+            "mean": 0.7489307693184887,
+            "lo95": 0.5329595739219662,
+            "hi95": 0.9098109265283525
+          }
+        },
+        "qualified": true,
+        "reasons": [
+          "baseline"
+        ],
+        "summary": {
+          "candidate_id": "stable",
+          "split": "dev",
+          "runs": 48,
+          "tasks": 16,
+          "task_success": 39,
+          "success_rate": 0.8125,
+          "hidden_test_pass": 46,
+          "mean_correctness": 0.9869791666666666,
+          "repeat_success_rate": 0.7291666666666666,
+          "all_repeats_pass_tasks": 10,
+          "hard_task_success_rate": 0.5555555555555556,
+          "regression_count": 0,
+          "critical_failure_count": 7,
+          "integrity_violations": 7,
+          "integrity_violation_runs": 7,
+          "attempts_used": 48,
+          "terminal": {
+            "completed": 48
+          },
+          "infra_rate": 0,
+          "input_tokens": 7502081,
+          "output_tokens": 172695,
+          "cache_tokens": 6112000,
+          "model_requests": 889,
+          "wall_time_ms": 5029415,
+          "simulated_runs": 0
+        }
+      }
+    }
+  ],
+  "front": [
+    "stable"
+  ],
+  "selection": {
+    "at": "2026-11-04T13:44:03.091Z",
+    "selected": null,
+    "extraArms": [],
+    "ablation": {
+      "B": {
+        "id": "stable",
+        "commit": "e831a6b2bc19f0c707b55505db33a11b2c9d4d4a"
+      },
+      "C": {
+        "id": "stable",
+        "commit": "e831a6b2bc19f0c707b55505db33a11b2c9d4d4a"
+      }
+    },
+    "frozenDigest": "a934e3cc929b34b401b1430a85ed21e3b5ec1b5f4aa67e6eca2eea6fc8a28877"
+  },
+  "final": {
+    "candidate": null,
+    "verdict": "BLOCKED",
+    "adopt": false,
+    "explorationOnly": true,
+    "exploration": "no candidate selected (none)",
+    "reasons": [
+      "exploration-only protocol (datasets.holdout = null): no unconsumed independent holdout is available, so no candidate can be validated or deployed; a development selection is not evidence of improvement"
+    ]
+  },
+  "counters": {
+    "candidates": 0,
+    "noProgress": 0,
+    "consecutiveInfra": 0
+  },
+  "deployHistory": [],
+  "proposerUsage": {
+    "requests": 0,
+    "input": 0,
+    "output": 0
+  },
+  "ledgerIntegrity": {
+    "runsLedger": [],
+    "events": []
+  },
+  "runs": 210
+}

@@ -1,6 +1,7 @@
 # pi-eval-loop: design, protocol, security and research basis
 
-Measured results: [`results-abc-real-1.md`](results-abc-real-1.md).
+Measured results: [`results-explore-real-2.md`](results-explore-real-2.md) (protocol-2, exploration-only train/dev search) and
+[`results-abc-real-1.md`](results-abc-real-1.md) (protocol-1, truncated exploratory evidence).
 
 pi-eval-loop is a headless, resumable program. It improves the pi-orche harness by running evaluation, failure analysis, candidate
 patches, screening, development, a quality Pareto archive, one final holdout, an adoption gate and rollback. No user takes part. Every
@@ -22,16 +23,30 @@ prepare -> baselines -> search (repeat: parent -> analysis -> proposal -> integr
 | Phase | What happens | Code |
 |---|---|---|
 | prepare | Checks prerequisites (missing ones end in BLOCKED; nothing is simulated). Validates the grader of every task: the original must fail, the reference must pass. Builds family-grouped train/dev splits. Verifies the sealed holdout. Locks the protocol (sha256 of the protocol, every evaluator file and the dataset manifest). | `src/loop.mjs` `prepare`, `src/protocol.mjs` `lockProtocol` |
-| baselines | Runs stable orche on train and dev; pure Pi (no extension) on train and dev; k=3 independent pure-Pi attempts on dev, keeping the first that passes the VISIBLE tests (an equal-compute control; no hidden information is used); the target mode's existing implementation (= stable when the target is `single`). | `baselines`, `baselineHarnesses` |
+| baselines | Runs stable orche on train and dev; pure Pi (no extension) on train and dev; a k=3 independent-attempt pure-Pi arm on dev that submits the first attempt whose VISIBLE tests pass (no hidden information is used); the target mode's existing implementation (= stable when the target is `single`). The k-attempt arm *allows* up to k attempts; whether it used more compute is a measurement (reports list allowed vs actual attempts, requests and tokens per unit). It is not called equal-compute or opportunity-matched unless those measurements show it. | `baselines`, `baselineHarnesses` |
 | search | Selects a parent (Pareto: archive front plus development-qualified; greedy: the current best only). Analyzes failures (train). The proposer edits a copy of the harness runtime. Then patch integrity, dedup, commit on the isolated branch `eval-loop/candidates/<ns>/<id>`, typecheck, adaptive screening, development. | `newCandidate`, `screen`, `develop` |
 | select | Picks the best development-qualified candidate without a family regression and freezes it (`selection.json`, digest) BEFORE any holdout access. | `select` |
 | holdout | Appends the use to the holdout's hash-chained `USES.jsonl` before the first run. Then one pass over all arms. | `holdout` |
 | adopt / post-adopt | Crash-safe local ref adoption, a smoke run, automatic rollback on a crash or route violation. | `src/deploy.mjs`, `adopt`, `postAdopt` |
 
-Watchdog: the search stops after 10 consecutive candidates without progress (configurable). Other stop rules are a per-cycle
-candidate cap, a wall-time cap, consecutive infrastructure failures, an infra-error rate, a cap on failures per failure class and a
-cap on child failures per parent. The rules are safety stops, not cost objectives. The candidate cap never interrupts an in-flight candidate. A finished cycle restarts (`--daemon`, or
+Search stop (protocol-2, pre-registered): the search cycle ends after **10 consecutive candidates without meaningful progress**
+(the user's default). Progress means: Pareto loop, a development-qualified, critical-clean candidate that no other development-set
+member weakly dominates (an exact tie is not progress); quality-only loop, a new single best. The other rules are safety stops,
+none motivated by cost or time:
+- a failure class is exhausted after 10 failed proposals targeting it (the same patience; identical patches and near-identical
+  failed hypotheses are refused anyway) — the cycle ends when no addressable class remains;
+- a runaway backstop of 200 candidates per cycle (a fully evaluated candidate keeps ≤ ~90 MB of worktree and evidence);
+- a 72 h cycle hang watchdog;
+- 5 consecutive infrastructure-tainted candidates; a trust-boundary breach halts at once.
+
+The stop reason and the failed proposals per class are recorded (`state.searchStop`, `state.classFailures`, the report). The
+candidate cap never interrupts an in-flight candidate. protocol-1's measured run `abc-real-1` used a 4-candidate cap set by session
+time; that cap is withdrawn and the run is marked truncated. A finished cycle restarts (`--daemon`, or
 `--once` again) only when its fingerprint changes: orche HEAD, stable, task digests, environment or protocol.
+
+Exploration-only protocol: `datasets.holdout: null` loads, grades and consumes no holdout. The cycle ends after selection with
+deployment **BLOCKED** (recorded separately from the exploration outcome); `--ablation` freezes B/C finals and skips the joint
+holdout pass. This is how train/dev search continues after the only holdout was consumed (`protocols/explore-real-2.json`).
 
 Persistence: `state.json` and `selection.json` are written atomically (tmp + fsync + rename). `runs.jsonl`, `events.jsonl`,
 `stable-history.jsonl` and `USES.jsonl` are append-only hash chains (`Ledger.verify`). A pid lock prevents duplicate runs. Every
@@ -91,12 +106,15 @@ Its differences from the paper:
   - an overall improvement with support ≥ 0.95 at task level on an independent holdout;
   - no family regression;
   - ≥ 6 tasks and ≥ 4 families with a hard stratum;
-  - no critical failure;
+  - no critical failure anywhere in the candidate's record (train, dev and holdout, every attempt);
   - complete units;
   - passing checks;
   - one environment/route digest.
 - Bootstrap support is a posterior-predictive fraction under this resampling model. It is **not** the probability that a harness
   generalizes. Resampling few runs does not create observations.
+- Point estimates (development points of the archive, the Pareto front, progress, selection and the reports) are the exact
+  plug-in values (uniform task weights, raw repeat means). protocol-1 used the bootstrap Monte Carlo mean there, which let
+  sampling noise separate identical outcomes (e.g. B-c001 vs stable in `abc-real-1`).
 
 ## 4. Datasets
 
@@ -110,7 +128,9 @@ Its differences from the paper:
   provenance for an adoption: on holdout-v1 the holdout is measured once, but deployment stays BLOCKED. An operator may accept
   the label only in a new protocol version, which is visible in the lock and the report.
 - **Single use**: a use is recorded before the first holdout run. After `maxUses` (1) uses the set is no longer independent. A
-  tampered ledger is detected.
+  tampered ledger is detected. holdout-v1 was used once by `abc-real-1` (2026-11-04): it is consumed, must not be reused for
+  tuning, and is not loaded by `explore-real-2`. Until an externally curated, unexposed holdout is added in a new protocol
+  version, **deployment stays BLOCKED**.
 
 ## 5. Trust boundaries and integrity
 
@@ -123,7 +143,7 @@ Mechanical enforcement:
 | The proposer edits a COPY of the harness runtime. The trusted host copies regular-file changes back (symlinks refused). Then patch integrity checks them: allowed paths `src/`, `prompts/`; tests, runner/module config, package.json and env files are protected even there; no test-environment detection or forced exits, no evaluation-aware or task-specific content, no new network access; at most 4 files and 200 lines | `src/proposer.mjs`, `src/integrity.mjs` `patchIntegrity` | `test/integrity.test.mjs` |
 | The evaluator, grader, protocol, splits, baseline snapshot, results and holdout seal are outside every candidate sandbox. Their digests are compared before and after each proposal: a change halts the loop as a trust-boundary breach. | `protectedState`, `lockProtocol` | `test/loop.test.mjs` |
 | Grading runs in its own sandbox on a disposable copy (visible, hidden, custom). The hidden test count must equal the reference count. | `src/grader.mjs` | grader validation in prepare |
-| Workspace integrity (ultra-ab rules reused) plus symlinks, module rewiring, runner injection, test detection and grading-material references | `workspaceIntegrity` | `test/integrity.test.mjs` |
+| Workspace integrity (ultra-ab rules reused) plus symlinks, module rewiring, runner injection, test detection and grading-material references. protocol-2: a task-agent violation, leak attempt, route violation or harness crash in ANY run attempt under a candidate is critical and rejects it at screening, development, selection and adoption, whatever the baseline did (the reference count is reported as context only). Harness-candidate violations (its patch) are rejected at proposal time. The stable incumbent's own violations are reported, not excused. | `workspaceIntegrity`, `criticalProblems` | `test/integrity.test.mjs`, `test/critical-exploration.test.mjs` |
 | Check results fail closed: a missing, partial, early-exit or forged vitest summary fails, as do fewer or skipped tests, a non-zero exit without failed tests, or tests failing only with the candidate. Failures shared with stable in the same sandbox are listed as environment failures. | `src/checks.mjs` `compareChecks` | `test/integrity.test.mjs` |
 | Results cannot be omitted or forged: hash-chained ledgers; every scheduled unit must have a final record (`missingUnits`), else BLOCKED | `Ledger`, `missingUnits` | `test/integrity.test.mjs`, `test/stats-gate.test.mjs` |
 | Controlled conditions: every compared harness runs on one route and effort (all orche tiers pinned); the environment digest is recorded per run | `orcheConfig`, `environmentDigest` | `test/integrity.test.mjs` |
@@ -173,16 +193,17 @@ Crash points are tested in `test/deploy.test.mjs`.
   Pareto archive.
 - **C**: the full quality-first Pareto loop.
 
-B and C are separate trajectories with the same tasks, protocol, route, proposer and candidate budget. Their finals are frozen
-first. A, B and C then share ONE holdout pass through A's ordinary holdout → adoption gate → adopt → post-adoption path. The
+B and C are separate trajectories with the same tasks, protocol, route, proposer and pre-registered stopping rule (so the number
+of candidates each uses is an outcome, reported per arm). Their finals are frozen first. A, B and C then share ONE holdout pass
+through A's ordinary holdout → adoption gate → adopt → post-adoption path (exploration-only protocols stop after freezing). The
 report covers:
-- each condition's quality with intervals;
+- each condition's quality with exact points and intervals (development: descriptive and selection-biased);
 - candidates, screening/development runs, tokens and proposer usage;
 - the contrasts B−A, C−A and C−B with support.
 
-Unsupported differences are reported as uncertain. Conditions are not compute-matched beyond the equal candidate budget, so the
-report lists each one's actual model usage. The k-attempt baseline separates the effect of extra compute from the effect of the
-harness.
+Unsupported differences are reported as uncertain. Conditions are not compute-matched, so the report lists each one's actual
+model usage. The k-attempt baseline can separate extra compute from harness effects only to the extent that its measured attempts,
+requests and tokens show extra compute was actually used.
 
 ## 9. Generalizing beyond pi-orche
 

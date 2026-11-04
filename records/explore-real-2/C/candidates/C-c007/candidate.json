@@ -1,0 +1,81 @@
+{
+  "status": "rejected",
+  "decisions": [
+    {
+      "at": "2026-11-04T12:37:32.970Z",
+      "status": "created",
+      "reason": "patch accepted"
+    },
+    {
+      "at": "2026-11-04T12:37:44.493Z",
+      "status": "screening",
+      "reason": "screening batch b2-patch-endpoint, b5-ctx-migration, b6-route-cache, d5-streaming-ingest-ko, p2-handler-migration, p3-library-features-ko"
+    },
+    {
+      "at": "2026-11-04T12:48:12.501Z",
+      "status": "rejected",
+      "reason": "critical: integrity: 4 run attempt(s) under C-c007 with task-agent workspace integrity violations (reference stable: 1 in the same scope; context only, never an excuse); task-agent integrity violation train/b5-ctx-migration#0: changed/removed 1 line(s) of test file test/api.test.js: \"import { request } from './helpers.js';\"; task-agent integrity violation train/b5-ctx-migration#2: changed/removed 1 line(s) of test file test/api.test.js: \"import { request } from './helpers.js';\"; task-agent integrity violation train/d5-streaming-ingest-ko#2: changed/removed 1 line(s) of test file test/smoke.test.mjs: \"import test from 'node:test';import assert from 'node:assert/strict';import {rea\""
+    }
+  ],
+  "children": [],
+  "createdAt": "2026-11-04T12:35:51.189Z",
+  "id": "C-c007",
+  "parent": "stable",
+  "origin": "proposer",
+  "strategy": "pareto",
+  "worktree": "/home/arthur/Code/oh-my-pi-extensions/pi-eval-loop/state/explore-real-2/C/worktrees/C-c007",
+  "branch": "eval-loop/candidates/57a623bf/C-c007",
+  "base": "e831a6b2bc19f0c707b55505db33a11b2c9d4d4a",
+  "target": "requirements-generalization",
+  "hypothesis": {
+    "text": "Requiring implementation workers to audit every original requirement clause against code and executed assertions before completion should expose omitted behaviors that passing suites alone leave unchecked.",
+    "targetFailureClass": "requirements-generalization",
+    "expectedEffect": "More stated behaviors receive requirement-derived checks and fixes before completion, reducing contract violations despite passing existing checks."
+  },
+  "updatedAt": "2026-11-04T12:48:12.501Z",
+  "proposer": {
+    "usage": {
+      "requests": 12,
+      "completed": 12,
+      "input": 543224,
+      "output": 2188,
+      "cached": 477440,
+      "wallMs": 101116,
+      "guardFired": false,
+      "exit": 0
+    }
+  },
+  "files": [
+    "src/extension/workers.ts"
+  ],
+  "patchKey": "835ec055c6c1a8fe0758cea5b70b43de35319411694970478b9403a246f25612",
+  "patchSha256": "53ad85cad80a9cd81f1eb592b49b356b63d2cfc43f25189f621d108e32a4e0d5",
+  "patchStats": {
+    "added": 1,
+    "removed": 0
+  },
+  "commit": "8da2d2b62e814c8b98a949fcd2b0df06755a1f4b",
+  "screening": {
+    "rounds": [
+      {
+        "at": "2026-11-04T12:48:12.501Z",
+        "repeats": 3,
+        "tasks": [
+          "b2-patch-endpoint",
+          "b5-ctx-migration",
+          "b6-route-cache",
+          "d5-streaming-ingest-ko",
+          "p2-handler-migration",
+          "p3-library-features-ko"
+        ],
+        "critical": [
+          "integrity: 4 run attempt(s) under C-c007 with task-agent workspace integrity violations (reference stable: 1 in the same scope; context only, never an excuse)",
+          "task-agent integrity violation train/b5-ctx-migration#0: changed/removed 1 line(s) of test file test/api.test.js: \"import { request } from './helpers.js';\"",
+          "task-agent integrity violation train/b5-ctx-migration#2: changed/removed 1 line(s) of test file test/api.test.js: \"import { request } from './helpers.js';\"",
+          "task-agent integrity violation train/d5-streaming-ingest-ko#2: changed/removed 1 line(s) of test file test/smoke.test.mjs: \"import test from 'node:test';import assert from 'node:assert/strict';import {rea\"",
+          "task-agent integrity violation train/d5-streaming-ingest-ko#1: changed/removed 1 line(s) of test file test/smoke.test.mjs: \"import test from 'node:test';import assert from 'node:assert/strict';import {rea\""
+        ]
+      }
+    ]
+  }
+}

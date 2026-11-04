@@ -1,0 +1,156 @@
+{
+  "protocol": {
+    "version": "pi-eval-loop/protocol-2",
+    "seed": "pi-eval-loop-2026-11-04",
+    "target": {
+      "harness": "orche",
+      "mode": "single"
+    },
+    "route": {
+      "provider": "cliproxyapi",
+      "model": "gpt-6-luna",
+      "effort": "medium"
+    },
+    "proposer": {
+      "kind": "pi",
+      "route": {
+        "provider": "cliproxyapi",
+        "model": "gpt-6.1-sol",
+        "effort": "high"
+      },
+      "maxRequests": 120,
+      "wallMs": 1800000,
+      "allowedPaths": [
+        "src/",
+        "prompts/"
+      ],
+      "maxChangedFiles": 4,
+      "maxDiffLines": 200
+    },
+    "unit": {
+      "wallMs": 1200000,
+      "maxRequests": 150,
+      "graderMs": 120000
+    },
+    "bootstrap": {
+      "draws": 10000
+    },
+    "screening": {
+      "tasks": 6,
+      "minRepeats": 3,
+      "maxRepeats": 9,
+      "step": 3,
+      "support": 0.8,
+      "band": 0.1,
+      "level": "execution"
+    },
+    "development": {
+      "repeats": 3,
+      "level": "task",
+      "support": 0.8
+    },
+    "holdout": {
+      "repeats": 3,
+      "maxUses": 1,
+      "minTasks": 6,
+      "minFamilies": 4,
+      "requireIndependent": true,
+      "acceptedProvenance": [
+        "external"
+      ]
+    },
+    "gate": {
+      "eps": {
+        "overall": 0.03,
+        "hard": 0.05,
+        "consistency": 0.05
+      },
+      "minGain": {
+        "overall": 0,
+        "hard": 0,
+        "consistency": 0
+      }
+    },
+    "adoption": {
+      "support": 0.95,
+      "level": "task",
+      "eps": {
+        "hard": 0.02,
+        "consistency": 0.02
+      },
+      "minGain": {
+        "overall": 0
+      },
+      "familyRegression": 0.15,
+      "familyRegressionSupport": 0.8,
+      "requireHardStratum": true,
+      "requireChecks": true
+    },
+    "baselines": {
+      "pure": true,
+      "stable": true,
+      "targetMode": true,
+      "multiAttempt": {
+        "k": 3
+      }
+    },
+    "watchdog": {
+      "noProgressCandidates": 10,
+      "maxCandidatesPerCycle": 200,
+      "maxCycleWallMs": 259200000,
+      "maxConsecutiveInfra": 5,
+      "maxInfraRate": 0.1,
+      "maxFailuresPerClass": 10,
+      "maxChildFailuresPerParent": 5,
+      "daemonPollMs": 600000,
+      "hypothesisSimilarity": 0.8
+    },
+    "infra": {
+      "maxRetries": 1
+    },
+    "parallelism": 6,
+    "datasets": {
+      "source": "suite",
+      "trainShare": 0.45,
+      "holdout": null
+    },
+    "deploy": {
+      "mode": "refs",
+      "branch": "eval-loop/stable"
+    },
+    "notes": "Exploration-only TRAIN/DEVELOPMENT search for B (quality-only, greedy) and C (quality-first Pareto) under protocol-2. No holdout: holdout-v1 was consumed by abc-real-1 and is implementer-authored, so it is neither loaded, graded nor used; deployment is BLOCKED by construction. Search stop = the pre-registered defaults: 10 consecutive candidates without meaningful progress; safety stops only (class exhaustion after 10 failed targeted proposals, 200-candidate runaway backstop, 72 h hang watchdog, 5 consecutive infra-tainted candidates). Same agent route/effort, proposer route/effort, seed (same train/dev split) and parallelism as abc-real-1. Operational setting: 6 parallel units per trajectory (resource use, not a quality or search limit)."
+  },
+  "protocolDigest": "393f3019e86013bff6509a1ee801e8852d81312fcf81de9da3b2f95ffe99ee4b",
+  "evaluator": {
+    "/var/tmp/pi-arthur/pi-orche/01a1a4ab-f428-75d9-aa78-34c0feea56e7/W2/frozen/pi-eval-loop/src/ablation.mjs": "0b87593bfd2ddeeb467c399a61e81ed3ecd3a9ac187d3b48360bc69e8e4bbca1",
+    "/var/tmp/pi-arthur/pi-orche/01a1a4ab-f428-75d9-aa78-34c0feea56e7/W2/frozen/pi-eval-loop/src/analysis.mjs": "8e818b012dcaac843657dbe1946650deeaef3c2b3868a73394b8f1201734b9cf",
+    "/var/tmp/pi-arthur/pi-orche/01a1a4ab-f428-75d9-aa78-34c0feea56e7/W2/frozen/pi-eval-loop/src/app.mjs": "4cff8587baf001e7c3df038a5ebabb99668f4d4b6ae3502f24f3b4fe72a5cb98",
+    "/var/tmp/pi-arthur/pi-orche/01a1a4ab-f428-75d9-aa78-34c0feea56e7/W2/frozen/pi-eval-loop/src/archive.mjs": "b07dfd5c15ec4be1a221970b13d2458fa05170a065d135e6b5bdbce4d8ec2192",
+    "/var/tmp/pi-arthur/pi-orche/01a1a4ab-f428-75d9-aa78-34c0feea56e7/W2/frozen/pi-eval-loop/src/checks.mjs": "5e818cfb7934890fa4bdb297dc74ff6b5cd0f03ed9366a164a18927e3f754de5",
+    "/var/tmp/pi-arthur/pi-orche/01a1a4ab-f428-75d9-aa78-34c0feea56e7/W2/frozen/pi-eval-loop/src/datasets.mjs": "892fb53d4af02f3d77b235664cc950d5228a912b1387b4744e56a07b17c3abd5",
+    "/var/tmp/pi-arthur/pi-orche/01a1a4ab-f428-75d9-aa78-34c0feea56e7/W2/frozen/pi-eval-loop/src/deploy.mjs": "3254278b2ed206c72b8c634ff5fb60ed1b7c6e0b07ee8b837144682c6811a966",
+    "/var/tmp/pi-arthur/pi-orche/01a1a4ab-f428-75d9-aa78-34c0feea56e7/W2/frozen/pi-eval-loop/src/evaluator.mjs": "4f371835e89b0ddb595ffb5914f5c2d0068f8983f0e897084c6451951d0ee064",
+    "/var/tmp/pi-arthur/pi-orche/01a1a4ab-f428-75d9-aa78-34c0feea56e7/W2/frozen/pi-eval-loop/src/faux-upstream.mjs": "7e98f2587472a936054fb2631c147dfa326de6eb34f026d16be64b5452731cad",
+    "/var/tmp/pi-arthur/pi-orche/01a1a4ab-f428-75d9-aa78-34c0feea56e7/W2/frozen/pi-eval-loop/src/gate.mjs": "ab20494aea1356c69a43376cbc0421c781a2f85113ddb50e2338706eb944cbb4",
+    "/var/tmp/pi-arthur/pi-orche/01a1a4ab-f428-75d9-aa78-34c0feea56e7/W2/frozen/pi-eval-loop/src/grader.mjs": "ee2e91e1119c18f59503d2388171b9b68482e6d7ac6c3603631a017fee6cc615",
+    "/var/tmp/pi-arthur/pi-orche/01a1a4ab-f428-75d9-aa78-34c0feea56e7/W2/frozen/pi-eval-loop/src/integrity.mjs": "9176e544bf4e9b54600d22e25a53618bd49ba5474559a2aa6c1b1db5af013f60",
+    "/var/tmp/pi-arthur/pi-orche/01a1a4ab-f428-75d9-aa78-34c0feea56e7/W2/frozen/pi-eval-loop/src/loop.mjs": "fb758b53089fcc7fb4f55347e47087f3abb83064dd542638ddb11446860043dc",
+    "/var/tmp/pi-arthur/pi-orche/01a1a4ab-f428-75d9-aa78-34c0feea56e7/W2/frozen/pi-eval-loop/src/metrics.mjs": "65767e5103a4d3af890028bbccd7bb1c3569f4769b9529be11f9e568be3e65ca",
+    "/var/tmp/pi-arthur/pi-orche/01a1a4ab-f428-75d9-aa78-34c0feea56e7/W2/frozen/pi-eval-loop/src/proposer.mjs": "23013ab3b2776da9e8bb023b0dde63f52e15fa36f42a2e101a240f512af6561a",
+    "/var/tmp/pi-arthur/pi-orche/01a1a4ab-f428-75d9-aa78-34c0feea56e7/W2/frozen/pi-eval-loop/src/protocol.mjs": "abee79fb92b2c913d3c168d0510a31080005a34abe9247a740950b9a4015bbe6",
+    "/var/tmp/pi-arthur/pi-orche/01a1a4ab-f428-75d9-aa78-34c0feea56e7/W2/frozen/pi-eval-loop/src/report.mjs": "2d7454c654727ec565a9bb68bde2d59167fda132757e763b237adc8d6aabf09e",
+    "/var/tmp/pi-arthur/pi-orche/01a1a4ab-f428-75d9-aa78-34c0feea56e7/W2/frozen/pi-eval-loop/src/rng.mjs": "7cb24904a94176a514cb29c82149bab5bfd0717db2ad9a103b4fec78e9e7b500",
+    "/var/tmp/pi-arthur/pi-orche/01a1a4ab-f428-75d9-aa78-34c0feea56e7/W2/frozen/pi-eval-loop/src/runner.mjs": "3e309ccffdb16804a02c77c4ad1d661f2b254af5dc5ee1c436fd967ea3e3bdb5",
+    "/var/tmp/pi-arthur/pi-orche/01a1a4ab-f428-75d9-aa78-34c0feea56e7/W2/frozen/pi-eval-loop/src/sandbox.mjs": "93d3ba24a48b089b391aa843b34528c0fa40fad4a5a5449a875f233fcdd84e0d",
+    "/var/tmp/pi-arthur/pi-orche/01a1a4ab-f428-75d9-aa78-34c0feea56e7/W2/frozen/pi-eval-loop/src/selftest.mjs": "7fd97c27099557d23719d7231a49dee173d5a92e209fec8a22ee8712cb7908b1",
+    "/var/tmp/pi-arthur/pi-orche/01a1a4ab-f428-75d9-aa78-34c0feea56e7/W2/frozen/pi-eval-loop/src/stats.mjs": "b3ee34a8f1c01ce124d67f2ca7d87856c087b84417baa0309c644521ad9e6d17",
+    "/var/tmp/pi-arthur/pi-orche/01a1a4ab-f428-75d9-aa78-34c0feea56e7/W2/frozen/pi-eval-loop/src/util.mjs": "b4894d0564b055e2a7aea5d406ec8f9b3ea11f8e7c51da5abbd15bcaa1ef5aae",
+    "/var/tmp/pi-arthur/pi-orche/01a1a4ab-f428-75d9-aa78-34c0feea56e7/W2/frozen/pi-eval-loop/src/worktree.mjs": "7fb552e2b21a4092544f4c63b570502f7ef6928ccbb847372ce41a6912aa29e1",
+    "orche/experiments/witness-replay/proxy.mjs": "67f839177a9961efe1354208e79fab8506316260f4ee51af27cf96dd99746ef5",
+    "orche/experiments/witness-replay/bridge.mjs": "85dc52cf5a467c1db776d68f4f20cfc2497ae22006c02232a56ec7c82fc28ab2",
+    "orche/experiments/witness-replay/sandbox.ts": "89fb3b861abf0507be3d3a429905b8305e818fc9b5aaf55c11159a5b9ede0871",
+    "orche/experiments/ultra-ab/protocol.ts": "c080e3efc4d0bfdbfe6f236902e6c6c94944d58da9664b8846ebcb0353ca53f6"
+  },
+  "datasetDigest": "32bcc9a472eb884f540618acf5c30ab01f4d80c197bab4e459b606ed03f11a77",
+  "lockedAt": "2026-11-04T10:01:21.116Z"
+}

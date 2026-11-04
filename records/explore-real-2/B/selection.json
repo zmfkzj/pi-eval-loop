@@ -1,0 +1,8 @@
+{
+  "at": "2026-11-04T13:35:14.071Z",
+  "considered": [],
+  "eligible": [],
+  "criticalExcluded": [],
+  "selected": null,
+  "reason": "no development-qualified, critical-clean candidate without family regression"
+}

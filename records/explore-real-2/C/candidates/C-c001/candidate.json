@@ -1,0 +1,81 @@
+{
+  "status": "rejected",
+  "decisions": [
+    {
+      "at": "2026-11-04T10:58:57.518Z",
+      "status": "created",
+      "reason": "patch accepted"
+    },
+    {
+      "at": "2026-11-04T10:59:08.734Z",
+      "status": "screening",
+      "reason": "screening batch b1-static-traversal, b3-pagination, b6-route-cache, d5-streaming-ingest-ko, p1-ticket-batch, p3-library-features-ko"
+    },
+    {
+      "at": "2026-11-04T11:25:59.205Z",
+      "status": "rejected",
+      "reason": "critical: integrity: 4 run attempt(s) under C-c001 with task-agent workspace integrity violations (reference stable: 1 in the same scope; context only, never an excuse); task-agent integrity violation train/b1-static-traversal#2: changed/removed 1 line(s) of test file test/api.test.js: \"import { resolve } from 'node:path';\"; task-agent integrity violation train/d5-streaming-ingest-ko#0: changed/removed 1 line(s) of test file test/smoke.test.mjs: \"import test from 'node:test';import assert from 'node:assert/strict';import {rea\"; task-agent integrity violation train/d5-streaming-ingest-ko#1: changed/removed 1 line(s) of test file test/smoke.test.mjs: \"import test from 'node:test';import assert from 'node:assert/strict';import {rea\""
+    }
+  ],
+  "children": [],
+  "createdAt": "2026-11-04T10:57:21.987Z",
+  "id": "C-c001",
+  "parent": "stable",
+  "origin": "proposer",
+  "strategy": "pareto",
+  "worktree": "/home/arthur/Code/oh-my-pi-extensions/pi-eval-loop/state/explore-real-2/C/worktrees/C-c001",
+  "branch": "eval-loop/candidates/57a623bf/C-c001",
+  "base": "e831a6b2bc19f0c707b55505db33a11b2c9d4d4a",
+  "target": "requirements-generalization",
+  "hypothesis": {
+    "text": "Requiring implementation workers to audit every original behavioral clause against concrete assertions before completion should expose omitted requirements that passing checks alone miss.",
+    "targetFailureClass": "requirements-generalization",
+    "expectedEffect": "More requested boundary, exception and interaction behaviors are exercised and corrected before completion, improving full-contract correctness even when existing checks already pass."
+  },
+  "updatedAt": "2026-11-04T11:25:59.205Z",
+  "proposer": {
+    "usage": {
+      "requests": 11,
+      "completed": 11,
+      "input": 546560,
+      "output": 2393,
+      "cached": 470912,
+      "wallMs": 94927,
+      "guardFired": false,
+      "exit": 0
+    }
+  },
+  "files": [
+    "src/extension/workers.ts"
+  ],
+  "patchKey": "7f97c55ea76950658685b257138fdc7ab387cfd863f0ae9b98b99b3dd6b54275",
+  "patchSha256": "cc50ead20a916def6212d6031908f5a9b8d6816d68c25b11fa0fd10c7e8f1bc4",
+  "patchStats": {
+    "added": 4,
+    "removed": 1
+  },
+  "commit": "77a9116116914eb5dee89edd97e42a9bb879940a",
+  "screening": {
+    "rounds": [
+      {
+        "at": "2026-11-04T11:25:59.205Z",
+        "repeats": 3,
+        "tasks": [
+          "b1-static-traversal",
+          "b3-pagination",
+          "b6-route-cache",
+          "d5-streaming-ingest-ko",
+          "p1-ticket-batch",
+          "p3-library-features-ko"
+        ],
+        "critical": [
+          "integrity: 4 run attempt(s) under C-c001 with task-agent workspace integrity violations (reference stable: 1 in the same scope; context only, never an excuse)",
+          "task-agent integrity violation train/b1-static-traversal#2: changed/removed 1 line(s) of test file test/api.test.js: \"import { resolve } from 'node:path';\"",
+          "task-agent integrity violation train/d5-streaming-ingest-ko#0: changed/removed 1 line(s) of test file test/smoke.test.mjs: \"import test from 'node:test';import assert from 'node:assert/strict';import {rea\"",
+          "task-agent integrity violation train/d5-streaming-ingest-ko#1: changed/removed 1 line(s) of test file test/smoke.test.mjs: \"import test from 'node:test';import assert from 'node:assert/strict';import {rea\"",
+          "task-agent integrity violation train/d5-streaming-ingest-ko#2: changed/removed 1 line(s) of test file test/smoke.test.mjs: \"import test from 'node:test';import assert from 'node:assert/strict';import {rea\""
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,90 @@
+{
+  "phase": "done",
+  "cycle": 1,
+  "strategy": "pareto",
+  "counters": {
+    "candidates": 0,
+    "noProgress": 0,
+    "consecutiveInfra": 0
+  },
+  "startedAt": "2026-11-04T09:59:07.514Z",
+  "prerequisites": [
+    {
+      "name": "bwrap",
+      "ok": true,
+      "detail": "bubblewrap 0.11.1"
+    },
+    {
+      "name": "bwrap-namespaces",
+      "ok": true,
+      "detail": "user/net/pid namespaces usable"
+    },
+    {
+      "name": "pi-cli",
+      "ok": true,
+      "detail": "/home/arthur/.bun/install/global/node_modules/@earendil-works/pi-coding-agent/dist/bundle/cli.js"
+    },
+    {
+      "name": "provider",
+      "ok": true,
+      "detail": "/home/arthur/Code/oh-my-pi-extensions/cliproxyapi/node_modules/@router-for-me/pi-cliproxyapi-provider"
+    },
+    {
+      "name": "orche",
+      "ok": true,
+      "detail": "/home/arthur/Code/oh-my-pi-extensions/orche"
+    },
+    {
+      "name": "git",
+      "ok": true,
+      "detail": "git version 2.53.0"
+    },
+    {
+      "name": "credentials",
+      "ok": true,
+      "detail": "cliproxyapi.json apiKey: set"
+    },
+    {
+      "name": "model-catalog",
+      "ok": true,
+      "detail": "/home/arthur/.pi/agent/cliproxyapi-models.json"
+    },
+    {
+      "name": "upstream",
+      "ok": true,
+      "detail": "http://127.0.0.1:8317 answered 401"
+    }
+  ],
+  "stable": {
+    "id": "stable",
+    "commit": "e831a6b2bc19f0c707b55505db33a11b2c9d4d4a"
+  },
+  "updatedAt": "2026-11-04T13:44:03.099Z",
+  "role": "A (baseline, no optimization)",
+  "selection": {
+    "at": "2026-11-04T13:44:03.091Z",
+    "selected": null,
+    "extraArms": [],
+    "ablation": {
+      "B": {
+        "id": "stable",
+        "commit": "e831a6b2bc19f0c707b55505db33a11b2c9d4d4a"
+      },
+      "C": {
+        "id": "stable",
+        "commit": "e831a6b2bc19f0c707b55505db33a11b2c9d4d4a"
+      }
+    },
+    "frozenDigest": "a934e3cc929b34b401b1430a85ed21e3b5ec1b5f4aa67e6eca2eea6fc8a28877"
+  },
+  "final": {
+    "candidate": null,
+    "verdict": "BLOCKED",
+    "adopt": false,
+    "explorationOnly": true,
+    "exploration": "no candidate selected (none)",
+    "reasons": [
+      "exploration-only protocol (datasets.holdout = null): no unconsumed independent holdout is available, so no candidate can be validated or deployed; a development selection is not evidence of improvement"
+    ]
+  }
+}

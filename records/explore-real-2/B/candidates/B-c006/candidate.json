@@ -1,0 +1,79 @@
+{
+  "status": "rejected",
+  "decisions": [
+    {
+      "at": "2026-11-04T12:21:47.444Z",
+      "status": "created",
+      "reason": "patch accepted"
+    },
+    {
+      "at": "2026-11-04T12:21:58.137Z",
+      "status": "screening",
+      "reason": "screening batch a7-auth-rotation, b1-static-traversal, b3-pagination, p1-ticket-batch, p2-handler-migration, p3-library-features-ko"
+    },
+    {
+      "at": "2026-11-04T12:32:58.977Z",
+      "status": "rejected",
+      "reason": "critical: integrity: 2 run attempt(s) under B-c006 with task-agent workspace integrity violations (reference stable: 0 in the same scope; context only, never an excuse); task-agent integrity violation train/b1-static-traversal#0: changed/removed 1 line(s) of test file test/api.test.js: \"import { resolve } from 'node:path';\"; task-agent integrity violation train/p3-library-features-ko#1: changed/removed 4 line(s) of test file test/smoke.test.mjs: \"import { normalize } from '../src/interval/index.mjs';\", \"test('기본 공개 함수', () => {\", \"  assert.deepEqual(normalize([[1,2]]), [[1,2]]);\""
+    }
+  ],
+  "children": [],
+  "createdAt": "2026-11-04T12:19:37.635Z",
+  "id": "B-c006",
+  "parent": "stable",
+  "origin": "proposer",
+  "strategy": "greedy",
+  "worktree": "/home/arthur/Code/oh-my-pi-extensions/pi-eval-loop/state/explore-real-2/B/worktrees/B-c006",
+  "branch": "eval-loop/candidates/a3b7701b/B-c006",
+  "base": "e831a6b2bc19f0c707b55505db33a11b2c9d4d4a",
+  "target": "requirements-generalization",
+  "hypothesis": {
+    "text": "Requiring implementation workers to audit the original request clause by clause and exercise uncovered contract behavior before completion should catch omissions that passing project checks alone miss.",
+    "targetFailureClass": "requirements-generalization",
+    "expectedEffect": "More stated requirements receive focused behavioral verification, reducing contract violations in completed implementations whose project checks pass."
+  },
+  "updatedAt": "2026-11-04T12:32:58.977Z",
+  "proposer": {
+    "usage": {
+      "requests": 14,
+      "completed": 14,
+      "input": 710492,
+      "output": 2542,
+      "cached": 633472,
+      "wallMs": 129143,
+      "guardFired": false,
+      "exit": 0
+    }
+  },
+  "files": [
+    "src/extension/workers.ts"
+  ],
+  "patchKey": "7bac0f45ce9cbc5364d2e013cc6b320b7e7d7615fad5e5cca4a0903e378b079c",
+  "patchSha256": "2b68fa2900f25a88499b2b0a574c9ac821321c771f2f601b8286d93f4577b15b",
+  "patchStats": {
+    "added": 1,
+    "removed": 0
+  },
+  "commit": "24e3a589cef70fb3d2555bfbcd5a76f4d8078425",
+  "screening": {
+    "rounds": [
+      {
+        "at": "2026-11-04T12:32:58.977Z",
+        "repeats": 3,
+        "tasks": [
+          "a7-auth-rotation",
+          "b1-static-traversal",
+          "b3-pagination",
+          "p1-ticket-batch",
+          "p2-handler-migration",
+          "p3-library-features-ko"
+        ],
+        "critical": [
+          "integrity: 2 run attempt(s) under B-c006 with task-agent workspace integrity violations (reference stable: 0 in the same scope; context only, never an excuse)",
+          "task-agent integrity violation train/b1-static-traversal#0: changed/removed 1 line(s) of test file test/api.test.js: \"import { resolve } from 'node:path';\"",
+          "task-agent integrity violation train/p3-library-features-ko#1: changed/removed 4 line(s) of test file test/smoke.test.mjs: \"import { normalize } from '../src/interval/index.mjs';\", \"test('기본 공개 함수', () => {\", \"  assert.deepEqual(normalize([[1,2]]), [[1,2]]);\""
+        ]
+      }
+    ]
+  }
+}

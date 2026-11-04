@@ -1,0 +1,13 @@
+diff --git a/src/extension/workers.ts b/src/extension/workers.ts
+index 09c371e..08d8009 100644
+--- a/src/extension/workers.ts
++++ b/src/extension/workers.ts
+@@ -827,7 +827,7 @@ export function assignmentPrompt(args: Pick<TaskParameters, "role" | "request" |
+   };
+   const rasterInstructions = imagesAvailable ? '\nUse generate_image for raster art (sprites, textures, icons, concept art, thumbnails). Request background "transparent" for sprites/icons. Always pass width/height for the exact target size: the gateway ignores size and returns roughly 1254x1254. Use kernel "nearest" for pixel art. Inspect results with read. Keep procedural/SVG generation for vector or pixel-exact assets. Record the generation prompt in outputs[].spec.' : "";
+   // An orchestrator is not told it works alone: "You work alone" read as a ban on sub-workers (evaluation v2, docs/orchestrator.md 9).
+-  return `Assignment: ${args.role}. ${args.orchestrate ? ORCHESTRATOR_TEAM_LINE : "You work alone; there are no peers or backlog."}\n${task}\n\n${instructions[args.role]}${rasterInstructions}${extraInstructions ? `\n${extraInstructions}` : ""}\nStart summary with the conclusion (1–3 sentences), then evidence as path:line references and command outcomes. Do not paste code, diffs or logs the reader can open. Answer summaries stay complete but cite code by location instead of long quotes.\n\n${gitAssignmentLine(grant)}`;
++  return `Assignment: ${args.role}. ${args.orchestrate ? ORCHESTRATOR_TEAM_LINE : "You work alone; there are no peers or backlog."}\n${task}\n\n${instructions[args.role]}${args.role === "implement" ? "\nBefore reporting completion, audit the implementation against the original request, not just the existing tests. Split compound requirements into individual obligations, including explicit boundaries, rejection rules, output shape and side-effect constraints. For each obligation, identify the enforcing code and a check that actually asserts it; a passing suite is not evidence for clauses it does not exercise. Add and run focused checks for uncovered obligations within your write scope, fix any discrepancies, and report anything still unverified rather than marking it met." : ""}${rasterInstructions}${extraInstructions ? `\n${extraInstructions}` : ""}\nStart summary with the conclusion (1–3 sentences), then evidence as path:line references and command outcomes. Do not paste code, diffs or logs the reader can open. Answer summaries stay complete but cite code by location instead of long quotes.\n\n${gitAssignmentLine(grant)}`;
+ }
+ 
+ /** The system instructions of an orche_task worker session; `spawn`: the session has orche_spawn (single workflow, `single.spawn`). */

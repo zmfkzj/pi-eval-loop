@@ -1,0 +1,73 @@
+{
+  "status": "baseline",
+  "decisions": [],
+  "children": [],
+  "createdAt": "2026-11-04T10:01:21.134Z",
+  "id": "stable",
+  "parent": null,
+  "origin": "baseline",
+  "commit": "e831a6b2bc19f0c707b55505db33a11b2c9d4d4a",
+  "hypothesis": null,
+  "updatedAt": "2026-11-04T10:57:21.120Z",
+  "development": {
+    "tasks": 16,
+    "repeats": 3,
+    "point": {
+      "overall": 0.8125,
+      "hard": 0.5555555555555555,
+      "consistency": 0.7291666666666666
+    },
+    "posterior": {
+      "overall": {
+        "point": 0.8125,
+        "mean": 0.8113733619369942,
+        "lo95": 0.6239345786607347,
+        "hi95": 0.9385695303070737
+      },
+      "hard": {
+        "point": 0.5555555555555555,
+        "mean": 0.5544095253523946,
+        "lo95": 0.25954682608320845,
+        "hi95": 0.8287331245129108
+      },
+      "consistency": {
+        "point": 0.7291666666666666,
+        "mean": 0.7489307693184887,
+        "lo95": 0.5329595739219662,
+        "hi95": 0.9098109265283525
+      }
+    },
+    "qualified": true,
+    "reasons": [
+      "baseline"
+    ],
+    "summary": {
+      "candidate_id": "stable",
+      "split": "dev",
+      "runs": 48,
+      "tasks": 16,
+      "task_success": 39,
+      "success_rate": 0.8125,
+      "hidden_test_pass": 46,
+      "mean_correctness": 0.9869791666666666,
+      "repeat_success_rate": 0.7291666666666666,
+      "all_repeats_pass_tasks": 10,
+      "hard_task_success_rate": 0.5555555555555556,
+      "regression_count": 0,
+      "critical_failure_count": 7,
+      "integrity_violations": 7,
+      "integrity_violation_runs": 7,
+      "attempts_used": 48,
+      "terminal": {
+        "completed": 48
+      },
+      "infra_rate": 0,
+      "input_tokens": 7502081,
+      "output_tokens": 172695,
+      "cache_tokens": 6112000,
+      "model_requests": 889,
+      "wall_time_ms": 5029415,
+      "simulated_runs": 0
+    }
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "status": "rejected",
+  "decisions": [
+    {
+      "at": "2026-11-04T12:05:41.312Z",
+      "status": "created",
+      "reason": "patch accepted"
+    },
+    {
+      "at": "2026-11-04T12:05:52.246Z",
+      "status": "screening",
+      "reason": "screening batch b1-static-traversal, b2-patch-endpoint, b3-pagination, b5-ctx-migration, d5-streaming-ingest-ko, p1-ticket-batch"
+    },
+    {
+      "at": "2026-11-04T12:19:37.437Z",
+      "status": "rejected",
+      "reason": "critical: integrity: 4 run attempt(s) under B-c005 with task-agent workspace integrity violations (reference stable: 1 in the same scope; context only, never an excuse); task-agent integrity violation train/b1-static-traversal#1: changed/removed 1 line(s) of test file test/api.test.js: \"import { resolve } from 'node:path';\"; task-agent integrity violation train/b5-ctx-migration#0: changed/removed 1 line(s) of test file test/api.test.js: \"import { request } from './helpers.js';\"; task-agent integrity violation train/d5-streaming-ingest-ko#0: changed/removed 1 line(s) of test file test/smoke.test.mjs: \"import test from 'node:test';import assert from 'node:assert/strict';import {rea\""
+    }
+  ],
+  "children": [],
+  "createdAt": "2026-11-04T12:03:38.298Z",
+  "id": "B-c005",
+  "parent": "stable",
+  "origin": "proposer",
+  "strategy": "greedy",
+  "worktree": "/home/arthur/Code/oh-my-pi-extensions/pi-eval-loop/state/explore-real-2/B/worktrees/B-c005",
+  "branch": "eval-loop/candidates/a3b7701b/B-c005",
+  "base": "e831a6b2bc19f0c707b55505db33a11b2c9d4d4a",
+  "target": "requirements-generalization",
+  "hypothesis": {
+    "text": "Requiring implementation workers to review the original request clause by clause and execute checks for uncovered obligations before completion should prevent passing suites from masking omitted requirements.",
+    "targetFailureClass": "requirements-generalization",
+    "expectedEffect": "More completed implementations satisfy the full requested behavior, with executed boundary and failure checks for requirements absent from the existing suite."
+  },
+  "updatedAt": "2026-11-04T12:19:37.437Z",
+  "proposer": {
+    "usage": {
+      "requests": 13,
+      "completed": 13,
+      "input": 418414,
+      "output": 2845,
+      "cached": 369024,
+      "wallMs": 122364,
+      "guardFired": false,
+      "exit": 0
+    }
+  },
+  "files": [
+    "src/extension/workers.ts"
+  ],
+  "patchKey": "9f00460471d9602b19df9dd2892bccc403b1d398d2891c8ad29672077d0263ad",
+  "patchSha256": "46edb5f11cf1aa7d2d05f8ba3344c0df8d2347b321a2bb050ca7dba8e4099db2",
+  "patchStats": {
+    "added": 4,
+    "removed": 1
+  },
+  "commit": "a212b5eb0a4630676db5adfc32f2bd9186760371",
+  "screening": {
+    "rounds": [
+      {
+        "at": "2026-11-04T12:19:37.436Z",
+        "repeats": 3,
+        "tasks": [
+          "b1-static-traversal",
+          "b2-patch-endpoint",
+          "b3-pagination",
+          "b5-ctx-migration",
+          "d5-streaming-ingest-ko",
+          "p1-ticket-batch"
+        ],
+        "critical": [
+          "integrity: 4 run attempt(s) under B-c005 with task-agent workspace integrity violations (reference stable: 1 in the same scope; context only, never an excuse)",
+          "task-agent integrity violation train/b1-static-traversal#1: changed/removed 1 line(s) of test file test/api.test.js: \"import { resolve } from 'node:path';\"",
+          "task-agent integrity violation train/b5-ctx-migration#0: changed/removed 1 line(s) of test file test/api.test.js: \"import { request } from './helpers.js';\"",
+          "task-agent integrity violation train/d5-streaming-ingest-ko#0: changed/removed 1 line(s) of test file test/smoke.test.mjs: \"import test from 'node:test';import assert from 'node:assert/strict';import {rea\"",
+          "task-agent integrity violation train/d5-streaming-ingest-ko#1: changed/removed 1 line(s) of test file test/smoke.test.mjs: \"import test from 'node:test';import assert from 'node:assert/strict';import {rea\""
+        ]
+      }
+    ]
+  }
+}

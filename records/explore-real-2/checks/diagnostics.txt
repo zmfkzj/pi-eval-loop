@@ -1,0 +1,19 @@
+checkJs diagnostics (tsc 5.9.3 --allowJs --checkJs --noEmit, types:[], over pi-eval-loop/{src,bin,test,extension})
+baseline 33ef7f2: 363 errors, 0 syntax (TS1xxx)
+final tree: 388 errors, 0 syntax (TS1xxx)
+codes (final):
+     98 TS2307
+      2 TS2322
+    184 TS2339
+     35 TS2345
+     24 TS2353
+      1 TS2551
+      2 TS2554
+     41 TS2591
+      1 TS2741
+per-file delta (baseline -> final):
+<       4 pi-eval-loop/src/ablation.mjs
+>       6 pi-eval-loop/src/ablation.mjs
+<     105 pi-eval-loop/src/loop.mjs
+>     108 pi-eval-loop/src/loop.mjs
+>      20 pi-eval-loop/test/critical-exploration.test.mjs

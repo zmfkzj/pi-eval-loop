@@ -1,0 +1,79 @@
+{
+  "status": "rejected",
+  "decisions": [
+    {
+      "at": "2026-11-04T11:52:09.029Z",
+      "status": "created",
+      "reason": "patch accepted"
+    },
+    {
+      "at": "2026-11-04T11:52:20.313Z",
+      "status": "screening",
+      "reason": "screening batch a7-auth-rotation, b2-patch-endpoint, b3-pagination, d4-cache-fencing, p1-ticket-batch, p2-handler-migration"
+    },
+    {
+      "at": "2026-11-04T12:07:20.970Z",
+      "status": "rejected",
+      "reason": "critical: integrity: 2 run attempt(s) under C-c004 with task-agent workspace integrity violations (reference stable: 3 in the same scope; context only, never an excuse); task-agent integrity violation train/d4-cache-fencing#2: changed/removed 1 line(s) of test file test/smoke.test.mjs: \"import test from 'node:test';import assert from 'node:assert/strict';import {cre\"; task-agent integrity violation train/d4-cache-fencing#0: changed/removed 1 line(s) of test file test/smoke.test.mjs: \"import test from 'node:test';import assert from 'node:assert/strict';import {cre\""
+    }
+  ],
+  "children": [],
+  "createdAt": "2026-11-04T11:50:05.754Z",
+  "id": "C-c004",
+  "parent": "stable",
+  "origin": "proposer",
+  "strategy": "pareto",
+  "worktree": "/home/arthur/Code/oh-my-pi-extensions/pi-eval-loop/state/explore-real-2/C/worktrees/C-c004",
+  "branch": "eval-loop/candidates/57a623bf/C-c004",
+  "base": "e831a6b2bc19f0c707b55505db33a11b2c9d4d4a",
+  "target": "requirements-generalization",
+  "hypothesis": {
+    "text": "Requiring implementation workers to reconcile every original-request clause with code and request-derived behavioral checks before completion should prevent passing suites from masking omitted contract requirements.",
+    "targetFailureClass": "requirements-generalization",
+    "expectedEffect": "More complete satisfaction of stated contracts, including specified boundaries, invalid inputs and interactions, with fewer completed implementations that omit requirements despite passing their existing checks."
+  },
+  "updatedAt": "2026-11-04T12:07:20.970Z",
+  "proposer": {
+    "usage": {
+      "requests": 12,
+      "completed": 12,
+      "input": 372242,
+      "output": 2416,
+      "cached": 328192,
+      "wallMs": 122624,
+      "guardFired": false,
+      "exit": 0
+    }
+  },
+  "files": [
+    "src/extension/workers.ts"
+  ],
+  "patchKey": "5db40088712cbb8f37c84c7629704b89eeeec9173673a1e1a9d027a76dd1f4b3",
+  "patchSha256": "758fcc8ad774cae21fdd3515c6ca2526606039b6b93349f977a4ee34ba094d85",
+  "patchStats": {
+    "added": 1,
+    "removed": 0
+  },
+  "commit": "e773add4e7daa5b9c8a5b0483a73aae2aeb194aa",
+  "screening": {
+    "rounds": [
+      {
+        "at": "2026-11-04T12:07:20.970Z",
+        "repeats": 3,
+        "tasks": [
+          "a7-auth-rotation",
+          "b2-patch-endpoint",
+          "b3-pagination",
+          "d4-cache-fencing",
+          "p1-ticket-batch",
+          "p2-handler-migration"
+        ],
+        "critical": [
+          "integrity: 2 run attempt(s) under C-c004 with task-agent workspace integrity violations (reference stable: 3 in the same scope; context only, never an excuse)",
+          "task-agent integrity violation train/d4-cache-fencing#2: changed/removed 1 line(s) of test file test/smoke.test.mjs: \"import test from 'node:test';import assert from 'node:assert/strict';import {cre\"",
+          "task-agent integrity violation train/d4-cache-fencing#0: changed/removed 1 line(s) of test file test/smoke.test.mjs: \"import test from 'node:test';import assert from 'node:assert/strict';import {cre\""
+        ]
+      }
+    ]
+  }
+}
