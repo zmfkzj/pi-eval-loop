@@ -1,0 +1,10 @@
+{
+  "id": "h1-interval-merge",
+  "title": "Merge intervals correctly",
+  "family": "intervals",
+  "tier": "medium",
+  "instruction": "mergeIntervals(list) in src/intervals.js must return a NEW array of sorted, non-overlapping [start, end] pairs (inclusive ends). Intervals that overlap OR touch (for example [1, 3] and [3, 5], which become [1, 5]) are merged; the input may be in any order and neither the input array nor its pairs may be mutated. An empty list returns []. An interval whose start is greater than its end, or whose bounds are not finite numbers, throws a RangeError. Keep the existing behaviour for already sorted, disjoint input and add a regression test.",
+  "timeoutSec": 900,
+  "provenance": "implementer-authored-sealed-before-search",
+  "provenanceNote": "Written for pi-eval-loop holdout-v1 by the implementing agent before any optimization run; sealed (SEAL.json) and never mounted into the optimizer's sandbox."
+}

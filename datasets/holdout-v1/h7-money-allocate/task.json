@@ -1,0 +1,10 @@
+{
+  "id": "h7-money-allocate",
+  "title": "Allocate cents by ratio",
+  "family": "money",
+  "tier": "easy",
+  "instruction": "allocate(totalCents, ratios) in src/allocate.js splits an integer amount of cents into integer parts proportional to the non-negative ratios, so that the parts always add up exactly to totalCents. Use the largest-remainder method: each part starts as the proportional share rounded toward zero, and the cents still missing are given one at a time to the parts with the largest fractional remainders (ties go to the earlier index). A negative total is allocated like its absolute value with every part negated. A ratio of 0 gets 0. A total that is not an integer, an empty ratio list, a negative or non-finite ratio, or ratios that are all 0 throw a RangeError. Add regression tests.",
+  "timeoutSec": 900,
+  "provenance": "implementer-authored-sealed-before-search",
+  "provenanceNote": "Written for pi-eval-loop holdout-v1 by the implementing agent before any optimization run; sealed (SEAL.json) and never mounted into the optimizer's sandbox."
+}

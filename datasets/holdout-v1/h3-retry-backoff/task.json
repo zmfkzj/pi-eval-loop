@@ -1,0 +1,10 @@
+{
+  "id": "h3-retry-backoff",
+  "title": "Retry with capped exponential backoff",
+  "family": "retry",
+  "tier": "medium",
+  "instruction": "retry(fn, options) in src/retry.js calls the async function fn(attempt) (attempt counts from 1) until it resolves, and resolves with its value. options: retries (number of RETRIES after the first call, default 3, so at most retries + 1 calls), baseMs (default 100), factor (default 2), maxMs (default 10000), sleep (an async function(ms), default a real timer) and shouldRetry (function(error, attempt) returning whether to retry, default: always). Before retry number k (k = 1, 2, ...) it awaits sleep(min(maxMs, baseMs * factor^(k-1))). When shouldRetry returns false, or no retries remain, it rejects with the error fn threw (the same error object, not a wrapper) without sleeping again. retries: 0 means a single call. Add regression tests.",
+  "timeoutSec": 900,
+  "provenance": "implementer-authored-sealed-before-search",
+  "provenanceNote": "Written for pi-eval-loop holdout-v1 by the implementing agent before any optimization run; sealed (SEAL.json) and never mounted into the optimizer's sandbox."
+}

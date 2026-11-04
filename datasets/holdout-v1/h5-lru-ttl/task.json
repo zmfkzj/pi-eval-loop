@@ -1,0 +1,10 @@
+{
+  "id": "h5-lru-ttl",
+  "title": "LRU cache with expiry",
+  "family": "cache",
+  "tier": "hard",
+  "instruction": "LruCache in src/lru.js is a bounded cache: new LruCache(capacity, { ttlMs, now }) where capacity is a positive integer (otherwise RangeError), ttlMs is an optional time-to-live in milliseconds (undefined: entries never expire) and now is an optional clock function (default Date.now). Required behaviour: get(key) returns the value (undefined when absent or expired) and makes a live entry the most recently used; has(key) returns whether a live entry exists WITHOUT changing recency; set(key, value) inserts or replaces (replacing makes the entry most recently used and restarts its time-to-live) and, when that exceeds the capacity, evicts the least recently used live entry; expired entries are never returned, never counted by size, never keep a live entry from staying (they are removed before evicting live ones); delete(key) returns whether a live entry was removed; size is the number of live entries; keys() returns the live keys from least to most recently used. An entry is expired once now() - setTime >= ttlMs. Add regression tests.",
+  "timeoutSec": 900,
+  "provenance": "implementer-authored-sealed-before-search",
+  "provenanceNote": "Written for pi-eval-loop holdout-v1 by the implementing agent before any optimization run; sealed (SEAL.json) and never mounted into the optimizer's sandbox."
+}

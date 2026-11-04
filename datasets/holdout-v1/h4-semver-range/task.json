@@ -1,0 +1,10 @@
+{
+  "id": "h4-semver-range",
+  "title": "Semantic version ranges",
+  "family": "semver",
+  "tier": "hard",
+  "instruction": "satisfies(version, range) in src/semver.js only handles an exact version. Implement ranges for versions MAJOR.MINOR.PATCH with an optional pre-release (1.2.3-beta.1): a range is one or more comparator sets joined by \"||\" (any set may match); a set is space-separated comparators that must all match; a comparator is an operator (>, >=, <, <=, = or none, meaning =) followed by a version, a caret range ^X.Y.Z (>=X.Y.Z and <(X+1).0.0 when X > 0; <0.(Y+1).0 when X is 0 and Y > 0; <0.0.(Z+1) when X and Y are 0) or a tilde range ~X.Y.Z (>=X.Y.Z and <X.(Y+1).0). Use compare(a, b) (exported, returns -1, 0 or 1) for ordering, with semantic-versioning precedence: numeric parts compare numerically, a version with a pre-release is lower than the same version without one, and pre-release identifiers compare left to right (numeric identifiers numerically and lower than alphanumeric ones, which compare as strings; a longer list wins when all shared identifiers are equal). Extra whitespace around operators and sets is allowed (\">= 1.2.0  <2.0.0\"). An invalid version or range throws a TypeError. Add regression tests.",
+  "timeoutSec": 900,
+  "provenance": "implementer-authored-sealed-before-search",
+  "provenanceNote": "Written for pi-eval-loop holdout-v1 by the implementing agent before any optimization run; sealed (SEAL.json) and never mounted into the optimizer's sandbox."
+}

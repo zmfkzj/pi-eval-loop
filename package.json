@@ -1,0 +1,30 @@
+{
+  "name": "pi-eval-loop",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Quality-first autonomous harness optimization loop for pi-orche (ParetoSaddler adaptation)",
+  "bin": {
+    "eval-loop": "./bin/eval-loop.mjs"
+  },
+  "scripts": {
+    "test": "node --test test/*.test.mjs",
+    "selftest": "node bin/eval-loop.mjs --selftest"
+  },
+  "keywords": [
+    "pi-package"
+  ],
+  "pi": {
+    "extensions": [
+      "./extension/index.js"
+    ]
+  },
+  "files": [
+    "bin",
+    "src",
+    "extension",
+    "datasets",
+    "docs",
+    "README.md"
+  ]
+}

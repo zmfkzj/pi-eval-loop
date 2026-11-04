@@ -1,0 +1,5 @@
+{
+  "notes": "First measured A/B/C run on the real route. Operational settings only: 6 parallel units per trajectory, and at most 4 candidates per trajectory in this cycle (the session wall time available to the implementing agent; the package default is 40). Every other value is the pre-registered default protocol.",
+  "parallelism": 6,
+  "watchdog": { "maxCandidatesPerCycle": 4 }
+}

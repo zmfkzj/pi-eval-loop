@@ -1,0 +1,10 @@
+{
+  "id": "h2-csv-parse",
+  "title": "Parse quoted CSV",
+  "family": "csv-parser",
+  "tier": "hard",
+  "instruction": "parseCsv(text) in src/csv.js returns an array of rows (arrays of strings) and must follow RFC 4180: fields are separated by commas; a field may be enclosed in double quotes, and then it may contain commas, line breaks (LF or CRLF) and doubled quotes (\"\" stands for one \"); rows end with LF or CRLF (both may appear in one input); a final line break does not create an extra row; empty fields are kept as empty strings (\"a,,b\" is [\"a\", \"\", \"b\"]; an empty line in the middle is a row with one empty field). Input that ends inside a quoted field, or a quote that appears in an unquoted field or after a closing quote is followed by something other than a comma or line break, throws a SyntaxError. Empty input returns []. Keep the existing simple behaviour and add regression tests.",
+  "timeoutSec": 900,
+  "provenance": "implementer-authored-sealed-before-search",
+  "provenanceNote": "Written for pi-eval-loop holdout-v1 by the implementing agent before any optimization run; sealed (SEAL.json) and never mounted into the optimizer's sandbox."
+}

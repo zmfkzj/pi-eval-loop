@@ -1,0 +1,372 @@
+[
+ {
+  "additional_speed_tiers": [
+   "fast"
+  ],
+  "allow_only_chatgpt_workspace_executor": false,
+  "allow_only_codex_cloud_agent_orchestrator": false,
+  "apply_patch_tool_type": "freeform",
+  "auto_compact_token_limit": null,
+  "auto_review_model_override": null,
+  "availability_nux": {
+   "message": "Maximize usage with GPT-6.1 Sol. Try it on complex work for near-Astra performance at a lower cost."
+  },
+  "available_access_programs": {
+   "cyber": [
+    "standard"
+   ]
+  },
+  "available_in_plans": [
+   "business",
+   "edu",
+   "edu_plus",
+   "edu_pro",
+   "education",
+   "ent26",
+   "enterprise",
+   "enterprise_cbp_automation",
+   "enterprise_cbp_trial",
+   "enterprise_cbp_usage_based",
+   "finserv",
+   "free",
+   "free_workspace",
+   "go",
+   "hc",
+   "hc_consumption",
+   "k12",
+   "law",
+   "plus",
+   "pro",
+   "prolite",
+   "promax",
+   "quorum",
+   "rosalind_academic",
+   "sci",
+   "self_serve_business_prolite",
+   "self_serve_business_usage_based",
+   "team"
+  ],
+  "base_instructions": "[elided by pi-eval-loop: long upstream text]",
+  "comp_hash": "3000",
+  "context_window": 500000,
+  "default_reasoning_level": "low",
+  "default_reasoning_summary": "none",
+  "default_service_tier": null,
+  "default_verbosity": "low",
+  "description": "Latest workhorse model for coding and everyday work.",
+  "display_name": "GPT 6.1 Sol",
+  "experimental_supported_tools": [
+   "send_user_message_async",
+   "clock"
+  ],
+  "guardian": null,
+  "include_apps_usage_instructions": false,
+  "include_plugin_usage_instructions": false,
+  "include_skills_usage_instructions": false,
+  "input_modalities": [
+   "text",
+   "image"
+  ],
+  "max_context_window": 872000,
+  "max_tokens": 128000,
+  "minimal_client_version": "0.153.0",
+  "model_messages": {
+   "approvals": {
+    "never": null,
+    "on_request": null,
+    "on_request_auto_review": "[elided by pi-eval-loop: long upstream text]",
+    "unless_trusted": null
+   },
+   "auto_review": {
+    "node_repl_policy": null,
+    "policy": null,
+    "policy_template": null,
+    "rejection_instructions": "[elided by pi-eval-loop: long upstream text]",
+    "timeout_instructions": null
+   },
+   "collaboration_modes": {
+    "default": "[elided by pi-eval-loop: long upstream text]",
+    "plan": null
+   },
+   "confirmation_policies": {
+    "browser_use": "[elided by pi-eval-loop: long upstream text]",
+    "computer_use": "[elided by pi-eval-loop: long upstream text]"
+   },
+   "guardian_v2": {
+    "classifier_instructions": "[elided by pi-eval-loop: long upstream text]",
+    "max_action_tokens": null,
+    "max_classifier_instruction_tokens": null,
+    "max_parent_compaction_tokens": null,
+    "max_tool_call_lag": null,
+    "reasoning_effort": null,
+    "reuse_parent_compaction": null,
+    "review_threshold_basis_points": null,
+    "transcript": null
+   },
+   "instructions_template": "[elided by pi-eval-loop: long upstream text]",
+   "instructions_variables": null,
+   "multi_agent": {
+    "mode": null,
+    "role": {
+     "root": "[elided by pi-eval-loop: long upstream text]",
+     "subagent": "[elided by pi-eval-loop: long upstream text]"
+    }
+   },
+   "permissions": null,
+   "persistent_instructions": "[elided by pi-eval-loop: long upstream text]",
+   "token_budget": {
+    "auto_compact_fallback_buffer_tokens": 16384,
+    "auto_compact_fallback_prompt": "[elided by pi-eval-loop: long upstream text]",
+    "enabled": false,
+    "guidance_message": "[elided by pi-eval-loop: long upstream text]",
+    "reminder_message_template": "[elided by pi-eval-loop: long upstream text]",
+    "reminder_threshold_tokens": 6144,
+    "use_history_notes_extension": false
+   },
+   "tools": null
+  },
+  "model_specialty": null,
+  "multi_agent_reasoning_effort": "xhigh",
+  "multi_agent_version": "v2",
+  "node_repl_auto_review_required": true,
+  "node_repl_disabled": false,
+  "prefer_websockets": true,
+  "priority": 1,
+  "requires_sandboxed_review": false,
+  "service_tiers": [
+   {
+    "description": "2x speed, increased usage",
+    "id": "priority",
+    "name": "Fast"
+   }
+  ],
+  "shell_type": "shell_command",
+  "slug": "gpt-6.1-sol",
+  "support_verbosity": true,
+  "supported_in_api": true,
+  "supported_reasoning_levels": [
+   {
+    "description": "Fast responses with lighter reasoning",
+    "effort": "low"
+   },
+   {
+    "description": "Balances speed and reasoning depth for everyday tasks",
+    "effort": "medium"
+   },
+   {
+    "description": "Greater reasoning depth for complex problems",
+    "effort": "high"
+   },
+   {
+    "description": "Extra high reasoning depth for complex problems",
+    "effort": "xhigh"
+   },
+   {
+    "description": "Maximum reasoning depth for the hardest problems",
+    "effort": "max"
+   },
+   {
+    "description": "Maximum reasoning with automatic task delegation",
+    "effort": "ultra"
+   }
+  ],
+  "supports_experimental_context": false,
+  "supports_image_detail_original": true,
+  "supports_parallel_tool_calls": true,
+  "supports_reasoning_effort_updates": true,
+  "supports_reasoning_summaries": true,
+  "supports_reasoning_summary_parameter": true,
+  "supports_search_tool": true,
+  "tool_mode": "code_mode_only",
+  "truncation_policy": {
+   "limit": 10000,
+   "mode": "tokens"
+  },
+  "upgrade": null,
+  "use_responses_lite": true,
+  "visibility": "list",
+  "web_search_tool_type": "text_and_image"
+ },
+ {
+  "additional_speed_tiers": [
+   "fast"
+  ],
+  "allow_only_chatgpt_workspace_executor": false,
+  "allow_only_codex_cloud_agent_orchestrator": false,
+  "apply_patch_tool_type": "freeform",
+  "auto_compact_token_limit": null,
+  "auto_review_model_override": null,
+  "availability_nux": null,
+  "available_access_programs": {
+   "cyber": [
+    "standard"
+   ]
+  },
+  "available_in_plans": [
+   "business",
+   "edu",
+   "edu_plus",
+   "edu_pro",
+   "education",
+   "ent26",
+   "enterprise",
+   "enterprise_cbp_automation",
+   "enterprise_cbp_trial",
+   "enterprise_cbp_usage_based",
+   "finserv",
+   "free",
+   "free_workspace",
+   "go",
+   "hc",
+   "hc_consumption",
+   "k12",
+   "law",
+   "plus",
+   "pro",
+   "prolite",
+   "promax",
+   "quorum",
+   "rosalind_academic",
+   "sci",
+   "self_serve_business_prolite",
+   "self_serve_business_usage_based",
+   "team"
+  ],
+  "base_instructions": "[elided by pi-eval-loop: long upstream text]",
+  "comp_hash": "3000",
+  "context_window": 272000,
+  "default_reasoning_level": "medium",
+  "default_reasoning_summary": "none",
+  "default_service_tier": null,
+  "default_verbosity": "low",
+  "description": "GPT-6 Luna Codex model.",
+  "display_name": "GPT 6.0 Luna",
+  "experimental_supported_tools": [
+   "send_user_message_async",
+   "clock"
+  ],
+  "guardian": null,
+  "include_apps_usage_instructions": false,
+  "include_plugin_usage_instructions": false,
+  "include_skills_usage_instructions": false,
+  "input_modalities": [
+   "text",
+   "image"
+  ],
+  "max_context_window": 872000,
+  "max_tokens": 128000,
+  "minimal_client_version": "0.155.0",
+  "model_messages": {
+   "approvals": {
+    "never": null,
+    "on_request": null,
+    "on_request_auto_review": "[elided by pi-eval-loop: long upstream text]",
+    "unless_trusted": null
+   },
+   "auto_review": {
+    "node_repl_policy": null,
+    "policy": null,
+    "policy_template": null,
+    "rejection_instructions": "[elided by pi-eval-loop: long upstream text]",
+    "timeout_instructions": null
+   },
+   "collaboration_modes": {
+    "default": "[elided by pi-eval-loop: long upstream text]",
+    "plan": null
+   },
+   "confirmation_policies": {
+    "browser_use": "[elided by pi-eval-loop: long upstream text]",
+    "computer_use": "[elided by pi-eval-loop: long upstream text]"
+   },
+   "guardian_v2": {
+    "classifier_instructions": "[elided by pi-eval-loop: long upstream text]",
+    "max_action_tokens": null,
+    "max_classifier_instruction_tokens": null,
+    "max_parent_compaction_tokens": null,
+    "max_tool_call_lag": null,
+    "reasoning_effort": null,
+    "reuse_parent_compaction": null,
+    "review_threshold_basis_points": null,
+    "transcript": null
+   },
+   "instructions_template": "[elided by pi-eval-loop: long upstream text]",
+   "instructions_variables": null,
+   "multi_agent": {
+    "mode": null,
+    "role": {
+     "root": "[elided by pi-eval-loop: long upstream text]",
+     "subagent": "[elided by pi-eval-loop: long upstream text]"
+    }
+   },
+   "permissions": null,
+   "persistent_instructions": "[elided by pi-eval-loop: long upstream text]",
+   "token_budget": {
+    "auto_compact_fallback_buffer_tokens": 16384,
+    "auto_compact_fallback_prompt": "[elided by pi-eval-loop: long upstream text]",
+    "enabled": false,
+    "guidance_message": "[elided by pi-eval-loop: long upstream text]",
+    "reminder_message_template": "[elided by pi-eval-loop: long upstream text]",
+    "reminder_threshold_tokens": 6144,
+    "use_history_notes_extension": false
+   },
+   "tools": null
+  },
+  "model_specialty": null,
+  "multi_agent_reasoning_effort": null,
+  "multi_agent_version": "v2",
+  "node_repl_auto_review_required": false,
+  "node_repl_disabled": false,
+  "prefer_websockets": true,
+  "priority": 5,
+  "requires_sandboxed_review": false,
+  "service_tiers": [
+   {
+    "description": "1.5x speed",
+    "id": "priority",
+    "name": "Fast"
+   }
+  ],
+  "shell_type": "shell_command",
+  "slug": "gpt-6-luna",
+  "support_verbosity": true,
+  "supported_in_api": true,
+  "supported_reasoning_levels": [
+   {
+    "description": "Fast responses with lighter reasoning",
+    "effort": "low"
+   },
+   {
+    "description": "Balances speed and reasoning depth for everyday tasks",
+    "effort": "medium"
+   },
+   {
+    "description": "Greater reasoning depth for complex problems",
+    "effort": "high"
+   },
+   {
+    "description": "Extra high reasoning depth for complex problems",
+    "effort": "xhigh"
+   },
+   {
+    "description": "Maximum reasoning depth for the hardest problems",
+    "effort": "max"
+   }
+  ],
+  "supports_experimental_context": true,
+  "supports_image_detail_original": true,
+  "supports_parallel_tool_calls": true,
+  "supports_reasoning_effort_updates": true,
+  "supports_reasoning_summaries": true,
+  "supports_reasoning_summary_parameter": true,
+  "supports_search_tool": true,
+  "tool_mode": "code_mode_only",
+  "truncation_policy": {
+   "limit": 10000,
+   "mode": "tokens"
+  },
+  "upgrade": null,
+  "use_responses_lite": true,
+  "visibility": "list",
+  "web_search_tool_type": "text_and_image"
+ }
+]

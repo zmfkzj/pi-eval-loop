@@ -1,0 +1,10 @@
+{
+  "id": "h6-markdown-toc",
+  "title": "Markdown table of contents",
+  "family": "markdown",
+  "tier": "medium",
+  "instruction": "toc(markdown) in src/toc.js returns the table of contents of the ATX headings of levels 2 and 3 (\"## \" and \"### \", up to three leading spaces allowed) as Markdown list lines joined with \"\\n\": \"- [Title](#slug)\" for level 2 and \"  - [Title](#slug)\" for level 3. Headings inside fenced code blocks (``` or ~~~ fences, closed by the same fence kind) are ignored; trailing #'s of a closed heading (\"## Title ##\") are not part of the title; inline code backticks are removed from the title text. Slugs: lowercase, remove every character that is not a letter, digit, space or hyphen (Unicode letters stay), replace each space with a hyphen; a repeated slug gets \"-1\", \"-2\", ... in order of appearance (counting all levels 2-3 headings). No headings: an empty string. Add regression tests.",
+  "timeoutSec": 900,
+  "provenance": "implementer-authored-sealed-before-search",
+  "provenanceNote": "Written for pi-eval-loop holdout-v1 by the implementing agent before any optimization run; sealed (SEAL.json) and never mounted into the optimizer's sandbox."
+}
