@@ -1,1 +1,8 @@
 state/
+
+# Dependencies (the umbrella bootstrap runs npm install in every submodule)
+node_modules/
+
+# Local environment and secrets
+.env
+.env.*
