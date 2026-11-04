@@ -1,0 +1,156 @@
+{
+  "protocol": {
+    "version": "pi-eval-loop/protocol-1",
+    "seed": "pi-eval-loop-2026-11-04",
+    "target": {
+      "harness": "orche",
+      "mode": "single"
+    },
+    "route": {
+      "provider": "cliproxyapi",
+      "model": "gpt-6-luna",
+      "effort": "medium"
+    },
+    "proposer": {
+      "kind": "pi",
+      "route": {
+        "provider": "cliproxyapi",
+        "model": "gpt-6.1-sol",
+        "effort": "high"
+      },
+      "maxRequests": 120,
+      "wallMs": 1800000,
+      "allowedPaths": [
+        "src/",
+        "prompts/"
+      ],
+      "maxChangedFiles": 4,
+      "maxDiffLines": 200
+    },
+    "unit": {
+      "wallMs": 1200000,
+      "maxRequests": 150,
+      "graderMs": 120000
+    },
+    "bootstrap": {
+      "draws": 10000
+    },
+    "screening": {
+      "tasks": 6,
+      "minRepeats": 3,
+      "maxRepeats": 9,
+      "step": 3,
+      "support": 0.8,
+      "band": 0.1,
+      "level": "execution"
+    },
+    "development": {
+      "repeats": 3,
+      "level": "task",
+      "support": 0.8
+    },
+    "holdout": {
+      "repeats": 3,
+      "maxUses": 1,
+      "minTasks": 6,
+      "minFamilies": 4,
+      "requireIndependent": true,
+      "acceptedProvenance": [
+        "external"
+      ]
+    },
+    "gate": {
+      "eps": {
+        "overall": 0.03,
+        "hard": 0.05,
+        "consistency": 0.05
+      },
+      "minGain": {
+        "overall": 0,
+        "hard": 0,
+        "consistency": 0
+      }
+    },
+    "adoption": {
+      "support": 0.95,
+      "level": "task",
+      "eps": {
+        "hard": 0.02,
+        "consistency": 0.02
+      },
+      "minGain": {
+        "overall": 0
+      },
+      "familyRegression": 0.15,
+      "familyRegressionSupport": 0.8,
+      "requireHardStratum": true,
+      "requireChecks": true
+    },
+    "baselines": {
+      "pure": true,
+      "stable": true,
+      "targetMode": true,
+      "multiAttempt": {
+        "k": 3
+      }
+    },
+    "watchdog": {
+      "noProgressCandidates": 10,
+      "maxCandidatesPerCycle": 4,
+      "maxCycleWallMs": 259200000,
+      "maxConsecutiveInfra": 5,
+      "maxInfraRate": 0.1,
+      "maxFailuresPerClass": 3,
+      "maxChildFailuresPerParent": 5,
+      "daemonPollMs": 600000,
+      "hypothesisSimilarity": 0.8
+    },
+    "infra": {
+      "maxRetries": 1
+    },
+    "parallelism": 6,
+    "datasets": {
+      "source": "suite",
+      "trainShare": 0.45,
+      "holdout": "datasets/holdout-v1"
+    },
+    "deploy": {
+      "mode": "refs",
+      "branch": "eval-loop/stable"
+    },
+    "notes": "First measured A/B/C run on the real route. Operational settings only: 6 parallel units per trajectory, and at most 4 candidates per trajectory in this cycle (the session wall time available to the implementing agent; the package default is 40). Every other value is the pre-registered default protocol."
+  },
+  "protocolDigest": "92a08768276528120678b4a8ad1ba958187a54c87253ff8e62bca3848b05740e",
+  "evaluator": {
+    "pi-eval-loop/src/ablation.mjs": "0f7a50099273ba2bcb00e39dc4c5f106a75da8155fed5dc5d4851a6ad0ee0b82",
+    "pi-eval-loop/src/analysis.mjs": "8e818b012dcaac843657dbe1946650deeaef3c2b3868a73394b8f1201734b9cf",
+    "pi-eval-loop/src/app.mjs": "4cff8587baf001e7c3df038a5ebabb99668f4d4b6ae3502f24f3b4fe72a5cb98",
+    "pi-eval-loop/src/archive.mjs": "e67dcd88265cea997919604d9e13e9e39c79ea0c0dafed32185f168e6d1b6ecb",
+    "pi-eval-loop/src/checks.mjs": "5e818cfb7934890fa4bdb297dc74ff6b5cd0f03ed9366a164a18927e3f754de5",
+    "pi-eval-loop/src/datasets.mjs": "892fb53d4af02f3d77b235664cc950d5228a912b1387b4744e56a07b17c3abd5",
+    "pi-eval-loop/src/deploy.mjs": "3254278b2ed206c72b8c634ff5fb60ed1b7c6e0b07ee8b837144682c6811a966",
+    "pi-eval-loop/src/evaluator.mjs": "87d977e16d01581ceaebe5258c20b56e25b2ac551e57aa0f9156982dcab56cf1",
+    "pi-eval-loop/src/faux-upstream.mjs": "7e98f2587472a936054fb2631c147dfa326de6eb34f026d16be64b5452731cad",
+    "pi-eval-loop/src/gate.mjs": "1c22c6c58d7938e1093f6a14dc2a4fabf3543490ab65695fbca24af5d6665d96",
+    "pi-eval-loop/src/grader.mjs": "ee2e91e1119c18f59503d2388171b9b68482e6d7ac6c3603631a017fee6cc615",
+    "pi-eval-loop/src/integrity.mjs": "9176e544bf4e9b54600d22e25a53618bd49ba5474559a2aa6c1b1db5af013f60",
+    "pi-eval-loop/src/loop.mjs": "60fb6bc2fef31180bcf69bcb242c1aee954eb93e07177bd8e2a78b8d2f291a80",
+    "pi-eval-loop/src/metrics.mjs": "8c985de1f5d5c892021517f37c4765587ed198c2e064ba632e85f28b0c2e9e08",
+    "pi-eval-loop/src/proposer.mjs": "b9c4088aa440f68115e81b00ae03afb22059b53ee34e0166d1c4937c4d934b4c",
+    "pi-eval-loop/src/protocol.mjs": "de1b7a94f7d742dd3542d29ad4bf85e17fab2063ddf35dfaeeac26430a7885b5",
+    "pi-eval-loop/src/report.mjs": "f6a79cb1085459afca35ce7780dbd34662baf5a2a480f17e17f83b54cce4c3b9",
+    "pi-eval-loop/src/rng.mjs": "7cb24904a94176a514cb29c82149bab5bfd0717db2ad9a103b4fec78e9e7b500",
+    "pi-eval-loop/src/runner.mjs": "3e309ccffdb16804a02c77c4ad1d661f2b254af5dc5ee1c436fd967ea3e3bdb5",
+    "pi-eval-loop/src/sandbox.mjs": "93d3ba24a48b089b391aa843b34528c0fa40fad4a5a5449a875f233fcdd84e0d",
+    "pi-eval-loop/src/selftest.mjs": "7fd97c27099557d23719d7231a49dee173d5a92e209fec8a22ee8712cb7908b1",
+    "pi-eval-loop/src/stats.mjs": "b3ee34a8f1c01ce124d67f2ca7d87856c087b84417baa0309c644521ad9e6d17",
+    "pi-eval-loop/src/util.mjs": "b4894d0564b055e2a7aea5d406ec8f9b3ea11f8e7c51da5abbd15bcaa1ef5aae",
+    "pi-eval-loop/src/worktree.mjs": "7fb552e2b21a4092544f4c63b570502f7ef6928ccbb847372ce41a6912aa29e1",
+    "orche/experiments/witness-replay/proxy.mjs": "67f839177a9961efe1354208e79fab8506316260f4ee51af27cf96dd99746ef5",
+    "orche/experiments/witness-replay/bridge.mjs": "85dc52cf5a467c1db776d68f4f20cfc2497ae22006c02232a56ec7c82fc28ab2",
+    "orche/experiments/witness-replay/sandbox.ts": "89fb3b861abf0507be3d3a429905b8305e818fc9b5aaf55c11159a5b9ede0871",
+    "orche/experiments/ultra-ab/protocol.ts": "c080e3efc4d0bfdbfe6f236902e6c6c94944d58da9664b8846ebcb0353ca53f6"
+  },
+  "datasetDigest": "61fb24942c779fb9a5d7b1671cdefc86b7d7164f0686ab88e98de69325f8140f",
+  "lockedAt": "2026-11-04T05:17:24.495Z"
+}

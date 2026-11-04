@@ -1,0 +1,54 @@
+n,evidence:[checks]}}."[39m
+Received: [31m"Implement completely, preserving unrelated changes. Write scope: []. Run local checks on touched files. report_result {kind:"implement",summary,data:{status:"done" or "blocked",reason,evidence:[checks]}}.[7m Before reporting done, re-read the original request clause by clause, not just requirement ids or existing tests. Map each clause to its implementation and a passing behavioral check; for uncovered clauses, add and run focused checks for the specified boundaries, invalid inputs and interactions. One passing example does not verify an entire grouped requirement. Fix discovered gaps before completion; report any unexercised clauses as unverified or partial, never as met merely because the suite passes.[27m"[39m
+
+[36m [2m❯[22m test/extension/task.test.ts:[2m144:81[22m[39m
+    [90m142| [39m    if (!assignment || assignment.role !== "user") throw new Error("Mi…
+    [90m143| [39m    const text = typeof assignment.content === "string" ? assignment.c…
+    [90m144| [39m    expect(text.match(/Implement completely,[\s\S]*?(?=\nStart summary…
+    [90m   | [39m                                                                                [31m^[39m
+    [90m145| [39m  })[33m;[39m
+    [90m146| [39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/9]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m test/tools/search.test.ts[2m > [22msearch tools enabled on a worker session[2m > [22mgrep, find (no fd needed) and ls work; find skips node_modules/.orche and sees dot dirs
+[31m[1mAssertionError[22m: expected 'ripgrep (rg) is not available and cou…' to contain 'src/a.ts'[39m
+
+Expected: [32m"src/a.ts"[39m
+Received: [31m"ripgrep (rg) is not available and could not be downloaded"[39m
+
+[36m [2m❯[22m test/tools/search.test.ts:[2m24:24[22m[39m
+    [90m 22| [39m      () [33m=>[39m ({ name[33m:[39m [32m"ls"[39m[33m,[39m args[33m:[39m { path[33m:[39m [32m"src"[39m } })[33m,[39m
+    [90m 23| [39m    ])[33m;[39m
+    [90m 24| [39m    [34mexpect[39m(grep[33m![39m[33m.[39mtext)[33m.[39m[34mtoContain[39m([32m"src/a.ts"[39m)[33m;[39m
+    [90m   | [39m                       [31m^[39m
+    [90m 25| [39m    [34mexpect[39m(grep[33m![39m[33m.[39mtext)[33m.[39m[34mtoContain[39m([32m"src/deep/b.ts"[39m)[33m;[39m
+    [90m 26| [39m    expect(findTs!.text.split("\n").sort()).toEqual(["src/a.ts", "src/…
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/9]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m test/tools/spill.test.ts[2m > [22martifact spill[2m > [22mkeeps artifacts out of grep results
+[31m[1mAssertionError[22m: expected 'ripgrep (rg) is not available and cou…' to match /No matches/i[39m
+
+[32m- Expected:[39m 
+/No matches/i
+
+[31m+ Received:[39m 
+"ripgrep (rg) is not available and could not be downloaded"
+
+[36m [2m❯[22m test/tools/spill.test.ts:[2m45:24[22m[39m
+    [90m 43| [39m      () [33m=>[39m ({ name[33m:[39m [32m"grep"[39m[33m,[39m args[33m:[39m { pattern[33m:[39m [32m"^4999$"[39m } })[33m,[39m
+    [90m 44| [39m    ])[33m;[39m
+    [90m 45| [39m    [34mexpect[39m(grep[33m![39m[33m.[39mtext)[33m.[39m[34mtoMatch[39m([36m/No matches/i[39m)[33m;[39m
+    [90m   | [39m                       [31m^[39m
+    [90m 46| [39m  })[33m;[39m
+    [90m 47| [39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[9/9]⎯[22m[39m
+
+
+[2m Test Files [22m [1m[31m7 failed[39m[22m[2m | [22m[1m[32m160 passed[39m[22m[2m | [22m[33m1 skipped[39m[90m (168)[39m
+[2m      Tests [22m [1m[31m9 failed[39m[22m[2m | [22m[1m[32m3006 passed[39m[22m[2m | [22m[33m30 skipped[39m[90m (3045)[39m
+[2m   Start at [22m 09:04:19
+[2m   Duration [22m 51.17s[2m (transform 6.69s, setup 0ms, collect 140.63s, tests 320.26s, environment 36ms, prepare 12.35s)[22m
+

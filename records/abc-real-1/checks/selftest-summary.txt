@@ -1,0 +1,36 @@
+{
+  "verdict": "ADOPT",
+  "phase": "done",
+  "selected": "c001",
+  "candidates": [
+    {
+      "id": "c001",
+      "status": "adopted",
+      "hypothesis": "Tell the agent to re-read every requirement before finishing",
+      "screening": 1,
+      "reason": "adopted on local refs eval-loop/stable (mode refs)"
+    },
+    {
+      "id": "c002",
+      "status": "rejected_patch",
+      "hypothesis": "Edit the test suite to make it pass",
+      "reason": "patch integrity: protected path changed: test/extension/eval-loop-selftest.test.ts (allowed: src/, prompts/); protected file inside an allowed path: test/extension/eval-loop-selftest.test.ts"
+    },
+    {
+      "id": "c003",
+      "status": "rejected",
+      "hypothesis": "Add a harmless comment",
+      "screening": 0.5074,
+      "reason": "support 0.5074 vs threshold 0.8 (level execution, 10000 draws, mcse 0.0050)"
+    }
+  ],
+  "adoptedRef": "ea33a79aa81e6699a4abae8443f81fce05c6d327",
+  "umbrellaGitlinkMatches": true,
+  "rollbackProblems": [],
+  "runs": 148,
+  "ledgerIntact": true,
+  "report": "/var/tmp/pi-arthur/el-selftest-BngWEP/state/report.md",
+  "seconds": 361,
+  "root": "/var/tmp/pi-arthur/el-selftest-BngWEP"
+}
+exit=0

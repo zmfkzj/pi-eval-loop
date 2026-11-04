@@ -1,0 +1,285 @@
+{
+  "status": "dev_rejected",
+  "decisions": [
+    {
+      "at": "2026-11-04T06:22:27.393Z",
+      "status": "created",
+      "reason": "patch accepted"
+    },
+    {
+      "at": "2026-11-04T06:22:39.060Z",
+      "status": "screening",
+      "reason": "screening batch a7-auth-rotation, b1-static-traversal, b3-pagination, b5-ctx-migration, d4-cache-fencing, p3-library-features-ko"
+    },
+    {
+      "at": "2026-11-04T06:33:18.171Z",
+      "status": "promoted",
+      "reason": "support 1.0000 vs threshold 0.8 (level execution, 10000 draws, mcse 0.0000)"
+    },
+    {
+      "at": "2026-11-04T07:14:22.329Z",
+      "status": "dev_rejected",
+      "reason": "critical: integrity: 9 run(s) with workspace integrity violations vs 5 for stable (a3-refactor-tax#1: changed/removed 1 line(s) of test file test/tax.test.js: \"test('US quotations and invoices agree', () => {\"; c1-timezone#2: changed/removed 1 line(s) of test file test/logtool.test.js: \"import { aggregate } from '../src/aggregate.js';\"; c2-since-flag-ko#0: changed/removed 1 line(s) of test file test/logtool.test.js: \"  assert.match(child.stdout, /Usage: logtool/);\")"
+    }
+  ],
+  "children": [],
+  "createdAt": "2026-11-04T06:20:46.209Z",
+  "id": "B-c001",
+  "parent": "stable",
+  "origin": "proposer",
+  "strategy": "greedy",
+  "worktree": "/home/arthur/Code/oh-my-pi-extensions/pi-eval-loop/state/abc-real-1/B/worktrees/B-c001",
+  "branch": "eval-loop/candidates/0cb75a26/B-c001",
+  "base": "e831a6b2bc19f0c707b55505db33a11b2c9d4d4a",
+  "target": "requirements-generalization",
+  "hypothesis": {
+    "text": "Requiring implementation workers to audit every behavioral clause against request-derived checks before completion should expose omissions that passing existing checks alone leave undetected.",
+    "targetFailureClass": "requirements-generalization",
+    "expectedEffect": "More completed implementations satisfy the full requested behavior, with fewer unexercised requirements reported as verified."
+  },
+  "updatedAt": "2026-11-04T07:14:22.329Z",
+  "proposer": {
+    "usage": {
+      "requests": 11,
+      "completed": 9,
+      "input": 387871,
+      "output": 1696,
+      "cached": 319232,
+      "wallMs": 100199,
+      "guardFired": false,
+      "exit": 0
+    }
+  },
+  "files": [
+    "src/extension/workers.ts"
+  ],
+  "patchKey": "2bd1dee0ce610a3d7ab98c9a66b13843463938c129361e8eec67d707c27b33e0",
+  "patchSha256": "b200fd5eb1d8fff195a2b56fff7c24a56108bd3a446bf60253fc51463d9d823e",
+  "patchStats": {
+    "added": 1,
+    "removed": 0
+  },
+  "commit": "3e8e68240a3087fb13d9adb43c8d675ee7190051",
+  "screening": {
+    "batch": [
+      "a7-auth-rotation",
+      "b1-static-traversal",
+      "b3-pagination",
+      "b5-ctx-migration",
+      "d4-cache-fencing",
+      "p3-library-features-ko"
+    ],
+    "repeats": 3,
+    "support": 1,
+    "supportTaskLevel": 1,
+    "mcse": 0,
+    "delta": {
+      "overall": {
+        "mean": 0.22257764679340536,
+        "lo95": 0.16861564325236789,
+        "hi95": 0.30670145454524556,
+        "probPositive": 1,
+        "probNegative": 0
+      },
+      "hard": {
+        "mean": 0.66773294038022,
+        "lo95": 0.505846929757104,
+        "hi95": 0.9201043636357366,
+        "probPositive": 1,
+        "probNegative": 0
+      },
+      "consistency": {
+        "mean": 0.19464232029474537,
+        "lo95": 0.16668945772505617,
+        "hi95": 0.28432511756385814,
+        "probPositive": 1,
+        "probNegative": 0
+      }
+    },
+    "point": {
+      "a": {
+        "overall": 0.6666666666666666,
+        "consistency": 0.6666666666666666,
+        "hard": 0
+      },
+      "b": {
+        "overall": 0.8888888888888888,
+        "consistency": 0.8518518518518517,
+        "hard": 0.6666666666666666
+      }
+    },
+    "decision": "PROMOTE",
+    "reasons": [
+      "support 1.0000 vs threshold 0.8 (level execution, 10000 draws, mcse 0.0000)"
+    ],
+    "rounds": [
+      {
+        "at": "2026-11-04T06:33:18.098Z",
+        "repeats": 3,
+        "tasks": [
+          "a7-auth-rotation",
+          "b1-static-traversal",
+          "b3-pagination",
+          "b5-ctx-migration",
+          "d4-cache-fencing",
+          "p3-library-features-ko"
+        ],
+        "support": 1,
+        "supportTaskLevel": 1,
+        "decision": "PROMOTE"
+      }
+    ]
+  },
+  "development": {
+    "tasks": 16,
+    "repeats": 3,
+    "point": {
+      "overall": 0.770799663914216,
+      "hard": 0.6657406626933599,
+      "consistency": 0.6980137050433676
+    },
+    "posterior": {
+      "overall": {
+        "point": 0.7708333333333331,
+        "mean": 0.770799663914216,
+        "lo95": 0.5826421840894225,
+        "hi95": 0.9122682712378954
+      },
+      "hard": {
+        "point": 0.6666666666666666,
+        "mean": 0.6657406626933599,
+        "lo95": 0.3361754105339969,
+        "hi95": 0.9212810176906772
+      },
+      "consistency": {
+        "point": 0.673611111111111,
+        "mean": 0.6980137050433676,
+        "lo95": 0.4857553180178732,
+        "hi95": 0.8746537794015574
+      }
+    },
+    "qualified": false,
+    "reasons": [
+      "critical: integrity: 9 run(s) with workspace integrity violations vs 5 for stable (a3-refactor-tax#1: changed/removed 1 line(s) of test file test/tax.test.js: \"test('US quotations and invoices agree', () => {\"; c1-timezone#2: changed/removed 1 line(s) of test file test/logtool.test.js: \"import { aggregate } from '../src/aggregate.js';\"; c2-since-flag-ko#0: changed/removed 1 line(s) of test file test/logtool.test.js: \"  assert.match(child.stdout, /Usage: logtool/);\")"
+    ],
+    "vsStable": {
+      "support": 0.5568,
+      "lossSupport": 0.3851,
+      "delta": {
+        "overall": {
+          "mean": -0.0008517798354283027,
+          "lo95": -0.20848632852105875,
+          "hi95": 0.21527000768774096,
+          "probPositive": 0.4925,
+          "probNegative": 0.5075
+        },
+        "hard": {
+          "mean": 0.1655359282234267,
+          "lo95": -0.20325666060192932,
+          "hi95": 0.534113053608982,
+          "probPositive": 0.8287,
+          "probNegative": 0.1713
+        },
+        "consistency": {
+          "mean": -0.021569921205081947,
+          "lo95": -0.25594124791585404,
+          "hi95": 0.21416047533857174,
+          "probPositive": 0.4197,
+          "probNegative": 0.5803
+        }
+      },
+      "familyDelta": {
+        "pkg:ledger": {
+          "mean": -0.001694412579796462,
+          "lo95": -0.29215770831703997,
+          "hi95": 0.30505931704193806,
+          "probPositive": 0.4721,
+          "probNegative": 0.5279,
+          "probBelow": 0.1056
+        },
+        "pkg:logtool": {
+          "mean": -0.19962266087122033,
+          "lo95": -0.53435484841209,
+          "hi95": -0.020736274406273538,
+          "probPositive": 0,
+          "probNegative": 1,
+          "probBelow": 0.5598
+        },
+        "pkg:d1-transactional-outbox": {
+          "mean": -0.3326028981415287,
+          "lo95": -0.842212576062328,
+          "hi95": -0.011096072365576795,
+          "probPositive": 0,
+          "probNegative": 1,
+          "probBelow": 0.7183
+        },
+        "pkg:d2-keyed-queue": {
+          "mean": 0.3325426509361265,
+          "lo95": 0.01284356368411299,
+          "hi95": 0.8416601355628605,
+          "probPositive": 1,
+          "probNegative": 0,
+          "probBelow": 0
+        },
+        "pkg:d3-money-migration-ko": {
+          "mean": 0.6659199560151883,
+          "lo95": 0.16466620579961283,
+          "hi95": 0.9863539616976674,
+          "probPositive": 1,
+          "probNegative": 0,
+          "probBelow": 0
+        },
+        "pkg:d6-snapshot-pagination": {
+          "mean": 0.33492130831570116,
+          "lo95": -0.3672672091058625,
+          "hi95": 0.8767180709338307,
+          "probPositive": 0.8371,
+          "probNegative": 0.1629,
+          "probBelow": 0.081
+        },
+        "pkg:d7-config-reload": {
+          "mean": -0.004010238385260743,
+          "lo95": -0.6500162368804262,
+          "hi95": 0.6505604089831699,
+          "probPositive": 0.4935,
+          "probNegative": 0.5065,
+          "probBelow": 0.3262
+        },
+        "pkg:d8-build-graph": {
+          "mean": 0,
+          "lo95": 0,
+          "hi95": 0,
+          "probPositive": 0,
+          "probNegative": 0,
+          "probBelow": 0
+        }
+      }
+    },
+    "summary": {
+      "candidate_id": "B-c001",
+      "split": "dev",
+      "runs": 48,
+      "tasks": 16,
+      "task_success": 37,
+      "success_rate": 0.7708333333333334,
+      "hidden_test_pass": 46,
+      "mean_correctness": 0.9872685185185185,
+      "repeat_success_rate": 0.6736111111111112,
+      "all_repeats_pass_tasks": 8,
+      "hard_task_success_rate": 0.6666666666666666,
+      "regression_count": 0,
+      "critical_failure_count": 9,
+      "integrity_violations": 9,
+      "terminal": {
+        "completed": 48
+      },
+      "infra_rate": 0,
+      "input_tokens": 10050886,
+      "output_tokens": 200322,
+      "cache_tokens": 8362240,
+      "model_requests": 1087,
+      "wall_time_ms": 6976570,
+      "simulated_runs": 0
+    }
+  }
+}

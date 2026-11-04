@@ -1,0 +1,1593 @@
+{
+  "generatedAt": "2026-11-04T09:39:22.859Z",
+  "stateDir": "/home/arthur/Code/oh-my-pi-extensions/pi-eval-loop/state/abc-real-1/C",
+  "simulated": false,
+  "phase": "holdout",
+  "cycle": 1,
+  "strategy": "pareto",
+  "protocolDigest": "92a08768276528120678b4a8ad1ba958187a54c87253ff8e62bca3848b05740e",
+  "protocol": {
+    "version": "pi-eval-loop/protocol-1",
+    "seed": "pi-eval-loop-2026-11-04",
+    "target": {
+      "harness": "orche",
+      "mode": "single"
+    },
+    "route": {
+      "provider": "cliproxyapi",
+      "model": "gpt-6-luna",
+      "effort": "medium"
+    },
+    "proposer": {
+      "kind": "pi",
+      "route": {
+        "provider": "cliproxyapi",
+        "model": "gpt-6.1-sol",
+        "effort": "high"
+      },
+      "maxRequests": 120,
+      "wallMs": 1800000,
+      "allowedPaths": [
+        "src/",
+        "prompts/"
+      ],
+      "maxChangedFiles": 4,
+      "maxDiffLines": 200
+    },
+    "unit": {
+      "wallMs": 1200000,
+      "maxRequests": 150,
+      "graderMs": 120000
+    },
+    "bootstrap": {
+      "draws": 10000
+    },
+    "screening": {
+      "tasks": 6,
+      "minRepeats": 3,
+      "maxRepeats": 9,
+      "step": 3,
+      "support": 0.8,
+      "band": 0.1,
+      "level": "execution"
+    },
+    "development": {
+      "repeats": 3,
+      "level": "task",
+      "support": 0.8
+    },
+    "holdout": {
+      "repeats": 3,
+      "maxUses": 1,
+      "minTasks": 6,
+      "minFamilies": 4,
+      "requireIndependent": true,
+      "acceptedProvenance": [
+        "external"
+      ]
+    },
+    "gate": {
+      "eps": {
+        "overall": 0.03,
+        "hard": 0.05,
+        "consistency": 0.05
+      },
+      "minGain": {
+        "overall": 0,
+        "hard": 0,
+        "consistency": 0
+      }
+    },
+    "adoption": {
+      "support": 0.95,
+      "level": "task",
+      "eps": {
+        "hard": 0.02,
+        "consistency": 0.02
+      },
+      "minGain": {
+        "overall": 0
+      },
+      "familyRegression": 0.15,
+      "familyRegressionSupport": 0.8,
+      "requireHardStratum": true,
+      "requireChecks": true
+    },
+    "baselines": {
+      "pure": true,
+      "stable": true,
+      "targetMode": true,
+      "multiAttempt": {
+        "k": 3
+      }
+    },
+    "watchdog": {
+      "noProgressCandidates": 10,
+      "maxCandidatesPerCycle": 4,
+      "maxCycleWallMs": 259200000,
+      "maxConsecutiveInfra": 5,
+      "maxInfraRate": 0.1,
+      "maxFailuresPerClass": 3,
+      "maxChildFailuresPerParent": 5,
+      "daemonPollMs": 600000,
+      "hypothesisSimilarity": 0.8
+    },
+    "infra": {
+      "maxRetries": 1
+    },
+    "parallelism": 6,
+    "datasets": {
+      "source": "suite",
+      "trainShare": 0.45,
+      "holdout": "datasets/holdout-v1"
+    },
+    "deploy": {
+      "mode": "refs",
+      "branch": "eval-loop/stable"
+    },
+    "notes": "First measured A/B/C run on the real route. Operational settings only: 6 parallel units per trajectory, and at most 4 candidates per trajectory in this cycle (the session wall time available to the implementing agent; the package default is 40). Every other value is the pre-registered default protocol."
+  },
+  "prerequisites": [
+    {
+      "name": "bwrap",
+      "ok": true,
+      "detail": "bubblewrap 0.11.1"
+    },
+    {
+      "name": "bwrap-namespaces",
+      "ok": true,
+      "detail": "user/net/pid namespaces usable"
+    },
+    {
+      "name": "pi-cli",
+      "ok": true,
+      "detail": "/home/arthur/.bun/install/global/node_modules/@earendil-works/pi-coding-agent/dist/bundle/cli.js"
+    },
+    {
+      "name": "provider",
+      "ok": true,
+      "detail": "/home/arthur/Code/oh-my-pi-extensions/cliproxyapi/node_modules/@router-for-me/pi-cliproxyapi-provider"
+    },
+    {
+      "name": "orche",
+      "ok": true,
+      "detail": "/home/arthur/Code/oh-my-pi-extensions/orche"
+    },
+    {
+      "name": "git",
+      "ok": true,
+      "detail": "git version 2.53.0"
+    },
+    {
+      "name": "credentials",
+      "ok": true,
+      "detail": "cliproxyapi.json apiKey: set"
+    },
+    {
+      "name": "model-catalog",
+      "ok": true,
+      "detail": "/home/arthur/.pi/agent/cliproxyapi-models.json"
+    },
+    {
+      "name": "upstream",
+      "ok": true,
+      "detail": "http://127.0.0.1:8317 answered 401"
+    }
+  ],
+  "datasets": {
+    "train": [
+      "a7-auth-rotation",
+      "b1-static-traversal",
+      "b2-patch-endpoint",
+      "b3-pagination",
+      "b5-ctx-migration",
+      "b6-route-cache",
+      "d4-cache-fencing",
+      "d5-streaming-ingest-ko",
+      "p1-ticket-batch",
+      "p2-handler-migration",
+      "p3-library-features-ko"
+    ],
+    "dev": [
+      "a1-rounding",
+      "a2-discount-codes",
+      "a3-refactor-tax",
+      "a4-tests-fx",
+      "a6-typo-message",
+      "c1-timezone",
+      "c2-since-flag-ko",
+      "c4-malformed-lines",
+      "c5-aggregate-perf",
+      "c6-csv-export",
+      "d1-transactional-outbox",
+      "d2-keyed-queue",
+      "d3-money-migration-ko",
+      "d6-snapshot-pagination",
+      "d7-config-reload",
+      "d8-build-graph"
+    ],
+    "holdout": [
+      "h1-interval-merge",
+      "h2-csv-parse",
+      "h3-retry-backoff",
+      "h4-semver-range",
+      "h5-lru-ttl",
+      "h6-markdown-toc",
+      "h7-money-allocate"
+    ],
+    "excluded": [],
+    "digests": {
+      "a1-rounding": "66dc1f2237f51f28596b2beb1c98367a0dcde491379c97e13c7667df228e583d",
+      "a2-discount-codes": "f4af636843804b529d68c537c3d9f6752db72dda6e430834ab30b7b946613547",
+      "a3-refactor-tax": "783a3f7993829a083cec4e7c51ade90378669fa6a2faa0e6572a095dbc7c9c1b",
+      "a4-tests-fx": "7876a5f1ca6c63d46aff6164f380ca28b988d2bac115075a721fc7e7142cce25",
+      "a6-typo-message": "66b7800e6e7f5b29fa84a0d55dcb34353f9c30cb4679e390fb7fc7022473e194",
+      "a7-auth-rotation": "b628aedb0b37f999afb9d828c57b43da7a4b1dbd8aa021398400f37af3514add",
+      "b1-static-traversal": "71187d345dd11c45d4e82f61220a5994574eb15d1aae3efe6a31b80ba7b230ad",
+      "b2-patch-endpoint": "1aa0776a526a50ae8ab347b2db30f6468f5602385fc0ccf15c82c11514dd9a28",
+      "b3-pagination": "aeae308bfb617a64ad981ec8e89330a1e2b92b83423156adefcd0ed33d7b2099",
+      "b5-ctx-migration": "0804db6f0b832962a3882f16926cc94017c4f3eeda9e20b0156b802375cdc7ad",
+      "b6-route-cache": "d6b72f998c1e8a1d035eca4c946ae4112470e0f1cba0fc89f13793acf47b9bb2",
+      "c1-timezone": "eea00bbb2bfb76a86ac6c9a3e7fdc17d0ae92e69c3277eb1232d9aeb7771708b",
+      "c2-since-flag-ko": "7e185f7ba2ff425a83b313f6c811813bfd3fc48c11bf3f9084553b7fe2230503",
+      "c4-malformed-lines": "f969cfcdd17884e25a7ef16d7ff1a27f63205b6c31cbd2ea4e7f2373c5128db7",
+      "c5-aggregate-perf": "5f743480dc71400d1ab31259fdbef468d1fac9699aa566e8fae71b8834a724de",
+      "c6-csv-export": "a04385ea74936ac0b7d80bc3be5b4404a04012aff1efcb7998834900b2d83cde",
+      "d1-transactional-outbox": "898cd696f0c9aebe6ebf35248a98f965fb2927328df8556a7c3485cc4278db4d",
+      "d2-keyed-queue": "63ff8c9ce8e4b3d8daab8cf77213589c7d61628240bf357552e2e8d18b41a643",
+      "d3-money-migration-ko": "9eb4dc02ef69842ade67506dffacc89840ce9ebea0358056fc6a91ba345fee76",
+      "d4-cache-fencing": "2b371bf7359a500b3c16feeaebe9fa35e8ce594207900c37e276f242fef0f102",
+      "d5-streaming-ingest-ko": "31d6ce9331e329d50065054e1f4cd24d02c60bb7c2f0b906ce4a1caf6df69b45",
+      "d6-snapshot-pagination": "69404b511703b8d9e1cb22d668291f142f29d11ba880a271501d871da0da6664",
+      "d7-config-reload": "4d0c0a0c87517eb23466838f65e5375d11160f5602e4062065a394e684282e23",
+      "d8-build-graph": "579b81ef90a39b26d7d42f7dd3bb5041bd760218b855ee08e6788cc95559f15e",
+      "p1-ticket-batch": "12e9f5919ed365333fa7f2ccb42dce4968722fb4a19a7d99eeb8e985284d066e",
+      "p2-handler-migration": "625bd2d7c94e45f42fa6ae70b98c4e0d04fe14fbf89420a3bb9d967842a817f6",
+      "p3-library-features-ko": "64099bf7f8f8c53ec6cf146b2dd4e3ad86f0067434e10e9696d0207ff54d33b3",
+      "h1-interval-merge": "882757b968cda3fed51639b85bd2cee2edf157274bb2b6e015a33d4d86e5db47",
+      "h2-csv-parse": "cb7cc57265278c18a05b4cbae1effc4f089cec809c501f86f9bdb39676595684",
+      "h3-retry-backoff": "b11b06f3db210bfb70c76c729da9ea60028bc44f6731c931fe84df7a11dfca3d",
+      "h4-semver-range": "beeb7d00187f624d04c1d1b34efef1b9de860f304a354d255ae903d94a136579",
+      "h5-lru-ttl": "102f8a521c039541f1d7d60996ad72c3c96d6750f9da24577ab975005c3b21e5",
+      "h6-markdown-toc": "d774d5269725d8a1df49c04a8f59d32ed102750b1dc9656d0bc3aa5f47c0d395",
+      "h7-money-allocate": "83db5f8ac16471b4e737cba69fed411cd580aba5355ec56a200bb3501ff12ac1"
+    },
+    "holdoutSeal": "370af542c6f44c2a7e868abf5615d3df981275b261272ac12852eb246c54c743",
+    "meta": {
+      "a1-rounding": {
+        "family": "pkg:ledger",
+        "tier": "easy",
+        "hard": false,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "a2-discount-codes": {
+        "family": "pkg:ledger",
+        "tier": "easy",
+        "hard": false,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "a3-refactor-tax": {
+        "family": "pkg:ledger",
+        "tier": "easy",
+        "hard": false,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "a4-tests-fx": {
+        "family": "pkg:ledger",
+        "tier": "easy",
+        "hard": false,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "a6-typo-message": {
+        "family": "pkg:ledger",
+        "tier": "easy",
+        "hard": false,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "a7-auth-rotation": {
+        "family": "pkg:invoice-sync",
+        "tier": "easy",
+        "hard": false,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "b1-static-traversal": {
+        "family": "pkg:minihttp",
+        "tier": "medium",
+        "hard": false,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "b2-patch-endpoint": {
+        "family": "pkg:minihttp",
+        "tier": "medium",
+        "hard": false,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "b3-pagination": {
+        "family": "pkg:minihttp",
+        "tier": "medium",
+        "hard": false,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "b5-ctx-migration": {
+        "family": "pkg:minihttp",
+        "tier": "medium",
+        "hard": false,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "b6-route-cache": {
+        "family": "pkg:minihttp",
+        "tier": "medium",
+        "hard": false,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "c1-timezone": {
+        "family": "pkg:logtool",
+        "tier": "medium",
+        "hard": false,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "c2-since-flag-ko": {
+        "family": "pkg:logtool",
+        "tier": "medium",
+        "hard": false,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "c4-malformed-lines": {
+        "family": "pkg:logtool",
+        "tier": "medium",
+        "hard": false,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "c5-aggregate-perf": {
+        "family": "pkg:logtool",
+        "tier": "medium",
+        "hard": false,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "c6-csv-export": {
+        "family": "pkg:logtool",
+        "tier": "medium",
+        "hard": false,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "d1-transactional-outbox": {
+        "family": "pkg:d1-transactional-outbox",
+        "tier": "hard",
+        "hard": true,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "d2-keyed-queue": {
+        "family": "pkg:d2-keyed-queue",
+        "tier": "hard",
+        "hard": true,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "d3-money-migration-ko": {
+        "family": "pkg:d3-money-migration-ko",
+        "tier": "hard",
+        "hard": true,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "d4-cache-fencing": {
+        "family": "pkg:d4-cache-fencing",
+        "tier": "hard",
+        "hard": true,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "d5-streaming-ingest-ko": {
+        "family": "pkg:d5-streaming-ingest-ko",
+        "tier": "hard",
+        "hard": true,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "d6-snapshot-pagination": {
+        "family": "pkg:d6-snapshot-pagination",
+        "tier": "hard",
+        "hard": true,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "d7-config-reload": {
+        "family": "pkg:d7-config-reload",
+        "tier": "hard",
+        "hard": true,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "d8-build-graph": {
+        "family": "pkg:d8-build-graph",
+        "tier": "hard",
+        "hard": true,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "p1-ticket-batch": {
+        "family": "p-series",
+        "tier": "hard",
+        "hard": true,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "p2-handler-migration": {
+        "family": "p-series",
+        "tier": "hard",
+        "hard": true,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "p3-library-features-ko": {
+        "family": "p-series",
+        "tier": "hard",
+        "hard": true,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "h1-interval-merge": {
+        "family": "intervals",
+        "tier": "medium",
+        "hard": false,
+        "source": "local",
+        "provenance": "implementer-authored-sealed-before-search"
+      },
+      "h2-csv-parse": {
+        "family": "csv-parser",
+        "tier": "hard",
+        "hard": true,
+        "source": "local",
+        "provenance": "implementer-authored-sealed-before-search"
+      },
+      "h3-retry-backoff": {
+        "family": "retry",
+        "tier": "medium",
+        "hard": false,
+        "source": "local",
+        "provenance": "implementer-authored-sealed-before-search"
+      },
+      "h4-semver-range": {
+        "family": "semver",
+        "tier": "hard",
+        "hard": true,
+        "source": "local",
+        "provenance": "implementer-authored-sealed-before-search"
+      },
+      "h5-lru-ttl": {
+        "family": "cache",
+        "tier": "hard",
+        "hard": true,
+        "source": "local",
+        "provenance": "implementer-authored-sealed-before-search"
+      },
+      "h6-markdown-toc": {
+        "family": "markdown",
+        "tier": "medium",
+        "hard": false,
+        "source": "local",
+        "provenance": "implementer-authored-sealed-before-search"
+      },
+      "h7-money-allocate": {
+        "family": "money",
+        "tier": "easy",
+        "hard": false,
+        "source": "local",
+        "provenance": "implementer-authored-sealed-before-search"
+      }
+    }
+  },
+  "arms": [
+    {
+      "arm": "C-c001",
+      "split": "train",
+      "posterior": {
+        "overall": {
+          "point": 0.6060606060606061,
+          "mean": 0.6059630254643988,
+          "lo95": 0.33513542040289696,
+          "hi95": 0.8450951673440275
+        },
+        "hard": {
+          "point": 0.13333333333333333,
+          "mean": 0.13196137320813,
+          "lo95": 0.008307593549351103,
+          "hi95": 0.4140390885352203
+        },
+        "consistency": {
+          "point": 0.5656565656565656,
+          "mean": 0.5758894785243885,
+          "lo95": 0.2989787533375119,
+          "hi95": 0.8273748650597194
+        }
+      },
+      "summary": {
+        "candidate_id": "C-c001",
+        "split": "train",
+        "runs": 33,
+        "tasks": 11,
+        "task_success": 20,
+        "success_rate": 0.6060606060606061,
+        "hidden_test_pass": 25,
+        "mean_correctness": 0.8798171936758893,
+        "repeat_success_rate": 0.5656565656565656,
+        "all_repeats_pass_tasks": 6,
+        "hard_task_success_rate": 0.13333333333333333,
+        "regression_count": 1,
+        "critical_failure_count": 5,
+        "integrity_violations": 5,
+        "terminal": {
+          "agent_error": 1,
+          "completed": 32
+        },
+        "infra_rate": 0,
+        "input_tokens": 10665379,
+        "output_tokens": 231738,
+        "cache_tokens": 8881792,
+        "model_requests": 1062,
+        "wall_time_ms": 6997344,
+        "simulated_runs": 0
+      }
+    },
+    {
+      "arm": "C-c001",
+      "split": "dev",
+      "posterior": {
+        "overall": {
+          "point": 0.7916666666666664,
+          "mean": 0.7920000779079056,
+          "lo95": 0.6002120688251664,
+          "hi95": 0.9267595126260919
+        },
+        "hard": {
+          "point": 0.7222222222222222,
+          "mean": 0.7214393887410362,
+          "lo95": 0.4466616312439159,
+          "hi95": 0.9225625176601833
+        },
+        "consistency": {
+          "point": 0.7083333333333334,
+          "mean": 0.7302433583240612,
+          "lo95": 0.5164097202826976,
+          "hi95": 0.897263211621029
+        }
+      },
+      "summary": {
+        "candidate_id": "C-c001",
+        "split": "dev",
+        "runs": 48,
+        "tasks": 16,
+        "task_success": 38,
+        "success_rate": 0.7916666666666666,
+        "hidden_test_pass": 42,
+        "mean_correctness": 0.9586226851851851,
+        "repeat_success_rate": 0.7083333333333334,
+        "all_repeats_pass_tasks": 9,
+        "hard_task_success_rate": 0.7222222222222222,
+        "regression_count": 0,
+        "critical_failure_count": 5,
+        "integrity_violations": 5,
+        "terminal": {
+          "completed": 48
+        },
+        "infra_rate": 0,
+        "input_tokens": 8971238,
+        "output_tokens": 196232,
+        "cache_tokens": 7449088,
+        "model_requests": 1003,
+        "wall_time_ms": 6821685,
+        "simulated_runs": 0
+      }
+    },
+    {
+      "arm": "C-c002",
+      "split": "train",
+      "posterior": {
+        "overall": {
+          "point": 0.6111111111111112,
+          "mean": 0.6076156014854117,
+          "lo95": 0.24106007172352167,
+          "hi95": 0.9070469105086684
+        },
+        "hard": {
+          "point": 0,
+          "mean": 0,
+          "lo95": 0,
+          "hi95": 0
+        },
+        "consistency": {
+          "point": 0.5740740740740741,
+          "mean": 0.5799296758235704,
+          "lo95": 0.2165180977965342,
+          "hi95": 0.8944209353236052
+        }
+      },
+      "summary": {
+        "candidate_id": "C-c002",
+        "split": "train",
+        "runs": 18,
+        "tasks": 6,
+        "task_success": 11,
+        "success_rate": 0.6111111111111112,
+        "hidden_test_pass": 12,
+        "mean_correctness": 0.9113940329218106,
+        "repeat_success_rate": 0.5740740740740741,
+        "all_repeats_pass_tasks": 3,
+        "hard_task_success_rate": 0,
+        "regression_count": 0,
+        "critical_failure_count": 1,
+        "integrity_violations": 1,
+        "terminal": {
+          "completed": 18
+        },
+        "infra_rate": 0,
+        "input_tokens": 7452362,
+        "output_tokens": 151020,
+        "cache_tokens": 6371328,
+        "model_requests": 666,
+        "wall_time_ms": 3830201,
+        "simulated_runs": 0
+      }
+    },
+    {
+      "arm": "C-c003",
+      "split": "train",
+      "posterior": {
+        "overall": {
+          "point": 0.7777777777777777,
+          "mean": 0.7767887070879309,
+          "lo95": 0.46367878262572204,
+          "hi95": 0.9622276818453711
+        },
+        "hard": {
+          "point": 0.5,
+          "mean": 0.497539118901948,
+          "lo95": 0.10291489022364005,
+          "hi95": 0.8986003067647856
+        },
+        "consistency": {
+          "point": 0.6666666666666666,
+          "mean": 0.6933469218373776,
+          "lo95": 0.3413109559999072,
+          "hi95": 0.9392031323006246
+        }
+      },
+      "summary": {
+        "candidate_id": "C-c003",
+        "split": "train",
+        "runs": 18,
+        "tasks": 6,
+        "task_success": 14,
+        "success_rate": 0.7777777777777778,
+        "hidden_test_pass": 17,
+        "mean_correctness": 0.9975845410628019,
+        "repeat_success_rate": 0.6666666666666666,
+        "all_repeats_pass_tasks": 3,
+        "hard_task_success_rate": 0.5,
+        "regression_count": 0,
+        "critical_failure_count": 3,
+        "integrity_violations": 3,
+        "terminal": {
+          "completed": 18
+        },
+        "infra_rate": 0,
+        "input_tokens": 4719391,
+        "output_tokens": 110194,
+        "cache_tokens": 3791360,
+        "model_requests": 513,
+        "wall_time_ms": 3059256,
+        "simulated_runs": 0
+      }
+    },
+    {
+      "arm": "multi3",
+      "split": "dev",
+      "posterior": {
+        "overall": {
+          "point": 0.9583333333333334,
+          "mean": 0.9587051788133772,
+          "lo95": 0.8514778832493607,
+          "hi95": 0.9976288342977777
+        },
+        "hard": {
+          "point": 0.9444444444444443,
+          "mean": 0.9447324767309352,
+          "lo95": 0.7411976450422828,
+          "hi95": 0.9995502337175034
+        },
+        "consistency": {
+          "point": 0.9305555555555556,
+          "mean": 0.9382414601434446,
+          "lo95": 0.7995034649193743,
+          "hi95": 0.9957542593260933
+        }
+      },
+      "summary": {
+        "candidate_id": "multi3",
+        "split": "dev",
+        "runs": 48,
+        "tasks": 16,
+        "task_success": 46,
+        "success_rate": 0.9583333333333334,
+        "hidden_test_pass": 47,
+        "mean_correctness": 0.9791666666666666,
+        "repeat_success_rate": 0.9305555555555556,
+        "all_repeats_pass_tasks": 14,
+        "hard_task_success_rate": 0.9444444444444444,
+        "regression_count": 0,
+        "critical_failure_count": 1,
+        "integrity_violations": 1,
+        "terminal": {
+          "completed": 48
+        },
+        "infra_rate": 0,
+        "input_tokens": 1417929,
+        "output_tokens": 76888,
+        "cache_tokens": 850688,
+        "model_requests": 432,
+        "wall_time_ms": 2322247,
+        "simulated_runs": 0
+      }
+    },
+    {
+      "arm": "pure",
+      "split": "train",
+      "posterior": {
+        "overall": {
+          "point": 0.6363636363636364,
+          "mean": 0.6358489359660306,
+          "lo95": 0.35487941140081547,
+          "hi95": 0.8660698451111067
+        },
+        "hard": {
+          "point": 0.26666666666666666,
+          "mean": 0.26499870447013496,
+          "lo95": 0.029007348632864076,
+          "hi95": 0.6563873856303758
+        },
+        "consistency": {
+          "point": 0.5959595959595959,
+          "mean": 0.605551160777874,
+          "lo95": 0.3229059699117132,
+          "hi95": 0.8519391948538428
+        }
+      },
+      "summary": {
+        "candidate_id": "pure",
+        "split": "train",
+        "runs": 33,
+        "tasks": 11,
+        "task_success": 21,
+        "success_rate": 0.6363636363636364,
+        "hidden_test_pass": 23,
+        "mean_correctness": 0.8928277338603424,
+        "repeat_success_rate": 0.5959595959595959,
+        "all_repeats_pass_tasks": 6,
+        "hard_task_success_rate": 0.26666666666666666,
+        "regression_count": 0,
+        "critical_failure_count": 2,
+        "integrity_violations": 2,
+        "terminal": {
+          "completed": 33
+        },
+        "infra_rate": 0,
+        "input_tokens": 1200234,
+        "output_tokens": 63120,
+        "cache_tokens": 793472,
+        "model_requests": 302,
+        "wall_time_ms": 1813802,
+        "simulated_runs": 0
+      }
+    },
+    {
+      "arm": "pure",
+      "split": "dev",
+      "posterior": {
+        "overall": {
+          "point": 0.8958333333333333,
+          "mean": 0.8954036244667782,
+          "lo95": 0.7467497319985219,
+          "hi95": 0.9791626099812577
+        },
+        "hard": {
+          "point": 0.8333333333333334,
+          "mean": 0.83297313419713,
+          "lo95": 0.531432610926835,
+          "hi95": 0.984949724358817
+        },
+        "consistency": {
+          "point": 0.8402777777777778,
+          "mean": 0.8534385476364914,
+          "lo95": 0.6696950469721574,
+          "hi95": 0.9672384746466582
+        }
+      },
+      "summary": {
+        "candidate_id": "pure",
+        "split": "dev",
+        "runs": 48,
+        "tasks": 16,
+        "task_success": 43,
+        "success_rate": 0.8958333333333334,
+        "hidden_test_pass": 46,
+        "mean_correctness": 0.9869791666666666,
+        "repeat_success_rate": 0.8402777777777778,
+        "all_repeats_pass_tasks": 12,
+        "hard_task_success_rate": 0.8333333333333334,
+        "regression_count": 0,
+        "critical_failure_count": 3,
+        "integrity_violations": 3,
+        "terminal": {
+          "completed": 48
+        },
+        "infra_rate": 0,
+        "input_tokens": 1358249,
+        "output_tokens": 73863,
+        "cache_tokens": 812544,
+        "model_requests": 427,
+        "wall_time_ms": 2249042,
+        "simulated_runs": 0
+      }
+    },
+    {
+      "arm": "stable",
+      "split": "train",
+      "posterior": {
+        "overall": {
+          "point": 0.5454545454545455,
+          "mean": 0.5480381411157316,
+          "lo95": 0.26366165452471413,
+          "hi95": 0.8155991957074291
+        },
+        "hard": {
+          "point": 0,
+          "mean": 0,
+          "lo95": 0,
+          "hi95": 0
+        },
+        "consistency": {
+          "point": 0.5454545454545455,
+          "mean": 0.5480381411157316,
+          "lo95": 0.26366165452471413,
+          "hi95": 0.8155991957074291
+        }
+      },
+      "summary": {
+        "candidate_id": "stable",
+        "split": "train",
+        "runs": 33,
+        "tasks": 11,
+        "task_success": 18,
+        "success_rate": 0.5454545454545454,
+        "hidden_test_pass": 23,
+        "mean_correctness": 0.9697427170253257,
+        "repeat_success_rate": 0.5454545454545454,
+        "all_repeats_pass_tasks": 6,
+        "hard_task_success_rate": 0,
+        "regression_count": 0,
+        "critical_failure_count": 6,
+        "integrity_violations": 6,
+        "terminal": {
+          "completed": 32,
+          "timeout": 1
+        },
+        "infra_rate": 0,
+        "input_tokens": 8539186,
+        "output_tokens": 190571,
+        "cache_tokens": 7287680,
+        "model_requests": 871,
+        "wall_time_ms": 5992632,
+        "simulated_runs": 0
+      }
+    },
+    {
+      "arm": "stable",
+      "split": "dev",
+      "posterior": {
+        "overall": {
+          "point": 0.7708333333333333,
+          "mean": 0.7704521277643549,
+          "lo95": 0.5688406726492319,
+          "hi95": 0.920101165561096
+        },
+        "hard": {
+          "point": 0.5,
+          "mean": 0.5011134463870301,
+          "lo95": 0.1992766003690837,
+          "hi95": 0.7985633372678614
+        },
+        "consistency": {
+          "point": 0.7013888888888888,
+          "mean": 0.7178585562699271,
+          "lo95": 0.4969672127310247,
+          "hi95": 0.8923461899234091
+        }
+      },
+      "summary": {
+        "candidate_id": "stable",
+        "split": "dev",
+        "runs": 48,
+        "tasks": 16,
+        "task_success": 37,
+        "success_rate": 0.7708333333333334,
+        "hidden_test_pass": 42,
+        "mean_correctness": 0.9667245370370369,
+        "repeat_success_rate": 0.7013888888888888,
+        "all_repeats_pass_tasks": 10,
+        "hard_task_success_rate": 0.5,
+        "regression_count": 0,
+        "critical_failure_count": 5,
+        "integrity_violations": 5,
+        "terminal": {
+          "completed": 48
+        },
+        "infra_rate": 0,
+        "input_tokens": 8000848,
+        "output_tokens": 180933,
+        "cache_tokens": 6783232,
+        "model_requests": 917,
+        "wall_time_ms": 5468650,
+        "simulated_runs": 0
+      }
+    }
+  ],
+  "candidates": [
+    {
+      "status": "selected",
+      "decisions": [
+        {
+          "at": "2026-11-04T06:22:32.557Z",
+          "status": "created",
+          "reason": "patch accepted"
+        },
+        {
+          "at": "2026-11-04T06:22:46.249Z",
+          "status": "screening",
+          "reason": "screening batch b1-static-traversal, b3-pagination, b6-route-cache, d5-streaming-ingest-ko, p1-ticket-batch, p3-library-features-ko"
+        },
+        {
+          "at": "2026-11-04T06:48:08.449Z",
+          "status": "promoted",
+          "reason": "support 1.0000 vs threshold 0.8 (level execution, 10000 draws, mcse 0.0000)"
+        },
+        {
+          "at": "2026-11-04T07:16:02.083Z",
+          "status": "dev_qualified",
+          "reason": "P(overall loss > 0.03) = 0.2766 (must be < 0.8); quality-first support vs stable 0.6922"
+        },
+        {
+          "at": "2026-11-04T07:47:28.626Z",
+          "status": "selected",
+          "reason": "final selection on development (frozen before holdout access)"
+        }
+      ],
+      "children": [
+        "C-c002",
+        "C-c003",
+        "C-c004"
+      ],
+      "createdAt": "2026-11-04T06:20:46.630Z",
+      "id": "C-c001",
+      "parent": "stable",
+      "origin": "proposer",
+      "strategy": "pareto",
+      "worktree": "/home/arthur/Code/oh-my-pi-extensions/pi-eval-loop/state/abc-real-1/C/worktrees/C-c001",
+      "branch": "eval-loop/candidates/ce8bb544/C-c001",
+      "base": "e831a6b2bc19f0c707b55505db33a11b2c9d4d4a",
+      "target": "requirements-generalization",
+      "hypothesis": {
+        "text": "Requiring implementers to audit every original-request clause against implementation and passing behavioral checks before completion should reduce omitted boundary cases and interactions masked by a passing suite.",
+        "targetFailureClass": "requirements-generalization",
+        "expectedEffect": "More requested behaviors are exercised and satisfied before completion, with fewer unsupported claims that grouped requirements are met."
+      },
+      "updatedAt": "2026-11-04T07:47:28.626Z",
+      "proposer": {
+        "usage": {
+          "requests": 12,
+          "completed": 10,
+          "input": 296412,
+          "output": 2275,
+          "cached": 260096,
+          "wallMs": 105278,
+          "guardFired": false,
+          "exit": 0
+        }
+      },
+      "files": [
+        "src/extension/workers.ts"
+      ],
+      "patchKey": "5b050f9519fa892becf06e37dec4e52ebb259f2e8e9e965e9c8d70f2b4087e8c",
+      "patchSha256": "a6cffbaf1ee180702bb522e1af36bcde6c88e41781deac48242f023103380899",
+      "patchStats": {
+        "added": 1,
+        "removed": 0
+      },
+      "commit": "6c14f42e223209c4011a8db063589b50c38102f0",
+      "screening": {
+        "batch": [
+          "b1-static-traversal",
+          "b3-pagination",
+          "b6-route-cache",
+          "d5-streaming-ingest-ko",
+          "p1-ticket-batch",
+          "p3-library-features-ko"
+        ],
+        "repeats": 3,
+        "support": 1,
+        "supportTaskLevel": 1,
+        "mcse": 0,
+        "delta": {
+          "overall": {
+            "mean": 0.05469572115951127,
+            "lo95": 0.00179571467893902,
+            "hi95": 0.14040361646479704,
+            "probPositive": 1,
+            "probNegative": 0
+          },
+          "hard": {
+            "mean": 0.10939144231902251,
+            "lo95": 0.003591429357878198,
+            "hi95": 0.2808072329295943,
+            "probPositive": 1,
+            "probNegative": 0
+          },
+          "consistency": {
+            "mean": 0.027196573521639907,
+            "lo95": 0.00001934754724886023,
+            "hi95": 0.11827905309836306,
+            "probPositive": 1,
+            "probNegative": 0
+          }
+        },
+        "point": {
+          "a": {
+            "overall": 0.5,
+            "consistency": 0.5,
+            "hard": 0
+          },
+          "b": {
+            "overall": 0.5555555555555556,
+            "consistency": 0.5185185185185185,
+            "hard": 0.1111111111111111
+          }
+        },
+        "decision": "PROMOTE",
+        "reasons": [
+          "support 1.0000 vs threshold 0.8 (level execution, 10000 draws, mcse 0.0000)"
+        ],
+        "rounds": [
+          {
+            "at": "2026-11-04T06:48:08.384Z",
+            "repeats": 3,
+            "tasks": [
+              "b1-static-traversal",
+              "b3-pagination",
+              "b6-route-cache",
+              "d5-streaming-ingest-ko",
+              "p1-ticket-batch",
+              "p3-library-features-ko"
+            ],
+            "support": 1,
+            "supportTaskLevel": 1,
+            "decision": "PROMOTE"
+          }
+        ]
+      },
+      "development": {
+        "tasks": 16,
+        "repeats": 3,
+        "point": {
+          "overall": 0.791401140691153,
+          "hard": 0.7204451372702666,
+          "consistency": 0.7288966436706098
+        },
+        "posterior": {
+          "overall": {
+            "point": 0.7916666666666664,
+            "mean": 0.791401140691153,
+            "lo95": 0.5993953967214843,
+            "hi95": 0.9280697527502488
+          },
+          "hard": {
+            "point": 0.7222222222222222,
+            "mean": 0.7204451372702666,
+            "lo95": 0.4393935172210399,
+            "hi95": 0.9223128775944229
+          },
+          "consistency": {
+            "point": 0.7083333333333334,
+            "mean": 0.7288966436706098,
+            "lo95": 0.5119549305976002,
+            "hi95": 0.8960297528538386
+          }
+        },
+        "qualified": true,
+        "reasons": [
+          "P(overall loss > 0.03) = 0.2766 (must be < 0.8)",
+          "quality-first support vs stable 0.6922"
+        ],
+        "vsStable": {
+          "support": 0.6922,
+          "lossSupport": 0.2766,
+          "delta": {
+            "overall": {
+              "mean": 0.02065523477103102,
+              "lo95": -0.1692730142667782,
+              "hi95": 0.21303421690654512,
+              "probPositive": 0.5922,
+              "probNegative": 0.4078
+            },
+            "hard": {
+              "mean": 0.2211040396875712,
+              "lo95": -0.1404070861318819,
+              "hi95": 0.5720178030440295,
+              "probPositive": 0.8938,
+              "probNegative": 0.1062
+            },
+            "consistency": {
+              "mean": 0.010257753770361644,
+              "lo95": -0.1926794567872484,
+              "hi95": 0.2107710229336811,
+              "probPositive": 0.5489,
+              "probNegative": 0.4511
+            }
+          },
+          "familyDelta": {
+            "pkg:ledger": {
+              "mean": -0.06660779464934782,
+              "lo95": -0.3063772989648762,
+              "hi95": -0.0005684549767549683,
+              "probPositive": 0,
+              "probNegative": 1,
+              "probBelow": 0.1279
+            },
+            "pkg:logtool": {
+              "mean": -0.13215024709568957,
+              "lo95": -0.46730207546169306,
+              "hi95": -0.0028693466004221404,
+              "probPositive": 0,
+              "probNegative": 1,
+              "probBelow": 0.3348
+            },
+            "pkg:d1-transactional-outbox": {
+              "mean": 0.3310933897726705,
+              "lo95": -0.38572815905025226,
+              "hi95": 0.8772735399015834,
+              "probPositive": 0.8335,
+              "probNegative": 0.1665,
+              "probBelow": 0.0887
+            },
+            "pkg:d2-keyed-queue": {
+              "mean": -0.0070180923422057066,
+              "lo95": -0.6623459577659558,
+              "hi95": 0.645924845939214,
+              "probPositive": 0.4908,
+              "probNegative": 0.5092,
+              "probBelow": 0.3278
+            },
+            "pkg:d3-money-migration-ko": {
+              "mean": 0.6667494966098647,
+              "lo95": 0.16052580203975259,
+              "hi95": 0.9850302472880235,
+              "probPositive": 1,
+              "probNegative": 0,
+              "probBelow": 0
+            },
+            "pkg:d6-snapshot-pagination": {
+              "mean": 0.3307470361454482,
+              "lo95": -0.38482956765181286,
+              "hi95": 0.8821560541261368,
+              "probPositive": 0.8315,
+              "probNegative": 0.1685,
+              "probBelow": 0.089
+            },
+            "pkg:d7-config-reload": {
+              "mean": -0.0013167202589658585,
+              "lo95": -0.6598924621754783,
+              "hi95": 0.6513603245467883,
+              "probPositive": 0.5004,
+              "probNegative": 0.4996,
+              "probBelow": 0.3258
+            },
+            "pkg:d8-build-graph": {
+              "mean": 0,
+              "lo95": 0,
+              "hi95": 0,
+              "probPositive": 0,
+              "probNegative": 0,
+              "probBelow": 0
+            }
+          }
+        },
+        "summary": {
+          "candidate_id": "C-c001",
+          "split": "dev",
+          "runs": 48,
+          "tasks": 16,
+          "task_success": 38,
+          "success_rate": 0.7916666666666666,
+          "hidden_test_pass": 42,
+          "mean_correctness": 0.9586226851851851,
+          "repeat_success_rate": 0.7083333333333334,
+          "all_repeats_pass_tasks": 9,
+          "hard_task_success_rate": 0.7222222222222222,
+          "regression_count": 0,
+          "critical_failure_count": 5,
+          "integrity_violations": 5,
+          "terminal": {
+            "completed": 48
+          },
+          "infra_rate": 0,
+          "input_tokens": 8971238,
+          "output_tokens": 196232,
+          "cache_tokens": 7449088,
+          "model_requests": 1003,
+          "wall_time_ms": 6821685,
+          "simulated_runs": 0
+        }
+      }
+    },
+    {
+      "status": "rejected",
+      "decisions": [
+        {
+          "at": "2026-11-04T07:17:45.033Z",
+          "status": "created",
+          "reason": "patch accepted"
+        },
+        {
+          "at": "2026-11-04T07:17:55.915Z",
+          "status": "screening",
+          "reason": "screening batch a7-auth-rotation, b1-static-traversal, b3-pagination, b5-ctx-migration, p1-ticket-batch, p2-handler-migration"
+        },
+        {
+          "at": "2026-11-04T07:33:21.095Z",
+          "status": "rejected",
+          "reason": "critical: integrity: 1 run(s) with workspace integrity violations vs 0 for C-c001 (b5-ctx-migration#0: changed/removed 1 line(s) of test file test/api.test.js: \"import { request } from './helpers.js';\")"
+        }
+      ],
+      "children": [],
+      "createdAt": "2026-11-04T07:16:02.283Z",
+      "id": "C-c002",
+      "parent": "C-c001",
+      "origin": "proposer",
+      "strategy": "pareto",
+      "worktree": "/home/arthur/Code/oh-my-pi-extensions/pi-eval-loop/state/abc-real-1/C/worktrees/C-c002",
+      "branch": "eval-loop/candidates/ce8bb544/C-c002",
+      "base": "6c14f42e223209c4011a8db063589b50c38102f0",
+      "target": "requirements-generalization",
+      "hypothesis": {
+        "text": "Requiring implementation workers to derive behavioral cases and expected outcomes from the original request before editing code should reduce omissions and implementation-shaped checks by establishing boundary and interaction expectations first.",
+        "targetFailureClass": "requirements-generalization",
+        "expectedEffect": "More completed implementations satisfy the full requested behavior, including specified boundaries and interactions, rather than only the cases already exercised by existing tests."
+      },
+      "updatedAt": "2026-11-04T07:33:21.095Z",
+      "proposer": {
+        "usage": {
+          "requests": 11,
+          "completed": 11,
+          "input": 469189,
+          "output": 1801,
+          "cached": 404864,
+          "wallMs": 101778,
+          "guardFired": false,
+          "exit": 0
+        }
+      },
+      "files": [
+        "src/extension/workers.ts"
+      ],
+      "patchKey": "e20038909e196e0f07ed92bec675d476018e4096845c71e59ae528d275a7a2d2",
+      "patchSha256": "0f55fd80150ced32439b03d2f83d22b8cba31e34778738160f705a2b334bfaf4",
+      "patchStats": {
+        "added": 1,
+        "removed": 1
+      },
+      "commit": "d8e0c967ceb6527f7f3a4adc64c1973830616a80",
+      "screening": {
+        "rounds": [
+          {
+            "at": "2026-11-04T07:33:21.095Z",
+            "repeats": 3,
+            "tasks": [
+              "a7-auth-rotation",
+              "b1-static-traversal",
+              "b3-pagination",
+              "b5-ctx-migration",
+              "p1-ticket-batch",
+              "p2-handler-migration"
+            ],
+            "critical": [
+              "integrity: 1 run(s) with workspace integrity violations vs 0 for C-c001 (b5-ctx-migration#0: changed/removed 1 line(s) of test file test/api.test.js: \"import { request } from './helpers.js';\")"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "status": "rejected",
+      "decisions": [
+        {
+          "at": "2026-11-04T07:34:30.459Z",
+          "status": "created",
+          "reason": "patch accepted"
+        },
+        {
+          "at": "2026-11-04T07:34:41.323Z",
+          "status": "screening",
+          "reason": "screening batch a7-auth-rotation, b2-patch-endpoint, b5-ctx-migration, b6-route-cache, d4-cache-fencing, p3-library-features-ko"
+        },
+        {
+          "at": "2026-11-04T07:45:39.864Z",
+          "status": "rejected",
+          "reason": "critical: integrity: 3 run(s) with workspace integrity violations vs 2 for C-c001 (b5-ctx-migration#0: changed/removed 1 line(s) of test file test/api.test.js: \"import { request } from './helpers.js';\"; d4-cache-fencing#0: changed/removed 1 line(s) of test file test/smoke.test.mjs: \"import test from 'node:test';import assert from 'node:assert/strict';import {cre\"; d4-cache-fencing#1: changed/removed 1 line(s) of test file test/smoke.test.mjs: \"import test from 'node:test';import assert from 'node:assert/strict';import {cre\")"
+        }
+      ],
+      "children": [],
+      "createdAt": "2026-11-04T07:33:21.290Z",
+      "id": "C-c003",
+      "parent": "C-c001",
+      "origin": "proposer",
+      "strategy": "pareto",
+      "worktree": "/home/arthur/Code/oh-my-pi-extensions/pi-eval-loop/state/abc-real-1/C/worktrees/C-c003",
+      "branch": "eval-loop/candidates/ce8bb544/C-c003",
+      "base": "6c14f42e223209c4011a8db063589b50c38102f0",
+      "target": "requirements-generalization",
+      "hypothesis": {
+        "text": "Requiring a completion-time audit that maps every requested behavior to implementation and verification evidence will expose omitted contract clauses and prompt focused checks before completion.",
+        "targetFailureClass": "requirements-generalization",
+        "expectedEffect": "More completed changes satisfy the full requested behavior, including boundaries and interactions absent from existing checks."
+      },
+      "updatedAt": "2026-11-04T07:45:39.864Z",
+      "proposer": {
+        "usage": {
+          "requests": 9,
+          "completed": 9,
+          "input": 363404,
+          "output": 1443,
+          "cached": 301952,
+          "wallMs": 68539,
+          "guardFired": false,
+          "exit": 0
+        }
+      },
+      "files": [
+        "prompts/c1-engineering-discipline.md"
+      ],
+      "patchKey": "b3f6d8d586f169b18ff58ca0fef7353f85cf7b9754621cd4167ea1a1b3cb0c0a",
+      "patchSha256": "95e7b29e881fc0ad711c34c3dafcab66f4b4783c11867f724f8fa38c81ce4190",
+      "patchStats": {
+        "added": 1,
+        "removed": 0
+      },
+      "commit": "907c13b5f87bf2d553cd7e9ffb03af034d157b03",
+      "screening": {
+        "rounds": [
+          {
+            "at": "2026-11-04T07:45:39.863Z",
+            "repeats": 3,
+            "tasks": [
+              "a7-auth-rotation",
+              "b2-patch-endpoint",
+              "b5-ctx-migration",
+              "b6-route-cache",
+              "d4-cache-fencing",
+              "p3-library-features-ko"
+            ],
+            "critical": [
+              "integrity: 3 run(s) with workspace integrity violations vs 2 for C-c001 (b5-ctx-migration#0: changed/removed 1 line(s) of test file test/api.test.js: \"import { request } from './helpers.js';\"; d4-cache-fencing#0: changed/removed 1 line(s) of test file test/smoke.test.mjs: \"import test from 'node:test';import assert from 'node:assert/strict';import {cre\"; d4-cache-fencing#1: changed/removed 1 line(s) of test file test/smoke.test.mjs: \"import test from 'node:test';import assert from 'node:assert/strict';import {cre\")"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "status": "screening",
+      "decisions": [
+        {
+          "at": "2026-11-04T07:47:17.600Z",
+          "status": "created",
+          "reason": "patch accepted"
+        },
+        {
+          "at": "2026-11-04T07:47:28.612Z",
+          "status": "screening",
+          "reason": "screening batch a7-auth-rotation, b2-patch-endpoint, b3-pagination, d4-cache-fencing, p1-ticket-batch, p2-handler-migration"
+        }
+      ],
+      "children": [],
+      "createdAt": "2026-11-04T07:45:40.059Z",
+      "id": "C-c004",
+      "parent": "C-c001",
+      "origin": "proposer",
+      "strategy": "pareto",
+      "worktree": "/home/arthur/Code/oh-my-pi-extensions/pi-eval-loop/state/abc-real-1/C/worktrees/C-c004",
+      "branch": "eval-loop/candidates/ce8bb544/C-c004",
+      "base": "6c14f42e223209c4011a8db063589b50c38102f0",
+      "target": "requirements-generalization",
+      "hypothesis": {
+        "text": "Requiring implementation workers to derive and run contract checks before editing code should reduce circular verification by anchoring expected behavior to the original requirements rather than implementation assumptions.",
+        "targetFailureClass": "requirements-generalization",
+        "expectedEffect": "More specified boundary and failure cases are exercised before implementation, and completed changes satisfy more of the original requirements even when the existing suite already passes."
+      },
+      "updatedAt": "2026-11-04T07:47:28.612Z",
+      "proposer": {
+        "usage": {
+          "requests": 9,
+          "completed": 9,
+          "input": 326005,
+          "output": 1759,
+          "cached": 273280,
+          "wallMs": 96935,
+          "guardFired": false,
+          "exit": 0
+        }
+      },
+      "files": [
+        "src/extension/workers.ts"
+      ],
+      "patchKey": "b22b8f48abf006ae74abeaf0ffe4cbfbd62b5db4ddedb09f215931f7865a43ce",
+      "patchSha256": "8006e9ee359b188dc83b9fa8880db95e74a1b1866f5d4de382cb1a9e7c14ed05",
+      "patchStats": {
+        "added": 1,
+        "removed": 1
+      },
+      "commit": "0a40cfa2a12e8b162cf5a9578426199c1c9a0bda"
+    },
+    {
+      "status": "baseline",
+      "decisions": [],
+      "children": [],
+      "createdAt": "2026-11-04T05:17:24.516Z",
+      "id": "multi3",
+      "parent": null,
+      "origin": "control",
+      "kind": "control",
+      "harness": {
+        "id": "multi3",
+        "kind": "multi",
+        "k": 3
+      },
+      "hypothesis": null,
+      "updatedAt": "2026-11-04T05:17:24.516Z"
+    },
+    {
+      "status": "baseline",
+      "decisions": [],
+      "children": [],
+      "createdAt": "2026-11-04T05:17:24.513Z",
+      "id": "pure",
+      "parent": null,
+      "origin": "control",
+      "kind": "control",
+      "harness": {
+        "id": "pure",
+        "kind": "pure"
+      },
+      "hypothesis": null,
+      "updatedAt": "2026-11-04T05:17:24.513Z"
+    },
+    {
+      "status": "baseline",
+      "decisions": [],
+      "children": [
+        "C-c001"
+      ],
+      "createdAt": "2026-11-04T05:17:24.511Z",
+      "id": "stable",
+      "parent": null,
+      "origin": "baseline",
+      "commit": "e831a6b2bc19f0c707b55505db33a11b2c9d4d4a",
+      "hypothesis": null,
+      "updatedAt": "2026-11-04T06:20:46.633Z",
+      "development": {
+        "tasks": 16,
+        "repeats": 3,
+        "point": {
+          "overall": 0.7717367502648188,
+          "hard": 0.5039709510377249,
+          "consistency": 0.7194706759137421
+        },
+        "posterior": {
+          "overall": {
+            "point": 0.7708333333333333,
+            "mean": 0.7717367502648188,
+            "lo95": 0.5706298572762984,
+            "hi95": 0.9194533182026232
+          },
+          "hard": {
+            "point": 0.5,
+            "mean": 0.5039709510377249,
+            "lo95": 0.2036955375718281,
+            "hi95": 0.7965390685354218
+          },
+          "consistency": {
+            "point": 0.7013888888888888,
+            "mean": 0.7194706759137421,
+            "lo95": 0.49820931678153224,
+            "hi95": 0.893569598046546
+          }
+        },
+        "qualified": true,
+        "reasons": [
+          "baseline"
+        ],
+        "summary": {
+          "candidate_id": "stable",
+          "split": "dev",
+          "runs": 48,
+          "tasks": 16,
+          "task_success": 37,
+          "success_rate": 0.7708333333333334,
+          "hidden_test_pass": 42,
+          "mean_correctness": 0.9667245370370369,
+          "repeat_success_rate": 0.7013888888888888,
+          "all_repeats_pass_tasks": 10,
+          "hard_task_success_rate": 0.5,
+          "regression_count": 0,
+          "critical_failure_count": 5,
+          "integrity_violations": 5,
+          "terminal": {
+            "completed": 48
+          },
+          "infra_rate": 0,
+          "input_tokens": 8000848,
+          "output_tokens": 180933,
+          "cache_tokens": 6783232,
+          "model_requests": 917,
+          "wall_time_ms": 5468650,
+          "simulated_runs": 0
+        }
+      }
+    }
+  ],
+  "front": [
+    "C-c001"
+  ],
+  "selection": {
+    "at": "2026-11-04T07:47:28.626Z",
+    "considered": [
+      "C-c001"
+    ],
+    "eligible": [
+      "C-c001"
+    ],
+    "selected": "C-c001",
+    "commit": "6c14f42e223209c4011a8db063589b50c38102f0",
+    "frozenDigest": "6f60591d5028f07bd972f799bfa0d7358048bf266192fc036d3db2825d389cc0"
+  },
+  "searchStop": "candidate cap of 4 per cycle reached (safety limit)",
+  "counters": {
+    "candidates": 4,
+    "noProgress": 2,
+    "consecutiveInfra": 0
+  },
+  "deployHistory": [],
+  "proposerUsage": {
+    "requests": 41,
+    "input": 1455010,
+    "output": 7278
+  },
+  "ledgerIntegrity": {
+    "runsLedger": [],
+    "events": []
+  },
+  "runs": 327
+}

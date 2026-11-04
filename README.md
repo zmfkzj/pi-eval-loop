@@ -59,6 +59,6 @@ ends as `BLOCKED` and is recorded as such. No simulated result is ever presented
 | `src/report.mjs` | Reports |
 | `datasets/holdout-v1/` | 7 sealed, implementer-authored holdout tasks (they cannot back an adoption under the default protocol) |
 | `protocols/` | Recorded protocol overrides of measured runs |
-| `results/` | Committed records of measured runs |
+| `records/` | Committed records of measured runs |
 
 Tests: `npm test` in this directory (`EL_TEST_TMP` sets the temp root). Root `npm run test:compat` runs them too.

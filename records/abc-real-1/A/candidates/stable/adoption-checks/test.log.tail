@@ -1,0 +1,63 @@
+l(JSON.parse(maxPrompts).pro…
+    [90m 53| [39m  })[33m;[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/8]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m test/experiments/ultra-ab.test.ts[2m > [22mdriver: manifest, resume, retries, lock[2m > [22mruns every planned unit once, keeps interrupted and infra attempts, retries infra once, reuses completed units and waits for C attempts
+[31m[1mError[22m: Command failed: git ls-files --cached --others --exclude-standard -- src package.json tsconfig.json
+fatal: not a git repository: /home/arthur/Code/oh-my-pi-extensions/.git/modules/orche/worktrees/stable
+[39m
+[36m [2m❯[22m git experiments/ultra-ab/env.ts:[2m49:46[22m[39m
+    [90m 47| [39m}
+    [90m 48| [39m
+    [90m 49| [39mconst git = (cwd: string, args: string[]) => execFileSync("git", args,…
+    [90m   | [39m                                             [31m^[39m
+    [90m 50| [39mconst SKIP_COPY = /\/(\.git|\.orche|node_modules|__pycache__|\.pytest_…
+    [90m 51| [39m
+[90m [2m❯[22m freezeRuntime experiments/ultra-ab/env.ts:[2m131:17[22m[39m
+[90m [2m❯[22m drive experiments/ultra-ab/driver.ts:[2m103:120[22m[39m
+[90m [2m❯[22m test/experiments/ultra-ab.test.ts:[2m311:20[22m[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/8]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m test/tools/search.test.ts[2m > [22msearch tools enabled on a worker session[2m > [22mgrep, find (no fd needed) and ls work; find skips node_modules/.orche and sees dot dirs
+[31m[1mAssertionError[22m: expected 'ripgrep (rg) is not available and cou…' to contain 'src/a.ts'[39m
+
+Expected: [32m"src/a.ts"[39m
+Received: [31m"ripgrep (rg) is not available and could not be downloaded"[39m
+
+[36m [2m❯[22m test/tools/search.test.ts:[2m24:24[22m[39m
+    [90m 22| [39m      () [33m=>[39m ({ name[33m:[39m [32m"ls"[39m[33m,[39m args[33m:[39m { path[33m:[39m [32m"src"[39m } })[33m,[39m
+    [90m 23| [39m    ])[33m;[39m
+    [90m 24| [39m    [34mexpect[39m(grep[33m![39m[33m.[39mtext)[33m.[39m[34mtoContain[39m([32m"src/a.ts"[39m)[33m;[39m
+    [90m   | [39m                       [31m^[39m
+    [90m 25| [39m    [34mexpect[39m(grep[33m![39m[33m.[39mtext)[33m.[39m[34mtoContain[39m([32m"src/deep/b.ts"[39m)[33m;[39m
+    [90m 26| [39m    expect(findTs!.text.split("\n").sort()).toEqual(["src/a.ts", "src/…
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/8]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m test/tools/spill.test.ts[2m > [22martifact spill[2m > [22mkeeps artifacts out of grep results
+[31m[1mAssertionError[22m: expected 'ripgrep (rg) is not available and cou…' to match /No matches/i[39m
+
+[32m- Expected:[39m 
+/No matches/i
+
+[31m+ Received:[39m 
+"ripgrep (rg) is not available and could not be downloaded"
+
+[36m [2m❯[22m test/tools/spill.test.ts:[2m45:24[22m[39m
+    [90m 43| [39m      () [33m=>[39m ({ name[33m:[39m [32m"grep"[39m[33m,[39m args[33m:[39m { pattern[33m:[39m [32m"^4999$"[39m } })[33m,[39m
+    [90m 44| [39m    ])[33m;[39m
+    [90m 45| [39m    [34mexpect[39m(grep[33m![39m[33m.[39mtext)[33m.[39m[34mtoMatch[39m([36m/No matches/i[39m)[33m;[39m
+    [90m   | [39m                       [31m^[39m
+    [90m 46| [39m  })[33m;[39m
+    [90m 47| [39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/8]⎯[22m[39m
+
+
+[2m Test Files [22m [1m[31m6 failed[39m[22m[2m | [22m[1m[32m161 passed[39m[22m[2m | [22m[33m1 skipped[39m[90m (168)[39m
+[2m      Tests [22m [1m[31m8 failed[39m[22m[2m | [22m[1m[32m3007 passed[39m[22m[2m | [22m[33m30 skipped[39m[90m (3045)[39m
+[2m   Start at [22m 09:03:16
+[2m   Duration [22m 51.31s[2m (transform 6.94s, setup 0ms, collect 141.64s, tests 319.63s, environment 37ms, prepare 12.63s)[22m
+

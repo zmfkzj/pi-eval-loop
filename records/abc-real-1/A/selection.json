@@ -1,0 +1,17 @@
+{
+  "at": "2026-11-04T08:47:58.453Z",
+  "selected": "C-c001",
+  "commit": "6c14f42e223209c4011a8db063589b50c38102f0",
+  "extraArms": [],
+  "ablation": {
+    "B": {
+      "id": "stable",
+      "commit": "e831a6b2bc19f0c707b55505db33a11b2c9d4d4a"
+    },
+    "C": {
+      "id": "C-c001",
+      "commit": "6c14f42e223209c4011a8db063589b50c38102f0"
+    }
+  },
+  "frozenDigest": "5ffb42245b288d66659d3ac86cad3a36807859b7a273da8ab7f3deadfa3c52fd"
+}

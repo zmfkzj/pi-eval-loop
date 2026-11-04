@@ -1,0 +1,12 @@
+diff --git a/prompts/c1-engineering-discipline.md b/prompts/c1-engineering-discipline.md
+index 11e1904..38f5ae0 100644
+--- a/prompts/c1-engineering-discipline.md
++++ b/prompts/c1-engineering-discipline.md
+@@ -16,6 +16,7 @@ Implementation
+ - Never run destructive git commands or delete code you did not write.
+ 
+ Verification
++- Before completion, re-read the original request and map every behavioral requirement to its implementation and verification evidence. For requirements not covered by existing checks, run focused cases derived from the request, including applicable boundaries, invalid inputs and interactions; fix discrepancies rather than assuming passing checks imply full compliance.
+ - Do not report completion without running the changed path and observing the result; passing tests alone are not proof.
+ - For a bug: reproduce it first, confirm the fix afterwards, and add a regression test that would have failed before.
+ - Tests must assert consumer-visible behavior (boundaries, error cases, invariants), not wiring or incidental details.

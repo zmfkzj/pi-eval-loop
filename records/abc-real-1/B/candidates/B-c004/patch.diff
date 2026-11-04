@@ -1,0 +1,19 @@
+diff --git a/src/tools/bash.ts b/src/tools/bash.ts
+index 50693ce..4387da7 100644
+--- a/src/tools/bash.ts
++++ b/src/tools/bash.ts
+@@ -494,5 +494,13 @@ export function createBashHeartbeatTool(options: BashHeartbeatToolOptions): Tool
+     }
+   };
+   // `timeout` (seconds) given as an integer string ("120") is coerced before pi validates it.
+-  return { ...base, prepareArguments: coerceIntegerArguments(["timeout"], base.prepareArguments), execute } as unknown as ToolDefinition;
++  return {
++    ...base,
++    promptGuidelines: [
++      ...(base.promptGuidelines ?? []),
++      "For verification via bash, use one-shot commands (not watch mode) with an explicit timeout in seconds: start with 60 unless the check is known to need longer. If a check times out, inspect its output and diagnose before retrying; do not repeat the unchanged command or merely increase its timeout.",
++    ],
++    prepareArguments: coerceIntegerArguments(["timeout"], base.prepareArguments),
++    execute,
++  } as unknown as ToolDefinition;
+ }

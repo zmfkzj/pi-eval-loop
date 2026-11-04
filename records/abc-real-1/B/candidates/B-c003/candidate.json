@@ -1,0 +1,128 @@
+{
+  "status": "rejected",
+  "decisions": [
+    {
+      "at": "2026-11-04T08:19:31.386Z",
+      "status": "created",
+      "reason": "patch accepted"
+    },
+    {
+      "at": "2026-11-04T08:19:42.261Z",
+      "status": "screening",
+      "reason": "screening batch b5-ctx-migration, d4-cache-fencing, d5-streaming-ingest-ko, p1-ticket-batch, p2-handler-migration, p3-library-features-ko"
+    },
+    {
+      "at": "2026-11-04T08:46:22.048Z",
+      "status": "rejected",
+      "reason": "support 0.6104 vs threshold 0.8 (level execution, 10000 draws, mcse 0.0049)"
+    }
+  ],
+  "children": [],
+  "createdAt": "2026-11-04T08:17:48.107Z",
+  "id": "B-c003",
+  "parent": "stable",
+  "origin": "proposer",
+  "strategy": "greedy",
+  "worktree": "/home/arthur/Code/oh-my-pi-extensions/pi-eval-loop/state/abc-real-1/B/worktrees/B-c003",
+  "branch": "eval-loop/candidates/0cb75a26/B-c003",
+  "base": "e831a6b2bc19f0c707b55505db33a11b2c9d4d4a",
+  "target": "requirements-generalization",
+  "hypothesis": {
+    "text": "Requiring implementation workers to derive a clause-by-clause acceptance checklist from the original request and reconcile it with behavioral checks before completion should prevent passing suites from masking omitted requirements.",
+    "targetFailureClass": "requirements-generalization",
+    "expectedEffect": "Completed implementations should satisfy more stated requirements and boundary behaviors while retaining passing project checks."
+  },
+  "updatedAt": "2026-11-04T08:46:22.048Z",
+  "proposer": {
+    "usage": {
+      "requests": 11,
+      "completed": 11,
+      "input": 371499,
+      "output": 2522,
+      "cached": 322048,
+      "wallMs": 102674,
+      "guardFired": false,
+      "exit": 0
+    }
+  },
+  "files": [
+    "src/extension/workers.ts"
+  ],
+  "patchKey": "d74fdb81f3604ab9155a37663d5755553424d027a1dbade955781ef417207c5b",
+  "patchSha256": "7204852c207fc7c4be45c2c708bc9d0579456ebddd097e1f5a13be60873fc1ff",
+  "patchStats": {
+    "added": 4,
+    "removed": 1
+  },
+  "commit": "830e78a1890b96d1367c61f50abcd88f56387139",
+  "screening": {
+    "batch": [
+      "b5-ctx-migration",
+      "d4-cache-fencing",
+      "d5-streaming-ingest-ko",
+      "p1-ticket-batch",
+      "p2-handler-migration",
+      "p3-library-features-ko"
+    ],
+    "repeats": 3,
+    "support": 0.6104,
+    "supportTaskLevel": 0.663,
+    "mcse": 0.004876595533771485,
+    "delta": {
+      "overall": {
+        "mean": 0.05565154164898022,
+        "lo95": -0.07558717863054451,
+        "hi95": 0.19450260292586394,
+        "probPositive": 0.7903,
+        "probNegative": 0.2097
+      },
+      "hard": {
+        "mean": 0.13366879137140586,
+        "lo95": 0.02239517210671488,
+        "hi95": 0.2760063662715645,
+        "probPositive": 1,
+        "probNegative": 0
+      },
+      "consistency": {
+        "mean": -0.027499114313205918,
+        "lo95": -0.1429647183913217,
+        "hi95": 0.11425647340924636,
+        "probPositive": 0.3292,
+        "probNegative": 0.6708
+      }
+    },
+    "point": {
+      "a": {
+        "overall": 0.16666666666666666,
+        "consistency": 0.16666666666666666,
+        "hard": 0
+      },
+      "b": {
+        "overall": 0.2222222222222222,
+        "consistency": 0.1111111111111111,
+        "hard": 0.13333333333333333
+      }
+    },
+    "decision": "REJECT",
+    "reasons": [
+      "support 0.6104 vs threshold 0.8 (level execution, 10000 draws, mcse 0.0049)"
+    ],
+    "rounds": [
+      {
+        "at": "2026-11-04T08:46:21.929Z",
+        "repeats": 3,
+        "tasks": [
+          "b5-ctx-migration",
+          "d4-cache-fencing",
+          "d5-streaming-ingest-ko",
+          "p1-ticket-batch",
+          "p2-handler-migration",
+          "p3-library-features-ko"
+        ],
+        "support": 0.6104,
+        "supportTaskLevel": 0.663,
+        "decision": "REJECT"
+      }
+    ]
+  }
+}

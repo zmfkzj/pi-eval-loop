@@ -1,0 +1,149 @@
+{
+  "status": "rejected",
+  "decisions": [
+    {
+      "at": "2026-11-04T07:15:51.327Z",
+      "status": "created",
+      "reason": "patch accepted"
+    },
+    {
+      "at": "2026-11-04T07:16:02.354Z",
+      "status": "screening",
+      "reason": "screening batch a7-auth-rotation, b1-static-traversal, b3-pagination, d4-cache-fencing, d5-streaming-ingest-ko, p1-ticket-batch"
+    },
+    {
+      "at": "2026-11-04T07:36:05.234Z",
+      "status": "screening",
+      "reason": "extend: support 0.7596 vs threshold 0.8 (level execution, 10000 draws, mcse 0.0043); within band 0.1 of the threshold: extend repeats (3 -> more)"
+    },
+    {
+      "at": "2026-11-04T08:17:47.893Z",
+      "status": "rejected",
+      "reason": "critical: integrity: 11 run(s) with workspace integrity violations vs 10 for stable (b1-static-traversal#2: changed/removed 1 line(s) of test file test/api.test.js: \"import { resolve } from 'node:path';\"; d5-streaming-ingest-ko#2: changed/removed 1 line(s) of test file test/smoke.test.mjs: \"import test from 'node:test';import assert from 'node:assert/strict';import {rea\"; d5-streaming-ingest-ko#1: changed/removed 1 line(s) of test file test/smoke.test.mjs: \"import test from 'node:test';import assert from 'node:assert/strict';import {rea\")"
+    }
+  ],
+  "children": [],
+  "createdAt": "2026-11-04T07:14:22.531Z",
+  "id": "B-c002",
+  "parent": "stable",
+  "origin": "proposer",
+  "strategy": "greedy",
+  "worktree": "/home/arthur/Code/oh-my-pi-extensions/pi-eval-loop/state/abc-real-1/B/worktrees/B-c002",
+  "branch": "eval-loop/candidates/0cb75a26/B-c002",
+  "base": "e831a6b2bc19f0c707b55505db33a11b2c9d4d4a",
+  "target": "requirements-generalization",
+  "hypothesis": {
+    "text": "Requiring implementation workers to review every original requirement against code and focused checks before completion should catch omitted boundary behavior and requirement interactions that a passing existing suite does not exercise.",
+    "targetFailureClass": "requirements-generalization",
+    "expectedEffect": "More requested behaviors are implemented and directly verified, with fewer completion claims that overlook unsupported requirement clauses."
+  },
+  "updatedAt": "2026-11-04T08:17:47.893Z",
+  "proposer": {
+    "usage": {
+      "requests": 11,
+      "completed": 11,
+      "input": 507436,
+      "output": 1831,
+      "cached": 432512,
+      "wallMs": 88173,
+      "guardFired": false,
+      "exit": 0
+    }
+  },
+  "files": [
+    "src/extension/workers.ts"
+  ],
+  "patchKey": "70b6f2d663b5ee9b82fedb425ccf9f23ec8d45ea04096b278e6765caeeca64cd",
+  "patchSha256": "9f7712f3d2ca464e1f2f128688b3c988477062a9bf0eccc75d81396898de2b10",
+  "patchStats": {
+    "added": 2,
+    "removed": 0
+  },
+  "commit": "ba3292d1277156cc72d2fe6cd5fa3033b22c68d7",
+  "screening": {
+    "batch": [
+      "a7-auth-rotation",
+      "b1-static-traversal",
+      "b3-pagination",
+      "d4-cache-fencing",
+      "d5-streaming-ingest-ko",
+      "p1-ticket-batch"
+    ],
+    "repeats": 3,
+    "support": 0.7596,
+    "supportTaskLevel": 0.7147,
+    "mcse": 0.004273263857989581,
+    "delta": {
+      "overall": {
+        "mean": 0.05545751796325775,
+        "lo95": -0.06330101127733923,
+        "hi95": 0.1483018432886254,
+        "probPositive": 0.8322,
+        "probNegative": 0.1678
+      },
+      "hard": {
+        "mean": 0.22308454569780597,
+        "lo95": 0.052538784745752395,
+        "hi95": 0.3294419099487607,
+        "probPositive": 1,
+        "probNegative": 0
+      },
+      "consistency": {
+        "mean": 0.00012205987439691665,
+        "lo95": -0.13034376501307998,
+        "hi95": 0.1312207613778179,
+        "probPositive": 0.5024,
+        "probNegative": 0.4976
+      }
+    },
+    "point": {
+      "a": {
+        "overall": 0.5,
+        "consistency": 0.5,
+        "hard": 0
+      },
+      "b": {
+        "overall": 0.5555555555555556,
+        "consistency": 0.48148148148148145,
+        "hard": 0.2222222222222222
+      }
+    },
+    "decision": "EXTEND",
+    "reasons": [
+      "support 0.7596 vs threshold 0.8 (level execution, 10000 draws, mcse 0.0043)",
+      "within band 0.1 of the threshold: extend repeats (3 -> more)"
+    ],
+    "rounds": [
+      {
+        "at": "2026-11-04T07:36:05.164Z",
+        "repeats": 3,
+        "tasks": [
+          "a7-auth-rotation",
+          "b1-static-traversal",
+          "b3-pagination",
+          "d4-cache-fencing",
+          "d5-streaming-ingest-ko",
+          "p1-ticket-batch"
+        ],
+        "support": 0.7596,
+        "supportTaskLevel": 0.7147,
+        "decision": "EXTEND"
+      },
+      {
+        "at": "2026-11-04T08:17:47.893Z",
+        "repeats": 6,
+        "tasks": [
+          "a7-auth-rotation",
+          "b1-static-traversal",
+          "b3-pagination",
+          "d4-cache-fencing",
+          "d5-streaming-ingest-ko",
+          "p1-ticket-batch"
+        ],
+        "critical": [
+          "integrity: 11 run(s) with workspace integrity violations vs 10 for stable (b1-static-traversal#2: changed/removed 1 line(s) of test file test/api.test.js: \"import { resolve } from 'node:path';\"; d5-streaming-ingest-ko#2: changed/removed 1 line(s) of test file test/smoke.test.mjs: \"import test from 'node:test';import assert from 'node:assert/strict';import {rea\"; d5-streaming-ingest-ko#1: changed/removed 1 line(s) of test file test/smoke.test.mjs: \"import test from 'node:test';import assert from 'node:assert/strict';import {rea\")"
+        ]
+      }
+    ]
+  }
+}

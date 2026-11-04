@@ -1,0 +1,76 @@
+{
+  "status": "baseline",
+  "decisions": [],
+  "children": [
+    "B-c001",
+    "B-c002",
+    "B-c003",
+    "B-c004"
+  ],
+  "createdAt": "2026-11-04T05:17:24.511Z",
+  "id": "stable",
+  "parent": null,
+  "origin": "baseline",
+  "commit": "e831a6b2bc19f0c707b55505db33a11b2c9d4d4a",
+  "hypothesis": null,
+  "updatedAt": "2026-11-04T08:46:22.302Z",
+  "development": {
+    "tasks": 16,
+    "repeats": 3,
+    "point": {
+      "overall": 0.7717367502648188,
+      "hard": 0.5039709510377249,
+      "consistency": 0.7194706759137421
+    },
+    "posterior": {
+      "overall": {
+        "point": 0.7708333333333333,
+        "mean": 0.7717367502648188,
+        "lo95": 0.5706298572762984,
+        "hi95": 0.9194533182026232
+      },
+      "hard": {
+        "point": 0.5,
+        "mean": 0.5039709510377249,
+        "lo95": 0.2036955375718281,
+        "hi95": 0.7965390685354218
+      },
+      "consistency": {
+        "point": 0.7013888888888888,
+        "mean": 0.7194706759137421,
+        "lo95": 0.49820931678153224,
+        "hi95": 0.893569598046546
+      }
+    },
+    "qualified": true,
+    "reasons": [
+      "baseline"
+    ],
+    "summary": {
+      "candidate_id": "stable",
+      "split": "dev",
+      "runs": 48,
+      "tasks": 16,
+      "task_success": 37,
+      "success_rate": 0.7708333333333334,
+      "hidden_test_pass": 42,
+      "mean_correctness": 0.9667245370370369,
+      "repeat_success_rate": 0.7013888888888888,
+      "all_repeats_pass_tasks": 10,
+      "hard_task_success_rate": 0.5,
+      "regression_count": 0,
+      "critical_failure_count": 5,
+      "integrity_violations": 5,
+      "terminal": {
+        "completed": 48
+      },
+      "infra_rate": 0,
+      "input_tokens": 8000848,
+      "output_tokens": 180933,
+      "cache_tokens": 6783232,
+      "model_requests": 917,
+      "wall_time_ms": 5468650,
+      "simulated_runs": 0
+    }
+  }
+}

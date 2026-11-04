@@ -147,7 +147,8 @@ export class Loop {
     const w = this.protocol.watchdog, c = this.state.counters;
     if (this.stopping) return "interrupted";
     if (c.noProgress >= w.noProgressCandidates) return `no meaningful progress in ${c.noProgress} consecutive candidates`;
-    if (c.candidates >= w.maxCandidatesPerCycle) return `candidate cap of ${w.maxCandidatesPerCycle} per cycle reached (safety limit)`;
+    // The cap counts created candidates; an in-flight candidate is always finished (never left unevaluated by the cap).
+    if (!this.state.current && c.candidates >= w.maxCandidatesPerCycle) return `candidate cap of ${w.maxCandidatesPerCycle} per cycle reached (safety limit)`;
     if (Date.now() - Date.parse(this.state.cycleStartedAt ?? this.state.startedAt) > w.maxCycleWallMs) return "cycle wall-time watchdog";
     if (c.consecutiveInfra >= w.maxConsecutiveInfra) return `infrastructure failing (${c.consecutiveInfra} consecutive candidates with infra-tainted screening)`;
     return undefined;

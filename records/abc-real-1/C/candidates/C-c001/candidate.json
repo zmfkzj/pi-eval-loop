@@ -1,0 +1,295 @@
+{
+  "status": "selected",
+  "decisions": [
+    {
+      "at": "2026-11-04T06:22:32.557Z",
+      "status": "created",
+      "reason": "patch accepted"
+    },
+    {
+      "at": "2026-11-04T06:22:46.249Z",
+      "status": "screening",
+      "reason": "screening batch b1-static-traversal, b3-pagination, b6-route-cache, d5-streaming-ingest-ko, p1-ticket-batch, p3-library-features-ko"
+    },
+    {
+      "at": "2026-11-04T06:48:08.449Z",
+      "status": "promoted",
+      "reason": "support 1.0000 vs threshold 0.8 (level execution, 10000 draws, mcse 0.0000)"
+    },
+    {
+      "at": "2026-11-04T07:16:02.083Z",
+      "status": "dev_qualified",
+      "reason": "P(overall loss > 0.03) = 0.2766 (must be < 0.8); quality-first support vs stable 0.6922"
+    },
+    {
+      "at": "2026-11-04T07:47:28.626Z",
+      "status": "selected",
+      "reason": "final selection on development (frozen before holdout access)"
+    }
+  ],
+  "children": [
+    "C-c002",
+    "C-c003",
+    "C-c004"
+  ],
+  "createdAt": "2026-11-04T06:20:46.630Z",
+  "id": "C-c001",
+  "parent": "stable",
+  "origin": "proposer",
+  "strategy": "pareto",
+  "worktree": "/home/arthur/Code/oh-my-pi-extensions/pi-eval-loop/state/abc-real-1/C/worktrees/C-c001",
+  "branch": "eval-loop/candidates/ce8bb544/C-c001",
+  "base": "e831a6b2bc19f0c707b55505db33a11b2c9d4d4a",
+  "target": "requirements-generalization",
+  "hypothesis": {
+    "text": "Requiring implementers to audit every original-request clause against implementation and passing behavioral checks before completion should reduce omitted boundary cases and interactions masked by a passing suite.",
+    "targetFailureClass": "requirements-generalization",
+    "expectedEffect": "More requested behaviors are exercised and satisfied before completion, with fewer unsupported claims that grouped requirements are met."
+  },
+  "updatedAt": "2026-11-04T07:47:28.626Z",
+  "proposer": {
+    "usage": {
+      "requests": 12,
+      "completed": 10,
+      "input": 296412,
+      "output": 2275,
+      "cached": 260096,
+      "wallMs": 105278,
+      "guardFired": false,
+      "exit": 0
+    }
+  },
+  "files": [
+    "src/extension/workers.ts"
+  ],
+  "patchKey": "5b050f9519fa892becf06e37dec4e52ebb259f2e8e9e965e9c8d70f2b4087e8c",
+  "patchSha256": "a6cffbaf1ee180702bb522e1af36bcde6c88e41781deac48242f023103380899",
+  "patchStats": {
+    "added": 1,
+    "removed": 0
+  },
+  "commit": "6c14f42e223209c4011a8db063589b50c38102f0",
+  "screening": {
+    "batch": [
+      "b1-static-traversal",
+      "b3-pagination",
+      "b6-route-cache",
+      "d5-streaming-ingest-ko",
+      "p1-ticket-batch",
+      "p3-library-features-ko"
+    ],
+    "repeats": 3,
+    "support": 1,
+    "supportTaskLevel": 1,
+    "mcse": 0,
+    "delta": {
+      "overall": {
+        "mean": 0.05469572115951127,
+        "lo95": 0.00179571467893902,
+        "hi95": 0.14040361646479704,
+        "probPositive": 1,
+        "probNegative": 0
+      },
+      "hard": {
+        "mean": 0.10939144231902251,
+        "lo95": 0.003591429357878198,
+        "hi95": 0.2808072329295943,
+        "probPositive": 1,
+        "probNegative": 0
+      },
+      "consistency": {
+        "mean": 0.027196573521639907,
+        "lo95": 0.00001934754724886023,
+        "hi95": 0.11827905309836306,
+        "probPositive": 1,
+        "probNegative": 0
+      }
+    },
+    "point": {
+      "a": {
+        "overall": 0.5,
+        "consistency": 0.5,
+        "hard": 0
+      },
+      "b": {
+        "overall": 0.5555555555555556,
+        "consistency": 0.5185185185185185,
+        "hard": 0.1111111111111111
+      }
+    },
+    "decision": "PROMOTE",
+    "reasons": [
+      "support 1.0000 vs threshold 0.8 (level execution, 10000 draws, mcse 0.0000)"
+    ],
+    "rounds": [
+      {
+        "at": "2026-11-04T06:48:08.384Z",
+        "repeats": 3,
+        "tasks": [
+          "b1-static-traversal",
+          "b3-pagination",
+          "b6-route-cache",
+          "d5-streaming-ingest-ko",
+          "p1-ticket-batch",
+          "p3-library-features-ko"
+        ],
+        "support": 1,
+        "supportTaskLevel": 1,
+        "decision": "PROMOTE"
+      }
+    ]
+  },
+  "development": {
+    "tasks": 16,
+    "repeats": 3,
+    "point": {
+      "overall": 0.791401140691153,
+      "hard": 0.7204451372702666,
+      "consistency": 0.7288966436706098
+    },
+    "posterior": {
+      "overall": {
+        "point": 0.7916666666666664,
+        "mean": 0.791401140691153,
+        "lo95": 0.5993953967214843,
+        "hi95": 0.9280697527502488
+      },
+      "hard": {
+        "point": 0.7222222222222222,
+        "mean": 0.7204451372702666,
+        "lo95": 0.4393935172210399,
+        "hi95": 0.9223128775944229
+      },
+      "consistency": {
+        "point": 0.7083333333333334,
+        "mean": 0.7288966436706098,
+        "lo95": 0.5119549305976002,
+        "hi95": 0.8960297528538386
+      }
+    },
+    "qualified": true,
+    "reasons": [
+      "P(overall loss > 0.03) = 0.2766 (must be < 0.8)",
+      "quality-first support vs stable 0.6922"
+    ],
+    "vsStable": {
+      "support": 0.6922,
+      "lossSupport": 0.2766,
+      "delta": {
+        "overall": {
+          "mean": 0.02065523477103102,
+          "lo95": -0.1692730142667782,
+          "hi95": 0.21303421690654512,
+          "probPositive": 0.5922,
+          "probNegative": 0.4078
+        },
+        "hard": {
+          "mean": 0.2211040396875712,
+          "lo95": -0.1404070861318819,
+          "hi95": 0.5720178030440295,
+          "probPositive": 0.8938,
+          "probNegative": 0.1062
+        },
+        "consistency": {
+          "mean": 0.010257753770361644,
+          "lo95": -0.1926794567872484,
+          "hi95": 0.2107710229336811,
+          "probPositive": 0.5489,
+          "probNegative": 0.4511
+        }
+      },
+      "familyDelta": {
+        "pkg:ledger": {
+          "mean": -0.06660779464934782,
+          "lo95": -0.3063772989648762,
+          "hi95": -0.0005684549767549683,
+          "probPositive": 0,
+          "probNegative": 1,
+          "probBelow": 0.1279
+        },
+        "pkg:logtool": {
+          "mean": -0.13215024709568957,
+          "lo95": -0.46730207546169306,
+          "hi95": -0.0028693466004221404,
+          "probPositive": 0,
+          "probNegative": 1,
+          "probBelow": 0.3348
+        },
+        "pkg:d1-transactional-outbox": {
+          "mean": 0.3310933897726705,
+          "lo95": -0.38572815905025226,
+          "hi95": 0.8772735399015834,
+          "probPositive": 0.8335,
+          "probNegative": 0.1665,
+          "probBelow": 0.0887
+        },
+        "pkg:d2-keyed-queue": {
+          "mean": -0.0070180923422057066,
+          "lo95": -0.6623459577659558,
+          "hi95": 0.645924845939214,
+          "probPositive": 0.4908,
+          "probNegative": 0.5092,
+          "probBelow": 0.3278
+        },
+        "pkg:d3-money-migration-ko": {
+          "mean": 0.6667494966098647,
+          "lo95": 0.16052580203975259,
+          "hi95": 0.9850302472880235,
+          "probPositive": 1,
+          "probNegative": 0,
+          "probBelow": 0
+        },
+        "pkg:d6-snapshot-pagination": {
+          "mean": 0.3307470361454482,
+          "lo95": -0.38482956765181286,
+          "hi95": 0.8821560541261368,
+          "probPositive": 0.8315,
+          "probNegative": 0.1685,
+          "probBelow": 0.089
+        },
+        "pkg:d7-config-reload": {
+          "mean": -0.0013167202589658585,
+          "lo95": -0.6598924621754783,
+          "hi95": 0.6513603245467883,
+          "probPositive": 0.5004,
+          "probNegative": 0.4996,
+          "probBelow": 0.3258
+        },
+        "pkg:d8-build-graph": {
+          "mean": 0,
+          "lo95": 0,
+          "hi95": 0,
+          "probPositive": 0,
+          "probNegative": 0,
+          "probBelow": 0
+        }
+      }
+    },
+    "summary": {
+      "candidate_id": "C-c001",
+      "split": "dev",
+      "runs": 48,
+      "tasks": 16,
+      "task_success": 38,
+      "success_rate": 0.7916666666666666,
+      "hidden_test_pass": 42,
+      "mean_correctness": 0.9586226851851851,
+      "repeat_success_rate": 0.7083333333333334,
+      "all_repeats_pass_tasks": 9,
+      "hard_task_success_rate": 0.7222222222222222,
+      "regression_count": 0,
+      "critical_failure_count": 5,
+      "integrity_violations": 5,
+      "terminal": {
+        "completed": 48
+      },
+      "infra_rate": 0,
+      "input_tokens": 8971238,
+      "output_tokens": 196232,
+      "cache_tokens": 7449088,
+      "model_requests": 1003,
+      "wall_time_ms": 6821685,
+      "simulated_runs": 0
+    }
+  }
+}

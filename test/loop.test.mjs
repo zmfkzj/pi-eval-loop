@@ -207,3 +207,15 @@ test("greedy (quality-only) and pareto strategies keep separate trajectories", a
     writeFileSync(join(root, "marker"), "x");
   } finally { rmSync(root, { recursive: true, force: true }); }
 });
+
+test("the candidate cap never leaves the last created candidate unevaluated", async () => {
+  const root = tempDir();
+  try {
+    const { loop } = makeLoop({ root, protocol: testProtocol({ watchdog: { maxCandidatesPerCycle: 1 } }), entries: [{ hypothesis: "only one", targetFailureClass: "requirements-generalization", edit: edit("same") }, { hypothesis: "never proposed", targetFailureClass: "requirements-generalization", edit: edit("good") }] });
+    const state = await loop.runCycle();
+    const proposed = loop.archive.all().filter(c => c.origin === "proposer");
+    assert.equal(proposed.length, 1);
+    assert.notEqual(proposed[0].status, "screening", "screened to a decision before the cap stops the search");
+    assert.match(state.searchStop, /candidate cap/);
+  } finally { rmSync(root, { recursive: true, force: true }); }
+});

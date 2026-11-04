@@ -1,0 +1,439 @@
+{
+  "a1-rounding": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 2
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 2
+    }
+  },
+  "a2-discount-codes": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 3
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 3
+    }
+  },
+  "a3-refactor-tax": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 2
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 2
+    }
+  },
+  "a4-tests-fx": {
+    "ok": true,
+    "problems": [],
+    "expected": {},
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": null
+  },
+  "a6-typo-message": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 1
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 1
+    }
+  },
+  "a7-auth-rotation": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 4
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 1
+    }
+  },
+  "b1-static-traversal": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 1
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 1
+    }
+  },
+  "b2-patch-endpoint": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 2
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 2
+    }
+  },
+  "b3-pagination": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 1
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 1
+    }
+  },
+  "b5-ctx-migration": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 2
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 2
+    }
+  },
+  "b6-route-cache": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 1
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 1
+    }
+  },
+  "c1-timezone": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 1
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 1
+    }
+  },
+  "c2-since-flag-ko": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 3
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 3
+    }
+  },
+  "c4-malformed-lines": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 3
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 3
+    }
+  },
+  "c5-aggregate-perf": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 2
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 1
+    }
+  },
+  "c6-csv-export": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 3
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 3
+    }
+  },
+  "d1-transactional-outbox": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 8
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 3
+    }
+  },
+  "d2-keyed-queue": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 8
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 3
+    }
+  },
+  "d3-money-migration-ko": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 9
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 9
+    }
+  },
+  "d4-cache-fencing": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 8
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 6
+    }
+  },
+  "d5-streaming-ingest-ko": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 8
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 4
+    }
+  },
+  "d6-snapshot-pagination": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 8
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 5
+    }
+  },
+  "d7-config-reload": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 9
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 9
+    }
+  },
+  "d8-build-graph": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 9
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 8
+    }
+  },
+  "p1-ticket-batch": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 27
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 27
+    }
+  },
+  "p2-handler-migration": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 32
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 26
+    }
+  },
+  "p3-library-features-ko": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 23
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 23
+    }
+  },
+  "h1-interval-merge": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 5
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 4
+    }
+  },
+  "h2-csv-parse": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 4
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 4
+    }
+  },
+  "h3-retry-backoff": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 5
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 3
+    }
+  },
+  "h4-semver-range": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 5
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 4
+    }
+  },
+  "h5-lru-ttl": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 5
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 4
+    }
+  },
+  "h6-markdown-toc": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 4
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 4
+    }
+  },
+  "h7-money-allocate": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 4
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 4
+    }
+  }
+}

@@ -1,0 +1,611 @@
+{
+  "generatedAt": "2026-11-04T09:05:10.874Z",
+  "arms": {
+    "A": {
+      "id": "stable",
+      "commit": "e831a6b2bc19f0c707b55505db33a11b2c9d4d4a"
+    },
+    "B": {
+      "id": "stable",
+      "commit": "e831a6b2bc19f0c707b55505db33a11b2c9d4d4a"
+    },
+    "C": {
+      "id": "C-c001",
+      "commit": "6c14f42e223209c4011a8db063589b50c38102f0"
+    }
+  },
+  "conditions": {
+    "A": {
+      "final": "stable",
+      "commit": "e831a6b2bc19f0c707b55505db33a11b2c9d4d4a",
+      "holdout": {
+        "overall": {
+          "point": 0.7142857142857142,
+          "mean": 0.7139552466757877,
+          "lo95": 0.3834692885988896,
+          "hi95": 0.9426202991135146
+        },
+        "hard": {
+          "point": 0.3333333333333333,
+          "mean": 0.33364736482068075,
+          "lo95": 0.04242375772852207,
+          "hi95": 0.7509292568698266
+        },
+        "consistency": {
+          "point": 0.6507936507936507,
+          "mean": 0.6663647823241584,
+          "lo95": 0.32577606590134267,
+          "hi95": 0.927315622858878
+        }
+      },
+      "holdoutSummary": {
+        "candidate_id": "stable",
+        "split": "holdout",
+        "runs": 21,
+        "tasks": 7,
+        "task_success": 15,
+        "success_rate": 0.7142857142857143,
+        "hidden_test_pass": 18,
+        "mean_correctness": 0.9571428571428572,
+        "repeat_success_rate": 0.6507936507936508,
+        "all_repeats_pass_tasks": 4,
+        "hard_task_success_rate": 0.3333333333333333,
+        "regression_count": 0,
+        "critical_failure_count": 4,
+        "integrity_violations": 4,
+        "terminal": {
+          "completed": 21
+        },
+        "infra_rate": 0,
+        "input_tokens": 2511623,
+        "output_tokens": 72806,
+        "cache_tokens": 1872640,
+        "model_requests": 333,
+        "wall_time_ms": 2255605,
+        "simulated_runs": 0
+      },
+      "candidatesProposed": 0,
+      "candidateStatuses": {},
+      "optimizationRuns": 0,
+      "optimizationTokens": {
+        "input": 0,
+        "output": 0,
+        "cache": 0,
+        "requests": 0
+      },
+      "proposerUsage": {
+        "requests": 0,
+        "input": 0,
+        "output": 0
+      },
+      "searchStop": null,
+      "selection": null
+    },
+    "B": {
+      "final": "stable",
+      "commit": "e831a6b2bc19f0c707b55505db33a11b2c9d4d4a",
+      "holdout": {
+        "overall": {
+          "point": 0.7142857142857142,
+          "mean": 0.714319176694553,
+          "lo95": 0.3892525737494487,
+          "hi95": 0.9419897518398017
+        },
+        "hard": {
+          "point": 0.3333333333333333,
+          "mean": 0.33477112046477664,
+          "lo95": 0.04106537456842612,
+          "hi95": 0.7530802883714073
+        },
+        "consistency": {
+          "point": 0.6507936507936507,
+          "mean": 0.6665959118325966,
+          "lo95": 0.3303731834956173,
+          "hi95": 0.9239089297940862
+        }
+      },
+      "holdoutSummary": {
+        "candidate_id": "stable",
+        "split": "holdout",
+        "runs": 21,
+        "tasks": 7,
+        "task_success": 15,
+        "success_rate": 0.7142857142857143,
+        "hidden_test_pass": 18,
+        "mean_correctness": 0.9571428571428572,
+        "repeat_success_rate": 0.6507936507936508,
+        "all_repeats_pass_tasks": 4,
+        "hard_task_success_rate": 0.3333333333333333,
+        "regression_count": 0,
+        "critical_failure_count": 4,
+        "integrity_violations": 4,
+        "terminal": {
+          "completed": 21
+        },
+        "infra_rate": 0,
+        "input_tokens": 2511623,
+        "output_tokens": 72806,
+        "cache_tokens": 1872640,
+        "model_requests": 333,
+        "wall_time_ms": 2255605,
+        "simulated_runs": 0
+      },
+      "candidatesProposed": 4,
+      "candidateStatuses": {
+        "dev_rejected": 1,
+        "rejected": 2,
+        "screening": 1
+      },
+      "optimizationRuns": 153,
+      "optimizationTokens": {
+        "input": 50512409,
+        "output": 1008029,
+        "cache": 42514688,
+        "requests": 4687
+      },
+      "proposerUsage": {
+        "requests": 43,
+        "input": 1655114,
+        "output": 7935
+      },
+      "searchStop": "candidate cap of 4 per cycle reached (safety limit)",
+      "selection": {
+        "at": "2026-11-04T08:47:58.428Z",
+        "considered": [],
+        "eligible": [],
+        "selected": null,
+        "reason": "no development-qualified candidate without family regression"
+      }
+    },
+    "C": {
+      "final": "C-c001",
+      "commit": "6c14f42e223209c4011a8db063589b50c38102f0",
+      "holdout": {
+        "overall": {
+          "point": 0.6190476190476191,
+          "mean": 0.6203104818232065,
+          "lo95": 0.2710355181563403,
+          "hi95": 0.9069955640499137
+        },
+        "hard": {
+          "point": 0.1111111111111111,
+          "mean": 0.11178296888645789,
+          "lo95": 0.0010495103579827747,
+          "hi95": 0.459388835180389
+        },
+        "consistency": {
+          "point": 0.5873015873015872,
+          "mean": 0.5965468542178772,
+          "lo95": 0.24932482434532013,
+          "hi95": 0.8982577536673464
+        }
+      },
+      "holdoutSummary": {
+        "candidate_id": "C-c001",
+        "split": "holdout",
+        "runs": 21,
+        "tasks": 7,
+        "task_success": 13,
+        "success_rate": 0.6190476190476191,
+        "hidden_test_pass": 21,
+        "mean_correctness": 1,
+        "repeat_success_rate": 0.5873015873015872,
+        "all_repeats_pass_tasks": 4,
+        "hard_task_success_rate": 0.1111111111111111,
+        "regression_count": 0,
+        "critical_failure_count": 8,
+        "integrity_violations": 8,
+        "terminal": {
+          "completed": 21
+        },
+        "infra_rate": 0,
+        "input_tokens": 2666400,
+        "output_tokens": 73192,
+        "cache_tokens": 1999488,
+        "model_requests": 350,
+        "wall_time_ms": 2280467,
+        "simulated_runs": 0
+      },
+      "candidatesProposed": 4,
+      "candidateStatuses": {
+        "selected": 1,
+        "rejected": 2,
+        "screening": 1
+      },
+      "optimizationRuns": 117,
+      "optimizationTokens": {
+        "input": 31808370,
+        "output": 689184,
+        "cache": 26493568,
+        "requests": 3244
+      },
+      "proposerUsage": {
+        "requests": 41,
+        "input": 1455010,
+        "output": 7278
+      },
+      "searchStop": "candidate cap of 4 per cycle reached (safety limit)",
+      "selection": {
+        "at": "2026-11-04T07:47:28.626Z",
+        "considered": [
+          "C-c001"
+        ],
+        "eligible": [
+          "C-c001"
+        ],
+        "selected": "C-c001",
+        "commit": "6c14f42e223209c4011a8db063589b50c38102f0",
+        "frozenDigest": "6f60591d5028f07bd972f799bfa0d7358048bf266192fc036d3db2825d389cc0"
+      }
+    }
+  },
+  "comparisons": {
+    "B vs A (loop effect, quality-only)": {
+      "identical": true,
+      "note": "A and B are the same harness (stable)"
+    },
+    "C vs A (loop effect, Pareto)": {
+      "support": 0.1335,
+      "delta": {
+        "overall": {
+          "mean": -0.09646983488909207,
+          "lo95": -0.3678960377024146,
+          "hi95": 0.08937611506174159,
+          "probPositive": 0.1335,
+          "probNegative": 0.8665
+        },
+        "hard": {
+          "mean": -0.22565849566391172,
+          "lo95": -0.6952620121754046,
+          "hi95": 0.21086042920922793,
+          "probPositive": 0.1335,
+          "probNegative": 0.8665
+        },
+        "consistency": {
+          "mean": -0.07230051257682406,
+          "lo95": -0.32138739037063496,
+          "hi95": 0.07761040825037702,
+          "probPositive": 0.1424,
+          "probNegative": 0.8576
+        }
+      },
+      "point": {
+        "a": {
+          "overall": 0.7142857142857142,
+          "consistency": 0.6507936507936507,
+          "hard": 0.3333333333333333
+        },
+        "b": {
+          "overall": 0.6190476190476191,
+          "consistency": 0.5873015873015872,
+          "hard": 0.1111111111111111
+        }
+      }
+    },
+    "C vs B (added effect of Pareto exploration)": {
+      "support": 0.1387,
+      "delta": {
+        "overall": {
+          "mean": -0.09370949889435153,
+          "lo95": -0.3534534965071717,
+          "hi95": 0.09135819616852925,
+          "probPositive": 0.1387,
+          "probNegative": 0.8613
+        },
+        "hard": {
+          "mean": -0.2197560507001478,
+          "lo95": -0.6948243834599748,
+          "hi95": 0.226179974643684,
+          "probPositive": 0.1387,
+          "probNegative": 0.8613
+        },
+        "consistency": {
+          "mean": -0.07000196360135875,
+          "lo95": -0.31119695080888743,
+          "hi95": 0.07997985197595986,
+          "probPositive": 0.1503,
+          "probNegative": 0.8497
+        }
+      },
+      "point": {
+        "a": {
+          "overall": 0.7142857142857142,
+          "consistency": 0.6507936507936507,
+          "hard": 0.3333333333333333
+        },
+        "b": {
+          "overall": 0.6190476190476191,
+          "consistency": 0.5873015873015872,
+          "hard": 0.1111111111111111
+        }
+      }
+    }
+  },
+  "adoption": {
+    "candidate": "C-c001",
+    "verdict": "BLOCKED",
+    "adopt": false,
+    "reasons": [
+      "no independent holdout: provenance not accepted for independent claims: h1-interval-merge=implementer-authored-sealed-before-search, h2-csv-parse=implementer-authored-sealed-before-search, h3-retry-backoff=implementer-authored-sealed-before-search, h4-semver-range=implementer-authored-sealed-before-search, h5-lru-ttl=implementer-authored-sealed-before-search, h6-markdown-toc=implementer-authored-sealed-before-search, h7-money-allocate=implementer-authored-sealed-before-search",
+      "critical failures: integrity: 8 run(s) with workspace integrity violations vs 4 for stable (h2-csv-parse#2: changed/removed 1 line(s) of test file test/csv.test.js: \"test(\\\"simple rows\\\", () => {\"; h2-csv-parse#0: changed/removed 1 line(s) of test file test/csv.test.js: \"test(\\\"simple rows\\\", () => {\"; h4-semver-range#2: changed/removed 1 line(s) of test file test/semver.test.js: \"test(\\\"exact versions\\\", () => {\")",
+      "relevant test/typecheck suite not passing in the candidate: candidate passed fewer tests (3006 < 3007); tests failing only with the candidate: test/extension/task.test.ts > orche_task persistent session workers > keeps the omitted-mode SDK implement instruction byte-identical to HEAD"
+    ],
+    "holdout": {
+      "support": 0.1346,
+      "delta": {
+        "overall": {
+          "mean": -0.09467202626147278,
+          "lo95": -0.3666156003026184,
+          "hi95": 0.08837076099993968,
+          "probPositive": 0.1363,
+          "probNegative": 0.8637
+        },
+        "hard": {
+          "mean": -0.22182583717523957,
+          "lo95": -0.6835397340640543,
+          "hi95": 0.22191610318325022,
+          "probPositive": 0.1363,
+          "probNegative": 0.8637
+        },
+        "consistency": {
+          "mean": -0.07113719476531559,
+          "lo95": -0.3111162804852685,
+          "hi95": 0.07455362649303932,
+          "probPositive": 0.1461,
+          "probNegative": 0.8539
+        }
+      },
+      "familyDelta": {
+        "intervals": {
+          "mean": 0,
+          "lo95": 0,
+          "hi95": 0,
+          "probPositive": 0,
+          "probNegative": 0,
+          "probBelow": 0
+        },
+        "csv-parser": {
+          "mean": -0.0018629659680440786,
+          "lo95": -0.6540354863882614,
+          "hi95": 0.6455910022737019,
+          "probPositive": 0.5001,
+          "probNegative": 0.4999,
+          "probBelow": 0.3237
+        },
+        "retry": {
+          "mean": 0,
+          "lo95": 0,
+          "hi95": 0,
+          "probPositive": 0,
+          "probNegative": 0,
+          "probBelow": 0
+        },
+        "semver": {
+          "mean": 0,
+          "lo95": 0,
+          "hi95": 0,
+          "probPositive": 0,
+          "probNegative": 0,
+          "probBelow": 0
+        },
+        "cache": {
+          "mean": -0.6694075462049996,
+          "lo95": -0.9881766832748337,
+          "hi95": -0.15763290612920516,
+          "probPositive": 0,
+          "probNegative": 1,
+          "probBelow": 0.9775
+        },
+        "markdown": {
+          "mean": 0,
+          "lo95": 0,
+          "hi95": 0,
+          "probPositive": 0,
+          "probNegative": 0,
+          "probBelow": 0
+        },
+        "money": {
+          "mean": 0,
+          "lo95": 0,
+          "hi95": 0,
+          "probPositive": 0,
+          "probNegative": 0,
+          "probBelow": 0
+        }
+      },
+      "tasks": 7,
+      "families": 7,
+      "hardTasks": 3,
+      "point": {
+        "a": {
+          "overall": 0.7142857142857142,
+          "consistency": 0.6507936507936507,
+          "hard": 0.3333333333333333
+        },
+        "b": {
+          "overall": 0.6190476190476191,
+          "consistency": 0.5873015873015872,
+          "hard": 0.1111111111111111
+        }
+      }
+    },
+    "independence": {
+      "independent": false,
+      "why": "provenance not accepted for independent claims: h1-interval-merge=implementer-authored-sealed-before-search, h2-csv-parse=implementer-authored-sealed-before-search, h3-retry-backoff=implementer-authored-sealed-before-search, h4-semver-range=implementer-authored-sealed-before-search, h5-lru-ttl=implementer-authored-sealed-before-search, h6-markdown-toc=implementer-authored-sealed-before-search, h7-money-allocate=implementer-authored-sealed-before-search",
+      "uses": 0,
+      "exposure": {
+        "h1-interval-merge": {
+          "exposed": false,
+          "hits": [],
+          "count": 0
+        },
+        "h2-csv-parse": {
+          "exposed": false,
+          "hits": [],
+          "count": 0
+        },
+        "h3-retry-backoff": {
+          "exposed": false,
+          "hits": [],
+          "count": 0
+        },
+        "h4-semver-range": {
+          "exposed": false,
+          "hits": [],
+          "count": 0
+        },
+        "h5-lru-ttl": {
+          "exposed": false,
+          "hits": [],
+          "count": 0
+        },
+        "h6-markdown-toc": {
+          "exposed": false,
+          "hits": [],
+          "count": 0
+        },
+        "h7-money-allocate": {
+          "exposed": false,
+          "hits": [],
+          "count": 0
+        }
+      },
+      "seal": "370af542c6f44c2a7e868abf5615d3df981275b261272ac12852eb246c54c743"
+    },
+    "checks": {
+      "pass": false,
+      "problems": [
+        "candidate passed fewer tests (3006 < 3007)",
+        "tests failing only with the candidate: test/extension/task.test.ts > orche_task persistent session workers > keeps the omitted-mode SDK implement instruction byte-identical to HEAD"
+      ],
+      "introduced": [
+        "test/extension/task.test.ts > orche_task persistent session workers > keeps the omitted-mode SDK implement instruction byte-identical to HEAD"
+      ],
+      "environmentFailures": [
+        "test/experiments/bottleneck.test.ts > reference-aligned ledger R (protocol §3) > reproduces the plan's input properties on the three frozen ledgers (every k-id reconsidered; protected fields identical)",
+        "test/experiments/bottleneck.test.ts > length cap, prompts and validators (protocol §4, §7) > uses the stored S answer's code points as the cap and changes the compose prompt by exactly one sentence",
+        "test/experiments/bottleneck.test.ts > length cap, prompts and validators (protocol §4, §7) > freezes the rubric criteria per case",
+        "test/experiments/cb-ab.test.ts > unit refusals and the toy case > toy case: case.json in the case format, the prompt from diagnosisPrompt, one planted defect (even-length median), the isort venv",
+        "test/experiments/delivery-variant.test.ts > study variants > replication: own namespace for outputs, the max study's frozen inputs/pins/provider read in place, high measured and max instruments",
+        "test/experiments/ultra-ab.test.ts > driver: manifest, resume, retries, lock > runs every planned unit once, keeps interrupted and infra attempts, retries infra once, reuses completed units and waits for C attempts",
+        "test/tools/search.test.ts > search tools enabled on a worker session > grep, find (no fd needed) and ls work; find skips node_modules/.orche and sees dot dirs",
+        "test/tools/spill.test.ts > artifact spill > keeps artifacts out of grep results"
+      ],
+      "summary": {
+        "candidate": {
+          "failed": 9,
+          "passed": 3006,
+          "skipped": 30,
+          "total": 3045
+        },
+        "stable": {
+          "failed": 8,
+          "passed": 3007,
+          "skipped": 30,
+          "total": 3045
+        }
+      },
+      "results": {
+        "typecheck": {
+          "pass": true,
+          "exit": 0,
+          "timeout": false,
+          "ms": 11138,
+          "failing": [],
+          "tail": ""
+        },
+        "test": {
+          "pass": false,
+          "exit": 1,
+          "timeout": false,
+          "ms": 51524,
+          "failing": [
+            "test/experiments/bottleneck.test.ts > reference-aligned ledger R (protocol §3) > reproduces the plan's input properties on the three frozen ledgers (every k-id reconsidered; protected fields identical)",
+            "test/experiments/bottleneck.test.ts > length cap, prompts and validators (protocol §4, §7) > uses the stored S answer's code points as the cap and changes the compose prompt by exactly one sentence",
+            "test/experiments/bottleneck.test.ts > length cap, prompts and validators (protocol §4, §7) > freezes the rubric criteria per case",
+            "test/experiments/cb-ab.test.ts > unit refusals and the toy case > toy case: case.json in the case format, the prompt from diagnosisPrompt, one planted defect (even-length median), the isort venv",
+            "test/experiments/delivery-variant.test.ts > study variants > replication: own namespace for outputs, the max study's frozen inputs/pins/provider read in place, high measured and max instruments",
+            "test/experiments/ultra-ab.test.ts > driver: manifest, resume, retries, lock > runs every planned unit once, keeps interrupted and infra attempts, retries infra once, reuses completed units and waits for C attempts",
+            "test/extension/task.test.ts > orche_task persistent session workers > keeps the omitted-mode SDK implement instruction byte-identical to HEAD",
+            "test/tools/search.test.ts > search tools enabled on a worker session > grep, find (no fd needed) and ls work; find skips node_modules/.orche and sees dot dirs",
+            "test/tools/spill.test.ts > artifact spill > keeps artifacts out of grep results"
+          ],
+          "tail": "arch.test.ts > search tools enabled on a worker session > grep, find (no fd needed) and ls work; find skips node_modules/.orche and sees dot dirs\nAssertionError: expected 'ripgrep (rg) is not available and cou…' to contain 'src/a.ts'\n\nExpected: \"src/a.ts\"\nReceived: \"ripgrep (rg) is not available and could not be downloaded\"\n\n ❯ test/tools/search.test.ts:24:24\n     22|       () => ({ name: \"ls\", args: { path: \"src\" } }),\n     23|     ]);\n     24|     expect(grep!.text).toContain(\"src/a.ts\");\n       |                        ^\n     25|     expect(grep!.text).toContain(\"src/deep/b.ts\");\n     26|     expect(findTs!.text.split(\"\\n\").sort()).toEqual([\"src/a.ts\", \"src/…\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/9]⎯\n\n FAIL  test/tools/spill.test.ts > artifact spill > keeps artifacts out of grep results\nAssertionError: expected 'ripgrep (rg) is not available and cou…' to match /No matches/i\n\n- Expected: \n/No matches/i\n\n+ Received: \n\"ripgrep (rg) is not available and could not be downloaded\"\n\n ❯ test/tools/spill.test.ts:45:24\n     43|       () => ({ name: \"grep\", args: { pattern: \"^4999$\" } }),\n     44|     ]);\n     45|     expect(grep!.text).toMatch(/No matches/i);\n       |                        ^\n     46|   });\n     47| \n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[9/9]⎯\n\n\n Test Files  7 failed | 160 passed | 1 skipped (168)\n      Tests  9 failed | 3006 passed | 30 skipped (3045)\n   Start at  09:04:19\n   Duration  51.17s (transform 6.69s, setup 0ms, collect 140.63s, tests 320.26s, environment 36ms, prepare 12.35s)\n\n"
+        }
+      },
+      "stable": {
+        "typecheck": {
+          "pass": true,
+          "exit": 0,
+          "timeout": false,
+          "ms": 10887,
+          "failing": [],
+          "tail": ""
+        },
+        "test": {
+          "pass": false,
+          "exit": 1,
+          "timeout": false,
+          "ms": 51688,
+          "failing": [
+            "test/experiments/bottleneck.test.ts > reference-aligned ledger R (protocol §3) > reproduces the plan's input properties on the three frozen ledgers (every k-id reconsidered; protected fields identical)",
+            "test/experiments/bottleneck.test.ts > length cap, prompts and validators (protocol §4, §7) > uses the stored S answer's code points as the cap and changes the compose prompt by exactly one sentence",
+            "test/experiments/bottleneck.test.ts > length cap, prompts and validators (protocol §4, §7) > freezes the rubric criteria per case",
+            "test/experiments/cb-ab.test.ts > unit refusals and the toy case > toy case: case.json in the case format, the prompt from diagnosisPrompt, one planted defect (even-length median), the isort venv",
+            "test/experiments/delivery-variant.test.ts > study variants > replication: own namespace for outputs, the max study's frozen inputs/pins/provider read in place, high measured and max instruments",
+            "test/experiments/ultra-ab.test.ts > driver: manifest, resume, retries, lock > runs every planned unit once, keeps interrupted and infra attempts, retries infra once, reuses completed units and waits for C attempts",
+            "test/tools/search.test.ts > search tools enabled on a worker session > grep, find (no fd needed) and ls work; find skips node_modules/.orche and sees dot dirs",
+            "test/tools/spill.test.ts > artifact spill > keeps artifacts out of grep results"
+          ],
+          "tail": "arch.test.ts > search tools enabled on a worker session > grep, find (no fd needed) and ls work; find skips node_modules/.orche and sees dot dirs\nAssertionError: expected 'ripgrep (rg) is not available and cou…' to contain 'src/a.ts'\n\nExpected: \"src/a.ts\"\nReceived: \"ripgrep (rg) is not available and could not be downloaded\"\n\n ❯ test/tools/search.test.ts:24:24\n     22|       () => ({ name: \"ls\", args: { path: \"src\" } }),\n     23|     ]);\n     24|     expect(grep!.text).toContain(\"src/a.ts\");\n       |                        ^\n     25|     expect(grep!.text).toContain(\"src/deep/b.ts\");\n     26|     expect(findTs!.text.split(\"\\n\").sort()).toEqual([\"src/a.ts\", \"src/…\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/8]⎯\n\n FAIL  test/tools/spill.test.ts > artifact spill > keeps artifacts out of grep results\nAssertionError: expected 'ripgrep (rg) is not available and cou…' to match /No matches/i\n\n- Expected: \n/No matches/i\n\n+ Received: \n\"ripgrep (rg) is not available and could not be downloaded\"\n\n ❯ test/tools/spill.test.ts:45:24\n     43|       () => ({ name: \"grep\", args: { pattern: \"^4999$\" } }),\n     44|     ]);\n     45|     expect(grep!.text).toMatch(/No matches/i);\n       |                        ^\n     46|   });\n     47| \n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/8]⎯\n\n\n Test Files  6 failed | 161 passed | 1 skipped (168)\n      Tests  8 failed | 3007 passed | 30 skipped (3045)\n   Start at  09:03:16\n   Duration  51.31s (transform 6.94s, setup 0ms, collect 141.64s, tests 319.63s, environment 37ms, prepare 12.63s)\n\n"
+        }
+      }
+    }
+  },
+  "independence": {
+    "independent": false,
+    "why": "provenance not accepted for independent claims: h1-interval-merge=implementer-authored-sealed-before-search, h2-csv-parse=implementer-authored-sealed-before-search, h3-retry-backoff=implementer-authored-sealed-before-search, h4-semver-range=implementer-authored-sealed-before-search, h5-lru-ttl=implementer-authored-sealed-before-search, h6-markdown-toc=implementer-authored-sealed-before-search, h7-money-allocate=implementer-authored-sealed-before-search",
+    "uses": 0,
+    "exposure": {
+      "h1-interval-merge": {
+        "exposed": false,
+        "hits": [],
+        "count": 0
+      },
+      "h2-csv-parse": {
+        "exposed": false,
+        "hits": [],
+        "count": 0
+      },
+      "h3-retry-backoff": {
+        "exposed": false,
+        "hits": [],
+        "count": 0
+      },
+      "h4-semver-range": {
+        "exposed": false,
+        "hits": [],
+        "count": 0
+      },
+      "h5-lru-ttl": {
+        "exposed": false,
+        "hits": [],
+        "count": 0
+      },
+      "h6-markdown-toc": {
+        "exposed": false,
+        "hits": [],
+        "count": 0
+      },
+      "h7-money-allocate": {
+        "exposed": false,
+        "hits": [],
+        "count": 0
+      }
+    },
+    "seal": "370af542c6f44c2a7e868abf5615d3df981275b261272ac12852eb246c54c743"
+  },
+  "holdoutUses": 1,
+  "rolledBack": null,
+  "simulated": false
+}

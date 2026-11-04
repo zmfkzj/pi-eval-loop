@@ -1,0 +1,26 @@
+{
+  "candidate_id": "C-c001",
+  "split": "dev",
+  "runs": 48,
+  "tasks": 16,
+  "task_success": 38,
+  "success_rate": 0.7916666666666666,
+  "hidden_test_pass": 42,
+  "mean_correctness": 0.9586226851851851,
+  "repeat_success_rate": 0.7083333333333334,
+  "all_repeats_pass_tasks": 9,
+  "hard_task_success_rate": 0.7222222222222222,
+  "regression_count": 0,
+  "critical_failure_count": 5,
+  "integrity_violations": 5,
+  "terminal": {
+    "completed": 48
+  },
+  "infra_rate": 0,
+  "input_tokens": 8971238,
+  "output_tokens": 196232,
+  "cache_tokens": 7449088,
+  "model_requests": 1003,
+  "wall_time_ms": 6821685,
+  "simulated_runs": 0
+}

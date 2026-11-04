@@ -1,0 +1,42 @@
+{
+  "digest": "0c2ea4b47d6cb7c6634f87ca0678276da2ae587c61aa82185cdff84aa7cbd933",
+  "files": 5328,
+  "host": {
+    "dir": "/home/arthur/Code/oh-my-pi-extensions/orche/node_modules/@earendil-works/pi-coding-agent",
+    "ai": "/home/arthur/Code/oh-my-pi-extensions/orche/node_modules/@earendil-works/pi-ai",
+    "tui": "/home/arthur/Code/oh-my-pi-extensions/orche/node_modules/@earendil-works/pi-tui",
+    "version": "1.4.0",
+    "aiVersion": "1.4.0",
+    "tuiVersion": "1.4.0"
+  },
+  "stages": [
+    {
+      "stage": "fresh",
+      "install": "npm ci --omit=dev --legacy-peer-deps --offline (postinstall enabled)",
+      "checks": [
+        "command-completions",
+        "browser-lifecycle",
+        "main-tool-surface",
+        "mcp-lifecycle",
+        "images-pi",
+        "workbench-bus",
+        "restore-installed-later"
+      ],
+      "passed": true
+    },
+    {
+      "stage": "reinstall-after-clean",
+      "install": "npm ci --omit=dev --legacy-peer-deps --offline (postinstall enabled)",
+      "checks": [
+        "command-completions",
+        "browser-lifecycle",
+        "main-tool-surface",
+        "mcp-lifecycle",
+        "images-pi",
+        "workbench-bus",
+        "restore-installed-later"
+      ],
+      "passed": true
+    }
+  ]
+}

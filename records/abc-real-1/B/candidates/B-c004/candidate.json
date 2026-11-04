@@ -1,0 +1,53 @@
+{
+  "status": "screening",
+  "decisions": [
+    {
+      "at": "2026-11-04T08:47:47.737Z",
+      "status": "created",
+      "reason": "patch accepted"
+    },
+    {
+      "at": "2026-11-04T08:47:58.406Z",
+      "status": "screening",
+      "reason": "screening batch b1-static-traversal, b2-patch-endpoint, b5-ctx-migration, d5-streaming-ingest-ko, p1-ticket-batch, p2-handler-migration"
+    }
+  ],
+  "children": [],
+  "createdAt": "2026-11-04T08:46:22.299Z",
+  "id": "B-c004",
+  "parent": "stable",
+  "origin": "proposer",
+  "strategy": "greedy",
+  "worktree": "/home/arthur/Code/oh-my-pi-extensions/pi-eval-loop/state/abc-real-1/B/worktrees/B-c004",
+  "branch": "eval-loop/candidates/0cb75a26/B-c004",
+  "base": "e831a6b2bc19f0c707b55505db33a11b2c9d4d4a",
+  "target": "termination-timeout",
+  "hypothesis": {
+    "text": "Requiring bounded, one-shot bash verification and diagnosis before retrying timed-out checks should prevent hanging checks and unchanged retries from consuming the unit wall-time guard.",
+    "targetFailureClass": "termination-timeout",
+    "expectedEffect": "Fewer wall-time timeouts and more runs reaching a final response after verification returns control promptly."
+  },
+  "updatedAt": "2026-11-04T08:47:58.406Z",
+  "proposer": {
+    "usage": {
+      "requests": 10,
+      "completed": 10,
+      "input": 388308,
+      "output": 1886,
+      "cached": 322560,
+      "wallMs": 84790,
+      "guardFired": false,
+      "exit": 0
+    }
+  },
+  "files": [
+    "src/tools/bash.ts"
+  ],
+  "patchKey": "91bd843f26a0a29d507f8154739a49589fe799b22e209ae3770a06e67bbd6d69",
+  "patchSha256": "57163b07dfbf42485b7673cf02450b66fccb7334e193a13d1768aaa66f6f8fe9",
+  "patchStats": {
+    "added": 9,
+    "removed": 1
+  },
+  "commit": "53f6c7dfbcfab9305705df81a1605c93cd529c5a"
+}

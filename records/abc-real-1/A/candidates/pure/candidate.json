@@ -1,0 +1,16 @@
+{
+  "status": "baseline",
+  "decisions": [],
+  "children": [],
+  "createdAt": "2026-11-04T05:17:24.513Z",
+  "id": "pure",
+  "parent": null,
+  "origin": "control",
+  "kind": "control",
+  "harness": {
+    "id": "pure",
+    "kind": "pure"
+  },
+  "hypothesis": null,
+  "updatedAt": "2026-11-04T05:17:24.513Z"
+}

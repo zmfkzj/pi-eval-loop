@@ -1,0 +1,92 @@
+{
+  "phase": "holdout",
+  "cycle": 1,
+  "counters": {
+    "candidates": 4,
+    "noProgress": 2,
+    "consecutiveInfra": 0
+  },
+  "stable": {
+    "id": "stable",
+    "commit": "e831a6b2bc19f0c707b55505db33a11b2c9d4d4a"
+  },
+  "startedAt": "2026-11-04T06:20:45.771Z",
+  "sharedBaselineFrom": "/home/arthur/Code/oh-my-pi-extensions/pi-eval-loop/state/abc-real-1/A",
+  "strategy": "pareto",
+  "role": "C (quality-first Pareto loop)",
+  "updatedAt": "2026-11-04T07:47:28.631Z",
+  "prerequisites": [
+    {
+      "name": "bwrap",
+      "ok": true,
+      "detail": "bubblewrap 0.11.1"
+    },
+    {
+      "name": "bwrap-namespaces",
+      "ok": true,
+      "detail": "user/net/pid namespaces usable"
+    },
+    {
+      "name": "pi-cli",
+      "ok": true,
+      "detail": "/home/arthur/.bun/install/global/node_modules/@earendil-works/pi-coding-agent/dist/bundle/cli.js"
+    },
+    {
+      "name": "provider",
+      "ok": true,
+      "detail": "/home/arthur/Code/oh-my-pi-extensions/cliproxyapi/node_modules/@router-for-me/pi-cliproxyapi-provider"
+    },
+    {
+      "name": "orche",
+      "ok": true,
+      "detail": "/home/arthur/Code/oh-my-pi-extensions/orche"
+    },
+    {
+      "name": "git",
+      "ok": true,
+      "detail": "git version 2.53.0"
+    },
+    {
+      "name": "credentials",
+      "ok": true,
+      "detail": "cliproxyapi.json apiKey: set"
+    },
+    {
+      "name": "model-catalog",
+      "ok": true,
+      "detail": "/home/arthur/.pi/agent/cliproxyapi-models.json"
+    },
+    {
+      "name": "upstream",
+      "ok": true,
+      "detail": "http://127.0.0.1:8317 answered 401"
+    }
+  ],
+  "cycleStartedAt": "2026-11-04T06:20:46.289Z",
+  "current": {
+    "id": "C-c004",
+    "step": "screen",
+    "repeats": 3,
+    "batch": [
+      "a7-auth-rotation",
+      "b2-patch-endpoint",
+      "b3-pagination",
+      "d4-cache-fencing",
+      "p1-ticket-batch",
+      "p2-handler-migration"
+    ]
+  },
+  "searchStop": "candidate cap of 4 per cycle reached (safety limit)",
+  "selection": {
+    "at": "2026-11-04T07:47:28.626Z",
+    "considered": [
+      "C-c001"
+    ],
+    "eligible": [
+      "C-c001"
+    ],
+    "selected": "C-c001",
+    "commit": "6c14f42e223209c4011a8db063589b50c38102f0",
+    "frozenDigest": "6f60591d5028f07bd972f799bfa0d7358048bf266192fc036d3db2825d389cc0"
+  }
+}

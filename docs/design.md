@@ -1,5 +1,7 @@
 # pi-eval-loop: design, protocol, security and research basis
 
+Measured results: [`results-abc-real-1.md`](results-abc-real-1.md).
+
 pi-eval-loop is a headless, resumable program. It improves the pi-orche harness by running evaluation, failure analysis, candidate
 patches, screening, development, a quality Pareto archive, one final holdout, an adoption gate and rollback. No user takes part. Every
 required piece of state lives on disk. Nothing depends on an LLM conversation.
@@ -20,7 +22,7 @@ prepare -> baselines -> search (repeat: parent -> analysis -> proposal -> integr
 | Phase | What happens | Code |
 |---|---|---|
 | prepare | Checks prerequisites (missing ones end in BLOCKED; nothing is simulated). Validates the grader of every task: the original must fail, the reference must pass. Builds family-grouped train/dev splits. Verifies the sealed holdout. Locks the protocol (sha256 of the protocol, every evaluator file and the dataset manifest). | `src/loop.mjs` `prepare`, `src/protocol.mjs` `lockProtocol` |
-| baselines | Runs stable orche on train and dev; pure Pi (no extension) on train and dev; k=3 independent attempts (equal-compute control) on dev; the target mode's existing implementation (= stable when the target is `single`). | `baselines`, `baselineHarnesses` |
+| baselines | Runs stable orche on train and dev; pure Pi (no extension) on train and dev; k=3 independent pure-Pi attempts on dev, keeping the first that passes the VISIBLE tests (an equal-compute control; no hidden information is used); the target mode's existing implementation (= stable when the target is `single`). | `baselines`, `baselineHarnesses` |
 | search | Selects a parent (Pareto: archive front plus development-qualified; greedy: the current best only). Analyzes failures (train). The proposer edits a copy of the harness runtime. Then patch integrity, dedup, commit on the isolated branch `eval-loop/candidates/<ns>/<id>`, typecheck, adaptive screening, development. | `newCandidate`, `screen`, `develop` |
 | select | Picks the best development-qualified candidate without a family regression and freezes it (`selection.json`, digest) BEFORE any holdout access. | `select` |
 | holdout | Appends the use to the holdout's hash-chained `USES.jsonl` before the first run. Then one pass over all arms. | `holdout` |
@@ -28,7 +30,7 @@ prepare -> baselines -> search (repeat: parent -> analysis -> proposal -> integr
 
 Watchdog: the search stops after 10 consecutive candidates without progress (configurable). Other stop rules are a per-cycle
 candidate cap, a wall-time cap, consecutive infrastructure failures, an infra-error rate, a cap on failures per failure class and a
-cap on child failures per parent. The rules are safety stops, not cost objectives. A finished cycle restarts (`--daemon`, or
+cap on child failures per parent. The rules are safety stops, not cost objectives. The candidate cap never interrupts an in-flight candidate. A finished cycle restarts (`--daemon`, or
 `--once` again) only when its fingerprint changes: orche HEAD, stable, task digests, environment or protocol.
 
 Persistence: `state.json` and `selection.json` are written atomically (tmp + fsync + rename). `runs.jsonl`, `events.jsonl`,

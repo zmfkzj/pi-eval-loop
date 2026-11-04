@@ -1,0 +1,53 @@
+{
+  "status": "screening",
+  "decisions": [
+    {
+      "at": "2026-11-04T07:47:17.600Z",
+      "status": "created",
+      "reason": "patch accepted"
+    },
+    {
+      "at": "2026-11-04T07:47:28.612Z",
+      "status": "screening",
+      "reason": "screening batch a7-auth-rotation, b2-patch-endpoint, b3-pagination, d4-cache-fencing, p1-ticket-batch, p2-handler-migration"
+    }
+  ],
+  "children": [],
+  "createdAt": "2026-11-04T07:45:40.059Z",
+  "id": "C-c004",
+  "parent": "C-c001",
+  "origin": "proposer",
+  "strategy": "pareto",
+  "worktree": "/home/arthur/Code/oh-my-pi-extensions/pi-eval-loop/state/abc-real-1/C/worktrees/C-c004",
+  "branch": "eval-loop/candidates/ce8bb544/C-c004",
+  "base": "6c14f42e223209c4011a8db063589b50c38102f0",
+  "target": "requirements-generalization",
+  "hypothesis": {
+    "text": "Requiring implementation workers to derive and run contract checks before editing code should reduce circular verification by anchoring expected behavior to the original requirements rather than implementation assumptions.",
+    "targetFailureClass": "requirements-generalization",
+    "expectedEffect": "More specified boundary and failure cases are exercised before implementation, and completed changes satisfy more of the original requirements even when the existing suite already passes."
+  },
+  "updatedAt": "2026-11-04T07:47:28.612Z",
+  "proposer": {
+    "usage": {
+      "requests": 9,
+      "completed": 9,
+      "input": 326005,
+      "output": 1759,
+      "cached": 273280,
+      "wallMs": 96935,
+      "guardFired": false,
+      "exit": 0
+    }
+  },
+  "files": [
+    "src/extension/workers.ts"
+  ],
+  "patchKey": "b22b8f48abf006ae74abeaf0ffe4cbfbd62b5db4ddedb09f215931f7865a43ce",
+  "patchSha256": "8006e9ee359b188dc83b9fa8880db95e74a1b1866f5d4de382cb1a9e7c14ed05",
+  "patchStats": {
+    "added": 1,
+    "removed": 1
+  },
+  "commit": "0a40cfa2a12e8b162cf5a9578426199c1c9a0bda"
+}

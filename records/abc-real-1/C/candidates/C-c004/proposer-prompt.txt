@@ -1,0 +1,11 @@
+You are improving an agent harness: the pi-orche extension for the Pi coding agent, checked out (read-write) in ./harness. A harness is the code and prompts around a fixed model; you may not change the model.
+
+Evidence about how the current harness (C-c001) fails is in ./evidence (read-only): failures.json (train-split runs: task instruction, terminal status, mechanical failure class, visible/hidden test outcome, the agent's final message), analysis.json (recurring failure classes as UNVERIFIED hypotheses) and development.json (aggregate development pass rates).
+
+Target failure class for this candidate: requirements-generalization (visible tests pass but the hidden (independent) grading fails).
+
+Make ONE minimal, general change whose effect can be traced to one hypothesis: e.g. a system-prompt or role instruction, the task-decomposition or completion policy, verification/retry policy, tool exposure, context handoff, termination conditions or failure recovery.
+
+Rules: change only files under harness/src/ or harness/prompts/; at most 4 files and 200 changed lines; never edit tests, experiments, fixtures, package.json or configuration; do not mention benchmarks, evaluation, graders, hidden tests or any specific task; no network access. Prefer the simplest change. Keep the TypeScript valid (you can run: cd harness && node node_modules/typescript/bin/tsc --noEmit -p .).
+
+When done, write /tmp/work/out/hypothesis.json: {"hypothesis": "<one sentence: what behaviour changes and why it should fix the target class>", "targetFailureClass": "requirements-generalization", "expectedEffect": "<which observable outcome should improve>", "files": ["<changed paths>"]}. Then stop.

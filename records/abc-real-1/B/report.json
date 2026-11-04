@@ -1,0 +1,1712 @@
+{
+  "generatedAt": "2026-11-04T09:39:22.557Z",
+  "stateDir": "/home/arthur/Code/oh-my-pi-extensions/pi-eval-loop/state/abc-real-1/B",
+  "simulated": false,
+  "phase": "done",
+  "cycle": 1,
+  "strategy": "greedy",
+  "protocolDigest": "92a08768276528120678b4a8ad1ba958187a54c87253ff8e62bca3848b05740e",
+  "protocol": {
+    "version": "pi-eval-loop/protocol-1",
+    "seed": "pi-eval-loop-2026-11-04",
+    "target": {
+      "harness": "orche",
+      "mode": "single"
+    },
+    "route": {
+      "provider": "cliproxyapi",
+      "model": "gpt-6-luna",
+      "effort": "medium"
+    },
+    "proposer": {
+      "kind": "pi",
+      "route": {
+        "provider": "cliproxyapi",
+        "model": "gpt-6.1-sol",
+        "effort": "high"
+      },
+      "maxRequests": 120,
+      "wallMs": 1800000,
+      "allowedPaths": [
+        "src/",
+        "prompts/"
+      ],
+      "maxChangedFiles": 4,
+      "maxDiffLines": 200
+    },
+    "unit": {
+      "wallMs": 1200000,
+      "maxRequests": 150,
+      "graderMs": 120000
+    },
+    "bootstrap": {
+      "draws": 10000
+    },
+    "screening": {
+      "tasks": 6,
+      "minRepeats": 3,
+      "maxRepeats": 9,
+      "step": 3,
+      "support": 0.8,
+      "band": 0.1,
+      "level": "execution"
+    },
+    "development": {
+      "repeats": 3,
+      "level": "task",
+      "support": 0.8
+    },
+    "holdout": {
+      "repeats": 3,
+      "maxUses": 1,
+      "minTasks": 6,
+      "minFamilies": 4,
+      "requireIndependent": true,
+      "acceptedProvenance": [
+        "external"
+      ]
+    },
+    "gate": {
+      "eps": {
+        "overall": 0.03,
+        "hard": 0.05,
+        "consistency": 0.05
+      },
+      "minGain": {
+        "overall": 0,
+        "hard": 0,
+        "consistency": 0
+      }
+    },
+    "adoption": {
+      "support": 0.95,
+      "level": "task",
+      "eps": {
+        "hard": 0.02,
+        "consistency": 0.02
+      },
+      "minGain": {
+        "overall": 0
+      },
+      "familyRegression": 0.15,
+      "familyRegressionSupport": 0.8,
+      "requireHardStratum": true,
+      "requireChecks": true
+    },
+    "baselines": {
+      "pure": true,
+      "stable": true,
+      "targetMode": true,
+      "multiAttempt": {
+        "k": 3
+      }
+    },
+    "watchdog": {
+      "noProgressCandidates": 10,
+      "maxCandidatesPerCycle": 4,
+      "maxCycleWallMs": 259200000,
+      "maxConsecutiveInfra": 5,
+      "maxInfraRate": 0.1,
+      "maxFailuresPerClass": 3,
+      "maxChildFailuresPerParent": 5,
+      "daemonPollMs": 600000,
+      "hypothesisSimilarity": 0.8
+    },
+    "infra": {
+      "maxRetries": 1
+    },
+    "parallelism": 6,
+    "datasets": {
+      "source": "suite",
+      "trainShare": 0.45,
+      "holdout": "datasets/holdout-v1"
+    },
+    "deploy": {
+      "mode": "refs",
+      "branch": "eval-loop/stable"
+    },
+    "notes": "First measured A/B/C run on the real route. Operational settings only: 6 parallel units per trajectory, and at most 4 candidates per trajectory in this cycle (the session wall time available to the implementing agent; the package default is 40). Every other value is the pre-registered default protocol."
+  },
+  "prerequisites": [
+    {
+      "name": "bwrap",
+      "ok": true,
+      "detail": "bubblewrap 0.11.1"
+    },
+    {
+      "name": "bwrap-namespaces",
+      "ok": true,
+      "detail": "user/net/pid namespaces usable"
+    },
+    {
+      "name": "pi-cli",
+      "ok": true,
+      "detail": "/home/arthur/.bun/install/global/node_modules/@earendil-works/pi-coding-agent/dist/bundle/cli.js"
+    },
+    {
+      "name": "provider",
+      "ok": true,
+      "detail": "/home/arthur/Code/oh-my-pi-extensions/cliproxyapi/node_modules/@router-for-me/pi-cliproxyapi-provider"
+    },
+    {
+      "name": "orche",
+      "ok": true,
+      "detail": "/home/arthur/Code/oh-my-pi-extensions/orche"
+    },
+    {
+      "name": "git",
+      "ok": true,
+      "detail": "git version 2.53.0"
+    },
+    {
+      "name": "credentials",
+      "ok": true,
+      "detail": "cliproxyapi.json apiKey: set"
+    },
+    {
+      "name": "model-catalog",
+      "ok": true,
+      "detail": "/home/arthur/.pi/agent/cliproxyapi-models.json"
+    },
+    {
+      "name": "upstream",
+      "ok": true,
+      "detail": "http://127.0.0.1:8317 answered 401"
+    }
+  ],
+  "datasets": {
+    "train": [
+      "a7-auth-rotation",
+      "b1-static-traversal",
+      "b2-patch-endpoint",
+      "b3-pagination",
+      "b5-ctx-migration",
+      "b6-route-cache",
+      "d4-cache-fencing",
+      "d5-streaming-ingest-ko",
+      "p1-ticket-batch",
+      "p2-handler-migration",
+      "p3-library-features-ko"
+    ],
+    "dev": [
+      "a1-rounding",
+      "a2-discount-codes",
+      "a3-refactor-tax",
+      "a4-tests-fx",
+      "a6-typo-message",
+      "c1-timezone",
+      "c2-since-flag-ko",
+      "c4-malformed-lines",
+      "c5-aggregate-perf",
+      "c6-csv-export",
+      "d1-transactional-outbox",
+      "d2-keyed-queue",
+      "d3-money-migration-ko",
+      "d6-snapshot-pagination",
+      "d7-config-reload",
+      "d8-build-graph"
+    ],
+    "holdout": [
+      "h1-interval-merge",
+      "h2-csv-parse",
+      "h3-retry-backoff",
+      "h4-semver-range",
+      "h5-lru-ttl",
+      "h6-markdown-toc",
+      "h7-money-allocate"
+    ],
+    "excluded": [],
+    "digests": {
+      "a1-rounding": "66dc1f2237f51f28596b2beb1c98367a0dcde491379c97e13c7667df228e583d",
+      "a2-discount-codes": "f4af636843804b529d68c537c3d9f6752db72dda6e430834ab30b7b946613547",
+      "a3-refactor-tax": "783a3f7993829a083cec4e7c51ade90378669fa6a2faa0e6572a095dbc7c9c1b",
+      "a4-tests-fx": "7876a5f1ca6c63d46aff6164f380ca28b988d2bac115075a721fc7e7142cce25",
+      "a6-typo-message": "66b7800e6e7f5b29fa84a0d55dcb34353f9c30cb4679e390fb7fc7022473e194",
+      "a7-auth-rotation": "b628aedb0b37f999afb9d828c57b43da7a4b1dbd8aa021398400f37af3514add",
+      "b1-static-traversal": "71187d345dd11c45d4e82f61220a5994574eb15d1aae3efe6a31b80ba7b230ad",
+      "b2-patch-endpoint": "1aa0776a526a50ae8ab347b2db30f6468f5602385fc0ccf15c82c11514dd9a28",
+      "b3-pagination": "aeae308bfb617a64ad981ec8e89330a1e2b92b83423156adefcd0ed33d7b2099",
+      "b5-ctx-migration": "0804db6f0b832962a3882f16926cc94017c4f3eeda9e20b0156b802375cdc7ad",
+      "b6-route-cache": "d6b72f998c1e8a1d035eca4c946ae4112470e0f1cba0fc89f13793acf47b9bb2",
+      "c1-timezone": "eea00bbb2bfb76a86ac6c9a3e7fdc17d0ae92e69c3277eb1232d9aeb7771708b",
+      "c2-since-flag-ko": "7e185f7ba2ff425a83b313f6c811813bfd3fc48c11bf3f9084553b7fe2230503",
+      "c4-malformed-lines": "f969cfcdd17884e25a7ef16d7ff1a27f63205b6c31cbd2ea4e7f2373c5128db7",
+      "c5-aggregate-perf": "5f743480dc71400d1ab31259fdbef468d1fac9699aa566e8fae71b8834a724de",
+      "c6-csv-export": "a04385ea74936ac0b7d80bc3be5b4404a04012aff1efcb7998834900b2d83cde",
+      "d1-transactional-outbox": "898cd696f0c9aebe6ebf35248a98f965fb2927328df8556a7c3485cc4278db4d",
+      "d2-keyed-queue": "63ff8c9ce8e4b3d8daab8cf77213589c7d61628240bf357552e2e8d18b41a643",
+      "d3-money-migration-ko": "9eb4dc02ef69842ade67506dffacc89840ce9ebea0358056fc6a91ba345fee76",
+      "d4-cache-fencing": "2b371bf7359a500b3c16feeaebe9fa35e8ce594207900c37e276f242fef0f102",
+      "d5-streaming-ingest-ko": "31d6ce9331e329d50065054e1f4cd24d02c60bb7c2f0b906ce4a1caf6df69b45",
+      "d6-snapshot-pagination": "69404b511703b8d9e1cb22d668291f142f29d11ba880a271501d871da0da6664",
+      "d7-config-reload": "4d0c0a0c87517eb23466838f65e5375d11160f5602e4062065a394e684282e23",
+      "d8-build-graph": "579b81ef90a39b26d7d42f7dd3bb5041bd760218b855ee08e6788cc95559f15e",
+      "p1-ticket-batch": "12e9f5919ed365333fa7f2ccb42dce4968722fb4a19a7d99eeb8e985284d066e",
+      "p2-handler-migration": "625bd2d7c94e45f42fa6ae70b98c4e0d04fe14fbf89420a3bb9d967842a817f6",
+      "p3-library-features-ko": "64099bf7f8f8c53ec6cf146b2dd4e3ad86f0067434e10e9696d0207ff54d33b3",
+      "h1-interval-merge": "882757b968cda3fed51639b85bd2cee2edf157274bb2b6e015a33d4d86e5db47",
+      "h2-csv-parse": "cb7cc57265278c18a05b4cbae1effc4f089cec809c501f86f9bdb39676595684",
+      "h3-retry-backoff": "b11b06f3db210bfb70c76c729da9ea60028bc44f6731c931fe84df7a11dfca3d",
+      "h4-semver-range": "beeb7d00187f624d04c1d1b34efef1b9de860f304a354d255ae903d94a136579",
+      "h5-lru-ttl": "102f8a521c039541f1d7d60996ad72c3c96d6750f9da24577ab975005c3b21e5",
+      "h6-markdown-toc": "d774d5269725d8a1df49c04a8f59d32ed102750b1dc9656d0bc3aa5f47c0d395",
+      "h7-money-allocate": "83db5f8ac16471b4e737cba69fed411cd580aba5355ec56a200bb3501ff12ac1"
+    },
+    "holdoutSeal": "370af542c6f44c2a7e868abf5615d3df981275b261272ac12852eb246c54c743",
+    "meta": {
+      "a1-rounding": {
+        "family": "pkg:ledger",
+        "tier": "easy",
+        "hard": false,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "a2-discount-codes": {
+        "family": "pkg:ledger",
+        "tier": "easy",
+        "hard": false,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "a3-refactor-tax": {
+        "family": "pkg:ledger",
+        "tier": "easy",
+        "hard": false,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "a4-tests-fx": {
+        "family": "pkg:ledger",
+        "tier": "easy",
+        "hard": false,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "a6-typo-message": {
+        "family": "pkg:ledger",
+        "tier": "easy",
+        "hard": false,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "a7-auth-rotation": {
+        "family": "pkg:invoice-sync",
+        "tier": "easy",
+        "hard": false,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "b1-static-traversal": {
+        "family": "pkg:minihttp",
+        "tier": "medium",
+        "hard": false,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "b2-patch-endpoint": {
+        "family": "pkg:minihttp",
+        "tier": "medium",
+        "hard": false,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "b3-pagination": {
+        "family": "pkg:minihttp",
+        "tier": "medium",
+        "hard": false,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "b5-ctx-migration": {
+        "family": "pkg:minihttp",
+        "tier": "medium",
+        "hard": false,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "b6-route-cache": {
+        "family": "pkg:minihttp",
+        "tier": "medium",
+        "hard": false,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "c1-timezone": {
+        "family": "pkg:logtool",
+        "tier": "medium",
+        "hard": false,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "c2-since-flag-ko": {
+        "family": "pkg:logtool",
+        "tier": "medium",
+        "hard": false,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "c4-malformed-lines": {
+        "family": "pkg:logtool",
+        "tier": "medium",
+        "hard": false,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "c5-aggregate-perf": {
+        "family": "pkg:logtool",
+        "tier": "medium",
+        "hard": false,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "c6-csv-export": {
+        "family": "pkg:logtool",
+        "tier": "medium",
+        "hard": false,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "d1-transactional-outbox": {
+        "family": "pkg:d1-transactional-outbox",
+        "tier": "hard",
+        "hard": true,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "d2-keyed-queue": {
+        "family": "pkg:d2-keyed-queue",
+        "tier": "hard",
+        "hard": true,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "d3-money-migration-ko": {
+        "family": "pkg:d3-money-migration-ko",
+        "tier": "hard",
+        "hard": true,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "d4-cache-fencing": {
+        "family": "pkg:d4-cache-fencing",
+        "tier": "hard",
+        "hard": true,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "d5-streaming-ingest-ko": {
+        "family": "pkg:d5-streaming-ingest-ko",
+        "tier": "hard",
+        "hard": true,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "d6-snapshot-pagination": {
+        "family": "pkg:d6-snapshot-pagination",
+        "tier": "hard",
+        "hard": true,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "d7-config-reload": {
+        "family": "pkg:d7-config-reload",
+        "tier": "hard",
+        "hard": true,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "d8-build-graph": {
+        "family": "pkg:d8-build-graph",
+        "tier": "hard",
+        "hard": true,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "p1-ticket-batch": {
+        "family": "p-series",
+        "tier": "hard",
+        "hard": true,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "p2-handler-migration": {
+        "family": "p-series",
+        "tier": "hard",
+        "hard": true,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "p3-library-features-ko": {
+        "family": "p-series",
+        "tier": "hard",
+        "hard": true,
+        "source": "suite",
+        "provenance": "orche-fixtures-suite"
+      },
+      "h1-interval-merge": {
+        "family": "intervals",
+        "tier": "medium",
+        "hard": false,
+        "source": "local",
+        "provenance": "implementer-authored-sealed-before-search"
+      },
+      "h2-csv-parse": {
+        "family": "csv-parser",
+        "tier": "hard",
+        "hard": true,
+        "source": "local",
+        "provenance": "implementer-authored-sealed-before-search"
+      },
+      "h3-retry-backoff": {
+        "family": "retry",
+        "tier": "medium",
+        "hard": false,
+        "source": "local",
+        "provenance": "implementer-authored-sealed-before-search"
+      },
+      "h4-semver-range": {
+        "family": "semver",
+        "tier": "hard",
+        "hard": true,
+        "source": "local",
+        "provenance": "implementer-authored-sealed-before-search"
+      },
+      "h5-lru-ttl": {
+        "family": "cache",
+        "tier": "hard",
+        "hard": true,
+        "source": "local",
+        "provenance": "implementer-authored-sealed-before-search"
+      },
+      "h6-markdown-toc": {
+        "family": "markdown",
+        "tier": "medium",
+        "hard": false,
+        "source": "local",
+        "provenance": "implementer-authored-sealed-before-search"
+      },
+      "h7-money-allocate": {
+        "family": "money",
+        "tier": "easy",
+        "hard": false,
+        "source": "local",
+        "provenance": "implementer-authored-sealed-before-search"
+      }
+    }
+  },
+  "arms": [
+    {
+      "arm": "B-c001",
+      "split": "train",
+      "posterior": {
+        "overall": {
+          "point": 0.7272727272727274,
+          "mean": 0.7254408850519808,
+          "lo95": 0.45282278987913316,
+          "hi95": 0.9199450661068393
+        },
+        "hard": {
+          "point": 0.39999999999999997,
+          "mean": 0.3952571458707934,
+          "lo95": 0.08953678838288194,
+          "hi95": 0.7616766073513257
+        },
+        "consistency": {
+          "point": 0.686868686868687,
+          "mean": 0.6951485948745015,
+          "lo95": 0.41202508014273653,
+          "hi95": 0.9060693605382549
+        }
+      },
+      "summary": {
+        "candidate_id": "B-c001",
+        "split": "train",
+        "runs": 33,
+        "tasks": 11,
+        "task_success": 24,
+        "success_rate": 0.7272727272727273,
+        "hidden_test_pass": 27,
+        "mean_correctness": 0.9233656004489337,
+        "repeat_success_rate": 0.6868686868686869,
+        "all_repeats_pass_tasks": 7,
+        "hard_task_success_rate": 0.4,
+        "regression_count": 2,
+        "critical_failure_count": 3,
+        "integrity_violations": 3,
+        "terminal": {
+          "agent_error": 1,
+          "completed": 32
+        },
+        "infra_rate": 0,
+        "input_tokens": 14056696,
+        "output_tokens": 249872,
+        "cache_tokens": 12184192,
+        "model_requests": 1112,
+        "wall_time_ms": 7380807,
+        "simulated_runs": 0
+      }
+    },
+    {
+      "arm": "B-c001",
+      "split": "dev",
+      "posterior": {
+        "overall": {
+          "point": 0.7708333333333331,
+          "mean": 0.771503974841938,
+          "lo95": 0.5783576663096989,
+          "hi95": 0.9112968781585506
+        },
+        "hard": {
+          "point": 0.6666666666666666,
+          "mean": 0.6676218667580796,
+          "lo95": 0.3403233609452845,
+          "hi95": 0.9177205792287877
+        },
+        "consistency": {
+          "point": 0.673611111111111,
+          "mean": 0.6985348479752244,
+          "lo95": 0.4823318371559765,
+          "hi95": 0.8711439224763597
+        }
+      },
+      "summary": {
+        "candidate_id": "B-c001",
+        "split": "dev",
+        "runs": 48,
+        "tasks": 16,
+        "task_success": 37,
+        "success_rate": 0.7708333333333334,
+        "hidden_test_pass": 46,
+        "mean_correctness": 0.9872685185185185,
+        "repeat_success_rate": 0.6736111111111112,
+        "all_repeats_pass_tasks": 8,
+        "hard_task_success_rate": 0.6666666666666666,
+        "regression_count": 0,
+        "critical_failure_count": 9,
+        "integrity_violations": 9,
+        "terminal": {
+          "completed": 48
+        },
+        "infra_rate": 0,
+        "input_tokens": 10050886,
+        "output_tokens": 200322,
+        "cache_tokens": 8362240,
+        "model_requests": 1087,
+        "wall_time_ms": 6976570,
+        "simulated_runs": 0
+      }
+    },
+    {
+      "arm": "B-c002",
+      "split": "train",
+      "posterior": {
+        "overall": {
+          "point": 0.5277777777777778,
+          "mean": 0.5239088087914872,
+          "lo95": 0.21325422399302174,
+          "hi95": 0.8248270542581732
+        },
+        "hard": {
+          "point": 0.16666666666666666,
+          "mean": 0.16489566995546195,
+          "lo95": 0.016998521613890347,
+          "hi95": 0.4420131995891756
+        },
+        "consistency": {
+          "point": 0.4305555555555556,
+          "mean": 0.4407868111341182,
+          "lo95": 0.1402662955005423,
+          "hi95": 0.7825009313428133
+        }
+      },
+      "summary": {
+        "candidate_id": "B-c002",
+        "split": "train",
+        "runs": 36,
+        "tasks": 6,
+        "task_success": 19,
+        "success_rate": 0.5277777777777778,
+        "hidden_test_pass": 30,
+        "mean_correctness": 0.8580246913580247,
+        "repeat_success_rate": 0.4305555555555556,
+        "all_repeats_pass_tasks": 2,
+        "hard_task_success_rate": 0.16666666666666666,
+        "regression_count": 1,
+        "critical_failure_count": 11,
+        "integrity_violations": 11,
+        "terminal": {
+          "agent_error": 1,
+          "completed": 35
+        },
+        "infra_rate": 0,
+        "input_tokens": 13513110,
+        "output_tokens": 270472,
+        "cache_tokens": 11199744,
+        "model_requests": 1305,
+        "wall_time_ms": 8127076,
+        "simulated_runs": 0
+      }
+    },
+    {
+      "arm": "B-c003",
+      "split": "train",
+      "posterior": {
+        "overall": {
+          "point": 0.2222222222222222,
+          "mean": 0.22182725545126408,
+          "lo95": 0.03468315890506516,
+          "hi95": 0.531500433446702
+        },
+        "hard": {
+          "point": 0.13333333333333333,
+          "mean": 0.13378141870198643,
+          "lo95": 0.008402020591727323,
+          "hi95": 0.41663877121874515
+        },
+        "consistency": {
+          "point": 0.1111111111111111,
+          "mean": 0.13845528097508733,
+          "lo95": 0.009199113656830939,
+          "hi95": 0.42260966735178446
+        }
+      },
+      "summary": {
+        "candidate_id": "B-c003",
+        "split": "train",
+        "runs": 18,
+        "tasks": 6,
+        "task_success": 4,
+        "success_rate": 0.2222222222222222,
+        "hidden_test_pass": 7,
+        "mean_correctness": 0.8106856101270352,
+        "repeat_success_rate": 0.11111111111111112,
+        "all_repeats_pass_tasks": 0,
+        "hard_task_success_rate": 0.13333333333333333,
+        "regression_count": 0,
+        "critical_failure_count": 5,
+        "integrity_violations": 5,
+        "terminal": {
+          "completed": 17,
+          "timeout": 1
+        },
+        "infra_rate": 0,
+        "input_tokens": 8284930,
+        "output_tokens": 179834,
+        "cache_tokens": 7005568,
+        "model_requests": 721,
+        "wall_time_ms": 5313171,
+        "simulated_runs": 0
+      }
+    },
+    {
+      "arm": "multi3",
+      "split": "dev",
+      "posterior": {
+        "overall": {
+          "point": 0.9583333333333334,
+          "mean": 0.9587051788133772,
+          "lo95": 0.8514778832493607,
+          "hi95": 0.9976288342977777
+        },
+        "hard": {
+          "point": 0.9444444444444443,
+          "mean": 0.9447324767309352,
+          "lo95": 0.7411976450422828,
+          "hi95": 0.9995502337175034
+        },
+        "consistency": {
+          "point": 0.9305555555555556,
+          "mean": 0.9382414601434446,
+          "lo95": 0.7995034649193743,
+          "hi95": 0.9957542593260933
+        }
+      },
+      "summary": {
+        "candidate_id": "multi3",
+        "split": "dev",
+        "runs": 48,
+        "tasks": 16,
+        "task_success": 46,
+        "success_rate": 0.9583333333333334,
+        "hidden_test_pass": 47,
+        "mean_correctness": 0.9791666666666666,
+        "repeat_success_rate": 0.9305555555555556,
+        "all_repeats_pass_tasks": 14,
+        "hard_task_success_rate": 0.9444444444444444,
+        "regression_count": 0,
+        "critical_failure_count": 1,
+        "integrity_violations": 1,
+        "terminal": {
+          "completed": 48
+        },
+        "infra_rate": 0,
+        "input_tokens": 1417929,
+        "output_tokens": 76888,
+        "cache_tokens": 850688,
+        "model_requests": 432,
+        "wall_time_ms": 2322247,
+        "simulated_runs": 0
+      }
+    },
+    {
+      "arm": "pure",
+      "split": "train",
+      "posterior": {
+        "overall": {
+          "point": 0.6363636363636364,
+          "mean": 0.6358489359660306,
+          "lo95": 0.35487941140081547,
+          "hi95": 0.8660698451111067
+        },
+        "hard": {
+          "point": 0.26666666666666666,
+          "mean": 0.26499870447013496,
+          "lo95": 0.029007348632864076,
+          "hi95": 0.6563873856303758
+        },
+        "consistency": {
+          "point": 0.5959595959595959,
+          "mean": 0.605551160777874,
+          "lo95": 0.3229059699117132,
+          "hi95": 0.8519391948538428
+        }
+      },
+      "summary": {
+        "candidate_id": "pure",
+        "split": "train",
+        "runs": 33,
+        "tasks": 11,
+        "task_success": 21,
+        "success_rate": 0.6363636363636364,
+        "hidden_test_pass": 23,
+        "mean_correctness": 0.8928277338603424,
+        "repeat_success_rate": 0.5959595959595959,
+        "all_repeats_pass_tasks": 6,
+        "hard_task_success_rate": 0.26666666666666666,
+        "regression_count": 0,
+        "critical_failure_count": 2,
+        "integrity_violations": 2,
+        "terminal": {
+          "completed": 33
+        },
+        "infra_rate": 0,
+        "input_tokens": 1200234,
+        "output_tokens": 63120,
+        "cache_tokens": 793472,
+        "model_requests": 302,
+        "wall_time_ms": 1813802,
+        "simulated_runs": 0
+      }
+    },
+    {
+      "arm": "pure",
+      "split": "dev",
+      "posterior": {
+        "overall": {
+          "point": 0.8958333333333333,
+          "mean": 0.8954036244667782,
+          "lo95": 0.7467497319985219,
+          "hi95": 0.9791626099812577
+        },
+        "hard": {
+          "point": 0.8333333333333334,
+          "mean": 0.83297313419713,
+          "lo95": 0.531432610926835,
+          "hi95": 0.984949724358817
+        },
+        "consistency": {
+          "point": 0.8402777777777778,
+          "mean": 0.8534385476364914,
+          "lo95": 0.6696950469721574,
+          "hi95": 0.9672384746466582
+        }
+      },
+      "summary": {
+        "candidate_id": "pure",
+        "split": "dev",
+        "runs": 48,
+        "tasks": 16,
+        "task_success": 43,
+        "success_rate": 0.8958333333333334,
+        "hidden_test_pass": 46,
+        "mean_correctness": 0.9869791666666666,
+        "repeat_success_rate": 0.8402777777777778,
+        "all_repeats_pass_tasks": 12,
+        "hard_task_success_rate": 0.8333333333333334,
+        "regression_count": 0,
+        "critical_failure_count": 3,
+        "integrity_violations": 3,
+        "terminal": {
+          "completed": 48
+        },
+        "infra_rate": 0,
+        "input_tokens": 1358249,
+        "output_tokens": 73863,
+        "cache_tokens": 812544,
+        "model_requests": 427,
+        "wall_time_ms": 2249042,
+        "simulated_runs": 0
+      }
+    },
+    {
+      "arm": "stable",
+      "split": "train",
+      "posterior": {
+        "overall": {
+          "point": 0.5606060606060607,
+          "mean": 0.5598830239278926,
+          "lo95": 0.280271371557197,
+          "hi95": 0.8208574168999353
+        },
+        "hard": {
+          "point": 0.03333333333333333,
+          "mean": 0.03241064722436729,
+          "lo95": 0.00022327827952611491,
+          "hi95": 0.15355025032695807
+        },
+        "consistency": {
+          "point": 0.547979797979798,
+          "mean": 0.5493531752309463,
+          "lo95": 0.267718908106654,
+          "hi95": 0.8132698933057364
+        }
+      },
+      "summary": {
+        "candidate_id": "stable",
+        "split": "train",
+        "runs": 51,
+        "tasks": 11,
+        "task_success": 28,
+        "success_rate": 0.5490196078431373,
+        "hidden_test_pass": 36,
+        "mean_correctness": 0.8995394051340343,
+        "repeat_success_rate": 0.547979797979798,
+        "all_repeats_pass_tasks": 6,
+        "hard_task_success_rate": 0.041666666666666664,
+        "regression_count": 0,
+        "critical_failure_count": 10,
+        "integrity_violations": 10,
+        "terminal": {
+          "completed": 49,
+          "timeout": 2
+        },
+        "infra_rate": 0,
+        "input_tokens": 13145973,
+        "output_tokens": 298100,
+        "cache_tokens": 11050624,
+        "model_requests": 1333,
+        "wall_time_ms": 10110116,
+        "simulated_runs": 0
+      }
+    },
+    {
+      "arm": "stable",
+      "split": "dev",
+      "posterior": {
+        "overall": {
+          "point": 0.7708333333333333,
+          "mean": 0.7704521277643549,
+          "lo95": 0.5688406726492319,
+          "hi95": 0.920101165561096
+        },
+        "hard": {
+          "point": 0.5,
+          "mean": 0.5011134463870301,
+          "lo95": 0.1992766003690837,
+          "hi95": 0.7985633372678614
+        },
+        "consistency": {
+          "point": 0.7013888888888888,
+          "mean": 0.7178585562699271,
+          "lo95": 0.4969672127310247,
+          "hi95": 0.8923461899234091
+        }
+      },
+      "summary": {
+        "candidate_id": "stable",
+        "split": "dev",
+        "runs": 48,
+        "tasks": 16,
+        "task_success": 37,
+        "success_rate": 0.7708333333333334,
+        "hidden_test_pass": 42,
+        "mean_correctness": 0.9667245370370369,
+        "repeat_success_rate": 0.7013888888888888,
+        "all_repeats_pass_tasks": 10,
+        "hard_task_success_rate": 0.5,
+        "regression_count": 0,
+        "critical_failure_count": 5,
+        "integrity_violations": 5,
+        "terminal": {
+          "completed": 48
+        },
+        "infra_rate": 0,
+        "input_tokens": 8000848,
+        "output_tokens": 180933,
+        "cache_tokens": 6783232,
+        "model_requests": 917,
+        "wall_time_ms": 5468650,
+        "simulated_runs": 0
+      }
+    }
+  ],
+  "candidates": [
+    {
+      "status": "dev_rejected",
+      "decisions": [
+        {
+          "at": "2026-11-04T06:22:27.393Z",
+          "status": "created",
+          "reason": "patch accepted"
+        },
+        {
+          "at": "2026-11-04T06:22:39.060Z",
+          "status": "screening",
+          "reason": "screening batch a7-auth-rotation, b1-static-traversal, b3-pagination, b5-ctx-migration, d4-cache-fencing, p3-library-features-ko"
+        },
+        {
+          "at": "2026-11-04T06:33:18.171Z",
+          "status": "promoted",
+          "reason": "support 1.0000 vs threshold 0.8 (level execution, 10000 draws, mcse 0.0000)"
+        },
+        {
+          "at": "2026-11-04T07:14:22.329Z",
+          "status": "dev_rejected",
+          "reason": "critical: integrity: 9 run(s) with workspace integrity violations vs 5 for stable (a3-refactor-tax#1: changed/removed 1 line(s) of test file test/tax.test.js: \"test('US quotations and invoices agree', () => {\"; c1-timezone#2: changed/removed 1 line(s) of test file test/logtool.test.js: \"import { aggregate } from '../src/aggregate.js';\"; c2-since-flag-ko#0: changed/removed 1 line(s) of test file test/logtool.test.js: \"  assert.match(child.stdout, /Usage: logtool/);\")"
+        }
+      ],
+      "children": [],
+      "createdAt": "2026-11-04T06:20:46.209Z",
+      "id": "B-c001",
+      "parent": "stable",
+      "origin": "proposer",
+      "strategy": "greedy",
+      "worktree": "/home/arthur/Code/oh-my-pi-extensions/pi-eval-loop/state/abc-real-1/B/worktrees/B-c001",
+      "branch": "eval-loop/candidates/0cb75a26/B-c001",
+      "base": "e831a6b2bc19f0c707b55505db33a11b2c9d4d4a",
+      "target": "requirements-generalization",
+      "hypothesis": {
+        "text": "Requiring implementation workers to audit every behavioral clause against request-derived checks before completion should expose omissions that passing existing checks alone leave undetected.",
+        "targetFailureClass": "requirements-generalization",
+        "expectedEffect": "More completed implementations satisfy the full requested behavior, with fewer unexercised requirements reported as verified."
+      },
+      "updatedAt": "2026-11-04T07:14:22.329Z",
+      "proposer": {
+        "usage": {
+          "requests": 11,
+          "completed": 9,
+          "input": 387871,
+          "output": 1696,
+          "cached": 319232,
+          "wallMs": 100199,
+          "guardFired": false,
+          "exit": 0
+        }
+      },
+      "files": [
+        "src/extension/workers.ts"
+      ],
+      "patchKey": "2bd1dee0ce610a3d7ab98c9a66b13843463938c129361e8eec67d707c27b33e0",
+      "patchSha256": "b200fd5eb1d8fff195a2b56fff7c24a56108bd3a446bf60253fc51463d9d823e",
+      "patchStats": {
+        "added": 1,
+        "removed": 0
+      },
+      "commit": "3e8e68240a3087fb13d9adb43c8d675ee7190051",
+      "screening": {
+        "batch": [
+          "a7-auth-rotation",
+          "b1-static-traversal",
+          "b3-pagination",
+          "b5-ctx-migration",
+          "d4-cache-fencing",
+          "p3-library-features-ko"
+        ],
+        "repeats": 3,
+        "support": 1,
+        "supportTaskLevel": 1,
+        "mcse": 0,
+        "delta": {
+          "overall": {
+            "mean": 0.22257764679340536,
+            "lo95": 0.16861564325236789,
+            "hi95": 0.30670145454524556,
+            "probPositive": 1,
+            "probNegative": 0
+          },
+          "hard": {
+            "mean": 0.66773294038022,
+            "lo95": 0.505846929757104,
+            "hi95": 0.9201043636357366,
+            "probPositive": 1,
+            "probNegative": 0
+          },
+          "consistency": {
+            "mean": 0.19464232029474537,
+            "lo95": 0.16668945772505617,
+            "hi95": 0.28432511756385814,
+            "probPositive": 1,
+            "probNegative": 0
+          }
+        },
+        "point": {
+          "a": {
+            "overall": 0.6666666666666666,
+            "consistency": 0.6666666666666666,
+            "hard": 0
+          },
+          "b": {
+            "overall": 0.8888888888888888,
+            "consistency": 0.8518518518518517,
+            "hard": 0.6666666666666666
+          }
+        },
+        "decision": "PROMOTE",
+        "reasons": [
+          "support 1.0000 vs threshold 0.8 (level execution, 10000 draws, mcse 0.0000)"
+        ],
+        "rounds": [
+          {
+            "at": "2026-11-04T06:33:18.098Z",
+            "repeats": 3,
+            "tasks": [
+              "a7-auth-rotation",
+              "b1-static-traversal",
+              "b3-pagination",
+              "b5-ctx-migration",
+              "d4-cache-fencing",
+              "p3-library-features-ko"
+            ],
+            "support": 1,
+            "supportTaskLevel": 1,
+            "decision": "PROMOTE"
+          }
+        ]
+      },
+      "development": {
+        "tasks": 16,
+        "repeats": 3,
+        "point": {
+          "overall": 0.770799663914216,
+          "hard": 0.6657406626933599,
+          "consistency": 0.6980137050433676
+        },
+        "posterior": {
+          "overall": {
+            "point": 0.7708333333333331,
+            "mean": 0.770799663914216,
+            "lo95": 0.5826421840894225,
+            "hi95": 0.9122682712378954
+          },
+          "hard": {
+            "point": 0.6666666666666666,
+            "mean": 0.6657406626933599,
+            "lo95": 0.3361754105339969,
+            "hi95": 0.9212810176906772
+          },
+          "consistency": {
+            "point": 0.673611111111111,
+            "mean": 0.6980137050433676,
+            "lo95": 0.4857553180178732,
+            "hi95": 0.8746537794015574
+          }
+        },
+        "qualified": false,
+        "reasons": [
+          "critical: integrity: 9 run(s) with workspace integrity violations vs 5 for stable (a3-refactor-tax#1: changed/removed 1 line(s) of test file test/tax.test.js: \"test('US quotations and invoices agree', () => {\"; c1-timezone#2: changed/removed 1 line(s) of test file test/logtool.test.js: \"import { aggregate } from '../src/aggregate.js';\"; c2-since-flag-ko#0: changed/removed 1 line(s) of test file test/logtool.test.js: \"  assert.match(child.stdout, /Usage: logtool/);\")"
+        ],
+        "vsStable": {
+          "support": 0.5568,
+          "lossSupport": 0.3851,
+          "delta": {
+            "overall": {
+              "mean": -0.0008517798354283027,
+              "lo95": -0.20848632852105875,
+              "hi95": 0.21527000768774096,
+              "probPositive": 0.4925,
+              "probNegative": 0.5075
+            },
+            "hard": {
+              "mean": 0.1655359282234267,
+              "lo95": -0.20325666060192932,
+              "hi95": 0.534113053608982,
+              "probPositive": 0.8287,
+              "probNegative": 0.1713
+            },
+            "consistency": {
+              "mean": -0.021569921205081947,
+              "lo95": -0.25594124791585404,
+              "hi95": 0.21416047533857174,
+              "probPositive": 0.4197,
+              "probNegative": 0.5803
+            }
+          },
+          "familyDelta": {
+            "pkg:ledger": {
+              "mean": -0.001694412579796462,
+              "lo95": -0.29215770831703997,
+              "hi95": 0.30505931704193806,
+              "probPositive": 0.4721,
+              "probNegative": 0.5279,
+              "probBelow": 0.1056
+            },
+            "pkg:logtool": {
+              "mean": -0.19962266087122033,
+              "lo95": -0.53435484841209,
+              "hi95": -0.020736274406273538,
+              "probPositive": 0,
+              "probNegative": 1,
+              "probBelow": 0.5598
+            },
+            "pkg:d1-transactional-outbox": {
+              "mean": -0.3326028981415287,
+              "lo95": -0.842212576062328,
+              "hi95": -0.011096072365576795,
+              "probPositive": 0,
+              "probNegative": 1,
+              "probBelow": 0.7183
+            },
+            "pkg:d2-keyed-queue": {
+              "mean": 0.3325426509361265,
+              "lo95": 0.01284356368411299,
+              "hi95": 0.8416601355628605,
+              "probPositive": 1,
+              "probNegative": 0,
+              "probBelow": 0
+            },
+            "pkg:d3-money-migration-ko": {
+              "mean": 0.6659199560151883,
+              "lo95": 0.16466620579961283,
+              "hi95": 0.9863539616976674,
+              "probPositive": 1,
+              "probNegative": 0,
+              "probBelow": 0
+            },
+            "pkg:d6-snapshot-pagination": {
+              "mean": 0.33492130831570116,
+              "lo95": -0.3672672091058625,
+              "hi95": 0.8767180709338307,
+              "probPositive": 0.8371,
+              "probNegative": 0.1629,
+              "probBelow": 0.081
+            },
+            "pkg:d7-config-reload": {
+              "mean": -0.004010238385260743,
+              "lo95": -0.6500162368804262,
+              "hi95": 0.6505604089831699,
+              "probPositive": 0.4935,
+              "probNegative": 0.5065,
+              "probBelow": 0.3262
+            },
+            "pkg:d8-build-graph": {
+              "mean": 0,
+              "lo95": 0,
+              "hi95": 0,
+              "probPositive": 0,
+              "probNegative": 0,
+              "probBelow": 0
+            }
+          }
+        },
+        "summary": {
+          "candidate_id": "B-c001",
+          "split": "dev",
+          "runs": 48,
+          "tasks": 16,
+          "task_success": 37,
+          "success_rate": 0.7708333333333334,
+          "hidden_test_pass": 46,
+          "mean_correctness": 0.9872685185185185,
+          "repeat_success_rate": 0.6736111111111112,
+          "all_repeats_pass_tasks": 8,
+          "hard_task_success_rate": 0.6666666666666666,
+          "regression_count": 0,
+          "critical_failure_count": 9,
+          "integrity_violations": 9,
+          "terminal": {
+            "completed": 48
+          },
+          "infra_rate": 0,
+          "input_tokens": 10050886,
+          "output_tokens": 200322,
+          "cache_tokens": 8362240,
+          "model_requests": 1087,
+          "wall_time_ms": 6976570,
+          "simulated_runs": 0
+        }
+      }
+    },
+    {
+      "status": "rejected",
+      "decisions": [
+        {
+          "at": "2026-11-04T07:15:51.327Z",
+          "status": "created",
+          "reason": "patch accepted"
+        },
+        {
+          "at": "2026-11-04T07:16:02.354Z",
+          "status": "screening",
+          "reason": "screening batch a7-auth-rotation, b1-static-traversal, b3-pagination, d4-cache-fencing, d5-streaming-ingest-ko, p1-ticket-batch"
+        },
+        {
+          "at": "2026-11-04T07:36:05.234Z",
+          "status": "screening",
+          "reason": "extend: support 0.7596 vs threshold 0.8 (level execution, 10000 draws, mcse 0.0043); within band 0.1 of the threshold: extend repeats (3 -> more)"
+        },
+        {
+          "at": "2026-11-04T08:17:47.893Z",
+          "status": "rejected",
+          "reason": "critical: integrity: 11 run(s) with workspace integrity violations vs 10 for stable (b1-static-traversal#2: changed/removed 1 line(s) of test file test/api.test.js: \"import { resolve } from 'node:path';\"; d5-streaming-ingest-ko#2: changed/removed 1 line(s) of test file test/smoke.test.mjs: \"import test from 'node:test';import assert from 'node:assert/strict';import {rea\"; d5-streaming-ingest-ko#1: changed/removed 1 line(s) of test file test/smoke.test.mjs: \"import test from 'node:test';import assert from 'node:assert/strict';import {rea\")"
+        }
+      ],
+      "children": [],
+      "createdAt": "2026-11-04T07:14:22.531Z",
+      "id": "B-c002",
+      "parent": "stable",
+      "origin": "proposer",
+      "strategy": "greedy",
+      "worktree": "/home/arthur/Code/oh-my-pi-extensions/pi-eval-loop/state/abc-real-1/B/worktrees/B-c002",
+      "branch": "eval-loop/candidates/0cb75a26/B-c002",
+      "base": "e831a6b2bc19f0c707b55505db33a11b2c9d4d4a",
+      "target": "requirements-generalization",
+      "hypothesis": {
+        "text": "Requiring implementation workers to review every original requirement against code and focused checks before completion should catch omitted boundary behavior and requirement interactions that a passing existing suite does not exercise.",
+        "targetFailureClass": "requirements-generalization",
+        "expectedEffect": "More requested behaviors are implemented and directly verified, with fewer completion claims that overlook unsupported requirement clauses."
+      },
+      "updatedAt": "2026-11-04T08:17:47.893Z",
+      "proposer": {
+        "usage": {
+          "requests": 11,
+          "completed": 11,
+          "input": 507436,
+          "output": 1831,
+          "cached": 432512,
+          "wallMs": 88173,
+          "guardFired": false,
+          "exit": 0
+        }
+      },
+      "files": [
+        "src/extension/workers.ts"
+      ],
+      "patchKey": "70b6f2d663b5ee9b82fedb425ccf9f23ec8d45ea04096b278e6765caeeca64cd",
+      "patchSha256": "9f7712f3d2ca464e1f2f128688b3c988477062a9bf0eccc75d81396898de2b10",
+      "patchStats": {
+        "added": 2,
+        "removed": 0
+      },
+      "commit": "ba3292d1277156cc72d2fe6cd5fa3033b22c68d7",
+      "screening": {
+        "batch": [
+          "a7-auth-rotation",
+          "b1-static-traversal",
+          "b3-pagination",
+          "d4-cache-fencing",
+          "d5-streaming-ingest-ko",
+          "p1-ticket-batch"
+        ],
+        "repeats": 3,
+        "support": 0.7596,
+        "supportTaskLevel": 0.7147,
+        "mcse": 0.004273263857989581,
+        "delta": {
+          "overall": {
+            "mean": 0.05545751796325775,
+            "lo95": -0.06330101127733923,
+            "hi95": 0.1483018432886254,
+            "probPositive": 0.8322,
+            "probNegative": 0.1678
+          },
+          "hard": {
+            "mean": 0.22308454569780597,
+            "lo95": 0.052538784745752395,
+            "hi95": 0.3294419099487607,
+            "probPositive": 1,
+            "probNegative": 0
+          },
+          "consistency": {
+            "mean": 0.00012205987439691665,
+            "lo95": -0.13034376501307998,
+            "hi95": 0.1312207613778179,
+            "probPositive": 0.5024,
+            "probNegative": 0.4976
+          }
+        },
+        "point": {
+          "a": {
+            "overall": 0.5,
+            "consistency": 0.5,
+            "hard": 0
+          },
+          "b": {
+            "overall": 0.5555555555555556,
+            "consistency": 0.48148148148148145,
+            "hard": 0.2222222222222222
+          }
+        },
+        "decision": "EXTEND",
+        "reasons": [
+          "support 0.7596 vs threshold 0.8 (level execution, 10000 draws, mcse 0.0043)",
+          "within band 0.1 of the threshold: extend repeats (3 -> more)"
+        ],
+        "rounds": [
+          {
+            "at": "2026-11-04T07:36:05.164Z",
+            "repeats": 3,
+            "tasks": [
+              "a7-auth-rotation",
+              "b1-static-traversal",
+              "b3-pagination",
+              "d4-cache-fencing",
+              "d5-streaming-ingest-ko",
+              "p1-ticket-batch"
+            ],
+            "support": 0.7596,
+            "supportTaskLevel": 0.7147,
+            "decision": "EXTEND"
+          },
+          {
+            "at": "2026-11-04T08:17:47.893Z",
+            "repeats": 6,
+            "tasks": [
+              "a7-auth-rotation",
+              "b1-static-traversal",
+              "b3-pagination",
+              "d4-cache-fencing",
+              "d5-streaming-ingest-ko",
+              "p1-ticket-batch"
+            ],
+            "critical": [
+              "integrity: 11 run(s) with workspace integrity violations vs 10 for stable (b1-static-traversal#2: changed/removed 1 line(s) of test file test/api.test.js: \"import { resolve } from 'node:path';\"; d5-streaming-ingest-ko#2: changed/removed 1 line(s) of test file test/smoke.test.mjs: \"import test from 'node:test';import assert from 'node:assert/strict';import {rea\"; d5-streaming-ingest-ko#1: changed/removed 1 line(s) of test file test/smoke.test.mjs: \"import test from 'node:test';import assert from 'node:assert/strict';import {rea\")"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "status": "rejected",
+      "decisions": [
+        {
+          "at": "2026-11-04T08:19:31.386Z",
+          "status": "created",
+          "reason": "patch accepted"
+        },
+        {
+          "at": "2026-11-04T08:19:42.261Z",
+          "status": "screening",
+          "reason": "screening batch b5-ctx-migration, d4-cache-fencing, d5-streaming-ingest-ko, p1-ticket-batch, p2-handler-migration, p3-library-features-ko"
+        },
+        {
+          "at": "2026-11-04T08:46:22.048Z",
+          "status": "rejected",
+          "reason": "support 0.6104 vs threshold 0.8 (level execution, 10000 draws, mcse 0.0049)"
+        }
+      ],
+      "children": [],
+      "createdAt": "2026-11-04T08:17:48.107Z",
+      "id": "B-c003",
+      "parent": "stable",
+      "origin": "proposer",
+      "strategy": "greedy",
+      "worktree": "/home/arthur/Code/oh-my-pi-extensions/pi-eval-loop/state/abc-real-1/B/worktrees/B-c003",
+      "branch": "eval-loop/candidates/0cb75a26/B-c003",
+      "base": "e831a6b2bc19f0c707b55505db33a11b2c9d4d4a",
+      "target": "requirements-generalization",
+      "hypothesis": {
+        "text": "Requiring implementation workers to derive a clause-by-clause acceptance checklist from the original request and reconcile it with behavioral checks before completion should prevent passing suites from masking omitted requirements.",
+        "targetFailureClass": "requirements-generalization",
+        "expectedEffect": "Completed implementations should satisfy more stated requirements and boundary behaviors while retaining passing project checks."
+      },
+      "updatedAt": "2026-11-04T08:46:22.048Z",
+      "proposer": {
+        "usage": {
+          "requests": 11,
+          "completed": 11,
+          "input": 371499,
+          "output": 2522,
+          "cached": 322048,
+          "wallMs": 102674,
+          "guardFired": false,
+          "exit": 0
+        }
+      },
+      "files": [
+        "src/extension/workers.ts"
+      ],
+      "patchKey": "d74fdb81f3604ab9155a37663d5755553424d027a1dbade955781ef417207c5b",
+      "patchSha256": "7204852c207fc7c4be45c2c708bc9d0579456ebddd097e1f5a13be60873fc1ff",
+      "patchStats": {
+        "added": 4,
+        "removed": 1
+      },
+      "commit": "830e78a1890b96d1367c61f50abcd88f56387139",
+      "screening": {
+        "batch": [
+          "b5-ctx-migration",
+          "d4-cache-fencing",
+          "d5-streaming-ingest-ko",
+          "p1-ticket-batch",
+          "p2-handler-migration",
+          "p3-library-features-ko"
+        ],
+        "repeats": 3,
+        "support": 0.6104,
+        "supportTaskLevel": 0.663,
+        "mcse": 0.004876595533771485,
+        "delta": {
+          "overall": {
+            "mean": 0.05565154164898022,
+            "lo95": -0.07558717863054451,
+            "hi95": 0.19450260292586394,
+            "probPositive": 0.7903,
+            "probNegative": 0.2097
+          },
+          "hard": {
+            "mean": 0.13366879137140586,
+            "lo95": 0.02239517210671488,
+            "hi95": 0.2760063662715645,
+            "probPositive": 1,
+            "probNegative": 0
+          },
+          "consistency": {
+            "mean": -0.027499114313205918,
+            "lo95": -0.1429647183913217,
+            "hi95": 0.11425647340924636,
+            "probPositive": 0.3292,
+            "probNegative": 0.6708
+          }
+        },
+        "point": {
+          "a": {
+            "overall": 0.16666666666666666,
+            "consistency": 0.16666666666666666,
+            "hard": 0
+          },
+          "b": {
+            "overall": 0.2222222222222222,
+            "consistency": 0.1111111111111111,
+            "hard": 0.13333333333333333
+          }
+        },
+        "decision": "REJECT",
+        "reasons": [
+          "support 0.6104 vs threshold 0.8 (level execution, 10000 draws, mcse 0.0049)"
+        ],
+        "rounds": [
+          {
+            "at": "2026-11-04T08:46:21.929Z",
+            "repeats": 3,
+            "tasks": [
+              "b5-ctx-migration",
+              "d4-cache-fencing",
+              "d5-streaming-ingest-ko",
+              "p1-ticket-batch",
+              "p2-handler-migration",
+              "p3-library-features-ko"
+            ],
+            "support": 0.6104,
+            "supportTaskLevel": 0.663,
+            "decision": "REJECT"
+          }
+        ]
+      }
+    },
+    {
+      "status": "screening",
+      "decisions": [
+        {
+          "at": "2026-11-04T08:47:47.737Z",
+          "status": "created",
+          "reason": "patch accepted"
+        },
+        {
+          "at": "2026-11-04T08:47:58.406Z",
+          "status": "screening",
+          "reason": "screening batch b1-static-traversal, b2-patch-endpoint, b5-ctx-migration, d5-streaming-ingest-ko, p1-ticket-batch, p2-handler-migration"
+        }
+      ],
+      "children": [],
+      "createdAt": "2026-11-04T08:46:22.299Z",
+      "id": "B-c004",
+      "parent": "stable",
+      "origin": "proposer",
+      "strategy": "greedy",
+      "worktree": "/home/arthur/Code/oh-my-pi-extensions/pi-eval-loop/state/abc-real-1/B/worktrees/B-c004",
+      "branch": "eval-loop/candidates/0cb75a26/B-c004",
+      "base": "e831a6b2bc19f0c707b55505db33a11b2c9d4d4a",
+      "target": "termination-timeout",
+      "hypothesis": {
+        "text": "Requiring bounded, one-shot bash verification and diagnosis before retrying timed-out checks should prevent hanging checks and unchanged retries from consuming the unit wall-time guard.",
+        "targetFailureClass": "termination-timeout",
+        "expectedEffect": "Fewer wall-time timeouts and more runs reaching a final response after verification returns control promptly."
+      },
+      "updatedAt": "2026-11-04T08:47:58.406Z",
+      "proposer": {
+        "usage": {
+          "requests": 10,
+          "completed": 10,
+          "input": 388308,
+          "output": 1886,
+          "cached": 322560,
+          "wallMs": 84790,
+          "guardFired": false,
+          "exit": 0
+        }
+      },
+      "files": [
+        "src/tools/bash.ts"
+      ],
+      "patchKey": "91bd843f26a0a29d507f8154739a49589fe799b22e209ae3770a06e67bbd6d69",
+      "patchSha256": "57163b07dfbf42485b7673cf02450b66fccb7334e193a13d1768aaa66f6f8fe9",
+      "patchStats": {
+        "added": 9,
+        "removed": 1
+      },
+      "commit": "53f6c7dfbcfab9305705df81a1605c93cd529c5a"
+    },
+    {
+      "status": "baseline",
+      "decisions": [],
+      "children": [],
+      "createdAt": "2026-11-04T05:17:24.516Z",
+      "id": "multi3",
+      "parent": null,
+      "origin": "control",
+      "kind": "control",
+      "harness": {
+        "id": "multi3",
+        "kind": "multi",
+        "k": 3
+      },
+      "hypothesis": null,
+      "updatedAt": "2026-11-04T05:17:24.516Z"
+    },
+    {
+      "status": "baseline",
+      "decisions": [],
+      "children": [],
+      "createdAt": "2026-11-04T05:17:24.513Z",
+      "id": "pure",
+      "parent": null,
+      "origin": "control",
+      "kind": "control",
+      "harness": {
+        "id": "pure",
+        "kind": "pure"
+      },
+      "hypothesis": null,
+      "updatedAt": "2026-11-04T05:17:24.513Z"
+    },
+    {
+      "status": "baseline",
+      "decisions": [],
+      "children": [
+        "B-c001",
+        "B-c002",
+        "B-c003",
+        "B-c004"
+      ],
+      "createdAt": "2026-11-04T05:17:24.511Z",
+      "id": "stable",
+      "parent": null,
+      "origin": "baseline",
+      "commit": "e831a6b2bc19f0c707b55505db33a11b2c9d4d4a",
+      "hypothesis": null,
+      "updatedAt": "2026-11-04T08:46:22.302Z",
+      "development": {
+        "tasks": 16,
+        "repeats": 3,
+        "point": {
+          "overall": 0.7717367502648188,
+          "hard": 0.5039709510377249,
+          "consistency": 0.7194706759137421
+        },
+        "posterior": {
+          "overall": {
+            "point": 0.7708333333333333,
+            "mean": 0.7717367502648188,
+            "lo95": 0.5706298572762984,
+            "hi95": 0.9194533182026232
+          },
+          "hard": {
+            "point": 0.5,
+            "mean": 0.5039709510377249,
+            "lo95": 0.2036955375718281,
+            "hi95": 0.7965390685354218
+          },
+          "consistency": {
+            "point": 0.7013888888888888,
+            "mean": 0.7194706759137421,
+            "lo95": 0.49820931678153224,
+            "hi95": 0.893569598046546
+          }
+        },
+        "qualified": true,
+        "reasons": [
+          "baseline"
+        ],
+        "summary": {
+          "candidate_id": "stable",
+          "split": "dev",
+          "runs": 48,
+          "tasks": 16,
+          "task_success": 37,
+          "success_rate": 0.7708333333333334,
+          "hidden_test_pass": 42,
+          "mean_correctness": 0.9667245370370369,
+          "repeat_success_rate": 0.7013888888888888,
+          "all_repeats_pass_tasks": 10,
+          "hard_task_success_rate": 0.5,
+          "regression_count": 0,
+          "critical_failure_count": 5,
+          "integrity_violations": 5,
+          "terminal": {
+            "completed": 48
+          },
+          "infra_rate": 0,
+          "input_tokens": 8000848,
+          "output_tokens": 180933,
+          "cache_tokens": 6783232,
+          "model_requests": 917,
+          "wall_time_ms": 5468650,
+          "simulated_runs": 0
+        }
+      }
+    }
+  ],
+  "front": [
+    "stable"
+  ],
+  "selection": {
+    "at": "2026-11-04T08:47:58.428Z",
+    "considered": [],
+    "eligible": [],
+    "selected": null,
+    "reason": "no development-qualified candidate without family regression"
+  },
+  "final": {
+    "verdict": "KEEP_STABLE",
+    "reasons": [
+      "no development-qualified candidate without family regression"
+    ]
+  },
+  "searchStop": "candidate cap of 4 per cycle reached (safety limit)",
+  "counters": {
+    "candidates": 4,
+    "noProgress": 3,
+    "consecutiveInfra": 0
+  },
+  "deployHistory": [],
+  "proposerUsage": {
+    "requests": 43,
+    "input": 1655114,
+    "output": 7935
+  },
+  "ledgerIntegrity": {
+    "runsLedger": [],
+    "events": []
+  },
+  "runs": 363
+}

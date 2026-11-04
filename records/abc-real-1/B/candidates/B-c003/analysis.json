@@ -1,0 +1,252 @@
+{
+  "observations": [
+    {
+      "task": "a7-auth-rotation",
+      "runs": 6,
+      "successRate": 1,
+      "persistence": "none",
+      "classes": {},
+      "referenceSuccessRate": 1,
+      "hard": false,
+      "excerpts": []
+    },
+    {
+      "task": "b1-static-traversal",
+      "runs": 6,
+      "successRate": 1,
+      "persistence": "none",
+      "classes": {},
+      "referenceSuccessRate": 1,
+      "hard": false,
+      "excerpts": []
+    },
+    {
+      "task": "b2-patch-endpoint",
+      "runs": 3,
+      "successRate": 1,
+      "persistence": "none",
+      "classes": {},
+      "referenceSuccessRate": 1,
+      "hard": false,
+      "excerpts": []
+    },
+    {
+      "task": "b3-pagination",
+      "runs": 6,
+      "successRate": 1,
+      "persistence": "none",
+      "classes": {},
+      "referenceSuccessRate": 1,
+      "hard": false,
+      "excerpts": []
+    },
+    {
+      "task": "b5-ctx-migration",
+      "runs": 3,
+      "successRate": 1,
+      "persistence": "none",
+      "classes": {},
+      "referenceSuccessRate": 0.6666666666666666,
+      "hard": false,
+      "excerpts": []
+    },
+    {
+      "task": "b6-route-cache",
+      "runs": 3,
+      "successRate": 1,
+      "persistence": "none",
+      "classes": {},
+      "referenceSuccessRate": 1,
+      "hard": false,
+      "excerpts": []
+    },
+    {
+      "task": "d4-cache-fencing",
+      "runs": 6,
+      "successRate": 0,
+      "persistence": "persistent",
+      "classes": {
+        "integrity": 5,
+        "termination-timeout": 1
+      },
+      "referenceSuccessRate": 1,
+      "hard": true,
+      "excerpts": [
+        {
+          "repeat": 0,
+          "terminal": "completed",
+          "detail": "stop",
+          "visible": true,
+          "hidden": true,
+          "final": "Fixed the cache defects identified in `logs/incident.log`: delimiter-ambiguous keys, stale generation races after invalidation, TTL measured from load start instead of completion, and shared mutable responses. The adapter now passes tenant through to `fetchProfile`; retry policy and profile normaliz"
+        },
+        {
+          "repeat": 2,
+          "terminal": "completed",
+          "detail": "stop",
+          "visible": true,
+          "hidden": true,
+          "final": "Fixed the cache, keying, and stale-generation fencing in `src/cache.mjs` and `src/keys.mjs`, and added deterministic regressions in `test/smoke.test.mjs`. The profile adapter was retained. The worker reports all four native Node tests pass, including the incident regressions. No commit was made."
+        }
+      ]
+    },
+    {
+      "task": "d5-streaming-ingest-ko",
+      "runs": 6,
+      "successRate": 0.16666666666666663,
+      "persistence": "mixed",
+      "classes": {
+        "integrity": 5
+      },
+      "referenceSuccessRate": 0.3333333333333333,
+      "hard": true,
+      "excerpts": [
+        {
+          "repeat": 0,
+          "terminal": "completed",
+          "detail": "stop",
+          "visible": true,
+          "hidden": true,
+          "final": "요청한 NDJSON 수집 경로를 수정했습니다. `src/parser.mjs`와 `src/aggregate.mjs`를 갱신하고 `test/smoke.test.mjs`에 테스트를 추가했습니다.\n\n`npm test`가 통과했고, CLI 스모크 테스트에서 관대 모드의 출력·진단과 엄격 모드의 종료 코드 1 및 부분 출력 방지를 확인했습니다. 커밋은 하지 않았습니다."
+        },
+        {
+          "repeat": 2,
+          "terminal": "completed",
+          "detail": "stop",
+          "visible": true,
+          "hidden": false,
+          "final": "요청한 NDJSON 수집 경로 개선을 완료했습니다. `src/parser.mjs`, `src/aggregate.mjs`, `src/cli.mjs`를 수정하고 `test/smoke.test.mjs`에 테스트를 추가했습니다.\n\n작업자 보고 기준으로 `npm test`에서 5개 테스트가 통과했고, CLI의 종료 코드와 출력 스트림도 스모크 테스트로 확인했습니다. 변경 사항은 커밋하지 않았습니다."
+        }
+      ]
+    },
+    {
+      "task": "p1-ticket-batch",
+      "runs": 6,
+      "successRate": 0,
+      "persistence": "persistent",
+      "classes": {
+        "requirements-generalization": 6
+      },
+      "referenceSuccessRate": 0,
+      "hard": true,
+      "excerpts": [
+        {
+          "repeat": 0,
+          "terminal": "completed",
+          "detail": "stop",
+          "visible": true,
+          "hidden": false,
+          "final": "Completed the four tickets and added regression tests in their respective module directories. `node --test` passes all 5 tests.\n\nThe worker also reported TypeScript diagnostics in auxiliary/runtime files and type-inference warnings in edited modules; those were not resolved as part of this task. No "
+        },
+        {
+          "repeat": 2,
+          "terminal": "completed",
+          "detail": "stop",
+          "visible": true,
+          "hidden": false,
+          "final": "Implemented all four tickets in their respective `src/` modules and added regression tests. The full `node --test` suite passes: 12 tests, 0 failures. No commit was made."
+        }
+      ]
+    },
+    {
+      "task": "p2-handler-migration",
+      "runs": 3,
+      "successRate": 0,
+      "persistence": "persistent",
+      "classes": {
+        "requirements-generalization": 3
+      },
+      "referenceSuccessRate": 0,
+      "hard": true,
+      "excerpts": [
+        {
+          "repeat": 0,
+          "terminal": "completed",
+          "detail": "stop",
+          "visible": true,
+          "hidden": false,
+          "final": "Migrated all six handlers to async `handle(ctx)` and added regression tests. `node --test` passes all 7 tests, and `src/router.mjs` is unchanged.\n\nThe worker reports that validation, service-error, and immutability coverage is partial; not every specified edge case was tested."
+        },
+        {
+          "repeat": 1,
+          "terminal": "completed",
+          "detail": "stop",
+          "visible": true,
+          "hidden": false,
+          "final": "Implemented the six async handlers and added injected-service regression tests. `node --test` passes (8 tests), and `src/router.mjs` remains unchanged. No commit was made."
+        }
+      ]
+    },
+    {
+      "task": "p3-library-features-ko",
+      "runs": 3,
+      "successRate": 0,
+      "persistence": "persistent",
+      "classes": {
+        "requirements-generalization": 3
+      },
+      "referenceSuccessRate": 0,
+      "hard": true,
+      "excerpts": [
+        {
+          "repeat": 0,
+          "terminal": "completed",
+          "detail": "stop",
+          "visible": true,
+          "hidden": false,
+          "final": "세 라이브러리 구현과 회귀 테스트를 추가했습니다. `node --test`가 통과했습니다.\n\n변경 파일: `src/interval/index.mjs`, `src/cron/index.mjs`, `src/merge/index.mjs`, `test/libraries.test.mjs`\n\nTypeScript 진단에서는 기존 프로젝트 오류와 JavaScript 타입 관련 오류가 보고됐지만, 테스트 실패는 없었습니다. git 커밋은 하지 않았습니다."
+        },
+        {
+          "repeat": 2,
+          "terminal": "completed",
+          "detail": "stop",
+          "visible": true,
+          "hidden": false,
+          "final": "세 라이브러리 구현과 회귀 테스트를 추가했습니다. `node --test`에서 12개 테스트가 통과했고, 진단 오류도 없습니다.\n\n변경 파일:\n- `src/interval/index.mjs`, `src/interval/index.test.mjs`\n- `src/cron/index.mjs`, `src/cron/regression.test.mjs`\n- `src/merge/index.mjs`, `src/merge/index.test.mjs`"
+        }
+      ]
+    }
+  ],
+  "hypotheses": [
+    {
+      "class": "requirements-generalization",
+      "description": "visible tests pass but the hidden (independent) grading fails",
+      "runs": 12,
+      "tasks": [
+        "p1-ticket-batch",
+        "p2-handler-migration",
+        "p3-library-features-ko"
+      ],
+      "recurrence": "recurring across tasks",
+      "reproducibility": "persistent on every repeat (could be a model limit)",
+      "modelVsHarness": "no reference harness did better on these tasks: model-limit not excluded",
+      "status": "unverified"
+    },
+    {
+      "class": "integrity",
+      "description": "weakened tests, injected configuration, or reached for grading material",
+      "runs": 10,
+      "tasks": [
+        "d4-cache-fencing",
+        "d5-streaming-ingest-ko"
+      ],
+      "recurrence": "recurring across tasks",
+      "reproducibility": "1/2 task(s) mixed (sometimes succeed: behaviour-dependent, plausibly harness-addressable)",
+      "modelVsHarness": "2 task(s) where the reference harness did better: harness-attributable evidence",
+      "status": "unverified"
+    },
+    {
+      "class": "termination-timeout",
+      "description": "ran out of the unit wall-time guard",
+      "runs": 1,
+      "tasks": [
+        "d4-cache-fencing"
+      ],
+      "recurrence": "single task",
+      "reproducibility": "persistent on every repeat (could be a model limit)",
+      "modelVsHarness": "1 task(s) where the reference harness did better: harness-attributable evidence",
+      "status": "unverified"
+    }
+  ],
+  "infraRuns": 0
+}

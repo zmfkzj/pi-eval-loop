@@ -1,0 +1,320 @@
+{
+  "train": [
+    "a7-auth-rotation",
+    "b1-static-traversal",
+    "b2-patch-endpoint",
+    "b3-pagination",
+    "b5-ctx-migration",
+    "b6-route-cache",
+    "d4-cache-fencing",
+    "d5-streaming-ingest-ko",
+    "p1-ticket-batch",
+    "p2-handler-migration",
+    "p3-library-features-ko"
+  ],
+  "dev": [
+    "a1-rounding",
+    "a2-discount-codes",
+    "a3-refactor-tax",
+    "a4-tests-fx",
+    "a6-typo-message",
+    "c1-timezone",
+    "c2-since-flag-ko",
+    "c4-malformed-lines",
+    "c5-aggregate-perf",
+    "c6-csv-export",
+    "d1-transactional-outbox",
+    "d2-keyed-queue",
+    "d3-money-migration-ko",
+    "d6-snapshot-pagination",
+    "d7-config-reload",
+    "d8-build-graph"
+  ],
+  "holdout": [
+    "h1-interval-merge",
+    "h2-csv-parse",
+    "h3-retry-backoff",
+    "h4-semver-range",
+    "h5-lru-ttl",
+    "h6-markdown-toc",
+    "h7-money-allocate"
+  ],
+  "excluded": [],
+  "digests": {
+    "a1-rounding": "66dc1f2237f51f28596b2beb1c98367a0dcde491379c97e13c7667df228e583d",
+    "a2-discount-codes": "f4af636843804b529d68c537c3d9f6752db72dda6e430834ab30b7b946613547",
+    "a3-refactor-tax": "783a3f7993829a083cec4e7c51ade90378669fa6a2faa0e6572a095dbc7c9c1b",
+    "a4-tests-fx": "7876a5f1ca6c63d46aff6164f380ca28b988d2bac115075a721fc7e7142cce25",
+    "a6-typo-message": "66b7800e6e7f5b29fa84a0d55dcb34353f9c30cb4679e390fb7fc7022473e194",
+    "a7-auth-rotation": "b628aedb0b37f999afb9d828c57b43da7a4b1dbd8aa021398400f37af3514add",
+    "b1-static-traversal": "71187d345dd11c45d4e82f61220a5994574eb15d1aae3efe6a31b80ba7b230ad",
+    "b2-patch-endpoint": "1aa0776a526a50ae8ab347b2db30f6468f5602385fc0ccf15c82c11514dd9a28",
+    "b3-pagination": "aeae308bfb617a64ad981ec8e89330a1e2b92b83423156adefcd0ed33d7b2099",
+    "b5-ctx-migration": "0804db6f0b832962a3882f16926cc94017c4f3eeda9e20b0156b802375cdc7ad",
+    "b6-route-cache": "d6b72f998c1e8a1d035eca4c946ae4112470e0f1cba0fc89f13793acf47b9bb2",
+    "c1-timezone": "eea00bbb2bfb76a86ac6c9a3e7fdc17d0ae92e69c3277eb1232d9aeb7771708b",
+    "c2-since-flag-ko": "7e185f7ba2ff425a83b313f6c811813bfd3fc48c11bf3f9084553b7fe2230503",
+    "c4-malformed-lines": "f969cfcdd17884e25a7ef16d7ff1a27f63205b6c31cbd2ea4e7f2373c5128db7",
+    "c5-aggregate-perf": "5f743480dc71400d1ab31259fdbef468d1fac9699aa566e8fae71b8834a724de",
+    "c6-csv-export": "a04385ea74936ac0b7d80bc3be5b4404a04012aff1efcb7998834900b2d83cde",
+    "d1-transactional-outbox": "898cd696f0c9aebe6ebf35248a98f965fb2927328df8556a7c3485cc4278db4d",
+    "d2-keyed-queue": "63ff8c9ce8e4b3d8daab8cf77213589c7d61628240bf357552e2e8d18b41a643",
+    "d3-money-migration-ko": "9eb4dc02ef69842ade67506dffacc89840ce9ebea0358056fc6a91ba345fee76",
+    "d4-cache-fencing": "2b371bf7359a500b3c16feeaebe9fa35e8ce594207900c37e276f242fef0f102",
+    "d5-streaming-ingest-ko": "31d6ce9331e329d50065054e1f4cd24d02c60bb7c2f0b906ce4a1caf6df69b45",
+    "d6-snapshot-pagination": "69404b511703b8d9e1cb22d668291f142f29d11ba880a271501d871da0da6664",
+    "d7-config-reload": "4d0c0a0c87517eb23466838f65e5375d11160f5602e4062065a394e684282e23",
+    "d8-build-graph": "579b81ef90a39b26d7d42f7dd3bb5041bd760218b855ee08e6788cc95559f15e",
+    "p1-ticket-batch": "12e9f5919ed365333fa7f2ccb42dce4968722fb4a19a7d99eeb8e985284d066e",
+    "p2-handler-migration": "625bd2d7c94e45f42fa6ae70b98c4e0d04fe14fbf89420a3bb9d967842a817f6",
+    "p3-library-features-ko": "64099bf7f8f8c53ec6cf146b2dd4e3ad86f0067434e10e9696d0207ff54d33b3",
+    "h1-interval-merge": "882757b968cda3fed51639b85bd2cee2edf157274bb2b6e015a33d4d86e5db47",
+    "h2-csv-parse": "cb7cc57265278c18a05b4cbae1effc4f089cec809c501f86f9bdb39676595684",
+    "h3-retry-backoff": "b11b06f3db210bfb70c76c729da9ea60028bc44f6731c931fe84df7a11dfca3d",
+    "h4-semver-range": "beeb7d00187f624d04c1d1b34efef1b9de860f304a354d255ae903d94a136579",
+    "h5-lru-ttl": "102f8a521c039541f1d7d60996ad72c3c96d6750f9da24577ab975005c3b21e5",
+    "h6-markdown-toc": "d774d5269725d8a1df49c04a8f59d32ed102750b1dc9656d0bc3aa5f47c0d395",
+    "h7-money-allocate": "83db5f8ac16471b4e737cba69fed411cd580aba5355ec56a200bb3501ff12ac1"
+  },
+  "holdoutSeal": "370af542c6f44c2a7e868abf5615d3df981275b261272ac12852eb246c54c743",
+  "meta": {
+    "a1-rounding": {
+      "family": "pkg:ledger",
+      "tier": "easy",
+      "hard": false,
+      "source": "suite",
+      "provenance": "orche-fixtures-suite"
+    },
+    "a2-discount-codes": {
+      "family": "pkg:ledger",
+      "tier": "easy",
+      "hard": false,
+      "source": "suite",
+      "provenance": "orche-fixtures-suite"
+    },
+    "a3-refactor-tax": {
+      "family": "pkg:ledger",
+      "tier": "easy",
+      "hard": false,
+      "source": "suite",
+      "provenance": "orche-fixtures-suite"
+    },
+    "a4-tests-fx": {
+      "family": "pkg:ledger",
+      "tier": "easy",
+      "hard": false,
+      "source": "suite",
+      "provenance": "orche-fixtures-suite"
+    },
+    "a6-typo-message": {
+      "family": "pkg:ledger",
+      "tier": "easy",
+      "hard": false,
+      "source": "suite",
+      "provenance": "orche-fixtures-suite"
+    },
+    "a7-auth-rotation": {
+      "family": "pkg:invoice-sync",
+      "tier": "easy",
+      "hard": false,
+      "source": "suite",
+      "provenance": "orche-fixtures-suite"
+    },
+    "b1-static-traversal": {
+      "family": "pkg:minihttp",
+      "tier": "medium",
+      "hard": false,
+      "source": "suite",
+      "provenance": "orche-fixtures-suite"
+    },
+    "b2-patch-endpoint": {
+      "family": "pkg:minihttp",
+      "tier": "medium",
+      "hard": false,
+      "source": "suite",
+      "provenance": "orche-fixtures-suite"
+    },
+    "b3-pagination": {
+      "family": "pkg:minihttp",
+      "tier": "medium",
+      "hard": false,
+      "source": "suite",
+      "provenance": "orche-fixtures-suite"
+    },
+    "b5-ctx-migration": {
+      "family": "pkg:minihttp",
+      "tier": "medium",
+      "hard": false,
+      "source": "suite",
+      "provenance": "orche-fixtures-suite"
+    },
+    "b6-route-cache": {
+      "family": "pkg:minihttp",
+      "tier": "medium",
+      "hard": false,
+      "source": "suite",
+      "provenance": "orche-fixtures-suite"
+    },
+    "c1-timezone": {
+      "family": "pkg:logtool",
+      "tier": "medium",
+      "hard": false,
+      "source": "suite",
+      "provenance": "orche-fixtures-suite"
+    },
+    "c2-since-flag-ko": {
+      "family": "pkg:logtool",
+      "tier": "medium",
+      "hard": false,
+      "source": "suite",
+      "provenance": "orche-fixtures-suite"
+    },
+    "c4-malformed-lines": {
+      "family": "pkg:logtool",
+      "tier": "medium",
+      "hard": false,
+      "source": "suite",
+      "provenance": "orche-fixtures-suite"
+    },
+    "c5-aggregate-perf": {
+      "family": "pkg:logtool",
+      "tier": "medium",
+      "hard": false,
+      "source": "suite",
+      "provenance": "orche-fixtures-suite"
+    },
+    "c6-csv-export": {
+      "family": "pkg:logtool",
+      "tier": "medium",
+      "hard": false,
+      "source": "suite",
+      "provenance": "orche-fixtures-suite"
+    },
+    "d1-transactional-outbox": {
+      "family": "pkg:d1-transactional-outbox",
+      "tier": "hard",
+      "hard": true,
+      "source": "suite",
+      "provenance": "orche-fixtures-suite"
+    },
+    "d2-keyed-queue": {
+      "family": "pkg:d2-keyed-queue",
+      "tier": "hard",
+      "hard": true,
+      "source": "suite",
+      "provenance": "orche-fixtures-suite"
+    },
+    "d3-money-migration-ko": {
+      "family": "pkg:d3-money-migration-ko",
+      "tier": "hard",
+      "hard": true,
+      "source": "suite",
+      "provenance": "orche-fixtures-suite"
+    },
+    "d4-cache-fencing": {
+      "family": "pkg:d4-cache-fencing",
+      "tier": "hard",
+      "hard": true,
+      "source": "suite",
+      "provenance": "orche-fixtures-suite"
+    },
+    "d5-streaming-ingest-ko": {
+      "family": "pkg:d5-streaming-ingest-ko",
+      "tier": "hard",
+      "hard": true,
+      "source": "suite",
+      "provenance": "orche-fixtures-suite"
+    },
+    "d6-snapshot-pagination": {
+      "family": "pkg:d6-snapshot-pagination",
+      "tier": "hard",
+      "hard": true,
+      "source": "suite",
+      "provenance": "orche-fixtures-suite"
+    },
+    "d7-config-reload": {
+      "family": "pkg:d7-config-reload",
+      "tier": "hard",
+      "hard": true,
+      "source": "suite",
+      "provenance": "orche-fixtures-suite"
+    },
+    "d8-build-graph": {
+      "family": "pkg:d8-build-graph",
+      "tier": "hard",
+      "hard": true,
+      "source": "suite",
+      "provenance": "orche-fixtures-suite"
+    },
+    "p1-ticket-batch": {
+      "family": "p-series",
+      "tier": "hard",
+      "hard": true,
+      "source": "suite",
+      "provenance": "orche-fixtures-suite"
+    },
+    "p2-handler-migration": {
+      "family": "p-series",
+      "tier": "hard",
+      "hard": true,
+      "source": "suite",
+      "provenance": "orche-fixtures-suite"
+    },
+    "p3-library-features-ko": {
+      "family": "p-series",
+      "tier": "hard",
+      "hard": true,
+      "source": "suite",
+      "provenance": "orche-fixtures-suite"
+    },
+    "h1-interval-merge": {
+      "family": "intervals",
+      "tier": "medium",
+      "hard": false,
+      "source": "local",
+      "provenance": "implementer-authored-sealed-before-search"
+    },
+    "h2-csv-parse": {
+      "family": "csv-parser",
+      "tier": "hard",
+      "hard": true,
+      "source": "local",
+      "provenance": "implementer-authored-sealed-before-search"
+    },
+    "h3-retry-backoff": {
+      "family": "retry",
+      "tier": "medium",
+      "hard": false,
+      "source": "local",
+      "provenance": "implementer-authored-sealed-before-search"
+    },
+    "h4-semver-range": {
+      "family": "semver",
+      "tier": "hard",
+      "hard": true,
+      "source": "local",
+      "provenance": "implementer-authored-sealed-before-search"
+    },
+    "h5-lru-ttl": {
+      "family": "cache",
+      "tier": "hard",
+      "hard": true,
+      "source": "local",
+      "provenance": "implementer-authored-sealed-before-search"
+    },
+    "h6-markdown-toc": {
+      "family": "markdown",
+      "tier": "medium",
+      "hard": false,
+      "source": "local",
+      "provenance": "implementer-authored-sealed-before-search"
+    },
+    "h7-money-allocate": {
+      "family": "money",
+      "tier": "easy",
+      "hard": false,
+      "source": "local",
+      "provenance": "implementer-authored-sealed-before-search"
+    }
+  }
+}

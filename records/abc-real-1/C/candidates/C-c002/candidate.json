@@ -1,0 +1,77 @@
+{
+  "status": "rejected",
+  "decisions": [
+    {
+      "at": "2026-11-04T07:17:45.033Z",
+      "status": "created",
+      "reason": "patch accepted"
+    },
+    {
+      "at": "2026-11-04T07:17:55.915Z",
+      "status": "screening",
+      "reason": "screening batch a7-auth-rotation, b1-static-traversal, b3-pagination, b5-ctx-migration, p1-ticket-batch, p2-handler-migration"
+    },
+    {
+      "at": "2026-11-04T07:33:21.095Z",
+      "status": "rejected",
+      "reason": "critical: integrity: 1 run(s) with workspace integrity violations vs 0 for C-c001 (b5-ctx-migration#0: changed/removed 1 line(s) of test file test/api.test.js: \"import { request } from './helpers.js';\")"
+    }
+  ],
+  "children": [],
+  "createdAt": "2026-11-04T07:16:02.283Z",
+  "id": "C-c002",
+  "parent": "C-c001",
+  "origin": "proposer",
+  "strategy": "pareto",
+  "worktree": "/home/arthur/Code/oh-my-pi-extensions/pi-eval-loop/state/abc-real-1/C/worktrees/C-c002",
+  "branch": "eval-loop/candidates/ce8bb544/C-c002",
+  "base": "6c14f42e223209c4011a8db063589b50c38102f0",
+  "target": "requirements-generalization",
+  "hypothesis": {
+    "text": "Requiring implementation workers to derive behavioral cases and expected outcomes from the original request before editing code should reduce omissions and implementation-shaped checks by establishing boundary and interaction expectations first.",
+    "targetFailureClass": "requirements-generalization",
+    "expectedEffect": "More completed implementations satisfy the full requested behavior, including specified boundaries and interactions, rather than only the cases already exercised by existing tests."
+  },
+  "updatedAt": "2026-11-04T07:33:21.095Z",
+  "proposer": {
+    "usage": {
+      "requests": 11,
+      "completed": 11,
+      "input": 469189,
+      "output": 1801,
+      "cached": 404864,
+      "wallMs": 101778,
+      "guardFired": false,
+      "exit": 0
+    }
+  },
+  "files": [
+    "src/extension/workers.ts"
+  ],
+  "patchKey": "e20038909e196e0f07ed92bec675d476018e4096845c71e59ae528d275a7a2d2",
+  "patchSha256": "0f55fd80150ced32439b03d2f83d22b8cba31e34778738160f705a2b334bfaf4",
+  "patchStats": {
+    "added": 1,
+    "removed": 1
+  },
+  "commit": "d8e0c967ceb6527f7f3a4adc64c1973830616a80",
+  "screening": {
+    "rounds": [
+      {
+        "at": "2026-11-04T07:33:21.095Z",
+        "repeats": 3,
+        "tasks": [
+          "a7-auth-rotation",
+          "b1-static-traversal",
+          "b3-pagination",
+          "b5-ctx-migration",
+          "p1-ticket-batch",
+          "p2-handler-migration"
+        ],
+        "critical": [
+          "integrity: 1 run(s) with workspace integrity violations vs 0 for C-c001 (b5-ctx-migration#0: changed/removed 1 line(s) of test file test/api.test.js: \"import { request } from './helpers.js';\")"
+        ]
+      }
+    ]
+  }
+}

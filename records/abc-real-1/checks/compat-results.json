@@ -1,0 +1,292 @@
+{
+  "host": {
+    "dir": "/home/arthur/Code/oh-my-pi-extensions/orche/node_modules/@earendil-works/pi-coding-agent",
+    "ai": "/home/arthur/Code/oh-my-pi-extensions/orche/node_modules/@earendil-works/pi-ai",
+    "tui": "/home/arthur/Code/oh-my-pi-extensions/orche/node_modules/@earendil-works/pi-tui",
+    "version": "1.4.0",
+    "aiVersion": "1.4.0",
+    "tuiVersion": "1.4.0"
+  },
+  "versions": [
+    "orche: @earendil-works/pi-agent-core@1.4.0 -> /home/arthur/Code/oh-my-pi-extensions/orche/node_modules/@earendil-works/pi-agent-core/package.json",
+    "orche: @earendil-works/pi-ai@1.4.0 -> /home/arthur/Code/oh-my-pi-extensions/orche/node_modules/@earendil-works/pi-ai/package.json",
+    "orche: @earendil-works/pi-coding-agent@1.4.0 -> /home/arthur/Code/oh-my-pi-extensions/orche/node_modules/@earendil-works/pi-coding-agent/package.json",
+    "browser: @earendil-works/pi-agent-core@1.4.0 -> /home/arthur/Code/oh-my-pi-extensions/browser/node_modules/@earendil-works/pi-agent-core/package.json",
+    "browser: @earendil-works/pi-ai@1.4.0 -> /home/arthur/Code/oh-my-pi-extensions/browser/node_modules/@earendil-works/pi-ai/package.json",
+    "browser: @earendil-works/pi-coding-agent@1.4.0 -> /home/arthur/Code/oh-my-pi-extensions/browser/node_modules/@earendil-works/pi-coding-agent/package.json",
+    "pi-gui: @earendil-works/pi-ai@1.4.0 -> /home/arthur/Code/oh-my-pi-extensions/pi-gui/node_modules/@earendil-works/pi-ai/package.json",
+    "pi-gui: @earendil-works/pi-coding-agent@1.4.0 -> /home/arthur/Code/oh-my-pi-extensions/pi-gui/node_modules/@earendil-works/pi-coding-agent/package.json",
+    "pi-commit: @earendil-works/pi-coding-agent@1.4.0 -> /home/arthur/Code/oh-my-pi-extensions/pi-commit/node_modules/@earendil-works/pi-coding-agent/package.json",
+    "pi-commit: @earendil-works/pi-ai@1.4.0 -> /home/arthur/Code/oh-my-pi-extensions/pi-commit/node_modules/@earendil-works/pi-ai/package.json",
+    "pi-commit: @earendil-works/pi-tui@1.4.0 -> /home/arthur/Code/oh-my-pi-extensions/pi-commit/node_modules/@earendil-works/pi-tui/package.json",
+    "session-bus: @earendil-works/pi-coding-agent@1.4.0 -> /home/arthur/Code/oh-my-pi-extensions/session-bus/node_modules/@earendil-works/pi-coding-agent/package.json",
+    "session-bus: @earendil-works/pi-ai@1.4.0 -> /home/arthur/Code/oh-my-pi-extensions/session-bus/node_modules/@earendil-works/pi-ai/package.json",
+    "images: @earendil-works/pi-ai@1.4.0 -> /home/arthur/Code/oh-my-pi-extensions/images/node_modules/@earendil-works/pi-ai/package.json",
+    "images: @earendil-works/pi-coding-agent@1.4.0 -> /home/arthur/Code/oh-my-pi-extensions/images/node_modules/@earendil-works/pi-coding-agent/package.json",
+    "images: @earendil-works/pi-tui@1.4.0 -> /home/arthur/Code/oh-my-pi-extensions/images/node_modules/@earendil-works/pi-tui/package.json",
+    "codegraph: @earendil-works/pi-coding-agent@1.4.0 -> /home/arthur/Code/oh-my-pi-extensions/codegraph/node_modules/@earendil-works/pi-coding-agent/package.json",
+    "codegraph: @earendil-works/pi-ai@1.4.0 -> /home/arthur/Code/oh-my-pi-extensions/codegraph/node_modules/@earendil-works/pi-ai/package.json",
+    "cliproxyapi: @earendil-works/pi-ai@1.4.0 -> /home/arthur/Code/oh-my-pi-extensions/cliproxyapi/node_modules/@earendil-works/pi-ai/package.json",
+    "cliproxyapi: @earendil-works/pi-coding-agent@1.4.0 -> /home/arthur/Code/oh-my-pi-extensions/cliproxyapi/node_modules/@earendil-works/pi-coding-agent/package.json"
+  ],
+  "optionalPythonSuitesExcluded": false,
+  "results": [
+    {
+      "name": "root",
+      "command": "npm test",
+      "cwd": "/home/arthur/Code/oh-my-pi-extensions",
+      "status": 0,
+      "signal": null,
+      "log": "/var/tmp/pi-arthur/omp-compat-9VQjvD/root.log",
+      "summary": [
+        "ℹ tests 74",
+        "ℹ pass 74",
+        "ℹ fail 0",
+        "ℹ cancelled 0",
+        "ℹ skipped 0"
+      ]
+    },
+    {
+      "name": "orche-typecheck",
+      "command": "npm run typecheck",
+      "cwd": "/home/arthur/Code/oh-my-pi-extensions/orche",
+      "status": 0,
+      "signal": null,
+      "log": "/var/tmp/pi-arthur/omp-compat-9VQjvD/orche-typecheck.log",
+      "summary": []
+    },
+    {
+      "name": "orche",
+      "command": "npm test",
+      "cwd": "/home/arthur/Code/oh-my-pi-extensions/orche",
+      "status": 0,
+      "signal": null,
+      "log": "/var/tmp/pi-arthur/omp-compat-9VQjvD/orche.log",
+      "summary": [
+        "2026-11-04T05:32:01.429Z END c1/C/r2 failed (exit 1: boom: harness failure); the next driver start keeps this attempt as .interrupted-<n> and reruns the unit",
+        " ✓ test/experiments/cb-ab.test.ts (27 tests | 2 skipped) 2029ms",
+        " ✓ test/experiments/mdsd-ab.test.ts (11 tests | 1 skipped) 333ms",
+        " ✓ test/experiments/cb-ab-sol.test.ts (11 tests | 1 skipped) 226ms",
+        " ✓ test/orchestration/scratch.test.ts (5 tests | 1 skipped) 48ms",
+        " ↓ test/live/generate-image.live.test.ts (1 test | 1 skipped)",
+        " Test Files  167 passed | 1 skipped (168)",
+        "      Tests  3039 passed | 6 skipped (3045)"
+      ]
+    },
+    {
+      "name": "browser-typecheck",
+      "command": "npm run typecheck",
+      "cwd": "/home/arthur/Code/oh-my-pi-extensions/browser",
+      "status": 0,
+      "signal": null,
+      "log": "/var/tmp/pi-arthur/omp-compat-9VQjvD/browser-typecheck.log",
+      "summary": []
+    },
+    {
+      "name": "browser",
+      "command": "npm test",
+      "cwd": "/home/arthur/Code/oh-my-pi-extensions/browser",
+      "status": 0,
+      "signal": null,
+      "log": "/var/tmp/pi-arthur/omp-compat-9VQjvD/browser.log",
+      "summary": [
+        " ↓ test/e2e-chrome.test.ts (1 test | 1 skipped)",
+        " ↓ test/e2e.test.ts (3 tests | 3 skipped)",
+        " Test Files  20 passed | 2 skipped (22)",
+        "      Tests  537 passed | 4 skipped (541)"
+      ]
+    },
+    {
+      "name": "pi-gui-typecheck",
+      "command": "npm run typecheck",
+      "cwd": "/home/arthur/Code/oh-my-pi-extensions/pi-gui",
+      "status": 0,
+      "signal": null,
+      "log": "/var/tmp/pi-arthur/omp-compat-9VQjvD/pi-gui-typecheck.log",
+      "summary": []
+    },
+    {
+      "name": "pi-gui",
+      "command": "npm test",
+      "cwd": "/home/arthur/Code/oh-my-pi-extensions/pi-gui",
+      "status": 0,
+      "signal": null,
+      "log": "/var/tmp/pi-arthur/omp-compat-9VQjvD/pi-gui.log",
+      "summary": [
+        "﹣ the in-snap script survives the real systemd-run unchanged (stand-in snap environment, no browser) (0.068168ms) # no user systemd with --expand-environment",
+        "ℹ tests 102",
+        "ℹ pass 101",
+        "ℹ fail 0",
+        "ℹ cancelled 0",
+        "ℹ skipped 1"
+      ]
+    },
+    {
+      "name": "pi-commit-typecheck",
+      "command": "npm run typecheck",
+      "cwd": "/home/arthur/Code/oh-my-pi-extensions/pi-commit",
+      "status": 0,
+      "signal": null,
+      "log": "/var/tmp/pi-arthur/omp-compat-9VQjvD/pi-commit-typecheck.log",
+      "summary": []
+    },
+    {
+      "name": "pi-commit",
+      "command": "npm test",
+      "cwd": "/home/arthur/Code/oh-my-pi-extensions/pi-commit",
+      "status": 0,
+      "signal": null,
+      "log": "/var/tmp/pi-arthur/omp-compat-9VQjvD/pi-commit.log",
+      "summary": [
+        " 193 pass",
+        " 0 fail"
+      ]
+    },
+    {
+      "name": "session-bus-typecheck",
+      "command": "npm run typecheck",
+      "cwd": "/home/arthur/Code/oh-my-pi-extensions/session-bus",
+      "status": 0,
+      "signal": null,
+      "log": "/var/tmp/pi-arthur/omp-compat-9VQjvD/session-bus-typecheck.log",
+      "summary": []
+    },
+    {
+      "name": "session-bus",
+      "command": "npm test",
+      "cwd": "/home/arthur/Code/oh-my-pi-extensions/session-bus",
+      "status": 0,
+      "signal": null,
+      "log": "/var/tmp/pi-arthur/omp-compat-9VQjvD/session-bus.log",
+      "summary": [
+        "ℹ tests 328",
+        "ℹ pass 328",
+        "ℹ fail 0",
+        "ℹ cancelled 0",
+        "ℹ skipped 0"
+      ]
+    },
+    {
+      "name": "images-typecheck",
+      "command": "npm run typecheck",
+      "cwd": "/home/arthur/Code/oh-my-pi-extensions/images",
+      "status": 0,
+      "signal": null,
+      "log": "/var/tmp/pi-arthur/omp-compat-9VQjvD/images-typecheck.log",
+      "summary": []
+    },
+    {
+      "name": "images",
+      "command": "npm test",
+      "cwd": "/home/arthur/Code/oh-my-pi-extensions/images",
+      "status": 0,
+      "signal": null,
+      "log": "/var/tmp/pi-arthur/omp-compat-9VQjvD/images.log",
+      "summary": [
+        " ↓ test/images.live.test.ts (1 test | 1 skipped)",
+        " Test Files  7 passed | 1 skipped (8)",
+        "      Tests  141 passed | 1 skipped (142)"
+      ]
+    },
+    {
+      "name": "codegraph-typecheck",
+      "command": "npm run typecheck",
+      "cwd": "/home/arthur/Code/oh-my-pi-extensions/codegraph",
+      "status": 0,
+      "signal": null,
+      "log": "/var/tmp/pi-arthur/omp-compat-9VQjvD/codegraph-typecheck.log",
+      "summary": []
+    },
+    {
+      "name": "codegraph",
+      "command": "npm test",
+      "cwd": "/home/arthur/Code/oh-my-pi-extensions/codegraph",
+      "status": 0,
+      "signal": null,
+      "log": "/var/tmp/pi-arthur/omp-compat-9VQjvD/codegraph.log",
+      "summary": [
+        "ℹ tests 39",
+        "ℹ pass 39",
+        "ℹ fail 0",
+        "ℹ cancelled 0",
+        "ℹ skipped 0"
+      ]
+    },
+    {
+      "name": "cliproxyapi-typecheck",
+      "command": "npm run typecheck",
+      "cwd": "/home/arthur/Code/oh-my-pi-extensions/cliproxyapi",
+      "status": 0,
+      "signal": null,
+      "log": "/var/tmp/pi-arthur/omp-compat-9VQjvD/cliproxyapi-typecheck.log",
+      "summary": []
+    },
+    {
+      "name": "cliproxyapi",
+      "command": "npm test",
+      "cwd": "/home/arthur/Code/oh-my-pi-extensions/cliproxyapi",
+      "status": 0,
+      "signal": null,
+      "log": "/var/tmp/pi-arthur/omp-compat-9VQjvD/cliproxyapi.log",
+      "summary": [
+        "ℹ tests 51",
+        "ℹ pass 51",
+        "ℹ fail 0",
+        "ℹ cancelled 0",
+        "ℹ skipped 0"
+      ]
+    },
+    {
+      "name": "workbench",
+      "command": "npm test",
+      "cwd": "/home/arthur/Code/oh-my-pi-extensions/pi-workbench",
+      "status": 0,
+      "signal": null,
+      "log": "/var/tmp/pi-arthur/omp-compat-9VQjvD/workbench.log",
+      "summary": [
+        "ℹ tests 75",
+        "ℹ pass 75",
+        "ℹ fail 0",
+        "ℹ cancelled 0",
+        "ℹ skipped 0"
+      ]
+    },
+    {
+      "name": "workbench-session",
+      "command": "npm run test:pi-session",
+      "cwd": "/home/arthur/Code/oh-my-pi-extensions/pi-workbench",
+      "status": 0,
+      "signal": null,
+      "log": "/var/tmp/pi-arthur/omp-compat-9VQjvD/workbench-session.log",
+      "summary": [
+        "  \"ok\": true,"
+      ]
+    },
+    {
+      "name": "workbench-editor",
+      "command": "npm run test:pi-editor",
+      "cwd": "/home/arthur/Code/oh-my-pi-extensions/pi-workbench",
+      "status": 0,
+      "signal": null,
+      "log": "/var/tmp/pi-arthur/omp-compat-9VQjvD/workbench-editor.log",
+      "summary": [
+        "  \"ok\": true,"
+      ]
+    },
+    {
+      "name": "pi-eval-loop",
+      "command": "npm test",
+      "cwd": "/home/arthur/Code/oh-my-pi-extensions/pi-eval-loop",
+      "status": 0,
+      "signal": null,
+      "log": "/var/tmp/pi-arthur/omp-compat-9VQjvD/pi-eval-loop.log",
+      "summary": [
+        "ℹ tests 38",
+        "ℹ pass 38",
+        "ℹ fail 0",
+        "ℹ cancelled 0",
+        "ℹ skipped 0"
+      ]
+    }
+  ]
+}
