@@ -16,6 +16,7 @@ import { explorationOnlyFinal } from "./loop.mjs";
 import { finalAttempts, pairsOf, summarize } from "./metrics.mjs";
 import { compare, describeArm } from "./stats.mjs";
 import { atomicWrite, atomicWriteJson, digestOf } from "./util.mjs";
+import { StateIntegrityError } from "./protocol.mjs";
 
 const SHARED = ["runs.jsonl", "grading.json", "protocol.lock.json", "datasets.json"];
 
@@ -27,19 +28,29 @@ function seedTrajectory(fromDir, toDir, baseState) {
   if (health !== "fresh") throw new Error(`trajectory ${toDir}: state ${health}; refusing to re-seed over existing records`);
   for (const f of SHARED) if (existsSync(join(fromDir, f))) cpSync(join(fromDir, f), join(toDir, f));
   cpSync(join(fromDir, "candidates"), join(toDir, "candidates"), { recursive: true });
-  atomicWriteJson(join(toDir, "state.json"), { phase: "search", cycle: 1, counters: { candidates: 0, noProgress: 0, consecutiveInfra: 0 }, stable: baseState.stable, startedAt: new Date().toISOString(), sharedBaselineFrom: fromDir });
+  // The trajectory shares A's lock (copied above) and is bound to it from its first state on.
+  atomicWriteJson(join(toDir, "state.json"), { phase: "search", cycle: 1, counters: { candidates: 0, noProgress: 0, consecutiveInfra: 0 }, stable: baseState.stable, startedAt: new Date().toISOString(), sharedBaselineFrom: fromDir, protocolLock: baseState.protocolLock });
 }
 
 /**
  * loopFactory({ stateDir, strategy }) -> Loop. Returns { ok, outcome, summary } (outcome: ok | blocked | halted | state_error |
  * incomplete). Resumable: every trajectory keeps its own state. A halted trajectory halts its siblings and ends every later run
- * before any work.
+ * before any work. A lost state or damaged protocol binding found by a trajectory's prepare (StateIntegrityError, nothing written)
+ * is returned as state_error.
  * @param {{ stateDir: string, loopFactory?: (opts: { stateDir: string, strategy: "pareto" | "greedy" }) => Promise<import("./loop.mjs").Loop>,
  *   protocolPath?: string, pids?: any, log?: (line: string) => void }} options
  */
-export async function runAblation({ stateDir, loopFactory, protocolPath, pids, log = () => {} }) {
+export async function runAblation(options) {
+  try { return await ablationSteps(options); } catch (error) {
+    if (error instanceof StateIntegrityError) return { ok: false, outcome: "state_error", summary: { health: error.health, integrity: error.integrity, detail: error.message } };
+    throw error;
+  }
+}
+
+/** @param {Parameters<typeof runAblation>[0]} options */
+async function ablationSteps({ stateDir, loopFactory, protocolPath, pids, log = () => {} }) {
   const pre = inspectAblation(stateDir);
-  if (pre.health === "missing" || pre.health === "corrupt") return { ok: false, outcome: "state_error", summary: { health: pre.health, detail: pre.detail } };
+  if (pre.health === "missing" || pre.health === "corrupt") return { ok: false, outcome: "state_error", summary: { health: pre.health, detail: pre.detail, integrity: pre.integrity } };
   if (pre.halted) return { ok: false, outcome: "halted", summary: { phase: `${pre.halted.arm}: halted`, halted: pre.halted.reason } };
   loopFactory ??= async (opts) => (await import("./app.mjs")).realLoop({ ...opts, protocolPath, pids });
   const haltGroup = { halted: null };

@@ -87,18 +87,75 @@ export function evaluatorFiles(orcheDir = join(UMBRELLA, "orche")) {
 export const fileDigests = (files, root = UMBRELLA) => Object.fromEntries(files.filter(existsSync).map(file => [file.startsWith(root) ? file.slice(root.length + 1) : file, sha256(readFileSync(file))]));
 
 /**
- * Lock the protocol in a state directory (first call) or verify it (later calls). Returns { lock, problems }: any difference in the
- * protocol, evaluator bytes or dataset digest is a problem (the caller halts: a changed evaluation is a new protocol version).
+ * Refusal to touch a damaged experiment directory: a lost state, or a protocol lock that is missing, unreadable, malformed or
+ * contradicts the state's recorded binding. Thrown before anything is written or run; the CLI reports it as `state_error`.
  */
-export function lockProtocol(stateDir, protocol, { datasetDigest, orcheDir } = {}) {
-  const path = join(stateDir, "protocol.lock.json");
+export class StateIntegrityError extends Error {
+  /** @param {string} message @param {{ health?: string, integrity?: string }} [info] */
+  constructor(message, { health = "corrupt", integrity } = {}) { super(message); this.code = "ESTATEINTEGRITY"; this.health = health; this.integrity = integrity; }
+}
+
+export const LOCK_FILE = "protocol.lock.json";
+const HEX64 = /^[0-9a-f]{64}$/;
+
+/** Structural problems of a parsed protocol lock (empty = well-formed and internally consistent). */
+export function lockShapeProblems(lock) {
+  if (!lock || typeof lock !== "object" || Array.isArray(lock)) return ["not a JSON object"];
+  const problems = [];
+  if (!lock.protocol || typeof lock.protocol !== "object" || Array.isArray(lock.protocol)) problems.push("protocol is not an object");
+  if (typeof lock.protocolDigest !== "string" || !HEX64.test(lock.protocolDigest)) problems.push("protocolDigest is not a sha256 digest");
+  else if (problems.length === 0 && digestOf(lock.protocol) !== lock.protocolDigest) problems.push("protocolDigest does not match the locked protocol");
+  const ev = lock.evaluator;
+  if (!ev || typeof ev !== "object" || Array.isArray(ev) || Object.keys(ev).length === 0) problems.push("evaluator is not a non-empty map of file digests");
+  else if (!Object.values(ev).every(d => typeof d === "string" && HEX64.test(d))) problems.push("evaluator holds a value that is not a sha256 digest");
+  if (lock.datasetDigest !== undefined && (typeof lock.datasetDigest !== "string" || !HEX64.test(lock.datasetDigest))) problems.push("datasetDigest is not a sha256 digest");
+  if (typeof lock.lockedAt !== "string" || !lock.lockedAt) problems.push("lockedAt missing");
+  return problems;
+}
+
+/**
+ * The binding a state records for its lock: the protocol digest and the digest of the WHOLE lock (protocol, evaluator file
+ * digests, dataset digest, lock time), so replacing the evaluator map or the dataset digest under the same protocol is detected.
+ */
+export const bindingOf = (lock) => ({ protocolDigest: lock.protocolDigest, lockDigest: digestOf(lock) });
+export const isBinding = (b) => Boolean(b) && typeof b === "object" && !Array.isArray(b) && typeof b.protocolDigest === "string" && HEX64.test(b.protocolDigest) && typeof b.lockDigest === "string" && HEX64.test(b.lockDigest);
+
+/**
+ * Read the lock of a state directory: { present: false } when absent, else the parsed lock. An unreadable, invalid or malformed
+ * lock throws StateIntegrityError (never "absent": a damaged lock is not a missing one).
+ */
+export function readLock(stateDir) {
+  const path = join(stateDir, LOCK_FILE);
+  let raw;
+  try { raw = readFileSync(path, "utf8"); } catch (error) {
+    if (error.code === "ENOENT") return { present: false };
+    throw new StateIntegrityError(`${LOCK_FILE} unreadable (${error.code})`, { integrity: "protocol_lock_corrupt" });
+  }
+  let lock;
+  try { lock = JSON.parse(raw); } catch { throw new StateIntegrityError(`${LOCK_FILE} is not valid JSON`, { integrity: "protocol_lock_corrupt" }); }
+  const problems = lockShapeProblems(lock);
+  if (problems.length) throw new StateIntegrityError(`${LOCK_FILE} is malformed: ${problems.join("; ")}`, { integrity: problems.some(p => p.startsWith("protocolDigest does not match")) ? "protocol_lock_mismatch" : "protocol_lock_corrupt" });
+  return { present: true, lock };
+}
+
+/**
+ * Verify the lock of a state directory against the current protocol, evaluator bytes and dataset digest. Returns
+ * { lock, problems, created }: any difference is a problem (the caller stops: a changed evaluation is a new protocol version).
+ * A missing lock is created ONLY with create: true, which the controller passes for a proven fresh initialization (see
+ * contract.mjs inspectProtocol); otherwise it is a StateIntegrityError and nothing is written. A damaged lock always throws.
+ * @param {string} stateDir @param {any} protocol @param {{ datasetDigest?: string, orcheDir?: string, create?: boolean }} [options]
+ */
+export function lockProtocol(stateDir, protocol, { datasetDigest, orcheDir, create = false } = {}) {
+  const path = join(stateDir, LOCK_FILE);
   const current = { protocol, protocolDigest: digestOf(protocol), evaluator: fileDigests(evaluatorFiles(orcheDir)), datasetDigest };
-  if (!existsSync(path)) {
+  const read = readLock(stateDir);
+  if (!read.present) {
+    if (!create) throw new StateIntegrityError(`${LOCK_FILE} is missing and this is not a fresh initialization: refusing to lock the current protocol/evaluator over existing state`, { integrity: "protocol_lock_missing" });
     const lock = { ...current, lockedAt: new Date().toISOString() };
     atomicWriteJson(path, lock);
     return { lock, problems: [], created: true };
   }
-  const lock = readJson(path);
+  const lock = read.lock;
   const problems = [];
   if (lock.protocolDigest !== current.protocolDigest) problems.push("protocol differs from the locked protocol");
   if (datasetDigest && lock.datasetDigest !== datasetDigest) problems.push("dataset split/manifest differs from the locked one");

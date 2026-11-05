@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import { mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import evalLoopExtension, { COMMAND, completeArgs, createEvalLoopExtension, parseArgs, runCli } from "../extension/index.js";
-import { rmSync, tempDir } from "./helpers.mjs";
+import { rmSync, tempDir, writeBoundState } from "./helpers.mjs";
 
 const fakePi = () => { const commands = new Map(); return { commands, registerCommand: (name, spec) => commands.set(name, spec) }; };
 const fakeCtx = () => { const notes = []; return { notes, ui: { notify: (text, level) => notes.push({ text, level }), setStatus() {} } }; };
@@ -24,8 +24,8 @@ test("/eval-loop status runs the real CLI on a state directory and reports its p
   const root = tempDir();
   try {
     const state = join(root, "state");
-    mkdirSync(state, { recursive: true });
-    writeFileSync(join(state, "state.json"), JSON.stringify({ phase: "search", cycle: 2 }));
+    // A valid state bound to its protocol lock (a lost, corrupt or unbound one makes --status exit 4, reported as a warning).
+    writeBoundState(state, { phase: "search", cycle: 2, counters: { candidates: 0, noProgress: 0, consecutiveInfra: 0 } });
     const pi = fakePi(), ctx = fakeCtx();
     createEvalLoopExtension({ run: (args) => runCli(args) })(pi);
     await pi.commands.get(COMMAND).handler(`status --state ${state}`, ctx);

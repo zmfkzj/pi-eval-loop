@@ -23,7 +23,7 @@ prepare -> baselines -> search (repeat: parent -> analysis -> proposal -> integr
 
 | Phase | What happens | Code |
 |---|---|---|
-| prepare | Checks prerequisites (missing ones end in BLOCKED; nothing is simulated). Validates the grader of every task: the original must fail, the reference must pass. Builds family-grouped train/dev splits. Verifies the sealed holdout. Locks the protocol (sha256 of the protocol, every evaluator file and the dataset manifest). | `src/loop.mjs` `prepare`, `src/protocol.mjs` `lockProtocol` |
+| prepare | First checks the state directory's integrity and protocol binding (a lost state or a missing, damaged or contradicting lock is a `StateIntegrityError`, nothing written) and an existing lock against the current protocol and evaluator bytes. Checks prerequisites (missing ones end in BLOCKED; nothing is simulated). Validates the grader of every task: the original must fail, the reference must pass. Builds family-grouped train/dev splits. Verifies the sealed holdout. Locks the protocol (sha256 of the protocol, every evaluator file and the dataset manifest) once, for a fresh or provably pre-lock state only, and records the binding (`state.protocolLock`). | `src/loop.mjs` `prepare`, `src/protocol.mjs` `lockProtocol`, `src/contract.mjs` `inspectProtocol` |
 | baselines | Runs stable orche on train and dev; pure Pi (no extension) on train and dev; a k=3 independent-attempt pure-Pi arm on dev that submits the first attempt whose VISIBLE tests pass (no hidden information is used); the target mode's existing implementation (= stable when the target is `single`). The k-attempt arm *allows* up to k attempts; whether it used more compute is a measurement (reports list allowed vs actual attempts, requests and tokens per unit). It is not called equal-compute or opportunity-matched unless those measurements show it. | `baselines`, `baselineHarnesses` |
 | search | Selects a parent (Pareto: archive front plus development-qualified; greedy: the current best only). Analyzes failures (train). The proposer edits a copy of the harness runtime. Then patch integrity, dedup, commit on the isolated branch `eval-loop/candidates/<ns>/<id>`, typecheck, adaptive screening, development. | `newCandidate`, `screen`, `develop` |
 | select | Picks the best development-qualified candidate without a family regression and freezes it (`selection.json`, digest) BEFORE any holdout access. | `select` |
@@ -57,7 +57,10 @@ holdout pass. This is how train/dev search continues after the only holdout was 
 
 Persistence: `state.json` and `selection.json` are written atomically (tmp + fsync + rename). `runs.jsonl`, `events.jsonl`,
 `stable-history.jsonl` and `USES.jsonl` are append-only hash chains (`Ledger.verify`). `state.json` exists from the first step;
-records without it are a lost state that no invocation re-initializes (`src/contract.mjs` `inspectState`). A controller lock
+records without it are a lost state that no invocation re-initializes (`src/contract.mjs` `inspectState`). Likewise a state is
+bound to its `protocol.lock.json` (`state.protocolLock`: protocol digest and digest of the whole lock); a missing, unreadable,
+malformed or contradicting lock is a `state_error` and is never re-created for the current evaluator, except before the lock
+step of a fresh directory (`inspectProtocol`). A controller lock
 with host, boot id, PID namespace, pid start time and token prevents duplicate runs; only verified-dead or reused-pid locks are recovered,
 under a reclaim guard (`src/util.mjs` `acquireLock`). Every
 unit is journaled (`dispatch`, with run id and control dir) before its model requests. After a crash, reconcile reads the proxy's

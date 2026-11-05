@@ -5,8 +5,9 @@
 import { existsSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { parseArgs } from "node:util";
-import { ablationParent, EXIT, inspectAblation, inspectState, outcomeRecord, statusSummary } from "./contract.mjs";
+import { ablationParent, EXIT, inspectAblation, inspectState, isAblationDir, outcomeRecord, statusSummary } from "./contract.mjs";
 import { HaltedError } from "./loop.mjs";
+import { StateIntegrityError } from "./protocol.mjs";
 import { acquireLock, LockBusyError, readJson, sleep } from "./util.mjs";
 
 export const RUN_MODES = ["once", "resume", "daemon", "rollback", "verify-stable", "ablation"];
@@ -41,7 +42,7 @@ export function preflight(stateDir, { mode, requireState = false }) {
   // A trajectory of an ablation is driven only through --ablation on its parent (one lock for all three trajectories).
   if (parent) return { stop: outcomeRecord("usage", { stateDir, detail: `${stateDir} is a trajectory of the ablation ${parent}: run --ablation --state ${parent}` }) };
   const info = /** @type {any} */ (mode === "ablation" ? inspectAblation(stateDir) : inspectState(stateDir));
-  if (info.health === "missing" || info.health === "corrupt") return { stop: outcomeRecord("state_error", { stateDir, health: info.health, detail: info.detail }) };
+  if (info.health === "missing" || info.health === "corrupt") return { stop: outcomeRecord("state_error", { stateDir, health: info.health, detail: info.detail, ...(info.integrity ? { integrity: info.integrity } : {}) }) };
   if (info.health === "fresh" && (requireState || mode === "verify-stable")) return { stop: outcomeRecord("state_error", { stateDir, health: "fresh", detail: requireState ? "no loop state and --require-state: refusing to initialize a new loop" : "--verify-stable needs an existing loop state" }) };
   const halted = mode === "ablation" ? info.halted?.reason : info.state?.halted;
   if (halted) return { stop: outcomeRecord("halted", { stateDir, state: info.state, detail: mode === "ablation" ? `trajectory ${info.halted.arm} is halted` : undefined }) };
@@ -129,6 +130,10 @@ export async function main(argv) {
     let state;
     try { state = readJson(join(stateDir, "state.json"), null); } catch (error) { emit(outcomeRecord("state_error", { stateDir, health: "corrupt", detail: `state.json unreadable (${error.code ?? error.name})` })); return EXIT.state_error; }
     print(state ?? { phase: "none", note: `no state in ${stateDir}` });
+    // A damaged state (lost, corrupt, or a damaged protocol binding; of the loop or of a trajectory of an ablation directory) is
+    // reported here as in --summary: the state is printed as recorded, then the state_error line, exit 4.
+    const info = /** @type {any} */ (isAblationDir(stateDir) ? inspectAblation(stateDir) : inspectState(stateDir));
+    if (info.health === "missing" || info.health === "corrupt") { emit(outcomeRecord("state_error", { stateDir, health: info.health, detail: info.detail, ...(info.integrity ? { integrity: info.integrity } : {}) })); return EXIT.state_error; }
     return 0;
   }
   if (values.doctor) { const { prerequisites, hostEnvironment } = await import("./sandbox.mjs"); const p = await prerequisites(hostEnvironment()); print(p); return p.every(x => x.ok) ? 0 : EXIT.blocked; }
@@ -193,7 +198,8 @@ export async function main(argv) {
       const r = await runAblation({ stateDir, protocolPath: values.protocol, pids });
       print(r.summary);
       const kind = /** @type {keyof typeof EXIT} */ (r.outcome in EXIT ? r.outcome : r.ok ? "ok" : "incomplete");
-      emit(outcomeRecord(kind, { stateDir, mode, detail: r.ok ? undefined : r.summary?.phase }));
+      const integrityFields = kind === "state_error" ? { health: r.summary?.health, ...(r.summary?.integrity ? { integrity: r.summary.integrity } : {}) } : {};
+      emit(outcomeRecord(kind, { stateDir, mode, detail: r.ok ? undefined : kind === "state_error" ? r.summary?.detail : r.summary?.phase, ...integrityFields }));
       return EXIT[kind];
     }
 
@@ -208,6 +214,8 @@ export async function main(argv) {
     return 0;
   } catch (error) {
     if (error instanceof HaltedError) { emit(outcomeRecord("halted", { stateDir, state: stateOf(), mode })); return EXIT.halted; }
+    // A lost state or a damaged protocol binding found by the controller itself: nothing was run or written; never retryable.
+    if (error instanceof StateIntegrityError) { emit(outcomeRecord("state_error", { stateDir, mode, health: error.health, detail: error.message, ...(error.integrity ? { integrity: error.integrity } : {}) })); return EXIT.state_error; }
     process.stderr.write(`[eval-loop] error: ${error?.stack ?? error}\n`);
     emit(outcomeRecord("error", { stateDir, state: stateOf(), mode, error: { name: error?.name ?? "Error", code: error?.code ?? null } }));
     return EXIT.error;

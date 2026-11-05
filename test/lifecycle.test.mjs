@@ -5,7 +5,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { join } from "node:path";
-import { edit, makeHoldout, makeLoop, makeTasks, makeUmbrella, HOLDOUT, TRAIN_DEV, rmSync, tempDir } from "./helpers.mjs";
+import { edit, makeHoldout, makeLoop, makeTasks, makeUmbrella, HOLDOUT, TRAIN_DEV, rmSync, tempDir, writeBoundState } from "./helpers.mjs";
 import { HaltedError } from "../src/loop.mjs";
 import { driveOnce } from "../src/cli.mjs";
 import { inspectAblation, inspectState, stateSummary, statusSummary } from "../src/contract.mjs";
@@ -253,7 +253,7 @@ test("state health: fresh, present, missing (records without state.json), corrup
       writeFileSync(join(root, "bad", "state.json"), JSON.stringify(broken));
       assert.equal(inspectState(join(root, "bad")).health, "corrupt", JSON.stringify(broken));
     }
-    writeFileSync(join(root, "bad", "state.json"), JSON.stringify({ phase: "holdout", cycle: 1, counters: C, selection: { selected: null, frozenDigest: "f" } }));
+    writeBoundState(join(root, "bad"), { phase: "holdout", cycle: 1, counters: C, selection: { selected: null, frozenDigest: "f" } });
     assert.equal(inspectState(join(root, "bad")).health, "present", "an A/B/C joint holdout pass may have no selected candidate");
   } finally { rmSync(root, { recursive: true, force: true }); }
 });

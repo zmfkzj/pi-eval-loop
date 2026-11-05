@@ -16,7 +16,8 @@ import { Evaluator } from "./evaluator.mjs";
 import { adoptionCompare, adoptionDecision, criticalProblems, developmentCompare, developmentDecision, screeningCompare, screeningDecision, taskLevelPromotion } from "./gate.mjs";
 import { changedProtected, patchIntegrity, protectedSnapshot } from "./integrity.mjs";
 import { finalAttempts, missingUnits, pairsOf, summarize } from "./metrics.mjs";
-import { evaluatorFiles, fileDigests, lockProtocol, PACKAGE_DIR, UMBRELLA } from "./protocol.mjs";
+import { bindingOf, evaluatorFiles, fileDigests, lockProtocol, PACKAGE_DIR, StateIntegrityError, UMBRELLA } from "./protocol.mjs";
+import { inspectState } from "./contract.mjs";
 import { createRng } from "./rng.mjs";
 import { describeArm } from "./stats.mjs";
 import { holdoutLedger, holdoutStatus, loadLocal, loadSuite, screeningBatch, splitByFamily, taskDigest, validateSplits, verifySeal } from "./datasets.mjs";
@@ -134,13 +135,49 @@ export class Loop {
   }
   /** @param {string} action */
   assertNotHalted(action) { if (this.state.halted) throw new HaltedError(this.state.halted, action); }
+  /**
+   * Record the lock this state is bound to (once; persisted before any lock-dependent step). A state bound to another lock is a
+   * StateIntegrityError: a state is never re-bound. An older state without a binding is bound to its EXISTING verified lock.
+   */
+  bindLock(lock, created) {
+    const binding = bindingOf(lock), had = this.state.protocolLock;
+    if (had) {
+      if (had.protocolDigest !== binding.protocolDigest || had.lockDigest !== binding.lockDigest) throw new StateIntegrityError("protocol.lock.json differs from the lock this state is bound to", { integrity: "protocol_lock_mismatch" });
+      return;
+    }
+    this.state.protocolLock = binding;
+    this.save();
+    this.event(created ? "protocol-locked" : "protocol-bound", { protocolDigest: binding.protocolDigest, lockDigest: binding.lockDigest });
+  }
 
   // ---------------------------------------------------------------------------------------------------------------------- prepare
   async prepare() {
     this.assertNotHalted("prepare");
     const p = this.protocol;
+    // Integrity first, read from disk (never only the cached state): a lost state or a missing, damaged or contradicting
+    // protocol lock stops here, before prerequisites, grader validation, model calls or any write (see contract.mjs).
+    const disk = inspectState(this.stateDir);
+    // A structurally invalid state.json (no integrity code) keeps its earlier handling (the CLI refuses it in preflight; through
+    // the API the phase checks halt where they apply); its lock is only ever verified, never created. Invalid JSON fails on read.
+    if (disk.health === "missing" || disk.integrity) throw new StateIntegrityError(`state directory ${this.stateDir}: ${disk.detail}`, { health: disk.health, integrity: disk.integrity });
+    if (disk.health === "present") {
+      if (disk.state.halted) throw new HaltedError(disk.state.halted, "prepare");
+      if (digestOf(this.state.protocolLock ?? null) !== digestOf(disk.state.protocolLock ?? null)) throw new StateIntegrityError("the loaded state's protocol binding differs from state.json on disk", { integrity: "protocol_lock_mismatch" });
+    }
+    // A missing lock may be created only by a fresh initialization or a provably pre-lock state (crash or block before the lock).
+    const createLock = disk.health === "fresh" || disk.protocol?.status === "unlocked";
     // The state file exists from the first step on: records without state.json always mean a lost state (see contract.mjs).
-    if (!existsSync(this.statePath())) this.save();
+    if (disk.health === "fresh") {
+      if (this.state.protocolLock) throw new StateIntegrityError("state.json vanished while this loop was bound to a protocol lock", { health: "missing", integrity: "protocol_lock_missing" });
+      this.save();
+    }
+    else if (!createLock) {
+      // An existing lock is checked against the current protocol and evaluator bytes before any other work (the dataset digest
+      // follows after grading below).
+      const early = lockProtocol(this.stateDir, p, { orcheDir: this.orche });
+      this.bindLock(early.lock, false);
+      if (early.problems.length) return this.block({ reason: "protocol/evaluator/dataset changed since the lock: start a new protocol version in a new state directory", problems: early.problems });
+    }
     let restored;
     if (this.state.phase === "blocked") {
       const back = this.state.blocked?.resumePhase ?? legacyResumePhase(this.state);
@@ -174,13 +211,13 @@ export class Loop {
     const problems = validateSplits(tasksById, { train: split.train, dev: split.dev, holdout });
     if (problems.length) return this.block({ reason: "split validation failed", problems });
     const datasetManifest = { train: split.train, dev: split.dev, holdout, excluded, digests: Object.fromEntries(Object.values(tasksById).map(t => [t.id, taskDigest(t)])), holdoutSeal: data.holdoutDir ? verifySeal(data.holdoutDir).seal?.digest ?? null : null, meta: Object.fromEntries(Object.values(tasksById).map(t => [t.id, { family: t.family, tier: t.tier, hard: t.hard, source: t.source, provenance: t.provenance }])) };
-    const { lock, problems: lockProblems, created } = lockProtocol(this.stateDir, p, { datasetDigest: digestOf(datasetManifest), orcheDir: this.orche });
+    const { lock, problems: lockProblems, created } = lockProtocol(this.stateDir, p, { datasetDigest: digestOf(datasetManifest), orcheDir: this.orche, create: createLock });
+    this.bindLock(lock, created);
     if (lockProblems.length) return this.block({ reason: "protocol/evaluator/dataset changed since the lock: start a new protocol version in a new state directory", problems: lockProblems });
     atomicWriteJson(join(this.stateDir, "datasets.json"), datasetManifest);
     this.protocolDigest = lock.protocolDigest;
     this.tasksById = tasksById; this.split = { ...split, holdout }; this.grading = grading; this.holdoutDir = data.holdoutDir;
     this.evaluator = new Evaluator({ stateDir: this.stateDir, protocol: p, protocolDigest: lock.protocolDigest, envDigest: this.envDigest, tasksById, grading, backend: this.backend, log: this.log });
-    if (created) this.event("protocol-locked", { protocolDigest: lock.protocolDigest });
     // The stable harness: the local eval-loop/stable ref when one exists (an earlier adoption), else orche's HEAD commit.
     if (!this.state.stable) {
       let stableCommit; try { stableCommit = execGit(this.orche, ["rev-parse", "--verify", "--quiet", `refs/heads/${p.deploy.branch}^{commit}`]); } catch { stableCommit = head(this.orche); }
@@ -594,7 +631,8 @@ export class Loop {
     this.assertNotHalted("a new cycle");
     const prev = this.state;
     const history = [...(prev.history ?? []), { cycle: prev.cycle, final: prev.final, selection: prev.selection, searchStop: prev.searchStop, doneAt: prev.doneAt, fingerprint: prev.cycleFingerprint }];
-    this._state = { phase: "prepare", cycle: prev.cycle + 1, strategy: this.strategy, counters: { candidates: 0, noProgress: 0, consecutiveInfra: 0 }, startedAt: new Date().toISOString(), history };
+    // The binding carries over: every cycle of a state directory runs under the one lock it was bound to.
+    this._state = { phase: "prepare", cycle: prev.cycle + 1, strategy: this.strategy, counters: { candidates: 0, noProgress: 0, consecutiveInfra: 0 }, startedAt: new Date().toISOString(), history, protocolLock: prev.protocolLock };
     this.save();
     this.event("cycle-start", { cycle: this._state.cycle });
   }

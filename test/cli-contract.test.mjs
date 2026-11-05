@@ -8,7 +8,7 @@ import { createHash } from "node:crypto";
 import { chmodSync, existsSync, mkdirSync, readdirSync, readFileSync, statSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
-import { rmSync, tempDir } from "./helpers.mjs";
+import { fixtureLock, rmSync, tempDir, writeBoundState } from "./helpers.mjs";
 import { bwrapArgs } from "../src/sandbox.mjs";
 
 const CLI = fileURLToPath(new URL("../bin/eval-loop.mjs", import.meta.url));
@@ -120,7 +120,7 @@ test("a live controller makes the next invocation busy (exit 75); the summary re
   const root = tempDir();
   const dir = join(root, "s");
   mkdirSync(dir);
-  writeFileSync(join(dir, "state.json"), JSON.stringify({ ...VALID, phase: "blocked", blocked: { reason: "missing prerequisites", retryable: true, resumePhase: "search", missing: [{ name: "upstream", detail: "http://x" }] } }));
+  writeBoundState(dir, { ...VALID, phase: "blocked", blocked: { reason: "missing prerequisites", retryable: true, resumePhase: "search", missing: [{ name: "upstream", detail: "http://x" }] } });
   const owner = spawn(process.execPath, ["--input-type=module", "-e", `import { acquireLock } from ${JSON.stringify(SRC("util.mjs"))}; acquireLock(${JSON.stringify(join(dir, ".lock"))}); console.log("ready"); setInterval(() => {}, 1000);`], { stdio: ["ignore", "pipe", "inherit"] });
   try {
     await new Promise((ok) => owner.stdout.once("data", ok));
@@ -174,7 +174,7 @@ test("a trajectory's --rollback takes the ablation's lock (busy while an ablatio
   const root = tempDir();
   const abc = join(root, "abc");
   mkdirSync(join(abc, "A"), { recursive: true });
-  writeFileSync(join(abc, "A", "state.json"), JSON.stringify(VALID));
+  writeBoundState(join(abc, "A"), VALID);
   const owner = spawn(process.execPath, ["--input-type=module", "-e", `import { acquireLock } from ${JSON.stringify(SRC("util.mjs"))}; acquireLock(${JSON.stringify(join(abc, ".lock"))}); console.log("ready"); setInterval(() => {}, 1000);`], { stdio: ["ignore", "pipe", "inherit"] });
   try {
     await new Promise((ok, fail) => { owner.stdout.once("data", ok); owner.once("exit", (code) => fail(new Error(`owner exited ${code}`))); });

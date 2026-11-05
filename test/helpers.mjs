@@ -4,7 +4,8 @@ import { execFileSync } from "node:child_process";
 import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
-import { DEFAULT_PROTOCOL, merge } from "../src/protocol.mjs";
+import { bindingOf, DEFAULT_PROTOCOL, merge } from "../src/protocol.mjs";
+import { digestOf } from "../src/util.mjs";
 import { sealOf } from "../src/datasets.mjs";
 import { simulatedBackend } from "../src/evaluator.mjs";
 import { Loop } from "../src/loop.mjs";
@@ -100,6 +101,20 @@ export function makeLoop({ root, protocol = testProtocol(), entries, skill = ski
   return { loop, fx };
 }
 export { rmSync };
+
+/** A well-formed protocol lock (fixture; the evaluator map is synthetic) and the binding a state records for it. */
+export function fixtureLock(protocol = DEFAULT_PROTOCOL, { evaluatorByte = "a" } = {}) {
+  const lock = { protocol, protocolDigest: digestOf(protocol), evaluator: { "pi-eval-loop/src/loop.mjs": evaluatorByte.repeat(64) }, datasetDigest: "d".repeat(64), lockedAt: "2026-01-01T00:00:00Z" };
+  return { lock, binding: bindingOf(lock) };
+}
+/** Write state.json bound to a fixture lock (and the lock itself); returns the state text. */
+export function writeBoundState(dir, state, fixture = fixtureLock()) {
+  mkdirSync(dir, { recursive: true });
+  writeFileSync(join(dir, "protocol.lock.json"), `${JSON.stringify(fixture.lock, null, 2)}\n`);
+  const text = JSON.stringify({ ...state, protocolLock: fixture.binding });
+  writeFileSync(join(dir, "state.json"), text);
+  return text;
+}
 
 /** A check result as runChecks reports it for a clean orche suite (typecheck plus a vitest summary). */
 export const passingChecks = (summary = "      Tests  10 passed (10)") => ({ pass: true, results: { typecheck: { pass: true, exit: 0 }, test: { pass: true, exit: 0, failing: [], tail: `\n${summary}\n` } } });

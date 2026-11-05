@@ -64,6 +64,7 @@ Extra fields:
 | `mode`, `note` | Applicable to the mode / outcome |
 | `initialized: true` | A fresh directory started a loop |
 | `health`, `detail` | `state_error` |
+| `integrity` | `state_error` caused by the protocol binding (below): `protocol_lock_missing`, `protocol_lock_corrupt`, `protocol_lock_mismatch` or `protocol_records_corrupt` |
 | `lock: {state, why, owner: {pid, host, startTime, at}}` | `busy` |
 | `signal` | `interrupted` |
 | `error: {name, code}` | `error`; the message and stack go to stderr |
@@ -75,7 +76,7 @@ Extra fields:
 | `ok` | 0 | `--rollback`, `--verify-stable` or `--ablation` finished | — |
 | `blocked` | 2 | A prerequisite, split or protocol-lock problem stopped the loop. `status.blocked.retryable` is true only for missing prerequisites. The state resumes at `status.resumePhase` | Retry later when retryable; otherwise a human must act (a changed protocol or evaluator needs a new state directory) |
 | `halted` | 3 | Trust-boundary breach or state-integrity violation; terminal for the directory | Never retry; human review |
-| `state_error` | 4 | `state.json` is missing (records exist), unreadable, invalid, or absent under `--require-state`. Nothing was changed | Never retry; restore the state or start a new directory |
+| `state_error` | 4 | `state.json` is missing (records exist), unreadable, invalid, or absent under `--require-state`; or the protocol binding is damaged (`integrity`, see **Protocol binding**). Nothing was changed | Never retry; restore the state or start a new directory |
 | `busy` | 75 | Another controller lock is held or cannot be verified. `lock.state`: `live`, `foreign-host` or `unverifiable`; `contended` (another process is recovering it, or it changed during recovery); `stale-guard` (a recoverer died holding `DIR/.lock.reclaim`; a human removes the guard after checking that no controller runs) | Retry later (a persistent `unverifiable`/`stale-guard` needs a human); never kill the owner on the PID alone |
 | `interrupted` | 130 | SIGINT/SIGTERM/SIGHUP | Rerun `--resume` |
 | `incomplete` / `error` | 1 | The loop returned before `done` without one of the reasons above / an unexpected exception, including file-system errors before or after the lock and uncaught exceptions or rejections (same cleanup as a signal) | Bounded retries, then a human |
@@ -87,15 +88,46 @@ Extra fields:
 - `condition` is one of `none`, `in_progress`, `blocked`, `halted`, `cycle_complete`, `state_error`.
 - `lock` is `{state: absent|live|stale|foreign-host|unverifiable, pid, host, at, guard?: held|stale-guard}`, the lock that
   governs the directory (a trajectory reports its ablation's lock); the token is never printed.
-- For a present state it adds `phase`, `cycle`, `strategy`, `resumePhase`,
+- For a present state it adds `phase`, `cycle`, `strategy`, `protocolDigest`, `resumePhase`,
   `blocked{reason,retryable,missing[names],problemCount}`, `halted{reason,at}`, `cycleComplete`, `searchStop` (null while
   searching), `counters{candidates,noProgress}`, `final{verdict,candidate,adopt,explorationOnly,rolledBack,reasonCount}`,
   `adopted{at}`, `doneAt`, `updatedAt` and `lastInterruption{at,signal}`.
+- `protocolDigest` is the sha256 of the locked protocol (the digest also recorded in `report.json` and the holdout ledger;
+  not secret). In the summary it comes from the verified lock on disk; in an outcome's `status` from the state's binding. It
+  is `null` before the lock step, and in the summary also when the lock cannot be verified (e.g. a halted state whose lock is
+  damaged). A supervisor can pin the first digest it sees and treat any later change as a new experiment.
 - An ablation directory lists `trajectories.A/B/C`.
 - The summary never carries prompts, task or holdout content, problem texts, gate reasons or credentials.
 - `lastInterruption` is history only. Older states' `interrupted` field is migrated to it, and neither decides an outcome.
-- Exit 4 when the health is `missing` or `corrupt`, else 0.
-- Plain `--status` still prints the full `state.json`.
+- Exit 4 when the health is `missing` or `corrupt` (with `integrity` for a damaged protocol binding), else 0.
+- Plain `--status` still prints the full `state.json`. When the health is `missing` or `corrupt` (including a damaged
+  protocol binding of the loop or of a trajectory of an ablation directory) it then prints a `state_error` outcome line and
+  exits 4, like `--summary` (formerly it exited 0 for a lost or structurally invalid state).
+
+**Protocol binding.** The first `prepare` of a state directory writes `protocol.lock.json` (protocol, digests of every
+evaluator file, dataset digest) and records in `state.json` the binding `protocolLock{protocolDigest,lockDigest}`, where
+`lockDigest` covers the whole lock. Every later invocation checks, before prerequisites, grader validation, model calls,
+holdout use or any write:
+
+- The lock exists, parses, is well-formed and internally consistent (`protocolDigest` = digest of its protocol).
+- It matches the state's binding and the journal (`events.jsonl`, whose hash chain must be intact): every
+  `protocol-locked`/`protocol-bound` event names the same protocol digest (and lock digest, where recorded); a state whose
+  journal recorded a lock digest must still carry its binding; a directory whose journal shows more than one
+  `protocol-locked` event (an earlier re-lock) is refused. The trajectories of an ablation are bound to the same lock.
+- A missing lock is created only for a fresh directory (a leftover `state.json.tmp-*` of an interrupted first write is not a
+  record) or a provably pre-lock state: a crash, or a BLOCKED missing prerequisite or split validation,
+  between creating `state.json` and writing the lock (phase `prepare`, cycle 1, no decisions, only `state.json`,
+  `events.jsonl` with prepare/blocked phases, `grading.json` and a report without a protocol digest). Anything else with a
+  missing lock is `state_error` `protocol_lock_missing`; the CLI never re-locks the current evaluator over existing evidence.
+- An older state without a binding is bound to its existing, verified lock on the next run (event `protocol-bound`), never
+  to the current evaluator. When the current protocol or evaluator differs from that lock it stays `blocked` as before.
+- A halted state stays `halted` (exit 3) whatever its lock: a halt takes precedence. `--rollback` reads no lock and still
+  works on any state.
+
+The Loop API enforces the same checks (`prepare` throws `StateIntegrityError`; `runAblation` returns `state_error`;
+`lockProtocol` only verifies unless the controller passes `create` for a proven pre-lock state). These checks detect lost,
+partial or inconsistent records. They are not a signature: someone who rewrites `state.json`, the lock and `events.jsonl`
+(recomputing its hash chain) together is not detected.
 
 **Locks.** The controller lock is `DIR/.lock`. An ablation and all its trajectories share the ablation directory's lock (a
 `--rollback --state DIR/A` takes `DIR/.lock`).
@@ -124,7 +156,9 @@ Extra fields:
 - Run with the same `--state` and `--protocol` every time. Keep `HOME`, `PATH` and the credentials of the original run.
 - Do not commit, push or deploy on the CLI's behalf. Adoption only moves the local `eval-loop/stable` refs after the gates.
 
-**Recovery.** Nothing clears a halt, a lost state or a protocol-lock BLOCKED automatically, and there is no override flag.
+**Recovery.** Nothing clears a halt, a lost state, a damaged protocol binding or a protocol-lock BLOCKED automatically, and
+there is no override flag. A missing or damaged `protocol.lock.json` is never regenerated: restore the original file (its
+content must match the recorded binding) or continue in a new state directory.
 `--rollback` is the exception by design: it restores the previous local `eval-loop/stable` refs on any state, including
 halted, lost or corrupt ones, and never evaluates or adopts. On a trajectory it holds the ablation's lock.
 A human reviews the records (`report.md`, `events.jsonl`), then continues in a new state directory. Use a new protocol
@@ -155,7 +189,7 @@ This is intentional: continue in a new state directory, and never rewrite a reco
 | `src/contract.mjs` | Outcome/exit-code table, state health, public status summary |
 | `extension/index.js` | Pi command |
 | `src/loop.mjs` | Phases, state machine, watchdog |
-| `src/protocol.mjs` | Pre-registered defaults and the lock |
+| `src/protocol.mjs` | Pre-registered defaults, the lock and the state's lock binding |
 | `src/stats.mjs` | Paired, clustered Bayesian bootstrap |
 | `src/gate.mjs` | Screening, development and adoption gates |
 | `src/archive.mjs` | Lineage, dedup, Pareto front |
@@ -175,4 +209,5 @@ This is intentional: continue in a new state directory, and never rewrite a reco
 | `records/` | Committed records of measured runs |
 
 Tests: `npm test` in this directory (`EL_TEST_TMP` sets the temp root). Root `npm run test:compat` runs them too. The
-unattended contract is covered by `test/lifecycle.test.mjs`, `test/lock.test.mjs` and `test/cli-contract.test.mjs`.
+unattended contract is covered by `test/lifecycle.test.mjs`, `test/lock.test.mjs`, `test/cli-contract.test.mjs` and
+`test/protocol-lock.test.mjs` (protocol binding).
