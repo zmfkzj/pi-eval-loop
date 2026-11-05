@@ -5,7 +5,8 @@
   "type": "module",
   "description": "Quality-first autonomous harness optimization loop for pi-orche (ParetoSaddler adaptation)",
   "bin": {
-    "eval-loop": "./bin/eval-loop.mjs"
+    "eval-loop": "./bin/eval-loop.mjs",
+    "eval-loop-supply": "./bin/eval-loop-supply.mjs"
   },
   "scripts": {
     "test": "node --test test/*.test.mjs",

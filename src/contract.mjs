@@ -59,6 +59,11 @@ export function validateState(state) {
   return problems;
 }
 
+/** Blocked reasons recorded before the lock step (exact strings; details go in other fields of `blocked`). */
+export const POOL_EMPTY = "no eligible unused holdout batch in the supply pool: collect and seal one (eval-loop-supply collect), then retry";
+export const POOL_UNUSABLE = "holdout supply pool unusable";
+const PRE_LOCK_BLOCKS = ["missing prerequisites", "split validation failed", POOL_EMPTY, POOL_UNUSABLE];
+
 /** Records a state directory may hold before its protocol lock exists (prepare writes state, grading results, then the lock). */
 const PRE_LOCK_FILES = new Set(["state.json", "events.jsonl", "grading.json", "report.md", "report.json"]);
 const preLockFile = (name) => PRE_LOCK_FILES.has(name) || [...PRE_LOCK_FILES, LOCK_FILE].some(base => name.startsWith(`${base}.tmp-`));
@@ -94,8 +99,9 @@ function preLockViolations(dir, state) {
   let events;
   try { events = readEvents(dir); } catch { out.push("events.jsonl unreadable or its hash chain broken"); events = []; }
   if (events.some(e => !(e?.type === "phase" && ["prepare", "blocked"].includes(e.phase)))) out.push("events after the lock step");
-  // Only the blocks that happen before the lock step (prerequisites, split validation) are pre-lock; a lock-check block proves a lock.
-  if (state.phase === "blocked" && !["missing prerequisites", "split validation failed"].includes(state.blocked?.reason)) out.push(`blocked: ${String(state.blocked?.reason).slice(0, 60)}`);
+  // Only the blocks that happen before the lock step (prerequisites, split validation, holdout supply resolution of a state that
+  // may still reserve) are pre-lock; a lock-check block proves a lock.
+  if (state.phase === "blocked" && !PRE_LOCK_BLOCKS.includes(state.blocked?.reason)) out.push(`blocked: ${String(state.blocked?.reason).slice(0, 60)}`);
   if (existsSync(join(dir, "report.json"))) {
     try { const report = JSON.parse(readFileSync(join(dir, "report.json"), "utf8")); if (report?.protocolDigest != null) out.push("report.json names a protocol digest"); } catch { out.push("report.json unreadable"); }
   }

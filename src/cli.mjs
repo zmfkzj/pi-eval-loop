@@ -11,18 +11,19 @@ import { StateIntegrityError } from "./protocol.mjs";
 import { acquireLock, LockBusyError, readJson, sleep } from "./util.mjs";
 
 export const RUN_MODES = ["once", "resume", "daemon", "rollback", "verify-stable", "ablation"];
-export const READ_MODES = ["status", "report", "doctor", "selftest"];
+export const READ_MODES = ["status", "report", "doctor", "selftest", "preflight"];
 export const USAGE = [
   "usage: eval-loop --once|--resume|--daemon [--max-cycles N]|--rollback [--reason R]|--verify-stable --tasks DIR|--ablation",
   "                 [--state DIR] [--protocol FILE] [--strategy pareto|greedy] [--require-state]",
   "       eval-loop --status [--summary]|--report|--doctor|--selftest [--state DIR]",
+  "       eval-loop --preflight [--state DIR] [--protocol FILE]   (model-free holdout eligibility; exit 0 ok, 2 blocked)",
 ].join("\n");
 
 const OPTIONS = /** @type {const} */ ({
   once: { type: "boolean" }, resume: { type: "boolean" }, daemon: { type: "boolean" }, report: { type: "boolean" }, status: { type: "boolean" }, summary: { type: "boolean" },
   doctor: { type: "boolean" }, rollback: { type: "boolean" }, reason: { type: "string" }, "verify-stable": { type: "boolean" }, tasks: { type: "string" }, selftest: { type: "boolean" },
   ablation: { type: "boolean" }, state: { type: "string" }, protocol: { type: "string" }, strategy: { type: "string" }, "max-cycles": { type: "string" },
-  "require-state": { type: "boolean" }, help: { type: "boolean", short: "h" },
+  "require-state": { type: "boolean" }, preflight: { type: "boolean" }, help: { type: "boolean", short: "h" },
 });
 
 const print = (x) => process.stdout.write(`${typeof x === "string" ? x : JSON.stringify(x, null, 2)}\n`);
@@ -137,6 +138,13 @@ export async function main(argv) {
     return 0;
   }
   if (values.doctor) { const { prerequisites, hostEnvironment } = await import("./sandbox.mjs"); const p = await prerequisites(hostEnvironment()); print(p); return p.every(x => x.ok) ? 0 : EXIT.blocked; }
+  if (values.preflight) {
+    const [{ preflightReport }, { loadProtocol }, { ORCHE }] = await Promise.all([import("./supply.mjs"), import("./protocol.mjs"), import("./sandbox.mjs")]);
+    let r;
+    try { r = preflightReport(loadProtocol(values.protocol), stateDir, { orcheDir: ORCHE }); } catch (error) { r = { schema: "pi-eval-loop/preflight@1", stateDir, ok: false, reasons: [String(error.message).slice(0, 500)] }; }
+    emit(r);
+    return r.ok ? 0 : EXIT.blocked;
+  }
   if (values.selftest) { const { selftest } = await import("./selftest.mjs"); const r = await selftest({ log: line => process.stderr.write(`[selftest] ${line}\n`) }); print(r.summary); return r.ok ? 0 : 1; }
 
   // ---- lock-taking modes

@@ -5,7 +5,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
-import { edit, makeLoop, rmSync, sh, tempDir, testProtocol } from "./helpers.mjs";
+import { edit, HOLDOUT, makeHoldout, makeLoop, rmSync, sh, tempDir, testProtocol } from "./helpers.mjs";
 import { Ledger } from "../src/util.mjs";
 import { gitlinks } from "../src/deploy.mjs";
 import { buildReport } from "../src/report.mjs";
@@ -67,30 +67,44 @@ test("a full cycle runs unattended: good candidate promoted, developed, selected
   } finally { rmSync(root, { recursive: true, force: true }); }
 });
 
-test("a holdout that was already used cannot back an adoption: BLOCKED, the stable harness is kept", async () => {
+test("a holdout that was already used blocks the experiment before the search (preflight): nothing is run or consumed", async () => {
   const root = tempDir();
   try {
-    const { loop, fx } = makeLoop({ root, entries: [ENTRIES[0]] });
+    let runs = 0;
+    const counting = simulatedBackend({ skill: skillOf, seed: "test" });
+    const { loop, fx } = makeLoop({ root, entries: [ENTRIES[0]], backend: { simulated: true, run: (input) => { runs++; return counting.run(input); } } });
     new Ledger(join(fx.holdout.dir, "USES.jsonl")).append({ type: "use", note: "an earlier final evaluation" });
     const state = await loop.runCycle();
-    assert.equal(state.selection.selected, "c001");
-    assert.equal(state.final.verdict, "BLOCKED");
-    assert.match(state.final.reasons.join(" "), /no independent holdout: .*already used 1 time/);
+    assert.equal(state.phase, "blocked");
+    assert.equal(state.blocked.retryable, false);
+    assert.match(state.blocked.reason, /^holdout preflight: /);
+    assert.match(state.blocked.preflight.reasons.join(" "), /already used 1 time/);
+    assert.equal(runs, 0, "no baseline, proposer or candidate run");
+    assert.equal(loop.archive.all().filter(c => c.origin === "proposer").length, 0);
     assert.throws(() => sh(fx.orche, ["rev-parse", "--verify", "refs/heads/eval-loop/stable"]));
-    assert.equal(new Ledger(join(fx.holdout.dir, "USES.jsonl")).records().length, 2, "this (non-independent) use is recorded too");
+    assert.equal(new Ledger(join(fx.holdout.dir, "USES.jsonl")).records().length, 1, "nothing consumed");
+    // Resuming does not get past it (permanent: the holdout is bound to this experiment).
+    const again = await loop.runCycle();
+    assert.equal(again.phase, "blocked"); assert.equal(runs, 0);
   } finally { rmSync(root, { recursive: true, force: true }); }
 });
 
-test("a later cycle starts from the adopted stable and finds no improvement over it", async () => {
+test("a later experiment starts from the adopted stable (with a fresh, unused holdout) and finds no improvement over it", async () => {
   const root = tempDir();
   try {
     const first = makeLoop({ root, entries: [ENTRIES[0]] });
     await first.loop.runCycle();
     assert.equal(first.loop.state.final.verdict, "ADOPT");
-    const second = makeLoop({ root, entries: [{ hypothesis: "another change", targetFailureClass: "requirements-generalization", edit: edit("good good") }], fixtures: first.fx, stateName: "state2" });
+    // The first holdout is consumed: the next experiment needs a new batch (same task layout, unused ledger).
+    const fresh = makeHoldout(join(root, "batch-2"), HOLDOUT);
+    const second = makeLoop({ root, entries: [{ hypothesis: "another change", targetFailureClass: "requirements-generalization", edit: edit("good good") }], fixtures: { ...first.fx, holdout: fresh }, stateName: "state2" });
     const state = await second.loop.runCycle();
     assert.equal(state.stable.commit, first.loop.archive.get("c001").commit);
     assert.equal(state.final.verdict, "KEEP_STABLE");
+    // Reusing the consumed holdout for a further experiment is refused before any run.
+    const third = makeLoop({ root, entries: [], fixtures: first.fx, stateName: "state3" });
+    const blocked = await third.loop.runCycle();
+    assert.equal(blocked.phase, "blocked"); assert.match(blocked.blocked.preflight.reasons.join(" "), /already used/);
   } finally { rmSync(root, { recursive: true, force: true }); }
 });
 

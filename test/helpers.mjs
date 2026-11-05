@@ -87,16 +87,17 @@ export const edit = (text) => (dir) => writeFileSync(join(dir, "src/skill.txt"),
 /**
  * @param {{ root: string, protocol?: any, entries?: any[], skill?: (harness: any, task?: any, info?: any) => { p: number, crash?: boolean, violation?: boolean, infra?: boolean },
  *   strategy?: "pareto" | "greedy", prerequisites?: () => Promise<Array<{ name: string, ok: boolean }>>, checks?: (worktree: string, which?: string[], logDir?: string) => Promise<any>,
- *   backend?: { run(input: any): Promise<any>, simulated?: boolean }, stateName?: string, fixtures?: any, fault?: any }} options
+ *   backend?: { run(input: any): Promise<any>, simulated?: boolean }, stateName?: string, fixtures?: any, fault?: any, holdoutFromProtocol?: boolean }} options
  */
-export function makeLoop({ root, protocol = testProtocol(), entries, skill = skillOf, strategy = "pareto", prerequisites, checks, backend, stateName = "state", fixtures, fault }) {
+export function makeLoop({ root, protocol = testProtocol(), entries, skill = skillOf, strategy = "pareto", prerequisites, checks, backend, stateName = "state", fixtures, fault, holdoutFromProtocol = false }) {
   const fx = fixtures ?? (() => { const u = makeUmbrella(root); const tasks = makeTasks(root, TRAIN_DEV); const holdout = makeHoldout(root, HOLDOUT); return { ...u, tasks, holdout }; })();
   const loop = new Loop({
     stateDir: join(root, stateName), protocol, strategy, umbrella: fx.umbrella, orche: fx.orche, envDigest: "test-env", log: () => {},
     backend: backend ?? simulatedBackend({ skill: (h, t, info) => skill(h, t, info), seed: "test" }),
     proposer: scriptedProposer(entries ?? []), prerequisites: prerequisites ?? (async () => [{ name: "sim", ok: true }]),
     checks: checks ?? (async () => passingChecks()),
-    datasets: { tasks: fx.tasks, holdoutDir: fx.holdout.dir, holdoutTasks: fx.holdout.tasks }, fault,
+    // holdoutFromProtocol: the holdout is loaded from the protocol path (e.g. a batch reserved in a supply pool), not the fixture.
+    datasets: holdoutFromProtocol ? { tasks: fx.tasks } : { tasks: fx.tasks, holdoutDir: fx.holdout.dir, holdoutTasks: fx.holdout.tasks }, fault,
   });
   return { loop, fx };
 }

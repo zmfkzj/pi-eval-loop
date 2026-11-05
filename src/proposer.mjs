@@ -9,7 +9,7 @@ import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 import { BRIDGE, BRIDGE_PORT, HARNESS_RUNTIME, LAUNCH, MOUNTS, PLACEHOLDER_KEY, completedModelCalls, runSandboxed, startModelPath, wireEntries } from "./sandbox.mjs";
 import { ensureDir, walkFiles } from "./util.mjs";
-import { FAILURE_CLASSES } from "./analysis.mjs";
+import { FAILURE_CLASSES, GATE_BLOCKING } from "./analysis.mjs";
 
 /** Copy the harness runtime parts of `worktree` into `dest` (regular files only). */
 export function harnessCopy(worktree, dest) {
@@ -48,21 +48,26 @@ export const WORK = "/tmp/work";
 export function proposerPrompt({ parentId, targetClass, protocol, blockedClasses }) {
   return [
     "You are improving an agent harness: the pi-orche extension for the Pi coding agent, checked out (read-write) in ./harness. A harness is the code and prompts around a fixed model; you may not change the model.",
-    `Evidence about how the current harness (${parentId}) fails is in ./evidence (read-only): failures.json (train-split runs: task instruction, terminal status, mechanical failure class, visible/hidden test outcome, the agent's final message), analysis.json (recurring failure classes as UNVERIFIED hypotheses) and development.json (aggregate development pass rates).`,
+    `Evidence about how the current harness (${parentId}) fails is in ./evidence (read-only): failures.json (train-split runs: task instruction, terminal status, mechanical failure class, visible/hidden test outcome, the agent's final message), analysis.json (recurring failure classes as UNVERIFIED hypotheses, gate-blocking classes first), development.json (aggregate development pass rates) and rejections.json (why recent candidates were rejected).`,
     `Target failure class for this candidate: ${targetClass} (${FAILURE_CLASSES[targetClass] ?? targetClass}).${blockedClasses.length ? ` Do not target these classes again (earlier attempts failed): ${blockedClasses.join(", ")}.` : ""}`,
+    ...(GATE_BLOCKING.includes(targetClass) ? ["This class is a hard gate: a single run in which a task agent shows it rejects the whole harness, whatever its success rate. Change how the harness instructs or constrains its task agents so that it does not happen (for integrity: existing test files are never edited, weakened or deleted; new behaviour gets new tests instead), keeping the change general."] : []),
     "Make ONE minimal, general change whose effect can be traced to one hypothesis: e.g. a system-prompt or role instruction, the task-decomposition or completion policy, verification/retry policy, tool exposure, context handoff, termination conditions or failure recovery.",
     `Rules: change only files under ${protocol.proposer.allowedPaths.map(p => `harness/${p}`).join(" or ")}; at most ${protocol.proposer.maxChangedFiles} files and ${protocol.proposer.maxDiffLines} changed lines; never edit tests, experiments, fixtures, package.json or configuration; do not mention benchmarks, evaluation, graders, hidden tests or any specific task; no network access. Prefer the simplest change. Keep the TypeScript valid (you can run: cd harness && node node_modules/typescript/bin/tsc --noEmit -p .).`,
     `When done, write ${WORK}/out/hypothesis.json: {"hypothesis": "<one sentence: what behaviour changes and why it should fix the target class>", "targetFailureClass": "${targetClass}", "expectedEffect": "<which observable outcome should improve>", "files": ["<changed paths>"]}. Then stop.`,
   ].join("\n\n");
 }
 
-/** Evidence files for the proposer: train failures (hidden test CONTENT is never included) and development aggregates. */
-export function writeEvidence(dir, { trainRecords, analysis, devSummary, tasksById }) {
+/**
+ * Evidence files for the proposer: train failures (hidden test CONTENT is never included), development aggregates and the critical
+ * reasons of recent rejected candidates (violation texts only: no task id, split or repeat; never holdout or hidden material).
+ */
+export function writeEvidence(dir, { trainRecords, analysis, devSummary, tasksById, rejections = [] }) {
   ensureDir(dir);
   const failures = trainRecords.filter(r => !r.task_success).map(r => ({ task: tasksById[r.task_id]?.instruction?.slice(0, 1500), terminal: r.terminal_status, detail: String(r.terminal_detail ?? "").slice(0, 300), failureClass: r.failure_class, visibleTestsPass: r.visible_test_pass, hiddenTestsPass: r.hidden_test_pass, integrityViolations: (r.integrity?.violations ?? []).slice(0, 3).map(v => String(v).slice(0, 300)), finalMessage: String(r.final_text_excerpt ?? "").slice(0, 600), modelRequests: r.model_requests }));
   writeFileSync(join(dir, "failures.json"), JSON.stringify(failures, null, 2));
   writeFileSync(join(dir, "analysis.json"), JSON.stringify(analysis.hypotheses, null, 2));
   writeFileSync(join(dir, "development.json"), JSON.stringify(devSummary, null, 2));
+  writeFileSync(join(dir, "rejections.json"), JSON.stringify(rejections, null, 2));
   return dir;
 }
 

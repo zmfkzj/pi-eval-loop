@@ -35,7 +35,13 @@ export class Evaluator {
   }
   /** Final records (results) of all units, latest attempt last. */
   records() { return this.ledger.records().filter(r => r.type === "result").map(r => r.record); }
-  keyOf(harness, task, split, repeat) { return unitKey({ harness, task, split, repeat, protocolDigest: this.protocolDigest }); }
+  keyOf(harness, task, split, repeat) { return unitKey({ harness, task, split, repeat, protocolDigest: this.protocolDigest, envDigest: this.envDigest }); }
+  /**
+   * Records that may enter a statistic of THIS evaluation identity: same protocol digest and environment digest (fail closed: a
+   * record without the digest never matches a defined one). Critical-problem checks use `records()` (every identity, every attempt):
+   * evidence of a violation is never filtered away.
+   */
+  samples() { const env = this.envDigest ?? null; return this.records().filter(r => r.protocol_digest === this.protocolDigest && (r.environment_digest ?? null) === env); }
 
   /** State of one unit from the ledger: { done: record|undefined, attempts, pending: dispatch without result }. */
   unitState(key) {
@@ -62,15 +68,24 @@ export class Evaluator {
     return record;
   }
 
-  /** Run (or reuse) every unit [{ task, split, repeat }] of `harness`; returns the final records in unit order. */
-  async evaluate(harness, units, context) {
+  /**
+   * Run (or reuse) every unit [{ task, split, repeat }] of `harness`; returns the final records in unit order (undefined for a unit
+   * that was not run because `stopWhen` fired). `stopWhen()` is consulted before the first dispatch (so a resumed evaluation whose
+   * recorded evidence already decides never dispatches) and after every finished unit; once it returns true no further unit is
+   * dispatched. Units already running finish and are recorded (never killed or discarded).
+   * @param {any} harness @param {Array<{ task: string, split: string, repeat: number }>} units @param {string} context
+   * @param {{ stopWhen?: () => boolean }} [options]
+   */
+  async evaluate(harness, units, context, { stopWhen } = {}) {
     const queue = units.map(u => ({ ...u, key: this.keyOf(harness, u.task, u.split, u.repeat) }));
     const out = new Map();
     let next = 0;
+    let stopped = Boolean(stopWhen?.());
     const worker = async () => {
-      while (next < queue.length) {
+      while (!stopped && next < queue.length) {
         const unit = queue[next++];
         out.set(unit.key, await this.runOne(harness, unit, context));
+        if (stopWhen?.()) stopped = true;
       }
     };
     await Promise.all(Array.from({ length: Math.max(1, Math.min(this.protocol.parallelism, queue.length)) }, worker));
@@ -89,7 +104,8 @@ export class Evaluator {
         const attempt = state.attempts + 1;
         const runId = `${harness.id}-${unit.task}-${unit.split}-r${unit.repeat}-a${attempt}-${unit.key.slice(0, 8)}`;
         const controlDir = mkdtempSync(join(tmpdir(), "el-"));
-        const evidence = join(this.stateDir, "evidence", harness.id, `${unit.split}-${unit.task}-r${unit.repeat}-a${attempt}`);
+        // The key prefix keeps evidence of another identity (environment, commit) of the same slot from being overwritten.
+        const evidence = join(this.stateDir, "evidence", harness.id, `${unit.split}-${unit.task}-r${unit.repeat}-a${attempt}-${unit.key.slice(0, 8)}`);
         this.ledger.append({ type: "dispatch", unit_key: unit.key, attempt, run_id: runId, controlDir, harness: { id: harness.id, kind: harness.kind, commit: harness.commit ?? null, mode: harness.mode ?? null }, task: unit.task, split: unit.split, repeat: unit.repeat, context, simulated: !!this.backend.simulated });
         let record;
         try {

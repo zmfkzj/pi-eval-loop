@@ -25,7 +25,7 @@ prepare -> baselines -> search (repeat: parent -> analysis -> proposal -> integr
 |---|---|---|
 | prepare | First checks the state directory's integrity and protocol binding (a lost state or a missing, damaged or contradicting lock is a `StateIntegrityError`, nothing written) and an existing lock against the current protocol and evaluator bytes. Checks prerequisites (missing ones end in BLOCKED; nothing is simulated). Validates the grader of every task: the original must fail, the reference must pass. Builds family-grouped train/dev splits. Verifies the sealed holdout. Locks the protocol (sha256 of the protocol, every evaluator file and the dataset manifest) once, for a fresh or provably pre-lock state only, and records the binding (`state.protocolLock`). | `src/loop.mjs` `prepare`, `src/protocol.mjs` `lockProtocol`, `src/contract.mjs` `inspectProtocol` |
 | baselines | Runs stable orche on train and dev; pure Pi (no extension) on train and dev; a k=3 independent-attempt pure-Pi arm on dev that submits the first attempt whose VISIBLE tests pass (no hidden information is used); the target mode's existing implementation (= stable when the target is `single`). The k-attempt arm *allows* up to k attempts; whether it used more compute is a measurement (reports list allowed vs actual attempts, requests and tokens per unit). It is not called equal-compute or opportunity-matched unless those measurements show it. | `baselines`, `baselineHarnesses` |
-| search | Selects a parent (Pareto: archive front plus development-qualified; greedy: the current best only). Analyzes failures (train). The proposer edits a copy of the harness runtime. Then patch integrity, dedup, commit on the isolated branch `eval-loop/candidates/<ns>/<id>`, typecheck, adaptive screening, development. | `newCandidate`, `screen`, `develop` |
+| search | Selects a parent (Pareto: archive front plus development-qualified; greedy: the current best only). Analyzes failures (train). The proposer edits a copy of the harness runtime. Then patch integrity, dedup, commit on the isolated branch `eval-loop/candidates/<ns>/<id>`, precheck (typecheck and test suite), adaptive screening, development (both stop dispatching on a recorded critical problem). | `newCandidate`, `screen`, `develop` |
 | select | Picks the best development-qualified candidate without a family regression and freezes it (`selection.json`, digest) BEFORE any holdout access. | `select` |
 | holdout | Appends the use to the holdout's hash-chained `USES.jsonl` before the first run. Then one pass over all arms. | `holdout` |
 | adopt / post-adopt | Crash-safe local ref adoption, a smoke run, automatic rollback on a crash or route violation. | `src/deploy.mjs`, `adopt`, `postAdopt` |
@@ -50,6 +50,42 @@ The stop reason and the failed proposals per class are recorded (`state.searchSt
 candidate cap never interrupts an in-flight candidate. protocol-1's measured run `abc-real-1` used a 4-candidate cap set by session
 time; that cap is withdrawn and the run is marked truncated. A finished cycle restarts (`--daemon`, or
 `--once` again) only when its fingerprint changes: orche HEAD, stable, task digests, environment or protocol.
+
+Efficiency (protocol-3; gates, thresholds and decision rules unchanged; `efficiency` in the protocol). explore-real-2 spent
+85 % of its task-agent input tokens on screening, and all 20 candidates were rejected because task agents edited existing tests
+under them, while every proposal targeted another class. protocol-3 therefore removes work that cannot change a decision:
+- **Failure-driven targeting** (`gateBlockingFirst`): a class the critical gate rejects on ONE run (`integrity`, `harness-crash`;
+  `src/analysis.mjs` `GATE_BLOCKING`) is targeted first while it recurs (parent train runs + recent critical rejections >= 2). The
+  proposer also gets `rejections.json`: the violation texts of recent critical rejections (no task id, split, repeat or holdout
+  material). This connects the observed failure (agents changing existing tests) to candidates that change how the harness
+  instructs its agents; it does not by itself make any candidate better, which only the evaluation can show.
+- **Precheck** (`precheck: ["typecheck", "test"]`): the candidate's harness checks run before any model run, and "test" applies the
+  adoption rule (`compareChecks` against stable's checks, measured once per stable commit and environment). A candidate failing it
+  could never be adopted. Status `build_failed`. Flaky orche tests can reject a candidate here as they would at adoption.
+- **Early critical stop** (`stopOnCritical`): the candidate's screening units run before the parent's (repeat-major, tasks where
+  the parent showed critical problems first), and once ANY recorded attempt of the candidate in scope has a critical problem no
+  further unit of that candidate (nor the parent's units of that round) is dispatched; units already running finish and are
+  recorded, and a resumed round with decided evidence dispatches nothing. Development (dev, then the candidate's own train runs)
+  stops the same way and records `dev_rejected` without a development point. The decision is the one the full round would reach
+  (a critical problem rejects whatever the statistics; the full round contains the same runs); a stopped round is never a
+  sample, estimate or progress. Faux replay (`test/efficiency.test.mjs`): 6 candidates all rejected for integrity, candidate
+  screening units 72 -> 22 with identical decisions; a valid candidate runs every unit with an identical development point.
+  Counterfactual on the recorded explore-real-2 screening outcomes (dispatch waves of 6, the whole wave counted): 360 -> 144
+  candidate units, 129.4 M -> 56.8 M input tokens. That replay assumes the same outcomes in another dispatch order; it is an
+  estimate, not a measurement.
+- **Reuse only for an identical identity**: a recorded outcome is reused only under the same unit key: harness id and commit,
+  task, split, repeat, protocol digest (route, effort, unit limits, seed) and environment digest (node, Pi CLI file and version,
+  provider package and entry, bwrap, route; `environmentDigest` does not hash every dependency file, so it is an identity check, not
+  proof of identical behaviour). Task contents, grader expectations and evaluator bytes are fixed per state by the lock. Within a
+  state directory this reuses the parent's screening units, a candidate's screening units in its development train runs, and the
+  baselines of a next cycle when nothing in that identity changed. Every statistic (`Loop.samples()`) uses only records of the
+  current protocol and environment and, for the stable arms, of the current stable commit; critical checks keep reading every
+  record and attempt. An environment change inside a cycle (search or holdout phase) blocks (`retryable: false`) instead of
+  comparing across environments; before the search the baselines are measured in the current environment, and after the cycle
+  the next one starts in the new environment. Nothing is reused across state directories or protocol versions (a new holdout
+  means a new protocol version and new baselines).
+- **No budget**: there is no token, cost or money limit or quota (operator decision); `merge` rejects unknown keys, so none can
+  be configured by accident. Cost still never enters a gate; the non-financial safety stops above are unchanged.
 
 Exploration-only protocol: `datasets.holdout: null` loads, grades and consumes no holdout. The cycle ends after selection with
 deployment **BLOCKED** (recorded separately from the exploration outcome); `--ablation` freezes B/C finals and skips the joint
@@ -147,7 +183,74 @@ Its differences from the paper:
 - **Single use**: a use is recorded before the first holdout run. After `maxUses` (1) uses the set is no longer independent. A
   tampered ledger is detected. holdout-v1 was used once by `abc-real-1` (2026-11-04): it is consumed, must not be reused for
   tuning, and is not loaded by `explore-real-2`. Until an externally curated, unexposed holdout is added in a new protocol
-  version, **deployment stays BLOCKED**.
+  version, **deployment stays BLOCKED**. The supply below provides such holdouts from public sources.
+
+### Holdout supply from public sources (`eval-loop-supply`, `src/supply.mjs`)
+
+Independent holdouts are supplied without anyone authoring tasks: real upstream changes of public projects, adapted mechanically
+and sealed in a pool OUTSIDE this package (the package exports `datasets/`; `poolPath` refuses pools inside it). The aw wrapper
+uses `agent_workflow/runs/eval-loop-supply` (git-ignored, mode 0700).
+
+- **Sources** (criteria fixed in `DEFAULT_SUPPLY` and recorded with their digest in the pool registry before collection): npm
+  packages found by fixed keyword searches whose latest version's test script runs `node --test`, with no runtime dependencies,
+  an accepted SPDX license and a GitHub repository. Upstream history: default branch, first parent, no merges, committed on/after
+  `since`, not by a bot, a descriptive subject, added/modified files only (deletions/renames cannot be overlaid), no manifest or
+  lockfile change, text only, >= 1 runnable test file and >= 1 non-test code file changed, size bounds.
+- **Adaptation without invention**: `repo/` = the upstream tree at the parent commit (with its license file); `hidden/` = the
+  commit's own post-change test files (renamed to `*.holdout.test.*` only when the runner would not pick them up; the mapping is
+  recorded); `reference/` = the commit's own post-change non-test files; instruction = a fixed preamble + the upstream commit message
+  (trailer lines removed). Provenance: repository URL, immutable parent/fix SHAs, dates, author name, branch head at collection,
+  license SPDX + license file hash + copyright line. Only tasks built this way are labelled `external`.
+- **License**: package.json SPDX in the allow list AND a root license file whose text matches it; otherwise rejected.
+- **Overlap** (reason codes; finding none is not proof of absence): exact commit and `git patch-id --stable` against every
+  earlier supply decision; file content hashes of hidden/reference against every earlier task (orche suite, bundled holdouts);
+  repository family and npm package name against earlier datasets; repository slug, SHA and task id against the texts of orche
+  experiments/docs/results and this package's records/docs. Not detected: semantic near-duplicates in unrelated repositories.
+- **Mechanical validation** in the grading sandbox (no network), repeated (2x): the original's visible suite passes offline; the
+  original FAILS the hidden tests with failing tests reported (timeouts rejected); the reference passes the hidden tests AND the
+  visible suite (a task whose fix breaks old assertions is unsolvable without editing tests, which integrity forbids); identical
+  counts on every repeat. The engine validates every holdout task again at prepare.
+- **Batch** (candidate-blind): eligible cases ordered by `sha256(seed:id)`, the first accepted hard case first, at most
+  `maxPerFamily` per repository and `maxPerOwner` per GitHub account, up to `maxTasks`; sealed only when the protocol minima hold
+  (6 tasks, 4 families, a hard task with an accepted basis). `PROVENANCE.json` and `SEAL.json` are inside the sealed directory.
+- **Difficulty**: the commit source's tier is a size proxy of the upstream fix (`difficultyBasis: "size-proxy"`; a commit-built
+  task.json cannot claim another basis except "source" with the annotation recorded). Patch size does not establish difficulty,
+  so `holdout.hardBasis` (default declared/curator/source) never accepts it: such tasks are not hard for the holdout stratum,
+  coverage, gate or preflight. A "source" basis counts only with a substantive `difficultySource` (dataset, label or value, URL
+  or revision, and a matching tier; `datasets.mjs` sourceAnnotated), otherwise it is "source-unannotated". Difficulty is never
+  calibrated by running a model on holdout tasks. The first real batch (2026-11-05) is structurally valid but blocked for this
+  reason; the hard stratum comes from the annotated source below.
+- **Annotated source: Exercism JavaScript track** (`eval-loop-supply collect-exercism`, `src/supply-exercism.mjs`). Each practice
+  exercise carries a maintainer-assigned `difficulty` (1-10) in the track's config.json, and Exercism's documentation
+  (exercism/docs `building/tracks/config-json.md`) fixes the reading 1-3 easy, 4-7 medium, 8-10 hard; the rubric text is verified
+  at a pinned docs revision before any tier is assigned, and both revisions are recorded in `difficultySource`. Only the tiers in
+  `DEFAULT_SUPPLY.exercism.tiers` (hard) are collected. Adaptation: `repo/` = the exercise directory as a student receives it
+  (without `.meta/`); `hidden/` = the upstream spec byte-identical under a non-runner name, a fixed node:test bridge (resolution
+  hook: `@jest/globals` -> a fixed shim, jest's extension fallback for relative imports) and the real `expect` package at the
+  version of the track's lockfile, vendored offline with versions, integrity and licenses (`VENDOR.json`); xtest/xit/xdescribe are
+  enabled as Exercism's CI does, `test.skip` stays skipped; `reference/` = the maintainers' example solution with Exercism CI's
+  only rewrite (`from '../` -> `from './`); instruction = fixed preamble + the exercise's .docs verbatim. Specs using jest features
+  the bridge does not carry are rejected. Validation runs with `visibleSuite: "none"`: the visible run must pass and find no
+  tests, and the original must execute as many hidden tests as the reference (failures on tests, not on loading); all other
+  checks unchanged; the commit source keeps the default. Exposure: exercises listed in public benchmark sets (default: Aider's
+  polyglot benchmark, whose set was picked from model results) are excluded, an exercise is taken once per pool across
+  revisions (`sourceKey`), the usual family/name/content checks apply, and the whole track is one family (`gh:exercism/javascript`,
+  so at most `maxPerFamily` per batch). Limitation: these exercises and many solutions have been public for years, so pretraining
+  exposure is likely; the hard tier is a curator annotation, not a measured difficulty.
+- **Reservation and use**: a protocol with `datasets.holdoutPool` (and `holdout: null`) reserves, under the pool lock, the first
+  unreserved, seal-intact, eligible batch for its state directory at the fresh initialization (a retry of the same experiment
+  gets the same batch; another experiment never gets it). The resolved batch path is locked with the protocol: one batch per
+  experiment; a later cycle of the same experiment is BLOCKED by the preflight once the batch is used, so a new batch means a new
+  experiment (new state directory, explicit init). No batch: BLOCKED (retryable) before the lock and before any run.
+- **Preflight** (`Loop.holdoutPreflight`, model-free, at every prepare before the selection is frozen): the holdout must be sealed,
+  of accepted provenance, unexposed, with an intact ledger and no use, and cover the minima after grader validation. Failing it
+  blocks permanently before baselines, proposals or candidate runs. At the holdout phase the status is checked again: a holdout
+  that is no longer independent is neither consumed nor run (final verdict BLOCKED); a use appended just before a crash is
+  recovered for its own frozen selection instead of being appended twice. `eval-loop --preflight` prints the same check read-only.
+- **Secrecy and its limits**: hidden tests and reference solutions stay in the pool (cases, batches); reports and the registry
+  carry ids, URLs, counts and reason codes only (per-case validation detail is in `validation.private.json` next to the case).
+  Model-facing sandboxes hide `/home`, so task agents and the proposer cannot read the pool; any unsandboxed process of the same
+  user can. Public code may have been in a model's pretraining data; recency and the overlap checks reduce, not exclude, that.
 
 ## 5. Trust boundaries and integrity
 

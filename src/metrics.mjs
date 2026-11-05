@@ -9,7 +9,14 @@ export const RUN_SCHEMA = "pi-eval-loop/run-1";
 export const TERMINALS = ["completed", "agent_error", "timeout", "aborted", "model_error", "model_unavailable", "grader_error", "infra_error", "route_violation", "harness_crash"];
 export const RETRYABLE = new Set(["infra_error", "model_unavailable"]);
 
-export const unitKey = ({ harness, task, split, repeat, protocolDigest }) => digestOf({ h: harness.id, c: harness.commit ?? null, task, split, repeat, p: protocolDigest });
+/**
+ * Identity of one evaluation unit. A recorded outcome is reused only for the SAME key: harness id and commit (code), task id,
+ * split, repeat index, protocol digest (route, effort, unit limits, seed) and environment digest (node, Pi CLI, provider, bwrap,
+ * route; see sandbox.mjs environmentDigest). Task contents, grader expectations and evaluator bytes are not in the key: they are
+ * fixed for a whole state directory by its protocol lock (a change blocks the state). Keys are only looked up in the state's own
+ * ledger (A/B/C trajectories share a copy of A's ledger under the same lock); nothing is reused across protocol versions.
+ */
+export const unitKey = ({ harness, task, split, repeat, protocolDigest, envDigest }) => digestOf({ h: harness.id, c: harness.commit ?? null, task, split, repeat, p: protocolDigest, e: envDigest ?? null });
 
 /** May this attempt be re-run? Never once a model request completed (a later failure is the run's outcome, not infrastructure). */
 export const retryable = (record) => RETRYABLE.has(record.terminal_status) && (record.model_requests_completed ?? 0) === 0;

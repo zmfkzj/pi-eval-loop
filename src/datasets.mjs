@@ -1,7 +1,7 @@
 // Task sources, family-grouped train/dev/holdout splits, exposure scanning and the sealed holdout with its durable use ledger.
 //
 // Task interface (extensible beyond coding: any task with a mechanical, independent grader fits):
-//   { id, source, dir, repo, hidden?, customGrader?, family, tier, hard, instruction, timeoutSec, provenance }
+//   { id, source, dir, repo, hidden?, customGrader?, family, tier, hard, difficultyBasis?, instruction, timeoutSec, provenance }
 // Tasks without a mechanical grader (rubric/LLM-judged) are NOT loaded: an LLM verdict alone never counts as success.
 import { cpSync, existsSync, readdirSync, readFileSync, statSync } from "node:fs";
 import { join, relative } from "node:path";
@@ -31,6 +31,32 @@ export function loadSuite(suiteDir) {
   return tasks;
 }
 
+/**
+ * Where a task.json tier comes from. A supply-built task (src/supply.mjs, `upstream.tierRule`) is "size-proxy" unless it carries a
+ * "source" basis WITH the annotation it came from (`difficultySource`): no self-declared label overrides its known origin. Any task
+ * claiming "source" must carry a substantive annotation (sourceAnnotated), else it is "source-unannotated" (never accepted). Any
+ * other dataset: its `difficultyBasis` when set, else "declared" (the tier its curator wrote in task.json).
+ */
+export const difficultyBasisOf = (m) => {
+  if (m.difficultyBasis === "source") return sourceAnnotated(m) ? "source" : m.upstream?.tierRule ? "size-proxy" : "source-unannotated";
+  if (m.upstream?.tierRule) return "size-proxy";
+  return typeof m.difficultyBasis === "string" && m.difficultyBasis ? m.difficultyBasis : "declared";
+};
+/**
+ * A difficulty annotation that can be checked: the dataset it came from, the label/value it gives, where to find it (URL or
+ * revision) and, when it names a tier, the same tier as the task.
+ */
+export function sourceAnnotated(m) {
+  const s = m.difficultySource;
+  if (!s || typeof s !== "object") return false;
+  const str = (v) => typeof v === "string" && v.trim().length > 0;
+  if (!str(s.dataset) || !(str(s.label) || Number.isFinite(s.value)) || !(str(s.url) || str(s.commit))) return false;
+  if (str(s.tier) && s.tier !== m.tier) return false;
+  return true;
+}
+/** Whether a holdout task counts as hard: tier hard AND a difficulty basis the protocol accepts (protocol holdout.hardBasis). */
+export const holdoutHard = (task, protocol) => Boolean(task.hard) && (protocol.holdout.hardBasis ?? []).includes(task.difficultyBasis ?? "declared");
+
 /** A local dataset directory (same layout: <id>/{task.json, repo/, hidden/, reference/}; task.json names family/tier/provenance). */
 export function loadLocal(datasetDir) {
   const tasks = [];
@@ -40,7 +66,7 @@ export function loadLocal(datasetDir) {
     const m = JSON.parse(readFileSync(join(dir, "task.json"), "utf8"));
     if (m.id !== id) throw new Error(`${dir}: task.json id ${m.id} != directory`);
     if (!m.family || !m.tier || !m.instruction || !m.provenance) throw new Error(`${dir}: task.json needs family, tier, instruction, provenance`);
-    tasks.push({ id, source: "local", dir, repo: join(dir, "repo"), hidden: existsSync(join(dir, "hidden")) ? join(dir, "hidden") : undefined, customGrader: existsSync(join(dir, "grade.mjs")) ? join(dir, "grade.mjs") : undefined, family: m.family, tier: m.tier, hard: m.tier === "hard", instruction: m.instruction, timeoutSec: m.timeoutSec ?? 900, provenance: m.provenance });
+    tasks.push({ id, source: "local", dir, repo: join(dir, "repo"), hidden: existsSync(join(dir, "hidden")) ? join(dir, "hidden") : undefined, customGrader: existsSync(join(dir, "grade.mjs")) ? join(dir, "grade.mjs") : undefined, family: m.family, tier: m.tier, hard: m.tier === "hard", difficultyBasis: difficultyBasisOf(m), instruction: m.instruction, timeoutSec: m.timeoutSec ?? 900, provenance: m.provenance });
   }
   return tasks;
 }

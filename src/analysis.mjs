@@ -30,11 +30,20 @@ export function classifyFailure(record, facts = {}) {
 }
 
 /**
+ * Classes that the critical gate rejects on a SINGLE run of a candidate, whatever its success rate (gate.mjs criticalProblems):
+ * while the parent harness still produces them at a recurring rate, a candidate rarely survives screening (explore-real-2: 20 of
+ * 20 candidates rejected for task-agent integrity while the proposals targeted another class), so they are targeted first.
+ */
+export const GATE_BLOCKING = Object.freeze(["integrity", "harness-crash"]);
+
+/**
  * Aggregate failure evidence of one harness on the train split.
  * Returns { observations: per task, recurring: classes with counts, hypotheses: [{class, tasks, persistence, addressable, status}] }.
  * `reference` (optional) = records of another harness (e.g. pure Pi) on the same tasks to separate model limits from harness limits.
+ * `rejections` (optional) = { [class]: number of recent candidates rejected by the critical gate for that class } (no task data).
+ * Order: recurring gate-blocking classes first (runs of the parent + candidate rejections >= 2), then by failed runs.
  */
-export function analyze(records, { reference = [] } = {}) {
+export function analyze(records, { reference = [], rejections = {}, gateFirst = true } = {}) {
   const byTask = new Map();
   for (const r of records) { if (!byTask.has(r.task_id)) byTask.set(r.task_id, []); byTask.get(r.task_id).push(r); }
   const observations = [];
@@ -59,8 +68,22 @@ export function analyze(records, { reference = [] } = {}) {
       recurrence: tasks.length > 1 ? "recurring across tasks" : "single task",
       reproducibility: mixed ? `${mixed}/${tasks.length} task(s) mixed (sometimes succeed: behaviour-dependent, plausibly harness-addressable)` : "persistent on every repeat (could be a model limit)",
       modelVsHarness: refHelps ? `${refHelps} task(s) where the reference harness did better: harness-attributable evidence` : "no reference harness did better on these tasks: model-limit not excluded",
-      status: "unverified",
+      status: "unverified", gateBlocking: false, candidateRejections: 0, priority: "by failed runs",
     };
-  }).sort((a, b) => b.runs - a.runs);
+  });
+  // A gate-blocking class seen only through candidate rejections (the parent's own train runs did not show it) is still a target.
+  for (const c of GATE_BLOCKING) {
+    if (!(rejections[c] >= 2) || hypotheses.some(h => h.class === c)) continue;
+    hypotheses.push({ class: c, description: FAILURE_CLASSES[c], runs: 0, tasks: [], recurrence: "recent candidates rejected for it", reproducibility: "observed in candidate screening/development runs", modelVsHarness: "not separated", status: "unverified", gateBlocking: true, candidateRejections: 0, priority: "by failed runs" });
+  }
+  for (const h of hypotheses) {
+    const gate = GATE_BLOCKING.includes(h.class);
+    h.gateBlocking = gate;
+    h.candidateRejections = gate ? (rejections[h.class] ?? 0) : 0;
+    h.priority = gateFirst && gate && h.runs + h.candidateRejections >= 2 ? "gate-blocking (one run rejects a candidate)" : "by failed runs";
+  }
+  const first = (h) => (h.priority.startsWith("gate-blocking") ? 0 : 1);
+  if (gateFirst) hypotheses.sort((a, b) => first(a) - first(b) || (b.runs + b.candidateRejections) - (a.runs + a.candidateRejections));
+  else hypotheses.sort((a, b) => b.runs - a.runs);
   return { observations, hypotheses, infraRuns: classes["model-or-infra"]?.runs ?? 0 };
 }

@@ -31,6 +31,10 @@ npm run eval:loop -- --ablation    # A (stable) / B (quality-only greedy loop) /
 npm run eval:loop -- --ablation --state pi-eval-loop/state/explore-real-2 --protocol pi-eval-loop/protocols/explore-real-2.json
                                    # exploration-only A/B/C: train/dev search, no holdout, deployment BLOCKED
 npm run eval:loop -- --selftest    # credential-free end-to-end run with a faux model (SIMULATED; plumbing only)
+npm run eval:loop -- --preflight --protocol FILE [--state DIR]   # read-only: holdout this experiment has/would get, eligible?
+node pi-eval-loop/bin/eval-loop-supply.mjs collect --pool DIR   # public-source holdout supply: collect, validate, seal a batch
+node pi-eval-loop/bin/eval-loop-supply.mjs status --pool DIR    # batches, reservations, uses, reason-code counts (non-secret)
+node pi-eval-loop/bin/eval-loop-supply.mjs collect-exercism --pool DIR [--no-seal]  # annotated source: Exercism JS hard exercises (difficulty 8-10)
 # options: --state DIR (default pi-eval-loop/state/default, git-ignored)  --protocol FILE (overrides; locked at first run)
 ```
 
@@ -172,11 +176,13 @@ This is intentional: continue in a new state directory, and never rewrite a reco
 |---|---|
 | Loop, CLI (`--once/--resume/--daemon/--report`), Pi command, isolation, gates, archive, adoption/rollback, A/B/C | Implemented and covered by `npm test` (faux/simulated runs are plumbing checks, never measurements) |
 | Critical integrity rule | protocol-2: any task-agent integrity violation, leak, route violation or crash under a candidate rejects it, whatever the baseline did |
+| Efficiency (protocol-3, same gates) | Recurring gate-blocking failure classes (task-agent integrity, harness crash) are targeted first, with the critical reasons of recent rejected candidates as proposer evidence; harness checks (typecheck and the test suite under the adoption rule) run before any model run; once a critical problem is recorded no further screening/development unit of that candidate is dispatched (candidate before parent; a stopped round is never a sample or estimate); recorded outcomes are reused only for an identical unit key (harness commit, task, split, repeat, protocol and environment digest) and statistics use only the current identity. No token, cost or money limit exists (operator decision); the safety limits below are unchanged. Faux evidence: `test/efficiency.test.mjs`; savings on real runs are not measured yet |
 | Real measurements | `abc-real-1` (protocol-1): truncated exploratory evidence (time-motivated 4-candidate cap, 3 evaluated per arm). `explore-real-2` (protocol-2): exploration-only train/dev search to the pre-registered stop; see `docs/results-explore-real-2.md` |
 | Holdout | `holdout-v1` is implementer-authored and was consumed once by `abc-real-1`; it is not independent and is not reused |
+| Holdout supply | `eval-loop-supply` collects real upstream changes of public npm projects (license-checked, provenance-recorded, deduplicated, validated in the grading sandbox), seals candidate-blind batches in a pool outside the package, and a protocol with `datasets.holdoutPool` reserves one per experiment; the engine blocks before any run without an eligible unused batch (docs/design.md §4). Supply tiers are a size proxy and never count as the hard stratum (`holdout.hardBasis`), so the first real batch is structurally valid but BLOCKED (no accepted hard task). The hard stratum comes from `collect-exercism`: Exercism JavaScript exercises whose maintainers rate them 8-10 (hard by Exercism's documented rubric; `difficultyBasis: "source"` with the annotation pinned). Public code and exercises may be in pretraining data: not excluded |
 | Deployment | **BLOCKED**: no externally curated independent holdout exists. No adoption and no real performance improvement are claimed |
 | Operational limits | Cost and time are not optimization targets; safety limits only: 200 candidates/cycle backstop, 72 h hang watchdog, 10 failed proposals per failure class since the last progress (cannot fire before the 10-candidate patience with the defaults), infra stops, 120 requests / 30 min per proposer session, 4 files / 200 diff lines per patch, 20 min / 150 requests per task unit (exact list: `docs/results-explore-real-2.md`) |
-| Exploration quality | Not demonstrated: the 20 explore-real-2 proposals were variants of one hypothesis, and none targeted the integrity class that rejected them all |
+| Exploration quality | Not demonstrated: the 20 explore-real-2 proposals were variants of one hypothesis, and none targeted the integrity class that rejected them all (protocol-3 targets it first; whether that yields better candidates is not measured) |
 | Diagnostics | No package typecheck script; `node pi-eval-loop/scripts/checkjs-compare.mjs <base> <out>` compares tsc checkJs output (record: `records/explore-real-2/checks/checkjs/`) |
 | Packaging | Git submodule `pi-eval-loop/` of the umbrella (`zmfkzj/pi-eval-loop`, branch `main`). Its history continues the umbrella-directory commits it was converted from (`Imported-From:` trailers). The pinned commit must be pushed before fresh clones can initialize it |
 
@@ -194,6 +200,8 @@ This is intentional: continue in a new state directory, and never rewrite a reco
 | `src/gate.mjs` | Screening, development and adoption gates |
 | `src/archive.mjs` | Lineage, dedup, Pareto front |
 | `src/datasets.mjs` | Splits, exposure scan, seal, holdout use ledger |
+| `src/supply.mjs`, `src/supply-cli.mjs`, `bin/eval-loop-supply.mjs` | Public-source holdout supply: discovery, adaptation, license/provenance, overlap, validation, sealed batches, reservations, preflight |
+| `src/supply-exercism.mjs` | Annotated holdout source: Exercism JavaScript track (maintainer difficulty + documented rubric -> `difficultyBasis: "source"`), node:test bridge for the unchanged jest spec with vendored `expect` |
 | `src/sandbox.mjs` | Reuses orche `experiments/witness-replay` sandbox, proxy and bridge; adds the endpoint gate and runtime-only mounts |
 | `src/runner.mjs` | Sandboxed Pi runs, controller-derived terminal states |
 | `src/grader.mjs` | Sandboxed independent grading |

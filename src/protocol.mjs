@@ -13,7 +13,10 @@ export const UMBRELLA = process.env.EVAL_LOOP_UMBRELLA ? resolve(process.env.EVA
 export const DEFAULT_PROTOCOL = Object.freeze({
   // protocol-2: any task-agent integrity violation / leak / route violation / crash of a candidate is critical regardless of the
   // baseline; exact development points; class-exhaustion and candidate backstops sized as safety limits (see docs/design.md §1).
-  version: "pi-eval-loop/protocol-2",
+  // protocol-3 (same gates, thresholds and decision rules): gate-blocking failure classes are targeted first, harness checks run
+  // before screening, a candidate's remaining units are not dispatched once a critical problem decides its rejection, and a
+  // recorded outcome is reused only for an identical unit key that now includes the environment digest (see `efficiency`).
+  version: "pi-eval-loop/protocol-3",
   seed: "pi-eval-loop-2026-11-04",
   // The harness being optimized: pi-orche in this mode. Every compared harness runs on this ONE agent route (model and effort).
   target: { harness: "orche", mode: "single" },
@@ -28,7 +31,12 @@ export const DEFAULT_PROTOCOL = Object.freeze({
   // Screening on a train mini-batch (parent vs candidate, matched repeats). Support threshold .80 is an empirical default, not a guarantee.
   screening: { tasks: 6, minRepeats: 3, maxRepeats: 9, step: 3, support: 0.80, band: 0.10, level: "execution" },
   development: { repeats: 3, level: "task", support: 0.80 },
-  holdout: { repeats: 3, maxUses: 1, minTasks: 6, minFamilies: 4, requireIndependent: true, acceptedProvenance: ["external"] },
+  // hardBasis: where a holdout task's "hard" tier may come from to count for the hard stratum (adoption.requireHardStratum):
+  // "declared" (the dataset's own task.json tier, set by whoever curated the dataset), "curator" (an independent curator's label),
+  // "source" (a difficulty annotation of the upstream dataset). "size-proxy" (a tier inferred from the size of the upstream fix by
+  // the supply, src/supply.mjs) is never accepted: patch size does not establish difficulty. A task whose hard tier has no
+  // accepted basis is not hard for the holdout (stratum, coverage, gate).
+  holdout: { repeats: 3, maxUses: 1, minTasks: 6, minFamilies: 4, requireIndependent: true, acceptedProvenance: ["external"], hardBasis: ["declared", "curator", "source"] },
   gate: { eps: { overall: 0.03, hard: 0.05, consistency: 0.05 }, minGain: { overall: 0, hard: 0, consistency: 0 } },
   adoption: { support: 0.95, level: "task", eps: { hard: 0.02, consistency: 0.02 }, minGain: { overall: 0 }, familyRegression: 0.15, familyRegressionSupport: 0.80, requireHardStratum: true, requireChecks: true },
   baselines: { pure: true, stable: true, targetMode: true, multiAttempt: { k: 3 } },
@@ -39,8 +47,18 @@ export const DEFAULT_PROTOCOL = Object.freeze({
   watchdog: { noProgressCandidates: 10, maxCandidatesPerCycle: 200, maxCycleWallMs: 72 * 3600_000, maxConsecutiveInfra: 5, maxInfraRate: 0.10, maxFailuresPerClass: 10, maxChildFailuresPerParent: 5, daemonPollMs: 10 * 60_000, hypothesisSimilarity: 0.8 },
   infra: { maxRetries: 1 },
   parallelism: 3,
+  // Avoiding work that cannot change a decision (protocol-3). None of these is a budget: there is no token, cost or money limit,
+  // by the operator's choice; the safety limits above stay. stopOnCritical: a candidate whose recorded runs already show a critical
+  // problem (the gate rejects it whatever the statistics) gets no further screening or development units dispatched, and its
+  // screening runs before the parent's (the parent is only needed for the statistics). precheck: the candidate's harness checks
+  // before any model run ("test" applies the adoption rule compareChecks against stable: a candidate failing it could never be
+  // adopted). gateBlockingFirst: target recurring gate-blocking failure classes (analysis.mjs GATE_BLOCKING) before the others.
+  efficiency: { stopOnCritical: true, precheck: ["typecheck", "test"], gateBlockingFirst: true },
   // datasets.holdout = null selects an exploration-only protocol (no holdout loaded, graded or consumed; deployment BLOCKED).
-  datasets: { source: "suite", trainShare: 0.45, holdout: "datasets/holdout-v1" },
+  // datasets.holdoutPool (with holdout: null): a supply pool (src/supply.mjs). A fresh experiment reserves one sealed, unused,
+  // eligible batch there for its state directory before anything else runs; the resolved batch path becomes datasets.holdout and
+  // is locked with the protocol (one batch per experiment; a later cycle never swaps it). No eligible batch: BLOCKED.
+  datasets: { source: "suite", trainShare: 0.45, holdout: "datasets/holdout-v1", holdoutPool: null },
   deploy: { mode: "refs", branch: "eval-loop/stable" },
 });
 
@@ -67,6 +85,15 @@ export function validateProtocol(p) {
   if (p.watchdog.noProgressCandidates < 1) problems.push("watchdog.noProgressCandidates must be >= 1");
   for (const key of ["cost", "tokens", "wallTimeObjective"]) if (key in (p.gate ?? {})) problems.push(`gate.${key}: cost/time are never quality objectives`);
   if (!["refs", "dry"].includes(p.deploy.mode)) problems.push("deploy.mode must be refs|dry");
+  if (p.datasets.holdoutPool !== null && p.datasets.holdoutPool !== undefined) {
+    if (typeof p.datasets.holdoutPool !== "string" || !p.datasets.holdoutPool) problems.push("datasets.holdoutPool must be a path or null");
+    else if (p.datasets.holdout !== null) problems.push("datasets.holdoutPool needs datasets.holdout: null (the reserved batch becomes the holdout)");
+  }
+  if (!Array.isArray(p.holdout.hardBasis) || p.holdout.hardBasis.some(b => typeof b !== "string")) problems.push("holdout.hardBasis must be a list of difficulty bases");
+  else if (p.holdout.hardBasis.includes("size-proxy")) problems.push("holdout.hardBasis must not accept size-proxy: patch size does not establish task difficulty");
+  const e = p.efficiency ?? {};
+  if (typeof e.stopOnCritical !== "boolean" || typeof e.gateBlockingFirst !== "boolean") problems.push("efficiency.stopOnCritical and efficiency.gateBlockingFirst must be booleans");
+  if (!Array.isArray(e.precheck) || !e.precheck.includes("typecheck") || e.precheck.some(x => !["typecheck", "test"].includes(x))) problems.push("efficiency.precheck must list typecheck and optionally test");
   return problems;
 }
 
