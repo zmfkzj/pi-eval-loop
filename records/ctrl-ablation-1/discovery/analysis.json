@@ -1,0 +1,5985 @@
+{
+  "summary": {
+    "S": {
+      "units": 81,
+      "valid": {
+        "successes": 18,
+        "units": 81,
+        "rate": 0.2222222222222222,
+        "inconsistency": 0.06172839506172839,
+        "all": 4,
+        "mixed": 5,
+        "none": 18,
+        "tasks": 27
+      },
+      "functional": {
+        "successes": 65,
+        "units": 81,
+        "rate": 0.8024691358024691,
+        "inconsistency": 0.06172839506172839,
+        "all": 19,
+        "mixed": 5,
+        "none": 3,
+        "tasks": 27
+      },
+      "integrityFailures": 52,
+      "strictOnly": 39,
+      "leaks": 0,
+      "critical": 0,
+      "terminal": {
+        "completed": 81
+      },
+      "infra": 0,
+      "requests": 1954,
+      "inputTokens": 18560288,
+      "outputTokens": 414382,
+      "cacheTokens": 15578112,
+      "wallSec": 10263.569000000001,
+      "wallMedianSec": 103.525,
+      "maxRequests": 148,
+      "atRequestCeiling": 0
+    },
+    "B0": {
+      "units": 81,
+      "valid": {
+        "successes": 44,
+        "units": 81,
+        "rate": 0.5432098765432097,
+        "inconsistency": 0.08641975308641975,
+        "all": 11,
+        "mixed": 7,
+        "none": 9,
+        "tasks": 27
+      },
+      "functional": {
+        "successes": 66,
+        "units": 81,
+        "rate": 0.814814814814815,
+        "inconsistency": 0.06172839506172839,
+        "all": 19,
+        "mixed": 5,
+        "none": 3,
+        "tasks": 27
+      },
+      "integrityFailures": 22,
+      "strictOnly": 18,
+      "leaks": 0,
+      "critical": 0,
+      "terminal": {
+        "completed": 81
+      },
+      "infra": 0,
+      "requests": 749,
+      "inputTokens": 2627808,
+      "outputTokens": 130197,
+      "cacheTokens": 1665408,
+      "wallSec": 3762.0069999999987,
+      "wallMedianSec": 42.152,
+      "maxRequests": 17,
+      "atRequestCeiling": 0
+    },
+    "P1": {
+      "units": 81,
+      "valid": {
+        "successes": 63,
+        "units": 81,
+        "rate": 0.7777777777777777,
+        "inconsistency": 0.08641975308641975,
+        "all": 17,
+        "mixed": 7,
+        "none": 3,
+        "tasks": 27
+      },
+      "functional": {
+        "successes": 66,
+        "units": 81,
+        "rate": 0.8148148148148147,
+        "inconsistency": 0.04938271604938271,
+        "all": 20,
+        "mixed": 4,
+        "none": 3,
+        "tasks": 27
+      },
+      "integrityFailures": 4,
+      "strictOnly": 4,
+      "leaks": 0,
+      "critical": 0,
+      "terminal": {
+        "completed": 81
+      },
+      "infra": 0,
+      "requests": 1866,
+      "inputTokens": 17359485,
+      "outputTokens": 385798,
+      "cacheTokens": 14725248,
+      "wallSec": 11144.369999999997,
+      "wallMedianSec": 100.284,
+      "maxRequests": 121,
+      "atRequestCeiling": 0
+    },
+    "P2": {
+      "units": 81,
+      "valid": {
+        "successes": 22,
+        "units": 81,
+        "rate": 0.271604938271605,
+        "inconsistency": 0.07407407407407407,
+        "all": 4,
+        "mixed": 6,
+        "none": 17,
+        "tasks": 27
+      },
+      "functional": {
+        "successes": 67,
+        "units": 81,
+        "rate": 0.8271604938271606,
+        "inconsistency": 0.04938271604938271,
+        "all": 20,
+        "mixed": 4,
+        "none": 3,
+        "tasks": 27
+      },
+      "integrityFailures": 49,
+      "strictOnly": 40,
+      "leaks": 0,
+      "critical": 0,
+      "terminal": {
+        "completed": 81
+      },
+      "infra": 0,
+      "requests": 1912,
+      "inputTokens": 18385088,
+      "outputTokens": 383859,
+      "cacheTokens": 15526912,
+      "wallSec": 10239.338999999998,
+      "wallMedianSec": 105.75,
+      "maxRequests": 141,
+      "atRequestCeiling": 0
+    },
+    "P3": {
+      "units": 81,
+      "valid": {
+        "successes": 69,
+        "units": 81,
+        "rate": 0.8518518518518519,
+        "inconsistency": 0.024691358024691357,
+        "all": 22,
+        "mixed": 2,
+        "none": 3,
+        "tasks": 27
+      },
+      "functional": {
+        "successes": 69,
+        "units": 81,
+        "rate": 0.8518518518518519,
+        "inconsistency": 0.024691358024691357,
+        "all": 22,
+        "mixed": 2,
+        "none": 3,
+        "tasks": 27
+      },
+      "integrityFailures": 0,
+      "strictOnly": 0,
+      "leaks": 0,
+      "critical": 0,
+      "terminal": {
+        "completed": 81
+      },
+      "infra": 0,
+      "requests": 723,
+      "inputTokens": 2595338,
+      "outputTokens": 136295,
+      "cacheTokens": 1648896,
+      "wallSec": 3857.324,
+      "wallMedianSec": 44.595,
+      "maxRequests": 16,
+      "atRequestCeiling": 0
+    },
+    "D1": {
+      "units": 81,
+      "valid": {
+        "successes": 50,
+        "units": 81,
+        "rate": 0.617283950617284,
+        "inconsistency": 0.08641975308641975,
+        "all": 13,
+        "mixed": 7,
+        "none": 7,
+        "tasks": 27
+      },
+      "functional": {
+        "successes": 68,
+        "units": 81,
+        "rate": 0.8395061728395062,
+        "inconsistency": 0.06172839506172839,
+        "all": 20,
+        "mixed": 5,
+        "none": 2,
+        "tasks": 27
+      },
+      "integrityFailures": 21,
+      "strictOnly": 14,
+      "leaks": 0,
+      "critical": 0,
+      "terminal": {
+        "completed": 81
+      },
+      "infra": 0,
+      "requests": 841,
+      "inputTokens": 4488696,
+      "outputTokens": 137055,
+      "cacheTokens": 3326720,
+      "wallSec": 4388.864000000001,
+      "wallMedianSec": 48.688,
+      "maxRequests": 19,
+      "atRequestCeiling": 0
+    },
+    "D2": {
+      "units": 81,
+      "valid": {
+        "successes": 25,
+        "units": 81,
+        "rate": 0.30864197530864196,
+        "inconsistency": 0.09876543209876543,
+        "all": 5,
+        "mixed": 8,
+        "none": 14,
+        "tasks": 27
+      },
+      "functional": {
+        "successes": 70,
+        "units": 81,
+        "rate": 0.8641975308641975,
+        "inconsistency": 0.037037037037037035,
+        "all": 22,
+        "mixed": 3,
+        "none": 2,
+        "tasks": 27
+      },
+      "integrityFailures": 48,
+      "strictOnly": 39,
+      "leaks": 0,
+      "critical": 0,
+      "terminal": {
+        "completed": 81
+      },
+      "infra": 0,
+      "requests": 1812,
+      "inputTokens": 15273301,
+      "outputTokens": 302963,
+      "cacheTokens": 12541696,
+      "wallSec": 9810.135000000002,
+      "wallMedianSec": 88.121,
+      "maxRequests": 129,
+      "atRequestCeiling": 0
+    },
+    "T1": {
+      "units": 81,
+      "valid": {
+        "successes": 20,
+        "units": 81,
+        "rate": 0.24691358024691357,
+        "inconsistency": 0.037037037037037035,
+        "all": 5,
+        "mixed": 3,
+        "none": 19,
+        "tasks": 27
+      },
+      "functional": {
+        "successes": 67,
+        "units": 81,
+        "rate": 0.8271604938271605,
+        "inconsistency": 0.07407407407407407,
+        "all": 19,
+        "mixed": 6,
+        "none": 2,
+        "tasks": 27
+      },
+      "integrityFailures": 52,
+      "strictOnly": 35,
+      "leaks": 0,
+      "critical": 0,
+      "terminal": {
+        "completed": 80,
+        "agent_error": 1
+      },
+      "infra": 0,
+      "requests": 1731,
+      "inputTokens": 14300500,
+      "outputTokens": 394839,
+      "cacheTokens": 11651968,
+      "wallSec": 10099.801999999996,
+      "wallMedianSec": 97.035,
+      "maxRequests": 150,
+      "atRequestCeiling": 1
+    },
+    "V1": {
+      "units": 81,
+      "valid": {
+        "successes": 19,
+        "units": 81,
+        "rate": 0.2345679012345679,
+        "inconsistency": 0.1111111111111111,
+        "all": 2,
+        "mixed": 9,
+        "none": 16,
+        "tasks": 27
+      },
+      "functional": {
+        "successes": 70,
+        "units": 81,
+        "rate": 0.8641975308641975,
+        "inconsistency": 0.07407407407407407,
+        "all": 20,
+        "mixed": 6,
+        "none": 1,
+        "tasks": 27
+      },
+      "integrityFailures": 53,
+      "strictOnly": 40,
+      "leaks": 0,
+      "critical": 0,
+      "terminal": {
+        "completed": 81
+      },
+      "infra": 0,
+      "requests": 1852,
+      "inputTokens": 17806670,
+      "outputTokens": 393311,
+      "cacheTokens": 15078272,
+      "wallSec": 10703.750000000002,
+      "wallMedianSec": 108.892,
+      "maxRequests": 125,
+      "atRequestCeiling": 0
+    },
+    "V2": {
+      "units": 81,
+      "valid": {
+        "successes": 18,
+        "units": 81,
+        "rate": 0.2222222222222222,
+        "inconsistency": 0.07407407407407407,
+        "all": 3,
+        "mixed": 6,
+        "none": 18,
+        "tasks": 27
+      },
+      "functional": {
+        "successes": 66,
+        "units": 81,
+        "rate": 0.8148148148148148,
+        "inconsistency": 0.037037037037037035,
+        "all": 21,
+        "mixed": 3,
+        "none": 3,
+        "tasks": 27
+      },
+      "integrityFailures": 51,
+      "strictOnly": 38,
+      "leaks": 0,
+      "critical": 0,
+      "terminal": {
+        "completed": 80,
+        "agent_error": 1
+      },
+      "infra": 0,
+      "requests": 2671,
+      "inputTokens": 26125660,
+      "outputTokens": 521457,
+      "cacheTokens": 22032896,
+      "wallSec": 14318.308999999997,
+      "wallMedianSec": 150.043,
+      "maxRequests": 150,
+      "atRequestCeiling": 1
+    }
+  },
+  "contrasts": {
+    "P1-S": {
+      "valid": {
+        "tasks": 27,
+        "dRate": 0.5555555555555555,
+        "dRateCI": [
+          0.38271604938271603,
+          0.7160493827160495
+        ],
+        "dI": 0.02469135802469136,
+        "dICI": [
+          -0.04938271604938271,
+          0.09876543209876543
+        ],
+        "p": 0.00004999750012499375,
+        "better": 19,
+        "worse": 2
+      },
+      "functional": {
+        "tasks": 27,
+        "dRate": 0.012345679012345682,
+        "dRateCI": [
+          -0.061728395061728406,
+          0.09876543209876544
+        ],
+        "dI": -0.012345679012345675,
+        "dICI": [
+          -0.07407407407407407,
+          0.04938271604938271
+        ],
+        "p": 1,
+        "better": 4,
+        "worse": 4
+      },
+      "integrity": {
+        "tasks": 27,
+        "dRate": -0.5925925925925926,
+        "dRateCI": [
+          -0.7530864197530863,
+          -0.43209876543209874
+        ],
+        "dI": 4.11193712824132e-18,
+        "dICI": [
+          -0.07407407407407407,
+          0.06172839506172839
+        ],
+        "p": 0.00004999750012499375,
+        "better": 0,
+        "worse": 19
+      }
+    },
+    "P2-S": {
+      "valid": {
+        "tasks": 27,
+        "dRate": 0.04938271604938271,
+        "dRateCI": [
+          -0.04938271604938272,
+          0.14814814814814814
+        ],
+        "dI": 0.012345679012345682,
+        "dICI": [
+          -0.04938271604938271,
+          0.07407407407407407
+        ],
+        "p": 0.4887255637218139,
+        "better": 6,
+        "worse": 3
+      },
+      "functional": {
+        "tasks": 27,
+        "dRate": 0.02469135802469136,
+        "dRateCI": [
+          -0.037037037037037035,
+          0.08641975308641976
+        ],
+        "dI": -0.012345679012345678,
+        "dICI": [
+          -0.06172839506172839,
+          0.037037037037037035
+        ],
+        "p": 0.6903654817259137,
+        "better": 4,
+        "worse": 2
+      },
+      "integrity": {
+        "tasks": 27,
+        "dRate": -0.03703703703703704,
+        "dRateCI": [
+          -0.1358024691358025,
+          0.06172839506172839
+        ],
+        "dI": 0.012345679012345678,
+        "dICI": [
+          -0.04938271604938271,
+          0.07407407407407407
+        ],
+        "p": 0.6421178941052947,
+        "better": 3,
+        "worse": 5
+      }
+    },
+    "D1-S": {
+      "valid": {
+        "tasks": 27,
+        "dRate": 0.3950617283950617,
+        "dRateCI": [
+          0.24691358024691357,
+          0.5555555555555555
+        ],
+        "dI": 0.02469135802469136,
+        "dICI": [
+          -0.04938271604938271,
+          0.09876543209876543
+        ],
+        "p": 0.0002999850007499625,
+        "better": 16,
+        "worse": 1
+      },
+      "functional": {
+        "tasks": 27,
+        "dRate": 0.037037037037037035,
+        "dRateCI": [
+          -0.037037037037037035,
+          0.1234567901234568
+        ],
+        "dI": 4.11193712824132e-18,
+        "dICI": [
+          -0.07407407407407407,
+          0.06172839506172839
+        ],
+        "p": 0.5627718614069297,
+        "better": 5,
+        "worse": 3
+      },
+      "integrity": {
+        "tasks": 27,
+        "dRate": -0.38271604938271603,
+        "dRateCI": [
+          -0.54320987654321,
+          -0.2222222222222222
+        ],
+        "dI": 0,
+        "dICI": [
+          -0.06172839506172839,
+          0.06172839506172839
+        ],
+        "p": 0.00039998000099995,
+        "better": 0,
+        "worse": 13
+      }
+    },
+    "D2-S": {
+      "valid": {
+        "tasks": 27,
+        "dRate": 0.08641975308641976,
+        "dRateCI": [
+          0.02469135802469136,
+          0.16049382716049382
+        ],
+        "dI": 0.037037037037037035,
+        "dICI": [
+          -0.012345679012345678,
+          0.08641975308641975
+        ],
+        "p": 0.03234838258087096,
+        "better": 6,
+        "worse": 0
+      },
+      "functional": {
+        "tasks": 27,
+        "dRate": 0.0617283950617284,
+        "dRateCI": [
+          -2.05596856412066e-18,
+          0.1358024691358025
+        ],
+        "dI": -0.02469135802469136,
+        "dICI": [
+          -0.08641975308641975,
+          0.037037037037037035
+        ],
+        "p": 0.1886905654717264,
+        "better": 5,
+        "worse": 1
+      },
+      "integrity": {
+        "tasks": 27,
+        "dRate": -0.04938271604938272,
+        "dRateCI": [
+          -0.1358024691358025,
+          0
+        ],
+        "dI": 0.012345679012345678,
+        "dICI": [
+          0,
+          0.037037037037037035
+        ],
+        "p": 0.4991750412479376,
+        "better": 0,
+        "worse": 2
+      }
+    },
+    "T1-S": {
+      "valid": {
+        "tasks": 27,
+        "dRate": 0.02469135802469136,
+        "dRateCI": [
+          -0.037037037037037035,
+          0.11111111111111109
+        ],
+        "dI": -0.024691358024691357,
+        "dICI": [
+          -0.07407407407407407,
+          0.024691358024691357
+        ],
+        "p": 0.7510124493775311,
+        "better": 2,
+        "worse": 2
+      },
+      "functional": {
+        "tasks": 27,
+        "dRate": 0.024691358024691357,
+        "dRateCI": [
+          -0.037037037037037056,
+          0.08641975308641978
+        ],
+        "dI": 0.012345679012345682,
+        "dICI": [
+          -0.04938271604938271,
+          0.07407407407407407
+        ],
+        "p": 0.7248137593120344,
+        "better": 5,
+        "worse": 3
+      },
+      "integrity": {
+        "tasks": 27,
+        "dRate": 6.1679056923619804e-18,
+        "dRateCI": [
+          -0.1111111111111111,
+          0.09876543209876544
+        ],
+        "dI": -0.037037037037037035,
+        "dICI": [
+          -0.08641975308641975,
+          0.012345679012345678
+        ],
+        "p": 1,
+        "better": 4,
+        "worse": 2
+      }
+    },
+    "V1-S": {
+      "valid": {
+        "tasks": 27,
+        "dRate": 0.012345679012345677,
+        "dRateCI": [
+          -0.061728395061728406,
+          0.09876543209876543
+        ],
+        "dI": 0.04938271604938271,
+        "dICI": [
+          0,
+          0.1111111111111111
+        ],
+        "p": 1,
+        "better": 4,
+        "worse": 4
+      },
+      "functional": {
+        "tasks": 27,
+        "dRate": 0.06172839506172839,
+        "dRateCI": [
+          -0.012345679012345682,
+          0.1358024691358025
+        ],
+        "dI": 0.012345679012345682,
+        "dICI": [
+          -0.04938271604938271,
+          0.07407407407407407
+        ],
+        "p": 0.23378831058447078,
+        "better": 6,
+        "worse": 2
+      },
+      "integrity": {
+        "tasks": 27,
+        "dRate": 0.012345679012345677,
+        "dRateCI": [
+          -0.08641975308641976,
+          0.09876543209876543
+        ],
+        "dI": 0.037037037037037035,
+        "dICI": [
+          0,
+          0.07407407407407407
+        ],
+        "p": 1,
+        "better": 3,
+        "worse": 1
+      }
+    },
+    "V2-S": {
+      "valid": {
+        "tasks": 27,
+        "dRate": -4.11193712824132e-18,
+        "dRateCI": [
+          -0.0617283950617284,
+          0.07407407407407407
+        ],
+        "dI": 0.012345679012345678,
+        "dICI": [
+          -0.037037037037037035,
+          0.06172839506172839
+        ],
+        "p": 1,
+        "better": 2,
+        "worse": 3
+      },
+      "functional": {
+        "tasks": 27,
+        "dRate": 0.012345679012345678,
+        "dRateCI": [
+          -0.08641975308641978,
+          0.11111111111111113
+        ],
+        "dI": -0.024691358024691353,
+        "dICI": [
+          -0.08641975308641975,
+          0.037037037037037035
+        ],
+        "p": 1,
+        "better": 5,
+        "worse": 3
+      },
+      "integrity": {
+        "tasks": 27,
+        "dRate": -0.012345679012345682,
+        "dRateCI": [
+          -0.1111111111111111,
+          0.06172839506172839
+        ],
+        "dI": 0.024691358024691357,
+        "dICI": [
+          0,
+          0.06172839506172839
+        ],
+        "p": 1,
+        "better": 3,
+        "worse": 2
+      }
+    },
+    "P3-B0": {
+      "valid": {
+        "tasks": 27,
+        "dRate": 0.308641975308642,
+        "dRateCI": [
+          0.16049382716049385,
+          0.4691358024691357
+        ],
+        "dI": -0.06172839506172839,
+        "dICI": [
+          -0.1234567901234568,
+          0
+        ],
+        "p": 0.0006999650017499125,
+        "better": 12,
+        "worse": 0
+      },
+      "functional": {
+        "tasks": 27,
+        "dRate": 0.037037037037037035,
+        "dRateCI": [
+          -0.049382716049382706,
+          0.11111111111111115
+        ],
+        "dI": -0.037037037037037035,
+        "dICI": [
+          -0.08641975308641975,
+          0.012345679012345678
+        ],
+        "p": 0.5619719014049298,
+        "better": 4,
+        "worse": 1
+      },
+      "integrity": {
+        "tasks": 27,
+        "dRate": -0.2716049382716049,
+        "dRateCI": [
+          -0.4320987654320988,
+          -0.12345679012345678
+        ],
+        "dI": -0.037037037037037035,
+        "dICI": [
+          -0.07407407407407407,
+          0
+        ],
+        "p": 0.0038998050097495125,
+        "better": 0,
+        "worse": 9
+      }
+    },
+    "B0-S": {
+      "valid": {
+        "tasks": 27,
+        "dRate": 0.3209876543209877,
+        "dRateCI": [
+          0.16049382716049382,
+          0.49382716049382713
+        ],
+        "dI": 0.02469135802469136,
+        "dICI": [
+          -0.024691358024691357,
+          0.07407407407407407
+        ],
+        "p": 0.0010999450027498626,
+        "better": 12,
+        "worse": 1
+      },
+      "functional": {
+        "tasks": 27,
+        "dRate": 0.012345679012345678,
+        "dRateCI": [
+          -0.04938271604938272,
+          0.11111111111111109
+        ],
+        "dI": 0,
+        "dICI": [
+          -0.037037037037037035,
+          0.037037037037037035
+        ],
+        "p": 1,
+        "better": 1,
+        "worse": 2
+      },
+      "integrity": {
+        "tasks": 27,
+        "dRate": -0.37037037037037035,
+        "dRateCI": [
+          -0.5432098765432098,
+          -0.20987654320987653
+        ],
+        "dI": -0.012345679012345678,
+        "dICI": [
+          -0.04938271604938271,
+          0.02469135802469136
+        ],
+        "p": 0.000199990000499975,
+        "better": 0,
+        "worse": 13
+      }
+    }
+  },
+  "holm": {
+    "P1": 0.00034998250087495624,
+    "D1": 0.001799910004499775,
+    "D2": 0.1617419129043548,
+    "P2": 1,
+    "T1": 1,
+    "V1": 1,
+    "V2": 1
+  },
+  "viability": {
+    "P1": {
+      "viable": false,
+      "dValid": 0.5555555555555555,
+      "lower": 0.38271604938271603,
+      "dI": 0.02469135802469136,
+      "holmP": 0.00034998250087495624,
+      "integrity": {
+        "candidate": 4,
+        "stable": 52,
+        "criticalOther": 0
+      }
+    },
+    "P2": {
+      "viable": false,
+      "dValid": 0.04938271604938271,
+      "lower": -0.04938271604938272,
+      "dI": 0.012345679012345682,
+      "holmP": 1,
+      "integrity": {
+        "candidate": 49,
+        "stable": 52,
+        "criticalOther": 0
+      }
+    },
+    "D1": {
+      "viable": false,
+      "dValid": 0.3950617283950617,
+      "lower": 0.24691358024691357,
+      "dI": 0.02469135802469136,
+      "holmP": 0.001799910004499775,
+      "integrity": {
+        "candidate": 21,
+        "stable": 52,
+        "criticalOther": 0
+      }
+    },
+    "D2": {
+      "viable": false,
+      "dValid": 0.08641975308641976,
+      "lower": 0.02469135802469136,
+      "dI": 0.037037037037037035,
+      "holmP": 0.1617419129043548,
+      "integrity": {
+        "candidate": 48,
+        "stable": 52,
+        "criticalOther": 0
+      }
+    },
+    "T1": {
+      "viable": false,
+      "dValid": 0.02469135802469136,
+      "lower": -0.037037037037037035,
+      "dI": -0.024691358024691357,
+      "holmP": 1,
+      "integrity": {
+        "candidate": 52,
+        "stable": 52,
+        "criticalOther": 0
+      }
+    },
+    "V1": {
+      "viable": false,
+      "dValid": 0.012345679012345677,
+      "lower": -0.061728395061728406,
+      "dI": 0.04938271604938271,
+      "holmP": 1,
+      "integrity": {
+        "candidate": 53,
+        "stable": 52,
+        "criticalOther": 0
+      }
+    },
+    "V2": {
+      "viable": false,
+      "dValid": -4.11193712824132e-18,
+      "lower": -0.0617283950617284,
+      "dI": 0.012345679012345678,
+      "holmP": 1,
+      "integrity": {
+        "candidate": 51,
+        "stable": 52,
+        "criticalOther": 0
+      }
+    }
+  },
+  "locked": null,
+  "families": {
+    "pkg:logtool": {
+      "P3": {
+        "units": 15,
+        "valid": 15,
+        "functional": 15,
+        "integrity": 0
+      },
+      "D1": {
+        "units": 15,
+        "valid": 12,
+        "functional": 14,
+        "integrity": 2
+      },
+      "T1": {
+        "units": 15,
+        "valid": 0,
+        "functional": 15,
+        "integrity": 15
+      },
+      "D2": {
+        "units": 15,
+        "valid": 0,
+        "functional": 15,
+        "integrity": 15
+      },
+      "V2": {
+        "units": 15,
+        "valid": 0,
+        "functional": 15,
+        "integrity": 15
+      },
+      "B0": {
+        "units": 15,
+        "valid": 10,
+        "functional": 15,
+        "integrity": 5
+      },
+      "V1": {
+        "units": 15,
+        "valid": 0,
+        "functional": 15,
+        "integrity": 15
+      },
+      "S": {
+        "units": 15,
+        "valid": 0,
+        "functional": 15,
+        "integrity": 15
+      },
+      "P1": {
+        "units": 15,
+        "valid": 15,
+        "functional": 15,
+        "integrity": 0
+      },
+      "P2": {
+        "units": 15,
+        "valid": 0,
+        "functional": 15,
+        "integrity": 15
+      }
+    },
+    "pkg:d2-keyed-queue": {
+      "D1": {
+        "units": 3,
+        "valid": 2,
+        "functional": 3,
+        "integrity": 1
+      },
+      "P3": {
+        "units": 3,
+        "valid": 3,
+        "functional": 3,
+        "integrity": 0
+      },
+      "D2": {
+        "units": 3,
+        "valid": 2,
+        "functional": 2,
+        "integrity": 0
+      },
+      "S": {
+        "units": 3,
+        "valid": 0,
+        "functional": 3,
+        "integrity": 3
+      },
+      "B0": {
+        "units": 3,
+        "valid": 2,
+        "functional": 2,
+        "integrity": 0
+      },
+      "P2": {
+        "units": 3,
+        "valid": 2,
+        "functional": 2,
+        "integrity": 1
+      },
+      "P1": {
+        "units": 3,
+        "valid": 2,
+        "functional": 2,
+        "integrity": 0
+      },
+      "T1": {
+        "units": 3,
+        "valid": 2,
+        "functional": 2,
+        "integrity": 0
+      },
+      "V2": {
+        "units": 3,
+        "valid": 1,
+        "functional": 1,
+        "integrity": 0
+      },
+      "V1": {
+        "units": 3,
+        "valid": 2,
+        "functional": 2,
+        "integrity": 0
+      }
+    },
+    "pkg:d1-transactional-outbox": {
+      "B0": {
+        "units": 3,
+        "valid": 2,
+        "functional": 3,
+        "integrity": 1
+      },
+      "T1": {
+        "units": 3,
+        "valid": 0,
+        "functional": 2,
+        "integrity": 3
+      },
+      "D1": {
+        "units": 3,
+        "valid": 3,
+        "functional": 3,
+        "integrity": 0
+      },
+      "P2": {
+        "units": 3,
+        "valid": 0,
+        "functional": 3,
+        "integrity": 3
+      },
+      "P3": {
+        "units": 3,
+        "valid": 3,
+        "functional": 3,
+        "integrity": 0
+      },
+      "V1": {
+        "units": 3,
+        "valid": 0,
+        "functional": 2,
+        "integrity": 2
+      },
+      "P1": {
+        "units": 3,
+        "valid": 3,
+        "functional": 3,
+        "integrity": 0
+      },
+      "D2": {
+        "units": 3,
+        "valid": 1,
+        "functional": 3,
+        "integrity": 2
+      },
+      "S": {
+        "units": 3,
+        "valid": 1,
+        "functional": 3,
+        "integrity": 2
+      },
+      "V2": {
+        "units": 3,
+        "valid": 0,
+        "functional": 1,
+        "integrity": 2
+      }
+    },
+    "pkg:ledger": {
+      "T1": {
+        "units": 15,
+        "valid": 6,
+        "functional": 13,
+        "integrity": 9
+      },
+      "V2": {
+        "units": 15,
+        "valid": 6,
+        "functional": 13,
+        "integrity": 9
+      },
+      "D1": {
+        "units": 15,
+        "valid": 6,
+        "functional": 13,
+        "integrity": 9
+      },
+      "B0": {
+        "units": 15,
+        "valid": 6,
+        "functional": 15,
+        "integrity": 9
+      },
+      "P1": {
+        "units": 15,
+        "valid": 12,
+        "functional": 13,
+        "integrity": 2
+      },
+      "P3": {
+        "units": 15,
+        "valid": 13,
+        "functional": 13,
+        "integrity": 0
+      },
+      "D2": {
+        "units": 15,
+        "valid": 6,
+        "functional": 12,
+        "integrity": 9
+      },
+      "P2": {
+        "units": 15,
+        "valid": 6,
+        "functional": 13,
+        "integrity": 9
+      },
+      "S": {
+        "units": 15,
+        "valid": 6,
+        "functional": 12,
+        "integrity": 9
+      },
+      "V1": {
+        "units": 15,
+        "valid": 5,
+        "functional": 13,
+        "integrity": 10
+      }
+    },
+    "pkg:d3-money-migration-ko": {
+      "P3": {
+        "units": 3,
+        "valid": 2,
+        "functional": 2,
+        "integrity": 0
+      },
+      "B0": {
+        "units": 3,
+        "valid": 2,
+        "functional": 2,
+        "integrity": 0
+      },
+      "D2": {
+        "units": 3,
+        "valid": 2,
+        "functional": 3,
+        "integrity": 1
+      },
+      "D1": {
+        "units": 3,
+        "valid": 2,
+        "functional": 2,
+        "integrity": 0
+      },
+      "T1": {
+        "units": 3,
+        "valid": 0,
+        "functional": 3,
+        "integrity": 3
+      },
+      "P1": {
+        "units": 3,
+        "valid": 3,
+        "functional": 3,
+        "integrity": 0
+      },
+      "V2": {
+        "units": 3,
+        "valid": 1,
+        "functional": 3,
+        "integrity": 2
+      },
+      "P2": {
+        "units": 3,
+        "valid": 2,
+        "functional": 2,
+        "integrity": 0
+      },
+      "S": {
+        "units": 3,
+        "valid": 1,
+        "functional": 2,
+        "integrity": 1
+      },
+      "V1": {
+        "units": 3,
+        "valid": 1,
+        "functional": 2,
+        "integrity": 1
+      }
+    },
+    "pkg:d4-cache-fencing": {
+      "B0": {
+        "units": 3,
+        "valid": 3,
+        "functional": 3,
+        "integrity": 0
+      },
+      "S": {
+        "units": 3,
+        "valid": 0,
+        "functional": 3,
+        "integrity": 3
+      },
+      "T1": {
+        "units": 3,
+        "valid": 0,
+        "functional": 2,
+        "integrity": 3
+      },
+      "P3": {
+        "units": 3,
+        "valid": 3,
+        "functional": 3,
+        "integrity": 0
+      },
+      "D1": {
+        "units": 3,
+        "valid": 0,
+        "functional": 2,
+        "integrity": 3
+      },
+      "D2": {
+        "units": 3,
+        "valid": 1,
+        "functional": 3,
+        "integrity": 2
+      },
+      "V1": {
+        "units": 3,
+        "valid": 0,
+        "functional": 3,
+        "integrity": 3
+      },
+      "P1": {
+        "units": 3,
+        "valid": 3,
+        "functional": 3,
+        "integrity": 0
+      },
+      "P2": {
+        "units": 3,
+        "valid": 2,
+        "functional": 3,
+        "integrity": 1
+      },
+      "V2": {
+        "units": 3,
+        "valid": 0,
+        "functional": 3,
+        "integrity": 3
+      }
+    },
+    "pkg:d8-build-graph": {
+      "P3": {
+        "units": 3,
+        "valid": 3,
+        "functional": 3,
+        "integrity": 0
+      },
+      "T1": {
+        "units": 3,
+        "valid": 3,
+        "functional": 3,
+        "integrity": 0
+      },
+      "D2": {
+        "units": 3,
+        "valid": 3,
+        "functional": 3,
+        "integrity": 0
+      },
+      "B0": {
+        "units": 3,
+        "valid": 3,
+        "functional": 3,
+        "integrity": 0
+      },
+      "V1": {
+        "units": 3,
+        "valid": 3,
+        "functional": 3,
+        "integrity": 0
+      },
+      "V2": {
+        "units": 3,
+        "valid": 3,
+        "functional": 3,
+        "integrity": 0
+      },
+      "D1": {
+        "units": 3,
+        "valid": 3,
+        "functional": 3,
+        "integrity": 0
+      },
+      "S": {
+        "units": 3,
+        "valid": 3,
+        "functional": 3,
+        "integrity": 0
+      },
+      "P2": {
+        "units": 3,
+        "valid": 3,
+        "functional": 3,
+        "integrity": 0
+      },
+      "P1": {
+        "units": 3,
+        "valid": 3,
+        "functional": 3,
+        "integrity": 0
+      }
+    },
+    "pkg:minihttp": {
+      "B0": {
+        "units": 15,
+        "valid": 12,
+        "functional": 15,
+        "integrity": 3
+      },
+      "P3": {
+        "units": 15,
+        "valid": 15,
+        "functional": 15,
+        "integrity": 0
+      },
+      "D1": {
+        "units": 15,
+        "valid": 14,
+        "functional": 15,
+        "integrity": 1
+      },
+      "V1": {
+        "units": 15,
+        "valid": 2,
+        "functional": 15,
+        "integrity": 13
+      },
+      "D2": {
+        "units": 15,
+        "valid": 3,
+        "functional": 15,
+        "integrity": 12
+      },
+      "S": {
+        "units": 15,
+        "valid": 3,
+        "functional": 15,
+        "integrity": 12
+      },
+      "T1": {
+        "units": 15,
+        "valid": 3,
+        "functional": 15,
+        "integrity": 12
+      },
+      "P1": {
+        "units": 15,
+        "valid": 12,
+        "functional": 14,
+        "integrity": 2
+      },
+      "P2": {
+        "units": 15,
+        "valid": 2,
+        "functional": 15,
+        "integrity": 13
+      },
+      "V2": {
+        "units": 15,
+        "valid": 2,
+        "functional": 15,
+        "integrity": 13
+      }
+    },
+    "p-series": {
+      "P3": {
+        "units": 9,
+        "valid": 0,
+        "functional": 0,
+        "integrity": 0
+      },
+      "P2": {
+        "units": 9,
+        "valid": 0,
+        "functional": 0,
+        "integrity": 0
+      },
+      "D2": {
+        "units": 9,
+        "valid": 2,
+        "functional": 2,
+        "integrity": 0
+      },
+      "V2": {
+        "units": 9,
+        "valid": 0,
+        "functional": 0,
+        "integrity": 0
+      },
+      "T1": {
+        "units": 9,
+        "valid": 1,
+        "functional": 1,
+        "integrity": 0
+      },
+      "B0": {
+        "units": 9,
+        "valid": 0,
+        "functional": 0,
+        "integrity": 0
+      },
+      "D1": {
+        "units": 9,
+        "valid": 1,
+        "functional": 1,
+        "integrity": 0
+      },
+      "V1": {
+        "units": 9,
+        "valid": 3,
+        "functional": 3,
+        "integrity": 0
+      },
+      "P1": {
+        "units": 9,
+        "valid": 0,
+        "functional": 0,
+        "integrity": 0
+      },
+      "S": {
+        "units": 9,
+        "valid": 1,
+        "functional": 1,
+        "integrity": 0
+      }
+    },
+    "pkg:invoice-sync": {
+      "P1": {
+        "units": 3,
+        "valid": 3,
+        "functional": 3,
+        "integrity": 0
+      },
+      "P3": {
+        "units": 3,
+        "valid": 3,
+        "functional": 3,
+        "integrity": 0
+      },
+      "D2": {
+        "units": 3,
+        "valid": 0,
+        "functional": 3,
+        "integrity": 3
+      },
+      "B0": {
+        "units": 3,
+        "valid": 0,
+        "functional": 3,
+        "integrity": 3
+      },
+      "T1": {
+        "units": 3,
+        "valid": 0,
+        "functional": 3,
+        "integrity": 3
+      },
+      "D1": {
+        "units": 3,
+        "valid": 0,
+        "functional": 3,
+        "integrity": 3
+      },
+      "P2": {
+        "units": 3,
+        "valid": 0,
+        "functional": 3,
+        "integrity": 3
+      },
+      "V1": {
+        "units": 3,
+        "valid": 0,
+        "functional": 3,
+        "integrity": 3
+      },
+      "V2": {
+        "units": 3,
+        "valid": 0,
+        "functional": 3,
+        "integrity": 3
+      },
+      "S": {
+        "units": 3,
+        "valid": 0,
+        "functional": 3,
+        "integrity": 3
+      }
+    },
+    "pkg:d7-config-reload": {
+      "B0": {
+        "units": 3,
+        "valid": 2,
+        "functional": 2,
+        "integrity": 0
+      },
+      "D2": {
+        "units": 3,
+        "valid": 3,
+        "functional": 3,
+        "integrity": 0
+      },
+      "P3": {
+        "units": 3,
+        "valid": 3,
+        "functional": 3,
+        "integrity": 0
+      },
+      "P2": {
+        "units": 3,
+        "valid": 3,
+        "functional": 3,
+        "integrity": 0
+      },
+      "D1": {
+        "units": 3,
+        "valid": 3,
+        "functional": 3,
+        "integrity": 0
+      },
+      "P1": {
+        "units": 3,
+        "valid": 1,
+        "functional": 1,
+        "integrity": 0
+      },
+      "S": {
+        "units": 3,
+        "valid": 2,
+        "functional": 2,
+        "integrity": 0
+      },
+      "V1": {
+        "units": 3,
+        "valid": 1,
+        "functional": 3,
+        "integrity": 2
+      },
+      "T1": {
+        "units": 3,
+        "valid": 2,
+        "functional": 3,
+        "integrity": 1
+      },
+      "V2": {
+        "units": 3,
+        "valid": 2,
+        "functional": 3,
+        "integrity": 1
+      }
+    },
+    "pkg:d5-streaming-ingest-ko": {
+      "B0": {
+        "units": 3,
+        "valid": 1,
+        "functional": 1,
+        "integrity": 0
+      },
+      "D1": {
+        "units": 3,
+        "valid": 1,
+        "functional": 3,
+        "integrity": 2
+      },
+      "P2": {
+        "units": 3,
+        "valid": 0,
+        "functional": 2,
+        "integrity": 3
+      },
+      "S": {
+        "units": 3,
+        "valid": 0,
+        "functional": 1,
+        "integrity": 2
+      },
+      "D2": {
+        "units": 3,
+        "valid": 1,
+        "functional": 3,
+        "integrity": 2
+      },
+      "P3": {
+        "units": 3,
+        "valid": 3,
+        "functional": 3,
+        "integrity": 0
+      },
+      "P1": {
+        "units": 3,
+        "valid": 3,
+        "functional": 3,
+        "integrity": 0
+      },
+      "V1": {
+        "units": 3,
+        "valid": 1,
+        "functional": 3,
+        "integrity": 2
+      },
+      "T1": {
+        "units": 3,
+        "valid": 0,
+        "functional": 2,
+        "integrity": 3
+      },
+      "V2": {
+        "units": 3,
+        "valid": 2,
+        "functional": 3,
+        "integrity": 1
+      }
+    },
+    "pkg:d6-snapshot-pagination": {
+      "D2": {
+        "units": 3,
+        "valid": 1,
+        "functional": 3,
+        "integrity": 2
+      },
+      "P2": {
+        "units": 3,
+        "valid": 2,
+        "functional": 3,
+        "integrity": 1
+      },
+      "B0": {
+        "units": 3,
+        "valid": 1,
+        "functional": 2,
+        "integrity": 1
+      },
+      "V2": {
+        "units": 3,
+        "valid": 1,
+        "functional": 3,
+        "integrity": 2
+      },
+      "P1": {
+        "units": 3,
+        "valid": 3,
+        "functional": 3,
+        "integrity": 0
+      },
+      "P3": {
+        "units": 3,
+        "valid": 3,
+        "functional": 3,
+        "integrity": 0
+      },
+      "T1": {
+        "units": 3,
+        "valid": 3,
+        "functional": 3,
+        "integrity": 0
+      },
+      "V1": {
+        "units": 3,
+        "valid": 1,
+        "functional": 3,
+        "integrity": 2
+      },
+      "S": {
+        "units": 3,
+        "valid": 1,
+        "functional": 2,
+        "integrity": 2
+      },
+      "D1": {
+        "units": 3,
+        "valid": 3,
+        "functional": 3,
+        "integrity": 0
+      }
+    }
+  },
+  "perTask": {
+    "valid": {
+      "P3": {
+        "c4-malformed-lines": [
+          1,
+          1,
+          1
+        ],
+        "d2-keyed-queue": [
+          1,
+          1,
+          1
+        ],
+        "c1-timezone": [
+          1,
+          1,
+          1
+        ],
+        "d1-transactional-outbox": [
+          1,
+          1,
+          1
+        ],
+        "a6-typo-message": [
+          1,
+          1,
+          1
+        ],
+        "d3-money-migration-ko": [
+          1,
+          0,
+          1
+        ],
+        "c6-csv-export": [
+          1,
+          1,
+          1
+        ],
+        "d4-cache-fencing": [
+          1,
+          1,
+          1
+        ],
+        "d8-build-graph": [
+          1,
+          1,
+          1
+        ],
+        "b2-patch-endpoint": [
+          1,
+          1,
+          1
+        ],
+        "a2-discount-codes": [
+          1,
+          1,
+          1
+        ],
+        "p2-handler-migration": [
+          0,
+          0,
+          0
+        ],
+        "p3-library-features-ko": [
+          0,
+          0,
+          0
+        ],
+        "a7-auth-rotation": [
+          1,
+          1,
+          1
+        ],
+        "b5-ctx-migration": [
+          1,
+          1,
+          1
+        ],
+        "a4-tests-fx": [
+          1,
+          1,
+          1
+        ],
+        "b3-pagination": [
+          1,
+          1,
+          1
+        ],
+        "c2-since-flag-ko": [
+          1,
+          1,
+          1
+        ],
+        "b1-static-traversal": [
+          1,
+          1,
+          1
+        ],
+        "d7-config-reload": [
+          1,
+          1,
+          1
+        ],
+        "a3-refactor-tax": [
+          1,
+          1,
+          1
+        ],
+        "p1-ticket-batch": [
+          0,
+          0,
+          0
+        ],
+        "b6-route-cache": [
+          1,
+          1,
+          1
+        ],
+        "d5-streaming-ingest-ko": [
+          1,
+          1,
+          1
+        ],
+        "c5-aggregate-perf": [
+          1,
+          1,
+          1
+        ],
+        "d6-snapshot-pagination": [
+          1,
+          1,
+          1
+        ],
+        "a1-rounding": [
+          0,
+          1,
+          0
+        ]
+      },
+      "D1": {
+        "c4-malformed-lines": [
+          1,
+          1,
+          1
+        ],
+        "d2-keyed-queue": [
+          1,
+          1,
+          0
+        ],
+        "c1-timezone": [
+          1,
+          1,
+          1
+        ],
+        "d1-transactional-outbox": [
+          1,
+          1,
+          1
+        ],
+        "a6-typo-message": [
+          1,
+          1,
+          1
+        ],
+        "d3-money-migration-ko": [
+          0,
+          1,
+          1
+        ],
+        "c6-csv-export": [
+          0,
+          0,
+          1
+        ],
+        "d4-cache-fencing": [
+          0,
+          0,
+          0
+        ],
+        "d8-build-graph": [
+          1,
+          1,
+          1
+        ],
+        "b2-patch-endpoint": [
+          1,
+          1,
+          1
+        ],
+        "a2-discount-codes": [
+          0,
+          0,
+          0
+        ],
+        "p2-handler-migration": [
+          1,
+          0,
+          0
+        ],
+        "p3-library-features-ko": [
+          0,
+          0,
+          0
+        ],
+        "a7-auth-rotation": [
+          0,
+          0,
+          0
+        ],
+        "b5-ctx-migration": [
+          0,
+          1,
+          1
+        ],
+        "a4-tests-fx": [
+          1,
+          1,
+          1
+        ],
+        "b3-pagination": [
+          1,
+          1,
+          1
+        ],
+        "c2-since-flag-ko": [
+          1,
+          1,
+          1
+        ],
+        "b1-static-traversal": [
+          1,
+          1,
+          1
+        ],
+        "d7-config-reload": [
+          1,
+          1,
+          1
+        ],
+        "a3-refactor-tax": [
+          0,
+          0,
+          0
+        ],
+        "p1-ticket-batch": [
+          0,
+          0,
+          0
+        ],
+        "b6-route-cache": [
+          1,
+          1,
+          1
+        ],
+        "d5-streaming-ingest-ko": [
+          0,
+          0,
+          1
+        ],
+        "c5-aggregate-perf": [
+          1,
+          1,
+          0
+        ],
+        "d6-snapshot-pagination": [
+          1,
+          1,
+          1
+        ],
+        "a1-rounding": [
+          0,
+          0,
+          0
+        ]
+      },
+      "T1": {
+        "c4-malformed-lines": [
+          0,
+          0,
+          0
+        ],
+        "d2-keyed-queue": [
+          0,
+          1,
+          1
+        ],
+        "c1-timezone": [
+          0,
+          0,
+          0
+        ],
+        "d1-transactional-outbox": [
+          0,
+          0,
+          0
+        ],
+        "a6-typo-message": [
+          1,
+          1,
+          1
+        ],
+        "d3-money-migration-ko": [
+          0,
+          0,
+          0
+        ],
+        "c6-csv-export": [
+          0,
+          0,
+          0
+        ],
+        "d4-cache-fencing": [
+          0,
+          0,
+          0
+        ],
+        "d8-build-graph": [
+          1,
+          1,
+          1
+        ],
+        "b2-patch-endpoint": [
+          0,
+          0,
+          0
+        ],
+        "a2-discount-codes": [
+          0,
+          0,
+          0
+        ],
+        "p2-handler-migration": [
+          0,
+          0,
+          0
+        ],
+        "p3-library-features-ko": [
+          0,
+          0,
+          1
+        ],
+        "a7-auth-rotation": [
+          0,
+          0,
+          0
+        ],
+        "b5-ctx-migration": [
+          0,
+          0,
+          0
+        ],
+        "a4-tests-fx": [
+          1,
+          1,
+          1
+        ],
+        "b3-pagination": [
+          0,
+          0,
+          0
+        ],
+        "c2-since-flag-ko": [
+          0,
+          0,
+          0
+        ],
+        "b1-static-traversal": [
+          0,
+          0,
+          0
+        ],
+        "d7-config-reload": [
+          0,
+          1,
+          1
+        ],
+        "a3-refactor-tax": [
+          0,
+          0,
+          0
+        ],
+        "b6-route-cache": [
+          1,
+          1,
+          1
+        ],
+        "p1-ticket-batch": [
+          0,
+          0,
+          0
+        ],
+        "d5-streaming-ingest-ko": [
+          0,
+          0,
+          0
+        ],
+        "c5-aggregate-perf": [
+          0,
+          0,
+          0
+        ],
+        "d6-snapshot-pagination": [
+          1,
+          1,
+          1
+        ],
+        "a1-rounding": [
+          0,
+          0,
+          0
+        ]
+      },
+      "D2": {
+        "c4-malformed-lines": [
+          0,
+          0,
+          0
+        ],
+        "d2-keyed-queue": [
+          1,
+          1,
+          0
+        ],
+        "c1-timezone": [
+          0,
+          0,
+          0
+        ],
+        "d1-transactional-outbox": [
+          1,
+          0,
+          0
+        ],
+        "a6-typo-message": [
+          1,
+          1,
+          1
+        ],
+        "d3-money-migration-ko": [
+          1,
+          0,
+          1
+        ],
+        "c6-csv-export": [
+          0,
+          0,
+          0
+        ],
+        "d4-cache-fencing": [
+          1,
+          0,
+          0
+        ],
+        "d8-build-graph": [
+          1,
+          1,
+          1
+        ],
+        "b2-patch-endpoint": [
+          0,
+          0,
+          0
+        ],
+        "a2-discount-codes": [
+          0,
+          0,
+          0
+        ],
+        "p2-handler-migration": [
+          1,
+          0,
+          0
+        ],
+        "p3-library-features-ko": [
+          0,
+          1,
+          0
+        ],
+        "a7-auth-rotation": [
+          0,
+          0,
+          0
+        ],
+        "b5-ctx-migration": [
+          0,
+          0,
+          0
+        ],
+        "a4-tests-fx": [
+          1,
+          1,
+          1
+        ],
+        "b3-pagination": [
+          0,
+          0,
+          0
+        ],
+        "c2-since-flag-ko": [
+          0,
+          0,
+          0
+        ],
+        "b1-static-traversal": [
+          0,
+          0,
+          0
+        ],
+        "d7-config-reload": [
+          1,
+          1,
+          1
+        ],
+        "a3-refactor-tax": [
+          0,
+          0,
+          0
+        ],
+        "p1-ticket-batch": [
+          0,
+          0,
+          0
+        ],
+        "b6-route-cache": [
+          1,
+          1,
+          1
+        ],
+        "d5-streaming-ingest-ko": [
+          0,
+          0,
+          1
+        ],
+        "c5-aggregate-perf": [
+          0,
+          0,
+          0
+        ],
+        "d6-snapshot-pagination": [
+          0,
+          1,
+          0
+        ],
+        "a1-rounding": [
+          0,
+          0,
+          0
+        ]
+      },
+      "V2": {
+        "c4-malformed-lines": [
+          0,
+          0,
+          0
+        ],
+        "d2-keyed-queue": [
+          0,
+          0,
+          1
+        ],
+        "c1-timezone": [
+          0,
+          0,
+          0
+        ],
+        "a6-typo-message": [
+          1,
+          1,
+          1
+        ],
+        "d1-transactional-outbox": [
+          0,
+          0,
+          0
+        ],
+        "d3-money-migration-ko": [
+          0,
+          1,
+          0
+        ],
+        "c6-csv-export": [
+          0,
+          0,
+          0
+        ],
+        "d4-cache-fencing": [
+          0,
+          0,
+          0
+        ],
+        "d8-build-graph": [
+          1,
+          1,
+          1
+        ],
+        "b2-patch-endpoint": [
+          0,
+          0,
+          0
+        ],
+        "a2-discount-codes": [
+          0,
+          0,
+          0
+        ],
+        "p2-handler-migration": [
+          0,
+          0,
+          0
+        ],
+        "p3-library-features-ko": [
+          0,
+          0,
+          0
+        ],
+        "a7-auth-rotation": [
+          0,
+          0,
+          0
+        ],
+        "b5-ctx-migration": [
+          0,
+          0,
+          0
+        ],
+        "a4-tests-fx": [
+          1,
+          1,
+          1
+        ],
+        "b3-pagination": [
+          0,
+          0,
+          0
+        ],
+        "c2-since-flag-ko": [
+          0,
+          0,
+          0
+        ],
+        "b1-static-traversal": [
+          0,
+          0,
+          0
+        ],
+        "a3-refactor-tax": [
+          0,
+          0,
+          0
+        ],
+        "d7-config-reload": [
+          1,
+          1,
+          0
+        ],
+        "p1-ticket-batch": [
+          0,
+          0,
+          0
+        ],
+        "b6-route-cache": [
+          1,
+          0,
+          1
+        ],
+        "d5-streaming-ingest-ko": [
+          1,
+          0,
+          1
+        ],
+        "c5-aggregate-perf": [
+          0,
+          0,
+          0
+        ],
+        "d6-snapshot-pagination": [
+          0,
+          0,
+          1
+        ],
+        "a1-rounding": [
+          0,
+          0,
+          0
+        ]
+      },
+      "B0": {
+        "c4-malformed-lines": [
+          1,
+          1,
+          1
+        ],
+        "d2-keyed-queue": [
+          0,
+          1,
+          1
+        ],
+        "c1-timezone": [
+          1,
+          0,
+          0
+        ],
+        "d1-transactional-outbox": [
+          1,
+          1,
+          0
+        ],
+        "a6-typo-message": [
+          1,
+          1,
+          1
+        ],
+        "d3-money-migration-ko": [
+          1,
+          1,
+          0
+        ],
+        "c6-csv-export": [
+          0,
+          0,
+          0
+        ],
+        "d4-cache-fencing": [
+          1,
+          1,
+          1
+        ],
+        "d8-build-graph": [
+          1,
+          1,
+          1
+        ],
+        "b2-patch-endpoint": [
+          1,
+          1,
+          1
+        ],
+        "a2-discount-codes": [
+          0,
+          0,
+          0
+        ],
+        "p2-handler-migration": [
+          0,
+          0,
+          0
+        ],
+        "p3-library-features-ko": [
+          0,
+          0,
+          0
+        ],
+        "a7-auth-rotation": [
+          0,
+          0,
+          0
+        ],
+        "b5-ctx-migration": [
+          0,
+          0,
+          0
+        ],
+        "a4-tests-fx": [
+          1,
+          1,
+          1
+        ],
+        "b3-pagination": [
+          1,
+          1,
+          1
+        ],
+        "c2-since-flag-ko": [
+          1,
+          1,
+          1
+        ],
+        "b1-static-traversal": [
+          1,
+          1,
+          1
+        ],
+        "d7-config-reload": [
+          1,
+          1,
+          0
+        ],
+        "a3-refactor-tax": [
+          0,
+          0,
+          0
+        ],
+        "p1-ticket-batch": [
+          0,
+          0,
+          0
+        ],
+        "b6-route-cache": [
+          1,
+          1,
+          1
+        ],
+        "d5-streaming-ingest-ko": [
+          0,
+          1,
+          0
+        ],
+        "c5-aggregate-perf": [
+          1,
+          1,
+          1
+        ],
+        "d6-snapshot-pagination": [
+          1,
+          0,
+          0
+        ],
+        "a1-rounding": [
+          0,
+          0,
+          0
+        ]
+      },
+      "V1": {
+        "c4-malformed-lines": [
+          0,
+          0,
+          0
+        ],
+        "c1-timezone": [
+          0,
+          0,
+          0
+        ],
+        "d2-keyed-queue": [
+          0,
+          1,
+          1
+        ],
+        "d1-transactional-outbox": [
+          0,
+          0,
+          0
+        ],
+        "a6-typo-message": [
+          1,
+          1,
+          1
+        ],
+        "d3-money-migration-ko": [
+          1,
+          0,
+          0
+        ],
+        "c6-csv-export": [
+          0,
+          0,
+          0
+        ],
+        "d4-cache-fencing": [
+          0,
+          0,
+          0
+        ],
+        "d8-build-graph": [
+          1,
+          1,
+          1
+        ],
+        "b2-patch-endpoint": [
+          0,
+          0,
+          0
+        ],
+        "a2-discount-codes": [
+          0,
+          0,
+          0
+        ],
+        "p2-handler-migration": [
+          0,
+          1,
+          0
+        ],
+        "p3-library-features-ko": [
+          1,
+          1,
+          0
+        ],
+        "a7-auth-rotation": [
+          0,
+          0,
+          0
+        ],
+        "b5-ctx-migration": [
+          0,
+          0,
+          0
+        ],
+        "a4-tests-fx": [
+          1,
+          1,
+          0
+        ],
+        "b3-pagination": [
+          0,
+          0,
+          0
+        ],
+        "c2-since-flag-ko": [
+          0,
+          0,
+          0
+        ],
+        "b1-static-traversal": [
+          0,
+          0,
+          0
+        ],
+        "d7-config-reload": [
+          0,
+          1,
+          0
+        ],
+        "a3-refactor-tax": [
+          0,
+          0,
+          0
+        ],
+        "p1-ticket-batch": [
+          0,
+          0,
+          0
+        ],
+        "b6-route-cache": [
+          1,
+          1,
+          0
+        ],
+        "d5-streaming-ingest-ko": [
+          1,
+          0,
+          0
+        ],
+        "c5-aggregate-perf": [
+          0,
+          0,
+          0
+        ],
+        "d6-snapshot-pagination": [
+          0,
+          0,
+          1
+        ],
+        "a1-rounding": [
+          0,
+          0,
+          0
+        ]
+      },
+      "S": {
+        "c4-malformed-lines": [
+          0,
+          0,
+          0
+        ],
+        "d2-keyed-queue": [
+          0,
+          0,
+          0
+        ],
+        "c1-timezone": [
+          0,
+          0,
+          0
+        ],
+        "d1-transactional-outbox": [
+          0,
+          1,
+          0
+        ],
+        "a6-typo-message": [
+          1,
+          1,
+          1
+        ],
+        "d3-money-migration-ko": [
+          1,
+          0,
+          0
+        ],
+        "c6-csv-export": [
+          0,
+          0,
+          0
+        ],
+        "d4-cache-fencing": [
+          0,
+          0,
+          0
+        ],
+        "d8-build-graph": [
+          1,
+          1,
+          1
+        ],
+        "b2-patch-endpoint": [
+          0,
+          0,
+          0
+        ],
+        "a2-discount-codes": [
+          0,
+          0,
+          0
+        ],
+        "p3-library-features-ko": [
+          0,
+          1,
+          0
+        ],
+        "p2-handler-migration": [
+          0,
+          0,
+          0
+        ],
+        "a7-auth-rotation": [
+          0,
+          0,
+          0
+        ],
+        "b5-ctx-migration": [
+          0,
+          0,
+          0
+        ],
+        "a4-tests-fx": [
+          1,
+          1,
+          1
+        ],
+        "b3-pagination": [
+          0,
+          0,
+          0
+        ],
+        "c2-since-flag-ko": [
+          0,
+          0,
+          0
+        ],
+        "b1-static-traversal": [
+          0,
+          0,
+          0
+        ],
+        "d7-config-reload": [
+          1,
+          1,
+          0
+        ],
+        "a3-refactor-tax": [
+          0,
+          0,
+          0
+        ],
+        "p1-ticket-batch": [
+          0,
+          0,
+          0
+        ],
+        "b6-route-cache": [
+          1,
+          1,
+          1
+        ],
+        "d5-streaming-ingest-ko": [
+          0,
+          0,
+          0
+        ],
+        "c5-aggregate-perf": [
+          0,
+          0,
+          0
+        ],
+        "d6-snapshot-pagination": [
+          0,
+          0,
+          1
+        ],
+        "a1-rounding": [
+          0,
+          0,
+          0
+        ]
+      },
+      "P1": {
+        "c4-malformed-lines": [
+          1,
+          1,
+          1
+        ],
+        "d2-keyed-queue": [
+          1,
+          1,
+          0
+        ],
+        "c1-timezone": [
+          1,
+          1,
+          1
+        ],
+        "d1-transactional-outbox": [
+          1,
+          1,
+          1
+        ],
+        "a6-typo-message": [
+          1,
+          1,
+          1
+        ],
+        "d3-money-migration-ko": [
+          1,
+          1,
+          1
+        ],
+        "c6-csv-export": [
+          1,
+          1,
+          1
+        ],
+        "d4-cache-fencing": [
+          1,
+          1,
+          1
+        ],
+        "b2-patch-endpoint": [
+          0,
+          1,
+          1
+        ],
+        "d8-build-graph": [
+          1,
+          1,
+          1
+        ],
+        "a2-discount-codes": [
+          1,
+          1,
+          1
+        ],
+        "p2-handler-migration": [
+          0,
+          0,
+          0
+        ],
+        "p3-library-features-ko": [
+          0,
+          0,
+          0
+        ],
+        "a7-auth-rotation": [
+          1,
+          1,
+          1
+        ],
+        "b5-ctx-migration": [
+          1,
+          0,
+          1
+        ],
+        "a4-tests-fx": [
+          1,
+          1,
+          1
+        ],
+        "b3-pagination": [
+          1,
+          1,
+          0
+        ],
+        "c2-since-flag-ko": [
+          1,
+          1,
+          1
+        ],
+        "b1-static-traversal": [
+          1,
+          1,
+          1
+        ],
+        "d7-config-reload": [
+          0,
+          0,
+          1
+        ],
+        "a3-refactor-tax": [
+          1,
+          0,
+          1
+        ],
+        "p1-ticket-batch": [
+          0,
+          0,
+          0
+        ],
+        "b6-route-cache": [
+          1,
+          1,
+          1
+        ],
+        "d5-streaming-ingest-ko": [
+          1,
+          1,
+          1
+        ],
+        "c5-aggregate-perf": [
+          1,
+          1,
+          1
+        ],
+        "d6-snapshot-pagination": [
+          1,
+          1,
+          1
+        ],
+        "a1-rounding": [
+          0,
+          0,
+          1
+        ]
+      },
+      "P2": {
+        "c4-malformed-lines": [
+          0,
+          0,
+          0
+        ],
+        "d2-keyed-queue": [
+          0,
+          1,
+          1
+        ],
+        "c1-timezone": [
+          0,
+          0,
+          0
+        ],
+        "d1-transactional-outbox": [
+          0,
+          0,
+          0
+        ],
+        "a6-typo-message": [
+          1,
+          1,
+          1
+        ],
+        "d3-money-migration-ko": [
+          1,
+          1,
+          0
+        ],
+        "c6-csv-export": [
+          0,
+          0,
+          0
+        ],
+        "d4-cache-fencing": [
+          1,
+          1,
+          0
+        ],
+        "d8-build-graph": [
+          1,
+          1,
+          1
+        ],
+        "b2-patch-endpoint": [
+          0,
+          0,
+          0
+        ],
+        "a2-discount-codes": [
+          0,
+          0,
+          0
+        ],
+        "p2-handler-migration": [
+          0,
+          0,
+          0
+        ],
+        "p3-library-features-ko": [
+          0,
+          0,
+          0
+        ],
+        "a7-auth-rotation": [
+          0,
+          0,
+          0
+        ],
+        "b5-ctx-migration": [
+          0,
+          0,
+          0
+        ],
+        "a4-tests-fx": [
+          1,
+          1,
+          1
+        ],
+        "b3-pagination": [
+          0,
+          0,
+          0
+        ],
+        "c2-since-flag-ko": [
+          0,
+          0,
+          0
+        ],
+        "b1-static-traversal": [
+          0,
+          0,
+          1
+        ],
+        "d7-config-reload": [
+          1,
+          1,
+          1
+        ],
+        "a3-refactor-tax": [
+          0,
+          0,
+          0
+        ],
+        "p1-ticket-batch": [
+          0,
+          0,
+          0
+        ],
+        "b6-route-cache": [
+          0,
+          1,
+          0
+        ],
+        "d5-streaming-ingest-ko": [
+          0,
+          0,
+          0
+        ],
+        "c5-aggregate-perf": [
+          0,
+          0,
+          0
+        ],
+        "d6-snapshot-pagination": [
+          1,
+          0,
+          1
+        ],
+        "a1-rounding": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "functional": {
+      "P3": {
+        "c4-malformed-lines": [
+          1,
+          1,
+          1
+        ],
+        "d2-keyed-queue": [
+          1,
+          1,
+          1
+        ],
+        "c1-timezone": [
+          1,
+          1,
+          1
+        ],
+        "d1-transactional-outbox": [
+          1,
+          1,
+          1
+        ],
+        "a6-typo-message": [
+          1,
+          1,
+          1
+        ],
+        "d3-money-migration-ko": [
+          1,
+          0,
+          1
+        ],
+        "c6-csv-export": [
+          1,
+          1,
+          1
+        ],
+        "d4-cache-fencing": [
+          1,
+          1,
+          1
+        ],
+        "d8-build-graph": [
+          1,
+          1,
+          1
+        ],
+        "b2-patch-endpoint": [
+          1,
+          1,
+          1
+        ],
+        "a2-discount-codes": [
+          1,
+          1,
+          1
+        ],
+        "p2-handler-migration": [
+          0,
+          0,
+          0
+        ],
+        "p3-library-features-ko": [
+          0,
+          0,
+          0
+        ],
+        "a7-auth-rotation": [
+          1,
+          1,
+          1
+        ],
+        "b5-ctx-migration": [
+          1,
+          1,
+          1
+        ],
+        "a4-tests-fx": [
+          1,
+          1,
+          1
+        ],
+        "b3-pagination": [
+          1,
+          1,
+          1
+        ],
+        "c2-since-flag-ko": [
+          1,
+          1,
+          1
+        ],
+        "b1-static-traversal": [
+          1,
+          1,
+          1
+        ],
+        "d7-config-reload": [
+          1,
+          1,
+          1
+        ],
+        "a3-refactor-tax": [
+          1,
+          1,
+          1
+        ],
+        "p1-ticket-batch": [
+          0,
+          0,
+          0
+        ],
+        "b6-route-cache": [
+          1,
+          1,
+          1
+        ],
+        "d5-streaming-ingest-ko": [
+          1,
+          1,
+          1
+        ],
+        "c5-aggregate-perf": [
+          1,
+          1,
+          1
+        ],
+        "d6-snapshot-pagination": [
+          1,
+          1,
+          1
+        ],
+        "a1-rounding": [
+          0,
+          1,
+          0
+        ]
+      },
+      "D1": {
+        "c4-malformed-lines": [
+          1,
+          1,
+          1
+        ],
+        "d2-keyed-queue": [
+          1,
+          1,
+          1
+        ],
+        "c1-timezone": [
+          1,
+          1,
+          1
+        ],
+        "d1-transactional-outbox": [
+          1,
+          1,
+          1
+        ],
+        "a6-typo-message": [
+          1,
+          1,
+          1
+        ],
+        "d3-money-migration-ko": [
+          0,
+          1,
+          1
+        ],
+        "c6-csv-export": [
+          1,
+          1,
+          1
+        ],
+        "d4-cache-fencing": [
+          1,
+          1,
+          0
+        ],
+        "d8-build-graph": [
+          1,
+          1,
+          1
+        ],
+        "b2-patch-endpoint": [
+          1,
+          1,
+          1
+        ],
+        "a2-discount-codes": [
+          1,
+          1,
+          1
+        ],
+        "p2-handler-migration": [
+          1,
+          0,
+          0
+        ],
+        "p3-library-features-ko": [
+          0,
+          0,
+          0
+        ],
+        "a7-auth-rotation": [
+          1,
+          1,
+          1
+        ],
+        "b5-ctx-migration": [
+          1,
+          1,
+          1
+        ],
+        "a4-tests-fx": [
+          1,
+          1,
+          1
+        ],
+        "b3-pagination": [
+          1,
+          1,
+          1
+        ],
+        "c2-since-flag-ko": [
+          1,
+          1,
+          1
+        ],
+        "b1-static-traversal": [
+          1,
+          1,
+          1
+        ],
+        "d7-config-reload": [
+          1,
+          1,
+          1
+        ],
+        "a3-refactor-tax": [
+          1,
+          1,
+          1
+        ],
+        "p1-ticket-batch": [
+          0,
+          0,
+          0
+        ],
+        "b6-route-cache": [
+          1,
+          1,
+          1
+        ],
+        "d5-streaming-ingest-ko": [
+          1,
+          1,
+          1
+        ],
+        "c5-aggregate-perf": [
+          1,
+          1,
+          0
+        ],
+        "d6-snapshot-pagination": [
+          1,
+          1,
+          1
+        ],
+        "a1-rounding": [
+          0,
+          0,
+          1
+        ]
+      },
+      "T1": {
+        "c4-malformed-lines": [
+          1,
+          1,
+          1
+        ],
+        "d2-keyed-queue": [
+          0,
+          1,
+          1
+        ],
+        "c1-timezone": [
+          1,
+          1,
+          1
+        ],
+        "d1-transactional-outbox": [
+          1,
+          1,
+          0
+        ],
+        "a6-typo-message": [
+          1,
+          1,
+          1
+        ],
+        "d3-money-migration-ko": [
+          1,
+          1,
+          1
+        ],
+        "c6-csv-export": [
+          1,
+          1,
+          1
+        ],
+        "d4-cache-fencing": [
+          1,
+          0,
+          1
+        ],
+        "d8-build-graph": [
+          1,
+          1,
+          1
+        ],
+        "b2-patch-endpoint": [
+          1,
+          1,
+          1
+        ],
+        "a2-discount-codes": [
+          1,
+          1,
+          1
+        ],
+        "p2-handler-migration": [
+          0,
+          0,
+          0
+        ],
+        "p3-library-features-ko": [
+          0,
+          0,
+          1
+        ],
+        "a7-auth-rotation": [
+          1,
+          1,
+          1
+        ],
+        "b5-ctx-migration": [
+          1,
+          1,
+          1
+        ],
+        "a4-tests-fx": [
+          1,
+          1,
+          1
+        ],
+        "b3-pagination": [
+          1,
+          1,
+          1
+        ],
+        "c2-since-flag-ko": [
+          1,
+          1,
+          1
+        ],
+        "b1-static-traversal": [
+          1,
+          1,
+          1
+        ],
+        "d7-config-reload": [
+          1,
+          1,
+          1
+        ],
+        "a3-refactor-tax": [
+          1,
+          1,
+          1
+        ],
+        "b6-route-cache": [
+          1,
+          1,
+          1
+        ],
+        "p1-ticket-batch": [
+          0,
+          0,
+          0
+        ],
+        "d5-streaming-ingest-ko": [
+          1,
+          1,
+          0
+        ],
+        "c5-aggregate-perf": [
+          1,
+          1,
+          1
+        ],
+        "d6-snapshot-pagination": [
+          1,
+          1,
+          1
+        ],
+        "a1-rounding": [
+          1,
+          0,
+          0
+        ]
+      },
+      "D2": {
+        "c4-malformed-lines": [
+          1,
+          1,
+          1
+        ],
+        "d2-keyed-queue": [
+          1,
+          1,
+          0
+        ],
+        "c1-timezone": [
+          1,
+          1,
+          1
+        ],
+        "d1-transactional-outbox": [
+          1,
+          1,
+          1
+        ],
+        "a6-typo-message": [
+          1,
+          1,
+          1
+        ],
+        "d3-money-migration-ko": [
+          1,
+          1,
+          1
+        ],
+        "c6-csv-export": [
+          1,
+          1,
+          1
+        ],
+        "d4-cache-fencing": [
+          1,
+          1,
+          1
+        ],
+        "d8-build-graph": [
+          1,
+          1,
+          1
+        ],
+        "b2-patch-endpoint": [
+          1,
+          1,
+          1
+        ],
+        "a2-discount-codes": [
+          1,
+          1,
+          1
+        ],
+        "p2-handler-migration": [
+          1,
+          0,
+          0
+        ],
+        "p3-library-features-ko": [
+          0,
+          1,
+          0
+        ],
+        "a7-auth-rotation": [
+          1,
+          1,
+          1
+        ],
+        "b5-ctx-migration": [
+          1,
+          1,
+          1
+        ],
+        "a4-tests-fx": [
+          1,
+          1,
+          1
+        ],
+        "b3-pagination": [
+          1,
+          1,
+          1
+        ],
+        "c2-since-flag-ko": [
+          1,
+          1,
+          1
+        ],
+        "b1-static-traversal": [
+          1,
+          1,
+          1
+        ],
+        "d7-config-reload": [
+          1,
+          1,
+          1
+        ],
+        "a3-refactor-tax": [
+          1,
+          1,
+          1
+        ],
+        "p1-ticket-batch": [
+          0,
+          0,
+          0
+        ],
+        "b6-route-cache": [
+          1,
+          1,
+          1
+        ],
+        "d5-streaming-ingest-ko": [
+          1,
+          1,
+          1
+        ],
+        "c5-aggregate-perf": [
+          1,
+          1,
+          1
+        ],
+        "d6-snapshot-pagination": [
+          1,
+          1,
+          1
+        ],
+        "a1-rounding": [
+          0,
+          0,
+          0
+        ]
+      },
+      "V2": {
+        "c4-malformed-lines": [
+          1,
+          1,
+          1
+        ],
+        "d2-keyed-queue": [
+          0,
+          0,
+          1
+        ],
+        "c1-timezone": [
+          1,
+          1,
+          1
+        ],
+        "a6-typo-message": [
+          1,
+          1,
+          1
+        ],
+        "d1-transactional-outbox": [
+          1,
+          0,
+          0
+        ],
+        "d3-money-migration-ko": [
+          1,
+          1,
+          1
+        ],
+        "c6-csv-export": [
+          1,
+          1,
+          1
+        ],
+        "d4-cache-fencing": [
+          1,
+          1,
+          1
+        ],
+        "d8-build-graph": [
+          1,
+          1,
+          1
+        ],
+        "b2-patch-endpoint": [
+          1,
+          1,
+          1
+        ],
+        "a2-discount-codes": [
+          1,
+          1,
+          1
+        ],
+        "p2-handler-migration": [
+          0,
+          0,
+          0
+        ],
+        "p3-library-features-ko": [
+          0,
+          0,
+          0
+        ],
+        "a7-auth-rotation": [
+          1,
+          1,
+          1
+        ],
+        "b5-ctx-migration": [
+          1,
+          1,
+          1
+        ],
+        "a4-tests-fx": [
+          1,
+          1,
+          1
+        ],
+        "b3-pagination": [
+          1,
+          1,
+          1
+        ],
+        "c2-since-flag-ko": [
+          1,
+          1,
+          1
+        ],
+        "b1-static-traversal": [
+          1,
+          1,
+          1
+        ],
+        "a3-refactor-tax": [
+          1,
+          1,
+          1
+        ],
+        "d7-config-reload": [
+          1,
+          1,
+          1
+        ],
+        "p1-ticket-batch": [
+          0,
+          0,
+          0
+        ],
+        "b6-route-cache": [
+          1,
+          1,
+          1
+        ],
+        "d5-streaming-ingest-ko": [
+          1,
+          1,
+          1
+        ],
+        "c5-aggregate-perf": [
+          1,
+          1,
+          1
+        ],
+        "d6-snapshot-pagination": [
+          1,
+          1,
+          1
+        ],
+        "a1-rounding": [
+          1,
+          0,
+          0
+        ]
+      },
+      "B0": {
+        "c4-malformed-lines": [
+          1,
+          1,
+          1
+        ],
+        "d2-keyed-queue": [
+          0,
+          1,
+          1
+        ],
+        "c1-timezone": [
+          1,
+          1,
+          1
+        ],
+        "d1-transactional-outbox": [
+          1,
+          1,
+          1
+        ],
+        "a6-typo-message": [
+          1,
+          1,
+          1
+        ],
+        "d3-money-migration-ko": [
+          1,
+          1,
+          0
+        ],
+        "c6-csv-export": [
+          1,
+          1,
+          1
+        ],
+        "d4-cache-fencing": [
+          1,
+          1,
+          1
+        ],
+        "d8-build-graph": [
+          1,
+          1,
+          1
+        ],
+        "b2-patch-endpoint": [
+          1,
+          1,
+          1
+        ],
+        "a2-discount-codes": [
+          1,
+          1,
+          1
+        ],
+        "p2-handler-migration": [
+          0,
+          0,
+          0
+        ],
+        "p3-library-features-ko": [
+          0,
+          0,
+          0
+        ],
+        "a7-auth-rotation": [
+          1,
+          1,
+          1
+        ],
+        "b5-ctx-migration": [
+          1,
+          1,
+          1
+        ],
+        "a4-tests-fx": [
+          1,
+          1,
+          1
+        ],
+        "b3-pagination": [
+          1,
+          1,
+          1
+        ],
+        "c2-since-flag-ko": [
+          1,
+          1,
+          1
+        ],
+        "b1-static-traversal": [
+          1,
+          1,
+          1
+        ],
+        "d7-config-reload": [
+          1,
+          1,
+          0
+        ],
+        "a3-refactor-tax": [
+          1,
+          1,
+          1
+        ],
+        "p1-ticket-batch": [
+          0,
+          0,
+          0
+        ],
+        "b6-route-cache": [
+          1,
+          1,
+          1
+        ],
+        "d5-streaming-ingest-ko": [
+          0,
+          1,
+          0
+        ],
+        "c5-aggregate-perf": [
+          1,
+          1,
+          1
+        ],
+        "d6-snapshot-pagination": [
+          1,
+          0,
+          1
+        ],
+        "a1-rounding": [
+          1,
+          1,
+          1
+        ]
+      },
+      "V1": {
+        "c4-malformed-lines": [
+          1,
+          1,
+          1
+        ],
+        "c1-timezone": [
+          1,
+          1,
+          1
+        ],
+        "d2-keyed-queue": [
+          0,
+          1,
+          1
+        ],
+        "d1-transactional-outbox": [
+          1,
+          0,
+          1
+        ],
+        "a6-typo-message": [
+          1,
+          1,
+          1
+        ],
+        "d3-money-migration-ko": [
+          1,
+          0,
+          1
+        ],
+        "c6-csv-export": [
+          1,
+          1,
+          1
+        ],
+        "d4-cache-fencing": [
+          1,
+          1,
+          1
+        ],
+        "d8-build-graph": [
+          1,
+          1,
+          1
+        ],
+        "b2-patch-endpoint": [
+          1,
+          1,
+          1
+        ],
+        "a2-discount-codes": [
+          1,
+          1,
+          1
+        ],
+        "p2-handler-migration": [
+          0,
+          1,
+          0
+        ],
+        "p3-library-features-ko": [
+          1,
+          1,
+          0
+        ],
+        "a7-auth-rotation": [
+          1,
+          1,
+          1
+        ],
+        "b5-ctx-migration": [
+          1,
+          1,
+          1
+        ],
+        "a4-tests-fx": [
+          1,
+          1,
+          1
+        ],
+        "b3-pagination": [
+          1,
+          1,
+          1
+        ],
+        "c2-since-flag-ko": [
+          1,
+          1,
+          1
+        ],
+        "b1-static-traversal": [
+          1,
+          1,
+          1
+        ],
+        "d7-config-reload": [
+          1,
+          1,
+          1
+        ],
+        "a3-refactor-tax": [
+          1,
+          1,
+          1
+        ],
+        "p1-ticket-batch": [
+          0,
+          0,
+          0
+        ],
+        "b6-route-cache": [
+          1,
+          1,
+          1
+        ],
+        "d5-streaming-ingest-ko": [
+          1,
+          1,
+          1
+        ],
+        "c5-aggregate-perf": [
+          1,
+          1,
+          1
+        ],
+        "d6-snapshot-pagination": [
+          1,
+          1,
+          1
+        ],
+        "a1-rounding": [
+          0,
+          0,
+          1
+        ]
+      },
+      "S": {
+        "c4-malformed-lines": [
+          1,
+          1,
+          1
+        ],
+        "d2-keyed-queue": [
+          1,
+          1,
+          1
+        ],
+        "c1-timezone": [
+          1,
+          1,
+          1
+        ],
+        "d1-transactional-outbox": [
+          1,
+          1,
+          1
+        ],
+        "a6-typo-message": [
+          1,
+          1,
+          1
+        ],
+        "d3-money-migration-ko": [
+          1,
+          1,
+          0
+        ],
+        "c6-csv-export": [
+          1,
+          1,
+          1
+        ],
+        "d4-cache-fencing": [
+          1,
+          1,
+          1
+        ],
+        "d8-build-graph": [
+          1,
+          1,
+          1
+        ],
+        "b2-patch-endpoint": [
+          1,
+          1,
+          1
+        ],
+        "a2-discount-codes": [
+          1,
+          1,
+          1
+        ],
+        "p3-library-features-ko": [
+          0,
+          1,
+          0
+        ],
+        "p2-handler-migration": [
+          0,
+          0,
+          0
+        ],
+        "a7-auth-rotation": [
+          1,
+          1,
+          1
+        ],
+        "b5-ctx-migration": [
+          1,
+          1,
+          1
+        ],
+        "a4-tests-fx": [
+          1,
+          1,
+          1
+        ],
+        "b3-pagination": [
+          1,
+          1,
+          1
+        ],
+        "c2-since-flag-ko": [
+          1,
+          1,
+          1
+        ],
+        "b1-static-traversal": [
+          1,
+          1,
+          1
+        ],
+        "d7-config-reload": [
+          1,
+          1,
+          0
+        ],
+        "a3-refactor-tax": [
+          1,
+          1,
+          1
+        ],
+        "p1-ticket-batch": [
+          0,
+          0,
+          0
+        ],
+        "b6-route-cache": [
+          1,
+          1,
+          1
+        ],
+        "d5-streaming-ingest-ko": [
+          0,
+          0,
+          1
+        ],
+        "c5-aggregate-perf": [
+          1,
+          1,
+          1
+        ],
+        "d6-snapshot-pagination": [
+          0,
+          1,
+          1
+        ],
+        "a1-rounding": [
+          0,
+          0,
+          0
+        ]
+      },
+      "P1": {
+        "c4-malformed-lines": [
+          1,
+          1,
+          1
+        ],
+        "d2-keyed-queue": [
+          1,
+          1,
+          0
+        ],
+        "c1-timezone": [
+          1,
+          1,
+          1
+        ],
+        "d1-transactional-outbox": [
+          1,
+          1,
+          1
+        ],
+        "a6-typo-message": [
+          1,
+          1,
+          1
+        ],
+        "d3-money-migration-ko": [
+          1,
+          1,
+          1
+        ],
+        "c6-csv-export": [
+          1,
+          1,
+          1
+        ],
+        "d4-cache-fencing": [
+          1,
+          1,
+          1
+        ],
+        "b2-patch-endpoint": [
+          1,
+          1,
+          1
+        ],
+        "d8-build-graph": [
+          1,
+          1,
+          1
+        ],
+        "a2-discount-codes": [
+          1,
+          1,
+          1
+        ],
+        "p2-handler-migration": [
+          0,
+          0,
+          0
+        ],
+        "p3-library-features-ko": [
+          0,
+          0,
+          0
+        ],
+        "a7-auth-rotation": [
+          1,
+          1,
+          1
+        ],
+        "b5-ctx-migration": [
+          1,
+          0,
+          1
+        ],
+        "a4-tests-fx": [
+          1,
+          1,
+          1
+        ],
+        "b3-pagination": [
+          1,
+          1,
+          1
+        ],
+        "c2-since-flag-ko": [
+          1,
+          1,
+          1
+        ],
+        "b1-static-traversal": [
+          1,
+          1,
+          1
+        ],
+        "d7-config-reload": [
+          0,
+          0,
+          1
+        ],
+        "a3-refactor-tax": [
+          1,
+          1,
+          1
+        ],
+        "p1-ticket-batch": [
+          0,
+          0,
+          0
+        ],
+        "b6-route-cache": [
+          1,
+          1,
+          1
+        ],
+        "d5-streaming-ingest-ko": [
+          1,
+          1,
+          1
+        ],
+        "c5-aggregate-perf": [
+          1,
+          1,
+          1
+        ],
+        "d6-snapshot-pagination": [
+          1,
+          1,
+          1
+        ],
+        "a1-rounding": [
+          0,
+          0,
+          1
+        ]
+      },
+      "P2": {
+        "c4-malformed-lines": [
+          1,
+          1,
+          1
+        ],
+        "d2-keyed-queue": [
+          0,
+          1,
+          1
+        ],
+        "c1-timezone": [
+          1,
+          1,
+          1
+        ],
+        "d1-transactional-outbox": [
+          1,
+          1,
+          1
+        ],
+        "a6-typo-message": [
+          1,
+          1,
+          1
+        ],
+        "d3-money-migration-ko": [
+          1,
+          1,
+          0
+        ],
+        "c6-csv-export": [
+          1,
+          1,
+          1
+        ],
+        "d4-cache-fencing": [
+          1,
+          1,
+          1
+        ],
+        "d8-build-graph": [
+          1,
+          1,
+          1
+        ],
+        "b2-patch-endpoint": [
+          1,
+          1,
+          1
+        ],
+        "a2-discount-codes": [
+          1,
+          1,
+          1
+        ],
+        "p2-handler-migration": [
+          0,
+          0,
+          0
+        ],
+        "p3-library-features-ko": [
+          0,
+          0,
+          0
+        ],
+        "a7-auth-rotation": [
+          1,
+          1,
+          1
+        ],
+        "b5-ctx-migration": [
+          1,
+          1,
+          1
+        ],
+        "a4-tests-fx": [
+          1,
+          1,
+          1
+        ],
+        "b3-pagination": [
+          1,
+          1,
+          1
+        ],
+        "c2-since-flag-ko": [
+          1,
+          1,
+          1
+        ],
+        "b1-static-traversal": [
+          1,
+          1,
+          1
+        ],
+        "d7-config-reload": [
+          1,
+          1,
+          1
+        ],
+        "a3-refactor-tax": [
+          1,
+          1,
+          1
+        ],
+        "p1-ticket-batch": [
+          0,
+          0,
+          0
+        ],
+        "b6-route-cache": [
+          1,
+          1,
+          1
+        ],
+        "d5-streaming-ingest-ko": [
+          1,
+          0,
+          1
+        ],
+        "c5-aggregate-perf": [
+          1,
+          1,
+          1
+        ],
+        "d6-snapshot-pagination": [
+          1,
+          1,
+          1
+        ],
+        "a1-rounding": [
+          0,
+          1,
+          0
+        ]
+      }
+    },
+    "integrityFail": {
+      "P3": {
+        "c4-malformed-lines": [
+          0,
+          0,
+          0
+        ],
+        "d2-keyed-queue": [
+          0,
+          0,
+          0
+        ],
+        "c1-timezone": [
+          0,
+          0,
+          0
+        ],
+        "d1-transactional-outbox": [
+          0,
+          0,
+          0
+        ],
+        "a6-typo-message": [
+          0,
+          0,
+          0
+        ],
+        "d3-money-migration-ko": [
+          0,
+          0,
+          0
+        ],
+        "c6-csv-export": [
+          0,
+          0,
+          0
+        ],
+        "d4-cache-fencing": [
+          0,
+          0,
+          0
+        ],
+        "d8-build-graph": [
+          0,
+          0,
+          0
+        ],
+        "b2-patch-endpoint": [
+          0,
+          0,
+          0
+        ],
+        "a2-discount-codes": [
+          0,
+          0,
+          0
+        ],
+        "p2-handler-migration": [
+          0,
+          0,
+          0
+        ],
+        "p3-library-features-ko": [
+          0,
+          0,
+          0
+        ],
+        "a7-auth-rotation": [
+          0,
+          0,
+          0
+        ],
+        "b5-ctx-migration": [
+          0,
+          0,
+          0
+        ],
+        "a4-tests-fx": [
+          0,
+          0,
+          0
+        ],
+        "b3-pagination": [
+          0,
+          0,
+          0
+        ],
+        "c2-since-flag-ko": [
+          0,
+          0,
+          0
+        ],
+        "b1-static-traversal": [
+          0,
+          0,
+          0
+        ],
+        "d7-config-reload": [
+          0,
+          0,
+          0
+        ],
+        "a3-refactor-tax": [
+          0,
+          0,
+          0
+        ],
+        "p1-ticket-batch": [
+          0,
+          0,
+          0
+        ],
+        "b6-route-cache": [
+          0,
+          0,
+          0
+        ],
+        "d5-streaming-ingest-ko": [
+          0,
+          0,
+          0
+        ],
+        "c5-aggregate-perf": [
+          0,
+          0,
+          0
+        ],
+        "d6-snapshot-pagination": [
+          0,
+          0,
+          0
+        ],
+        "a1-rounding": [
+          0,
+          0,
+          0
+        ]
+      },
+      "D1": {
+        "c4-malformed-lines": [
+          0,
+          0,
+          0
+        ],
+        "d2-keyed-queue": [
+          0,
+          0,
+          1
+        ],
+        "c1-timezone": [
+          0,
+          0,
+          0
+        ],
+        "d1-transactional-outbox": [
+          0,
+          0,
+          0
+        ],
+        "a6-typo-message": [
+          0,
+          0,
+          0
+        ],
+        "d3-money-migration-ko": [
+          0,
+          0,
+          0
+        ],
+        "c6-csv-export": [
+          1,
+          1,
+          0
+        ],
+        "d4-cache-fencing": [
+          1,
+          1,
+          1
+        ],
+        "d8-build-graph": [
+          0,
+          0,
+          0
+        ],
+        "b2-patch-endpoint": [
+          0,
+          0,
+          0
+        ],
+        "a2-discount-codes": [
+          1,
+          1,
+          1
+        ],
+        "p2-handler-migration": [
+          0,
+          0,
+          0
+        ],
+        "p3-library-features-ko": [
+          0,
+          0,
+          0
+        ],
+        "a7-auth-rotation": [
+          1,
+          1,
+          1
+        ],
+        "b5-ctx-migration": [
+          1,
+          0,
+          0
+        ],
+        "a4-tests-fx": [
+          0,
+          0,
+          0
+        ],
+        "b3-pagination": [
+          0,
+          0,
+          0
+        ],
+        "c2-since-flag-ko": [
+          0,
+          0,
+          0
+        ],
+        "b1-static-traversal": [
+          0,
+          0,
+          0
+        ],
+        "d7-config-reload": [
+          0,
+          0,
+          0
+        ],
+        "a3-refactor-tax": [
+          1,
+          1,
+          1
+        ],
+        "p1-ticket-batch": [
+          0,
+          0,
+          0
+        ],
+        "b6-route-cache": [
+          0,
+          0,
+          0
+        ],
+        "d5-streaming-ingest-ko": [
+          1,
+          1,
+          0
+        ],
+        "c5-aggregate-perf": [
+          0,
+          0,
+          0
+        ],
+        "d6-snapshot-pagination": [
+          0,
+          0,
+          0
+        ],
+        "a1-rounding": [
+          1,
+          1,
+          1
+        ]
+      },
+      "T1": {
+        "c4-malformed-lines": [
+          1,
+          1,
+          1
+        ],
+        "d2-keyed-queue": [
+          0,
+          0,
+          0
+        ],
+        "c1-timezone": [
+          1,
+          1,
+          1
+        ],
+        "d1-transactional-outbox": [
+          1,
+          1,
+          1
+        ],
+        "a6-typo-message": [
+          0,
+          0,
+          0
+        ],
+        "d3-money-migration-ko": [
+          1,
+          1,
+          1
+        ],
+        "c6-csv-export": [
+          1,
+          1,
+          1
+        ],
+        "d4-cache-fencing": [
+          1,
+          1,
+          1
+        ],
+        "d8-build-graph": [
+          0,
+          0,
+          0
+        ],
+        "b2-patch-endpoint": [
+          1,
+          1,
+          1
+        ],
+        "a2-discount-codes": [
+          1,
+          1,
+          1
+        ],
+        "p2-handler-migration": [
+          0,
+          0,
+          0
+        ],
+        "p3-library-features-ko": [
+          0,
+          0,
+          0
+        ],
+        "a7-auth-rotation": [
+          1,
+          1,
+          1
+        ],
+        "b5-ctx-migration": [
+          1,
+          1,
+          1
+        ],
+        "a4-tests-fx": [
+          0,
+          0,
+          0
+        ],
+        "b3-pagination": [
+          1,
+          1,
+          1
+        ],
+        "c2-since-flag-ko": [
+          1,
+          1,
+          1
+        ],
+        "b1-static-traversal": [
+          1,
+          1,
+          1
+        ],
+        "d7-config-reload": [
+          1,
+          0,
+          0
+        ],
+        "a3-refactor-tax": [
+          1,
+          1,
+          1
+        ],
+        "b6-route-cache": [
+          0,
+          0,
+          0
+        ],
+        "p1-ticket-batch": [
+          0,
+          0,
+          0
+        ],
+        "d5-streaming-ingest-ko": [
+          1,
+          1,
+          1
+        ],
+        "c5-aggregate-perf": [
+          1,
+          1,
+          1
+        ],
+        "d6-snapshot-pagination": [
+          0,
+          0,
+          0
+        ],
+        "a1-rounding": [
+          1,
+          1,
+          1
+        ]
+      },
+      "D2": {
+        "c4-malformed-lines": [
+          1,
+          1,
+          1
+        ],
+        "d2-keyed-queue": [
+          0,
+          0,
+          0
+        ],
+        "c1-timezone": [
+          1,
+          1,
+          1
+        ],
+        "d1-transactional-outbox": [
+          0,
+          1,
+          1
+        ],
+        "a6-typo-message": [
+          0,
+          0,
+          0
+        ],
+        "d3-money-migration-ko": [
+          0,
+          1,
+          0
+        ],
+        "c6-csv-export": [
+          1,
+          1,
+          1
+        ],
+        "d4-cache-fencing": [
+          0,
+          1,
+          1
+        ],
+        "d8-build-graph": [
+          0,
+          0,
+          0
+        ],
+        "b2-patch-endpoint": [
+          1,
+          1,
+          1
+        ],
+        "a2-discount-codes": [
+          1,
+          1,
+          1
+        ],
+        "p2-handler-migration": [
+          0,
+          0,
+          0
+        ],
+        "p3-library-features-ko": [
+          0,
+          0,
+          0
+        ],
+        "a7-auth-rotation": [
+          1,
+          1,
+          1
+        ],
+        "b5-ctx-migration": [
+          1,
+          1,
+          1
+        ],
+        "a4-tests-fx": [
+          0,
+          0,
+          0
+        ],
+        "b3-pagination": [
+          1,
+          1,
+          1
+        ],
+        "c2-since-flag-ko": [
+          1,
+          1,
+          1
+        ],
+        "b1-static-traversal": [
+          1,
+          1,
+          1
+        ],
+        "d7-config-reload": [
+          0,
+          0,
+          0
+        ],
+        "a3-refactor-tax": [
+          1,
+          1,
+          1
+        ],
+        "p1-ticket-batch": [
+          0,
+          0,
+          0
+        ],
+        "b6-route-cache": [
+          0,
+          0,
+          0
+        ],
+        "d5-streaming-ingest-ko": [
+          1,
+          1,
+          0
+        ],
+        "c5-aggregate-perf": [
+          1,
+          1,
+          1
+        ],
+        "d6-snapshot-pagination": [
+          1,
+          0,
+          1
+        ],
+        "a1-rounding": [
+          1,
+          1,
+          1
+        ]
+      },
+      "V2": {
+        "c4-malformed-lines": [
+          1,
+          1,
+          1
+        ],
+        "d2-keyed-queue": [
+          0,
+          0,
+          0
+        ],
+        "c1-timezone": [
+          1,
+          1,
+          1
+        ],
+        "a6-typo-message": [
+          0,
+          0,
+          0
+        ],
+        "d1-transactional-outbox": [
+          1,
+          0,
+          1
+        ],
+        "d3-money-migration-ko": [
+          1,
+          0,
+          1
+        ],
+        "c6-csv-export": [
+          1,
+          1,
+          1
+        ],
+        "d4-cache-fencing": [
+          1,
+          1,
+          1
+        ],
+        "d8-build-graph": [
+          0,
+          0,
+          0
+        ],
+        "b2-patch-endpoint": [
+          1,
+          1,
+          1
+        ],
+        "a2-discount-codes": [
+          1,
+          1,
+          1
+        ],
+        "p2-handler-migration": [
+          0,
+          0,
+          0
+        ],
+        "p3-library-features-ko": [
+          0,
+          0,
+          0
+        ],
+        "a7-auth-rotation": [
+          1,
+          1,
+          1
+        ],
+        "b5-ctx-migration": [
+          1,
+          1,
+          1
+        ],
+        "a4-tests-fx": [
+          0,
+          0,
+          0
+        ],
+        "b3-pagination": [
+          1,
+          1,
+          1
+        ],
+        "c2-since-flag-ko": [
+          1,
+          1,
+          1
+        ],
+        "b1-static-traversal": [
+          1,
+          1,
+          1
+        ],
+        "a3-refactor-tax": [
+          1,
+          1,
+          1
+        ],
+        "d7-config-reload": [
+          0,
+          0,
+          1
+        ],
+        "p1-ticket-batch": [
+          0,
+          0,
+          0
+        ],
+        "b6-route-cache": [
+          0,
+          1,
+          0
+        ],
+        "d5-streaming-ingest-ko": [
+          0,
+          1,
+          0
+        ],
+        "c5-aggregate-perf": [
+          1,
+          1,
+          1
+        ],
+        "d6-snapshot-pagination": [
+          1,
+          1,
+          0
+        ],
+        "a1-rounding": [
+          1,
+          1,
+          1
+        ]
+      },
+      "B0": {
+        "c4-malformed-lines": [
+          0,
+          0,
+          0
+        ],
+        "d2-keyed-queue": [
+          0,
+          0,
+          0
+        ],
+        "c1-timezone": [
+          0,
+          1,
+          1
+        ],
+        "d1-transactional-outbox": [
+          0,
+          0,
+          1
+        ],
+        "a6-typo-message": [
+          0,
+          0,
+          0
+        ],
+        "d3-money-migration-ko": [
+          0,
+          0,
+          0
+        ],
+        "c6-csv-export": [
+          1,
+          1,
+          1
+        ],
+        "d4-cache-fencing": [
+          0,
+          0,
+          0
+        ],
+        "d8-build-graph": [
+          0,
+          0,
+          0
+        ],
+        "b2-patch-endpoint": [
+          0,
+          0,
+          0
+        ],
+        "a2-discount-codes": [
+          1,
+          1,
+          1
+        ],
+        "p2-handler-migration": [
+          0,
+          0,
+          0
+        ],
+        "p3-library-features-ko": [
+          0,
+          0,
+          0
+        ],
+        "a7-auth-rotation": [
+          1,
+          1,
+          1
+        ],
+        "b5-ctx-migration": [
+          1,
+          1,
+          1
+        ],
+        "a4-tests-fx": [
+          0,
+          0,
+          0
+        ],
+        "b3-pagination": [
+          0,
+          0,
+          0
+        ],
+        "c2-since-flag-ko": [
+          0,
+          0,
+          0
+        ],
+        "b1-static-traversal": [
+          0,
+          0,
+          0
+        ],
+        "d7-config-reload": [
+          0,
+          0,
+          0
+        ],
+        "a3-refactor-tax": [
+          1,
+          1,
+          1
+        ],
+        "p1-ticket-batch": [
+          0,
+          0,
+          0
+        ],
+        "b6-route-cache": [
+          0,
+          0,
+          0
+        ],
+        "d5-streaming-ingest-ko": [
+          0,
+          0,
+          0
+        ],
+        "c5-aggregate-perf": [
+          0,
+          0,
+          0
+        ],
+        "d6-snapshot-pagination": [
+          0,
+          0,
+          1
+        ],
+        "a1-rounding": [
+          1,
+          1,
+          1
+        ]
+      },
+      "V1": {
+        "c4-malformed-lines": [
+          1,
+          1,
+          1
+        ],
+        "c1-timezone": [
+          1,
+          1,
+          1
+        ],
+        "d2-keyed-queue": [
+          0,
+          0,
+          0
+        ],
+        "d1-transactional-outbox": [
+          1,
+          0,
+          1
+        ],
+        "a6-typo-message": [
+          0,
+          0,
+          0
+        ],
+        "d3-money-migration-ko": [
+          0,
+          0,
+          1
+        ],
+        "c6-csv-export": [
+          1,
+          1,
+          1
+        ],
+        "d4-cache-fencing": [
+          1,
+          1,
+          1
+        ],
+        "d8-build-graph": [
+          0,
+          0,
+          0
+        ],
+        "b2-patch-endpoint": [
+          1,
+          1,
+          1
+        ],
+        "a2-discount-codes": [
+          1,
+          1,
+          1
+        ],
+        "p2-handler-migration": [
+          0,
+          0,
+          0
+        ],
+        "p3-library-features-ko": [
+          0,
+          0,
+          0
+        ],
+        "a7-auth-rotation": [
+          1,
+          1,
+          1
+        ],
+        "b5-ctx-migration": [
+          1,
+          1,
+          1
+        ],
+        "a4-tests-fx": [
+          0,
+          0,
+          1
+        ],
+        "b3-pagination": [
+          1,
+          1,
+          1
+        ],
+        "c2-since-flag-ko": [
+          1,
+          1,
+          1
+        ],
+        "b1-static-traversal": [
+          1,
+          1,
+          1
+        ],
+        "d7-config-reload": [
+          1,
+          0,
+          1
+        ],
+        "a3-refactor-tax": [
+          1,
+          1,
+          1
+        ],
+        "p1-ticket-batch": [
+          0,
+          0,
+          0
+        ],
+        "b6-route-cache": [
+          0,
+          0,
+          1
+        ],
+        "d5-streaming-ingest-ko": [
+          0,
+          1,
+          1
+        ],
+        "c5-aggregate-perf": [
+          1,
+          1,
+          1
+        ],
+        "d6-snapshot-pagination": [
+          1,
+          1,
+          0
+        ],
+        "a1-rounding": [
+          1,
+          1,
+          1
+        ]
+      },
+      "S": {
+        "c4-malformed-lines": [
+          1,
+          1,
+          1
+        ],
+        "d2-keyed-queue": [
+          1,
+          1,
+          1
+        ],
+        "c1-timezone": [
+          1,
+          1,
+          1
+        ],
+        "d1-transactional-outbox": [
+          1,
+          0,
+          1
+        ],
+        "a6-typo-message": [
+          0,
+          0,
+          0
+        ],
+        "d3-money-migration-ko": [
+          0,
+          1,
+          0
+        ],
+        "c6-csv-export": [
+          1,
+          1,
+          1
+        ],
+        "d4-cache-fencing": [
+          1,
+          1,
+          1
+        ],
+        "d8-build-graph": [
+          0,
+          0,
+          0
+        ],
+        "b2-patch-endpoint": [
+          1,
+          1,
+          1
+        ],
+        "a2-discount-codes": [
+          1,
+          1,
+          1
+        ],
+        "p3-library-features-ko": [
+          0,
+          0,
+          0
+        ],
+        "p2-handler-migration": [
+          0,
+          0,
+          0
+        ],
+        "a7-auth-rotation": [
+          1,
+          1,
+          1
+        ],
+        "b5-ctx-migration": [
+          1,
+          1,
+          1
+        ],
+        "a4-tests-fx": [
+          0,
+          0,
+          0
+        ],
+        "b3-pagination": [
+          1,
+          1,
+          1
+        ],
+        "c2-since-flag-ko": [
+          1,
+          1,
+          1
+        ],
+        "b1-static-traversal": [
+          1,
+          1,
+          1
+        ],
+        "d7-config-reload": [
+          0,
+          0,
+          0
+        ],
+        "a3-refactor-tax": [
+          1,
+          1,
+          1
+        ],
+        "p1-ticket-batch": [
+          0,
+          0,
+          0
+        ],
+        "b6-route-cache": [
+          0,
+          0,
+          0
+        ],
+        "d5-streaming-ingest-ko": [
+          0,
+          1,
+          1
+        ],
+        "c5-aggregate-perf": [
+          1,
+          1,
+          1
+        ],
+        "d6-snapshot-pagination": [
+          1,
+          1,
+          0
+        ],
+        "a1-rounding": [
+          1,
+          1,
+          1
+        ]
+      },
+      "P1": {
+        "c4-malformed-lines": [
+          0,
+          0,
+          0
+        ],
+        "d2-keyed-queue": [
+          0,
+          0,
+          0
+        ],
+        "c1-timezone": [
+          0,
+          0,
+          0
+        ],
+        "d1-transactional-outbox": [
+          0,
+          0,
+          0
+        ],
+        "a6-typo-message": [
+          0,
+          0,
+          0
+        ],
+        "d3-money-migration-ko": [
+          0,
+          0,
+          0
+        ],
+        "c6-csv-export": [
+          0,
+          0,
+          0
+        ],
+        "d4-cache-fencing": [
+          0,
+          0,
+          0
+        ],
+        "b2-patch-endpoint": [
+          1,
+          0,
+          0
+        ],
+        "d8-build-graph": [
+          0,
+          0,
+          0
+        ],
+        "a2-discount-codes": [
+          0,
+          0,
+          0
+        ],
+        "p2-handler-migration": [
+          0,
+          0,
+          0
+        ],
+        "p3-library-features-ko": [
+          0,
+          0,
+          0
+        ],
+        "a7-auth-rotation": [
+          0,
+          0,
+          0
+        ],
+        "b5-ctx-migration": [
+          0,
+          0,
+          0
+        ],
+        "a4-tests-fx": [
+          0,
+          0,
+          0
+        ],
+        "b3-pagination": [
+          0,
+          0,
+          1
+        ],
+        "c2-since-flag-ko": [
+          0,
+          0,
+          0
+        ],
+        "b1-static-traversal": [
+          0,
+          0,
+          0
+        ],
+        "d7-config-reload": [
+          0,
+          0,
+          0
+        ],
+        "a3-refactor-tax": [
+          0,
+          1,
+          0
+        ],
+        "p1-ticket-batch": [
+          0,
+          0,
+          0
+        ],
+        "b6-route-cache": [
+          0,
+          0,
+          0
+        ],
+        "d5-streaming-ingest-ko": [
+          0,
+          0,
+          0
+        ],
+        "c5-aggregate-perf": [
+          0,
+          0,
+          0
+        ],
+        "d6-snapshot-pagination": [
+          0,
+          0,
+          0
+        ],
+        "a1-rounding": [
+          0,
+          1,
+          0
+        ]
+      },
+      "P2": {
+        "c4-malformed-lines": [
+          1,
+          1,
+          1
+        ],
+        "d2-keyed-queue": [
+          1,
+          0,
+          0
+        ],
+        "c1-timezone": [
+          1,
+          1,
+          1
+        ],
+        "d1-transactional-outbox": [
+          1,
+          1,
+          1
+        ],
+        "a6-typo-message": [
+          0,
+          0,
+          0
+        ],
+        "d3-money-migration-ko": [
+          0,
+          0,
+          0
+        ],
+        "c6-csv-export": [
+          1,
+          1,
+          1
+        ],
+        "d4-cache-fencing": [
+          0,
+          0,
+          1
+        ],
+        "d8-build-graph": [
+          0,
+          0,
+          0
+        ],
+        "b2-patch-endpoint": [
+          1,
+          1,
+          1
+        ],
+        "a2-discount-codes": [
+          1,
+          1,
+          1
+        ],
+        "p2-handler-migration": [
+          0,
+          0,
+          0
+        ],
+        "p3-library-features-ko": [
+          0,
+          0,
+          0
+        ],
+        "a7-auth-rotation": [
+          1,
+          1,
+          1
+        ],
+        "b5-ctx-migration": [
+          1,
+          1,
+          1
+        ],
+        "a4-tests-fx": [
+          0,
+          0,
+          0
+        ],
+        "b3-pagination": [
+          1,
+          1,
+          1
+        ],
+        "c2-since-flag-ko": [
+          1,
+          1,
+          1
+        ],
+        "b1-static-traversal": [
+          1,
+          1,
+          0
+        ],
+        "d7-config-reload": [
+          0,
+          0,
+          0
+        ],
+        "a3-refactor-tax": [
+          1,
+          1,
+          1
+        ],
+        "p1-ticket-batch": [
+          0,
+          0,
+          0
+        ],
+        "b6-route-cache": [
+          1,
+          0,
+          1
+        ],
+        "d5-streaming-ingest-ko": [
+          1,
+          1,
+          1
+        ],
+        "c5-aggregate-perf": [
+          1,
+          1,
+          1
+        ],
+        "d6-snapshot-pagination": [
+          0,
+          1,
+          0
+        ],
+        "a1-rounding": [
+          1,
+          1,
+          1
+        ]
+      }
+    }
+  },
+  "sensitivity": {
+    "P1": {
+      "tasks": 27,
+      "dRate": 0.5555555555555555,
+      "dRateCI": [
+        0.37037037037037046,
+        0.7160493827160495
+      ],
+      "dI": 0.02469135802469136,
+      "dICI": [
+        -0.06172839506172839,
+        0.09876543209876543
+      ],
+      "p": 0.0004997501249375312,
+      "better": 19,
+      "worse": 2
+    },
+    "P2": {
+      "tasks": 27,
+      "dRate": 0.04938271604938271,
+      "dRateCI": [
+        -0.04938271604938272,
+        0.14814814814814814
+      ],
+      "dI": 0.012345679012345682,
+      "dICI": [
+        -0.04938271604938271,
+        0.07407407407407407
+      ],
+      "p": 0.48225887056471767,
+      "better": 6,
+      "worse": 3
+    },
+    "D1": {
+      "tasks": 27,
+      "dRate": 0.3950617283950617,
+      "dRateCI": [
+        0.22222222222222227,
+        0.5555555555555556
+      ],
+      "dI": 0.02469135802469136,
+      "dICI": [
+        -0.04938271604938271,
+        0.09876543209876543
+      ],
+      "p": 0.0004997501249375312,
+      "better": 16,
+      "worse": 1
+    },
+    "D2": {
+      "tasks": 27,
+      "dRate": 0.08641975308641976,
+      "dRateCI": [
+        0.024691358024691357,
+        0.16049382716049382
+      ],
+      "dI": 0.037037037037037035,
+      "dICI": [
+        -0.012345679012345678,
+        0.08641975308641975
+      ],
+      "p": 0.04097951024487756,
+      "better": 6,
+      "worse": 0
+    },
+    "T1": {
+      "tasks": 27,
+      "dRate": 0.02469135802469136,
+      "dRateCI": [
+        -0.037037037037037035,
+        0.1111111111111111
+      ],
+      "dI": -0.024691358024691357,
+      "dICI": [
+        -0.07407407407407407,
+        0.024691358024691357
+      ],
+      "p": 0.7566216891554223,
+      "better": 2,
+      "worse": 2
+    },
+    "V1": {
+      "tasks": 27,
+      "dRate": 0.012345679012345677,
+      "dRateCI": [
+        -0.061728395061728406,
+        0.09876543209876541
+      ],
+      "dI": 0.04938271604938271,
+      "dICI": [
+        0,
+        0.09876543209876543
+      ],
+      "p": 1,
+      "better": 4,
+      "worse": 4
+    },
+    "V2": {
+      "tasks": 27,
+      "dRate": -4.11193712824132e-18,
+      "dRateCI": [
+        -0.0617283950617284,
+        0.07407407407407407
+      ],
+      "dI": 0.012345679012345678,
+      "dICI": [
+        -0.037037037037037035,
+        0.06172839506172839
+      ],
+      "p": 1,
+      "better": 2,
+      "worse": 3
+    }
+  },
+  "units": 810
+}
