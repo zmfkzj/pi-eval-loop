@@ -1,0 +1,278 @@
+{
+  "records": 2,
+  "usable": 2,
+  "infraRate": 0,
+  "maxInfraRate": 0.5,
+  "reconciled": [],
+  "summary": {
+    "M1": {
+      "successes": 0,
+      "units": 1,
+      "rate": 0,
+      "inconsistency": 0,
+      "all": 0,
+      "mixed": 0,
+      "none": 1,
+      "tasks": 1,
+      "infra": 0,
+      "reconciled": [],
+      "withoutTelemetry": 0,
+      "integrityFailures": 1,
+      "hiddenPass": 1,
+      "regressions": 0,
+      "critical": 2,
+      "terminal": {
+        "completed": 1
+      },
+      "requests": 75,
+      "meanWallS": 1001,
+      "telemetry": {
+        "units": 1,
+        "withTelemetry": 1,
+        "compactions": 0,
+        "unitsWithCompaction": 0,
+        "subWorkerCompactions": 0,
+        "summaryRequestsObserved": 0,
+        "taskRequestsObserved": 75,
+        "maxInputTokensObserved": 37693,
+        "cancelled": 0,
+        "failed": 0,
+        "fallbacks": 0,
+        "transcriptReads": 2,
+        "transcriptReadsAfterCompaction": 0,
+        "essentialsMissing": []
+      },
+      "fidelity": {
+        "units": 1,
+        "ledgerUnits": 1,
+        "efforts": [
+          "high"
+        ],
+        "earlyCompactions": 0,
+        "referencesValid": 0,
+        "referencesOther": 0,
+        "cancelled": [],
+        "subWorkerCompactions": 0,
+        "spawned": 0,
+        "heuristicTranscriptCallsOk": 2
+      },
+      "audit": {
+        "units": 1,
+        "transcriptCalls": 0,
+        "verifiedReads": 0,
+        "unitsWithVerifiedRead": 0,
+        "verifiedReadsAfterOwnCompaction": 0,
+        "heuristicOnly": 0,
+        "batchIdRetrievedFromTranscript": 0,
+        "handovers": 2,
+        "handoversWithVerifiedRead": 0,
+        "ledgerBriefings": 0,
+        "unitsWithSubWorkers": 0,
+        "unitsWithSubWorkersValid": 0,
+        "subWorkerSessions": 0,
+        "subWorkerCompactionEntries": 0
+      },
+      "s1": {
+        "units": 1,
+        "allTurnsCompleted": 1,
+        "workerPerTurn": [
+          "1/1/1"
+        ],
+        "valid": 0,
+        "hiddenPass": 1,
+        "failingHidden": []
+      }
+    },
+    "M4": {
+      "successes": 0,
+      "units": 1,
+      "rate": 0,
+      "inconsistency": 0,
+      "all": 0,
+      "mixed": 0,
+      "none": 1,
+      "tasks": 1,
+      "infra": 0,
+      "reconciled": [],
+      "withoutTelemetry": 0,
+      "integrityFailures": 1,
+      "hiddenPass": 1,
+      "regressions": 0,
+      "critical": 2,
+      "terminal": {
+        "completed": 1
+      },
+      "requests": 86,
+      "meanWallS": 1146,
+      "telemetry": {
+        "units": 1,
+        "withTelemetry": 1,
+        "compactions": 4,
+        "unitsWithCompaction": 1,
+        "subWorkerCompactions": 0,
+        "summaryRequestsObserved": 5,
+        "taskRequestsObserved": 81,
+        "maxInputTokensObserved": 23950,
+        "cancelled": 0,
+        "failed": 0,
+        "fallbacks": 0,
+        "transcriptReads": 0,
+        "transcriptReadsAfterCompaction": 0,
+        "essentialsMissing": []
+      },
+      "fidelity": {
+        "units": 1,
+        "ledgerUnits": 1,
+        "efforts": [
+          "high"
+        ],
+        "earlyCompactions": 4,
+        "referencesValid": 4,
+        "referencesOther": 0,
+        "cancelled": [],
+        "subWorkerCompactions": 0,
+        "spawned": 0,
+        "heuristicTranscriptCallsOk": 0
+      },
+      "audit": {
+        "units": 1,
+        "transcriptCalls": 0,
+        "verifiedReads": 0,
+        "unitsWithVerifiedRead": 0,
+        "verifiedReadsAfterOwnCompaction": 0,
+        "heuristicOnly": 0,
+        "batchIdRetrievedFromTranscript": 0,
+        "handovers": 2,
+        "handoversWithVerifiedRead": 0,
+        "ledgerBriefings": 0,
+        "unitsWithSubWorkers": 0,
+        "unitsWithSubWorkersValid": 0,
+        "subWorkerSessions": 0,
+        "subWorkerCompactionEntries": 0
+      },
+      "s1": {
+        "units": 1,
+        "allTurnsCompleted": 1,
+        "workerPerTurn": [
+          "1/1/1"
+        ],
+        "valid": 0,
+        "hiddenPass": 1,
+        "failingHidden": []
+      }
+    }
+  },
+  "contrasts": {},
+  "contrastsPaired": {
+    "M1-M0": {
+      "pairs": 0,
+      "missingCells": [
+        {
+          "cell": "s1-amended-billing#0",
+          "has": "M1"
+        }
+      ],
+      "tasks": 0,
+      "dRate": null,
+      "dRateCI": [
+        null,
+        null
+      ],
+      "better": 0,
+      "worse": 0,
+      "pExact": 1,
+      "minAttainableP": 1,
+      "minAttainablePHolm": 1,
+      "pHolm": 1,
+      "viable": false,
+      "verdict": "INCONCLUSIVE"
+    },
+    "M2-M1": {
+      "pairs": 0,
+      "missingCells": [
+        {
+          "cell": "s1-amended-billing#0",
+          "has": "M1"
+        }
+      ],
+      "tasks": 0,
+      "dRate": null,
+      "dRateCI": [
+        null,
+        null
+      ],
+      "better": 0,
+      "worse": 0,
+      "pExact": 1,
+      "minAttainableP": 1,
+      "minAttainablePHolm": 1,
+      "pHolm": 1,
+      "viable": false,
+      "verdict": "INCONCLUSIVE"
+    },
+    "M3-M2": {
+      "pairs": 0,
+      "missingCells": [],
+      "tasks": 0,
+      "dRate": null,
+      "dRateCI": [
+        null,
+        null
+      ],
+      "better": 0,
+      "worse": 0,
+      "pExact": 1,
+      "minAttainableP": 1,
+      "minAttainablePHolm": 1,
+      "pHolm": 1,
+      "viable": false,
+      "verdict": "INCONCLUSIVE"
+    },
+    "M4-M3": {
+      "pairs": 0,
+      "missingCells": [
+        {
+          "cell": "s1-amended-billing#0",
+          "has": "M4"
+        }
+      ],
+      "tasks": 0,
+      "dRate": null,
+      "dRateCI": [
+        null,
+        null
+      ],
+      "better": 0,
+      "worse": 0,
+      "pExact": 1,
+      "minAttainableP": 1,
+      "minAttainablePHolm": 1,
+      "pHolm": 1,
+      "viable": false,
+      "verdict": "INCONCLUSIVE"
+    }
+  },
+  "sensitivityWithoutReconciled": {
+    "M1-M0": {
+      "pairs": 0,
+      "dRate": null,
+      "pExact": 1
+    },
+    "M2-M1": {
+      "pairs": 0,
+      "dRate": null,
+      "pExact": 1
+    },
+    "M3-M2": {
+      "pairs": 0,
+      "dRate": null,
+      "pExact": 1
+    },
+    "M4-M3": {
+      "pairs": 0,
+      "dRate": null,
+      "pExact": 1
+    }
+  },
+  "anyViable": false
+}

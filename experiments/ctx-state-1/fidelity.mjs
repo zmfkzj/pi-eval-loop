@@ -26,9 +26,34 @@ export function unitFidelity(dir) {
   const refsTagged = workerTexts.reduce((s, t) => s + (t.match(/\[orche ref T\d+/g) ?? []).length, 0);
   const thinkingChanges = events.filter(e => e.type === "thinking_change").length;
   const compactions = events.filter(e => e.type === "compaction");
+  // Main-session turns (user messages) and the orche_task calls after each: a resumed turn that continues the job calls a worker again.
+  const mainMessages = mainSession.filter(e => e.type === "message").map(e => e.message);
+  const perTurn = [];
+  for (const m of mainMessages) {
+    if (m.role === "user") perTurn.push({ orcheTaskCalls: 0 });
+    else if (m.role === "assistant" && perTurn.length) for (const part of m.content ?? []) if (part.type === "toolCall" && part.name === "orche_task") perTurn.at(-1).orcheTaskCalls++;
+  }
+  // Retrieval: tool calls of any worker/sub-worker that read a transcript (session JSONL / orche records), whether they succeeded,
+  // and whether the returned content held the single-use batch id line (s1's past observation).
+  const retrieval = [];
+  for (const text of workerTexts) {
+    const entries = text.split("\n").filter(Boolean).map(l => { try { return JSON.parse(l); } catch { return undefined; } }).filter(Boolean);
+    const results = new Map(entries.filter(e => e.type === "message" && e.message?.role === "toolResult").map(e => [e.message.toolCallId, e.message]));
+    for (const e of entries) {
+      if (e.type !== "message" || e.message?.role !== "assistant") continue;
+      for (const part of e.message.content ?? []) {
+        if (part.type !== "toolCall" || !/\.jsonl\b|orche\/records|\/sessions\//.test(JSON.stringify(part.arguments ?? {}))) continue;
+        const result = results.get(part.id);
+        const content = JSON.stringify(result?.content ?? "");
+        retrieval.push({ tool: part.name, ok: !!result && !result.isError, batchIdInResult: /Issued batch id: B-[0-9a-f]{12}/.test(content) });
+      }
+    }
+  }
+  const grade = existsSync(join(dir, "grade.json")) ? JSON.parse(readFileSync(join(dir, "grade.json"), "utf8")) : {};
+  const failingHidden = (grade.hidden?.failing ?? []).map(f => (typeof f === "string" ? f : f.name ?? JSON.stringify(f)).slice(0, 120));
   const overlay = record.runtime_settings?.orche ?? null;
   return {
-    arm: record.candidate_id, task: record.task_id, terminal: record.terminal_status, success: record.task_success,
+    arm: record.candidate_id, task: record.task_id, repeat: record.repeat, terminal: record.terminal_status, success: record.task_success, hidden: record.hidden_test_pass, failingHidden, turns: record.turns ?? null,
     configured: { ledger: overlay?.single?.ledger ?? null, thinkingPolicy: overlay?.thinkingPolicy ?? null, workerCompaction: overlay?.workerCompaction ?? null, extendedContext: overlay?.default?.extendedContext ?? null },
     observed: {
       efforts, models, thinkingChanges,
@@ -41,6 +66,7 @@ export function unitFidelity(dir) {
       subWorkerCompactions: events.filter(e => e.type === "spawn").flatMap(e => (e.workers ?? []).map(w => w.compactions ?? 0)).reduce((s, n) => s + n, 0),
       piCompactionEntries: record.telemetry?.compaction?.count ?? null, summaryRequests: record.telemetry?.requests?.summary_observed ?? null,
       maxInputObserved: record.telemetry?.requests?.max_input_tokens_observed ?? null, transcriptReads: record.telemetry?.retrieval?.transcript_reads ?? null,
+      mainTurns: perTurn, retrieval, spawns: events.filter(e => e.type === "spawn").reduce((s, e) => s + (e.workers ?? []).length, 0),
     },
   };
 }
@@ -57,5 +83,5 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   const stateDir = resolve(values.state);
   const units = stateFidelity(stateDir);
   writeFileSync(join(stateDir, "fidelity.json"), `${JSON.stringify(units, null, 2)}\n`);
-  for (const u of units) process.stdout.write(`${u.arm} ${u.task} ${u.terminal} success=${u.success} efforts=${u.observed.efforts} ledger=${u.observed.ledgerEvents} plans=${u.observed.taskPlans} ckpt=${u.observed.checkpointsInLastPlan}/${u.observed.checkpointsCitingRefs} refs=${u.observed.refsTagged} thinkChg=${u.observed.thinkingChanges} subs=${u.observed.workerSessions} cmp=${u.observed.compactions}(${u.observed.compactionPolicies}) early=${u.observed.earlyCompactions} cancel=${u.observed.cancelled} subCmp=${u.observed.subWorkerCompactions} maxIn=${u.observed.maxInputObserved}\n`);
+  for (const u of units) process.stdout.write(`${u.arm} ${u.task} r${u.repeat} ${u.terminal} turns=${(u.turns ?? []).map(t => t.status).join("/") || "-"} mainTurnTasks=${u.observed.mainTurns.map(t => t.orcheTaskCalls).join("/")} reads=${u.observed.retrieval.length}(ok ${u.observed.retrieval.filter(r => r.ok).length}, batch ${u.observed.retrieval.filter(r => r.batchIdInResult).length}) spawned=${u.observed.spawns} failing=${u.failingHidden.length} success=${u.success} efforts=${u.observed.efforts} ledger=${u.observed.ledgerEvents} plans=${u.observed.taskPlans} ckpt=${u.observed.checkpointsInLastPlan}/${u.observed.checkpointsCitingRefs} refs=${u.observed.refsTagged} thinkChg=${u.observed.thinkingChanges} subs=${u.observed.workerSessions} cmp=${u.observed.compactions}(${u.observed.compactionPolicies}) early=${u.observed.earlyCompactions} cancel=${u.observed.cancelled} subCmp=${u.observed.subWorkerCompactions} maxIn=${u.observed.maxInputObserved}\n`);
 }

@@ -1,0 +1,15 @@
+{
+  "s1-amended-billing": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 14
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 1
+    }
+  }
+}

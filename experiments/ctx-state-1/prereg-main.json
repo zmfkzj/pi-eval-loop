@@ -1,0 +1,189 @@
+{
+  "id": "ctx-state-1",
+  "stage": "main",
+  "version": "pi-eval-loop/ctx-state-1/main",
+  "registeredAt": "2026-11-07",
+  "status": "main controlled ablation (confirmatory within the exposed discovery suite). Frozen before launch: arms M0-M4 (one factor per adjacent contrast), trigger 24000/6000 from the first pilot (repeated compactions, no fallback), tasks = the six baseline tasks (fixed before any new-code run) + s1-amended-billing (specified after the first pilot, before any main run; its pilot checked plumbing only), 3 repeats, seeded interleaved queue, safety stops below. No re-runs for outcomes.",
+  "seed": "ctx-state-1/main/2026-11-07",
+  "route": {
+    "provider": "cliproxyapi",
+    "model": "gpt-6-astra",
+    "effort": "high",
+    "extendedContext": true
+  },
+  "routeRationale": "Production main model and default thinking (~/.pi/agent/settings.json defaultModel cliproxyapi/gpt-6-astra, defaultThinkingLevel high; orche default extendedContext true). Production orche workers run on cliproxyapi/claude-opus-5-5, which the evaluator's fail-closed sandbox gate cannot verify (only the codex responses endpoint is admitted); every tier is pinned to the one route as in every earlier experiment. Model and effort are identical in every arm; thinkingPolicy stays fixed (no step-down).",
+  "unit": {
+    "wallMs": 2700000,
+    "maxRequests": 300,
+    "graderMs": 120000
+  },
+  "infra": {
+    "maxRetries": 1
+  },
+  "parallelism": 5,
+  "capture": {
+    "transcripts": true
+  },
+  "integrity": {
+    "strictTestFiles": true
+  },
+  "harnessBase": {
+    "repo": "orche",
+    "commit": "559bf27cae4cedd7b0bd6f209b4ecfd5bee55262",
+    "paths": [
+      "src",
+      "prompts",
+      "package.json",
+      "tsconfig.json"
+    ]
+  },
+  "arms": [
+    {
+      "id": "M0",
+      "mode": "single",
+      "role": "operational policy (A0 settings) on the new commit",
+      "intervention": "operational policy (A0 settings) on the new commit",
+      "orcheConfig": {
+        "single": {
+          "ledger": false,
+          "spawn": true,
+          "advisor": false,
+          "maxSubWorkers": 8
+        },
+        "thinkingPolicy": "fixed"
+      }
+    },
+    {
+      "id": "M1",
+      "mode": "single",
+      "role": "M0 + existing state preservation: single.ledger, checkpoints, evidence strict",
+      "intervention": "M0 + existing state preservation: single.ledger, checkpoints, evidence strict",
+      "orcheConfig": {
+        "single": {
+          "ledger": true,
+          "spawn": true,
+          "advisor": false,
+          "maxSubWorkers": 8
+        },
+        "thinkingPolicy": {
+          "mode": "fixed",
+          "checkpoints": true,
+          "evidence": "strict"
+        }
+      }
+    },
+    {
+      "id": "M2",
+      "mode": "single",
+      "role": "M1 + early worker compaction: absolute 24000/6000 (pilot-fixed), basic essentials",
+      "intervention": "M1 + early worker compaction: absolute 24000/6000 (pilot-fixed), basic essentials",
+      "orcheConfig": {
+        "single": {
+          "ledger": true,
+          "spawn": true,
+          "advisor": false,
+          "maxSubWorkers": 8
+        },
+        "thinkingPolicy": {
+          "mode": "fixed",
+          "checkpoints": true,
+          "evidence": "strict"
+        },
+        "workerCompaction": {
+          "policy": "absolute",
+          "triggerTokens": 24000,
+          "keepRecentTokens": 6000,
+          "essentials": "basic",
+          "subWorkers": false
+        }
+      }
+    },
+    {
+      "id": "M3",
+      "mode": "single",
+      "role": "M2 + extended essentials: main messages, work log, disk-checked transcript reference for re-reading",
+      "intervention": "M2 + extended essentials: main messages, work log, disk-checked transcript reference for re-reading",
+      "orcheConfig": {
+        "single": {
+          "ledger": true,
+          "spawn": true,
+          "advisor": false,
+          "maxSubWorkers": 8
+        },
+        "thinkingPolicy": {
+          "mode": "fixed",
+          "checkpoints": true,
+          "evidence": "strict"
+        },
+        "workerCompaction": {
+          "policy": "absolute",
+          "triggerTokens": 24000,
+          "keepRecentTokens": 6000,
+          "essentials": "extended",
+          "subWorkers": false
+        }
+      }
+    },
+    {
+      "id": "M4",
+      "mode": "single",
+      "role": "M3 + orche_spawn sub-worker compaction with own essentials",
+      "intervention": "M3 + orche_spawn sub-worker compaction with own essentials",
+      "orcheConfig": {
+        "single": {
+          "ledger": true,
+          "spawn": true,
+          "advisor": false,
+          "maxSubWorkers": 8
+        },
+        "thinkingPolicy": {
+          "mode": "fixed",
+          "checkpoints": true,
+          "evidence": "strict"
+        },
+        "workerCompaction": {
+          "policy": "absolute",
+          "triggerTokens": 24000,
+          "keepRecentTokens": 6000,
+          "essentials": "extended",
+          "subWorkers": true
+        }
+      }
+    }
+  ],
+  "tasks": {
+    "source": "orche/fixtures/suite",
+    "split": "discovery: six exposed suite tasks + ctx-state-1 own multi-turn task",
+    "ids": [
+      "p1-ticket-batch",
+      "p2-handler-migration",
+      "p3-library-features-ko",
+      "d1-transactional-outbox",
+      "d5-streaming-ingest-ko",
+      "d7-config-reload",
+      "s1-amended-billing"
+    ]
+  },
+  "repeats": 3,
+  "randomization": "ctrl-ablation-1 buildQueue: blocks (task, repeat) shuffled, arm order shuffled inside each block, one queue consumed by `parallelism` workers",
+  "budget": {
+    "plannedUnits": 105,
+    "maxRequestsTotal": 26000,
+    "maxCampaignWallHours": 12,
+    "maxConsecutiveInfra": 6,
+    "maxInfraRate": 0.1
+  },
+  "analysis": {
+    "primary": "valid success (ctrl-ablation-1 definition: completed, hidden pass, no integrity violation, strict test immutability)",
+    "contrasts": [
+      "M1-M0 (existing preservation package: ledger+checkpoints+strict evidence)",
+      "M2-M1 (compaction timing)",
+      "M3-M2 (extended essentials package incl. retrieval reference; not a pure retrieval effect)",
+      "M4-M3 (sub-worker compaction)"
+    ],
+    "inference": "paired by (task, repeat); task-cluster bootstrap 95% CI of the difference (resamples tasks, not runs) and exact within-task sign-flip randomization p; Holm over the four contrasts",
+    "viability": "a contrast is viable for adoption only if its CI lower bound > 0, Holm p < 0.05, no increase in critical failures; ties or wide CIs are INCONCLUSIVE, never equivalence",
+    "holdout": "only for a viable contrast: obtain an unused eligible holdout batch through the existing supply route and run the preregistered confirmation; otherwise not performed",
+    "secondary": "descriptive per arm: compactions, early, fallbacks, failures, summary vs task requests, max observed input, transcript reads (successful, with content), s1 turn completion and failing hidden tests (amended rule, batch id), spawned sub-workers"
+  }
+}

@@ -16,10 +16,12 @@ import { environmentDigest, hostEnvironment, prerequisites, stopProxies } from "
 import { UMBRELLA, evaluatorFiles, fileDigests } from "../../src/protocol.mjs";
 import { atomicWriteJson, digestOf, ensureDir } from "../../src/util.mjs";
 import { runCampaign } from "../ctrl-ablation/run.mjs";
-import { buildHarness, buildQueue, experimentFiles, harnessOf, loadPrereg, lockMismatches } from "./lib.mjs";
+import { EXPERIMENT_DIR, buildHarness, buildQueue, experimentFiles, harnessOf, loadPrereg, lockMismatches } from "./lib.mjs";
 
 export async function prepare({ stateDir, prereg, orcheDir = join(UMBRELLA, "orche"), env = hostEnvironment(), validate = validateGrader, envDigest = undefined }) {
-  const tasks = loadSuite(join(orcheDir, "fixtures/suite")).filter(t => prereg.tasks.ids.includes(t.id));
+  // The orche suite plus this experiment's own tasks (tasks/, e.g. multi-turn amendment tasks); both are digested into the lock.
+  const own = existsSync(join(EXPERIMENT_DIR, "tasks")) ? loadSuite(join(EXPERIMENT_DIR, "tasks")) : [];
+  const tasks = [...loadSuite(join(orcheDir, "fixtures/suite")), ...own].filter(t => prereg.tasks.ids.includes(t.id));
   if (tasks.length !== prereg.tasks.ids.length) throw new Error(`tasks: expected ${prereg.tasks.ids.length}, found ${tasks.length}`);
   const tasksById = Object.fromEntries(tasks.map(t => [t.id, t]));
   const harness = {}, harnessDigests = {};

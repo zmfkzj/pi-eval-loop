@@ -75,3 +75,68 @@ test("telemetry: observed vs estimated, task vs summary requests, compactions, r
   assert.equal(s.compactions, 1);
   assert.equal(s.withTelemetry, 1);
 });
+
+import { addTotals, userTurns, TASK_SUFFIX } from "../src/runner.mjs";
+import { loadSuite } from "../src/datasets.mjs";
+import { fileURLToPath } from "node:url";
+import { dirname, join as joinPath } from "node:path";
+
+test("multi-turn: user turns are the instruction then the task's turns, each with the task suffix; single-turn tasks unchanged", () => {
+  assert.deepEqual(userTurns({ instruction: "do X" }), [`do X${TASK_SUFFIX}`]);
+  assert.deepEqual(userTurns({ instruction: "do X", turns: ["amend Y", "finish Z"] }), [`do X${TASK_SUFFIX}`, `amend Y${TASK_SUFFIX}`, `finish Z${TASK_SUFFIX}`]);
+});
+
+test("multi-turn: totals of the turns' model paths add up (the unit limits cover all turns)", () => {
+  assert.deepEqual(addTotals({ forwarded: 3, input: 10, refused: { budget: 0, route: 1 }, model: "m" }, { forwarded: 2, input: 5, refused: { budget: 1 }, cached: 4, model: "m" }), { forwarded: 5, input: 15, refused: { budget: 1, route: 1 }, cached: 4, model: "m" });
+  assert.deepEqual(addTotals({}, { forwarded: 1 }), { forwarded: 1 });
+});
+
+test("multi-turn: the suite loader carries `turns` only when they are nonempty strings", () => {
+  const dir = joinPath(dirname(fileURLToPath(import.meta.url)), "../experiments/ctx-state-1/tasks");
+  const [task] = loadSuite(dir).filter(t => t.id === "s1-amended-billing");
+  assert.equal(task.turns.length, 2);
+  assert.match(task.turns[0], /supersedes the session 1 tie rule/);
+  assert.match(task.instruction, /do NOT start ticket D yet/);
+});
+
+import { exactSignFlip, pairedTables, reconciledOf } from "../experiments/ctx-state-1-analysis/analyze.mjs";
+import { transcriptCalls } from "../experiments/ctx-state-1-analysis/audit.mjs";
+
+test("analysis: exact sign-flip enumerates all 2^T patterns; 7 tasks cannot reach Holm p < 0.05 over four contrasts", () => {
+  const all = exactSignFlip([1, 1, 1, 1, 1, 1, 1]);
+  assert.equal(all.patterns, 128);
+  assert.equal(all.p, 2 / 128);
+  assert.ok(4 * all.minP > 0.05);
+  assert.equal(exactSignFlip([0, 0, 0]).p, 1);
+  assert.equal(exactSignFlip([1, -1]).p, 1);
+  assert.equal(exactSignFlip([]).p, 1);
+});
+
+test("analysis: contrasts pair (task, repeat) cells explicitly and report cells missing on either side", () => {
+  const r = (arm, task, repeat, ok) => ({ candidate_id: arm, task_id: task, repeat, ok });
+  const usable = [r("A", "t1", 0, 1), r("A", "t1", 1, 0), r("B", "t1", 0, 0), r("A", "t2", 0, 1), r("B", "t2", 1, 1)];
+  const p = pairedTables(usable, "A", "B", x => x.ok === 1);
+  assert.deepEqual(p.a, { t1: [1] });
+  assert.deepEqual(p.b, { t1: [0] });
+  assert.equal(p.pairs, 1);
+  assert.deepEqual(p.missing.map(m => m.cell).sort(), ["t1#1", "t2#0", "t2#1"]);
+  assert.equal(reconciledOf({ terminal_detail: "controller interrupted; reconciled from the wire journal: 9 completed model call(s)" }), true);
+  assert.equal(reconciledOf({ terminal_detail: "stop" }), false);
+});
+
+test("audit: only a matched, non-error call on a transcript file that returned session entries is a verified read", () => {
+  const call = (id, name, args) => ({ type: "message", timestamp: `2026-01-01T00:00:0${id}Z`, message: { role: "assistant", content: [{ type: "toolCall", id: `c${id}`, name, arguments: args }] } });
+  const result = (id, text, isError = false) => ({ type: "message", message: { role: "toolResult", toolCallId: `c${id}`, isError, content: [{ type: "text", text }] } });
+  const entries = [
+    call(1, "read", { path: "/tmp/box/agent/orche/records/x/workers/W1-2026.jsonl" }), result(1, '{"type":"message","message":{"role":"toolResult","content":"Issued batch id: B-0123456789ab"}}'),
+    { type: "compaction", timestamp: "2026-01-01T00:00:02Z" },
+    call(3, "bash", { command: "ls /tmp/box/agent/orche/records/x/workers/" }), result(3, "W1-2026.jsonl"),
+    call(4, "write", { path: "notes/data.jsonl", content: "{}" }), result(4, "ok"),
+    call(5, "grep", { pattern: "batch", path: "/tmp/box/sessions/s.jsonl" }), result(5, "no such file", true),
+    call(6, "read", { path: "/tmp/box/agent/orche/records/x/workers/W2-2026.jsonl" }), result(6, '{"type":"session","id":"x"}'),
+  ];
+  const calls = transcriptCalls(entries);
+  assert.deepEqual(calls.map(c => [c.target, c.verified, c.afterOwnCompaction, c.batchIdInResult]), [
+    ["W1-2026.jsonl", true, false, true], ["s.jsonl", false, true, false], ["W2-2026.jsonl", true, true, false],
+  ]);
+});

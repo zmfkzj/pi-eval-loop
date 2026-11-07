@@ -1,0 +1,107 @@
+{
+  "id": "ctx-state-1",
+  "stage": "pilot-s1",
+  "version": "pi-eval-loop/ctx-state-1/pilot-s1",
+  "registeredAt": "2026-11-07",
+  "status": "pilot of the multi-turn amendment task s1 (written after the first pilot, before the main stage): plumbing only (three resumed turns complete, transcripts/telemetry captured, interventions occur). Excluded from the main analysis; s1 enters the main stage unless its plumbing fails.",
+  "seed": "ctx-state-1/pilot-s1/2026-11-07",
+  "route": {
+    "provider": "cliproxyapi",
+    "model": "gpt-6-astra",
+    "effort": "high",
+    "extendedContext": true
+  },
+  "routeRationale": "Production main model and default thinking (~/.pi/agent/settings.json defaultModel cliproxyapi/gpt-6-astra, defaultThinkingLevel high; orche default extendedContext true). Production orche workers run on cliproxyapi/claude-opus-5-5, which the evaluator's fail-closed sandbox gate cannot verify (only the codex responses endpoint is admitted); every tier is pinned to the one route as in every earlier experiment. Model and effort are identical in every arm; thinkingPolicy stays fixed (no step-down).",
+  "unit": {
+    "wallMs": 2700000,
+    "maxRequests": 300,
+    "graderMs": 120000
+  },
+  "infra": {
+    "maxRetries": 1
+  },
+  "parallelism": 4,
+  "capture": {
+    "transcripts": true
+  },
+  "integrity": {
+    "strictTestFiles": true
+  },
+  "harnessBase": {
+    "repo": "orche",
+    "commit": "559bf27cae4cedd7b0bd6f209b4ecfd5bee55262",
+    "paths": [
+      "src",
+      "prompts",
+      "package.json",
+      "tsconfig.json"
+    ]
+  },
+  "arms": [
+    {
+      "id": "M1",
+      "mode": "single",
+      "role": "M0 + existing state preservation: single.ledger, checkpoints, evidence strict",
+      "intervention": "M0 + existing state preservation: single.ledger, checkpoints, evidence strict",
+      "orcheConfig": {
+        "single": {
+          "ledger": true,
+          "spawn": true,
+          "advisor": false,
+          "maxSubWorkers": 8
+        },
+        "thinkingPolicy": {
+          "mode": "fixed",
+          "checkpoints": true,
+          "evidence": "strict"
+        }
+      }
+    },
+    {
+      "id": "M4",
+      "mode": "single",
+      "role": "M3 + orche_spawn sub-worker compaction with own essentials",
+      "intervention": "M3 + orche_spawn sub-worker compaction with own essentials",
+      "orcheConfig": {
+        "single": {
+          "ledger": true,
+          "spawn": true,
+          "advisor": false,
+          "maxSubWorkers": 8
+        },
+        "thinkingPolicy": {
+          "mode": "fixed",
+          "checkpoints": true,
+          "evidence": "strict"
+        },
+        "workerCompaction": {
+          "policy": "absolute",
+          "triggerTokens": 24000,
+          "keepRecentTokens": 6000,
+          "essentials": "extended",
+          "subWorkers": true
+        }
+      }
+    }
+  ],
+  "tasks": {
+    "source": "orche/fixtures/suite",
+    "split": "ctx-state-1 own task (tasks/), prospectively specified multi-turn amendment case",
+    "ids": [
+      "s1-amended-billing"
+    ]
+  },
+  "repeats": 1,
+  "randomization": "ctrl-ablation-1 buildQueue: blocks (task, repeat) shuffled, arm order shuffled inside each block, one queue consumed by `parallelism` workers",
+  "budget": {
+    "plannedUnits": 2,
+    "maxRequestsTotal": 700,
+    "maxCampaignWallHours": 2,
+    "maxConsecutiveInfra": 3,
+    "maxInfraRate": 0.5
+  },
+  "analysis": {
+    "purpose": "multi-turn plumbing and intervention occurrence; no outcome decision",
+    "primary": "none (pilot)"
+  }
+}

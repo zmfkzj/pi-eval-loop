@@ -1,0 +1,100 @@
+[
+  {
+    "arm": "M1",
+    "task": "s1-amended-billing",
+    "repeat": 0,
+    "terminal": "completed",
+    "success": false,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      },
+      {
+        "worker": "W2",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": "W1",
+        "ledgerBriefing": false,
+        "readPreviousTranscript": false,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      },
+      {
+        "worker": "W3",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": "W2",
+        "ledgerBriefing": false,
+        "readPreviousTranscript": false,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 2,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 3,
+    "subWorkerSessions": 0,
+    "subWorkerCompactionEntries": 0
+  },
+  {
+    "arm": "M4",
+    "task": "s1-amended-billing",
+    "repeat": 0,
+    "terminal": "completed",
+    "success": false,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      },
+      {
+        "worker": "W2",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": "W1",
+        "ledgerBriefing": false,
+        "readPreviousTranscript": false,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      },
+      {
+        "worker": "W3",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": "W2",
+        "ledgerBriefing": false,
+        "readPreviousTranscript": false,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 2,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 3,
+    "subWorkerSessions": 0,
+    "subWorkerCompactionEntries": 0
+  }
+]

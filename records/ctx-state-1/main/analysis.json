@@ -1,0 +1,644 @@
+{
+  "records": 105,
+  "usable": 105,
+  "infraRate": 0,
+  "maxInfraRate": 0.1,
+  "reconciled": [
+    {
+      "arm": "M4",
+      "task": "d1-transactional-outbox",
+      "repeat": 0,
+      "terminal": "aborted",
+      "detail": "controller interrupted; reconciled from the wire journal: 39 completed model call(s)"
+    },
+    {
+      "arm": "M3",
+      "task": "d1-transactional-outbox",
+      "repeat": 0,
+      "terminal": "aborted",
+      "detail": "controller interrupted; reconciled from the wire journal: 27 completed model call(s)"
+    },
+    {
+      "arm": "M1",
+      "task": "d1-transactional-outbox",
+      "repeat": 0,
+      "terminal": "aborted",
+      "detail": "controller interrupted; reconciled from the wire journal: 28 completed model call(s)"
+    },
+    {
+      "arm": "M0",
+      "task": "d1-transactional-outbox",
+      "repeat": 0,
+      "terminal": "aborted",
+      "detail": "controller interrupted; reconciled from the wire journal: 9 completed model call(s)"
+    },
+    {
+      "arm": "M0",
+      "task": "p2-handler-migration",
+      "repeat": 2,
+      "terminal": "aborted",
+      "detail": "controller interrupted; reconciled from the wire journal: 6 completed model call(s)"
+    }
+  ],
+  "summary": {
+    "M0": {
+      "successes": 19,
+      "units": 21,
+      "rate": 0.9047619047619048,
+      "inconsistency": 0.09523809523809523,
+      "all": 5,
+      "mixed": 2,
+      "none": 0,
+      "tasks": 7,
+      "infra": 0,
+      "reconciled": [
+        "d1-transactional-outbox#0",
+        "p2-handler-migration#2"
+      ],
+      "withoutTelemetry": 2,
+      "integrityFailures": 0,
+      "hiddenPass": 19,
+      "regressions": 0,
+      "critical": 0,
+      "terminal": {
+        "completed": 19,
+        "aborted": 2
+      },
+      "requests": 942,
+      "meanWallS": 466,
+      "telemetry": {
+        "units": 21,
+        "withTelemetry": 19,
+        "compactions": 0,
+        "unitsWithCompaction": 0,
+        "subWorkerCompactions": 0,
+        "summaryRequestsObserved": 0,
+        "taskRequestsObserved": 923,
+        "maxInputTokensObserved": 53547,
+        "cancelled": 0,
+        "failed": 0,
+        "fallbacks": 0,
+        "transcriptReads": 11,
+        "transcriptReadsAfterCompaction": 0,
+        "essentialsMissing": []
+      },
+      "fidelity": {
+        "units": 19,
+        "ledgerUnits": 0,
+        "efforts": [
+          "high"
+        ],
+        "earlyCompactions": 0,
+        "referencesValid": 0,
+        "referencesOther": 0,
+        "cancelled": [],
+        "subWorkerCompactions": 0,
+        "spawned": 28,
+        "heuristicTranscriptCallsOk": 4
+      },
+      "audit": {
+        "units": 19,
+        "transcriptCalls": 0,
+        "verifiedReads": 0,
+        "unitsWithVerifiedRead": 0,
+        "verifiedReadsAfterOwnCompaction": 0,
+        "heuristicOnly": 0,
+        "batchIdRetrievedFromTranscript": 0,
+        "handovers": 6,
+        "handoversWithVerifiedRead": 0,
+        "ledgerBriefings": 0,
+        "unitsWithSubWorkers": 8,
+        "unitsWithSubWorkersValid": 8,
+        "subWorkerSessions": 28,
+        "subWorkerCompactionEntries": 0
+      },
+      "s1": {
+        "units": 3,
+        "allTurnsCompleted": 3,
+        "workerPerTurn": [
+          "1/1/1",
+          "1/1/1",
+          "1/1/1"
+        ],
+        "valid": 3,
+        "hiddenPass": 3,
+        "failingHidden": []
+      }
+    },
+    "M1": {
+      "successes": 20,
+      "units": 21,
+      "rate": 0.9523809523809523,
+      "inconsistency": 0.047619047619047616,
+      "all": 6,
+      "mixed": 1,
+      "none": 0,
+      "tasks": 7,
+      "infra": 0,
+      "reconciled": [
+        "d1-transactional-outbox#0"
+      ],
+      "withoutTelemetry": 1,
+      "integrityFailures": 0,
+      "hiddenPass": 20,
+      "regressions": 0,
+      "critical": 0,
+      "terminal": {
+        "completed": 20,
+        "aborted": 1
+      },
+      "requests": 1165,
+      "meanWallS": 531,
+      "telemetry": {
+        "units": 21,
+        "withTelemetry": 20,
+        "compactions": 0,
+        "unitsWithCompaction": 0,
+        "subWorkerCompactions": 0,
+        "summaryRequestsObserved": 0,
+        "taskRequestsObserved": 1134,
+        "maxInputTokensObserved": 55485,
+        "cancelled": 0,
+        "failed": 0,
+        "fallbacks": 0,
+        "transcriptReads": 8,
+        "transcriptReadsAfterCompaction": 0,
+        "essentialsMissing": []
+      },
+      "fidelity": {
+        "units": 20,
+        "ledgerUnits": 20,
+        "efforts": [
+          "high"
+        ],
+        "earlyCompactions": 0,
+        "referencesValid": 0,
+        "referencesOther": 0,
+        "cancelled": [],
+        "subWorkerCompactions": 0,
+        "spawned": 29,
+        "heuristicTranscriptCallsOk": 4
+      },
+      "audit": {
+        "units": 20,
+        "transcriptCalls": 0,
+        "verifiedReads": 0,
+        "unitsWithVerifiedRead": 0,
+        "verifiedReadsAfterOwnCompaction": 0,
+        "heuristicOnly": 0,
+        "batchIdRetrievedFromTranscript": 0,
+        "handovers": 5,
+        "handoversWithVerifiedRead": 0,
+        "ledgerBriefings": 2,
+        "unitsWithSubWorkers": 8,
+        "unitsWithSubWorkersValid": 8,
+        "subWorkerSessions": 29,
+        "subWorkerCompactionEntries": 0
+      },
+      "s1": {
+        "units": 3,
+        "allTurnsCompleted": 3,
+        "workerPerTurn": [
+          "1/1/1",
+          "1/1/1",
+          "1/2/1"
+        ],
+        "valid": 3,
+        "hiddenPass": 3,
+        "failingHidden": []
+      }
+    },
+    "M2": {
+      "successes": 19,
+      "units": 21,
+      "rate": 0.9047619047619048,
+      "inconsistency": 0.09523809523809523,
+      "all": 5,
+      "mixed": 2,
+      "none": 0,
+      "tasks": 7,
+      "infra": 0,
+      "reconciled": [],
+      "withoutTelemetry": 0,
+      "integrityFailures": 1,
+      "hiddenPass": 20,
+      "regressions": 0,
+      "critical": 1,
+      "terminal": {
+        "completed": 21
+      },
+      "requests": 1233,
+      "meanWallS": 704,
+      "telemetry": {
+        "units": 21,
+        "withTelemetry": 21,
+        "compactions": 63,
+        "unitsWithCompaction": 21,
+        "subWorkerCompactions": 0,
+        "summaryRequestsObserved": 90,
+        "taskRequestsObserved": 1143,
+        "maxInputTokensObserved": 47930,
+        "cancelled": 2,
+        "failed": 0,
+        "fallbacks": 2,
+        "transcriptReads": 8,
+        "transcriptReadsAfterCompaction": 0,
+        "essentialsMissing": []
+      },
+      "fidelity": {
+        "units": 21,
+        "ledgerUnits": 21,
+        "efforts": [
+          "high"
+        ],
+        "earlyCompactions": 63,
+        "referencesValid": 0,
+        "referencesOther": 0,
+        "cancelled": [
+          "loop_guard",
+          "loop_guard"
+        ],
+        "subWorkerCompactions": 0,
+        "spawned": 27,
+        "heuristicTranscriptCallsOk": 5
+      },
+      "audit": {
+        "units": 21,
+        "transcriptCalls": 1,
+        "verifiedReads": 0,
+        "unitsWithVerifiedRead": 0,
+        "verifiedReadsAfterOwnCompaction": 0,
+        "heuristicOnly": 1,
+        "batchIdRetrievedFromTranscript": 0,
+        "handovers": 6,
+        "handoversWithVerifiedRead": 0,
+        "ledgerBriefings": 0,
+        "unitsWithSubWorkers": 7,
+        "unitsWithSubWorkersValid": 7,
+        "subWorkerSessions": 27,
+        "subWorkerCompactionEntries": 0
+      },
+      "s1": {
+        "units": 3,
+        "allTurnsCompleted": 3,
+        "workerPerTurn": [
+          "1/1/1",
+          "1/1/1",
+          "1/1/1"
+        ],
+        "valid": 2,
+        "hiddenPass": 3,
+        "failingHidden": []
+      }
+    },
+    "M3": {
+      "successes": 20,
+      "units": 21,
+      "rate": 0.9523809523809523,
+      "inconsistency": 0.047619047619047616,
+      "all": 6,
+      "mixed": 1,
+      "none": 0,
+      "tasks": 7,
+      "infra": 0,
+      "reconciled": [
+        "d1-transactional-outbox#0"
+      ],
+      "withoutTelemetry": 1,
+      "integrityFailures": 0,
+      "hiddenPass": 20,
+      "regressions": 0,
+      "critical": 0,
+      "terminal": {
+        "completed": 20,
+        "aborted": 1
+      },
+      "requests": 1339,
+      "meanWallS": 661,
+      "telemetry": {
+        "units": 21,
+        "withTelemetry": 20,
+        "compactions": 63,
+        "unitsWithCompaction": 19,
+        "subWorkerCompactions": 0,
+        "summaryRequestsObserved": 80,
+        "taskRequestsObserved": 1227,
+        "maxInputTokensObserved": 51107,
+        "cancelled": 2,
+        "failed": 0,
+        "fallbacks": 2,
+        "transcriptReads": 6,
+        "transcriptReadsAfterCompaction": 1,
+        "essentialsMissing": []
+      },
+      "fidelity": {
+        "units": 20,
+        "ledgerUnits": 20,
+        "efforts": [
+          "high"
+        ],
+        "earlyCompactions": 63,
+        "referencesValid": 63,
+        "referencesOther": 0,
+        "cancelled": [
+          "loop_guard",
+          "loop_guard"
+        ],
+        "subWorkerCompactions": 0,
+        "spawned": 34,
+        "heuristicTranscriptCallsOk": 3
+      },
+      "audit": {
+        "units": 20,
+        "transcriptCalls": 1,
+        "verifiedReads": 0,
+        "unitsWithVerifiedRead": 0,
+        "verifiedReadsAfterOwnCompaction": 0,
+        "heuristicOnly": 1,
+        "batchIdRetrievedFromTranscript": 0,
+        "handovers": 7,
+        "handoversWithVerifiedRead": 0,
+        "ledgerBriefings": 1,
+        "unitsWithSubWorkers": 9,
+        "unitsWithSubWorkersValid": 9,
+        "subWorkerSessions": 34,
+        "subWorkerCompactionEntries": 0
+      },
+      "s1": {
+        "units": 3,
+        "allTurnsCompleted": 3,
+        "workerPerTurn": [
+          "1/3/1",
+          "1/1/1",
+          "1/1/1"
+        ],
+        "valid": 3,
+        "hiddenPass": 3,
+        "failingHidden": []
+      }
+    },
+    "M4": {
+      "successes": 20,
+      "units": 21,
+      "rate": 0.9523809523809523,
+      "inconsistency": 0.047619047619047616,
+      "all": 6,
+      "mixed": 1,
+      "none": 0,
+      "tasks": 7,
+      "infra": 0,
+      "reconciled": [
+        "d1-transactional-outbox#0"
+      ],
+      "withoutTelemetry": 1,
+      "integrityFailures": 0,
+      "hiddenPass": 20,
+      "regressions": 0,
+      "critical": 0,
+      "terminal": {
+        "completed": 20,
+        "aborted": 1
+      },
+      "requests": 1310,
+      "meanWallS": 682,
+      "telemetry": {
+        "units": 21,
+        "withTelemetry": 20,
+        "compactions": 71,
+        "unitsWithCompaction": 20,
+        "subWorkerCompactions": 8,
+        "summaryRequestsObserved": 97,
+        "taskRequestsObserved": 1172,
+        "maxInputTokensObserved": 46368,
+        "cancelled": 4,
+        "failed": 0,
+        "fallbacks": 4,
+        "transcriptReads": 9,
+        "transcriptReadsAfterCompaction": 2,
+        "essentialsMissing": []
+      },
+      "fidelity": {
+        "units": 20,
+        "ledgerUnits": 20,
+        "efforts": [
+          "high"
+        ],
+        "earlyCompactions": 63,
+        "referencesValid": 63,
+        "referencesOther": 0,
+        "cancelled": [
+          "loop_guard",
+          "loop_guard",
+          "loop_guard",
+          "loop_guard"
+        ],
+        "subWorkerCompactions": 8,
+        "spawned": 33,
+        "heuristicTranscriptCallsOk": 5
+      },
+      "audit": {
+        "units": 20,
+        "transcriptCalls": 6,
+        "verifiedReads": 2,
+        "unitsWithVerifiedRead": 1,
+        "verifiedReadsAfterOwnCompaction": 0,
+        "heuristicOnly": 4,
+        "batchIdRetrievedFromTranscript": 0,
+        "handovers": 5,
+        "handoversWithVerifiedRead": 1,
+        "ledgerBriefings": 2,
+        "unitsWithSubWorkers": 9,
+        "unitsWithSubWorkersValid": 9,
+        "subWorkerSessions": 33,
+        "subWorkerCompactionEntries": 8
+      },
+      "s1": {
+        "units": 3,
+        "allTurnsCompleted": 3,
+        "workerPerTurn": [
+          "2/1/1",
+          "1/2/1",
+          "1/1/1"
+        ],
+        "valid": 3,
+        "hiddenPass": 3,
+        "failingHidden": []
+      }
+    }
+  },
+  "contrasts": {
+    "M1-M0": {
+      "tasks": 7,
+      "dRate": 0.04761904761904762,
+      "dRateCI": [
+        0,
+        0.14285714285714285
+      ],
+      "dI": -0.047619047619047616,
+      "dICI": [
+        -0.14285714285714285,
+        0
+      ],
+      "p": 1,
+      "better": 1,
+      "worse": 0,
+      "pHolm": 1,
+      "viable": false,
+      "verdict": "INCONCLUSIVE"
+    },
+    "M2-M1": {
+      "tasks": 7,
+      "dRate": -0.04761904761904762,
+      "dRateCI": [
+        -0.14285714285714285,
+        0
+      ],
+      "dI": 0.047619047619047616,
+      "dICI": [
+        0,
+        0.14285714285714285
+      ],
+      "p": 1,
+      "better": 0,
+      "worse": 1,
+      "pHolm": 1,
+      "viable": false,
+      "verdict": "INCONCLUSIVE"
+    },
+    "M3-M2": {
+      "tasks": 7,
+      "dRate": 0.04761904761904762,
+      "dRateCI": [
+        0,
+        0.14285714285714285
+      ],
+      "dI": -0.047619047619047616,
+      "dICI": [
+        -0.14285714285714285,
+        0
+      ],
+      "p": 1,
+      "better": 1,
+      "worse": 0,
+      "pHolm": 1,
+      "viable": false,
+      "verdict": "INCONCLUSIVE"
+    },
+    "M4-M3": {
+      "tasks": 7,
+      "dRate": 0,
+      "dRateCI": [
+        0,
+        0
+      ],
+      "dI": 0,
+      "dICI": [
+        0,
+        0
+      ],
+      "p": 1,
+      "better": 0,
+      "worse": 0,
+      "pHolm": 1,
+      "viable": false,
+      "verdict": "INCONCLUSIVE"
+    }
+  },
+  "contrastsPaired": {
+    "M1-M0": {
+      "pairs": 21,
+      "missingCells": [],
+      "tasks": 7,
+      "dRate": 0.04761904761904762,
+      "dRateCI": [
+        0,
+        0.14285714285714285
+      ],
+      "better": 1,
+      "worse": 0,
+      "pExact": 1,
+      "minAttainableP": 0.015625,
+      "minAttainablePHolm": 0.0625,
+      "pHolm": 1,
+      "viable": false,
+      "verdict": "INCONCLUSIVE"
+    },
+    "M2-M1": {
+      "pairs": 21,
+      "missingCells": [],
+      "tasks": 7,
+      "dRate": -0.04761904761904762,
+      "dRateCI": [
+        -0.14285714285714285,
+        0
+      ],
+      "better": 0,
+      "worse": 1,
+      "pExact": 1,
+      "minAttainableP": 0.015625,
+      "minAttainablePHolm": 0.0625,
+      "pHolm": 1,
+      "viable": false,
+      "verdict": "INCONCLUSIVE"
+    },
+    "M3-M2": {
+      "pairs": 21,
+      "missingCells": [],
+      "tasks": 7,
+      "dRate": 0.04761904761904762,
+      "dRateCI": [
+        0,
+        0.14285714285714285
+      ],
+      "better": 1,
+      "worse": 0,
+      "pExact": 1,
+      "minAttainableP": 0.015625,
+      "minAttainablePHolm": 0.0625,
+      "pHolm": 1,
+      "viable": false,
+      "verdict": "INCONCLUSIVE"
+    },
+    "M4-M3": {
+      "pairs": 21,
+      "missingCells": [],
+      "tasks": 7,
+      "dRate": 0,
+      "dRateCI": [
+        0,
+        0
+      ],
+      "better": 0,
+      "worse": 0,
+      "pExact": 1,
+      "minAttainableP": 0.015625,
+      "minAttainablePHolm": 0.0625,
+      "pHolm": 1,
+      "viable": false,
+      "verdict": "INCONCLUSIVE"
+    }
+  },
+  "sensitivityWithoutReconciled": {
+    "M1-M0": {
+      "pairs": 19,
+      "dRate": 0,
+      "pExact": 1
+    },
+    "M2-M1": {
+      "pairs": 20,
+      "dRate": -0.11904761904761905,
+      "pExact": 0.5
+    },
+    "M3-M2": {
+      "pairs": 20,
+      "dRate": 0.11904761904761905,
+      "pExact": 0.5
+    },
+    "M4-M3": {
+      "pairs": 20,
+      "dRate": 0,
+      "pExact": 1
+    }
+  },
+  "anyViable": false
+}
