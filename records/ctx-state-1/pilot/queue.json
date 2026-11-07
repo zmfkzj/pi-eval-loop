@@ -1,0 +1,22 @@
+[
+ {
+  "arm": "PT32",
+  "task": "p1-ticket-batch",
+  "repeat": 0
+ },
+ {
+  "arm": "PT24",
+  "task": "p1-ticket-batch",
+  "repeat": 0
+ },
+ {
+  "arm": "PT32",
+  "task": "p3-library-features-ko",
+  "repeat": 0
+ },
+ {
+  "arm": "PT24",
+  "task": "p3-library-features-ko",
+  "repeat": 0
+ }
+]

@@ -1,0 +1,34 @@
+{
+  "id": "ctx-state-1",
+  "stage": "baseline",
+  "version": "pi-eval-loop/ctx-state-1/baseline",
+  "registeredAt": "2026-11-07",
+  "status": "baseline + pilot (exploratory): existing features only, pre-change orche commit; also the pilot of task length and variance for the frozen main stage",
+  "seed": "ctx-state-1/baseline/2026-11-07",
+  "route": { "provider": "cliproxyapi", "model": "gpt-6-astra", "effort": "high", "extendedContext": true },
+  "routeRationale": "Production main model and default thinking (~/.pi/agent/settings.json defaultModel cliproxyapi/gpt-6-astra, defaultThinkingLevel high; orche default extendedContext true). Production orche workers run on cliproxyapi/claude-opus-5-5, which the evaluator's fail-closed sandbox gate cannot verify (only the codex responses endpoint is admitted); every tier is pinned to the one route as in every earlier experiment. Model and effort are identical in every arm; thinkingPolicy stays fixed (no step-down).",
+  "unit": { "wallMs": 2700000, "maxRequests": 300, "graderMs": 120000 },
+  "infra": { "maxRetries": 1 },
+  "parallelism": 4,
+  "capture": { "transcripts": true },
+  "integrity": { "strictTestFiles": true },
+  "harnessBase": { "repo": "orche", "commit": "e831a6b2bc19f0c707b55505db33a11b2c9d4d4a", "paths": ["src", "prompts", "package.json", "tsconfig.json"] },
+  "arms": [
+    { "id": "A0", "mode": "single", "role": "control", "intervention": "current operational policy, explicit: single mode, spawn on, maxSubWorkers 8 (production), ledger off, thinkingPolicy fixed (no checkpoints, evidence off), worker compaction at 50% of the window (pre-change code). Deviation from production: single.advisor off (production on; its model differs from the pinned route and Scout/Advisor are not newly enabled)",
+      "orcheConfig": { "single": { "ledger": false, "spawn": true, "advisor": false, "maxSubWorkers": 8 }, "thinkingPolicy": "fixed" } },
+    { "id": "A1", "mode": "single", "role": "existing-features", "intervention": "A0 + existing state preservation only: single.ledger true, thinkingPolicy {fixed, checkpoints true, evidence strict}; same model, same effort, same code",
+      "orcheConfig": { "single": { "ledger": true, "spawn": true, "advisor": false, "maxSubWorkers": 8 }, "thinkingPolicy": { "mode": "fixed", "checkpoints": true, "evidence": "strict" } } }
+  ],
+  "tasks": {
+    "source": "orche/fixtures/suite",
+    "split": "discovery (exposed suite tasks; the longest families by earlier request counts: p = multi-ticket, d = design)",
+    "ids": ["p1-ticket-batch", "p2-handler-migration", "p3-library-features-ko", "d1-transactional-outbox", "d5-streaming-ingest-ko", "d7-config-reload"]
+  },
+  "repeats": 1,
+  "randomization": "ctrl-ablation-1 buildQueue: blocks (task, repeat) shuffled, arm order shuffled inside each block, one queue consumed by `parallelism` workers",
+  "budget": { "plannedUnits": 12, "maxRequestsTotal": 6000, "maxCampaignWallHours": 6, "maxConsecutiveInfra": 5, "maxInfraRate": 0.10 },
+  "analysis": {
+    "purpose": "R2 trace verification (ledger events, strict checkpoints with refs, fixed effort on every request) and pilot measurements (requests, max observed input per request, wall, success variance) that fix the main stage's tasks, compaction trigger and limits",
+    "primary": "valid success (ctrl-ablation-1 definition); descriptive only at this stage, no decision"
+  }
+}

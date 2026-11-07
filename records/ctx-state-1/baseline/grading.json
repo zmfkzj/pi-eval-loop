@@ -1,0 +1,80 @@
+{
+  "d1-transactional-outbox": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 8
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 3
+    }
+  },
+  "d5-streaming-ingest-ko": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 8
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 4
+    }
+  },
+  "d7-config-reload": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 9
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 9
+    }
+  },
+  "p1-ticket-batch": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 27
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 27
+    }
+  },
+  "p2-handler-migration": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 32
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 26
+    }
+  },
+  "p3-library-features-ko": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 23
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 23
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "startedAt": "2026-11-07T12:57:40.123Z",
+  "invocations": [
+    {
+      "ran": 12,
+      "remaining": 0,
+      "total": 12,
+      "paused": null,
+      "requests": 581,
+      "at": "2026-11-07T13:23:43.729Z"
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+[
+ {
+  "arm": "A0",
+  "task": "p3-library-features-ko",
+  "repeat": 0
+ },
+ {
+  "arm": "A1",
+  "task": "p3-library-features-ko",
+  "repeat": 0
+ },
+ {
+  "arm": "A1",
+  "task": "p1-ticket-batch",
+  "repeat": 0
+ },
+ {
+  "arm": "A0",
+  "task": "p1-ticket-batch",
+  "repeat": 0
+ },
+ {
+  "arm": "A0",
+  "task": "d1-transactional-outbox",
+  "repeat": 0
+ },
+ {
+  "arm": "A1",
+  "task": "d1-transactional-outbox",
+  "repeat": 0
+ },
+ {
+  "arm": "A1",
+  "task": "p2-handler-migration",
+  "repeat": 0
+ },
+ {
+  "arm": "A0",
+  "task": "p2-handler-migration",
+  "repeat": 0
+ },
+ {
+  "arm": "A1",
+  "task": "d5-streaming-ingest-ko",
+  "repeat": 0
+ },
+ {
+  "arm": "A0",
+  "task": "d5-streaming-ingest-ko",
+  "repeat": 0
+ },
+ {
+  "arm": "A1",
+  "task": "d7-config-reload",
+  "repeat": 0
+ },
+ {
+  "arm": "A0",
+  "task": "d7-config-reload",
+  "repeat": 0
+ }
+]

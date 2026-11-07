@@ -1,0 +1,115 @@
+{
+  "id": "ctx-state-1",
+  "stage": "pilot",
+  "version": "pi-eval-loop/ctx-state-1/pilot",
+  "registeredAt": "2026-11-07",
+  "status": "pilot (exploratory, excluded from the main analysis): does the new code load in the real sandbox, do early compactions, extended essentials and sub-worker compaction actually occur on the long tasks, and which trigger leaves room (loop-guard fallbacks) - fixes the main stage trigger",
+  "seed": "ctx-state-1/pilot/2026-11-07",
+  "route": {
+    "provider": "cliproxyapi",
+    "model": "gpt-6-astra",
+    "effort": "high",
+    "extendedContext": true
+  },
+  "routeRationale": "Production main model and default thinking (~/.pi/agent/settings.json defaultModel cliproxyapi/gpt-6-astra, defaultThinkingLevel high; orche default extendedContext true). Production orche workers run on cliproxyapi/claude-opus-5-5, which the evaluator's fail-closed sandbox gate cannot verify (only the codex responses endpoint is admitted); every tier is pinned to the one route as in every earlier experiment. Model and effort are identical in every arm; thinkingPolicy stays fixed (no step-down).",
+  "unit": {
+    "wallMs": 2700000,
+    "maxRequests": 300,
+    "graderMs": 120000
+  },
+  "infra": {
+    "maxRetries": 1
+  },
+  "parallelism": 4,
+  "capture": {
+    "transcripts": true
+  },
+  "integrity": {
+    "strictTestFiles": true
+  },
+  "harnessBase": {
+    "repo": "orche",
+    "commit": "559bf27cae4cedd7b0bd6f209b4ecfd5bee55262",
+    "paths": [
+      "src",
+      "prompts",
+      "package.json",
+      "tsconfig.json"
+    ]
+  },
+  "arms": [
+    {
+      "id": "PT24",
+      "mode": "single",
+      "role": "pilot",
+      "intervention": "A1 settings + workerCompaction absolute 24000/6000, extended essentials, sub-workers on",
+      "orcheConfig": {
+        "single": {
+          "ledger": true,
+          "spawn": true,
+          "advisor": false,
+          "maxSubWorkers": 8
+        },
+        "thinkingPolicy": {
+          "mode": "fixed",
+          "checkpoints": true,
+          "evidence": "strict"
+        },
+        "workerCompaction": {
+          "policy": "absolute",
+          "triggerTokens": 24000,
+          "keepRecentTokens": 6000,
+          "essentials": "extended",
+          "subWorkers": true
+        }
+      }
+    },
+    {
+      "id": "PT32",
+      "mode": "single",
+      "role": "pilot",
+      "intervention": "A1 settings + workerCompaction absolute 32000/8000, extended essentials, sub-workers on",
+      "orcheConfig": {
+        "single": {
+          "ledger": true,
+          "spawn": true,
+          "advisor": false,
+          "maxSubWorkers": 8
+        },
+        "thinkingPolicy": {
+          "mode": "fixed",
+          "checkpoints": true,
+          "evidence": "strict"
+        },
+        "workerCompaction": {
+          "policy": "absolute",
+          "triggerTokens": 32000,
+          "keepRecentTokens": 8000,
+          "essentials": "extended",
+          "subWorkers": true
+        }
+      }
+    }
+  ],
+  "tasks": {
+    "source": "orche/fixtures/suite",
+    "split": "discovery (exposed suite tasks; the longest families by earlier request counts: p = multi-ticket, d = design)",
+    "ids": [
+      "p1-ticket-batch",
+      "p3-library-features-ko"
+    ]
+  },
+  "repeats": 1,
+  "randomization": "ctrl-ablation-1 buildQueue: blocks (task, repeat) shuffled, arm order shuffled inside each block, one queue consumed by `parallelism` workers",
+  "budget": {
+    "plannedUnits": 4,
+    "maxRequestsTotal": 2000,
+    "maxCampaignWallHours": 3,
+    "maxConsecutiveInfra": 5,
+    "maxInfraRate": 0.1
+  },
+  "analysis": {
+    "purpose": "intervention occurrence (compactions, early, references valid, fallbacks, sub-worker compactions), load check, max context; no outcome decision",
+    "primary": "none (pilot)"
+  }
+}

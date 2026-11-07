@@ -13,19 +13,36 @@ import { stageWorkspace } from "./datasets.mjs";
 import { makeRecord } from "./metrics.mjs";
 import { workspaceIntegrity, leakScan, sessionToolCalls, strictTestIntegrity } from "./integrity.mjs";
 import { classifyFailure } from "./analysis.mjs";
+import { unitTelemetry } from "./telemetry.mjs";
 
 export const BOX = "/tmp/box";
 export const TASK_SUFFIX = "\n\nWork in the current directory (a git repository with the project). Make the change the task asks for and keep the existing tests passing. Do not commit. Stop when you are done.";
 
-/** Private orche config of a run: every model tier pinned to the one route, product defaults otherwise. */
-export function orcheConfig(route, mode, unit) {
-  const ref = { model: `${route.provider}/${route.model}`, thinking: route.effort };
+/**
+ * Private orche config of a run: every model tier pinned to the one route, product defaults otherwise. `overlay` (an experiment
+ * arm's explicit runtime settings, e.g. `single.ledger`, `thinkingPolicy`, `workerCompaction`) is merged over these defaults key
+ * by key (objects deeply, everything else replaced); it can never change the pinned route, the tiers or the unit limits.
+ * `route.extendedContext` (optional) is applied to the default and every tier like an operator's config would.
+ */
+export function orcheConfig(route, mode, unit, overlay = undefined) {
+  const ref = { model: `${route.provider}/${route.model}`, thinking: route.effort, ...(route.extendedContext !== undefined ? { extendedContext: route.extendedContext } : {}) };
   const tiers = ["main", "orchestrator", "worker", "strong-orchestrator", "strong-worker", "advisor", "strong-advisor"];
-  return {
+  const base = {
     mainMode: mode, routes: {}, default: { ...ref }, models: Object.fromEntries(tiers.map(tier => [tier, { ...ref }])),
     single: { ledger: false, spawn: true, advisor: false }, concurrentSessions: { enabled: false }, bashReview: { enabled: false },
     limits: { overallMs: unit.wallMs, assignmentMs: unit.wallMs, assignmentRequests: unit.maxRequests },
   };
+  if (overlay === undefined || overlay === null) return base;
+  const fixed = ["mainMode", "routes", "default", "models", "limits"];
+  const bad = Object.keys(overlay).filter(key => fixed.includes(key));
+  if (bad.length) throw new Error(`orche config overlay may not set ${bad.join(", ")} (the route, tiers and unit limits are pinned by the protocol)`);
+  const merge = (a, b) => {
+    if (!b || typeof b !== "object" || Array.isArray(b) || !a || typeof a !== "object" || Array.isArray(a)) return structuredClone(b);
+    const out = { ...a };
+    for (const [key, value] of Object.entries(b)) out[key] = merge(a[key], value);
+    return out;
+  };
+  return merge(base, overlay);
 }
 
 export const piSettings = (route) => ({ defaultProvider: route.provider, defaultModel: route.model, defaultThinkingLevel: route.effort, quietStartup: true, transport: "sse" });
@@ -86,7 +103,8 @@ async function piAttempt({ harness, task, route, unit, env, box, evidence, sessi
   const bridgeUrl = `http://127.0.0.1:${BRIDGE_PORT}`;
   writeFileSync(join(agent, "cliproxyapi.json"), JSON.stringify({ apiKey: PLACEHOLDER_KEY, baseUrl: bridgeUrl, providerId: "cliproxyapi", providerName: "CLIProxyAPI" }), { mode: 0o600 });
   writeFileSync(join(agent, "settings.json"), JSON.stringify(piSettings(route), null, 2));
-  if (harness.kind === "orche") writeFileSync(join(agent, "orche.config.json"), JSON.stringify(orcheConfig(route, harness.mode, unit), null, 2));
+  const runtimeConfig = harness.kind === "orche" ? orcheConfig(route, harness.mode, unit, harness.orcheConfig) : undefined;
+  if (runtimeConfig) writeFileSync(join(agent, "orche.config.json"), JSON.stringify(runtimeConfig, null, 2));
   // Short private control directory (unix socket paths are limited to ~108 bytes); the evaluator records it before dispatch so a
   // crash can be reconciled from the wire journal kept here.
   ensureDir(control);
@@ -129,7 +147,7 @@ async function piAttempt({ harness, task, route, unit, env, box, evidence, sessi
   const transcripts = transcriptFiles(box, capture);
   const sessionText = transcripts.filter(f => f.endsWith(".jsonl")).map(f => readFileSync(join(box, f), "utf8")).join("\n");
   rmSync(launch, { force: true });
-  return { ws, box, transcripts, run, wallMs: Date.now() - started, totals, wire, completed: completedModelCalls(wire), events, terminal, sessionText, gateRefusals: model.gateRefusals(), stderrTail: stderr.slice(-2000) };
+  return { ws, box, transcripts, runtimeConfig, run, wallMs: Date.now() - started, totals, wire, completed: completedModelCalls(wire), events, terminal, sessionText, gateRefusals: model.gateRefusals(), stderrTail: stderr.slice(-2000) };
 }
 
 /** Transcript files of one attempt relative to its box: the main session directory and, with `all`, orche's records. */
@@ -200,6 +218,10 @@ export async function runUnit({ harness, task, repeat, split, context, protocol,
     input_tokens: sumOf(t => t.totals.input ?? 0), output_tokens: sumOf(t => t.totals.output ?? 0), cache_tokens: sumOf(t => t.totals.cached ?? 0), cache_write_tokens: sumOf(t => t.totals.cacheWrite ?? 0),
     wall_time: sumOf(t => t.wallMs), attempts_used: tries.length, evidence_dir: evidence, started_at: startedAt,
   });
+  // Explicit runtime settings of the run (what the harness was configured with, beyond the protocol route) and, with transcript
+  // capture, the attributable telemetry (src/telemetry.mjs): observed vs estimated tokens, task vs summary requests, compactions.
+  record.runtime_settings = { route: { ...route }, orche: chosen.runtimeConfig ?? null, appendSystemPrompt: harness.appendSystemPrompt ? true : false };
+  if (protocol.capture?.transcripts) record.telemetry = unitTelemetry({ files: chosen.transcripts.map(f => ({ path: f, text: readFileSync(join(chosen.box, f), "utf8") })), wire: chosen.wire, runtime: { orcheOverlay: harness.orcheConfig ?? null } });
   const ranTests = sessionToolCalls(chosen.sessionText).some(call => call.name === "bash" && /\btest\b|--test/.test(JSON.stringify(call.arguments ?? {})));
   record.failure_class = classifyFailure(record, { ranTests, tools: chosen.events.tools, toolNames: chosen.events.toolNames, toolErrors: chosen.events.toolErrors, diffBytes: diff.length, grade });
   record.final_text_excerpt = chosen.events.finalText.slice(0, 600);
