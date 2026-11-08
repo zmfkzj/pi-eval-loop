@@ -1,0 +1,46 @@
+{
+  "at": "2026-11-07T17:59:58.744Z",
+  "powerFile": "records/ctrl-confirm-3/plan/power-bootstrap-shrunk.json",
+  "eligibilityFile": "../results/ctrl-confirm-3-holdout/ctrl-confirm-3-holdout-4206b2e38c1d.ELIGIBILITY.json",
+  "launch": false,
+  "checks": {
+    "a_powerReachable": {
+      "pass": true,
+      "scenario": "scale:1",
+      "nRequired": 1600
+    },
+    "b_supply": {
+      "pass": false,
+      "sealedTasks": 159
+    },
+    "c_requests": {
+      "pass": false,
+      "planned": 335381,
+      "ceiling": 45000
+    },
+    "d_activeHours": {
+      "pass": false,
+      "planned": 81.3,
+      "ceiling": 16
+    }
+  },
+  "reference": {
+    "costAtSealed": {
+      "units": 1431,
+      "requests": 33328,
+      "activeHours": 8.1
+    },
+    "powerAtLargestSimulatedNWithinSupply": {
+      "tasks": 93,
+      "H1": {
+        "scale:1.5": 0.159,
+        "scale:1": 0.04675,
+        "scale:0.5": 0.01125,
+        "scale:0": 0.0025,
+        "null:E2-only-null": 0.01,
+        "null:E1-only-null": 0.01175,
+        "null:skewed-heterogeneous-E1": 0.013
+      }
+    }
+  }
+}

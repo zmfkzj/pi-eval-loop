@@ -1,0 +1,23 @@
+ctrl-confirm-3 supply collection status (recorded 2026-11-07T18:05Z by W7, outcome-blind: no agent has run on any ctrl-confirm-3 case)
+
+discovery: 174509 npm packages -> 4169 candidate repositories; excluded before cloning 595 (535 consumed ctrl-confirm-2 supply/holdout slugs incl. unfinished slices, 60 pre-existing external pool) -> 3574 kept (results/ctrl-confirm-3-supply/repos.json)
+collect: seeded order sha256(seed:repo:slug), --limit 2400, 12 slices of 200 repositories, started 2026-11-07T13:26:40Z
+stop: all 12 collector processes ended at ~2026-11-07T15:12:45Z when the owning pi session shut down (last registry writes 15:02:45Z-15:12:45Z); no slice finished (collect-*.out empty, no slice report)
+repositories cloned per slice (cache): 39 64 87 112 93 75 62 70 36 46 93 55 = 832 of 2400 planned
+STOP_RULE.txt (recorded 14:36:31Z) fixed a 17:00:00Z cutoff; the collectors were not restarted afterwards (inspection 17:44Z, after the cutoff)
+registry entries: 1554, entries with at > 17:00:00Z: 0; eligible records: 163 (all counted)
+sha256 of supply registries/plan at sealing (results/ctrl-confirm-3-supply/):
+  668afed69500f841564cb4874705abbb7ecaea8e03d533338867edff421f3af7  pool-0/registry.jsonl
+  7564a152d9ea6135d253b11bbc2218bcb589930a5f564285f92ae3f9da73587a  pool-10/registry.jsonl
+  607da14a38023e5549045b37084804c0cde7dce0b8f1a592574b510a97823b51  pool-11/registry.jsonl
+  375c2f9b2af601356603547c9e23433d24651aa2754c09cfb6d631e282c03bc8  pool-1/registry.jsonl
+  dc27e0561c22ff944d6dbd4d0ad2598be68769bb39f61efca3c8fc32b64bb834  pool-2/registry.jsonl
+  a1ad2ea70087c2d18b39b14c3ef4a42a2f1fc440c51a18f4b0b4f03a885e4af3  pool-3/registry.jsonl
+  76fa4920af5d9981c03e287b7279840d6c666c89823c88a910d2e652ff343c07  pool-4/registry.jsonl
+  981528ed4ededafe1a33e5744e869d253a184b852cbc48ebed73932a38680ba9  pool-5/registry.jsonl
+  96e2028bdd5595f1c225fcb44b81bd116df4251eaecdeea323035a2abb932ab7  pool-6/registry.jsonl
+  3160feeacff34ca583f7ecd010abdb10141f16ff04453b5e5dd6007a283acbce  pool-7/registry.jsonl
+  b30f42b596e7e8c423f27ad2f91f412891eba55a7a95a725a39841f490b34e54  pool-8/registry.jsonl
+  7636450356f127cfb2a31a7a8256c42b589896412861368d22fbf53f2d672597  pool-9/registry.jsonl
+  d9a524874d181dec37caa96dea3ba9042e7727a6e7f612efd7eec8caea06c305  repos.json
+  2dd06524d201d54b638310e675b1edce197afee1c3bd79608c737f187a4135e8  STOP_RULE.txt

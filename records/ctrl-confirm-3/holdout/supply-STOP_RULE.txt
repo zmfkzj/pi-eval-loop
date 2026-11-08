@@ -1,0 +1,1 @@
+Recorded 2026-11-07T14:36:31Z before any agent run on any case (outcome-blind): collection slices still running at 2026-11-07T17:00:00Z are stopped (SIGTERM) for time; only cases already recorded eligible in the pool registries count. Reason: the worker's assignment time ceiling; the feasibility gate fails on budget regardless of supply size.

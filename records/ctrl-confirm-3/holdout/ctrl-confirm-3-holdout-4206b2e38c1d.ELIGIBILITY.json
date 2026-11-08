@@ -1,0 +1,1166 @@
+{
+  "at": "2026-11-07T17:55:21.701Z",
+  "batch": "ctrl-confirm-3-holdout-4206b2e38c1d",
+  "dir": "/home/arthur/Code/oh-my-pi-extensions/results/ctrl-confirm-3-holdout/ctrl-confirm-3-holdout-4206b2e38c1d",
+  "sealDigest": "b9e9a05559c9c242c112098079f3691827907ea5e6e87ffa77229906681df10b",
+  "tasks": 159,
+  "families": 85,
+  "owners": 82,
+  "familySizes": [
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+  ],
+  "taskIds": [
+    "x-0x1903-safemcp-59cf0bcab2",
+    "x-0x1903-safemcp-6b18074502",
+    "x-0x1903-safemcp-d7b891244d",
+    "x-acidnik-pi-edit-file-1b8322aef4",
+    "x-acidnik-pi-edit-file-6960c17f07",
+    "x-acidnik-pi-edit-file-7054b9845e",
+    "x-aditya030207-npm-package-project-1b29d52ade",
+    "x-aditya030207-npm-package-project-3936effc47",
+    "x-aditya030207-npm-package-project-f80652002b",
+    "x-agnusdei1207-pentesting-358022506e",
+    "x-allan-nava-backlogsync-07b9269718",
+    "x-amittell-agentcli-228b9be656",
+    "x-amittell-agentcli-43892446e2",
+    "x-amittell-agentcli-cb9916c325",
+    "x-apinggithub-mydsh-auto-model-router-70aefa08ad",
+    "x-apinggithub-mydsh-auto-model-router-7a6fda742d",
+    "x-apinggithub-mydsh-auto-model-router-9dc872d8f5",
+    "x-ara-5-mind-mri-agent-second-brain-3ef41249fe",
+    "x-awais-amjed-rift-bot-sdk-node-0637166854",
+    "x-awais-amjed-rift-bot-sdk-node-0cdd639bb0",
+    "x-awais-amjed-rift-bot-sdk-node-63b35ba695",
+    "x-chaoschild-subtrk-b9b9dcf79a",
+    "x-chaoschild-subtrk-d3fd16d9c7",
+    "x-clasen-jevers-41438a4079",
+    "x-clasen-jevers-47c3e7fbcc",
+    "x-clasen-jevers-c93fa3c179",
+    "x-dbunk903-codex-oss-lens-2df7410c0c",
+    "x-dbunk903-codex-oss-lens-c63faf8e3a",
+    "x-dbunk903-codex-oss-lens-cda9c502ac",
+    "x-ddoong10-can-bridge-3153ba19ce",
+    "x-ddoong10-can-bridge-5f4c76a5ea",
+    "x-doscientos-es-changelog-3859c9fe35",
+    "x-drbaher-docx2pdf-cli-00fd34f4c3",
+    "x-drbaher-docx2pdf-cli-7f1f8c9e85",
+    "x-duzhenxun-oh-my-http-fd777f3c5d",
+    "x-elalfner-relevo-900367b223",
+    "x-elalfner-relevo-b8e86d932b",
+    "x-elfmingh-dsh-prompt-manager-f817beb0e7",
+    "x-erekola-llms-txt-validator-d8dcb20a3a",
+    "x-etchv-labs-node-sdk-e1f67e8aaf",
+    "x-fathomforge-belay-135d0ae56a",
+    "x-fathomforge-belay-8c1e1a9b20",
+    "x-fei2-labs-oauth-switch-144ede8722",
+    "x-fei2-labs-oauth-switch-4196925f03",
+    "x-fei2-labs-oauth-switch-c781827871",
+    "x-felipemiiller-persistent-worker-runtime-20b3564ec6",
+    "x-felipemiiller-persistent-worker-runtime-46a1a7ff6e",
+    "x-felipesotero-opencode-hard-limit-629b1ee912",
+    "x-felipesotero-opencode-hard-limit-bcc502a9ff",
+    "x-flossypurse-studios-gitsignet-56f2242a3c",
+    "x-frederick-wang-pi-deepseek-balance-bce5c1eecb",
+    "x-frederick-wang-pi-deepseek-balance-cea4cb3c57",
+    "x-ghostpawjs-questlog-b53d73abb5",
+    "x-ghostpawjs-questlog-d9cc9c2b3b",
+    "x-gluppler-creole-llm-940b73737e",
+    "x-grigent-trustdex-0421a3287e",
+    "x-grigent-trustdex-7554a14ba9",
+    "x-grigent-trustdex-c4f7726b55",
+    "x-investblog-cards-lite-b4d7be3bc3",
+    "x-investblog-roulette-lite-1d7be6d2e7",
+    "x-irxk-naide-ea93f16004",
+    "x-johnhenry-aimatey-middleware-andbox-0179ad1d8c",
+    "x-johnhenry-andbox-b73dff2f84",
+    "x-johnhenry-window-algebra-f6fc3a8e18",
+    "x-junhan2-reaproof-1271965619",
+    "x-junhan2-reaproof-24657ee889",
+    "x-karpeleslab-teamclaude-e04365e9b2",
+    "x-karpeleslab-teamclaude-e6b6f6e209",
+    "x-karpeleslab-teamclaude-ff6cae4bfb",
+    "x-kazant-flexgraph-08a56642f0",
+    "x-kazant-flexgraph-2a3906c55f",
+    "x-kingofpowers-dsh-line-patch-6b0f692951",
+    "x-kingofpowers-dsh-line-patch-cfeb78e204",
+    "x-kylelloyd63-star-ops-drift-gate-db4aff9141",
+    "x-kylelloyd63-star-ops-drift-gate-f25ebdfc2e",
+    "x-legend80s-privacy-brush-5f7f8339f8",
+    "x-legible-sh-slate-c4fcc4023d",
+    "x-littleblacktong-dsh-plugin-cron-233bb126d2",
+    "x-littleblacktong-dsh-plugin-cron-51eb80c692",
+    "x-littleblacktong-dsh-plugin-cron-b429f411b8",
+    "x-lizhouai-dsh-provider-usage-9c47fb0902",
+    "x-lobo235-pi-date-tail-d12ce7f04f",
+    "x-m-sanchez-frozen-eval-1d2da4c639",
+    "x-m-sanchez-frozen-eval-80bf7df7fd",
+    "x-m-sanchez-frozen-eval-e1d73c51f8",
+    "x-majidbilal-gistline-ecc121d961",
+    "x-majidbilal-gistline-f6d0fcdd59",
+    "x-maquinatech-graph-indexer-993244ad98",
+    "x-maquinatech-graph-indexer-a27ce133a9",
+    "x-maquinatech-graph-indexer-ba5c669477",
+    "x-mark-brannan-coast-wright-98d235eb75",
+    "x-mark-brannan-coast-wright-bf76f156d2",
+    "x-mark-brannan-coast-wright-cb05b90929",
+    "x-maxhawksby-hypatia-4e3f598acb",
+    "x-maxhawksby-hypatia-c8c352be6c",
+    "x-maxhawksby-hypatia-e2f5bdb666",
+    "x-mihailshumilov-node-binutils-b6f50f7d88",
+    "x-moaaz-i-jprot-052a350a7d",
+    "x-moaaz-i-jprot-79d6afdf32",
+    "x-moaaz-i-jprot-9d6913663a",
+    "x-n473cl0-uwcheck-4654f2c59d",
+    "x-nabheet-opencode-model-failover-cb8ef30ccd",
+    "x-noguerol-t-plan-d15fdb5986",
+    "x-nonewind-dsh-spend-8e8d0ee394",
+    "x-nonewind-dsh-spend-eafc616b0d",
+    "x-ottttto-dsh-scheduled-send-95baa0d0ef",
+    "x-possumtech-sqlrite-82c7195022",
+    "x-possumtech-sqlrite-89798ff662",
+    "x-possumtech-sqlrite-c4dc22ec3b",
+    "x-raja0sama-vibex-1ea1b2485f",
+    "x-raja0sama-vibex-b0e2df8ef1",
+    "x-raja0sama-vibex-bb3b49d37e",
+    "x-reality-software-entertainment-ravensight-js-3edf1a5bd6",
+    "x-reality-software-entertainment-ravensight-js-ec8d539a1e",
+    "x-reality-software-entertainment-ravensight-js-f28cd65cac",
+    "x-redreceipt-lamplight-04edb09ee9",
+    "x-redreceipt-lamplight-ad82840817",
+    "x-renezander030-pi-crypto-gate-f83970bda6",
+    "x-ridelink0-claude-code-usage-limits-dd762e6394",
+    "x-sandsoftwaresolutions-ss-case-style-a46389465c",
+    "x-sanstoolow0513-toksight-35fde49d94",
+    "x-sanstoolow0513-toksight-841ad33a42",
+    "x-sharjeelfaiq-superbstring-2209d0c084",
+    "x-sjinks-sri-calc-9f3063a4fe",
+    "x-soulwaxx-obsidian-second-brain-58a36343d0",
+    "x-specode-pi-subscription-usage-9bdd99b81e",
+    "x-strato-dan-dan-oss-bridge-dashboard-d8f94a48f4",
+    "x-suguid-bareink-0edf63a970",
+    "x-suguid-bareink-6213db8053",
+    "x-suguid-bareink-7b96f74d1e",
+    "x-the-nexus-collective-fastrelay-js-sdk-a9ad978853",
+    "x-the-nexus-collective-fastrelay-js-sdk-fc55429cfd",
+    "x-tmrk-agent-accounts-06a9617425",
+    "x-tmrk-agent-accounts-212829793e",
+    "x-tomd4vs-prumo-9e4f8b6b7d",
+    "x-tomd4vs-prumo-bd0e43d0b0",
+    "x-tttmaximttt-slop-analyser-04f21f0ea4",
+    "x-ujjwal502-thermal-8697111af9",
+    "x-ujjwal502-thermal-9e9946b162",
+    "x-ujjwal502-thermal-fe1f417821",
+    "x-unifylk-infra9core-12757013ac",
+    "x-unifylk-infra9core-c9f3d365af",
+    "x-webkubor-dsh-llm-hub-b1cb9dd16c",
+    "x-whisper-sec-whisper-node-261fc5b652",
+    "x-whisper-sec-whisper-node-5feb7f50b9",
+    "x-wuisabel-gif-cadence-051832ac88",
+    "x-wuisabel-gif-cadence-9182997f58",
+    "x-wuisabel-gif-cadence-e3b258d908",
+    "x-xeplr-xeplr-expression-handler-2287a9fc54",
+    "x-xeplr-xeplr-expression-handler-2715b1a03d",
+    "x-xeplr-xeplr-expression-handler-c1cc5c8a5f",
+    "x-xiaohai-78-dsh-mode-skills-1e95034712",
+    "x-xiaohai-78-dsh-mode-skills-774cf92e60",
+    "x-yuanbop-frugal-5acf53676e",
+    "x-yuanbop-frugal-845e4165e4",
+    "x-yuanbop-frugal-8d24218432",
+    "x-yumankind-worldsignals-js-2fcf8a7f57",
+    "x-yumankind-worldsignals-js-67cafef4fc",
+    "x-yuna78-dsh-agent-tree-777ad12214"
+  ],
+  "perFamily": {
+    "gh:0x1903/safemcp": 3,
+    "gh:acidnik/pi-edit-file": 3,
+    "gh:aditya030207/npm-package-project": 3,
+    "gh:agnusdei1207/pentesting": 1,
+    "gh:allan-nava/backlogsync": 1,
+    "gh:amittell/agentcli": 3,
+    "gh:apinggithub/mydsh-auto-model-router": 3,
+    "gh:ara-5/mind-mri-agent-second-brain": 1,
+    "gh:awais-amjed/rift-bot-sdk-node": 3,
+    "gh:chaoschild/subtrk": 2,
+    "gh:clasen/jevers": 3,
+    "gh:dbunk903/codex-oss-lens": 3,
+    "gh:ddoong10/can-bridge": 2,
+    "gh:doscientos-es/changelog": 1,
+    "gh:drbaher/docx2pdf-cli": 2,
+    "gh:duzhenxun/oh-my-http": 1,
+    "gh:elalfner/relevo": 2,
+    "gh:elfmingh/dsh-prompt-manager": 1,
+    "gh:erekola/llms-txt-validator": 1,
+    "gh:etchv-labs/node-sdk": 1,
+    "gh:fathomforge/belay": 2,
+    "gh:fei2-labs/oauth-switch": 3,
+    "gh:felipemiiller/persistent-worker-runtime": 2,
+    "gh:felipesotero/opencode-hard-limit": 2,
+    "gh:flossypurse-studios/gitsignet": 1,
+    "gh:frederick-wang/pi-deepseek-balance": 2,
+    "gh:ghostpawjs/questlog": 2,
+    "gh:gluppler/creole-llm": 1,
+    "gh:grigent/trustdex": 3,
+    "gh:investblog/cards-lite": 1,
+    "gh:investblog/roulette-lite": 1,
+    "gh:irxk/naide": 1,
+    "gh:johnhenry/aimatey-middleware-andbox": 1,
+    "gh:johnhenry/andbox": 1,
+    "gh:johnhenry/window-algebra": 1,
+    "gh:junhan2/reaproof": 2,
+    "gh:karpeleslab/teamclaude": 3,
+    "gh:kazant/flexgraph": 2,
+    "gh:kingofpowers/dsh-line-patch": 2,
+    "gh:kylelloyd63-star/ops-drift-gate": 2,
+    "gh:legend80s/privacy-brush": 1,
+    "gh:legible-sh/slate": 1,
+    "gh:littleblacktong/dsh-plugin-cron": 3,
+    "gh:lizhouai/dsh-provider-usage": 1,
+    "gh:lobo235/pi-date-tail": 1,
+    "gh:m-sanchez/frozen-eval": 3,
+    "gh:majidbilal/gistline": 2,
+    "gh:maquinatech/graph-indexer": 3,
+    "gh:mark-brannan/coast-wright": 3,
+    "gh:maxhawksby/hypatia": 3,
+    "gh:mihailshumilov/node-binutils": 1,
+    "gh:moaaz-i/jprot": 3,
+    "gh:n473cl0/uwcheck": 1,
+    "gh:nabheet/opencode-model-failover": 1,
+    "gh:noguerol/t-plan": 1,
+    "gh:nonewind/dsh-spend": 2,
+    "gh:ottttto/dsh-scheduled-send": 1,
+    "gh:possumtech/sqlrite": 3,
+    "gh:raja0sama/vibex": 3,
+    "gh:reality-software-entertainment/ravensight-js": 3,
+    "gh:redreceipt/lamplight": 2,
+    "gh:renezander030/pi-crypto-gate": 1,
+    "gh:ridelink0/claude-code-usage-limits": 1,
+    "gh:sandsoftwaresolutions/ss-case-style": 1,
+    "gh:sanstoolow0513/toksight": 2,
+    "gh:sharjeelfaiq/superbstring": 1,
+    "gh:sjinks/sri-calc": 1,
+    "gh:soulwaxx/obsidian-second-brain": 1,
+    "gh:specode/pi-subscription-usage": 1,
+    "gh:strato-dan/dan-oss-bridge-dashboard": 1,
+    "gh:suguid/bareink": 3,
+    "gh:the-nexus-collective/fastrelay-js-sdk": 2,
+    "gh:tmrk/agent-accounts": 2,
+    "gh:tomd4vs/prumo": 2,
+    "gh:tttmaximttt/slop-analyser": 1,
+    "gh:ujjwal502/thermal": 3,
+    "gh:unifylk/infra9core": 2,
+    "gh:webkubor/dsh-llm-hub": 1,
+    "gh:whisper-sec/whisper-node": 2,
+    "gh:wuisabel-gif/cadence": 3,
+    "gh:xeplr/xeplr-expression-handler": 3,
+    "gh:xiaohai-78/dsh-mode-skills": 2,
+    "gh:yuanbop/frugal": 3,
+    "gh:yumankind/worldsignals-js": 2,
+    "gh:yuna78/dsh-agent-tree": 1
+  },
+  "decisions": [
+    {
+      "id": "x-jashjacob-opencode-token-metrics-ea9b678c21",
+      "family": "gh:jashjacob/opencode-token-metrics",
+      "decision": "excluded",
+      "why": "instruction-test-change-conflict: instruction lists \"update tests\" as part of the change: directs modifying existing tests; excluded conservatively (cannot establish outcome-blind that appending suffices)"
+    },
+    {
+      "id": "x-ddoong10-can-bridge-14b581efc6",
+      "family": "gh:ddoong10/can-bridge",
+      "decision": "excluded",
+      "why": "instruction-test-change-conflict: the described commit changes the existing smoke suite and the existing \"ambiguous id\" test (temp home): instruction requires changing existing test lines"
+    },
+    {
+      "id": "x-tylda-solutions-diffquiz-05a0211775",
+      "family": "gh:tylda-solutions/diffquiz",
+      "decision": "excluded",
+      "why": "instruction-test-change-conflict: the described commit rewrites the existing Slack token fixture inside secrets.test.ts: instruction requires changing an existing test line"
+    },
+    {
+      "id": "x-ffyfox-dsh-prompt-hardener-821be08d94",
+      "family": "gh:ffyfox/dsh-prompt-hardener",
+      "decision": "excluded",
+      "why": "engine-grader: the reference solution does not pass the hidden grading ({\"hidden\":{\"pass\":false"
+    },
+    {
+      "id": "x-elalfner-relevo-b8e86d932b",
+      "family": "gh:elalfner/relevo",
+      "decision": "selected"
+    },
+    {
+      "id": "x-elalfner-relevo-900367b223",
+      "family": "gh:elalfner/relevo",
+      "decision": "selected"
+    },
+    {
+      "id": "x-tomd4vs-prumo-9e4f8b6b7d",
+      "family": "gh:tomd4vs/prumo",
+      "decision": "selected"
+    },
+    {
+      "id": "x-tomd4vs-prumo-bd0e43d0b0",
+      "family": "gh:tomd4vs/prumo",
+      "decision": "selected"
+    },
+    {
+      "id": "x-ddoong10-can-bridge-3153ba19ce",
+      "family": "gh:ddoong10/can-bridge",
+      "decision": "selected"
+    },
+    {
+      "id": "x-ddoong10-can-bridge-5f4c76a5ea",
+      "family": "gh:ddoong10/can-bridge",
+      "decision": "selected"
+    },
+    {
+      "id": "x-duzhenxun-oh-my-http-fd777f3c5d",
+      "family": "gh:duzhenxun/oh-my-http",
+      "decision": "selected"
+    },
+    {
+      "id": "x-kingofpowers-dsh-line-patch-cfeb78e204",
+      "family": "gh:kingofpowers/dsh-line-patch",
+      "decision": "selected"
+    },
+    {
+      "id": "x-kingofpowers-dsh-line-patch-6b0f692951",
+      "family": "gh:kingofpowers/dsh-line-patch",
+      "decision": "selected"
+    },
+    {
+      "id": "x-kylelloyd63-star-ops-drift-gate-db4aff9141",
+      "family": "gh:kylelloyd63-star/ops-drift-gate",
+      "decision": "selected"
+    },
+    {
+      "id": "x-kylelloyd63-star-ops-drift-gate-f25ebdfc2e",
+      "family": "gh:kylelloyd63-star/ops-drift-gate",
+      "decision": "selected"
+    },
+    {
+      "id": "x-johnhenry-aimatey-middleware-andbox-0179ad1d8c",
+      "family": "gh:johnhenry/aimatey-middleware-andbox",
+      "decision": "selected"
+    },
+    {
+      "id": "x-tmrk-agent-accounts-06a9617425",
+      "family": "gh:tmrk/agent-accounts",
+      "decision": "selected"
+    },
+    {
+      "id": "x-tmrk-agent-accounts-212829793e",
+      "family": "gh:tmrk/agent-accounts",
+      "decision": "selected"
+    },
+    {
+      "id": "x-sandsoftwaresolutions-ss-case-style-a46389465c",
+      "family": "gh:sandsoftwaresolutions/ss-case-style",
+      "decision": "selected"
+    },
+    {
+      "id": "x-gluppler-creole-llm-940b73737e",
+      "family": "gh:gluppler/creole-llm",
+      "decision": "selected"
+    },
+    {
+      "id": "x-majidbilal-gistline-f6d0fcdd59",
+      "family": "gh:majidbilal/gistline",
+      "decision": "selected"
+    },
+    {
+      "id": "x-majidbilal-gistline-ecc121d961",
+      "family": "gh:majidbilal/gistline",
+      "decision": "selected"
+    },
+    {
+      "id": "x-johnhenry-andbox-b73dff2f84",
+      "family": "gh:johnhenry/andbox",
+      "decision": "selected"
+    },
+    {
+      "id": "x-investblog-cards-lite-b4d7be3bc3",
+      "family": "gh:investblog/cards-lite",
+      "decision": "selected"
+    },
+    {
+      "id": "x-doscientos-es-changelog-3859c9fe35",
+      "family": "gh:doscientos-es/changelog",
+      "decision": "selected"
+    },
+    {
+      "id": "x-flossypurse-studios-gitsignet-56f2242a3c",
+      "family": "gh:flossypurse-studios/gitsignet",
+      "decision": "selected"
+    },
+    {
+      "id": "x-drbaher-docx2pdf-cli-7f1f8c9e85",
+      "family": "gh:drbaher/docx2pdf-cli",
+      "decision": "selected"
+    },
+    {
+      "id": "x-drbaher-docx2pdf-cli-00fd34f4c3",
+      "family": "gh:drbaher/docx2pdf-cli",
+      "decision": "selected"
+    },
+    {
+      "id": "x-unifylk-infra9core-c9f3d365af",
+      "family": "gh:unifylk/infra9core",
+      "decision": "selected"
+    },
+    {
+      "id": "x-unifylk-infra9core-12757013ac",
+      "family": "gh:unifylk/infra9core",
+      "decision": "selected"
+    },
+    {
+      "id": "x-legend80s-privacy-brush-5f7f8339f8",
+      "family": "gh:legend80s/privacy-brush",
+      "decision": "selected"
+    },
+    {
+      "id": "x-specode-pi-subscription-usage-9bdd99b81e",
+      "family": "gh:specode/pi-subscription-usage",
+      "decision": "selected"
+    },
+    {
+      "id": "x-felipemiiller-persistent-worker-runtime-46a1a7ff6e",
+      "family": "gh:felipemiiller/persistent-worker-runtime",
+      "decision": "selected"
+    },
+    {
+      "id": "x-felipemiiller-persistent-worker-runtime-20b3564ec6",
+      "family": "gh:felipemiiller/persistent-worker-runtime",
+      "decision": "selected"
+    },
+    {
+      "id": "x-apinggithub-mydsh-auto-model-router-70aefa08ad",
+      "family": "gh:apinggithub/mydsh-auto-model-router",
+      "decision": "selected"
+    },
+    {
+      "id": "x-apinggithub-mydsh-auto-model-router-9dc872d8f5",
+      "family": "gh:apinggithub/mydsh-auto-model-router",
+      "decision": "selected"
+    },
+    {
+      "id": "x-apinggithub-mydsh-auto-model-router-7a6fda742d",
+      "family": "gh:apinggithub/mydsh-auto-model-router",
+      "decision": "selected"
+    },
+    {
+      "id": "x-aditya030207-npm-package-project-1b29d52ade",
+      "family": "gh:aditya030207/npm-package-project",
+      "decision": "selected"
+    },
+    {
+      "id": "x-aditya030207-npm-package-project-3936effc47",
+      "family": "gh:aditya030207/npm-package-project",
+      "decision": "selected"
+    },
+    {
+      "id": "x-aditya030207-npm-package-project-f80652002b",
+      "family": "gh:aditya030207/npm-package-project",
+      "decision": "selected"
+    },
+    {
+      "id": "x-raja0sama-vibex-b0e2df8ef1",
+      "family": "gh:raja0sama/vibex",
+      "decision": "selected"
+    },
+    {
+      "id": "x-raja0sama-vibex-1ea1b2485f",
+      "family": "gh:raja0sama/vibex",
+      "decision": "selected"
+    },
+    {
+      "id": "x-raja0sama-vibex-bb3b49d37e",
+      "family": "gh:raja0sama/vibex",
+      "decision": "selected"
+    },
+    {
+      "id": "x-moaaz-i-jprot-052a350a7d",
+      "family": "gh:moaaz-i/jprot",
+      "decision": "selected"
+    },
+    {
+      "id": "x-moaaz-i-jprot-79d6afdf32",
+      "family": "gh:moaaz-i/jprot",
+      "decision": "selected"
+    },
+    {
+      "id": "x-moaaz-i-jprot-9d6913663a",
+      "family": "gh:moaaz-i/jprot",
+      "decision": "selected"
+    },
+    {
+      "id": "x-possumtech-sqlrite-c4dc22ec3b",
+      "family": "gh:possumtech/sqlrite",
+      "decision": "selected"
+    },
+    {
+      "id": "x-possumtech-sqlrite-82c7195022",
+      "family": "gh:possumtech/sqlrite",
+      "decision": "selected"
+    },
+    {
+      "id": "x-possumtech-sqlrite-89798ff662",
+      "family": "gh:possumtech/sqlrite",
+      "decision": "selected"
+    },
+    {
+      "id": "x-n473cl0-uwcheck-4654f2c59d",
+      "family": "gh:n473cl0/uwcheck",
+      "decision": "selected"
+    },
+    {
+      "id": "x-irxk-naide-ea93f16004",
+      "family": "gh:irxk/naide",
+      "decision": "selected"
+    },
+    {
+      "id": "x-etchv-labs-node-sdk-e1f67e8aaf",
+      "family": "gh:etchv-labs/node-sdk",
+      "decision": "selected"
+    },
+    {
+      "id": "x-0x1903-safemcp-6b18074502",
+      "family": "gh:0x1903/safemcp",
+      "decision": "selected"
+    },
+    {
+      "id": "x-0x1903-safemcp-59cf0bcab2",
+      "family": "gh:0x1903/safemcp",
+      "decision": "selected"
+    },
+    {
+      "id": "x-0x1903-safemcp-d7b891244d",
+      "family": "gh:0x1903/safemcp",
+      "decision": "selected"
+    },
+    {
+      "id": "x-investblog-roulette-lite-1d7be6d2e7",
+      "family": "gh:investblog/roulette-lite",
+      "decision": "selected"
+    },
+    {
+      "id": "x-acidnik-pi-edit-file-7054b9845e",
+      "family": "gh:acidnik/pi-edit-file",
+      "decision": "selected"
+    },
+    {
+      "id": "x-acidnik-pi-edit-file-6960c17f07",
+      "family": "gh:acidnik/pi-edit-file",
+      "decision": "selected"
+    },
+    {
+      "id": "x-acidnik-pi-edit-file-1b8322aef4",
+      "family": "gh:acidnik/pi-edit-file",
+      "decision": "selected"
+    },
+    {
+      "id": "x-nabheet-opencode-model-failover-cb8ef30ccd",
+      "family": "gh:nabheet/opencode-model-failover",
+      "decision": "selected"
+    },
+    {
+      "id": "x-maquinatech-graph-indexer-a27ce133a9",
+      "family": "gh:maquinatech/graph-indexer",
+      "decision": "selected"
+    },
+    {
+      "id": "x-maquinatech-graph-indexer-ba5c669477",
+      "family": "gh:maquinatech/graph-indexer",
+      "decision": "selected"
+    },
+    {
+      "id": "x-maquinatech-graph-indexer-993244ad98",
+      "family": "gh:maquinatech/graph-indexer",
+      "decision": "selected"
+    },
+    {
+      "id": "x-allan-nava-backlogsync-07b9269718",
+      "family": "gh:allan-nava/backlogsync",
+      "decision": "selected"
+    },
+    {
+      "id": "x-karpeleslab-teamclaude-e04365e9b2",
+      "family": "gh:karpeleslab/teamclaude",
+      "decision": "selected"
+    },
+    {
+      "id": "x-karpeleslab-teamclaude-e6b6f6e209",
+      "family": "gh:karpeleslab/teamclaude",
+      "decision": "selected"
+    },
+    {
+      "id": "x-karpeleslab-teamclaude-ff6cae4bfb",
+      "family": "gh:karpeleslab/teamclaude",
+      "decision": "selected"
+    },
+    {
+      "id": "x-fei2-labs-oauth-switch-c781827871",
+      "family": "gh:fei2-labs/oauth-switch",
+      "decision": "selected"
+    },
+    {
+      "id": "x-fei2-labs-oauth-switch-4196925f03",
+      "family": "gh:fei2-labs/oauth-switch",
+      "decision": "selected"
+    },
+    {
+      "id": "x-fei2-labs-oauth-switch-144ede8722",
+      "family": "gh:fei2-labs/oauth-switch",
+      "decision": "selected"
+    },
+    {
+      "id": "x-ujjwal502-thermal-9e9946b162",
+      "family": "gh:ujjwal502/thermal",
+      "decision": "selected"
+    },
+    {
+      "id": "x-ujjwal502-thermal-fe1f417821",
+      "family": "gh:ujjwal502/thermal",
+      "decision": "selected"
+    },
+    {
+      "id": "x-ujjwal502-thermal-8697111af9",
+      "family": "gh:ujjwal502/thermal",
+      "decision": "selected"
+    },
+    {
+      "id": "x-ara-5-mind-mri-agent-second-brain-3ef41249fe",
+      "family": "gh:ara-5/mind-mri-agent-second-brain",
+      "decision": "selected"
+    },
+    {
+      "id": "x-awais-amjed-rift-bot-sdk-node-0637166854",
+      "family": "gh:awais-amjed/rift-bot-sdk-node",
+      "decision": "selected"
+    },
+    {
+      "id": "x-awais-amjed-rift-bot-sdk-node-0cdd639bb0",
+      "family": "gh:awais-amjed/rift-bot-sdk-node",
+      "decision": "selected"
+    },
+    {
+      "id": "x-awais-amjed-rift-bot-sdk-node-63b35ba695",
+      "family": "gh:awais-amjed/rift-bot-sdk-node",
+      "decision": "selected"
+    },
+    {
+      "id": "x-chaoschild-subtrk-d3fd16d9c7",
+      "family": "gh:chaoschild/subtrk",
+      "decision": "selected"
+    },
+    {
+      "id": "x-chaoschild-subtrk-b9b9dcf79a",
+      "family": "gh:chaoschild/subtrk",
+      "decision": "selected"
+    },
+    {
+      "id": "x-grigent-trustdex-c4f7726b55",
+      "family": "gh:grigent/trustdex",
+      "decision": "selected"
+    },
+    {
+      "id": "x-grigent-trustdex-0421a3287e",
+      "family": "gh:grigent/trustdex",
+      "decision": "selected"
+    },
+    {
+      "id": "x-grigent-trustdex-7554a14ba9",
+      "family": "gh:grigent/trustdex",
+      "decision": "selected"
+    },
+    {
+      "id": "x-junhan2-reaproof-1271965619",
+      "family": "gh:junhan2/reaproof",
+      "decision": "selected"
+    },
+    {
+      "id": "x-junhan2-reaproof-24657ee889",
+      "family": "gh:junhan2/reaproof",
+      "decision": "selected"
+    },
+    {
+      "id": "x-legible-sh-slate-c4fcc4023d",
+      "family": "gh:legible-sh/slate",
+      "decision": "selected"
+    },
+    {
+      "id": "x-renezander030-pi-crypto-gate-f83970bda6",
+      "family": "gh:renezander030/pi-crypto-gate",
+      "decision": "selected"
+    },
+    {
+      "id": "x-fathomforge-belay-8c1e1a9b20",
+      "family": "gh:fathomforge/belay",
+      "decision": "selected"
+    },
+    {
+      "id": "x-fathomforge-belay-135d0ae56a",
+      "family": "gh:fathomforge/belay",
+      "decision": "selected"
+    },
+    {
+      "id": "x-sharjeelfaiq-superbstring-2209d0c084",
+      "family": "gh:sharjeelfaiq/superbstring",
+      "decision": "selected"
+    },
+    {
+      "id": "x-ottttto-dsh-scheduled-send-95baa0d0ef",
+      "family": "gh:ottttto/dsh-scheduled-send",
+      "decision": "selected"
+    },
+    {
+      "id": "x-ghostpawjs-questlog-b53d73abb5",
+      "family": "gh:ghostpawjs/questlog",
+      "decision": "selected"
+    },
+    {
+      "id": "x-ghostpawjs-questlog-d9cc9c2b3b",
+      "family": "gh:ghostpawjs/questlog",
+      "decision": "selected"
+    },
+    {
+      "id": "x-erekola-llms-txt-validator-d8dcb20a3a",
+      "family": "gh:erekola/llms-txt-validator",
+      "decision": "selected"
+    },
+    {
+      "id": "x-lizhouai-dsh-provider-usage-9c47fb0902",
+      "family": "gh:lizhouai/dsh-provider-usage",
+      "decision": "selected"
+    },
+    {
+      "id": "x-strato-dan-dan-oss-bridge-dashboard-d8f94a48f4",
+      "family": "gh:strato-dan/dan-oss-bridge-dashboard",
+      "decision": "selected"
+    },
+    {
+      "id": "x-soulwaxx-obsidian-second-brain-58a36343d0",
+      "family": "gh:soulwaxx/obsidian-second-brain",
+      "decision": "selected"
+    },
+    {
+      "id": "x-agnusdei1207-pentesting-358022506e",
+      "family": "gh:agnusdei1207/pentesting",
+      "decision": "selected"
+    },
+    {
+      "id": "x-yuna78-dsh-agent-tree-777ad12214",
+      "family": "gh:yuna78/dsh-agent-tree",
+      "decision": "selected"
+    },
+    {
+      "id": "x-mihailshumilov-node-binutils-b6f50f7d88",
+      "family": "gh:mihailshumilov/node-binutils",
+      "decision": "selected"
+    },
+    {
+      "id": "x-johnhenry-window-algebra-f6fc3a8e18",
+      "family": "gh:johnhenry/window-algebra",
+      "decision": "selected"
+    },
+    {
+      "id": "x-tttmaximttt-slop-analyser-04f21f0ea4",
+      "family": "gh:tttmaximttt/slop-analyser",
+      "decision": "selected"
+    },
+    {
+      "id": "x-noguerol-t-plan-d15fdb5986",
+      "family": "gh:noguerol/t-plan",
+      "decision": "selected"
+    },
+    {
+      "id": "x-whisper-sec-whisper-node-261fc5b652",
+      "family": "gh:whisper-sec/whisper-node",
+      "decision": "selected"
+    },
+    {
+      "id": "x-whisper-sec-whisper-node-5feb7f50b9",
+      "family": "gh:whisper-sec/whisper-node",
+      "decision": "selected"
+    },
+    {
+      "id": "x-suguid-bareink-0edf63a970",
+      "family": "gh:suguid/bareink",
+      "decision": "selected"
+    },
+    {
+      "id": "x-suguid-bareink-6213db8053",
+      "family": "gh:suguid/bareink",
+      "decision": "selected"
+    },
+    {
+      "id": "x-suguid-bareink-7b96f74d1e",
+      "family": "gh:suguid/bareink",
+      "decision": "selected"
+    },
+    {
+      "id": "x-clasen-jevers-41438a4079",
+      "family": "gh:clasen/jevers",
+      "decision": "selected"
+    },
+    {
+      "id": "x-clasen-jevers-47c3e7fbcc",
+      "family": "gh:clasen/jevers",
+      "decision": "selected"
+    },
+    {
+      "id": "x-clasen-jevers-c93fa3c179",
+      "family": "gh:clasen/jevers",
+      "decision": "selected"
+    },
+    {
+      "id": "x-elfmingh-dsh-prompt-manager-f817beb0e7",
+      "family": "gh:elfmingh/dsh-prompt-manager",
+      "decision": "selected"
+    },
+    {
+      "id": "x-xiaohai-78-dsh-mode-skills-1e95034712",
+      "family": "gh:xiaohai-78/dsh-mode-skills",
+      "decision": "selected"
+    },
+    {
+      "id": "x-xiaohai-78-dsh-mode-skills-774cf92e60",
+      "family": "gh:xiaohai-78/dsh-mode-skills",
+      "decision": "selected"
+    },
+    {
+      "id": "x-sanstoolow0513-toksight-35fde49d94",
+      "family": "gh:sanstoolow0513/toksight",
+      "decision": "selected"
+    },
+    {
+      "id": "x-sanstoolow0513-toksight-841ad33a42",
+      "family": "gh:sanstoolow0513/toksight",
+      "decision": "selected"
+    },
+    {
+      "id": "x-yuanbop-frugal-845e4165e4",
+      "family": "gh:yuanbop/frugal",
+      "decision": "selected"
+    },
+    {
+      "id": "x-yuanbop-frugal-5acf53676e",
+      "family": "gh:yuanbop/frugal",
+      "decision": "selected"
+    },
+    {
+      "id": "x-yuanbop-frugal-8d24218432",
+      "family": "gh:yuanbop/frugal",
+      "decision": "selected"
+    },
+    {
+      "id": "x-yumankind-worldsignals-js-67cafef4fc",
+      "family": "gh:yumankind/worldsignals-js",
+      "decision": "selected"
+    },
+    {
+      "id": "x-yumankind-worldsignals-js-2fcf8a7f57",
+      "family": "gh:yumankind/worldsignals-js",
+      "decision": "selected"
+    },
+    {
+      "id": "x-nonewind-dsh-spend-eafc616b0d",
+      "family": "gh:nonewind/dsh-spend",
+      "decision": "selected"
+    },
+    {
+      "id": "x-nonewind-dsh-spend-8e8d0ee394",
+      "family": "gh:nonewind/dsh-spend",
+      "decision": "selected"
+    },
+    {
+      "id": "x-littleblacktong-dsh-plugin-cron-233bb126d2",
+      "family": "gh:littleblacktong/dsh-plugin-cron",
+      "decision": "selected"
+    },
+    {
+      "id": "x-littleblacktong-dsh-plugin-cron-b429f411b8",
+      "family": "gh:littleblacktong/dsh-plugin-cron",
+      "decision": "selected"
+    },
+    {
+      "id": "x-littleblacktong-dsh-plugin-cron-51eb80c692",
+      "family": "gh:littleblacktong/dsh-plugin-cron",
+      "decision": "selected"
+    },
+    {
+      "id": "x-amittell-agentcli-cb9916c325",
+      "family": "gh:amittell/agentcli",
+      "decision": "selected"
+    },
+    {
+      "id": "x-amittell-agentcli-43892446e2",
+      "family": "gh:amittell/agentcli",
+      "decision": "selected"
+    },
+    {
+      "id": "x-amittell-agentcli-228b9be656",
+      "family": "gh:amittell/agentcli",
+      "decision": "selected"
+    },
+    {
+      "id": "x-m-sanchez-frozen-eval-1d2da4c639",
+      "family": "gh:m-sanchez/frozen-eval",
+      "decision": "selected"
+    },
+    {
+      "id": "x-m-sanchez-frozen-eval-80bf7df7fd",
+      "family": "gh:m-sanchez/frozen-eval",
+      "decision": "selected"
+    },
+    {
+      "id": "x-m-sanchez-frozen-eval-e1d73c51f8",
+      "family": "gh:m-sanchez/frozen-eval",
+      "decision": "selected"
+    },
+    {
+      "id": "x-reality-software-entertainment-ravensight-js-f28cd65cac",
+      "family": "gh:reality-software-entertainment/ravensight-js",
+      "decision": "selected"
+    },
+    {
+      "id": "x-reality-software-entertainment-ravensight-js-3edf1a5bd6",
+      "family": "gh:reality-software-entertainment/ravensight-js",
+      "decision": "selected"
+    },
+    {
+      "id": "x-reality-software-entertainment-ravensight-js-ec8d539a1e",
+      "family": "gh:reality-software-entertainment/ravensight-js",
+      "decision": "selected"
+    },
+    {
+      "id": "x-xeplr-xeplr-expression-handler-c1cc5c8a5f",
+      "family": "gh:xeplr/xeplr-expression-handler",
+      "decision": "selected"
+    },
+    {
+      "id": "x-xeplr-xeplr-expression-handler-2287a9fc54",
+      "family": "gh:xeplr/xeplr-expression-handler",
+      "decision": "selected"
+    },
+    {
+      "id": "x-xeplr-xeplr-expression-handler-2715b1a03d",
+      "family": "gh:xeplr/xeplr-expression-handler",
+      "decision": "selected"
+    },
+    {
+      "id": "x-mark-brannan-coast-wright-bf76f156d2",
+      "family": "gh:mark-brannan/coast-wright",
+      "decision": "selected"
+    },
+    {
+      "id": "x-mark-brannan-coast-wright-cb05b90929",
+      "family": "gh:mark-brannan/coast-wright",
+      "decision": "selected"
+    },
+    {
+      "id": "x-mark-brannan-coast-wright-98d235eb75",
+      "family": "gh:mark-brannan/coast-wright",
+      "decision": "selected"
+    },
+    {
+      "id": "x-frederick-wang-pi-deepseek-balance-bce5c1eecb",
+      "family": "gh:frederick-wang/pi-deepseek-balance",
+      "decision": "selected"
+    },
+    {
+      "id": "x-frederick-wang-pi-deepseek-balance-cea4cb3c57",
+      "family": "gh:frederick-wang/pi-deepseek-balance",
+      "decision": "selected"
+    },
+    {
+      "id": "x-wuisabel-gif-cadence-051832ac88",
+      "family": "gh:wuisabel-gif/cadence",
+      "decision": "selected"
+    },
+    {
+      "id": "x-wuisabel-gif-cadence-e3b258d908",
+      "family": "gh:wuisabel-gif/cadence",
+      "decision": "selected"
+    },
+    {
+      "id": "x-wuisabel-gif-cadence-9182997f58",
+      "family": "gh:wuisabel-gif/cadence",
+      "decision": "selected"
+    },
+    {
+      "id": "x-ridelink0-claude-code-usage-limits-dd762e6394",
+      "family": "gh:ridelink0/claude-code-usage-limits",
+      "decision": "selected"
+    },
+    {
+      "id": "x-felipesotero-opencode-hard-limit-bcc502a9ff",
+      "family": "gh:felipesotero/opencode-hard-limit",
+      "decision": "selected"
+    },
+    {
+      "id": "x-felipesotero-opencode-hard-limit-629b1ee912",
+      "family": "gh:felipesotero/opencode-hard-limit",
+      "decision": "selected"
+    },
+    {
+      "id": "x-redreceipt-lamplight-04edb09ee9",
+      "family": "gh:redreceipt/lamplight",
+      "decision": "selected"
+    },
+    {
+      "id": "x-redreceipt-lamplight-ad82840817",
+      "family": "gh:redreceipt/lamplight",
+      "decision": "selected"
+    },
+    {
+      "id": "x-lobo235-pi-date-tail-d12ce7f04f",
+      "family": "gh:lobo235/pi-date-tail",
+      "decision": "selected"
+    },
+    {
+      "id": "x-webkubor-dsh-llm-hub-b1cb9dd16c",
+      "family": "gh:webkubor/dsh-llm-hub",
+      "decision": "selected"
+    },
+    {
+      "id": "x-dbunk903-codex-oss-lens-cda9c502ac",
+      "family": "gh:dbunk903/codex-oss-lens",
+      "decision": "selected"
+    },
+    {
+      "id": "x-dbunk903-codex-oss-lens-c63faf8e3a",
+      "family": "gh:dbunk903/codex-oss-lens",
+      "decision": "selected"
+    },
+    {
+      "id": "x-dbunk903-codex-oss-lens-2df7410c0c",
+      "family": "gh:dbunk903/codex-oss-lens",
+      "decision": "selected"
+    },
+    {
+      "id": "x-the-nexus-collective-fastrelay-js-sdk-fc55429cfd",
+      "family": "gh:the-nexus-collective/fastrelay-js-sdk",
+      "decision": "selected"
+    },
+    {
+      "id": "x-the-nexus-collective-fastrelay-js-sdk-a9ad978853",
+      "family": "gh:the-nexus-collective/fastrelay-js-sdk",
+      "decision": "selected"
+    },
+    {
+      "id": "x-kazant-flexgraph-08a56642f0",
+      "family": "gh:kazant/flexgraph",
+      "decision": "selected"
+    },
+    {
+      "id": "x-kazant-flexgraph-2a3906c55f",
+      "family": "gh:kazant/flexgraph",
+      "decision": "selected"
+    },
+    {
+      "id": "x-sjinks-sri-calc-9f3063a4fe",
+      "family": "gh:sjinks/sri-calc",
+      "decision": "selected"
+    },
+    {
+      "id": "x-maxhawksby-hypatia-c8c352be6c",
+      "family": "gh:maxhawksby/hypatia",
+      "decision": "selected"
+    },
+    {
+      "id": "x-maxhawksby-hypatia-4e3f598acb",
+      "family": "gh:maxhawksby/hypatia",
+      "decision": "selected"
+    },
+    {
+      "id": "x-maxhawksby-hypatia-e2f5bdb666",
+      "family": "gh:maxhawksby/hypatia",
+      "decision": "selected"
+    }
+  ],
+  "reviewDigest": "5fe1ce940d935ec75aed17791263bce1692a8ff53162d812616216303a00fddb"
+}
