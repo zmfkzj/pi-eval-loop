@@ -125,6 +125,17 @@ test("guard-serialized recovery: a recoverer that judged a record stale never re
     busy(() => acquireLock(path), "stale-guard");
     assert.equal(readFileSync(`${path}.reclaim`, "utf8"), leftover);
     assert.equal(readFileSync(path, "utf8"), stale);
+    // (5) Regression (seen 2026-11-08 under a loaded parallel suite as "busy:stale-guard" in the competing-acquisition test): a live
+    // recoverer's guard that is released between our failed guard link and our read of it is NOT a stale guard; the acquisition
+    // starts over and recovers. (Same fix as the agent_workflow clone, 2026-11-06.)
+    writeFileSync(`${path}.reclaim`, JSON.stringify({ pid: process.pid, host: hostname(), bootId: bootId(), pidNs: pidNamespace(), startTime: processStart(process.pid), token: "live-guard" }));
+    let removed = 0;
+    const won = acquireLock(path, { afterGuardBusy: () => { removed++; unlinkSync(`${path}.reclaim`); } });
+    assert.equal(removed, 1);
+    assert.equal(won.stale, true, "the stale record was recovered after the retry");
+    assert.equal(existsSync(`${path}.reclaim`), false);
+    won.release();
+    assert.equal(existsSync(path), false);
   } finally { rmSync(dir, { recursive: true, force: true }); }
 });
 
@@ -141,20 +152,32 @@ test("release is owner-checked: a replaced lock file is not removed by the previ
 });
 
 test("competing acquisitions (fresh and over a stale record): exactly one process wins", async () => {
+  // The winner holds the lock until every competitor has reported (the parent writes `done`), not for a fixed time: under load a
+  // late competitor must still meet the live lock, so a second "ok" can only come from a real mutual-exclusion failure.
   for (const startStale of [false, true]) {
     const dir = tempDir();
     try {
-      const path = join(dir, ".lock"), go = join(dir, "go");
+      const path = join(dir, ".lock"), go = join(dir, "go"), done = join(dir, "done");
       if (startStale) writeFileSync(path, record());
       const body = `import { existsSync } from "node:fs";
 console.log("ready");
 while (!existsSync(${JSON.stringify(go)})) await new Promise(r => setTimeout(r, 2));
-try { acquireLock(${JSON.stringify(path)}); console.log("ok"); await new Promise(r => setTimeout(r, 1500)); } catch (e) { console.log("busy:" + (e.verdict?.state ?? e.message)); }`;
+try { const lock = acquireLock(${JSON.stringify(path)}); console.log("ok"); while (!existsSync(${JSON.stringify(done)})) await new Promise(r => setTimeout(r, 5)); lock.release(); } catch (e) { console.log("busy:" + (e.verdict?.state ?? e.message)); }`;
       const kids = Array.from({ length: 6 }, () => child(body));
-      for (const k of kids) assert.equal(await k.next(), "ready");
-      writeFileSync(go, "");
-      const outcomes = await Promise.all(kids.map(k => k.next()));
-      await Promise.all(kids.map(k => k.exited));
+      // Parent-side bound (no fixed hold time in the children): a stuck run fails here, and every child is killed and reaped.
+      const within = (promise, what) => Promise.race([promise, new Promise((_, fail) => setTimeout(() => fail(new Error(`timed out waiting for ${what}`)), 60_000).unref())]);
+      let outcomes = [];
+      try {
+        for (const k of kids) assert.equal(await within(k.next(), "ready"), "ready");
+        writeFileSync(go, "");
+        outcomes = await within(Promise.all(kids.map(k => k.next())), "outcomes");
+        writeFileSync(done, "");
+        await within(Promise.all(kids.map(k => k.exited)), "children to exit");
+      } finally {
+        writeFileSync(done, "");
+        for (const k of kids) if (k.proc.exitCode === null && k.proc.signalCode === null) k.proc.kill("SIGKILL");
+        await Promise.all(kids.map(k => k.exited));
+      }
       assert.equal(outcomes.filter(o => o === "ok").length, 1, `${startStale ? "stale" : "fresh"}: ${outcomes.join(", ")}`);
       assert.ok(outcomes.every(o => o === "ok" || /^busy:(live|contended)$/.test(o)), outcomes.join(", "));
     } finally { rmSync(dir, { recursive: true, force: true }); }

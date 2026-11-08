@@ -145,9 +145,10 @@ export function inspectGuard(path) {
  * guard left by a recoverer that died within its few synchronous steps is "stale-guard" (never removed automatically, since
  * removing it could break the guard's exclusivity; an operator removes it after checking that no controller runs).
  * @param {string} path
- * @param {{ beforeReclaim?: () => void }} [hooks] test hook run after a record was judged stale, before the guard is taken
+ * @param {{ beforeReclaim?: () => void, afterGuardBusy?: () => void }} [hooks] test hooks: after a record was judged stale, before
+ *   the guard is taken; after the guard link failed (EEXIST), before the guard is read
  */
-export function acquireLock(path, { beforeReclaim } = {}) {
+export function acquireLock(path, { beforeReclaim, afterGuardBusy } = {}) {
   ensureDir(dirname(path));
   const record = { pid: process.pid, host: hostname(), bootId: bootId(), pidNs: pidNamespace(), startTime: processStart(process.pid), token: randomBytes(12).toString("hex"), at: new Date().toISOString() };
   const temp = `${path}.new-${record.token}`, guard = `${path}.reclaim`;
@@ -167,7 +168,12 @@ export function acquireLock(path, { beforeReclaim } = {}) {
         beforeReclaim?.();
         try { linkSync(temp, guard); } catch (guardError) {
           if (guardError.code !== "EEXIST") throw guardError;
-          const g = parseLock(readRaw(guard) ?? "");
+          afterGuardBusy?.();
+          const guardRaw = readRaw(guard);
+          // The guard holder finished (and removed it) between our failed link and this read: the guard was live, not stale.
+          // Start over (the lock is re-read and re-classified); never report a guard that no longer exists as stale-guard.
+          if (guardRaw === undefined) continue;
+          const g = parseLock(guardRaw);
           const guardState = classifyGuard(g);
           if (guardState.state === "stale-guard") throw new LockBusyError(path, { state: "stale-guard", why: `the reclaim guard ${guard} ${guardState.why}: remove it after checking that no controller runs` }, lockOwner(g));
           throw new LockBusyError(path, { state: "contended", why: `another process holds the reclaim guard ${guard}` }, lockOwner(g));
