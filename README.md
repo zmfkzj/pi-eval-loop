@@ -216,6 +216,7 @@ This is intentional: continue in a new state directory, and never rewrite a reco
 | `protocols/` | Recorded protocol overrides of measured runs |
 | `records/` | Committed records of measured runs |
 | `experiments/ctrl-ablation/` | Preregistered controlled ablation of orche (separate driver, never adopts): `run.mjs`, `analyze.mjs`, `fidelity.mjs`, variant patches; results `docs/results-ctrl-ablation-1.md` |
+| `experiments/ctrl-confirm-2/` | Prospectively registered confirmation (2 x 2: orche / pure Pi x test-preservation rule, disclosed integrity contract, legacy-scored co-primary valid rate + reliable success) on a fresh workspace-local external holdout: `supply.mjs`, `assemble.mjs`, `run.mjs`, `analyze.mjs`, `fidelity.mjs`, `power.mjs`; results `docs/results-ctrl-confirm-2.md` |
 
 Tests: `npm test` in this directory (`EL_TEST_TMP` sets the temp root). Root `npm run test:compat` runs them too. The
 unattended contract is covered by `test/lifecycle.test.mjs`, `test/lock.test.mjs`, `test/cli-contract.test.mjs` and

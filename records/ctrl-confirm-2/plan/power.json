@@ -1,0 +1,341 @@
+{
+ "source": "pi-eval-loop/records/ctrl-ablation-1/discovery/runs.jsonl",
+ "calibration": {
+  "control": "S",
+  "candidate": "P1",
+  "metric": "legacy-valid",
+  "priorStrength": 2,
+  "rates": {
+   "control": 0.6666666666666666,
+   "candidate": 0.8148148148148149
+  },
+  "tasks": 27
+ },
+ "method": "see file header",
+ "rows": [
+  {
+   "shrink": 1,
+   "repeats": 3,
+   "tasks": 20,
+   "perFamily": 2,
+   "coPrimary": 0.11925,
+   "rate": 0.1825,
+   "reliable": 0.185
+  },
+  {
+   "shrink": 1,
+   "repeats": 3,
+   "tasks": 30,
+   "perFamily": 2,
+   "coPrimary": 0.27925,
+   "rate": 0.38825,
+   "reliable": 0.35
+  },
+  {
+   "shrink": 1,
+   "repeats": 3,
+   "tasks": 40,
+   "perFamily": 2,
+   "coPrimary": 0.42675,
+   "rate": 0.56025,
+   "reliable": 0.49975
+  },
+  {
+   "shrink": 1,
+   "repeats": 3,
+   "tasks": 50,
+   "perFamily": 2,
+   "coPrimary": 0.528,
+   "rate": 0.65425,
+   "reliable": 0.5955
+  },
+  {
+   "shrink": 1,
+   "repeats": 3,
+   "tasks": 60,
+   "perFamily": 2,
+   "coPrimary": 0.61275,
+   "rate": 0.7455,
+   "reliable": 0.6635
+  },
+  {
+   "shrink": 1,
+   "repeats": 3,
+   "tasks": 80,
+   "perFamily": 2,
+   "coPrimary": 0.76775,
+   "rate": 0.86825,
+   "reliable": 0.80375
+  },
+  {
+   "shrink": 1,
+   "repeats": 3,
+   "tasks": 100,
+   "perFamily": 2,
+   "coPrimary": 0.87575,
+   "rate": 0.94,
+   "reliable": 0.8935
+  },
+  {
+   "shrink": 1,
+   "repeats": 3,
+   "tasks": 120,
+   "perFamily": 2,
+   "coPrimary": 0.931,
+   "rate": 0.97525,
+   "reliable": 0.93875
+  },
+  {
+   "shrink": 0.5,
+   "repeats": 3,
+   "tasks": 20,
+   "perFamily": 2,
+   "coPrimary": 0.0345,
+   "rate": 0.08825,
+   "reliable": 0.0515
+  },
+  {
+   "shrink": 0.5,
+   "repeats": 3,
+   "tasks": 30,
+   "perFamily": 2,
+   "coPrimary": 0.065,
+   "rate": 0.1555,
+   "reliable": 0.09125
+  },
+  {
+   "shrink": 0.5,
+   "repeats": 3,
+   "tasks": 40,
+   "perFamily": 2,
+   "coPrimary": 0.0895,
+   "rate": 0.21225,
+   "reliable": 0.1145
+  },
+  {
+   "shrink": 0.5,
+   "repeats": 3,
+   "tasks": 50,
+   "perFamily": 2,
+   "coPrimary": 0.117,
+   "rate": 0.281,
+   "reliable": 0.146
+  },
+  {
+   "shrink": 0.5,
+   "repeats": 3,
+   "tasks": 60,
+   "perFamily": 2,
+   "coPrimary": 0.1275,
+   "rate": 0.33025,
+   "reliable": 0.15225
+  },
+  {
+   "shrink": 0.5,
+   "repeats": 3,
+   "tasks": 80,
+   "perFamily": 2,
+   "coPrimary": 0.18775,
+   "rate": 0.43825,
+   "reliable": 0.211
+  },
+  {
+   "shrink": 0.5,
+   "repeats": 3,
+   "tasks": 100,
+   "perFamily": 2,
+   "coPrimary": 0.2355,
+   "rate": 0.529,
+   "reliable": 0.25525
+  },
+  {
+   "shrink": 0.5,
+   "repeats": 3,
+   "tasks": 120,
+   "perFamily": 2,
+   "coPrimary": 0.27775,
+   "rate": 0.61225,
+   "reliable": 0.294
+  },
+  {
+   "shrink": 0.25,
+   "repeats": 3,
+   "tasks": 20,
+   "perFamily": 2,
+   "coPrimary": 0.013,
+   "rate": 0.0405,
+   "reliable": 0.02175
+  },
+  {
+   "shrink": 0.25,
+   "repeats": 3,
+   "tasks": 30,
+   "perFamily": 2,
+   "coPrimary": 0.02525,
+   "rate": 0.0735,
+   "reliable": 0.04275
+  },
+  {
+   "shrink": 0.25,
+   "repeats": 3,
+   "tasks": 40,
+   "perFamily": 2,
+   "coPrimary": 0.031,
+   "rate": 0.08775,
+   "reliable": 0.0505
+  },
+  {
+   "shrink": 0.25,
+   "repeats": 3,
+   "tasks": 50,
+   "perFamily": 2,
+   "coPrimary": 0.0345,
+   "rate": 0.106,
+   "reliable": 0.05525
+  },
+  {
+   "shrink": 0.25,
+   "repeats": 3,
+   "tasks": 60,
+   "perFamily": 2,
+   "coPrimary": 0.03575,
+   "rate": 0.10925,
+   "reliable": 0.0535
+  },
+  {
+   "shrink": 0.25,
+   "repeats": 3,
+   "tasks": 80,
+   "perFamily": 2,
+   "coPrimary": 0.05525,
+   "rate": 0.15575,
+   "reliable": 0.07225
+  },
+  {
+   "shrink": 0.25,
+   "repeats": 3,
+   "tasks": 100,
+   "perFamily": 2,
+   "coPrimary": 0.06225,
+   "rate": 0.19075,
+   "reliable": 0.08475
+  },
+  {
+   "shrink": 0.25,
+   "repeats": 3,
+   "tasks": 120,
+   "perFamily": 2,
+   "coPrimary": 0.06875,
+   "rate": 0.21,
+   "reliable": 0.08625
+  },
+  {
+   "shrink": 0,
+   "repeats": 3,
+   "tasks": 20,
+   "perFamily": 2,
+   "coPrimary": 0.00475,
+   "rate": 0.016,
+   "reliable": 0.01025
+  },
+  {
+   "shrink": 0,
+   "repeats": 3,
+   "tasks": 30,
+   "perFamily": 2,
+   "coPrimary": 0.00725,
+   "rate": 0.02375,
+   "reliable": 0.0195
+  },
+  {
+   "shrink": 0,
+   "repeats": 3,
+   "tasks": 40,
+   "perFamily": 2,
+   "coPrimary": 0.00675,
+   "rate": 0.021,
+   "reliable": 0.02175
+  },
+  {
+   "shrink": 0,
+   "repeats": 3,
+   "tasks": 50,
+   "perFamily": 2,
+   "coPrimary": 0.00875,
+   "rate": 0.02575,
+   "reliable": 0.02525
+  },
+  {
+   "shrink": 0,
+   "repeats": 3,
+   "tasks": 60,
+   "perFamily": 2,
+   "coPrimary": 0.006,
+   "rate": 0.0185,
+   "reliable": 0.02175
+  },
+  {
+   "shrink": 0,
+   "repeats": 3,
+   "tasks": 80,
+   "perFamily": 2,
+   "coPrimary": 0.00975,
+   "rate": 0.0235,
+   "reliable": 0.02425
+  },
+  {
+   "shrink": 0,
+   "repeats": 3,
+   "tasks": 100,
+   "perFamily": 2,
+   "coPrimary": 0.0095,
+   "rate": 0.0245,
+   "reliable": 0.02575
+  },
+  {
+   "shrink": 0,
+   "repeats": 3,
+   "tasks": 120,
+   "perFamily": 2,
+   "coPrimary": 0.01075,
+   "rate": 0.02375,
+   "reliable": 0.02925
+  },
+  {
+   "shrink": 1,
+   "repeats": 3,
+   "tasks": 93,
+   "realizedFamilies": 54,
+   "coPrimary": 0.79325,
+   "rate": 0.8945,
+   "reliable": 0.81725
+  },
+  {
+   "shrink": 0.5,
+   "repeats": 3,
+   "tasks": 93,
+   "realizedFamilies": 54,
+   "coPrimary": 0.18475,
+   "rate": 0.44175,
+   "reliable": 0.20825
+  },
+  {
+   "shrink": 0.25,
+   "repeats": 3,
+   "tasks": 93,
+   "realizedFamilies": 54,
+   "coPrimary": 0.0515,
+   "rate": 0.15575,
+   "reliable": 0.0745
+  },
+  {
+   "shrink": 0,
+   "repeats": 3,
+   "tasks": 93,
+   "realizedFamilies": 54,
+   "coPrimary": 0.009,
+   "rate": 0.0255,
+   "reliable": 0.0275
+  }
+ ]
+}

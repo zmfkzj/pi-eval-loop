@@ -1,0 +1,5582 @@
+[
+ {
+  "arm": "PC",
+  "task": "x-short-io-envalid-unused-f77a6c7072",
+  "repeat": 0
+ },
+ {
+  "arm": "OC",
+  "task": "x-short-io-envalid-unused-f77a6c7072",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "x-short-io-envalid-unused-f77a6c7072",
+  "repeat": 0
+ },
+ {
+  "arm": "PCR",
+  "task": "x-short-io-envalid-unused-f77a6c7072",
+  "repeat": 0
+ },
+ {
+  "arm": "PC",
+  "task": "x-sindresorhus-clone-regexp-0594242c88",
+  "repeat": 0
+ },
+ {
+  "arm": "PCR",
+  "task": "x-sindresorhus-clone-regexp-0594242c88",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "x-sindresorhus-clone-regexp-0594242c88",
+  "repeat": 0
+ },
+ {
+  "arm": "OC",
+  "task": "x-sindresorhus-clone-regexp-0594242c88",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "x-runcat-tommy-dsh-panda-calendar-ec35ab2529",
+  "repeat": 2
+ },
+ {
+  "arm": "PC",
+  "task": "x-runcat-tommy-dsh-panda-calendar-ec35ab2529",
+  "repeat": 2
+ },
+ {
+  "arm": "PCR",
+  "task": "x-runcat-tommy-dsh-panda-calendar-ec35ab2529",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-runcat-tommy-dsh-panda-calendar-ec35ab2529",
+  "repeat": 2
+ },
+ {
+  "arm": "PC",
+  "task": "x-fugangcui-speakremix-codes-7bf8b8fb00",
+  "repeat": 1
+ },
+ {
+  "arm": "OCR",
+  "task": "x-fugangcui-speakremix-codes-7bf8b8fb00",
+  "repeat": 1
+ },
+ {
+  "arm": "PCR",
+  "task": "x-fugangcui-speakremix-codes-7bf8b8fb00",
+  "repeat": 1
+ },
+ {
+  "arm": "OC",
+  "task": "x-fugangcui-speakremix-codes-7bf8b8fb00",
+  "repeat": 1
+ },
+ {
+  "arm": "PCR",
+  "task": "x-wenaixi-dsh-prompt-history-396b4d7ce7",
+  "repeat": 2
+ },
+ {
+  "arm": "OCR",
+  "task": "x-wenaixi-dsh-prompt-history-396b4d7ce7",
+  "repeat": 2
+ },
+ {
+  "arm": "PC",
+  "task": "x-wenaixi-dsh-prompt-history-396b4d7ce7",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-wenaixi-dsh-prompt-history-396b4d7ce7",
+  "repeat": 2
+ },
+ {
+  "arm": "PC",
+  "task": "x-nodemailer-libqp-7bbdcbeac4",
+  "repeat": 2
+ },
+ {
+  "arm": "OCR",
+  "task": "x-nodemailer-libqp-7bbdcbeac4",
+  "repeat": 2
+ },
+ {
+  "arm": "PCR",
+  "task": "x-nodemailer-libqp-7bbdcbeac4",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-nodemailer-libqp-7bbdcbeac4",
+  "repeat": 2
+ },
+ {
+  "arm": "OCR",
+  "task": "x-magrinj-hermes-intl-e1877c8147",
+  "repeat": 2
+ },
+ {
+  "arm": "PCR",
+  "task": "x-magrinj-hermes-intl-e1877c8147",
+  "repeat": 2
+ },
+ {
+  "arm": "PC",
+  "task": "x-magrinj-hermes-intl-e1877c8147",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-magrinj-hermes-intl-e1877c8147",
+  "repeat": 2
+ },
+ {
+  "arm": "OCR",
+  "task": "x-avoidwork-filesize-js-64b4a2611f",
+  "repeat": 1
+ },
+ {
+  "arm": "PCR",
+  "task": "x-avoidwork-filesize-js-64b4a2611f",
+  "repeat": 1
+ },
+ {
+  "arm": "OC",
+  "task": "x-avoidwork-filesize-js-64b4a2611f",
+  "repeat": 1
+ },
+ {
+  "arm": "PC",
+  "task": "x-avoidwork-filesize-js-64b4a2611f",
+  "repeat": 1
+ },
+ {
+  "arm": "OCR",
+  "task": "x-dirop1-pi-delay-prompt-a7948a14a4",
+  "repeat": 0
+ },
+ {
+  "arm": "OC",
+  "task": "x-dirop1-pi-delay-prompt-a7948a14a4",
+  "repeat": 0
+ },
+ {
+  "arm": "PC",
+  "task": "x-dirop1-pi-delay-prompt-a7948a14a4",
+  "repeat": 0
+ },
+ {
+  "arm": "PCR",
+  "task": "x-dirop1-pi-delay-prompt-a7948a14a4",
+  "repeat": 0
+ },
+ {
+  "arm": "PC",
+  "task": "x-avoidwork-filesize-js-f5bd84b81b",
+  "repeat": 0
+ },
+ {
+  "arm": "OC",
+  "task": "x-avoidwork-filesize-js-f5bd84b81b",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "x-avoidwork-filesize-js-f5bd84b81b",
+  "repeat": 0
+ },
+ {
+  "arm": "PCR",
+  "task": "x-avoidwork-filesize-js-f5bd84b81b",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "x-dhaupin-crashtest-5c6ce1d53f",
+  "repeat": 2
+ },
+ {
+  "arm": "PC",
+  "task": "x-dhaupin-crashtest-5c6ce1d53f",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-dhaupin-crashtest-5c6ce1d53f",
+  "repeat": 2
+ },
+ {
+  "arm": "PCR",
+  "task": "x-dhaupin-crashtest-5c6ce1d53f",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-l956615272-hub-dsh-token-usage-8c425815aa",
+  "repeat": 2
+ },
+ {
+  "arm": "PC",
+  "task": "x-l956615272-hub-dsh-token-usage-8c425815aa",
+  "repeat": 2
+ },
+ {
+  "arm": "PCR",
+  "task": "x-l956615272-hub-dsh-token-usage-8c425815aa",
+  "repeat": 2
+ },
+ {
+  "arm": "OCR",
+  "task": "x-l956615272-hub-dsh-token-usage-8c425815aa",
+  "repeat": 2
+ },
+ {
+  "arm": "OCR",
+  "task": "x-ghostpawjs-grimoire-c5aa4b66a3",
+  "repeat": 1
+ },
+ {
+  "arm": "OC",
+  "task": "x-ghostpawjs-grimoire-c5aa4b66a3",
+  "repeat": 1
+ },
+ {
+  "arm": "PC",
+  "task": "x-ghostpawjs-grimoire-c5aa4b66a3",
+  "repeat": 1
+ },
+ {
+  "arm": "PCR",
+  "task": "x-ghostpawjs-grimoire-c5aa4b66a3",
+  "repeat": 1
+ },
+ {
+  "arm": "PC",
+  "task": "x-insession-space-insession-sdk-29c8a3b74e",
+  "repeat": 1
+ },
+ {
+  "arm": "OC",
+  "task": "x-insession-space-insession-sdk-29c8a3b74e",
+  "repeat": 1
+ },
+ {
+  "arm": "OCR",
+  "task": "x-insession-space-insession-sdk-29c8a3b74e",
+  "repeat": 1
+ },
+ {
+  "arm": "PCR",
+  "task": "x-insession-space-insession-sdk-29c8a3b74e",
+  "repeat": 1
+ },
+ {
+  "arm": "OC",
+  "task": "x-ahmtsahin-agent-context-bench-134ba49b33",
+  "repeat": 2
+ },
+ {
+  "arm": "OCR",
+  "task": "x-ahmtsahin-agent-context-bench-134ba49b33",
+  "repeat": 2
+ },
+ {
+  "arm": "PCR",
+  "task": "x-ahmtsahin-agent-context-bench-134ba49b33",
+  "repeat": 2
+ },
+ {
+  "arm": "PC",
+  "task": "x-ahmtsahin-agent-context-bench-134ba49b33",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-azu-setup-npm-trusted-publish-6104f8bee9",
+  "repeat": 2
+ },
+ {
+  "arm": "OCR",
+  "task": "x-azu-setup-npm-trusted-publish-6104f8bee9",
+  "repeat": 2
+ },
+ {
+  "arm": "PC",
+  "task": "x-azu-setup-npm-trusted-publish-6104f8bee9",
+  "repeat": 2
+ },
+ {
+  "arm": "PCR",
+  "task": "x-azu-setup-npm-trusted-publish-6104f8bee9",
+  "repeat": 2
+ },
+ {
+  "arm": "PCR",
+  "task": "x-groophylifefor-heap-analysis-71cd48f8ba",
+  "repeat": 1
+ },
+ {
+  "arm": "OC",
+  "task": "x-groophylifefor-heap-analysis-71cd48f8ba",
+  "repeat": 1
+ },
+ {
+  "arm": "PC",
+  "task": "x-groophylifefor-heap-analysis-71cd48f8ba",
+  "repeat": 1
+ },
+ {
+  "arm": "OCR",
+  "task": "x-groophylifefor-heap-analysis-71cd48f8ba",
+  "repeat": 1
+ },
+ {
+  "arm": "PC",
+  "task": "x-ghostpawjs-grimoire-b7fc19a032",
+  "repeat": 2
+ },
+ {
+  "arm": "OCR",
+  "task": "x-ghostpawjs-grimoire-b7fc19a032",
+  "repeat": 2
+ },
+ {
+  "arm": "PCR",
+  "task": "x-ghostpawjs-grimoire-b7fc19a032",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-ghostpawjs-grimoire-b7fc19a032",
+  "repeat": 2
+ },
+ {
+  "arm": "PC",
+  "task": "x-l956615272-hub-dsh-token-usage-4fef2ea940",
+  "repeat": 2
+ },
+ {
+  "arm": "PCR",
+  "task": "x-l956615272-hub-dsh-token-usage-4fef2ea940",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-l956615272-hub-dsh-token-usage-4fef2ea940",
+  "repeat": 2
+ },
+ {
+  "arm": "OCR",
+  "task": "x-l956615272-hub-dsh-token-usage-4fef2ea940",
+  "repeat": 2
+ },
+ {
+  "arm": "OCR",
+  "task": "x-ahmtsahin-agent-context-bench-134ba49b33",
+  "repeat": 1
+ },
+ {
+  "arm": "PCR",
+  "task": "x-ahmtsahin-agent-context-bench-134ba49b33",
+  "repeat": 1
+ },
+ {
+  "arm": "PC",
+  "task": "x-ahmtsahin-agent-context-bench-134ba49b33",
+  "repeat": 1
+ },
+ {
+  "arm": "OC",
+  "task": "x-ahmtsahin-agent-context-bench-134ba49b33",
+  "repeat": 1
+ },
+ {
+  "arm": "PC",
+  "task": "x-avoidwork-tiny-lru-da90b42c31",
+  "repeat": 1
+ },
+ {
+  "arm": "OC",
+  "task": "x-avoidwork-tiny-lru-da90b42c31",
+  "repeat": 1
+ },
+ {
+  "arm": "OCR",
+  "task": "x-avoidwork-tiny-lru-da90b42c31",
+  "repeat": 1
+ },
+ {
+  "arm": "PCR",
+  "task": "x-avoidwork-tiny-lru-da90b42c31",
+  "repeat": 1
+ },
+ {
+  "arm": "PCR",
+  "task": "x-avoidwork-filesize-js-109ae605ab",
+  "repeat": 1
+ },
+ {
+  "arm": "PC",
+  "task": "x-avoidwork-filesize-js-109ae605ab",
+  "repeat": 1
+ },
+ {
+  "arm": "OC",
+  "task": "x-avoidwork-filesize-js-109ae605ab",
+  "repeat": 1
+ },
+ {
+  "arm": "OCR",
+  "task": "x-avoidwork-filesize-js-109ae605ab",
+  "repeat": 1
+ },
+ {
+  "arm": "PC",
+  "task": "x-antonioprosperi2-svg-beeladybug-universal-a89811cf4e",
+  "repeat": 2
+ },
+ {
+  "arm": "OCR",
+  "task": "x-antonioprosperi2-svg-beeladybug-universal-a89811cf4e",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-antonioprosperi2-svg-beeladybug-universal-a89811cf4e",
+  "repeat": 2
+ },
+ {
+  "arm": "PCR",
+  "task": "x-antonioprosperi2-svg-beeladybug-universal-a89811cf4e",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-sandsoftwaresolutions-ss-duration-ac6449101c",
+  "repeat": 0
+ },
+ {
+  "arm": "PCR",
+  "task": "x-sandsoftwaresolutions-ss-duration-ac6449101c",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "x-sandsoftwaresolutions-ss-duration-ac6449101c",
+  "repeat": 0
+ },
+ {
+  "arm": "PC",
+  "task": "x-sandsoftwaresolutions-ss-duration-ac6449101c",
+  "repeat": 0
+ },
+ {
+  "arm": "PCR",
+  "task": "x-dgrr-studio-dice-141a1a8d6b",
+  "repeat": 1
+ },
+ {
+  "arm": "OCR",
+  "task": "x-dgrr-studio-dice-141a1a8d6b",
+  "repeat": 1
+ },
+ {
+  "arm": "OC",
+  "task": "x-dgrr-studio-dice-141a1a8d6b",
+  "repeat": 1
+ },
+ {
+  "arm": "PC",
+  "task": "x-dgrr-studio-dice-141a1a8d6b",
+  "repeat": 1
+ },
+ {
+  "arm": "PC",
+  "task": "x-guotree-magpie-websearch-c4d8db57f9",
+  "repeat": 2
+ },
+ {
+  "arm": "OCR",
+  "task": "x-guotree-magpie-websearch-c4d8db57f9",
+  "repeat": 2
+ },
+ {
+  "arm": "PCR",
+  "task": "x-guotree-magpie-websearch-c4d8db57f9",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-guotree-magpie-websearch-c4d8db57f9",
+  "repeat": 2
+ },
+ {
+  "arm": "PC",
+  "task": "x-magrinj-hermes-intl-22ec94ee24",
+  "repeat": 1
+ },
+ {
+  "arm": "OC",
+  "task": "x-magrinj-hermes-intl-22ec94ee24",
+  "repeat": 1
+ },
+ {
+  "arm": "PCR",
+  "task": "x-magrinj-hermes-intl-22ec94ee24",
+  "repeat": 1
+ },
+ {
+  "arm": "OCR",
+  "task": "x-magrinj-hermes-intl-22ec94ee24",
+  "repeat": 1
+ },
+ {
+  "arm": "OC",
+  "task": "x-cheapestinference-claude-auto-retry-f859f12fea",
+  "repeat": 1
+ },
+ {
+  "arm": "PCR",
+  "task": "x-cheapestinference-claude-auto-retry-f859f12fea",
+  "repeat": 1
+ },
+ {
+  "arm": "OCR",
+  "task": "x-cheapestinference-claude-auto-retry-f859f12fea",
+  "repeat": 1
+ },
+ {
+  "arm": "PC",
+  "task": "x-cheapestinference-claude-auto-retry-f859f12fea",
+  "repeat": 1
+ },
+ {
+  "arm": "PC",
+  "task": "x-ghostpawjs-grimoire-c5aa4b66a3",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-ghostpawjs-grimoire-c5aa4b66a3",
+  "repeat": 2
+ },
+ {
+  "arm": "PCR",
+  "task": "x-ghostpawjs-grimoire-c5aa4b66a3",
+  "repeat": 2
+ },
+ {
+  "arm": "OCR",
+  "task": "x-ghostpawjs-grimoire-c5aa4b66a3",
+  "repeat": 2
+ },
+ {
+  "arm": "PC",
+  "task": "x-ghostpawjs-grimoire-b7fc19a032",
+  "repeat": 1
+ },
+ {
+  "arm": "OCR",
+  "task": "x-ghostpawjs-grimoire-b7fc19a032",
+  "repeat": 1
+ },
+ {
+  "arm": "PCR",
+  "task": "x-ghostpawjs-grimoire-b7fc19a032",
+  "repeat": 1
+ },
+ {
+  "arm": "OC",
+  "task": "x-ghostpawjs-grimoire-b7fc19a032",
+  "repeat": 1
+ },
+ {
+  "arm": "PC",
+  "task": "x-metarhia-metawatch-e1b278f5c3",
+  "repeat": 1
+ },
+ {
+  "arm": "OC",
+  "task": "x-metarhia-metawatch-e1b278f5c3",
+  "repeat": 1
+ },
+ {
+  "arm": "OCR",
+  "task": "x-metarhia-metawatch-e1b278f5c3",
+  "repeat": 1
+ },
+ {
+  "arm": "PCR",
+  "task": "x-metarhia-metawatch-e1b278f5c3",
+  "repeat": 1
+ },
+ {
+  "arm": "PC",
+  "task": "x-insession-space-insession-sdk-29c8a3b74e",
+  "repeat": 2
+ },
+ {
+  "arm": "PCR",
+  "task": "x-insession-space-insession-sdk-29c8a3b74e",
+  "repeat": 2
+ },
+ {
+  "arm": "OCR",
+  "task": "x-insession-space-insession-sdk-29c8a3b74e",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-insession-space-insession-sdk-29c8a3b74e",
+  "repeat": 2
+ },
+ {
+  "arm": "PC",
+  "task": "x-lhf198-dsh-prompt-optimizer-fe5772419b",
+  "repeat": 0
+ },
+ {
+  "arm": "OC",
+  "task": "x-lhf198-dsh-prompt-optimizer-fe5772419b",
+  "repeat": 0
+ },
+ {
+  "arm": "PCR",
+  "task": "x-lhf198-dsh-prompt-optimizer-fe5772419b",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "x-lhf198-dsh-prompt-optimizer-fe5772419b",
+  "repeat": 0
+ },
+ {
+  "arm": "PCR",
+  "task": "x-igormel81-dsh-chat-cost-8b37b31edf",
+  "repeat": 1
+ },
+ {
+  "arm": "PC",
+  "task": "x-igormel81-dsh-chat-cost-8b37b31edf",
+  "repeat": 1
+ },
+ {
+  "arm": "OC",
+  "task": "x-igormel81-dsh-chat-cost-8b37b31edf",
+  "repeat": 1
+ },
+ {
+  "arm": "OCR",
+  "task": "x-igormel81-dsh-chat-cost-8b37b31edf",
+  "repeat": 1
+ },
+ {
+  "arm": "PCR",
+  "task": "x-wenaixi-dsh-prompt-history-f2c2ad01c0",
+  "repeat": 1
+ },
+ {
+  "arm": "OCR",
+  "task": "x-wenaixi-dsh-prompt-history-f2c2ad01c0",
+  "repeat": 1
+ },
+ {
+  "arm": "PC",
+  "task": "x-wenaixi-dsh-prompt-history-f2c2ad01c0",
+  "repeat": 1
+ },
+ {
+  "arm": "OC",
+  "task": "x-wenaixi-dsh-prompt-history-f2c2ad01c0",
+  "repeat": 1
+ },
+ {
+  "arm": "PCR",
+  "task": "x-mr-mihu-dsh-dbhub-live-534032da27",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "x-mr-mihu-dsh-dbhub-live-534032da27",
+  "repeat": 0
+ },
+ {
+  "arm": "OC",
+  "task": "x-mr-mihu-dsh-dbhub-live-534032da27",
+  "repeat": 0
+ },
+ {
+  "arm": "PC",
+  "task": "x-mr-mihu-dsh-dbhub-live-534032da27",
+  "repeat": 0
+ },
+ {
+  "arm": "PC",
+  "task": "x-dirop1-pi-delay-prompt-a7948a14a4",
+  "repeat": 1
+ },
+ {
+  "arm": "PCR",
+  "task": "x-dirop1-pi-delay-prompt-a7948a14a4",
+  "repeat": 1
+ },
+ {
+  "arm": "OC",
+  "task": "x-dirop1-pi-delay-prompt-a7948a14a4",
+  "repeat": 1
+ },
+ {
+  "arm": "OCR",
+  "task": "x-dirop1-pi-delay-prompt-a7948a14a4",
+  "repeat": 1
+ },
+ {
+  "arm": "PC",
+  "task": "x-avoidwork-tiny-lru-da90b42c31",
+  "repeat": 2
+ },
+ {
+  "arm": "PCR",
+  "task": "x-avoidwork-tiny-lru-da90b42c31",
+  "repeat": 2
+ },
+ {
+  "arm": "OCR",
+  "task": "x-avoidwork-tiny-lru-da90b42c31",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-avoidwork-tiny-lru-da90b42c31",
+  "repeat": 2
+ },
+ {
+  "arm": "PC",
+  "task": "x-insession-space-insession-sdk-c721ee0c1d",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-insession-space-insession-sdk-c721ee0c1d",
+  "repeat": 2
+ },
+ {
+  "arm": "PCR",
+  "task": "x-insession-space-insession-sdk-c721ee0c1d",
+  "repeat": 2
+ },
+ {
+  "arm": "OCR",
+  "task": "x-insession-space-insession-sdk-c721ee0c1d",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-drewthomas00-tcpa-quiet-hours-d929633b54",
+  "repeat": 2
+ },
+ {
+  "arm": "PC",
+  "task": "x-drewthomas00-tcpa-quiet-hours-d929633b54",
+  "repeat": 2
+ },
+ {
+  "arm": "PCR",
+  "task": "x-drewthomas00-tcpa-quiet-hours-d929633b54",
+  "repeat": 2
+ },
+ {
+  "arm": "OCR",
+  "task": "x-drewthomas00-tcpa-quiet-hours-d929633b54",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-blucca-n8n-check-a7fa85ded5",
+  "repeat": 1
+ },
+ {
+  "arm": "PC",
+  "task": "x-blucca-n8n-check-a7fa85ded5",
+  "repeat": 1
+ },
+ {
+  "arm": "OCR",
+  "task": "x-blucca-n8n-check-a7fa85ded5",
+  "repeat": 1
+ },
+ {
+  "arm": "PCR",
+  "task": "x-blucca-n8n-check-a7fa85ded5",
+  "repeat": 1
+ },
+ {
+  "arm": "PC",
+  "task": "x-mr-mihu-dsh-dbhub-live-f9d568569b",
+  "repeat": 2
+ },
+ {
+  "arm": "OCR",
+  "task": "x-mr-mihu-dsh-dbhub-live-f9d568569b",
+  "repeat": 2
+ },
+ {
+  "arm": "PCR",
+  "task": "x-mr-mihu-dsh-dbhub-live-f9d568569b",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-mr-mihu-dsh-dbhub-live-f9d568569b",
+  "repeat": 2
+ },
+ {
+  "arm": "PC",
+  "task": "x-ahmtsahin-agent-context-bench-b63c4acd3d",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-ahmtsahin-agent-context-bench-b63c4acd3d",
+  "repeat": 2
+ },
+ {
+  "arm": "OCR",
+  "task": "x-ahmtsahin-agent-context-bench-b63c4acd3d",
+  "repeat": 2
+ },
+ {
+  "arm": "PCR",
+  "task": "x-ahmtsahin-agent-context-bench-b63c4acd3d",
+  "repeat": 2
+ },
+ {
+  "arm": "OCR",
+  "task": "x-avoidwork-tiny-lru-da90b42c31",
+  "repeat": 0
+ },
+ {
+  "arm": "PC",
+  "task": "x-avoidwork-tiny-lru-da90b42c31",
+  "repeat": 0
+ },
+ {
+  "arm": "OC",
+  "task": "x-avoidwork-tiny-lru-da90b42c31",
+  "repeat": 0
+ },
+ {
+  "arm": "PCR",
+  "task": "x-avoidwork-tiny-lru-da90b42c31",
+  "repeat": 0
+ },
+ {
+  "arm": "OC",
+  "task": "x-l956615272-hub-dsh-token-usage-8c425815aa",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "x-l956615272-hub-dsh-token-usage-8c425815aa",
+  "repeat": 0
+ },
+ {
+  "arm": "PCR",
+  "task": "x-l956615272-hub-dsh-token-usage-8c425815aa",
+  "repeat": 0
+ },
+ {
+  "arm": "PC",
+  "task": "x-l956615272-hub-dsh-token-usage-8c425815aa",
+  "repeat": 0
+ },
+ {
+  "arm": "PC",
+  "task": "x-blakeb056-six-degrees-aec5ecaebb",
+  "repeat": 1
+ },
+ {
+  "arm": "OC",
+  "task": "x-blakeb056-six-degrees-aec5ecaebb",
+  "repeat": 1
+ },
+ {
+  "arm": "PCR",
+  "task": "x-blakeb056-six-degrees-aec5ecaebb",
+  "repeat": 1
+ },
+ {
+  "arm": "OCR",
+  "task": "x-blakeb056-six-degrees-aec5ecaebb",
+  "repeat": 1
+ },
+ {
+  "arm": "PCR",
+  "task": "x-metarhia-metawatch-e1b278f5c3",
+  "repeat": 0
+ },
+ {
+  "arm": "PC",
+  "task": "x-metarhia-metawatch-e1b278f5c3",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "x-metarhia-metawatch-e1b278f5c3",
+  "repeat": 0
+ },
+ {
+  "arm": "OC",
+  "task": "x-metarhia-metawatch-e1b278f5c3",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "x-sandsoftwaresolutions-ss-human-format-ade5993e4f",
+  "repeat": 2
+ },
+ {
+  "arm": "PCR",
+  "task": "x-sandsoftwaresolutions-ss-human-format-ade5993e4f",
+  "repeat": 2
+ },
+ {
+  "arm": "PC",
+  "task": "x-sandsoftwaresolutions-ss-human-format-ade5993e4f",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-sandsoftwaresolutions-ss-human-format-ade5993e4f",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-kannakuron-dsh-ide-git-3599010391",
+  "repeat": 1
+ },
+ {
+  "arm": "OCR",
+  "task": "x-kannakuron-dsh-ide-git-3599010391",
+  "repeat": 1
+ },
+ {
+  "arm": "PCR",
+  "task": "x-kannakuron-dsh-ide-git-3599010391",
+  "repeat": 1
+ },
+ {
+  "arm": "PC",
+  "task": "x-kannakuron-dsh-ide-git-3599010391",
+  "repeat": 1
+ },
+ {
+  "arm": "OCR",
+  "task": "x-guorunjie-agentic-workflow-guard-79f4aec3b8",
+  "repeat": 0
+ },
+ {
+  "arm": "PCR",
+  "task": "x-guorunjie-agentic-workflow-guard-79f4aec3b8",
+  "repeat": 0
+ },
+ {
+  "arm": "OC",
+  "task": "x-guorunjie-agentic-workflow-guard-79f4aec3b8",
+  "repeat": 0
+ },
+ {
+  "arm": "PC",
+  "task": "x-guorunjie-agentic-workflow-guard-79f4aec3b8",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "x-dhaupin-crashtest-eb4c5fee65",
+  "repeat": 1
+ },
+ {
+  "arm": "PCR",
+  "task": "x-dhaupin-crashtest-eb4c5fee65",
+  "repeat": 1
+ },
+ {
+  "arm": "PC",
+  "task": "x-dhaupin-crashtest-eb4c5fee65",
+  "repeat": 1
+ },
+ {
+  "arm": "OC",
+  "task": "x-dhaupin-crashtest-eb4c5fee65",
+  "repeat": 1
+ },
+ {
+  "arm": "PC",
+  "task": "x-ghostpawjs-grimoire-c5aa4b66a3",
+  "repeat": 0
+ },
+ {
+  "arm": "OC",
+  "task": "x-ghostpawjs-grimoire-c5aa4b66a3",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "x-ghostpawjs-grimoire-c5aa4b66a3",
+  "repeat": 0
+ },
+ {
+  "arm": "PCR",
+  "task": "x-ghostpawjs-grimoire-c5aa4b66a3",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "x-johnhenry-mport-b70dabf4e7",
+  "repeat": 1
+ },
+ {
+  "arm": "PCR",
+  "task": "x-johnhenry-mport-b70dabf4e7",
+  "repeat": 1
+ },
+ {
+  "arm": "OC",
+  "task": "x-johnhenry-mport-b70dabf4e7",
+  "repeat": 1
+ },
+ {
+  "arm": "PC",
+  "task": "x-johnhenry-mport-b70dabf4e7",
+  "repeat": 1
+ },
+ {
+  "arm": "OC",
+  "task": "x-mr-mihu-dsh-dbhub-live-534032da27",
+  "repeat": 1
+ },
+ {
+  "arm": "OCR",
+  "task": "x-mr-mihu-dsh-dbhub-live-534032da27",
+  "repeat": 1
+ },
+ {
+  "arm": "PC",
+  "task": "x-mr-mihu-dsh-dbhub-live-534032da27",
+  "repeat": 1
+ },
+ {
+  "arm": "PCR",
+  "task": "x-mr-mihu-dsh-dbhub-live-534032da27",
+  "repeat": 1
+ },
+ {
+  "arm": "OCR",
+  "task": "x-sindresorhus-clone-regexp-0594242c88",
+  "repeat": 2
+ },
+ {
+  "arm": "PCR",
+  "task": "x-sindresorhus-clone-regexp-0594242c88",
+  "repeat": 2
+ },
+ {
+  "arm": "PC",
+  "task": "x-sindresorhus-clone-regexp-0594242c88",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-sindresorhus-clone-regexp-0594242c88",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-groophylifefor-heap-analysis-71cd48f8ba",
+  "repeat": 0
+ },
+ {
+  "arm": "PC",
+  "task": "x-groophylifefor-heap-analysis-71cd48f8ba",
+  "repeat": 0
+ },
+ {
+  "arm": "PCR",
+  "task": "x-groophylifefor-heap-analysis-71cd48f8ba",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "x-groophylifefor-heap-analysis-71cd48f8ba",
+  "repeat": 0
+ },
+ {
+  "arm": "PC",
+  "task": "x-l956615272-hub-dsh-token-usage-4fef2ea940",
+  "repeat": 1
+ },
+ {
+  "arm": "OCR",
+  "task": "x-l956615272-hub-dsh-token-usage-4fef2ea940",
+  "repeat": 1
+ },
+ {
+  "arm": "PCR",
+  "task": "x-l956615272-hub-dsh-token-usage-4fef2ea940",
+  "repeat": 1
+ },
+ {
+  "arm": "OC",
+  "task": "x-l956615272-hub-dsh-token-usage-4fef2ea940",
+  "repeat": 1
+ },
+ {
+  "arm": "PC",
+  "task": "x-cccalana-gatewaycheck-2d961d088c",
+  "repeat": 0
+ },
+ {
+  "arm": "PCR",
+  "task": "x-cccalana-gatewaycheck-2d961d088c",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "x-cccalana-gatewaycheck-2d961d088c",
+  "repeat": 0
+ },
+ {
+  "arm": "OC",
+  "task": "x-cccalana-gatewaycheck-2d961d088c",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "x-insession-space-insession-sdk-f9057e96cd",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-insession-space-insession-sdk-f9057e96cd",
+  "repeat": 2
+ },
+ {
+  "arm": "PC",
+  "task": "x-insession-space-insession-sdk-f9057e96cd",
+  "repeat": 2
+ },
+ {
+  "arm": "PCR",
+  "task": "x-insession-space-insession-sdk-f9057e96cd",
+  "repeat": 2
+ },
+ {
+  "arm": "PCR",
+  "task": "x-wenaixi-dsh-prompt-history-87cd943992",
+  "repeat": 0
+ },
+ {
+  "arm": "PC",
+  "task": "x-wenaixi-dsh-prompt-history-87cd943992",
+  "repeat": 0
+ },
+ {
+  "arm": "OC",
+  "task": "x-wenaixi-dsh-prompt-history-87cd943992",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "x-wenaixi-dsh-prompt-history-87cd943992",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "x-wenaixi-dsh-prompt-history-396b4d7ce7",
+  "repeat": 1
+ },
+ {
+  "arm": "OC",
+  "task": "x-wenaixi-dsh-prompt-history-396b4d7ce7",
+  "repeat": 1
+ },
+ {
+  "arm": "PCR",
+  "task": "x-wenaixi-dsh-prompt-history-396b4d7ce7",
+  "repeat": 1
+ },
+ {
+  "arm": "PC",
+  "task": "x-wenaixi-dsh-prompt-history-396b4d7ce7",
+  "repeat": 1
+ },
+ {
+  "arm": "OC",
+  "task": "x-evomap-gep-sdk-js-6a387bbe32",
+  "repeat": 2
+ },
+ {
+  "arm": "OCR",
+  "task": "x-evomap-gep-sdk-js-6a387bbe32",
+  "repeat": 2
+ },
+ {
+  "arm": "PC",
+  "task": "x-evomap-gep-sdk-js-6a387bbe32",
+  "repeat": 2
+ },
+ {
+  "arm": "PCR",
+  "task": "x-evomap-gep-sdk-js-6a387bbe32",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-shrinivas-sn-adapter-ingestion-499701352b",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "x-shrinivas-sn-adapter-ingestion-499701352b",
+  "repeat": 0
+ },
+ {
+  "arm": "PCR",
+  "task": "x-shrinivas-sn-adapter-ingestion-499701352b",
+  "repeat": 0
+ },
+ {
+  "arm": "PC",
+  "task": "x-shrinivas-sn-adapter-ingestion-499701352b",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "x-fugangcui-speakremix-codes-7bf8b8fb00",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-fugangcui-speakremix-codes-7bf8b8fb00",
+  "repeat": 2
+ },
+ {
+  "arm": "PCR",
+  "task": "x-fugangcui-speakremix-codes-7bf8b8fb00",
+  "repeat": 2
+ },
+ {
+  "arm": "PC",
+  "task": "x-fugangcui-speakremix-codes-7bf8b8fb00",
+  "repeat": 2
+ },
+ {
+  "arm": "PC",
+  "task": "x-igormel81-dsh-chat-cost-8b37b31edf",
+  "repeat": 0
+ },
+ {
+  "arm": "PCR",
+  "task": "x-igormel81-dsh-chat-cost-8b37b31edf",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "x-igormel81-dsh-chat-cost-8b37b31edf",
+  "repeat": 0
+ },
+ {
+  "arm": "OC",
+  "task": "x-igormel81-dsh-chat-cost-8b37b31edf",
+  "repeat": 0
+ },
+ {
+  "arm": "OC",
+  "task": "x-avoidwork-filesize-js-64b4a2611f",
+  "repeat": 2
+ },
+ {
+  "arm": "PC",
+  "task": "x-avoidwork-filesize-js-64b4a2611f",
+  "repeat": 2
+ },
+ {
+  "arm": "PCR",
+  "task": "x-avoidwork-filesize-js-64b4a2611f",
+  "repeat": 2
+ },
+ {
+  "arm": "OCR",
+  "task": "x-avoidwork-filesize-js-64b4a2611f",
+  "repeat": 2
+ },
+ {
+  "arm": "PC",
+  "task": "x-guotree-magpie-websearch-a74cfdcbe9",
+  "repeat": 1
+ },
+ {
+  "arm": "OCR",
+  "task": "x-guotree-magpie-websearch-a74cfdcbe9",
+  "repeat": 1
+ },
+ {
+  "arm": "PCR",
+  "task": "x-guotree-magpie-websearch-a74cfdcbe9",
+  "repeat": 1
+ },
+ {
+  "arm": "OC",
+  "task": "x-guotree-magpie-websearch-a74cfdcbe9",
+  "repeat": 1
+ },
+ {
+  "arm": "PC",
+  "task": "x-legible-sh-mutex-3a0cb5dd56",
+  "repeat": 1
+ },
+ {
+  "arm": "OCR",
+  "task": "x-legible-sh-mutex-3a0cb5dd56",
+  "repeat": 1
+ },
+ {
+  "arm": "PCR",
+  "task": "x-legible-sh-mutex-3a0cb5dd56",
+  "repeat": 1
+ },
+ {
+  "arm": "OC",
+  "task": "x-legible-sh-mutex-3a0cb5dd56",
+  "repeat": 1
+ },
+ {
+  "arm": "OC",
+  "task": "x-ahmtsahin-agent-context-bench-b63c4acd3d",
+  "repeat": 0
+ },
+ {
+  "arm": "PC",
+  "task": "x-ahmtsahin-agent-context-bench-b63c4acd3d",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "x-ahmtsahin-agent-context-bench-b63c4acd3d",
+  "repeat": 0
+ },
+ {
+  "arm": "PCR",
+  "task": "x-ahmtsahin-agent-context-bench-b63c4acd3d",
+  "repeat": 0
+ },
+ {
+  "arm": "PCR",
+  "task": "x-sandsoftwaresolutions-ss-human-format-ade5993e4f",
+  "repeat": 1
+ },
+ {
+  "arm": "OCR",
+  "task": "x-sandsoftwaresolutions-ss-human-format-ade5993e4f",
+  "repeat": 1
+ },
+ {
+  "arm": "OC",
+  "task": "x-sandsoftwaresolutions-ss-human-format-ade5993e4f",
+  "repeat": 1
+ },
+ {
+  "arm": "PC",
+  "task": "x-sandsoftwaresolutions-ss-human-format-ade5993e4f",
+  "repeat": 1
+ },
+ {
+  "arm": "OC",
+  "task": "x-opopeshku-cronalive-node-a6f621977e",
+  "repeat": 2
+ },
+ {
+  "arm": "PCR",
+  "task": "x-opopeshku-cronalive-node-a6f621977e",
+  "repeat": 2
+ },
+ {
+  "arm": "OCR",
+  "task": "x-opopeshku-cronalive-node-a6f621977e",
+  "repeat": 2
+ },
+ {
+  "arm": "PC",
+  "task": "x-opopeshku-cronalive-node-a6f621977e",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-guotree-magpie-websearch-466d493835",
+  "repeat": 1
+ },
+ {
+  "arm": "PCR",
+  "task": "x-guotree-magpie-websearch-466d493835",
+  "repeat": 1
+ },
+ {
+  "arm": "OCR",
+  "task": "x-guotree-magpie-websearch-466d493835",
+  "repeat": 1
+ },
+ {
+  "arm": "PC",
+  "task": "x-guotree-magpie-websearch-466d493835",
+  "repeat": 1
+ },
+ {
+  "arm": "OC",
+  "task": "x-antonioprosperi2-svg-beeladybug-universal-5f88e1d66c",
+  "repeat": 1
+ },
+ {
+  "arm": "OCR",
+  "task": "x-antonioprosperi2-svg-beeladybug-universal-5f88e1d66c",
+  "repeat": 1
+ },
+ {
+  "arm": "PC",
+  "task": "x-antonioprosperi2-svg-beeladybug-universal-5f88e1d66c",
+  "repeat": 1
+ },
+ {
+  "arm": "PCR",
+  "task": "x-antonioprosperi2-svg-beeladybug-universal-5f88e1d66c",
+  "repeat": 1
+ },
+ {
+  "arm": "OCR",
+  "task": "x-l956615272-hub-dsh-token-usage-8c425815aa",
+  "repeat": 1
+ },
+ {
+  "arm": "PCR",
+  "task": "x-l956615272-hub-dsh-token-usage-8c425815aa",
+  "repeat": 1
+ },
+ {
+  "arm": "OC",
+  "task": "x-l956615272-hub-dsh-token-usage-8c425815aa",
+  "repeat": 1
+ },
+ {
+  "arm": "PC",
+  "task": "x-l956615272-hub-dsh-token-usage-8c425815aa",
+  "repeat": 1
+ },
+ {
+  "arm": "PC",
+  "task": "x-cccalana-gatewaycheck-2d961d088c",
+  "repeat": 2
+ },
+ {
+  "arm": "PCR",
+  "task": "x-cccalana-gatewaycheck-2d961d088c",
+  "repeat": 2
+ },
+ {
+  "arm": "OCR",
+  "task": "x-cccalana-gatewaycheck-2d961d088c",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-cccalana-gatewaycheck-2d961d088c",
+  "repeat": 2
+ },
+ {
+  "arm": "OCR",
+  "task": "x-w8s-rng-with-intention-d6d0f34e4c",
+  "repeat": 0
+ },
+ {
+  "arm": "PC",
+  "task": "x-w8s-rng-with-intention-d6d0f34e4c",
+  "repeat": 0
+ },
+ {
+  "arm": "OC",
+  "task": "x-w8s-rng-with-intention-d6d0f34e4c",
+  "repeat": 0
+ },
+ {
+  "arm": "PCR",
+  "task": "x-w8s-rng-with-intention-d6d0f34e4c",
+  "repeat": 0
+ },
+ {
+  "arm": "PC",
+  "task": "x-toolbuilder-list-bc22a50372",
+  "repeat": 1
+ },
+ {
+  "arm": "PCR",
+  "task": "x-toolbuilder-list-bc22a50372",
+  "repeat": 1
+ },
+ {
+  "arm": "OCR",
+  "task": "x-toolbuilder-list-bc22a50372",
+  "repeat": 1
+ },
+ {
+  "arm": "OC",
+  "task": "x-toolbuilder-list-bc22a50372",
+  "repeat": 1
+ },
+ {
+  "arm": "OC",
+  "task": "x-avoidwork-tiny-lru-30397d7a76",
+  "repeat": 0
+ },
+ {
+  "arm": "PC",
+  "task": "x-avoidwork-tiny-lru-30397d7a76",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "x-avoidwork-tiny-lru-30397d7a76",
+  "repeat": 0
+ },
+ {
+  "arm": "PCR",
+  "task": "x-avoidwork-tiny-lru-30397d7a76",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "x-guotree-magpie-websearch-c4d8db57f9",
+  "repeat": 1
+ },
+ {
+  "arm": "PCR",
+  "task": "x-guotree-magpie-websearch-c4d8db57f9",
+  "repeat": 1
+ },
+ {
+  "arm": "OC",
+  "task": "x-guotree-magpie-websearch-c4d8db57f9",
+  "repeat": 1
+ },
+ {
+  "arm": "PC",
+  "task": "x-guotree-magpie-websearch-c4d8db57f9",
+  "repeat": 1
+ },
+ {
+  "arm": "OCR",
+  "task": "x-ahmtsahin-agent-context-bench-3912f5ad87",
+  "repeat": 0
+ },
+ {
+  "arm": "PCR",
+  "task": "x-ahmtsahin-agent-context-bench-3912f5ad87",
+  "repeat": 0
+ },
+ {
+  "arm": "OC",
+  "task": "x-ahmtsahin-agent-context-bench-3912f5ad87",
+  "repeat": 0
+ },
+ {
+  "arm": "PC",
+  "task": "x-ahmtsahin-agent-context-bench-3912f5ad87",
+  "repeat": 0
+ },
+ {
+  "arm": "OC",
+  "task": "x-avoidwork-filesize-js-f5bd84b81b",
+  "repeat": 1
+ },
+ {
+  "arm": "PC",
+  "task": "x-avoidwork-filesize-js-f5bd84b81b",
+  "repeat": 1
+ },
+ {
+  "arm": "PCR",
+  "task": "x-avoidwork-filesize-js-f5bd84b81b",
+  "repeat": 1
+ },
+ {
+  "arm": "OCR",
+  "task": "x-avoidwork-filesize-js-f5bd84b81b",
+  "repeat": 1
+ },
+ {
+  "arm": "PC",
+  "task": "x-fugangcui-speakremix-codes-7bf8b8fb00",
+  "repeat": 0
+ },
+ {
+  "arm": "PCR",
+  "task": "x-fugangcui-speakremix-codes-7bf8b8fb00",
+  "repeat": 0
+ },
+ {
+  "arm": "OC",
+  "task": "x-fugangcui-speakremix-codes-7bf8b8fb00",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "x-fugangcui-speakremix-codes-7bf8b8fb00",
+  "repeat": 0
+ },
+ {
+  "arm": "OC",
+  "task": "x-cheapestinference-claude-auto-retry-6d605a5d91",
+  "repeat": 2
+ },
+ {
+  "arm": "OCR",
+  "task": "x-cheapestinference-claude-auto-retry-6d605a5d91",
+  "repeat": 2
+ },
+ {
+  "arm": "PCR",
+  "task": "x-cheapestinference-claude-auto-retry-6d605a5d91",
+  "repeat": 2
+ },
+ {
+  "arm": "PC",
+  "task": "x-cheapestinference-claude-auto-retry-6d605a5d91",
+  "repeat": 2
+ },
+ {
+  "arm": "PCR",
+  "task": "x-nodemailer-libqp-7bbdcbeac4",
+  "repeat": 0
+ },
+ {
+  "arm": "PC",
+  "task": "x-nodemailer-libqp-7bbdcbeac4",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "x-nodemailer-libqp-7bbdcbeac4",
+  "repeat": 0
+ },
+ {
+  "arm": "OC",
+  "task": "x-nodemailer-libqp-7bbdcbeac4",
+  "repeat": 0
+ },
+ {
+  "arm": "PCR",
+  "task": "x-legible-sh-mutex-13867857ca",
+  "repeat": 1
+ },
+ {
+  "arm": "PC",
+  "task": "x-legible-sh-mutex-13867857ca",
+  "repeat": 1
+ },
+ {
+  "arm": "OC",
+  "task": "x-legible-sh-mutex-13867857ca",
+  "repeat": 1
+ },
+ {
+  "arm": "OCR",
+  "task": "x-legible-sh-mutex-13867857ca",
+  "repeat": 1
+ },
+ {
+  "arm": "OC",
+  "task": "x-groophylifefor-heap-analysis-bfc733de41",
+  "repeat": 2
+ },
+ {
+  "arm": "PCR",
+  "task": "x-groophylifefor-heap-analysis-bfc733de41",
+  "repeat": 2
+ },
+ {
+  "arm": "OCR",
+  "task": "x-groophylifefor-heap-analysis-bfc733de41",
+  "repeat": 2
+ },
+ {
+  "arm": "PC",
+  "task": "x-groophylifefor-heap-analysis-bfc733de41",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-ghostpawjs-grimoire-4a1c83b504",
+  "repeat": 2
+ },
+ {
+  "arm": "PC",
+  "task": "x-ghostpawjs-grimoire-4a1c83b504",
+  "repeat": 2
+ },
+ {
+  "arm": "PCR",
+  "task": "x-ghostpawjs-grimoire-4a1c83b504",
+  "repeat": 2
+ },
+ {
+  "arm": "OCR",
+  "task": "x-ghostpawjs-grimoire-4a1c83b504",
+  "repeat": 2
+ },
+ {
+  "arm": "OCR",
+  "task": "x-mukundakatta-agentfit-510c32d490",
+  "repeat": 2
+ },
+ {
+  "arm": "PC",
+  "task": "x-mukundakatta-agentfit-510c32d490",
+  "repeat": 2
+ },
+ {
+  "arm": "PCR",
+  "task": "x-mukundakatta-agentfit-510c32d490",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-mukundakatta-agentfit-510c32d490",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-antonioprosperi2-svg-beeladybug-universal-a89811cf4e",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "x-antonioprosperi2-svg-beeladybug-universal-a89811cf4e",
+  "repeat": 0
+ },
+ {
+  "arm": "PCR",
+  "task": "x-antonioprosperi2-svg-beeladybug-universal-a89811cf4e",
+  "repeat": 0
+ },
+ {
+  "arm": "PC",
+  "task": "x-antonioprosperi2-svg-beeladybug-universal-a89811cf4e",
+  "repeat": 0
+ },
+ {
+  "arm": "PCR",
+  "task": "x-metarhia-metawatch-af9528a554",
+  "repeat": 2
+ },
+ {
+  "arm": "OCR",
+  "task": "x-metarhia-metawatch-af9528a554",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-metarhia-metawatch-af9528a554",
+  "repeat": 2
+ },
+ {
+  "arm": "PC",
+  "task": "x-metarhia-metawatch-af9528a554",
+  "repeat": 2
+ },
+ {
+  "arm": "PCR",
+  "task": "x-toolbuilder-list-1914dfac5e",
+  "repeat": 2
+ },
+ {
+  "arm": "OCR",
+  "task": "x-toolbuilder-list-1914dfac5e",
+  "repeat": 2
+ },
+ {
+  "arm": "PC",
+  "task": "x-toolbuilder-list-1914dfac5e",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-toolbuilder-list-1914dfac5e",
+  "repeat": 2
+ },
+ {
+  "arm": "PC",
+  "task": "x-ghostpawjs-grimoire-4a1c83b504",
+  "repeat": 1
+ },
+ {
+  "arm": "OC",
+  "task": "x-ghostpawjs-grimoire-4a1c83b504",
+  "repeat": 1
+ },
+ {
+  "arm": "PCR",
+  "task": "x-ghostpawjs-grimoire-4a1c83b504",
+  "repeat": 1
+ },
+ {
+  "arm": "OCR",
+  "task": "x-ghostpawjs-grimoire-4a1c83b504",
+  "repeat": 1
+ },
+ {
+  "arm": "PCR",
+  "task": "x-shelamkoff-event-bus-cc858589eb",
+  "repeat": 1
+ },
+ {
+  "arm": "PC",
+  "task": "x-shelamkoff-event-bus-cc858589eb",
+  "repeat": 1
+ },
+ {
+  "arm": "OCR",
+  "task": "x-shelamkoff-event-bus-cc858589eb",
+  "repeat": 1
+ },
+ {
+  "arm": "OC",
+  "task": "x-shelamkoff-event-bus-cc858589eb",
+  "repeat": 1
+ },
+ {
+  "arm": "PCR",
+  "task": "x-legible-sh-mutex-13867857ca",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "x-legible-sh-mutex-13867857ca",
+  "repeat": 0
+ },
+ {
+  "arm": "PC",
+  "task": "x-legible-sh-mutex-13867857ca",
+  "repeat": 0
+ },
+ {
+  "arm": "OC",
+  "task": "x-legible-sh-mutex-13867857ca",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "x-wenaixi-dsh-prompt-history-f2c2ad01c0",
+  "repeat": 0
+ },
+ {
+  "arm": "OC",
+  "task": "x-wenaixi-dsh-prompt-history-f2c2ad01c0",
+  "repeat": 0
+ },
+ {
+  "arm": "PC",
+  "task": "x-wenaixi-dsh-prompt-history-f2c2ad01c0",
+  "repeat": 0
+ },
+ {
+  "arm": "PCR",
+  "task": "x-wenaixi-dsh-prompt-history-f2c2ad01c0",
+  "repeat": 0
+ },
+ {
+  "arm": "PC",
+  "task": "x-shelamkoff-event-bus-cc858589eb",
+  "repeat": 2
+ },
+ {
+  "arm": "PCR",
+  "task": "x-shelamkoff-event-bus-cc858589eb",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-shelamkoff-event-bus-cc858589eb",
+  "repeat": 2
+ },
+ {
+  "arm": "OCR",
+  "task": "x-shelamkoff-event-bus-cc858589eb",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-legible-sh-mutex-3a0cb5dd56",
+  "repeat": 0
+ },
+ {
+  "arm": "PCR",
+  "task": "x-legible-sh-mutex-3a0cb5dd56",
+  "repeat": 0
+ },
+ {
+  "arm": "PC",
+  "task": "x-legible-sh-mutex-3a0cb5dd56",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "x-legible-sh-mutex-3a0cb5dd56",
+  "repeat": 0
+ },
+ {
+  "arm": "PC",
+  "task": "x-codyrobertson-gh-issue-lease-f0f573c258",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-codyrobertson-gh-issue-lease-f0f573c258",
+  "repeat": 2
+ },
+ {
+  "arm": "PCR",
+  "task": "x-codyrobertson-gh-issue-lease-f0f573c258",
+  "repeat": 2
+ },
+ {
+  "arm": "OCR",
+  "task": "x-codyrobertson-gh-issue-lease-f0f573c258",
+  "repeat": 2
+ },
+ {
+  "arm": "PCR",
+  "task": "x-cheapestinference-claude-auto-retry-7a1ddf10b2",
+  "repeat": 1
+ },
+ {
+  "arm": "OCR",
+  "task": "x-cheapestinference-claude-auto-retry-7a1ddf10b2",
+  "repeat": 1
+ },
+ {
+  "arm": "PC",
+  "task": "x-cheapestinference-claude-auto-retry-7a1ddf10b2",
+  "repeat": 1
+ },
+ {
+  "arm": "OC",
+  "task": "x-cheapestinference-claude-auto-retry-7a1ddf10b2",
+  "repeat": 1
+ },
+ {
+  "arm": "OC",
+  "task": "x-toolbuilder-list-1914dfac5e",
+  "repeat": 0
+ },
+ {
+  "arm": "PCR",
+  "task": "x-toolbuilder-list-1914dfac5e",
+  "repeat": 0
+ },
+ {
+  "arm": "PC",
+  "task": "x-toolbuilder-list-1914dfac5e",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "x-toolbuilder-list-1914dfac5e",
+  "repeat": 0
+ },
+ {
+  "arm": "PCR",
+  "task": "x-runcat-tommy-dsh-panda-calendar-ec35ab2529",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "x-runcat-tommy-dsh-panda-calendar-ec35ab2529",
+  "repeat": 0
+ },
+ {
+  "arm": "OC",
+  "task": "x-runcat-tommy-dsh-panda-calendar-ec35ab2529",
+  "repeat": 0
+ },
+ {
+  "arm": "PC",
+  "task": "x-runcat-tommy-dsh-panda-calendar-ec35ab2529",
+  "repeat": 0
+ },
+ {
+  "arm": "OC",
+  "task": "x-marko-js-htmljs-parser-a576b5c86e",
+  "repeat": 1
+ },
+ {
+  "arm": "PC",
+  "task": "x-marko-js-htmljs-parser-a576b5c86e",
+  "repeat": 1
+ },
+ {
+  "arm": "PCR",
+  "task": "x-marko-js-htmljs-parser-a576b5c86e",
+  "repeat": 1
+ },
+ {
+  "arm": "OCR",
+  "task": "x-marko-js-htmljs-parser-a576b5c86e",
+  "repeat": 1
+ },
+ {
+  "arm": "OCR",
+  "task": "x-guotree-magpie-websearch-a74cfdcbe9",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-guotree-magpie-websearch-a74cfdcbe9",
+  "repeat": 2
+ },
+ {
+  "arm": "PCR",
+  "task": "x-guotree-magpie-websearch-a74cfdcbe9",
+  "repeat": 2
+ },
+ {
+  "arm": "PC",
+  "task": "x-guotree-magpie-websearch-a74cfdcbe9",
+  "repeat": 2
+ },
+ {
+  "arm": "OCR",
+  "task": "x-blakeb056-six-degrees-aec5ecaebb",
+  "repeat": 0
+ },
+ {
+  "arm": "PCR",
+  "task": "x-blakeb056-six-degrees-aec5ecaebb",
+  "repeat": 0
+ },
+ {
+  "arm": "OC",
+  "task": "x-blakeb056-six-degrees-aec5ecaebb",
+  "repeat": 0
+ },
+ {
+  "arm": "PC",
+  "task": "x-blakeb056-six-degrees-aec5ecaebb",
+  "repeat": 0
+ },
+ {
+  "arm": "OC",
+  "task": "x-insession-space-insession-sdk-c721ee0c1d",
+  "repeat": 1
+ },
+ {
+  "arm": "PCR",
+  "task": "x-insession-space-insession-sdk-c721ee0c1d",
+  "repeat": 1
+ },
+ {
+  "arm": "OCR",
+  "task": "x-insession-space-insession-sdk-c721ee0c1d",
+  "repeat": 1
+ },
+ {
+  "arm": "PC",
+  "task": "x-insession-space-insession-sdk-c721ee0c1d",
+  "repeat": 1
+ },
+ {
+  "arm": "PC",
+  "task": "x-runcat-tommy-dsh-panda-calendar-667f1793e5",
+  "repeat": 1
+ },
+ {
+  "arm": "OC",
+  "task": "x-runcat-tommy-dsh-panda-calendar-667f1793e5",
+  "repeat": 1
+ },
+ {
+  "arm": "OCR",
+  "task": "x-runcat-tommy-dsh-panda-calendar-667f1793e5",
+  "repeat": 1
+ },
+ {
+  "arm": "PCR",
+  "task": "x-runcat-tommy-dsh-panda-calendar-667f1793e5",
+  "repeat": 1
+ },
+ {
+  "arm": "PC",
+  "task": "x-dhaupin-crashtest-eb4c5fee65",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "x-dhaupin-crashtest-eb4c5fee65",
+  "repeat": 0
+ },
+ {
+  "arm": "PCR",
+  "task": "x-dhaupin-crashtest-eb4c5fee65",
+  "repeat": 0
+ },
+ {
+  "arm": "OC",
+  "task": "x-dhaupin-crashtest-eb4c5fee65",
+  "repeat": 0
+ },
+ {
+  "arm": "PC",
+  "task": "x-otto-ottospace-mizan-f2f8fcb2c8",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-otto-ottospace-mizan-f2f8fcb2c8",
+  "repeat": 2
+ },
+ {
+  "arm": "PCR",
+  "task": "x-otto-ottospace-mizan-f2f8fcb2c8",
+  "repeat": 2
+ },
+ {
+  "arm": "OCR",
+  "task": "x-otto-ottospace-mizan-f2f8fcb2c8",
+  "repeat": 2
+ },
+ {
+  "arm": "PC",
+  "task": "x-w8s-rng-with-intention-d6d0f34e4c",
+  "repeat": 1
+ },
+ {
+  "arm": "OCR",
+  "task": "x-w8s-rng-with-intention-d6d0f34e4c",
+  "repeat": 1
+ },
+ {
+  "arm": "OC",
+  "task": "x-w8s-rng-with-intention-d6d0f34e4c",
+  "repeat": 1
+ },
+ {
+  "arm": "PCR",
+  "task": "x-w8s-rng-with-intention-d6d0f34e4c",
+  "repeat": 1
+ },
+ {
+  "arm": "PC",
+  "task": "x-guorunjie-agentic-workflow-guard-bc30533f19",
+  "repeat": 2
+ },
+ {
+  "arm": "PCR",
+  "task": "x-guorunjie-agentic-workflow-guard-bc30533f19",
+  "repeat": 2
+ },
+ {
+  "arm": "OCR",
+  "task": "x-guorunjie-agentic-workflow-guard-bc30533f19",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-guorunjie-agentic-workflow-guard-bc30533f19",
+  "repeat": 2
+ },
+ {
+  "arm": "PCR",
+  "task": "x-shelamkoff-event-bus-cc858589eb",
+  "repeat": 0
+ },
+ {
+  "arm": "OC",
+  "task": "x-shelamkoff-event-bus-cc858589eb",
+  "repeat": 0
+ },
+ {
+  "arm": "PC",
+  "task": "x-shelamkoff-event-bus-cc858589eb",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "x-shelamkoff-event-bus-cc858589eb",
+  "repeat": 0
+ },
+ {
+  "arm": "PCR",
+  "task": "x-legible-sh-mutex-3a0cb5dd56",
+  "repeat": 2
+ },
+ {
+  "arm": "PC",
+  "task": "x-legible-sh-mutex-3a0cb5dd56",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-legible-sh-mutex-3a0cb5dd56",
+  "repeat": 2
+ },
+ {
+  "arm": "OCR",
+  "task": "x-legible-sh-mutex-3a0cb5dd56",
+  "repeat": 2
+ },
+ {
+  "arm": "PC",
+  "task": "x-dhaupin-crashtest-e70988c5b4",
+  "repeat": 0
+ },
+ {
+  "arm": "OC",
+  "task": "x-dhaupin-crashtest-e70988c5b4",
+  "repeat": 0
+ },
+ {
+  "arm": "PCR",
+  "task": "x-dhaupin-crashtest-e70988c5b4",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "x-dhaupin-crashtest-e70988c5b4",
+  "repeat": 0
+ },
+ {
+  "arm": "OC",
+  "task": "x-yammm-ynode-ylog-d5c5c3f62e",
+  "repeat": 1
+ },
+ {
+  "arm": "PCR",
+  "task": "x-yammm-ynode-ylog-d5c5c3f62e",
+  "repeat": 1
+ },
+ {
+  "arm": "OCR",
+  "task": "x-yammm-ynode-ylog-d5c5c3f62e",
+  "repeat": 1
+ },
+ {
+  "arm": "PC",
+  "task": "x-yammm-ynode-ylog-d5c5c3f62e",
+  "repeat": 1
+ },
+ {
+  "arm": "OC",
+  "task": "x-short-io-envalid-unused-f77a6c7072",
+  "repeat": 2
+ },
+ {
+  "arm": "PCR",
+  "task": "x-short-io-envalid-unused-f77a6c7072",
+  "repeat": 2
+ },
+ {
+  "arm": "OCR",
+  "task": "x-short-io-envalid-unused-f77a6c7072",
+  "repeat": 2
+ },
+ {
+  "arm": "PC",
+  "task": "x-short-io-envalid-unused-f77a6c7072",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-antonioprosperi2-svg-beeladybug-universal-5f88e1d66c",
+  "repeat": 2
+ },
+ {
+  "arm": "PCR",
+  "task": "x-antonioprosperi2-svg-beeladybug-universal-5f88e1d66c",
+  "repeat": 2
+ },
+ {
+  "arm": "PC",
+  "task": "x-antonioprosperi2-svg-beeladybug-universal-5f88e1d66c",
+  "repeat": 2
+ },
+ {
+  "arm": "OCR",
+  "task": "x-antonioprosperi2-svg-beeladybug-universal-5f88e1d66c",
+  "repeat": 2
+ },
+ {
+  "arm": "PCR",
+  "task": "x-shrinivas-sn-adapter-ingestion-499701352b",
+  "repeat": 1
+ },
+ {
+  "arm": "PC",
+  "task": "x-shrinivas-sn-adapter-ingestion-499701352b",
+  "repeat": 1
+ },
+ {
+  "arm": "OC",
+  "task": "x-shrinivas-sn-adapter-ingestion-499701352b",
+  "repeat": 1
+ },
+ {
+  "arm": "OCR",
+  "task": "x-shrinivas-sn-adapter-ingestion-499701352b",
+  "repeat": 1
+ },
+ {
+  "arm": "PC",
+  "task": "x-l956615272-hub-dsh-token-usage-76b731dfd1",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "x-l956615272-hub-dsh-token-usage-76b731dfd1",
+  "repeat": 0
+ },
+ {
+  "arm": "PCR",
+  "task": "x-l956615272-hub-dsh-token-usage-76b731dfd1",
+  "repeat": 0
+ },
+ {
+  "arm": "OC",
+  "task": "x-l956615272-hub-dsh-token-usage-76b731dfd1",
+  "repeat": 0
+ },
+ {
+  "arm": "PCR",
+  "task": "x-mr-mihu-dsh-dbhub-live-f9d568569b",
+  "repeat": 1
+ },
+ {
+  "arm": "OC",
+  "task": "x-mr-mihu-dsh-dbhub-live-f9d568569b",
+  "repeat": 1
+ },
+ {
+  "arm": "OCR",
+  "task": "x-mr-mihu-dsh-dbhub-live-f9d568569b",
+  "repeat": 1
+ },
+ {
+  "arm": "PC",
+  "task": "x-mr-mihu-dsh-dbhub-live-f9d568569b",
+  "repeat": 1
+ },
+ {
+  "arm": "OC",
+  "task": "x-toolbuilder-list-2b73f7f42c",
+  "repeat": 0
+ },
+ {
+  "arm": "PC",
+  "task": "x-toolbuilder-list-2b73f7f42c",
+  "repeat": 0
+ },
+ {
+  "arm": "PCR",
+  "task": "x-toolbuilder-list-2b73f7f42c",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "x-toolbuilder-list-2b73f7f42c",
+  "repeat": 0
+ },
+ {
+  "arm": "PC",
+  "task": "x-insession-space-insession-sdk-c721ee0c1d",
+  "repeat": 0
+ },
+ {
+  "arm": "OC",
+  "task": "x-insession-space-insession-sdk-c721ee0c1d",
+  "repeat": 0
+ },
+ {
+  "arm": "PCR",
+  "task": "x-insession-space-insession-sdk-c721ee0c1d",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "x-insession-space-insession-sdk-c721ee0c1d",
+  "repeat": 0
+ },
+ {
+  "arm": "OC",
+  "task": "x-wenaixi-dsh-prompt-history-396b4d7ce7",
+  "repeat": 0
+ },
+ {
+  "arm": "PC",
+  "task": "x-wenaixi-dsh-prompt-history-396b4d7ce7",
+  "repeat": 0
+ },
+ {
+  "arm": "PCR",
+  "task": "x-wenaixi-dsh-prompt-history-396b4d7ce7",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "x-wenaixi-dsh-prompt-history-396b4d7ce7",
+  "repeat": 0
+ },
+ {
+  "arm": "PCR",
+  "task": "x-dhaupin-crashtest-e70988c5b4",
+  "repeat": 2
+ },
+ {
+  "arm": "PC",
+  "task": "x-dhaupin-crashtest-e70988c5b4",
+  "repeat": 2
+ },
+ {
+  "arm": "OCR",
+  "task": "x-dhaupin-crashtest-e70988c5b4",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-dhaupin-crashtest-e70988c5b4",
+  "repeat": 2
+ },
+ {
+  "arm": "PC",
+  "task": "x-metarhia-metawatch-af9528a554",
+  "repeat": 1
+ },
+ {
+  "arm": "OCR",
+  "task": "x-metarhia-metawatch-af9528a554",
+  "repeat": 1
+ },
+ {
+  "arm": "PCR",
+  "task": "x-metarhia-metawatch-af9528a554",
+  "repeat": 1
+ },
+ {
+  "arm": "OC",
+  "task": "x-metarhia-metawatch-af9528a554",
+  "repeat": 1
+ },
+ {
+  "arm": "PC",
+  "task": "x-guorunjie-agentic-workflow-guard-bc30533f19",
+  "repeat": 1
+ },
+ {
+  "arm": "PCR",
+  "task": "x-guorunjie-agentic-workflow-guard-bc30533f19",
+  "repeat": 1
+ },
+ {
+  "arm": "OC",
+  "task": "x-guorunjie-agentic-workflow-guard-bc30533f19",
+  "repeat": 1
+ },
+ {
+  "arm": "OCR",
+  "task": "x-guorunjie-agentic-workflow-guard-bc30533f19",
+  "repeat": 1
+ },
+ {
+  "arm": "PC",
+  "task": "x-insession-space-insession-sdk-29c8a3b74e",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "x-insession-space-insession-sdk-29c8a3b74e",
+  "repeat": 0
+ },
+ {
+  "arm": "PCR",
+  "task": "x-insession-space-insession-sdk-29c8a3b74e",
+  "repeat": 0
+ },
+ {
+  "arm": "OC",
+  "task": "x-insession-space-insession-sdk-29c8a3b74e",
+  "repeat": 0
+ },
+ {
+  "arm": "PCR",
+  "task": "x-drewthomas00-tcpa-quiet-hours-d929633b54",
+  "repeat": 1
+ },
+ {
+  "arm": "OC",
+  "task": "x-drewthomas00-tcpa-quiet-hours-d929633b54",
+  "repeat": 1
+ },
+ {
+  "arm": "PC",
+  "task": "x-drewthomas00-tcpa-quiet-hours-d929633b54",
+  "repeat": 1
+ },
+ {
+  "arm": "OCR",
+  "task": "x-drewthomas00-tcpa-quiet-hours-d929633b54",
+  "repeat": 1
+ },
+ {
+  "arm": "OC",
+  "task": "x-ducaoya-pi-hang-guard-b75099e5bc",
+  "repeat": 2
+ },
+ {
+  "arm": "PCR",
+  "task": "x-ducaoya-pi-hang-guard-b75099e5bc",
+  "repeat": 2
+ },
+ {
+  "arm": "OCR",
+  "task": "x-ducaoya-pi-hang-guard-b75099e5bc",
+  "repeat": 2
+ },
+ {
+  "arm": "PC",
+  "task": "x-ducaoya-pi-hang-guard-b75099e5bc",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-johnhenry-spintax-8e582b7cde",
+  "repeat": 1
+ },
+ {
+  "arm": "PCR",
+  "task": "x-johnhenry-spintax-8e582b7cde",
+  "repeat": 1
+ },
+ {
+  "arm": "PC",
+  "task": "x-johnhenry-spintax-8e582b7cde",
+  "repeat": 1
+ },
+ {
+  "arm": "OCR",
+  "task": "x-johnhenry-spintax-8e582b7cde",
+  "repeat": 1
+ },
+ {
+  "arm": "OCR",
+  "task": "x-kannakuron-dsh-ide-git-317ae73aa6",
+  "repeat": 0
+ },
+ {
+  "arm": "PC",
+  "task": "x-kannakuron-dsh-ide-git-317ae73aa6",
+  "repeat": 0
+ },
+ {
+  "arm": "PCR",
+  "task": "x-kannakuron-dsh-ide-git-317ae73aa6",
+  "repeat": 0
+ },
+ {
+  "arm": "OC",
+  "task": "x-kannakuron-dsh-ide-git-317ae73aa6",
+  "repeat": 0
+ },
+ {
+  "arm": "PC",
+  "task": "x-guotree-magpie-websearch-466d493835",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-guotree-magpie-websearch-466d493835",
+  "repeat": 2
+ },
+ {
+  "arm": "OCR",
+  "task": "x-guotree-magpie-websearch-466d493835",
+  "repeat": 2
+ },
+ {
+  "arm": "PCR",
+  "task": "x-guotree-magpie-websearch-466d493835",
+  "repeat": 2
+ },
+ {
+  "arm": "PC",
+  "task": "x-spartawhy117-dsh-token-dash-ba4082dce3",
+  "repeat": 2
+ },
+ {
+  "arm": "OCR",
+  "task": "x-spartawhy117-dsh-token-dash-ba4082dce3",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-spartawhy117-dsh-token-dash-ba4082dce3",
+  "repeat": 2
+ },
+ {
+  "arm": "PCR",
+  "task": "x-spartawhy117-dsh-token-dash-ba4082dce3",
+  "repeat": 2
+ },
+ {
+  "arm": "OCR",
+  "task": "x-cheapestinference-claude-auto-retry-f859f12fea",
+  "repeat": 0
+ },
+ {
+  "arm": "PC",
+  "task": "x-cheapestinference-claude-auto-retry-f859f12fea",
+  "repeat": 0
+ },
+ {
+  "arm": "PCR",
+  "task": "x-cheapestinference-claude-auto-retry-f859f12fea",
+  "repeat": 0
+ },
+ {
+  "arm": "OC",
+  "task": "x-cheapestinference-claude-auto-retry-f859f12fea",
+  "repeat": 0
+ },
+ {
+  "arm": "PC",
+  "task": "x-sanchit07-dev-node-core-easy-kit-39890fd99f",
+  "repeat": 2
+ },
+ {
+  "arm": "OCR",
+  "task": "x-sanchit07-dev-node-core-easy-kit-39890fd99f",
+  "repeat": 2
+ },
+ {
+  "arm": "PCR",
+  "task": "x-sanchit07-dev-node-core-easy-kit-39890fd99f",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-sanchit07-dev-node-core-easy-kit-39890fd99f",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-lhf198-dsh-prompt-optimizer-42cfbd7f35",
+  "repeat": 0
+ },
+ {
+  "arm": "PC",
+  "task": "x-lhf198-dsh-prompt-optimizer-42cfbd7f35",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "x-lhf198-dsh-prompt-optimizer-42cfbd7f35",
+  "repeat": 0
+ },
+ {
+  "arm": "PCR",
+  "task": "x-lhf198-dsh-prompt-optimizer-42cfbd7f35",
+  "repeat": 0
+ },
+ {
+  "arm": "PC",
+  "task": "x-johnhenry-mport-b70dabf4e7",
+  "repeat": 2
+ },
+ {
+  "arm": "OCR",
+  "task": "x-johnhenry-mport-b70dabf4e7",
+  "repeat": 2
+ },
+ {
+  "arm": "PCR",
+  "task": "x-johnhenry-mport-b70dabf4e7",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-johnhenry-mport-b70dabf4e7",
+  "repeat": 2
+ },
+ {
+  "arm": "OCR",
+  "task": "x-alannerfranklin-dsh-relay-isolation-dfccc5d2c1",
+  "repeat": 1
+ },
+ {
+  "arm": "PC",
+  "task": "x-alannerfranklin-dsh-relay-isolation-dfccc5d2c1",
+  "repeat": 1
+ },
+ {
+  "arm": "PCR",
+  "task": "x-alannerfranklin-dsh-relay-isolation-dfccc5d2c1",
+  "repeat": 1
+ },
+ {
+  "arm": "OC",
+  "task": "x-alannerfranklin-dsh-relay-isolation-dfccc5d2c1",
+  "repeat": 1
+ },
+ {
+  "arm": "OCR",
+  "task": "x-sanchit07-dev-node-core-easy-kit-268de6812c",
+  "repeat": 0
+ },
+ {
+  "arm": "PC",
+  "task": "x-sanchit07-dev-node-core-easy-kit-268de6812c",
+  "repeat": 0
+ },
+ {
+  "arm": "PCR",
+  "task": "x-sanchit07-dev-node-core-easy-kit-268de6812c",
+  "repeat": 0
+ },
+ {
+  "arm": "OC",
+  "task": "x-sanchit07-dev-node-core-easy-kit-268de6812c",
+  "repeat": 0
+ },
+ {
+  "arm": "PCR",
+  "task": "x-wenaixi-dsh-prompt-history-87cd943992",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-wenaixi-dsh-prompt-history-87cd943992",
+  "repeat": 2
+ },
+ {
+  "arm": "PC",
+  "task": "x-wenaixi-dsh-prompt-history-87cd943992",
+  "repeat": 2
+ },
+ {
+  "arm": "OCR",
+  "task": "x-wenaixi-dsh-prompt-history-87cd943992",
+  "repeat": 2
+ },
+ {
+  "arm": "PC",
+  "task": "x-magrinj-hermes-intl-22ec94ee24",
+  "repeat": 0
+ },
+ {
+  "arm": "PCR",
+  "task": "x-magrinj-hermes-intl-22ec94ee24",
+  "repeat": 0
+ },
+ {
+  "arm": "OC",
+  "task": "x-magrinj-hermes-intl-22ec94ee24",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "x-magrinj-hermes-intl-22ec94ee24",
+  "repeat": 0
+ },
+ {
+  "arm": "OC",
+  "task": "x-sanchit07-dev-node-core-easy-kit-268de6812c",
+  "repeat": 2
+ },
+ {
+  "arm": "OCR",
+  "task": "x-sanchit07-dev-node-core-easy-kit-268de6812c",
+  "repeat": 2
+ },
+ {
+  "arm": "PCR",
+  "task": "x-sanchit07-dev-node-core-easy-kit-268de6812c",
+  "repeat": 2
+ },
+ {
+  "arm": "PC",
+  "task": "x-sanchit07-dev-node-core-easy-kit-268de6812c",
+  "repeat": 2
+ },
+ {
+  "arm": "PCR",
+  "task": "x-blucca-n8n-check-a7fa85ded5",
+  "repeat": 2
+ },
+ {
+  "arm": "OCR",
+  "task": "x-blucca-n8n-check-a7fa85ded5",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-blucca-n8n-check-a7fa85ded5",
+  "repeat": 2
+ },
+ {
+  "arm": "PC",
+  "task": "x-blucca-n8n-check-a7fa85ded5",
+  "repeat": 2
+ },
+ {
+  "arm": "PC",
+  "task": "x-opopeshku-cronalive-node-a6f621977e",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "x-opopeshku-cronalive-node-a6f621977e",
+  "repeat": 0
+ },
+ {
+  "arm": "OC",
+  "task": "x-opopeshku-cronalive-node-a6f621977e",
+  "repeat": 0
+ },
+ {
+  "arm": "PCR",
+  "task": "x-opopeshku-cronalive-node-a6f621977e",
+  "repeat": 0
+ },
+ {
+  "arm": "PCR",
+  "task": "x-groophylifefor-heap-analysis-10ddfecb6b",
+  "repeat": 1
+ },
+ {
+  "arm": "OC",
+  "task": "x-groophylifefor-heap-analysis-10ddfecb6b",
+  "repeat": 1
+ },
+ {
+  "arm": "OCR",
+  "task": "x-groophylifefor-heap-analysis-10ddfecb6b",
+  "repeat": 1
+ },
+ {
+  "arm": "PC",
+  "task": "x-groophylifefor-heap-analysis-10ddfecb6b",
+  "repeat": 1
+ },
+ {
+  "arm": "PC",
+  "task": "x-antonioprosperi2-svg-beeladybug-universal-b6e1d19aa0",
+  "repeat": 2
+ },
+ {
+  "arm": "OCR",
+  "task": "x-antonioprosperi2-svg-beeladybug-universal-b6e1d19aa0",
+  "repeat": 2
+ },
+ {
+  "arm": "PCR",
+  "task": "x-antonioprosperi2-svg-beeladybug-universal-b6e1d19aa0",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-antonioprosperi2-svg-beeladybug-universal-b6e1d19aa0",
+  "repeat": 2
+ },
+ {
+  "arm": "PC",
+  "task": "x-ahmtsahin-agent-context-bench-3912f5ad87",
+  "repeat": 1
+ },
+ {
+  "arm": "OC",
+  "task": "x-ahmtsahin-agent-context-bench-3912f5ad87",
+  "repeat": 1
+ },
+ {
+  "arm": "OCR",
+  "task": "x-ahmtsahin-agent-context-bench-3912f5ad87",
+  "repeat": 1
+ },
+ {
+  "arm": "PCR",
+  "task": "x-ahmtsahin-agent-context-bench-3912f5ad87",
+  "repeat": 1
+ },
+ {
+  "arm": "OCR",
+  "task": "x-guotree-magpie-websearch-a74cfdcbe9",
+  "repeat": 0
+ },
+ {
+  "arm": "PCR",
+  "task": "x-guotree-magpie-websearch-a74cfdcbe9",
+  "repeat": 0
+ },
+ {
+  "arm": "OC",
+  "task": "x-guotree-magpie-websearch-a74cfdcbe9",
+  "repeat": 0
+ },
+ {
+  "arm": "PC",
+  "task": "x-guotree-magpie-websearch-a74cfdcbe9",
+  "repeat": 0
+ },
+ {
+  "arm": "PC",
+  "task": "x-kannakuron-dsh-ide-git-317ae73aa6",
+  "repeat": 2
+ },
+ {
+  "arm": "OCR",
+  "task": "x-kannakuron-dsh-ide-git-317ae73aa6",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-kannakuron-dsh-ide-git-317ae73aa6",
+  "repeat": 2
+ },
+ {
+  "arm": "PCR",
+  "task": "x-kannakuron-dsh-ide-git-317ae73aa6",
+  "repeat": 2
+ },
+ {
+  "arm": "OCR",
+  "task": "x-toolbuilder-list-2b73f7f42c",
+  "repeat": 1
+ },
+ {
+  "arm": "PCR",
+  "task": "x-toolbuilder-list-2b73f7f42c",
+  "repeat": 1
+ },
+ {
+  "arm": "PC",
+  "task": "x-toolbuilder-list-2b73f7f42c",
+  "repeat": 1
+ },
+ {
+  "arm": "OC",
+  "task": "x-toolbuilder-list-2b73f7f42c",
+  "repeat": 1
+ },
+ {
+  "arm": "PCR",
+  "task": "x-guotree-magpie-websearch-466d493835",
+  "repeat": 0
+ },
+ {
+  "arm": "PC",
+  "task": "x-guotree-magpie-websearch-466d493835",
+  "repeat": 0
+ },
+ {
+  "arm": "OC",
+  "task": "x-guotree-magpie-websearch-466d493835",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "x-guotree-magpie-websearch-466d493835",
+  "repeat": 0
+ },
+ {
+  "arm": "PC",
+  "task": "x-avoidwork-tiny-lru-30397d7a76",
+  "repeat": 1
+ },
+ {
+  "arm": "OC",
+  "task": "x-avoidwork-tiny-lru-30397d7a76",
+  "repeat": 1
+ },
+ {
+  "arm": "OCR",
+  "task": "x-avoidwork-tiny-lru-30397d7a76",
+  "repeat": 1
+ },
+ {
+  "arm": "PCR",
+  "task": "x-avoidwork-tiny-lru-30397d7a76",
+  "repeat": 1
+ },
+ {
+  "arm": "PC",
+  "task": "x-mr-mihu-dsh-dbhub-live-534032da27",
+  "repeat": 2
+ },
+ {
+  "arm": "OCR",
+  "task": "x-mr-mihu-dsh-dbhub-live-534032da27",
+  "repeat": 2
+ },
+ {
+  "arm": "PCR",
+  "task": "x-mr-mihu-dsh-dbhub-live-534032da27",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-mr-mihu-dsh-dbhub-live-534032da27",
+  "repeat": 2
+ },
+ {
+  "arm": "PCR",
+  "task": "x-metarhia-metawatch-e1b278f5c3",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-metarhia-metawatch-e1b278f5c3",
+  "repeat": 2
+ },
+ {
+  "arm": "PC",
+  "task": "x-metarhia-metawatch-e1b278f5c3",
+  "repeat": 2
+ },
+ {
+  "arm": "OCR",
+  "task": "x-metarhia-metawatch-e1b278f5c3",
+  "repeat": 2
+ },
+ {
+  "arm": "PC",
+  "task": "x-blucca-n8n-check-0d73b43caa",
+  "repeat": 1
+ },
+ {
+  "arm": "PCR",
+  "task": "x-blucca-n8n-check-0d73b43caa",
+  "repeat": 1
+ },
+ {
+  "arm": "OC",
+  "task": "x-blucca-n8n-check-0d73b43caa",
+  "repeat": 1
+ },
+ {
+  "arm": "OCR",
+  "task": "x-blucca-n8n-check-0d73b43caa",
+  "repeat": 1
+ },
+ {
+  "arm": "OC",
+  "task": "x-kannakuron-dsh-ide-git-317ae73aa6",
+  "repeat": 1
+ },
+ {
+  "arm": "OCR",
+  "task": "x-kannakuron-dsh-ide-git-317ae73aa6",
+  "repeat": 1
+ },
+ {
+  "arm": "PCR",
+  "task": "x-kannakuron-dsh-ide-git-317ae73aa6",
+  "repeat": 1
+ },
+ {
+  "arm": "PC",
+  "task": "x-kannakuron-dsh-ide-git-317ae73aa6",
+  "repeat": 1
+ },
+ {
+  "arm": "OC",
+  "task": "x-dgrr-studio-dice-141a1a8d6b",
+  "repeat": 0
+ },
+ {
+  "arm": "PC",
+  "task": "x-dgrr-studio-dice-141a1a8d6b",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "x-dgrr-studio-dice-141a1a8d6b",
+  "repeat": 0
+ },
+ {
+  "arm": "PCR",
+  "task": "x-dgrr-studio-dice-141a1a8d6b",
+  "repeat": 0
+ },
+ {
+  "arm": "PCR",
+  "task": "x-guotree-magpie-websearch-c4d8db57f9",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "x-guotree-magpie-websearch-c4d8db57f9",
+  "repeat": 0
+ },
+ {
+  "arm": "OC",
+  "task": "x-guotree-magpie-websearch-c4d8db57f9",
+  "repeat": 0
+ },
+ {
+  "arm": "PC",
+  "task": "x-guotree-magpie-websearch-c4d8db57f9",
+  "repeat": 0
+ },
+ {
+  "arm": "PC",
+  "task": "x-mukundakatta-agentfit-510c32d490",
+  "repeat": 1
+ },
+ {
+  "arm": "OCR",
+  "task": "x-mukundakatta-agentfit-510c32d490",
+  "repeat": 1
+ },
+ {
+  "arm": "OC",
+  "task": "x-mukundakatta-agentfit-510c32d490",
+  "repeat": 1
+ },
+ {
+  "arm": "PCR",
+  "task": "x-mukundakatta-agentfit-510c32d490",
+  "repeat": 1
+ },
+ {
+  "arm": "PC",
+  "task": "x-legible-sh-mutex-13867857ca",
+  "repeat": 2
+ },
+ {
+  "arm": "PCR",
+  "task": "x-legible-sh-mutex-13867857ca",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-legible-sh-mutex-13867857ca",
+  "repeat": 2
+ },
+ {
+  "arm": "OCR",
+  "task": "x-legible-sh-mutex-13867857ca",
+  "repeat": 2
+ },
+ {
+  "arm": "OCR",
+  "task": "x-codyrobertson-gh-issue-lease-f0f573c258",
+  "repeat": 1
+ },
+ {
+  "arm": "PC",
+  "task": "x-codyrobertson-gh-issue-lease-f0f573c258",
+  "repeat": 1
+ },
+ {
+  "arm": "PCR",
+  "task": "x-codyrobertson-gh-issue-lease-f0f573c258",
+  "repeat": 1
+ },
+ {
+  "arm": "OC",
+  "task": "x-codyrobertson-gh-issue-lease-f0f573c258",
+  "repeat": 1
+ },
+ {
+  "arm": "PCR",
+  "task": "x-marko-js-htmljs-parser-a576b5c86e",
+  "repeat": 2
+ },
+ {
+  "arm": "OCR",
+  "task": "x-marko-js-htmljs-parser-a576b5c86e",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-marko-js-htmljs-parser-a576b5c86e",
+  "repeat": 2
+ },
+ {
+  "arm": "PC",
+  "task": "x-marko-js-htmljs-parser-a576b5c86e",
+  "repeat": 2
+ },
+ {
+  "arm": "PC",
+  "task": "x-insession-space-insession-sdk-f9057e96cd",
+  "repeat": 1
+ },
+ {
+  "arm": "PCR",
+  "task": "x-insession-space-insession-sdk-f9057e96cd",
+  "repeat": 1
+ },
+ {
+  "arm": "OCR",
+  "task": "x-insession-space-insession-sdk-f9057e96cd",
+  "repeat": 1
+ },
+ {
+  "arm": "OC",
+  "task": "x-insession-space-insession-sdk-f9057e96cd",
+  "repeat": 1
+ },
+ {
+  "arm": "OC",
+  "task": "x-runcat-tommy-dsh-panda-calendar-ec35ab2529",
+  "repeat": 1
+ },
+ {
+  "arm": "PCR",
+  "task": "x-runcat-tommy-dsh-panda-calendar-ec35ab2529",
+  "repeat": 1
+ },
+ {
+  "arm": "PC",
+  "task": "x-runcat-tommy-dsh-panda-calendar-ec35ab2529",
+  "repeat": 1
+ },
+ {
+  "arm": "OCR",
+  "task": "x-runcat-tommy-dsh-panda-calendar-ec35ab2529",
+  "repeat": 1
+ },
+ {
+  "arm": "PCR",
+  "task": "x-spartawhy117-dsh-token-dash-ba4082dce3",
+  "repeat": 0
+ },
+ {
+  "arm": "OC",
+  "task": "x-spartawhy117-dsh-token-dash-ba4082dce3",
+  "repeat": 0
+ },
+ {
+  "arm": "PC",
+  "task": "x-spartawhy117-dsh-token-dash-ba4082dce3",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "x-spartawhy117-dsh-token-dash-ba4082dce3",
+  "repeat": 0
+ },
+ {
+  "arm": "PC",
+  "task": "x-sanchit07-dev-node-core-easy-kit-39890fd99f",
+  "repeat": 0
+ },
+ {
+  "arm": "OC",
+  "task": "x-sanchit07-dev-node-core-easy-kit-39890fd99f",
+  "repeat": 0
+ },
+ {
+  "arm": "PCR",
+  "task": "x-sanchit07-dev-node-core-easy-kit-39890fd99f",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "x-sanchit07-dev-node-core-easy-kit-39890fd99f",
+  "repeat": 0
+ },
+ {
+  "arm": "OC",
+  "task": "x-dhaupin-crashtest-5c6ce1d53f",
+  "repeat": 0
+ },
+ {
+  "arm": "PC",
+  "task": "x-dhaupin-crashtest-5c6ce1d53f",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "x-dhaupin-crashtest-5c6ce1d53f",
+  "repeat": 0
+ },
+ {
+  "arm": "PCR",
+  "task": "x-dhaupin-crashtest-5c6ce1d53f",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "x-ducaoya-pi-hang-guard-b75099e5bc",
+  "repeat": 0
+ },
+ {
+  "arm": "OC",
+  "task": "x-ducaoya-pi-hang-guard-b75099e5bc",
+  "repeat": 0
+ },
+ {
+  "arm": "PCR",
+  "task": "x-ducaoya-pi-hang-guard-b75099e5bc",
+  "repeat": 0
+ },
+ {
+  "arm": "PC",
+  "task": "x-ducaoya-pi-hang-guard-b75099e5bc",
+  "repeat": 0
+ },
+ {
+  "arm": "OC",
+  "task": "x-groophylifefor-heap-analysis-bfc733de41",
+  "repeat": 1
+ },
+ {
+  "arm": "PCR",
+  "task": "x-groophylifefor-heap-analysis-bfc733de41",
+  "repeat": 1
+ },
+ {
+  "arm": "OCR",
+  "task": "x-groophylifefor-heap-analysis-bfc733de41",
+  "repeat": 1
+ },
+ {
+  "arm": "PC",
+  "task": "x-groophylifefor-heap-analysis-bfc733de41",
+  "repeat": 1
+ },
+ {
+  "arm": "PC",
+  "task": "x-guorunjie-agentic-workflow-guard-bc30533f19",
+  "repeat": 0
+ },
+ {
+  "arm": "OC",
+  "task": "x-guorunjie-agentic-workflow-guard-bc30533f19",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "x-guorunjie-agentic-workflow-guard-bc30533f19",
+  "repeat": 0
+ },
+ {
+  "arm": "PCR",
+  "task": "x-guorunjie-agentic-workflow-guard-bc30533f19",
+  "repeat": 0
+ },
+ {
+  "arm": "OC",
+  "task": "x-wenaixi-dsh-prompt-history-87cd943992",
+  "repeat": 1
+ },
+ {
+  "arm": "OCR",
+  "task": "x-wenaixi-dsh-prompt-history-87cd943992",
+  "repeat": 1
+ },
+ {
+  "arm": "PC",
+  "task": "x-wenaixi-dsh-prompt-history-87cd943992",
+  "repeat": 1
+ },
+ {
+  "arm": "PCR",
+  "task": "x-wenaixi-dsh-prompt-history-87cd943992",
+  "repeat": 1
+ },
+ {
+  "arm": "OCR",
+  "task": "x-wenaixi-dsh-prompt-history-f2c2ad01c0",
+  "repeat": 2
+ },
+ {
+  "arm": "PCR",
+  "task": "x-wenaixi-dsh-prompt-history-f2c2ad01c0",
+  "repeat": 2
+ },
+ {
+  "arm": "PC",
+  "task": "x-wenaixi-dsh-prompt-history-f2c2ad01c0",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-wenaixi-dsh-prompt-history-f2c2ad01c0",
+  "repeat": 2
+ },
+ {
+  "arm": "OCR",
+  "task": "x-runcat-tommy-dsh-panda-calendar-667f1793e5",
+  "repeat": 0
+ },
+ {
+  "arm": "OC",
+  "task": "x-runcat-tommy-dsh-panda-calendar-667f1793e5",
+  "repeat": 0
+ },
+ {
+  "arm": "PC",
+  "task": "x-runcat-tommy-dsh-panda-calendar-667f1793e5",
+  "repeat": 0
+ },
+ {
+  "arm": "PCR",
+  "task": "x-runcat-tommy-dsh-panda-calendar-667f1793e5",
+  "repeat": 0
+ },
+ {
+  "arm": "OC",
+  "task": "x-lhf198-dsh-prompt-optimizer-42cfbd7f35",
+  "repeat": 1
+ },
+ {
+  "arm": "OCR",
+  "task": "x-lhf198-dsh-prompt-optimizer-42cfbd7f35",
+  "repeat": 1
+ },
+ {
+  "arm": "PCR",
+  "task": "x-lhf198-dsh-prompt-optimizer-42cfbd7f35",
+  "repeat": 1
+ },
+ {
+  "arm": "PC",
+  "task": "x-lhf198-dsh-prompt-optimizer-42cfbd7f35",
+  "repeat": 1
+ },
+ {
+  "arm": "PC",
+  "task": "x-otto-ottospace-mizan-f2f8fcb2c8",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "x-otto-ottospace-mizan-f2f8fcb2c8",
+  "repeat": 0
+ },
+ {
+  "arm": "OC",
+  "task": "x-otto-ottospace-mizan-f2f8fcb2c8",
+  "repeat": 0
+ },
+ {
+  "arm": "PCR",
+  "task": "x-otto-ottospace-mizan-f2f8fcb2c8",
+  "repeat": 0
+ },
+ {
+  "arm": "PC",
+  "task": "x-cheapestinference-claude-auto-retry-6d605a5d91",
+  "repeat": 1
+ },
+ {
+  "arm": "OC",
+  "task": "x-cheapestinference-claude-auto-retry-6d605a5d91",
+  "repeat": 1
+ },
+ {
+  "arm": "OCR",
+  "task": "x-cheapestinference-claude-auto-retry-6d605a5d91",
+  "repeat": 1
+ },
+ {
+  "arm": "PCR",
+  "task": "x-cheapestinference-claude-auto-retry-6d605a5d91",
+  "repeat": 1
+ },
+ {
+  "arm": "PC",
+  "task": "x-guorunjie-agentic-workflow-guard-c1322204ff",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "x-guorunjie-agentic-workflow-guard-c1322204ff",
+  "repeat": 0
+ },
+ {
+  "arm": "PCR",
+  "task": "x-guorunjie-agentic-workflow-guard-c1322204ff",
+  "repeat": 0
+ },
+ {
+  "arm": "OC",
+  "task": "x-guorunjie-agentic-workflow-guard-c1322204ff",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "x-panpontomate-solana-risk-engine-e2582ea728",
+  "repeat": 2
+ },
+ {
+  "arm": "PC",
+  "task": "x-panpontomate-solana-risk-engine-e2582ea728",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-panpontomate-solana-risk-engine-e2582ea728",
+  "repeat": 2
+ },
+ {
+  "arm": "PCR",
+  "task": "x-panpontomate-solana-risk-engine-e2582ea728",
+  "repeat": 2
+ },
+ {
+  "arm": "PC",
+  "task": "x-sanchit07-dev-node-core-easy-kit-39890fd99f",
+  "repeat": 1
+ },
+ {
+  "arm": "OC",
+  "task": "x-sanchit07-dev-node-core-easy-kit-39890fd99f",
+  "repeat": 1
+ },
+ {
+  "arm": "OCR",
+  "task": "x-sanchit07-dev-node-core-easy-kit-39890fd99f",
+  "repeat": 1
+ },
+ {
+  "arm": "PCR",
+  "task": "x-sanchit07-dev-node-core-easy-kit-39890fd99f",
+  "repeat": 1
+ },
+ {
+  "arm": "OC",
+  "task": "x-ducaoya-pi-hang-guard-b75099e5bc",
+  "repeat": 1
+ },
+ {
+  "arm": "OCR",
+  "task": "x-ducaoya-pi-hang-guard-b75099e5bc",
+  "repeat": 1
+ },
+ {
+  "arm": "PCR",
+  "task": "x-ducaoya-pi-hang-guard-b75099e5bc",
+  "repeat": 1
+ },
+ {
+  "arm": "PC",
+  "task": "x-ducaoya-pi-hang-guard-b75099e5bc",
+  "repeat": 1
+ },
+ {
+  "arm": "OC",
+  "task": "x-ahmtsahin-agent-context-bench-3912f5ad87",
+  "repeat": 2
+ },
+ {
+  "arm": "OCR",
+  "task": "x-ahmtsahin-agent-context-bench-3912f5ad87",
+  "repeat": 2
+ },
+ {
+  "arm": "PC",
+  "task": "x-ahmtsahin-agent-context-bench-3912f5ad87",
+  "repeat": 2
+ },
+ {
+  "arm": "PCR",
+  "task": "x-ahmtsahin-agent-context-bench-3912f5ad87",
+  "repeat": 2
+ },
+ {
+  "arm": "PCR",
+  "task": "x-alannerfranklin-dsh-relay-isolation-dfccc5d2c1",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-alannerfranklin-dsh-relay-isolation-dfccc5d2c1",
+  "repeat": 2
+ },
+ {
+  "arm": "OCR",
+  "task": "x-alannerfranklin-dsh-relay-isolation-dfccc5d2c1",
+  "repeat": 2
+ },
+ {
+  "arm": "PC",
+  "task": "x-alannerfranklin-dsh-relay-isolation-dfccc5d2c1",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-short-io-envalid-unused-f77a6c7072",
+  "repeat": 1
+ },
+ {
+  "arm": "OCR",
+  "task": "x-short-io-envalid-unused-f77a6c7072",
+  "repeat": 1
+ },
+ {
+  "arm": "PCR",
+  "task": "x-short-io-envalid-unused-f77a6c7072",
+  "repeat": 1
+ },
+ {
+  "arm": "PC",
+  "task": "x-short-io-envalid-unused-f77a6c7072",
+  "repeat": 1
+ },
+ {
+  "arm": "OCR",
+  "task": "x-avoidwork-filesize-js-109ae605ab",
+  "repeat": 2
+ },
+ {
+  "arm": "PCR",
+  "task": "x-avoidwork-filesize-js-109ae605ab",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-avoidwork-filesize-js-109ae605ab",
+  "repeat": 2
+ },
+ {
+  "arm": "PC",
+  "task": "x-avoidwork-filesize-js-109ae605ab",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-dhaupin-crashtest-eb4c5fee65",
+  "repeat": 2
+ },
+ {
+  "arm": "PC",
+  "task": "x-dhaupin-crashtest-eb4c5fee65",
+  "repeat": 2
+ },
+ {
+  "arm": "PCR",
+  "task": "x-dhaupin-crashtest-eb4c5fee65",
+  "repeat": 2
+ },
+ {
+  "arm": "OCR",
+  "task": "x-dhaupin-crashtest-eb4c5fee65",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-lhf198-dsh-prompt-optimizer-42cfbd7f35",
+  "repeat": 2
+ },
+ {
+  "arm": "PC",
+  "task": "x-lhf198-dsh-prompt-optimizer-42cfbd7f35",
+  "repeat": 2
+ },
+ {
+  "arm": "PCR",
+  "task": "x-lhf198-dsh-prompt-optimizer-42cfbd7f35",
+  "repeat": 2
+ },
+ {
+  "arm": "OCR",
+  "task": "x-lhf198-dsh-prompt-optimizer-42cfbd7f35",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-codyrobertson-gh-issue-lease-f0f573c258",
+  "repeat": 0
+ },
+ {
+  "arm": "PC",
+  "task": "x-codyrobertson-gh-issue-lease-f0f573c258",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "x-codyrobertson-gh-issue-lease-f0f573c258",
+  "repeat": 0
+ },
+ {
+  "arm": "PCR",
+  "task": "x-codyrobertson-gh-issue-lease-f0f573c258",
+  "repeat": 0
+ },
+ {
+  "arm": "PCR",
+  "task": "x-insession-space-insession-sdk-f9057e96cd",
+  "repeat": 0
+ },
+ {
+  "arm": "PC",
+  "task": "x-insession-space-insession-sdk-f9057e96cd",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "x-insession-space-insession-sdk-f9057e96cd",
+  "repeat": 0
+ },
+ {
+  "arm": "OC",
+  "task": "x-insession-space-insession-sdk-f9057e96cd",
+  "repeat": 0
+ },
+ {
+  "arm": "PC",
+  "task": "x-sandsoftwaresolutions-ss-duration-ac6449101c",
+  "repeat": 1
+ },
+ {
+  "arm": "OCR",
+  "task": "x-sandsoftwaresolutions-ss-duration-ac6449101c",
+  "repeat": 1
+ },
+ {
+  "arm": "PCR",
+  "task": "x-sandsoftwaresolutions-ss-duration-ac6449101c",
+  "repeat": 1
+ },
+ {
+  "arm": "OC",
+  "task": "x-sandsoftwaresolutions-ss-duration-ac6449101c",
+  "repeat": 1
+ },
+ {
+  "arm": "PCR",
+  "task": "x-alannerfranklin-dsh-relay-isolation-dfccc5d2c1",
+  "repeat": 0
+ },
+ {
+  "arm": "OC",
+  "task": "x-alannerfranklin-dsh-relay-isolation-dfccc5d2c1",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "x-alannerfranklin-dsh-relay-isolation-dfccc5d2c1",
+  "repeat": 0
+ },
+ {
+  "arm": "PC",
+  "task": "x-alannerfranklin-dsh-relay-isolation-dfccc5d2c1",
+  "repeat": 0
+ },
+ {
+  "arm": "PCR",
+  "task": "x-panpontomate-solana-risk-engine-e2582ea728",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "x-panpontomate-solana-risk-engine-e2582ea728",
+  "repeat": 0
+ },
+ {
+  "arm": "PC",
+  "task": "x-panpontomate-solana-risk-engine-e2582ea728",
+  "repeat": 0
+ },
+ {
+  "arm": "OC",
+  "task": "x-panpontomate-solana-risk-engine-e2582ea728",
+  "repeat": 0
+ },
+ {
+  "arm": "PC",
+  "task": "x-groophylifefor-heap-analysis-10ddfecb6b",
+  "repeat": 0
+ },
+ {
+  "arm": "PCR",
+  "task": "x-groophylifefor-heap-analysis-10ddfecb6b",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "x-groophylifefor-heap-analysis-10ddfecb6b",
+  "repeat": 0
+ },
+ {
+  "arm": "OC",
+  "task": "x-groophylifefor-heap-analysis-10ddfecb6b",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "x-mr-mihu-dsh-dbhub-live-f9d568569b",
+  "repeat": 0
+ },
+ {
+  "arm": "OC",
+  "task": "x-mr-mihu-dsh-dbhub-live-f9d568569b",
+  "repeat": 0
+ },
+ {
+  "arm": "PCR",
+  "task": "x-mr-mihu-dsh-dbhub-live-f9d568569b",
+  "repeat": 0
+ },
+ {
+  "arm": "PC",
+  "task": "x-mr-mihu-dsh-dbhub-live-f9d568569b",
+  "repeat": 0
+ },
+ {
+  "arm": "PCR",
+  "task": "x-groophylifefor-heap-analysis-bfc733de41",
+  "repeat": 0
+ },
+ {
+  "arm": "OC",
+  "task": "x-groophylifefor-heap-analysis-bfc733de41",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "x-groophylifefor-heap-analysis-bfc733de41",
+  "repeat": 0
+ },
+ {
+  "arm": "PC",
+  "task": "x-groophylifefor-heap-analysis-bfc733de41",
+  "repeat": 0
+ },
+ {
+  "arm": "PC",
+  "task": "x-l956615272-hub-dsh-token-usage-76b731dfd1",
+  "repeat": 1
+ },
+ {
+  "arm": "PCR",
+  "task": "x-l956615272-hub-dsh-token-usage-76b731dfd1",
+  "repeat": 1
+ },
+ {
+  "arm": "OCR",
+  "task": "x-l956615272-hub-dsh-token-usage-76b731dfd1",
+  "repeat": 1
+ },
+ {
+  "arm": "OC",
+  "task": "x-l956615272-hub-dsh-token-usage-76b731dfd1",
+  "repeat": 1
+ },
+ {
+  "arm": "PCR",
+  "task": "x-blakeb056-six-degrees-aec5ecaebb",
+  "repeat": 2
+ },
+ {
+  "arm": "OCR",
+  "task": "x-blakeb056-six-degrees-aec5ecaebb",
+  "repeat": 2
+ },
+ {
+  "arm": "PC",
+  "task": "x-blakeb056-six-degrees-aec5ecaebb",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-blakeb056-six-degrees-aec5ecaebb",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-nodemailer-libqp-7bbdcbeac4",
+  "repeat": 1
+ },
+ {
+  "arm": "PCR",
+  "task": "x-nodemailer-libqp-7bbdcbeac4",
+  "repeat": 1
+ },
+ {
+  "arm": "OCR",
+  "task": "x-nodemailer-libqp-7bbdcbeac4",
+  "repeat": 1
+ },
+ {
+  "arm": "PC",
+  "task": "x-nodemailer-libqp-7bbdcbeac4",
+  "repeat": 1
+ },
+ {
+  "arm": "PCR",
+  "task": "x-misterkante-cc-model-router-ced46f7612",
+  "repeat": 2
+ },
+ {
+  "arm": "PC",
+  "task": "x-misterkante-cc-model-router-ced46f7612",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-misterkante-cc-model-router-ced46f7612",
+  "repeat": 2
+ },
+ {
+  "arm": "OCR",
+  "task": "x-misterkante-cc-model-router-ced46f7612",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-guorunjie-agentic-workflow-guard-79f4aec3b8",
+  "repeat": 1
+ },
+ {
+  "arm": "PC",
+  "task": "x-guorunjie-agentic-workflow-guard-79f4aec3b8",
+  "repeat": 1
+ },
+ {
+  "arm": "PCR",
+  "task": "x-guorunjie-agentic-workflow-guard-79f4aec3b8",
+  "repeat": 1
+ },
+ {
+  "arm": "OCR",
+  "task": "x-guorunjie-agentic-workflow-guard-79f4aec3b8",
+  "repeat": 1
+ },
+ {
+  "arm": "OC",
+  "task": "x-shrinivas-sn-adapter-ingestion-499701352b",
+  "repeat": 2
+ },
+ {
+  "arm": "PCR",
+  "task": "x-shrinivas-sn-adapter-ingestion-499701352b",
+  "repeat": 2
+ },
+ {
+  "arm": "PC",
+  "task": "x-shrinivas-sn-adapter-ingestion-499701352b",
+  "repeat": 2
+ },
+ {
+  "arm": "OCR",
+  "task": "x-shrinivas-sn-adapter-ingestion-499701352b",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-groophylifefor-heap-analysis-10ddfecb6b",
+  "repeat": 2
+ },
+ {
+  "arm": "OCR",
+  "task": "x-groophylifefor-heap-analysis-10ddfecb6b",
+  "repeat": 2
+ },
+ {
+  "arm": "PCR",
+  "task": "x-groophylifefor-heap-analysis-10ddfecb6b",
+  "repeat": 2
+ },
+ {
+  "arm": "PC",
+  "task": "x-groophylifefor-heap-analysis-10ddfecb6b",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-kannakuron-dsh-ide-git-3599010391",
+  "repeat": 2
+ },
+ {
+  "arm": "PC",
+  "task": "x-kannakuron-dsh-ide-git-3599010391",
+  "repeat": 2
+ },
+ {
+  "arm": "OCR",
+  "task": "x-kannakuron-dsh-ide-git-3599010391",
+  "repeat": 2
+ },
+ {
+  "arm": "PCR",
+  "task": "x-kannakuron-dsh-ide-git-3599010391",
+  "repeat": 2
+ },
+ {
+  "arm": "PCR",
+  "task": "x-lucastonidev-patrickuser-05e5089acf",
+  "repeat": 0
+ },
+ {
+  "arm": "OC",
+  "task": "x-lucastonidev-patrickuser-05e5089acf",
+  "repeat": 0
+ },
+ {
+  "arm": "PC",
+  "task": "x-lucastonidev-patrickuser-05e5089acf",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "x-lucastonidev-patrickuser-05e5089acf",
+  "repeat": 0
+ },
+ {
+  "arm": "PC",
+  "task": "x-drewthomas00-tcpa-quiet-hours-d929633b54",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "x-drewthomas00-tcpa-quiet-hours-d929633b54",
+  "repeat": 0
+ },
+ {
+  "arm": "PCR",
+  "task": "x-drewthomas00-tcpa-quiet-hours-d929633b54",
+  "repeat": 0
+ },
+ {
+  "arm": "OC",
+  "task": "x-drewthomas00-tcpa-quiet-hours-d929633b54",
+  "repeat": 0
+ },
+ {
+  "arm": "PC",
+  "task": "x-cheapestinference-claude-auto-retry-7a1ddf10b2",
+  "repeat": 2
+ },
+ {
+  "arm": "PCR",
+  "task": "x-cheapestinference-claude-auto-retry-7a1ddf10b2",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-cheapestinference-claude-auto-retry-7a1ddf10b2",
+  "repeat": 2
+ },
+ {
+  "arm": "OCR",
+  "task": "x-cheapestinference-claude-auto-retry-7a1ddf10b2",
+  "repeat": 2
+ },
+ {
+  "arm": "PC",
+  "task": "x-avoidwork-filesize-js-109ae605ab",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "x-avoidwork-filesize-js-109ae605ab",
+  "repeat": 0
+ },
+ {
+  "arm": "PCR",
+  "task": "x-avoidwork-filesize-js-109ae605ab",
+  "repeat": 0
+ },
+ {
+  "arm": "OC",
+  "task": "x-avoidwork-filesize-js-109ae605ab",
+  "repeat": 0
+ },
+ {
+  "arm": "PCR",
+  "task": "x-sindresorhus-clone-regexp-0594242c88",
+  "repeat": 1
+ },
+ {
+  "arm": "OCR",
+  "task": "x-sindresorhus-clone-regexp-0594242c88",
+  "repeat": 1
+ },
+ {
+  "arm": "OC",
+  "task": "x-sindresorhus-clone-regexp-0594242c88",
+  "repeat": 1
+ },
+ {
+  "arm": "PC",
+  "task": "x-sindresorhus-clone-regexp-0594242c88",
+  "repeat": 1
+ },
+ {
+  "arm": "PCR",
+  "task": "x-antonioprosperi2-svg-beeladybug-universal-5f88e1d66c",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "x-antonioprosperi2-svg-beeladybug-universal-5f88e1d66c",
+  "repeat": 0
+ },
+ {
+  "arm": "PC",
+  "task": "x-antonioprosperi2-svg-beeladybug-universal-5f88e1d66c",
+  "repeat": 0
+ },
+ {
+  "arm": "OC",
+  "task": "x-antonioprosperi2-svg-beeladybug-universal-5f88e1d66c",
+  "repeat": 0
+ },
+ {
+  "arm": "OC",
+  "task": "x-magrinj-hermes-intl-e1877c8147",
+  "repeat": 0
+ },
+ {
+  "arm": "PCR",
+  "task": "x-magrinj-hermes-intl-e1877c8147",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "x-magrinj-hermes-intl-e1877c8147",
+  "repeat": 0
+ },
+ {
+  "arm": "PC",
+  "task": "x-magrinj-hermes-intl-e1877c8147",
+  "repeat": 0
+ },
+ {
+  "arm": "PCR",
+  "task": "x-sandsoftwaresolutions-ss-human-format-ade5993e4f",
+  "repeat": 0
+ },
+ {
+  "arm": "OC",
+  "task": "x-sandsoftwaresolutions-ss-human-format-ade5993e4f",
+  "repeat": 0
+ },
+ {
+  "arm": "PC",
+  "task": "x-sandsoftwaresolutions-ss-human-format-ade5993e4f",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "x-sandsoftwaresolutions-ss-human-format-ade5993e4f",
+  "repeat": 0
+ },
+ {
+  "arm": "OC",
+  "task": "x-toolbuilder-list-bc22a50372",
+  "repeat": 2
+ },
+ {
+  "arm": "PC",
+  "task": "x-toolbuilder-list-bc22a50372",
+  "repeat": 2
+ },
+ {
+  "arm": "PCR",
+  "task": "x-toolbuilder-list-bc22a50372",
+  "repeat": 2
+ },
+ {
+  "arm": "OCR",
+  "task": "x-toolbuilder-list-bc22a50372",
+  "repeat": 2
+ },
+ {
+  "arm": "OCR",
+  "task": "x-mukundakatta-agentfit-510c32d490",
+  "repeat": 0
+ },
+ {
+  "arm": "PCR",
+  "task": "x-mukundakatta-agentfit-510c32d490",
+  "repeat": 0
+ },
+ {
+  "arm": "OC",
+  "task": "x-mukundakatta-agentfit-510c32d490",
+  "repeat": 0
+ },
+ {
+  "arm": "PC",
+  "task": "x-mukundakatta-agentfit-510c32d490",
+  "repeat": 0
+ },
+ {
+  "arm": "PC",
+  "task": "x-yammm-ynode-ylog-d5c5c3f62e",
+  "repeat": 2
+ },
+ {
+  "arm": "PCR",
+  "task": "x-yammm-ynode-ylog-d5c5c3f62e",
+  "repeat": 2
+ },
+ {
+  "arm": "OCR",
+  "task": "x-yammm-ynode-ylog-d5c5c3f62e",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-yammm-ynode-ylog-d5c5c3f62e",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-dhaupin-crashtest-e70988c5b4",
+  "repeat": 1
+ },
+ {
+  "arm": "PC",
+  "task": "x-dhaupin-crashtest-e70988c5b4",
+  "repeat": 1
+ },
+ {
+  "arm": "OCR",
+  "task": "x-dhaupin-crashtest-e70988c5b4",
+  "repeat": 1
+ },
+ {
+  "arm": "PCR",
+  "task": "x-dhaupin-crashtest-e70988c5b4",
+  "repeat": 1
+ },
+ {
+  "arm": "OC",
+  "task": "x-groophylifefor-heap-analysis-71cd48f8ba",
+  "repeat": 2
+ },
+ {
+  "arm": "PCR",
+  "task": "x-groophylifefor-heap-analysis-71cd48f8ba",
+  "repeat": 2
+ },
+ {
+  "arm": "OCR",
+  "task": "x-groophylifefor-heap-analysis-71cd48f8ba",
+  "repeat": 2
+ },
+ {
+  "arm": "PC",
+  "task": "x-groophylifefor-heap-analysis-71cd48f8ba",
+  "repeat": 2
+ },
+ {
+  "arm": "PCR",
+  "task": "x-blucca-n8n-check-0d73b43caa",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "x-blucca-n8n-check-0d73b43caa",
+  "repeat": 0
+ },
+ {
+  "arm": "PC",
+  "task": "x-blucca-n8n-check-0d73b43caa",
+  "repeat": 0
+ },
+ {
+  "arm": "OC",
+  "task": "x-blucca-n8n-check-0d73b43caa",
+  "repeat": 0
+ },
+ {
+  "arm": "OC",
+  "task": "x-kannakuron-dsh-ide-git-3599010391",
+  "repeat": 0
+ },
+ {
+  "arm": "PC",
+  "task": "x-kannakuron-dsh-ide-git-3599010391",
+  "repeat": 0
+ },
+ {
+  "arm": "PCR",
+  "task": "x-kannakuron-dsh-ide-git-3599010391",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "x-kannakuron-dsh-ide-git-3599010391",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "x-magrinj-hermes-intl-22ec94ee24",
+  "repeat": 2
+ },
+ {
+  "arm": "PC",
+  "task": "x-magrinj-hermes-intl-22ec94ee24",
+  "repeat": 2
+ },
+ {
+  "arm": "PCR",
+  "task": "x-magrinj-hermes-intl-22ec94ee24",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-magrinj-hermes-intl-22ec94ee24",
+  "repeat": 2
+ },
+ {
+  "arm": "PCR",
+  "task": "x-sanchit07-dev-node-core-easy-kit-268de6812c",
+  "repeat": 1
+ },
+ {
+  "arm": "PC",
+  "task": "x-sanchit07-dev-node-core-easy-kit-268de6812c",
+  "repeat": 1
+ },
+ {
+  "arm": "OC",
+  "task": "x-sanchit07-dev-node-core-easy-kit-268de6812c",
+  "repeat": 1
+ },
+ {
+  "arm": "OCR",
+  "task": "x-sanchit07-dev-node-core-easy-kit-268de6812c",
+  "repeat": 1
+ },
+ {
+  "arm": "OC",
+  "task": "x-avoidwork-filesize-js-f5bd84b81b",
+  "repeat": 2
+ },
+ {
+  "arm": "OCR",
+  "task": "x-avoidwork-filesize-js-f5bd84b81b",
+  "repeat": 2
+ },
+ {
+  "arm": "PCR",
+  "task": "x-avoidwork-filesize-js-f5bd84b81b",
+  "repeat": 2
+ },
+ {
+  "arm": "PC",
+  "task": "x-avoidwork-filesize-js-f5bd84b81b",
+  "repeat": 2
+ },
+ {
+  "arm": "OCR",
+  "task": "x-sandsoftwaresolutions-ss-duration-ac6449101c",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-sandsoftwaresolutions-ss-duration-ac6449101c",
+  "repeat": 2
+ },
+ {
+  "arm": "PC",
+  "task": "x-sandsoftwaresolutions-ss-duration-ac6449101c",
+  "repeat": 2
+ },
+ {
+  "arm": "PCR",
+  "task": "x-sandsoftwaresolutions-ss-duration-ac6449101c",
+  "repeat": 2
+ },
+ {
+  "arm": "OCR",
+  "task": "x-w8s-rng-with-intention-d6d0f34e4c",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-w8s-rng-with-intention-d6d0f34e4c",
+  "repeat": 2
+ },
+ {
+  "arm": "PCR",
+  "task": "x-w8s-rng-with-intention-d6d0f34e4c",
+  "repeat": 2
+ },
+ {
+  "arm": "PC",
+  "task": "x-w8s-rng-with-intention-d6d0f34e4c",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-blucca-n8n-check-a7fa85ded5",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "x-blucca-n8n-check-a7fa85ded5",
+  "repeat": 0
+ },
+ {
+  "arm": "PCR",
+  "task": "x-blucca-n8n-check-a7fa85ded5",
+  "repeat": 0
+ },
+ {
+  "arm": "PC",
+  "task": "x-blucca-n8n-check-a7fa85ded5",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "x-johnhenry-spintax-8e582b7cde",
+  "repeat": 0
+ },
+ {
+  "arm": "OC",
+  "task": "x-johnhenry-spintax-8e582b7cde",
+  "repeat": 0
+ },
+ {
+  "arm": "PC",
+  "task": "x-johnhenry-spintax-8e582b7cde",
+  "repeat": 0
+ },
+ {
+  "arm": "PCR",
+  "task": "x-johnhenry-spintax-8e582b7cde",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "x-antonioprosperi2-svg-beeladybug-universal-b6e1d19aa0",
+  "repeat": 1
+ },
+ {
+  "arm": "PC",
+  "task": "x-antonioprosperi2-svg-beeladybug-universal-b6e1d19aa0",
+  "repeat": 1
+ },
+ {
+  "arm": "PCR",
+  "task": "x-antonioprosperi2-svg-beeladybug-universal-b6e1d19aa0",
+  "repeat": 1
+ },
+ {
+  "arm": "OC",
+  "task": "x-antonioprosperi2-svg-beeladybug-universal-b6e1d19aa0",
+  "repeat": 1
+ },
+ {
+  "arm": "OC",
+  "task": "x-sanchit07-dev-node-core-easy-kit-70f95fc1b2",
+  "repeat": 0
+ },
+ {
+  "arm": "PCR",
+  "task": "x-sanchit07-dev-node-core-easy-kit-70f95fc1b2",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "x-sanchit07-dev-node-core-easy-kit-70f95fc1b2",
+  "repeat": 0
+ },
+ {
+  "arm": "PC",
+  "task": "x-sanchit07-dev-node-core-easy-kit-70f95fc1b2",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "x-avoidwork-filesize-js-64b4a2611f",
+  "repeat": 0
+ },
+ {
+  "arm": "OC",
+  "task": "x-avoidwork-filesize-js-64b4a2611f",
+  "repeat": 0
+ },
+ {
+  "arm": "PC",
+  "task": "x-avoidwork-filesize-js-64b4a2611f",
+  "repeat": 0
+ },
+ {
+  "arm": "PCR",
+  "task": "x-avoidwork-filesize-js-64b4a2611f",
+  "repeat": 0
+ },
+ {
+  "arm": "OC",
+  "task": "x-cheapestinference-claude-auto-retry-7a1ddf10b2",
+  "repeat": 0
+ },
+ {
+  "arm": "PC",
+  "task": "x-cheapestinference-claude-auto-retry-7a1ddf10b2",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "x-cheapestinference-claude-auto-retry-7a1ddf10b2",
+  "repeat": 0
+ },
+ {
+  "arm": "PCR",
+  "task": "x-cheapestinference-claude-auto-retry-7a1ddf10b2",
+  "repeat": 0
+ },
+ {
+  "arm": "PC",
+  "task": "x-avoidwork-tiny-lru-30397d7a76",
+  "repeat": 2
+ },
+ {
+  "arm": "PCR",
+  "task": "x-avoidwork-tiny-lru-30397d7a76",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-avoidwork-tiny-lru-30397d7a76",
+  "repeat": 2
+ },
+ {
+  "arm": "OCR",
+  "task": "x-avoidwork-tiny-lru-30397d7a76",
+  "repeat": 2
+ },
+ {
+  "arm": "PC",
+  "task": "x-johnhenry-mport-b70dabf4e7",
+  "repeat": 0
+ },
+ {
+  "arm": "PCR",
+  "task": "x-johnhenry-mport-b70dabf4e7",
+  "repeat": 0
+ },
+ {
+  "arm": "OC",
+  "task": "x-johnhenry-mport-b70dabf4e7",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "x-johnhenry-mport-b70dabf4e7",
+  "repeat": 0
+ },
+ {
+  "arm": "PC",
+  "task": "x-azu-setup-npm-trusted-publish-6104f8bee9",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "x-azu-setup-npm-trusted-publish-6104f8bee9",
+  "repeat": 0
+ },
+ {
+  "arm": "PCR",
+  "task": "x-azu-setup-npm-trusted-publish-6104f8bee9",
+  "repeat": 0
+ },
+ {
+  "arm": "OC",
+  "task": "x-azu-setup-npm-trusted-publish-6104f8bee9",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "x-runcat-tommy-dsh-panda-calendar-667f1793e5",
+  "repeat": 2
+ },
+ {
+  "arm": "PC",
+  "task": "x-runcat-tommy-dsh-panda-calendar-667f1793e5",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-runcat-tommy-dsh-panda-calendar-667f1793e5",
+  "repeat": 2
+ },
+ {
+  "arm": "PCR",
+  "task": "x-runcat-tommy-dsh-panda-calendar-667f1793e5",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-igormel81-dsh-chat-cost-8b37b31edf",
+  "repeat": 2
+ },
+ {
+  "arm": "OCR",
+  "task": "x-igormel81-dsh-chat-cost-8b37b31edf",
+  "repeat": 2
+ },
+ {
+  "arm": "PC",
+  "task": "x-igormel81-dsh-chat-cost-8b37b31edf",
+  "repeat": 2
+ },
+ {
+  "arm": "PCR",
+  "task": "x-igormel81-dsh-chat-cost-8b37b31edf",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-kannakuron-dsh-ide-git-09c63b85e5",
+  "repeat": 1
+ },
+ {
+  "arm": "PCR",
+  "task": "x-kannakuron-dsh-ide-git-09c63b85e5",
+  "repeat": 1
+ },
+ {
+  "arm": "PC",
+  "task": "x-kannakuron-dsh-ide-git-09c63b85e5",
+  "repeat": 1
+ },
+ {
+  "arm": "OCR",
+  "task": "x-kannakuron-dsh-ide-git-09c63b85e5",
+  "repeat": 1
+ },
+ {
+  "arm": "PCR",
+  "task": "x-kannakuron-dsh-ide-git-09c63b85e5",
+  "repeat": 0
+ },
+ {
+  "arm": "OC",
+  "task": "x-kannakuron-dsh-ide-git-09c63b85e5",
+  "repeat": 0
+ },
+ {
+  "arm": "PC",
+  "task": "x-kannakuron-dsh-ide-git-09c63b85e5",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "x-kannakuron-dsh-ide-git-09c63b85e5",
+  "repeat": 0
+ },
+ {
+  "arm": "PC",
+  "task": "x-blucca-n8n-check-1c589621bf",
+  "repeat": 0
+ },
+ {
+  "arm": "OC",
+  "task": "x-blucca-n8n-check-1c589621bf",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "x-blucca-n8n-check-1c589621bf",
+  "repeat": 0
+ },
+ {
+  "arm": "PCR",
+  "task": "x-blucca-n8n-check-1c589621bf",
+  "repeat": 0
+ },
+ {
+  "arm": "PCR",
+  "task": "x-evomap-gep-sdk-js-6a387bbe32",
+  "repeat": 1
+ },
+ {
+  "arm": "PC",
+  "task": "x-evomap-gep-sdk-js-6a387bbe32",
+  "repeat": 1
+ },
+ {
+  "arm": "OCR",
+  "task": "x-evomap-gep-sdk-js-6a387bbe32",
+  "repeat": 1
+ },
+ {
+  "arm": "OC",
+  "task": "x-evomap-gep-sdk-js-6a387bbe32",
+  "repeat": 1
+ },
+ {
+  "arm": "PCR",
+  "task": "x-sanchit07-dev-node-core-easy-kit-70f95fc1b2",
+  "repeat": 1
+ },
+ {
+  "arm": "OCR",
+  "task": "x-sanchit07-dev-node-core-easy-kit-70f95fc1b2",
+  "repeat": 1
+ },
+ {
+  "arm": "OC",
+  "task": "x-sanchit07-dev-node-core-easy-kit-70f95fc1b2",
+  "repeat": 1
+ },
+ {
+  "arm": "PC",
+  "task": "x-sanchit07-dev-node-core-easy-kit-70f95fc1b2",
+  "repeat": 1
+ },
+ {
+  "arm": "PCR",
+  "task": "x-panpontomate-solana-risk-engine-e2582ea728",
+  "repeat": 1
+ },
+ {
+  "arm": "OC",
+  "task": "x-panpontomate-solana-risk-engine-e2582ea728",
+  "repeat": 1
+ },
+ {
+  "arm": "PC",
+  "task": "x-panpontomate-solana-risk-engine-e2582ea728",
+  "repeat": 1
+ },
+ {
+  "arm": "OCR",
+  "task": "x-panpontomate-solana-risk-engine-e2582ea728",
+  "repeat": 1
+ },
+ {
+  "arm": "PCR",
+  "task": "x-lhf198-dsh-prompt-optimizer-fe5772419b",
+  "repeat": 2
+ },
+ {
+  "arm": "OCR",
+  "task": "x-lhf198-dsh-prompt-optimizer-fe5772419b",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-lhf198-dsh-prompt-optimizer-fe5772419b",
+  "repeat": 2
+ },
+ {
+  "arm": "PC",
+  "task": "x-lhf198-dsh-prompt-optimizer-fe5772419b",
+  "repeat": 2
+ },
+ {
+  "arm": "PCR",
+  "task": "x-guorunjie-agentic-workflow-guard-79f4aec3b8",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-guorunjie-agentic-workflow-guard-79f4aec3b8",
+  "repeat": 2
+ },
+ {
+  "arm": "PC",
+  "task": "x-guorunjie-agentic-workflow-guard-79f4aec3b8",
+  "repeat": 2
+ },
+ {
+  "arm": "OCR",
+  "task": "x-guorunjie-agentic-workflow-guard-79f4aec3b8",
+  "repeat": 2
+ },
+ {
+  "arm": "PC",
+  "task": "x-evomap-gep-sdk-js-6a387bbe32",
+  "repeat": 0
+ },
+ {
+  "arm": "PCR",
+  "task": "x-evomap-gep-sdk-js-6a387bbe32",
+  "repeat": 0
+ },
+ {
+  "arm": "OC",
+  "task": "x-evomap-gep-sdk-js-6a387bbe32",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "x-evomap-gep-sdk-js-6a387bbe32",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "x-dhaupin-crashtest-5c6ce1d53f",
+  "repeat": 1
+ },
+ {
+  "arm": "PC",
+  "task": "x-dhaupin-crashtest-5c6ce1d53f",
+  "repeat": 1
+ },
+ {
+  "arm": "OC",
+  "task": "x-dhaupin-crashtest-5c6ce1d53f",
+  "repeat": 1
+ },
+ {
+  "arm": "PCR",
+  "task": "x-dhaupin-crashtest-5c6ce1d53f",
+  "repeat": 1
+ },
+ {
+  "arm": "OCR",
+  "task": "x-dgrr-studio-dice-141a1a8d6b",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-dgrr-studio-dice-141a1a8d6b",
+  "repeat": 2
+ },
+ {
+  "arm": "PCR",
+  "task": "x-dgrr-studio-dice-141a1a8d6b",
+  "repeat": 2
+ },
+ {
+  "arm": "PC",
+  "task": "x-dgrr-studio-dice-141a1a8d6b",
+  "repeat": 2
+ },
+ {
+  "arm": "PC",
+  "task": "x-guorunjie-agentic-workflow-guard-c1322204ff",
+  "repeat": 1
+ },
+ {
+  "arm": "OC",
+  "task": "x-guorunjie-agentic-workflow-guard-c1322204ff",
+  "repeat": 1
+ },
+ {
+  "arm": "PCR",
+  "task": "x-guorunjie-agentic-workflow-guard-c1322204ff",
+  "repeat": 1
+ },
+ {
+  "arm": "OCR",
+  "task": "x-guorunjie-agentic-workflow-guard-c1322204ff",
+  "repeat": 1
+ },
+ {
+  "arm": "PC",
+  "task": "x-kannakuron-dsh-ide-git-09c63b85e5",
+  "repeat": 2
+ },
+ {
+  "arm": "PCR",
+  "task": "x-kannakuron-dsh-ide-git-09c63b85e5",
+  "repeat": 2
+ },
+ {
+  "arm": "OCR",
+  "task": "x-kannakuron-dsh-ide-git-09c63b85e5",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-kannakuron-dsh-ide-git-09c63b85e5",
+  "repeat": 2
+ },
+ {
+  "arm": "OCR",
+  "task": "x-spartawhy117-dsh-token-dash-ba4082dce3",
+  "repeat": 1
+ },
+ {
+  "arm": "OC",
+  "task": "x-spartawhy117-dsh-token-dash-ba4082dce3",
+  "repeat": 1
+ },
+ {
+  "arm": "PCR",
+  "task": "x-spartawhy117-dsh-token-dash-ba4082dce3",
+  "repeat": 1
+ },
+ {
+  "arm": "PC",
+  "task": "x-spartawhy117-dsh-token-dash-ba4082dce3",
+  "repeat": 1
+ },
+ {
+  "arm": "OCR",
+  "task": "x-blucca-n8n-check-0d73b43caa",
+  "repeat": 2
+ },
+ {
+  "arm": "PC",
+  "task": "x-blucca-n8n-check-0d73b43caa",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-blucca-n8n-check-0d73b43caa",
+  "repeat": 2
+ },
+ {
+  "arm": "PCR",
+  "task": "x-blucca-n8n-check-0d73b43caa",
+  "repeat": 2
+ },
+ {
+  "arm": "PC",
+  "task": "x-cheapestinference-claude-auto-retry-f859f12fea",
+  "repeat": 2
+ },
+ {
+  "arm": "PCR",
+  "task": "x-cheapestinference-claude-auto-retry-f859f12fea",
+  "repeat": 2
+ },
+ {
+  "arm": "OCR",
+  "task": "x-cheapestinference-claude-auto-retry-f859f12fea",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-cheapestinference-claude-auto-retry-f859f12fea",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-sanchit07-dev-node-core-easy-kit-70f95fc1b2",
+  "repeat": 2
+ },
+ {
+  "arm": "OCR",
+  "task": "x-sanchit07-dev-node-core-easy-kit-70f95fc1b2",
+  "repeat": 2
+ },
+ {
+  "arm": "PCR",
+  "task": "x-sanchit07-dev-node-core-easy-kit-70f95fc1b2",
+  "repeat": 2
+ },
+ {
+  "arm": "PC",
+  "task": "x-sanchit07-dev-node-core-easy-kit-70f95fc1b2",
+  "repeat": 2
+ },
+ {
+  "arm": "PC",
+  "task": "x-cheapestinference-claude-auto-retry-6d605a5d91",
+  "repeat": 0
+ },
+ {
+  "arm": "OC",
+  "task": "x-cheapestinference-claude-auto-retry-6d605a5d91",
+  "repeat": 0
+ },
+ {
+  "arm": "PCR",
+  "task": "x-cheapestinference-claude-auto-retry-6d605a5d91",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "x-cheapestinference-claude-auto-retry-6d605a5d91",
+  "repeat": 0
+ },
+ {
+  "arm": "OC",
+  "task": "x-ahmtsahin-agent-context-bench-b63c4acd3d",
+  "repeat": 1
+ },
+ {
+  "arm": "OCR",
+  "task": "x-ahmtsahin-agent-context-bench-b63c4acd3d",
+  "repeat": 1
+ },
+ {
+  "arm": "PC",
+  "task": "x-ahmtsahin-agent-context-bench-b63c4acd3d",
+  "repeat": 1
+ },
+ {
+  "arm": "PCR",
+  "task": "x-ahmtsahin-agent-context-bench-b63c4acd3d",
+  "repeat": 1
+ },
+ {
+  "arm": "OC",
+  "task": "x-guorunjie-agentic-workflow-guard-c1322204ff",
+  "repeat": 2
+ },
+ {
+  "arm": "PCR",
+  "task": "x-guorunjie-agentic-workflow-guard-c1322204ff",
+  "repeat": 2
+ },
+ {
+  "arm": "PC",
+  "task": "x-guorunjie-agentic-workflow-guard-c1322204ff",
+  "repeat": 2
+ },
+ {
+  "arm": "OCR",
+  "task": "x-guorunjie-agentic-workflow-guard-c1322204ff",
+  "repeat": 2
+ },
+ {
+  "arm": "OCR",
+  "task": "x-ghostpawjs-grimoire-b7fc19a032",
+  "repeat": 0
+ },
+ {
+  "arm": "PCR",
+  "task": "x-ghostpawjs-grimoire-b7fc19a032",
+  "repeat": 0
+ },
+ {
+  "arm": "PC",
+  "task": "x-ghostpawjs-grimoire-b7fc19a032",
+  "repeat": 0
+ },
+ {
+  "arm": "OC",
+  "task": "x-ghostpawjs-grimoire-b7fc19a032",
+  "repeat": 0
+ },
+ {
+  "arm": "PCR",
+  "task": "x-toolbuilder-list-1914dfac5e",
+  "repeat": 1
+ },
+ {
+  "arm": "PC",
+  "task": "x-toolbuilder-list-1914dfac5e",
+  "repeat": 1
+ },
+ {
+  "arm": "OCR",
+  "task": "x-toolbuilder-list-1914dfac5e",
+  "repeat": 1
+ },
+ {
+  "arm": "OC",
+  "task": "x-toolbuilder-list-1914dfac5e",
+  "repeat": 1
+ },
+ {
+  "arm": "PC",
+  "task": "x-yammm-ynode-ylog-d5c5c3f62e",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "x-yammm-ynode-ylog-d5c5c3f62e",
+  "repeat": 0
+ },
+ {
+  "arm": "OC",
+  "task": "x-yammm-ynode-ylog-d5c5c3f62e",
+  "repeat": 0
+ },
+ {
+  "arm": "PCR",
+  "task": "x-yammm-ynode-ylog-d5c5c3f62e",
+  "repeat": 0
+ },
+ {
+  "arm": "OC",
+  "task": "x-magrinj-hermes-intl-e1877c8147",
+  "repeat": 1
+ },
+ {
+  "arm": "PCR",
+  "task": "x-magrinj-hermes-intl-e1877c8147",
+  "repeat": 1
+ },
+ {
+  "arm": "PC",
+  "task": "x-magrinj-hermes-intl-e1877c8147",
+  "repeat": 1
+ },
+ {
+  "arm": "OCR",
+  "task": "x-magrinj-hermes-intl-e1877c8147",
+  "repeat": 1
+ },
+ {
+  "arm": "PC",
+  "task": "x-ghostpawjs-grimoire-4a1c83b504",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "x-ghostpawjs-grimoire-4a1c83b504",
+  "repeat": 0
+ },
+ {
+  "arm": "OC",
+  "task": "x-ghostpawjs-grimoire-4a1c83b504",
+  "repeat": 0
+ },
+ {
+  "arm": "PCR",
+  "task": "x-ghostpawjs-grimoire-4a1c83b504",
+  "repeat": 0
+ },
+ {
+  "arm": "OC",
+  "task": "x-opopeshku-cronalive-node-a6f621977e",
+  "repeat": 1
+ },
+ {
+  "arm": "OCR",
+  "task": "x-opopeshku-cronalive-node-a6f621977e",
+  "repeat": 1
+ },
+ {
+  "arm": "PC",
+  "task": "x-opopeshku-cronalive-node-a6f621977e",
+  "repeat": 1
+ },
+ {
+  "arm": "PCR",
+  "task": "x-opopeshku-cronalive-node-a6f621977e",
+  "repeat": 1
+ },
+ {
+  "arm": "OCR",
+  "task": "x-antonioprosperi2-svg-beeladybug-universal-a89811cf4e",
+  "repeat": 1
+ },
+ {
+  "arm": "PCR",
+  "task": "x-antonioprosperi2-svg-beeladybug-universal-a89811cf4e",
+  "repeat": 1
+ },
+ {
+  "arm": "OC",
+  "task": "x-antonioprosperi2-svg-beeladybug-universal-a89811cf4e",
+  "repeat": 1
+ },
+ {
+  "arm": "PC",
+  "task": "x-antonioprosperi2-svg-beeladybug-universal-a89811cf4e",
+  "repeat": 1
+ },
+ {
+  "arm": "PC",
+  "task": "x-l956615272-hub-dsh-token-usage-76b731dfd1",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-l956615272-hub-dsh-token-usage-76b731dfd1",
+  "repeat": 2
+ },
+ {
+  "arm": "OCR",
+  "task": "x-l956615272-hub-dsh-token-usage-76b731dfd1",
+  "repeat": 2
+ },
+ {
+  "arm": "PCR",
+  "task": "x-l956615272-hub-dsh-token-usage-76b731dfd1",
+  "repeat": 2
+ },
+ {
+  "arm": "PC",
+  "task": "x-azu-setup-npm-trusted-publish-6104f8bee9",
+  "repeat": 1
+ },
+ {
+  "arm": "OC",
+  "task": "x-azu-setup-npm-trusted-publish-6104f8bee9",
+  "repeat": 1
+ },
+ {
+  "arm": "OCR",
+  "task": "x-azu-setup-npm-trusted-publish-6104f8bee9",
+  "repeat": 1
+ },
+ {
+  "arm": "PCR",
+  "task": "x-azu-setup-npm-trusted-publish-6104f8bee9",
+  "repeat": 1
+ },
+ {
+  "arm": "OC",
+  "task": "x-blucca-n8n-check-1c589621bf",
+  "repeat": 1
+ },
+ {
+  "arm": "OCR",
+  "task": "x-blucca-n8n-check-1c589621bf",
+  "repeat": 1
+ },
+ {
+  "arm": "PCR",
+  "task": "x-blucca-n8n-check-1c589621bf",
+  "repeat": 1
+ },
+ {
+  "arm": "PC",
+  "task": "x-blucca-n8n-check-1c589621bf",
+  "repeat": 1
+ },
+ {
+  "arm": "OC",
+  "task": "x-antonioprosperi2-svg-beeladybug-universal-b6e1d19aa0",
+  "repeat": 0
+ },
+ {
+  "arm": "PCR",
+  "task": "x-antonioprosperi2-svg-beeladybug-universal-b6e1d19aa0",
+  "repeat": 0
+ },
+ {
+  "arm": "PC",
+  "task": "x-antonioprosperi2-svg-beeladybug-universal-b6e1d19aa0",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "x-antonioprosperi2-svg-beeladybug-universal-b6e1d19aa0",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "x-lhf198-dsh-prompt-optimizer-fe5772419b",
+  "repeat": 1
+ },
+ {
+  "arm": "PC",
+  "task": "x-lhf198-dsh-prompt-optimizer-fe5772419b",
+  "repeat": 1
+ },
+ {
+  "arm": "PCR",
+  "task": "x-lhf198-dsh-prompt-optimizer-fe5772419b",
+  "repeat": 1
+ },
+ {
+  "arm": "OC",
+  "task": "x-lhf198-dsh-prompt-optimizer-fe5772419b",
+  "repeat": 1
+ },
+ {
+  "arm": "PCR",
+  "task": "x-lucastonidev-patrickuser-05e5089acf",
+  "repeat": 2
+ },
+ {
+  "arm": "PC",
+  "task": "x-lucastonidev-patrickuser-05e5089acf",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-lucastonidev-patrickuser-05e5089acf",
+  "repeat": 2
+ },
+ {
+  "arm": "OCR",
+  "task": "x-lucastonidev-patrickuser-05e5089acf",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-otto-ottospace-mizan-f2f8fcb2c8",
+  "repeat": 1
+ },
+ {
+  "arm": "OCR",
+  "task": "x-otto-ottospace-mizan-f2f8fcb2c8",
+  "repeat": 1
+ },
+ {
+  "arm": "PCR",
+  "task": "x-otto-ottospace-mizan-f2f8fcb2c8",
+  "repeat": 1
+ },
+ {
+  "arm": "PC",
+  "task": "x-otto-ottospace-mizan-f2f8fcb2c8",
+  "repeat": 1
+ },
+ {
+  "arm": "OCR",
+  "task": "x-toolbuilder-list-bc22a50372",
+  "repeat": 0
+ },
+ {
+  "arm": "PCR",
+  "task": "x-toolbuilder-list-bc22a50372",
+  "repeat": 0
+ },
+ {
+  "arm": "PC",
+  "task": "x-toolbuilder-list-bc22a50372",
+  "repeat": 0
+ },
+ {
+  "arm": "OC",
+  "task": "x-toolbuilder-list-bc22a50372",
+  "repeat": 0
+ },
+ {
+  "arm": "PCR",
+  "task": "x-toolbuilder-list-2b73f7f42c",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-toolbuilder-list-2b73f7f42c",
+  "repeat": 2
+ },
+ {
+  "arm": "OCR",
+  "task": "x-toolbuilder-list-2b73f7f42c",
+  "repeat": 2
+ },
+ {
+  "arm": "PC",
+  "task": "x-toolbuilder-list-2b73f7f42c",
+  "repeat": 2
+ },
+ {
+  "arm": "PC",
+  "task": "x-johnhenry-spintax-8e582b7cde",
+  "repeat": 2
+ },
+ {
+  "arm": "OCR",
+  "task": "x-johnhenry-spintax-8e582b7cde",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-johnhenry-spintax-8e582b7cde",
+  "repeat": 2
+ },
+ {
+  "arm": "PCR",
+  "task": "x-johnhenry-spintax-8e582b7cde",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-metarhia-metawatch-af9528a554",
+  "repeat": 0
+ },
+ {
+  "arm": "PCR",
+  "task": "x-metarhia-metawatch-af9528a554",
+  "repeat": 0
+ },
+ {
+  "arm": "PC",
+  "task": "x-metarhia-metawatch-af9528a554",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "x-metarhia-metawatch-af9528a554",
+  "repeat": 0
+ },
+ {
+  "arm": "PCR",
+  "task": "x-l956615272-hub-dsh-token-usage-4fef2ea940",
+  "repeat": 0
+ },
+ {
+  "arm": "OC",
+  "task": "x-l956615272-hub-dsh-token-usage-4fef2ea940",
+  "repeat": 0
+ },
+ {
+  "arm": "PC",
+  "task": "x-l956615272-hub-dsh-token-usage-4fef2ea940",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "x-l956615272-hub-dsh-token-usage-4fef2ea940",
+  "repeat": 0
+ },
+ {
+  "arm": "OC",
+  "task": "x-lucastonidev-patrickuser-05e5089acf",
+  "repeat": 1
+ },
+ {
+  "arm": "PC",
+  "task": "x-lucastonidev-patrickuser-05e5089acf",
+  "repeat": 1
+ },
+ {
+  "arm": "PCR",
+  "task": "x-lucastonidev-patrickuser-05e5089acf",
+  "repeat": 1
+ },
+ {
+  "arm": "OCR",
+  "task": "x-lucastonidev-patrickuser-05e5089acf",
+  "repeat": 1
+ },
+ {
+  "arm": "PCR",
+  "task": "x-misterkante-cc-model-router-ced46f7612",
+  "repeat": 0
+ },
+ {
+  "arm": "PC",
+  "task": "x-misterkante-cc-model-router-ced46f7612",
+  "repeat": 0
+ },
+ {
+  "arm": "OC",
+  "task": "x-misterkante-cc-model-router-ced46f7612",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "x-misterkante-cc-model-router-ced46f7612",
+  "repeat": 0
+ },
+ {
+  "arm": "PC",
+  "task": "x-cccalana-gatewaycheck-2d961d088c",
+  "repeat": 1
+ },
+ {
+  "arm": "OC",
+  "task": "x-cccalana-gatewaycheck-2d961d088c",
+  "repeat": 1
+ },
+ {
+  "arm": "OCR",
+  "task": "x-cccalana-gatewaycheck-2d961d088c",
+  "repeat": 1
+ },
+ {
+  "arm": "PCR",
+  "task": "x-cccalana-gatewaycheck-2d961d088c",
+  "repeat": 1
+ },
+ {
+  "arm": "OC",
+  "task": "x-misterkante-cc-model-router-ced46f7612",
+  "repeat": 1
+ },
+ {
+  "arm": "PCR",
+  "task": "x-misterkante-cc-model-router-ced46f7612",
+  "repeat": 1
+ },
+ {
+  "arm": "PC",
+  "task": "x-misterkante-cc-model-router-ced46f7612",
+  "repeat": 1
+ },
+ {
+  "arm": "OCR",
+  "task": "x-misterkante-cc-model-router-ced46f7612",
+  "repeat": 1
+ },
+ {
+  "arm": "PC",
+  "task": "x-dirop1-pi-delay-prompt-a7948a14a4",
+  "repeat": 2
+ },
+ {
+  "arm": "PCR",
+  "task": "x-dirop1-pi-delay-prompt-a7948a14a4",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-dirop1-pi-delay-prompt-a7948a14a4",
+  "repeat": 2
+ },
+ {
+  "arm": "OCR",
+  "task": "x-dirop1-pi-delay-prompt-a7948a14a4",
+  "repeat": 2
+ },
+ {
+  "arm": "PCR",
+  "task": "x-ahmtsahin-agent-context-bench-134ba49b33",
+  "repeat": 0
+ },
+ {
+  "arm": "PC",
+  "task": "x-ahmtsahin-agent-context-bench-134ba49b33",
+  "repeat": 0
+ },
+ {
+  "arm": "OC",
+  "task": "x-ahmtsahin-agent-context-bench-134ba49b33",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "x-ahmtsahin-agent-context-bench-134ba49b33",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "x-blucca-n8n-check-1c589621bf",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-blucca-n8n-check-1c589621bf",
+  "repeat": 2
+ },
+ {
+  "arm": "PC",
+  "task": "x-blucca-n8n-check-1c589621bf",
+  "repeat": 2
+ },
+ {
+  "arm": "PCR",
+  "task": "x-blucca-n8n-check-1c589621bf",
+  "repeat": 2
+ },
+ {
+  "arm": "OC",
+  "task": "x-marko-js-htmljs-parser-a576b5c86e",
+  "repeat": 0
+ },
+ {
+  "arm": "PC",
+  "task": "x-marko-js-htmljs-parser-a576b5c86e",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "x-marko-js-htmljs-parser-a576b5c86e",
+  "repeat": 0
+ },
+ {
+  "arm": "PCR",
+  "task": "x-marko-js-htmljs-parser-a576b5c86e",
+  "repeat": 0
+ }
+]

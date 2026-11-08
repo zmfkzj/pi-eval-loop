@@ -1,0 +1,2 @@
+2026-11-06T13:45:36Z
+collection stopped by the operator (time limit; outcome-blind: no agent had run on any case); wave-2 slices 3, 6, 9 incomplete (47/60, 18/60, 44/60 repositories)

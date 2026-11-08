@@ -1,0 +1,175 @@
+{
+  "at": "2026-11-07T04:06:46.833Z",
+  "units": 8,
+  "ok": 0,
+  "perUnit": [
+    {
+      "run_id": "OC-x-ahmtsahin-agent-context-bench-b63c4acd3d-confirmation-r2-a1-af00e173",
+      "arm": "OC",
+      "terminal_status": "aborted",
+      "evidenceDir": "/home/arthur/Code/oh-my-pi-extensions/pi-eval-loop/state/ctrl-confirm-2/evidence/OC/confirmation-x-ahmtsahin-agent-context-bench-b63c4acd3d-r2-a1-af00e173",
+      "exists": true,
+      "fidelity": {
+        "ok": false,
+        "checks": {
+          "mainSession": false,
+          "contractInTask": false,
+          "delegated": false,
+          "noRule": true
+        },
+        "reported": {
+          "contractReachedWorker": false
+        },
+        "handoffs": 0,
+        "sessions": []
+      }
+    },
+    {
+      "run_id": "OC-x-l956615272-hub-dsh-token-usage-8c425815aa-confirmation-r0-a1-e17c55e5",
+      "arm": "OC",
+      "terminal_status": "aborted",
+      "evidenceDir": "/home/arthur/Code/oh-my-pi-extensions/pi-eval-loop/state/ctrl-confirm-2/evidence/OC/confirmation-x-l956615272-hub-dsh-token-usage-8c425815aa-r0-a1-e17c55e5",
+      "exists": true,
+      "fidelity": {
+        "ok": false,
+        "checks": {
+          "mainSession": false,
+          "contractInTask": false,
+          "delegated": false,
+          "noRule": true
+        },
+        "reported": {
+          "contractReachedWorker": false
+        },
+        "handoffs": 0,
+        "sessions": []
+      }
+    },
+    {
+      "run_id": "OCR-x-l956615272-hub-dsh-token-usage-8c425815aa-confirmation-r0-a1-1bcbc028",
+      "arm": "OCR",
+      "terminal_status": "aborted",
+      "evidenceDir": "/home/arthur/Code/oh-my-pi-extensions/pi-eval-loop/state/ctrl-confirm-2/evidence/OCR/confirmation-x-l956615272-hub-dsh-token-usage-8c425815aa-r0-a1-1bcbc028",
+      "exists": true,
+      "fidelity": {
+        "ok": false,
+        "checks": {
+          "mainSession": false,
+          "contractInTask": false,
+          "delegated": false,
+          "ruleInEveryOrcheSession": false
+        },
+        "reported": {
+          "contractReachedWorker": false
+        },
+        "handoffs": 0,
+        "sessions": []
+      }
+    },
+    {
+      "run_id": "OC-x-blakeb056-six-degrees-aec5ecaebb-confirmation-r1-a1-f75b2eaa",
+      "arm": "OC",
+      "terminal_status": "aborted",
+      "evidenceDir": "/home/arthur/Code/oh-my-pi-extensions/pi-eval-loop/state/ctrl-confirm-2/evidence/OC/confirmation-x-blakeb056-six-degrees-aec5ecaebb-r1-a1-f75b2eaa",
+      "exists": true,
+      "fidelity": {
+        "ok": false,
+        "checks": {
+          "mainSession": false,
+          "contractInTask": false,
+          "delegated": false,
+          "noRule": true
+        },
+        "reported": {
+          "contractReachedWorker": false
+        },
+        "handoffs": 0,
+        "sessions": []
+      }
+    },
+    {
+      "run_id": "OCR-x-blakeb056-six-degrees-aec5ecaebb-confirmation-r1-a1-f7e85b95",
+      "arm": "OCR",
+      "terminal_status": "aborted",
+      "evidenceDir": "/home/arthur/Code/oh-my-pi-extensions/pi-eval-loop/state/ctrl-confirm-2/evidence/OCR/confirmation-x-blakeb056-six-degrees-aec5ecaebb-r1-a1-f7e85b95",
+      "exists": true,
+      "fidelity": {
+        "ok": false,
+        "checks": {
+          "mainSession": false,
+          "contractInTask": false,
+          "delegated": false,
+          "ruleInEveryOrcheSession": false
+        },
+        "reported": {
+          "contractReachedWorker": false
+        },
+        "handoffs": 0,
+        "sessions": []
+      }
+    },
+    {
+      "run_id": "OCR-x-metarhia-metawatch-e1b278f5c3-confirmation-r0-a1-97ed29d1",
+      "arm": "OCR",
+      "terminal_status": "aborted",
+      "evidenceDir": "/home/arthur/Code/oh-my-pi-extensions/pi-eval-loop/state/ctrl-confirm-2/evidence/OCR/confirmation-x-metarhia-metawatch-e1b278f5c3-r0-a1-97ed29d1",
+      "exists": true,
+      "fidelity": {
+        "ok": false,
+        "checks": {
+          "mainSession": false,
+          "contractInTask": false,
+          "delegated": false,
+          "ruleInEveryOrcheSession": false
+        },
+        "reported": {
+          "contractReachedWorker": false
+        },
+        "handoffs": 0,
+        "sessions": []
+      }
+    },
+    {
+      "run_id": "OC-x-metarhia-metawatch-e1b278f5c3-confirmation-r0-a1-2ba89655",
+      "arm": "OC",
+      "terminal_status": "aborted",
+      "evidenceDir": "/home/arthur/Code/oh-my-pi-extensions/pi-eval-loop/state/ctrl-confirm-2/evidence/OC/confirmation-x-metarhia-metawatch-e1b278f5c3-r0-a1-2ba89655",
+      "exists": true,
+      "fidelity": {
+        "ok": false,
+        "checks": {
+          "mainSession": false,
+          "contractInTask": false,
+          "delegated": false,
+          "noRule": true
+        },
+        "reported": {
+          "contractReachedWorker": false
+        },
+        "handoffs": 0,
+        "sessions": []
+      }
+    },
+    {
+      "run_id": "OCR-x-sandsoftwaresolutions-ss-human-format-ade5993e4f-confirmation-r2-a1-c94992e5",
+      "arm": "OCR",
+      "terminal_status": "aborted",
+      "evidenceDir": "/home/arthur/Code/oh-my-pi-extensions/pi-eval-loop/state/ctrl-confirm-2/evidence/OCR/confirmation-x-sandsoftwaresolutions-ss-human-format-ade5993e4f-r2-a1-c94992e5",
+      "exists": true,
+      "fidelity": {
+        "ok": false,
+        "checks": {
+          "mainSession": false,
+          "contractInTask": false,
+          "delegated": false,
+          "ruleInEveryOrcheSession": false
+        },
+        "reported": {
+          "contractReachedWorker": false
+        },
+        "handoffs": 0,
+        "sessions": []
+      }
+    }
+  ]
+}

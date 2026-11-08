@@ -1,0 +1,39 @@
+{
+  "startedAt": "2026-11-06T11:59:43.669Z",
+  "experiment": "ctrl-confirm-2",
+  "split": "smoke",
+  "preregDigest": "9182d1c8da7b81400d134da0f8a00b020537c8917410388d5bcdb5b4f189d46f",
+  "queueDigest": "430d5dd09a37369a42f4b42e9e3e6612d51faa80e1ad394cb59c3025619cff70",
+  "total": 8,
+  "done": 8,
+  "unsettled": 0,
+  "inFlight": 0,
+  "requests": 79,
+  "terminal": {
+    "completed": 8
+  },
+  "firstResultAt": "2026-11-06T11:59:43.887Z",
+  "updatedAt": "2026-11-06T12:02:25.366Z",
+  "paused": null,
+  "resume": "node pi-eval-loop/experiments/ctrl-confirm-2/run.mjs --state /home/arthur/Code/oh-my-pi-extensions/pi-eval-loop/state/ctrl-confirm-2-smoke --smoke",
+  "invocations": [
+    {
+      "ran": 8,
+      "total": 8,
+      "done": 8,
+      "unsettled": 0,
+      "paused": null,
+      "requests": 79,
+      "at": "2026-11-06T12:01:21.998Z"
+    },
+    {
+      "ran": 0,
+      "total": 8,
+      "done": 8,
+      "unsettled": 0,
+      "paused": null,
+      "requests": 79,
+      "at": "2026-11-06T12:02:25.369Z"
+    }
+  ]
+}

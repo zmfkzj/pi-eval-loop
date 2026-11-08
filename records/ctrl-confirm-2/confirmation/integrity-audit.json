@@ -1,0 +1,188 @@
+{
+  "at": "2026-11-07T04:06:08.935Z",
+  "stateDir": "/home/arthur/Code/oh-my-pi-extensions/pi-eval-loop/state/ctrl-confirm-2",
+  "dataset": "/home/arthur/Code/oh-my-pi-extensions/results/ctrl-confirm-2-holdout/ctrl-confirm-2-holdout-3e83b1b2af67",
+  "ok": true,
+  "problems": [],
+  "notes": [
+    "3 critical terminal statuses (route_violation/harness_crash)"
+  ],
+  "lock": {
+    "preregDigest": "c57de71464d075dbd97beed902edea44c36d3143debc2accf18ae0277daea9a0",
+    "queueDigest": "7f9d9fd8ad46981322c466308512a26e9c7f45e61ab71ef9e1109c5415d11d0b",
+    "envDigest": "f5ce141053523d5762388ddb6f4c826c8470ea7156015a8e2045359bd7ff22a9",
+    "holdoutSeal": "1dbe71800c0fa04b5648aca1a47bdf9013f95a7fd399176f6e3bf2c72aa2b7ca",
+    "lockedAt": "2026-11-06T13:57:31.882Z",
+    "lockCopyIdentical": true,
+    "files": 45,
+    "fileProblems": 0,
+    "harness": {
+      "OC": {
+        "identity": "e831a6b2bc19f0c707b55505db33a11b2c9d4d4a:single",
+        "tree": "6bfbe380e9782c21c65554d181631130ae4a2ea21ff00df6ef283b829f1e6195",
+        "ok": true
+      },
+      "OCR": {
+        "identity": "e831a6b2bc19f0c707b55505db33a11b2c9d4d4a:single+1c36e2b7eeae1864",
+        "tree": "503ae17237e202cb501f05d50ddeaadbcf8e17f58d5486c9d09102eb53190f16",
+        "ok": true
+      },
+      "PC": {
+        "identity": "pure",
+        "tree": null,
+        "ok": true
+      },
+      "PCR": {
+        "identity": "pure+fb8e0a93e3e33541",
+        "tree": null,
+        "ok": true
+      }
+    }
+  },
+  "holdoutUses": [
+    {
+      "experiment": "ctrl-confirm-2",
+      "stateDir": "/home/arthur/Code/oh-my-pi-extensions/pi-eval-loop/state/ctrl-confirm-2",
+      "at": "2026-11-06T13:57:31.888Z"
+    }
+  ],
+  "ledger": {
+    "entries": 2232,
+    "dispatches": 1116,
+    "results": 1116,
+    "reconciledResults": 8,
+    "orphanDispatches": 0,
+    "units": 1116,
+    "redraws": 0
+  },
+  "design": {
+    "scheduled": 1116,
+    "withResult": 1116,
+    "missing": 0,
+    "unsettled": 0,
+    "complete": true
+  },
+  "terminal": {
+    "final": {
+      "completed": 1093,
+      "agent_error": 1,
+      "aborted": 8,
+      "model_error": 9,
+      "timeout": 2,
+      "route_violation": 3
+    },
+    "allAttempts": {
+      "completed": 1093,
+      "agent_error": 1,
+      "aborted": 8,
+      "model_error": 9,
+      "timeout": 2,
+      "route_violation": 3
+    }
+  },
+  "infrastructure": {
+    "finalInfraUnits": 0,
+    "rate": 0,
+    "maxInfraRate": 0.1,
+    "compromised": false
+  },
+  "integrityCritical": {
+    "criticalStatuses": 3,
+    "leakUnitsAllArms": 1
+  },
+  "resourcesAllAttempts": {
+    "total": {
+      "attempts": 1116,
+      "requests": 22232,
+      "requestsCompleted": 22105,
+      "inputTokens": 335326095,
+      "outputTokens": 3227788,
+      "cacheTokens": 296668928,
+      "cacheWriteTokens": 0,
+      "unitWallHours": 42.83919861111111
+    },
+    "perArm": {
+      "OC": {
+        "attempts": 279,
+        "requests": 8578,
+        "requestsCompleted": 8527,
+        "inputTokens": 141362925,
+        "outputTokens": 1251778,
+        "cacheTokens": 127627776,
+        "cacheWriteTokens": 0,
+        "unitWallHours": 16.634095
+      },
+      "OCR": {
+        "attempts": 279,
+        "requests": 8219,
+        "requestsCompleted": 8171,
+        "inputTokens": 139550049,
+        "outputTokens": 1249761,
+        "cacheTokens": 126102400,
+        "cacheWriteTokens": 0,
+        "unitWallHours": 16.226710833333332
+      },
+      "PC": {
+        "attempts": 279,
+        "requests": 2738,
+        "requestsCompleted": 2723,
+        "inputTokens": 27213800,
+        "outputTokens": 363639,
+        "cacheTokens": 21459584,
+        "cacheWriteTokens": 0,
+        "unitWallHours": 4.956828333333333
+      },
+      "PCR": {
+        "attempts": 279,
+        "requests": 2697,
+        "requestsCompleted": 2684,
+        "inputTokens": 27199321,
+        "outputTokens": 362610,
+        "cacheTokens": 21479168,
+        "cacheWriteTokens": 0,
+        "unitWallHours": 5.0215644444444445
+      }
+    },
+    "reconciledOrphans": {
+      "attempts": 8,
+      "requests": 298,
+      "requestsCompleted": 290,
+      "inputTokens": 0,
+      "outputTokens": 0,
+      "cacheTokens": 0,
+      "cacheWriteTokens": 0,
+      "unitWallHours": 0,
+      "note": "Evaluator.reconcile records requests from the wire journal only: tokens, unit wall time and evidence_dir are not recorded for these attempts"
+    }
+  },
+  "campaign": {
+    "startedAt": "2026-11-06T13:57:31.903Z",
+    "wallCeilingAt": "2026-11-07T03:57:31.903Z",
+    "firstResultAt": "2026-11-06T13:57:32.084Z",
+    "updatedAt": "2026-11-07T04:00:25.594Z",
+    "lastRecordTime": "2026-11-07T03:59:55.919Z",
+    "requestsCheckpoint": 22232,
+    "requestCeiling": 40000,
+    "paused": null,
+    "invocations": [
+      {
+        "ran": 752,
+        "total": 1116,
+        "done": 933,
+        "unsettled": 183,
+        "paused": "route violation in PCR-x-kannakuron-dsh-ide-git-09c63b85e5-confirmation-r1-a1-a48ef08e",
+        "requests": 18575,
+        "at": "2026-11-07T02:37:31.195Z"
+      },
+      {
+        "ran": 183,
+        "total": 1116,
+        "done": 1116,
+        "unsettled": 0,
+        "paused": null,
+        "requests": 22232,
+        "at": "2026-11-07T04:00:25.602Z"
+      }
+    ]
+  }
+}

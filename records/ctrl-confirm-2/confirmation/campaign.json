@@ -1,0 +1,44 @@
+{
+  "startedAt": "2026-11-06T13:57:31.903Z",
+  "experiment": "ctrl-confirm-2",
+  "split": "confirmation",
+  "preregDigest": "c57de71464d075dbd97beed902edea44c36d3143debc2accf18ae0277daea9a0",
+  "queueDigest": "7f9d9fd8ad46981322c466308512a26e9c7f45e61ab71ef9e1109c5415d11d0b",
+  "total": 1116,
+  "done": 1116,
+  "unsettled": 0,
+  "inFlight": 0,
+  "requests": 22232,
+  "terminal": {
+    "completed": 1093,
+    "agent_error": 1,
+    "aborted": 8,
+    "model_error": 9,
+    "timeout": 2,
+    "route_violation": 3
+  },
+  "firstResultAt": "2026-11-06T13:57:32.084Z",
+  "updatedAt": "2026-11-07T04:00:25.594Z",
+  "paused": null,
+  "resume": "node pi-eval-loop/experiments/ctrl-confirm-2/run.mjs --state /home/arthur/Code/oh-my-pi-extensions/pi-eval-loop/state/ctrl-confirm-2 --dataset /home/arthur/Code/oh-my-pi-extensions/results/ctrl-confirm-2-holdout/ctrl-confirm-2-holdout-3e83b1b2af67",
+  "invocations": [
+    {
+      "ran": 752,
+      "total": 1116,
+      "done": 933,
+      "unsettled": 183,
+      "paused": "route violation in PCR-x-kannakuron-dsh-ide-git-09c63b85e5-confirmation-r1-a1-a48ef08e",
+      "requests": 18575,
+      "at": "2026-11-07T02:37:31.195Z"
+    },
+    {
+      "ran": 183,
+      "total": 1116,
+      "done": 1116,
+      "unsettled": 0,
+      "paused": null,
+      "requests": 22232,
+      "at": "2026-11-07T04:00:25.602Z"
+    }
+  ]
+}

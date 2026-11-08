@@ -1,0 +1,1211 @@
+{
+  "x-ahmtsahin-agent-context-bench-134ba49b33": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 33
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 1
+    }
+  },
+  "x-ahmtsahin-agent-context-bench-3912f5ad87": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 32
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 1
+    }
+  },
+  "x-ahmtsahin-agent-context-bench-b63c4acd3d": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 31
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 5
+    }
+  },
+  "x-alannerfranklin-dsh-relay-isolation-dfccc5d2c1": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 7
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 1
+    }
+  },
+  "x-antonioprosperi2-svg-beeladybug-universal-5f88e1d66c": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 7
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 2
+    }
+  },
+  "x-antonioprosperi2-svg-beeladybug-universal-a89811cf4e": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 16
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 4
+    }
+  },
+  "x-antonioprosperi2-svg-beeladybug-universal-b6e1d19aa0": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 9
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 3
+    }
+  },
+  "x-avoidwork-filesize-js-109ae605ab": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 198
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 1
+    }
+  },
+  "x-avoidwork-filesize-js-64b4a2611f": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 196
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 1
+    }
+  },
+  "x-avoidwork-filesize-js-f5bd84b81b": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 197
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 1
+    }
+  },
+  "x-avoidwork-tiny-lru-30397d7a76": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 173
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 1
+    }
+  },
+  "x-avoidwork-tiny-lru-da90b42c31": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 172
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 1
+    }
+  },
+  "x-azu-setup-npm-trusted-publish-6104f8bee9": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 8
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 1
+    }
+  },
+  "x-blakeb056-six-degrees-aec5ecaebb": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 2
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 1
+    }
+  },
+  "x-blucca-n8n-check-0d73b43caa": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 3
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 1
+    }
+  },
+  "x-blucca-n8n-check-1c589621bf": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 6
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 1
+    }
+  },
+  "x-blucca-n8n-check-a7fa85ded5": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 23
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 1
+    }
+  },
+  "x-cccalana-gatewaycheck-2d961d088c": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 4
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 1
+    }
+  },
+  "x-cheapestinference-claude-auto-retry-6d605a5d91": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 197
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 2
+    }
+  },
+  "x-cheapestinference-claude-auto-retry-7a1ddf10b2": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 30
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 1
+    }
+  },
+  "x-cheapestinference-claude-auto-retry-f859f12fea": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 17
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 1
+    }
+  },
+  "x-codyrobertson-gh-issue-lease-f0f573c258": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 29
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 1
+    }
+  },
+  "x-dgrr-studio-dice-141a1a8d6b": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 10
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 1
+    }
+  },
+  "x-dhaupin-crashtest-5c6ce1d53f": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 46
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 5
+    }
+  },
+  "x-dhaupin-crashtest-e70988c5b4": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 21
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 1
+    }
+  },
+  "x-dhaupin-crashtest-eb4c5fee65": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 5
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 1
+    }
+  },
+  "x-dirop1-pi-delay-prompt-a7948a14a4": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 3
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 1
+    }
+  },
+  "x-drewthomas00-tcpa-quiet-hours-d929633b54": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 128
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 1
+    }
+  },
+  "x-ducaoya-pi-hang-guard-b75099e5bc": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 44
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 4
+    }
+  },
+  "x-evomap-gep-sdk-js-6a387bbe32": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 5
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 1
+    }
+  },
+  "x-fugangcui-speakremix-codes-7bf8b8fb00": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 10
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 1
+    }
+  },
+  "x-ghostpawjs-grimoire-4a1c83b504": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 6
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 1
+    }
+  },
+  "x-ghostpawjs-grimoire-b7fc19a032": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 6
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 1
+    }
+  },
+  "x-ghostpawjs-grimoire-c5aa4b66a3": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 8
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 2
+    }
+  },
+  "x-groophylifefor-heap-analysis-10ddfecb6b": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 20
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 7
+    }
+  },
+  "x-groophylifefor-heap-analysis-71cd48f8ba": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 13
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 2
+    }
+  },
+  "x-groophylifefor-heap-analysis-bfc733de41": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 9
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 1
+    }
+  },
+  "x-guorunjie-agentic-workflow-guard-79f4aec3b8": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 6
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 3
+    }
+  },
+  "x-guorunjie-agentic-workflow-guard-bc30533f19": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 14
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 2
+    }
+  },
+  "x-guorunjie-agentic-workflow-guard-c1322204ff": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 11
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 3
+    }
+  },
+  "x-guotree-magpie-websearch-466d493835": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 5
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 1
+    }
+  },
+  "x-guotree-magpie-websearch-a74cfdcbe9": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 42
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 1
+    }
+  },
+  "x-guotree-magpie-websearch-c4d8db57f9": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 11
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 4
+    }
+  },
+  "x-igormel81-dsh-chat-cost-8b37b31edf": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 8
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 4
+    }
+  },
+  "x-insession-space-insession-sdk-29c8a3b74e": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 77
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 6
+    }
+  },
+  "x-insession-space-insession-sdk-c721ee0c1d": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 65
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 5
+    }
+  },
+  "x-insession-space-insession-sdk-f9057e96cd": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 68
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 2
+    }
+  },
+  "x-johnhenry-mport-b70dabf4e7": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 35
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 1
+    }
+  },
+  "x-johnhenry-spintax-8e582b7cde": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 8
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 3
+    }
+  },
+  "x-kannakuron-dsh-ide-git-09c63b85e5": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 56
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 1
+    }
+  },
+  "x-kannakuron-dsh-ide-git-317ae73aa6": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 52
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 1
+    }
+  },
+  "x-kannakuron-dsh-ide-git-3599010391": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 53
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 1
+    }
+  },
+  "x-l956615272-hub-dsh-token-usage-4fef2ea940": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 17
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 2
+    }
+  },
+  "x-l956615272-hub-dsh-token-usage-76b731dfd1": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 9
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 1
+    }
+  },
+  "x-l956615272-hub-dsh-token-usage-8c425815aa": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 19
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 3
+    }
+  },
+  "x-legible-sh-mutex-13867857ca": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 17
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 5
+    }
+  },
+  "x-legible-sh-mutex-3a0cb5dd56": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 5
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 5
+    }
+  },
+  "x-lhf198-dsh-prompt-optimizer-42cfbd7f35": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 1
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 1
+    }
+  },
+  "x-lhf198-dsh-prompt-optimizer-fe5772419b": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 1
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 1
+    }
+  },
+  "x-lucastonidev-patrickuser-05e5089acf": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 2
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 1
+    }
+  },
+  "x-magrinj-hermes-intl-22ec94ee24": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 1
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 1
+    }
+  },
+  "x-magrinj-hermes-intl-e1877c8147": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 1
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 1
+    }
+  },
+  "x-marko-js-htmljs-parser-a576b5c86e": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 34
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 1
+    }
+  },
+  "x-metarhia-metawatch-af9528a554": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 18
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 2
+    }
+  },
+  "x-metarhia-metawatch-e1b278f5c3": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 16
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 3
+    }
+  },
+  "x-misterkante-cc-model-router-ced46f7612": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 1
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 1
+    }
+  },
+  "x-mr-mihu-dsh-dbhub-live-534032da27": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 5
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 1
+    }
+  },
+  "x-mr-mihu-dsh-dbhub-live-f9d568569b": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 4
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 4
+    }
+  },
+  "x-mukundakatta-agentfit-510c32d490": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 17
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 5
+    }
+  },
+  "x-nodemailer-libqp-7bbdcbeac4": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 18
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 1
+    }
+  },
+  "x-opopeshku-cronalive-node-a6f621977e": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 2
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 2
+    }
+  },
+  "x-otto-ottospace-mizan-f2f8fcb2c8": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 13
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 2
+    }
+  },
+  "x-panpontomate-solana-risk-engine-e2582ea728": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 5
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 2
+    }
+  },
+  "x-runcat-tommy-dsh-panda-calendar-667f1793e5": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 17
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 3
+    }
+  },
+  "x-runcat-tommy-dsh-panda-calendar-ec35ab2529": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 24
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 2
+    }
+  },
+  "x-sanchit07-dev-node-core-easy-kit-268de6812c": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 19
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 1
+    }
+  },
+  "x-sanchit07-dev-node-core-easy-kit-39890fd99f": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 22
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 1
+    }
+  },
+  "x-sanchit07-dev-node-core-easy-kit-70f95fc1b2": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 20
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 1
+    }
+  },
+  "x-sandsoftwaresolutions-ss-duration-ac6449101c": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 10
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 3
+    }
+  },
+  "x-sandsoftwaresolutions-ss-human-format-ade5993e4f": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 14
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 5
+    }
+  },
+  "x-shelamkoff-event-bus-cc858589eb": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 14
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 9
+    }
+  },
+  "x-short-io-envalid-unused-f77a6c7072": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 20
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 1
+    }
+  },
+  "x-shrinivas-sn-adapter-ingestion-499701352b": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 6
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 1
+    }
+  },
+  "x-sindresorhus-clone-regexp-0594242c88": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 34
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 1
+    }
+  },
+  "x-spartawhy117-dsh-token-dash-ba4082dce3": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 1
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 1
+    }
+  },
+  "x-toolbuilder-list-1914dfac5e": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 30
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 1
+    }
+  },
+  "x-toolbuilder-list-2b73f7f42c": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 32
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 2
+    }
+  },
+  "x-toolbuilder-list-bc22a50372": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 30
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 1
+    }
+  },
+  "x-w8s-rng-with-intention-d6d0f34e4c": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 7
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 1
+    }
+  },
+  "x-wenaixi-dsh-prompt-history-396b4d7ce7": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 4
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 2
+    }
+  },
+  "x-wenaixi-dsh-prompt-history-87cd943992": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 5
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 1
+    }
+  },
+  "x-wenaixi-dsh-prompt-history-f2c2ad01c0": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 10
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 1
+    }
+  },
+  "x-yammm-ynode-ylog-d5c5c3f62e": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 46
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 1
+    }
+  }
+}

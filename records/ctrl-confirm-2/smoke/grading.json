@@ -1,0 +1,28 @@
+{
+  "a6-typo-message": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 1
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 1
+    }
+  },
+  "c4-malformed-lines": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 3
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 3
+    }
+  }
+}

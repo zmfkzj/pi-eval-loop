@@ -1,0 +1,42 @@
+[
+ {
+  "arm": "PC",
+  "task": "c4-malformed-lines",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "c4-malformed-lines",
+  "repeat": 0
+ },
+ {
+  "arm": "OC",
+  "task": "c4-malformed-lines",
+  "repeat": 0
+ },
+ {
+  "arm": "PCR",
+  "task": "c4-malformed-lines",
+  "repeat": 0
+ },
+ {
+  "arm": "OCR",
+  "task": "a6-typo-message",
+  "repeat": 0
+ },
+ {
+  "arm": "PC",
+  "task": "a6-typo-message",
+  "repeat": 0
+ },
+ {
+  "arm": "OC",
+  "task": "a6-typo-message",
+  "repeat": 0
+ },
+ {
+  "arm": "PCR",
+  "task": "a6-typo-message",
+  "repeat": 0
+ }
+]

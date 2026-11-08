@@ -1,0 +1,5629 @@
+{
+  "units": 1116,
+  "design": {
+    "arms": [
+      "OC",
+      "OCR",
+      "PC",
+      "PCR"
+    ],
+    "tasks": [
+      "x-ahmtsahin-agent-context-bench-134ba49b33",
+      "x-ahmtsahin-agent-context-bench-3912f5ad87",
+      "x-ahmtsahin-agent-context-bench-b63c4acd3d",
+      "x-alannerfranklin-dsh-relay-isolation-dfccc5d2c1",
+      "x-antonioprosperi2-svg-beeladybug-universal-5f88e1d66c",
+      "x-antonioprosperi2-svg-beeladybug-universal-a89811cf4e",
+      "x-antonioprosperi2-svg-beeladybug-universal-b6e1d19aa0",
+      "x-avoidwork-filesize-js-109ae605ab",
+      "x-avoidwork-filesize-js-64b4a2611f",
+      "x-avoidwork-filesize-js-f5bd84b81b",
+      "x-avoidwork-tiny-lru-30397d7a76",
+      "x-avoidwork-tiny-lru-da90b42c31",
+      "x-azu-setup-npm-trusted-publish-6104f8bee9",
+      "x-blakeb056-six-degrees-aec5ecaebb",
+      "x-blucca-n8n-check-0d73b43caa",
+      "x-blucca-n8n-check-1c589621bf",
+      "x-blucca-n8n-check-a7fa85ded5",
+      "x-cccalana-gatewaycheck-2d961d088c",
+      "x-cheapestinference-claude-auto-retry-6d605a5d91",
+      "x-cheapestinference-claude-auto-retry-7a1ddf10b2",
+      "x-cheapestinference-claude-auto-retry-f859f12fea",
+      "x-codyrobertson-gh-issue-lease-f0f573c258",
+      "x-dgrr-studio-dice-141a1a8d6b",
+      "x-dhaupin-crashtest-5c6ce1d53f",
+      "x-dhaupin-crashtest-e70988c5b4",
+      "x-dhaupin-crashtest-eb4c5fee65",
+      "x-dirop1-pi-delay-prompt-a7948a14a4",
+      "x-drewthomas00-tcpa-quiet-hours-d929633b54",
+      "x-ducaoya-pi-hang-guard-b75099e5bc",
+      "x-evomap-gep-sdk-js-6a387bbe32",
+      "x-fugangcui-speakremix-codes-7bf8b8fb00",
+      "x-ghostpawjs-grimoire-4a1c83b504",
+      "x-ghostpawjs-grimoire-b7fc19a032",
+      "x-ghostpawjs-grimoire-c5aa4b66a3",
+      "x-groophylifefor-heap-analysis-10ddfecb6b",
+      "x-groophylifefor-heap-analysis-71cd48f8ba",
+      "x-groophylifefor-heap-analysis-bfc733de41",
+      "x-guorunjie-agentic-workflow-guard-79f4aec3b8",
+      "x-guorunjie-agentic-workflow-guard-bc30533f19",
+      "x-guorunjie-agentic-workflow-guard-c1322204ff",
+      "x-guotree-magpie-websearch-466d493835",
+      "x-guotree-magpie-websearch-a74cfdcbe9",
+      "x-guotree-magpie-websearch-c4d8db57f9",
+      "x-igormel81-dsh-chat-cost-8b37b31edf",
+      "x-insession-space-insession-sdk-29c8a3b74e",
+      "x-insession-space-insession-sdk-c721ee0c1d",
+      "x-insession-space-insession-sdk-f9057e96cd",
+      "x-johnhenry-mport-b70dabf4e7",
+      "x-johnhenry-spintax-8e582b7cde",
+      "x-kannakuron-dsh-ide-git-09c63b85e5",
+      "x-kannakuron-dsh-ide-git-317ae73aa6",
+      "x-kannakuron-dsh-ide-git-3599010391",
+      "x-l956615272-hub-dsh-token-usage-4fef2ea940",
+      "x-l956615272-hub-dsh-token-usage-76b731dfd1",
+      "x-l956615272-hub-dsh-token-usage-8c425815aa",
+      "x-legible-sh-mutex-13867857ca",
+      "x-legible-sh-mutex-3a0cb5dd56",
+      "x-lhf198-dsh-prompt-optimizer-42cfbd7f35",
+      "x-lhf198-dsh-prompt-optimizer-fe5772419b",
+      "x-lucastonidev-patrickuser-05e5089acf",
+      "x-magrinj-hermes-intl-22ec94ee24",
+      "x-magrinj-hermes-intl-e1877c8147",
+      "x-marko-js-htmljs-parser-a576b5c86e",
+      "x-metarhia-metawatch-af9528a554",
+      "x-metarhia-metawatch-e1b278f5c3",
+      "x-misterkante-cc-model-router-ced46f7612",
+      "x-mr-mihu-dsh-dbhub-live-534032da27",
+      "x-mr-mihu-dsh-dbhub-live-f9d568569b",
+      "x-mukundakatta-agentfit-510c32d490",
+      "x-nodemailer-libqp-7bbdcbeac4",
+      "x-opopeshku-cronalive-node-a6f621977e",
+      "x-otto-ottospace-mizan-f2f8fcb2c8",
+      "x-panpontomate-solana-risk-engine-e2582ea728",
+      "x-runcat-tommy-dsh-panda-calendar-667f1793e5",
+      "x-runcat-tommy-dsh-panda-calendar-ec35ab2529",
+      "x-sanchit07-dev-node-core-easy-kit-268de6812c",
+      "x-sanchit07-dev-node-core-easy-kit-39890fd99f",
+      "x-sanchit07-dev-node-core-easy-kit-70f95fc1b2",
+      "x-sandsoftwaresolutions-ss-duration-ac6449101c",
+      "x-sandsoftwaresolutions-ss-human-format-ade5993e4f",
+      "x-shelamkoff-event-bus-cc858589eb",
+      "x-short-io-envalid-unused-f77a6c7072",
+      "x-shrinivas-sn-adapter-ingestion-499701352b",
+      "x-sindresorhus-clone-regexp-0594242c88",
+      "x-spartawhy117-dsh-token-dash-ba4082dce3",
+      "x-toolbuilder-list-1914dfac5e",
+      "x-toolbuilder-list-2b73f7f42c",
+      "x-toolbuilder-list-bc22a50372",
+      "x-w8s-rng-with-intention-d6d0f34e4c",
+      "x-wenaixi-dsh-prompt-history-396b4d7ce7",
+      "x-wenaixi-dsh-prompt-history-87cd943992",
+      "x-wenaixi-dsh-prompt-history-f2c2ad01c0",
+      "x-yammm-ynode-ylog-d5c5c3f62e"
+    ],
+    "repeats": 3,
+    "scheduled": 1116
+  },
+  "complete": true,
+  "missing": [],
+  "summary": {
+    "OC": {
+      "units": 279,
+      "legacy": {
+        "tasks": 93,
+        "units": 279,
+        "successes": 73,
+        "rate": 0.26164874551971323,
+        "reliable": 0.1935483870967742,
+        "reliableTasks": 18,
+        "noneTasks": 63,
+        "mixedTasks": 12,
+        "inconsistency": 0.043010752688172046
+      },
+      "strict": {
+        "tasks": 93,
+        "units": 279,
+        "successes": 25,
+        "rate": 0.0896057347670251,
+        "reliable": 0.03225806451612903,
+        "reliableTasks": 3,
+        "noneTasks": 80,
+        "mixedTasks": 10,
+        "inconsistency": 0.035842293906810034
+      },
+      "functional": {
+        "tasks": 93,
+        "units": 279,
+        "successes": 75,
+        "rate": 0.26881720430107525,
+        "reliable": 0.21505376344086022,
+        "reliableTasks": 20,
+        "noneTasks": 63,
+        "mixedTasks": 10,
+        "inconsistency": 0.035842293906810034
+      },
+      "legacyFail": 8,
+      "strictFail": 125,
+      "strictOnly": 117,
+      "leaks": 0,
+      "critical": 1,
+      "terminal": {
+        "completed": 269,
+        "agent_error": 1,
+        "aborted": 4,
+        "timeout": 1,
+        "model_error": 3,
+        "route_violation": 1
+      },
+      "infra": 0,
+      "requests": 8578,
+      "inputTokens": 141362925,
+      "outputTokens": 1251778,
+      "cacheTokens": 127627776,
+      "wallHours": 16.634095,
+      "atRequestCeiling": 1
+    },
+    "OCR": {
+      "units": 279,
+      "legacy": {
+        "tasks": 93,
+        "units": 279,
+        "successes": 84,
+        "rate": 0.3010752688172043,
+        "reliable": 0.23655913978494625,
+        "reliableTasks": 22,
+        "noneTasks": 61,
+        "mixedTasks": 10,
+        "inconsistency": 0.035842293906810034
+      },
+      "strict": {
+        "tasks": 93,
+        "units": 279,
+        "successes": 70,
+        "rate": 0.25089605734767023,
+        "reliable": 0.15053763440860216,
+        "reliableTasks": 14,
+        "noneTasks": 62,
+        "mixedTasks": 17,
+        "inconsistency": 0.060931899641577046
+      },
+      "functional": {
+        "tasks": 93,
+        "units": 279,
+        "successes": 86,
+        "rate": 0.3082437275985663,
+        "reliable": 0.25806451612903225,
+        "reliableTasks": 24,
+        "noneTasks": 61,
+        "mixedTasks": 8,
+        "inconsistency": 0.02867383512544803
+      },
+      "legacyFail": 3,
+      "strictFail": 33,
+      "strictOnly": 30,
+      "leaks": 0,
+      "critical": 0,
+      "terminal": {
+        "completed": 272,
+        "aborted": 4,
+        "timeout": 1,
+        "model_error": 2
+      },
+      "infra": 0,
+      "requests": 8219,
+      "inputTokens": 139550049,
+      "outputTokens": 1249761,
+      "cacheTokens": 126102400,
+      "wallHours": 16.22671083333334,
+      "atRequestCeiling": 0
+    },
+    "PC": {
+      "units": 279,
+      "legacy": {
+        "tasks": 93,
+        "units": 279,
+        "successes": 79,
+        "rate": 0.2831541218637993,
+        "reliable": 0.21505376344086022,
+        "reliableTasks": 20,
+        "noneTasks": 58,
+        "mixedTasks": 15,
+        "inconsistency": 0.05376344086021505
+      },
+      "strict": {
+        "tasks": 93,
+        "units": 279,
+        "successes": 69,
+        "rate": 0.24731182795698925,
+        "reliable": 0.16129032258064516,
+        "reliableTasks": 15,
+        "noneTasks": 60,
+        "mixedTasks": 18,
+        "inconsistency": 0.06451612903225805
+      },
+      "functional": {
+        "tasks": 93,
+        "units": 279,
+        "successes": 82,
+        "rate": 0.2939068100358423,
+        "reliable": 0.22580645161290322,
+        "reliableTasks": 21,
+        "noneTasks": 57,
+        "mixedTasks": 15,
+        "inconsistency": 0.05376344086021505
+      },
+      "legacyFail": 4,
+      "strictFail": 21,
+      "strictOnly": 17,
+      "leaks": 0,
+      "critical": 0,
+      "terminal": {
+        "completed": 277,
+        "model_error": 2
+      },
+      "infra": 0,
+      "requests": 2738,
+      "inputTokens": 27213800,
+      "outputTokens": 363639,
+      "cacheTokens": 21459584,
+      "wallHours": 4.9568283333333305,
+      "atRequestCeiling": 0
+    },
+    "PCR": {
+      "units": 279,
+      "legacy": {
+        "tasks": 93,
+        "units": 279,
+        "successes": 75,
+        "rate": 0.2688172043010753,
+        "reliable": 0.21505376344086022,
+        "reliableTasks": 20,
+        "noneTasks": 63,
+        "mixedTasks": 10,
+        "inconsistency": 0.035842293906810034
+      },
+      "strict": {
+        "tasks": 93,
+        "units": 279,
+        "successes": 73,
+        "rate": 0.26164874551971323,
+        "reliable": 0.21505376344086022,
+        "reliableTasks": 20,
+        "noneTasks": 64,
+        "mixedTasks": 9,
+        "inconsistency": 0.03225806451612903
+      },
+      "functional": {
+        "tasks": 93,
+        "units": 279,
+        "successes": 77,
+        "rate": 0.27598566308243727,
+        "reliable": 0.22580645161290322,
+        "reliableTasks": 21,
+        "noneTasks": 63,
+        "mixedTasks": 9,
+        "inconsistency": 0.03225806451612903
+      },
+      "legacyFail": 2,
+      "strictFail": 7,
+      "strictOnly": 5,
+      "leaks": 1,
+      "critical": 2,
+      "terminal": {
+        "completed": 275,
+        "model_error": 2,
+        "route_violation": 2
+      },
+      "infra": 0,
+      "requests": 2697,
+      "inputTokens": 27199321,
+      "outputTokens": 362610,
+      "cacheTokens": 21479168,
+      "wallHours": 5.021564444444444,
+      "atRequestCeiling": 0
+    }
+  },
+  "primary": {
+    "legacy": {
+      "tasks": 93,
+      "families": 54,
+      "rate": {
+        "estimate": 0.03942652329749104,
+        "ci95": [
+          0.003921568627450986,
+          0.07777777777777777
+        ],
+        "pOneSided": 0.034098295085245735,
+        "pTwoSided": 0.07134643267836609,
+        "better": 8,
+        "worse": 4
+      },
+      "reliable": {
+        "estimate": 0.043010752688172046,
+        "ci95": [
+          0.01,
+          0.0898876404494382
+        ],
+        "pOneSided": 0.06504674766261687,
+        "pTwoSided": 0.13079346032698366,
+        "better": 6,
+        "worse": 2
+      }
+    },
+    "strict": {
+      "tasks": 93,
+      "families": 54,
+      "rate": {
+        "estimate": 0.16129032258064516,
+        "ci95": [
+          0.09465020576131687,
+          0.2362869198312236
+        ],
+        "pOneSided": 0.00004999750012499375,
+        "pTwoSided": 0.00004999750012499375,
+        "better": 24,
+        "worse": 1
+      },
+      "reliable": {
+        "estimate": 0.11827956989247312,
+        "ci95": [
+          0.058823529411764705,
+          0.18681318681318682
+        ],
+        "pOneSided": 0.000999950002499875,
+        "pTwoSided": 0.0014499275036248187,
+        "better": 12,
+        "worse": 1
+      }
+    },
+    "functional": {
+      "tasks": 93,
+      "families": 54,
+      "rate": {
+        "estimate": 0.039426523297491044,
+        "ci95": [
+          0.003831417624521074,
+          0.07954545454545454
+        ],
+        "pOneSided": 0.04009799510024499,
+        "pTwoSided": 0.07669616519174041,
+        "better": 7,
+        "worse": 3
+      },
+      "reliable": {
+        "estimate": 0.043010752688172046,
+        "ci95": [
+          0.01020408163265306,
+          0.08791208791208792
+        ],
+        "pOneSided": 0.0615969201539923,
+        "pTwoSided": 0.12609369531523423,
+        "better": 5,
+        "worse": 1
+      }
+    }
+  },
+  "decision": {
+    "verdict": "INCONCLUSIVE",
+    "why": "at least one co-primary endpoint did not reach its preregistered bound (absence of evidence, not evidence of no effect)"
+  },
+  "verdict": {
+    "verdict": "KEEP_STABLE",
+    "why": "primary INCONCLUSIVE"
+  },
+  "secondary": {
+    "OCR-PCR": {
+      "legacy": {
+        "tasks": 93,
+        "families": 54,
+        "rate": {
+          "estimate": 0.03225806451612904,
+          "ci95": [
+            -0.006944444444444447,
+            0.07490636704119849
+          ],
+          "pOneSided": 0.09029548522573871,
+          "pTwoSided": 0.17899105044747762,
+          "better": 11,
+          "worse": 6
+        },
+        "reliable": {
+          "estimate": 0.021505376344086023,
+          "ci95": [
+            -0.030612244897959183,
+            0.07446808510638298
+          ],
+          "pOneSided": 0.3396830158492075,
+          "pTwoSided": 0.680565971701415,
+          "better": 4,
+          "worse": 2
+        }
+      },
+      "strict": {
+        "tasks": 93,
+        "families": 54,
+        "rate": {
+          "estimate": -0.010752688172043015,
+          "ci95": [
+            -0.05263157894736843,
+            0.030303030303030297
+          ],
+          "pOneSided": 0.7414129293535323,
+          "pTwoSided": 0.7489125543722814,
+          "better": 8,
+          "worse": 12
+        },
+        "reliable": {
+          "estimate": -0.06451612903225806,
+          "ci95": [
+            -0.125,
+            -0.010638297872340425
+          ],
+          "pOneSided": 0.9962001899905005,
+          "pTwoSided": 0.06829658517074147,
+          "better": 2,
+          "worse": 8
+        }
+      },
+      "functional": {
+        "tasks": 93,
+        "families": 54,
+        "rate": {
+          "estimate": 0.03225806451612903,
+          "ci95": [
+            -0.003875968992248054,
+            0.07279693486590037
+          ],
+          "pOneSided": 0.08524573771311435,
+          "pTwoSided": 0.16614169291535424,
+          "better": 10,
+          "worse": 5
+        },
+        "reliable": {
+          "estimate": 0.03225806451612903,
+          "ci95": [
+            -0.01098901098901099,
+            0.08247422680412371
+          ],
+          "pOneSided": 0.18354082295885205,
+          "pTwoSided": 0.3733813309334533,
+          "better": 4,
+          "worse": 1
+        }
+      }
+    },
+    "PCR-PC": {
+      "legacy": {
+        "tasks": 93,
+        "families": 54,
+        "rate": {
+          "estimate": -0.01433691756272401,
+          "ci95": [
+            -0.05284552845528455,
+            0.019417475728155338
+          ],
+          "pOneSided": 0.8211589420528973,
+          "pTwoSided": 0.5829208539573021,
+          "better": 7,
+          "worse": 9
+        },
+        "reliable": {
+          "estimate": 0,
+          "ci95": [
+            -0.05263157894736842,
+            0.05154639175257732
+          ],
+          "pOneSided": 0.6523673816309185,
+          "pTwoSided": 1,
+          "better": 3,
+          "worse": 3
+        }
+      },
+      "strict": {
+        "tasks": 93,
+        "families": 54,
+        "rate": {
+          "estimate": 0.014336917562724021,
+          "ci95": [
+            -0.035842293906810034,
+            0.06462585034013606
+          ],
+          "pOneSided": 0.3398330083495825,
+          "pTwoSided": 0.6824158792060397,
+          "better": 12,
+          "worse": 9
+        },
+        "reliable": {
+          "estimate": 0.053763440860215055,
+          "ci95": [
+            -0.011363636363636364,
+            0.12643678160919541
+          ],
+          "pOneSided": 0.11504424778761062,
+          "pTwoSided": 0.23078846057697114,
+          "better": 8,
+          "worse": 3
+        }
+      },
+      "functional": {
+        "tasks": 93,
+        "families": 54,
+        "rate": {
+          "estimate": -0.017921146953405017,
+          "ci95": [
+            -0.056666666666666664,
+            0.016181229773462785
+          ],
+          "pOneSided": 0.8664566771661417,
+          "pTwoSided": 0.4545272736363182,
+          "better": 6,
+          "worse": 9
+        },
+        "reliable": {
+          "estimate": 0,
+          "ci95": [
+            -0.05333333333333334,
+            0.05217391304347826
+          ],
+          "pOneSided": 0.6532173391330434,
+          "pTwoSided": 1,
+          "better": 3,
+          "worse": 3
+        }
+      }
+    },
+    "OC-PC": {
+      "legacy": {
+        "tasks": 93,
+        "families": 54,
+        "rate": {
+          "estimate": -0.021505376344086023,
+          "ci95": [
+            -0.06666666666666667,
+            0.022222222222222223
+          ],
+          "pOneSided": 0.8550072496375182,
+          "pTwoSided": 0.4521273936303185,
+          "better": 9,
+          "worse": 13
+        },
+        "reliable": {
+          "estimate": -0.021505376344086023,
+          "ci95": [
+            -0.08235294117647059,
+            0.0375
+          ],
+          "pOneSided": 0.855857207139643,
+          "pTwoSided": 0.7274636268186591,
+          "better": 4,
+          "worse": 6
+        }
+      },
+      "strict": {
+        "tasks": 93,
+        "families": 54,
+        "rate": {
+          "estimate": -0.15770609318996417,
+          "ci95": [
+            -0.24497991967871494,
+            -0.08045977011494251
+          ],
+          "pOneSided": 1,
+          "pTwoSided": 0.0000999950002499875,
+          "better": 3,
+          "worse": 27
+        },
+        "reliable": {
+          "estimate": -0.12903225806451613,
+          "ci95": [
+            -0.21052631578947367,
+            -0.056818181818181816
+          ],
+          "pOneSided": 1,
+          "pTwoSided": 0.0017499125043747813,
+          "better": 1,
+          "worse": 13
+        }
+      },
+      "functional": {
+        "tasks": 93,
+        "families": 54,
+        "rate": {
+          "estimate": -0.025089605734767026,
+          "ci95": [
+            -0.06730769230769232,
+            0.016877637130801686
+          ],
+          "pOneSided": 0.9027548622568872,
+          "pTwoSided": 0.3348832558372081,
+          "better": 8,
+          "worse": 12
+        },
+        "reliable": {
+          "estimate": -0.010752688172043012,
+          "ci95": [
+            -0.06593406593406594,
+            0.044444444444444446
+          ],
+          "pOneSided": 0.7695115244237788,
+          "pTwoSided": 1,
+          "better": 4,
+          "worse": 5
+        }
+      }
+    }
+  },
+  "holmSecondary": {
+    "OCR-PCR:E1": 1,
+    "OC-PC:E1": 1,
+    "PCR-PC:E1": 1,
+    "OCR-PCR:E2": 1,
+    "OC-PC:E2": 1,
+    "PCR-PC:E2": 1
+  },
+  "interaction": 0.05376344086021506,
+  "families": {
+    "gh:ahmtsahin/agent-context-bench": {
+      "OC": {
+        "tasks": 3,
+        "units": 9,
+        "valid": 1
+      },
+      "OCR": {
+        "tasks": 3,
+        "units": 9,
+        "valid": 0
+      },
+      "PC": {
+        "tasks": 3,
+        "units": 9,
+        "valid": 0
+      },
+      "PCR": {
+        "tasks": 3,
+        "units": 9,
+        "valid": 0
+      }
+    },
+    "gh:alannerfranklin/dsh-relay-isolation": {
+      "OC": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 0
+      },
+      "OCR": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 0
+      },
+      "PC": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 0
+      },
+      "PCR": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 0
+      }
+    },
+    "gh:antonioprosperi2-svg/beeladybug-universal": {
+      "OC": {
+        "tasks": 3,
+        "units": 9,
+        "valid": 0
+      },
+      "OCR": {
+        "tasks": 3,
+        "units": 9,
+        "valid": 0
+      },
+      "PC": {
+        "tasks": 3,
+        "units": 9,
+        "valid": 0
+      },
+      "PCR": {
+        "tasks": 3,
+        "units": 9,
+        "valid": 0
+      }
+    },
+    "gh:avoidwork/filesize.js": {
+      "OC": {
+        "tasks": 3,
+        "units": 9,
+        "valid": 3
+      },
+      "OCR": {
+        "tasks": 3,
+        "units": 9,
+        "valid": 6
+      },
+      "PC": {
+        "tasks": 3,
+        "units": 9,
+        "valid": 4
+      },
+      "PCR": {
+        "tasks": 3,
+        "units": 9,
+        "valid": 3
+      }
+    },
+    "gh:avoidwork/tiny-lru": {
+      "OC": {
+        "tasks": 2,
+        "units": 6,
+        "valid": 5
+      },
+      "OCR": {
+        "tasks": 2,
+        "units": 6,
+        "valid": 5
+      },
+      "PC": {
+        "tasks": 2,
+        "units": 6,
+        "valid": 4
+      },
+      "PCR": {
+        "tasks": 2,
+        "units": 6,
+        "valid": 5
+      }
+    },
+    "gh:azu/setup-npm-trusted-publish": {
+      "OC": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 0
+      },
+      "OCR": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 0
+      },
+      "PC": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 0
+      },
+      "PCR": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 0
+      }
+    },
+    "gh:blakeb056/six-degrees": {
+      "OC": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 0
+      },
+      "OCR": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 0
+      },
+      "PC": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 0
+      },
+      "PCR": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 0
+      }
+    },
+    "gh:blucca/n8n-check": {
+      "OC": {
+        "tasks": 3,
+        "units": 9,
+        "valid": 0
+      },
+      "OCR": {
+        "tasks": 3,
+        "units": 9,
+        "valid": 0
+      },
+      "PC": {
+        "tasks": 3,
+        "units": 9,
+        "valid": 0
+      },
+      "PCR": {
+        "tasks": 3,
+        "units": 9,
+        "valid": 0
+      }
+    },
+    "gh:cccalana/gatewaycheck": {
+      "OC": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 0
+      },
+      "OCR": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 0
+      },
+      "PC": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 0
+      },
+      "PCR": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 0
+      }
+    },
+    "gh:cheapestinference/claude-auto-retry": {
+      "OC": {
+        "tasks": 3,
+        "units": 9,
+        "valid": 3
+      },
+      "OCR": {
+        "tasks": 3,
+        "units": 9,
+        "valid": 3
+      },
+      "PC": {
+        "tasks": 3,
+        "units": 9,
+        "valid": 2
+      },
+      "PCR": {
+        "tasks": 3,
+        "units": 9,
+        "valid": 3
+      }
+    },
+    "gh:codyrobertson/gh-issue-lease": {
+      "OC": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 1
+      },
+      "OCR": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 0
+      },
+      "PC": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 1
+      },
+      "PCR": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 1
+      }
+    },
+    "gh:dgrr-studio/dice": {
+      "OC": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 0
+      },
+      "OCR": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 0
+      },
+      "PC": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 0
+      },
+      "PCR": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 0
+      }
+    },
+    "gh:dhaupin/crashtest": {
+      "OC": {
+        "tasks": 3,
+        "units": 9,
+        "valid": 3
+      },
+      "OCR": {
+        "tasks": 3,
+        "units": 9,
+        "valid": 3
+      },
+      "PC": {
+        "tasks": 3,
+        "units": 9,
+        "valid": 3
+      },
+      "PCR": {
+        "tasks": 3,
+        "units": 9,
+        "valid": 3
+      }
+    },
+    "gh:dirop1/pi-delay-prompt": {
+      "OC": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 0
+      },
+      "OCR": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 0
+      },
+      "PC": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 0
+      },
+      "PCR": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 0
+      }
+    },
+    "gh:drewthomas00/tcpa-quiet-hours": {
+      "OC": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 3
+      },
+      "OCR": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 3
+      },
+      "PC": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 3
+      },
+      "PCR": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 3
+      }
+    },
+    "gh:ducaoya/pi-hang-guard": {
+      "OC": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 0
+      },
+      "OCR": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 0
+      },
+      "PC": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 0
+      },
+      "PCR": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 0
+      }
+    },
+    "gh:evomap/gep-sdk-js": {
+      "OC": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 0
+      },
+      "OCR": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 0
+      },
+      "PC": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 0
+      },
+      "PCR": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 0
+      }
+    },
+    "gh:fugangcui/speakremix-codes": {
+      "OC": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 0
+      },
+      "OCR": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 0
+      },
+      "PC": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 0
+      },
+      "PCR": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 0
+      }
+    },
+    "gh:ghostpawjs/grimoire": {
+      "OC": {
+        "tasks": 3,
+        "units": 9,
+        "valid": 4
+      },
+      "OCR": {
+        "tasks": 3,
+        "units": 9,
+        "valid": 5
+      },
+      "PC": {
+        "tasks": 3,
+        "units": 9,
+        "valid": 4
+      },
+      "PCR": {
+        "tasks": 3,
+        "units": 9,
+        "valid": 6
+      }
+    },
+    "gh:groophylifefor/heap-analysis": {
+      "OC": {
+        "tasks": 3,
+        "units": 9,
+        "valid": 0
+      },
+      "OCR": {
+        "tasks": 3,
+        "units": 9,
+        "valid": 0
+      },
+      "PC": {
+        "tasks": 3,
+        "units": 9,
+        "valid": 0
+      },
+      "PCR": {
+        "tasks": 3,
+        "units": 9,
+        "valid": 0
+      }
+    },
+    "gh:guorunjie/agentic-workflow-guard": {
+      "OC": {
+        "tasks": 3,
+        "units": 9,
+        "valid": 0
+      },
+      "OCR": {
+        "tasks": 3,
+        "units": 9,
+        "valid": 0
+      },
+      "PC": {
+        "tasks": 3,
+        "units": 9,
+        "valid": 0
+      },
+      "PCR": {
+        "tasks": 3,
+        "units": 9,
+        "valid": 0
+      }
+    },
+    "gh:guotree/magpie-websearch": {
+      "OC": {
+        "tasks": 3,
+        "units": 9,
+        "valid": 0
+      },
+      "OCR": {
+        "tasks": 3,
+        "units": 9,
+        "valid": 0
+      },
+      "PC": {
+        "tasks": 3,
+        "units": 9,
+        "valid": 0
+      },
+      "PCR": {
+        "tasks": 3,
+        "units": 9,
+        "valid": 0
+      }
+    },
+    "gh:igormel81/dsh-chat-cost": {
+      "OC": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 0
+      },
+      "OCR": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 0
+      },
+      "PC": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 0
+      },
+      "PCR": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 0
+      }
+    },
+    "gh:insession-space/insession-sdk": {
+      "OC": {
+        "tasks": 3,
+        "units": 9,
+        "valid": 6
+      },
+      "OCR": {
+        "tasks": 3,
+        "units": 9,
+        "valid": 8
+      },
+      "PC": {
+        "tasks": 3,
+        "units": 9,
+        "valid": 8
+      },
+      "PCR": {
+        "tasks": 3,
+        "units": 9,
+        "valid": 5
+      }
+    },
+    "gh:johnhenry/mport": {
+      "OC": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 0
+      },
+      "OCR": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 0
+      },
+      "PC": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 0
+      },
+      "PCR": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 0
+      }
+    },
+    "gh:johnhenry/spintax": {
+      "OC": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 3
+      },
+      "OCR": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 3
+      },
+      "PC": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 3
+      },
+      "PCR": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 3
+      }
+    },
+    "gh:kannakuron/dsh-ide-git": {
+      "OC": {
+        "tasks": 3,
+        "units": 9,
+        "valid": 0
+      },
+      "OCR": {
+        "tasks": 3,
+        "units": 9,
+        "valid": 0
+      },
+      "PC": {
+        "tasks": 3,
+        "units": 9,
+        "valid": 0
+      },
+      "PCR": {
+        "tasks": 3,
+        "units": 9,
+        "valid": 0
+      }
+    },
+    "gh:l956615272-hub/dsh-token-usage": {
+      "OC": {
+        "tasks": 3,
+        "units": 9,
+        "valid": 0
+      },
+      "OCR": {
+        "tasks": 3,
+        "units": 9,
+        "valid": 0
+      },
+      "PC": {
+        "tasks": 3,
+        "units": 9,
+        "valid": 2
+      },
+      "PCR": {
+        "tasks": 3,
+        "units": 9,
+        "valid": 2
+      }
+    },
+    "gh:legible-sh/mutex": {
+      "OC": {
+        "tasks": 2,
+        "units": 6,
+        "valid": 0
+      },
+      "OCR": {
+        "tasks": 2,
+        "units": 6,
+        "valid": 0
+      },
+      "PC": {
+        "tasks": 2,
+        "units": 6,
+        "valid": 1
+      },
+      "PCR": {
+        "tasks": 2,
+        "units": 6,
+        "valid": 0
+      }
+    },
+    "gh:lhf198/dsh-prompt-optimizer": {
+      "OC": {
+        "tasks": 2,
+        "units": 6,
+        "valid": 2
+      },
+      "OCR": {
+        "tasks": 2,
+        "units": 6,
+        "valid": 2
+      },
+      "PC": {
+        "tasks": 2,
+        "units": 6,
+        "valid": 0
+      },
+      "PCR": {
+        "tasks": 2,
+        "units": 6,
+        "valid": 1
+      }
+    },
+    "gh:lucastonidev/patrickuser": {
+      "OC": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 3
+      },
+      "OCR": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 3
+      },
+      "PC": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 3
+      },
+      "PCR": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 3
+      }
+    },
+    "gh:magrinj/hermes-intl": {
+      "OC": {
+        "tasks": 2,
+        "units": 6,
+        "valid": 0
+      },
+      "OCR": {
+        "tasks": 2,
+        "units": 6,
+        "valid": 3
+      },
+      "PC": {
+        "tasks": 2,
+        "units": 6,
+        "valid": 2
+      },
+      "PCR": {
+        "tasks": 2,
+        "units": 6,
+        "valid": 2
+      }
+    },
+    "gh:marko-js/htmljs-parser": {
+      "OC": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 3
+      },
+      "OCR": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 3
+      },
+      "PC": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 2
+      },
+      "PCR": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 2
+      }
+    },
+    "gh:metarhia/metawatch": {
+      "OC": {
+        "tasks": 2,
+        "units": 6,
+        "valid": 2
+      },
+      "OCR": {
+        "tasks": 2,
+        "units": 6,
+        "valid": 2
+      },
+      "PC": {
+        "tasks": 2,
+        "units": 6,
+        "valid": 0
+      },
+      "PCR": {
+        "tasks": 2,
+        "units": 6,
+        "valid": 0
+      }
+    },
+    "gh:misterkante/cc-model-router": {
+      "OC": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 0
+      },
+      "OCR": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 0
+      },
+      "PC": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 0
+      },
+      "PCR": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 0
+      }
+    },
+    "gh:mr-mihu/dsh-dbhub-live": {
+      "OC": {
+        "tasks": 2,
+        "units": 6,
+        "valid": 2
+      },
+      "OCR": {
+        "tasks": 2,
+        "units": 6,
+        "valid": 2
+      },
+      "PC": {
+        "tasks": 2,
+        "units": 6,
+        "valid": 1
+      },
+      "PCR": {
+        "tasks": 2,
+        "units": 6,
+        "valid": 1
+      }
+    },
+    "gh:mukundakatta/agentfit": {
+      "OC": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 2
+      },
+      "OCR": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 3
+      },
+      "PC": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 3
+      },
+      "PCR": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 3
+      }
+    },
+    "gh:nodemailer/libqp": {
+      "OC": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 3
+      },
+      "OCR": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 3
+      },
+      "PC": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 3
+      },
+      "PCR": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 3
+      }
+    },
+    "gh:opopeshku/cronalive-node": {
+      "OC": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 3
+      },
+      "OCR": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 3
+      },
+      "PC": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 3
+      },
+      "PCR": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 3
+      }
+    },
+    "gh:otto-ottospace/mizan": {
+      "OC": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 2
+      },
+      "OCR": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 3
+      },
+      "PC": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 3
+      },
+      "PCR": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 3
+      }
+    },
+    "gh:panpontomate/solana-risk-engine": {
+      "OC": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 0
+      },
+      "OCR": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 0
+      },
+      "PC": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 0
+      },
+      "PCR": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 0
+      }
+    },
+    "gh:runcat-tommy/dsh-panda-calendar": {
+      "OC": {
+        "tasks": 2,
+        "units": 6,
+        "valid": 0
+      },
+      "OCR": {
+        "tasks": 2,
+        "units": 6,
+        "valid": 0
+      },
+      "PC": {
+        "tasks": 2,
+        "units": 6,
+        "valid": 0
+      },
+      "PCR": {
+        "tasks": 2,
+        "units": 6,
+        "valid": 0
+      }
+    },
+    "gh:sanchit07-dev/node-core-easy-kit": {
+      "OC": {
+        "tasks": 3,
+        "units": 9,
+        "valid": 0
+      },
+      "OCR": {
+        "tasks": 3,
+        "units": 9,
+        "valid": 0
+      },
+      "PC": {
+        "tasks": 3,
+        "units": 9,
+        "valid": 0
+      },
+      "PCR": {
+        "tasks": 3,
+        "units": 9,
+        "valid": 0
+      }
+    },
+    "gh:sandsoftwaresolutions/ss-duration": {
+      "OC": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 0
+      },
+      "OCR": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 0
+      },
+      "PC": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 0
+      },
+      "PCR": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 0
+      }
+    },
+    "gh:sandsoftwaresolutions/ss-human-format": {
+      "OC": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 0
+      },
+      "OCR": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 0
+      },
+      "PC": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 0
+      },
+      "PCR": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 0
+      }
+    },
+    "gh:shelamkoff/event-bus": {
+      "OC": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 0
+      },
+      "OCR": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 0
+      },
+      "PC": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 0
+      },
+      "PCR": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 0
+      }
+    },
+    "gh:short-io/envalid-unused": {
+      "OC": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 0
+      },
+      "OCR": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 0
+      },
+      "PC": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 0
+      },
+      "PCR": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 0
+      }
+    },
+    "gh:shrinivas-sn/adapter-ingestion": {
+      "OC": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 3
+      },
+      "OCR": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 3
+      },
+      "PC": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 3
+      },
+      "PCR": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 3
+      }
+    },
+    "gh:sindresorhus/clone-regexp": {
+      "OC": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 3
+      },
+      "OCR": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 3
+      },
+      "PC": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 3
+      },
+      "PCR": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 2
+      }
+    },
+    "gh:spartawhy117/dsh-token-dash": {
+      "OC": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 0
+      },
+      "OCR": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 0
+      },
+      "PC": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 0
+      },
+      "PCR": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 0
+      }
+    },
+    "gh:toolbuilder/list": {
+      "OC": {
+        "tasks": 3,
+        "units": 9,
+        "valid": 7
+      },
+      "OCR": {
+        "tasks": 3,
+        "units": 9,
+        "valid": 7
+      },
+      "PC": {
+        "tasks": 3,
+        "units": 9,
+        "valid": 9
+      },
+      "PCR": {
+        "tasks": 3,
+        "units": 9,
+        "valid": 6
+      }
+    },
+    "gh:w8s/rng-with-intention": {
+      "OC": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 3
+      },
+      "OCR": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 3
+      },
+      "PC": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 3
+      },
+      "PCR": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 3
+      }
+    },
+    "gh:wenaixi/dsh-prompt-history": {
+      "OC": {
+        "tasks": 3,
+        "units": 9,
+        "valid": 0
+      },
+      "OCR": {
+        "tasks": 3,
+        "units": 9,
+        "valid": 2
+      },
+      "PC": {
+        "tasks": 3,
+        "units": 9,
+        "valid": 3
+      },
+      "PCR": {
+        "tasks": 3,
+        "units": 9,
+        "valid": 3
+      }
+    },
+    "gh:yammm/ynode-ylog": {
+      "OC": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 3
+      },
+      "OCR": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 3
+      },
+      "PC": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 3
+      },
+      "PCR": {
+        "tasks": 1,
+        "units": 3,
+        "valid": 3
+      }
+    }
+  },
+  "familyRegressions": [
+    "gh:ahmtsahin/agent-context-bench",
+    "gh:codyrobertson/gh-issue-lease"
+  ],
+  "sensitivityNoInfra": {
+    "excluded": 0,
+    "primary": {
+      "tasks": 93,
+      "families": 54,
+      "rate": {
+        "estimate": 0.03942652329749104,
+        "ci95": [
+          0.0060606060606060615,
+          0.07723577235772357
+        ],
+        "pOneSided": 0.03948025987006497,
+        "pTwoSided": 0.07896051974012994,
+        "better": 8,
+        "worse": 4
+      },
+      "reliable": {
+        "estimate": 0.043010752688172046,
+        "ci95": [
+          0.010101010101010102,
+          0.08888888888888889
+        ],
+        "pOneSided": 0.06446776611694154,
+        "pTwoSided": 0.12843578210894552,
+        "better": 6,
+        "worse": 2
+      }
+    }
+  },
+  "perTask": {
+    "OC": {
+      "x-ahmtsahin-agent-context-bench-134ba49b33": [
+        0,
+        0,
+        1
+      ],
+      "x-ahmtsahin-agent-context-bench-3912f5ad87": [
+        0,
+        0,
+        0
+      ],
+      "x-ahmtsahin-agent-context-bench-b63c4acd3d": [
+        0,
+        0,
+        0
+      ],
+      "x-alannerfranklin-dsh-relay-isolation-dfccc5d2c1": [
+        0,
+        0,
+        0
+      ],
+      "x-antonioprosperi2-svg-beeladybug-universal-5f88e1d66c": [
+        0,
+        0,
+        0
+      ],
+      "x-antonioprosperi2-svg-beeladybug-universal-a89811cf4e": [
+        0,
+        0,
+        0
+      ],
+      "x-antonioprosperi2-svg-beeladybug-universal-b6e1d19aa0": [
+        0,
+        0,
+        0
+      ],
+      "x-avoidwork-filesize-js-109ae605ab": [
+        0,
+        0,
+        0
+      ],
+      "x-avoidwork-filesize-js-64b4a2611f": [
+        0,
+        0,
+        0
+      ],
+      "x-avoidwork-filesize-js-f5bd84b81b": [
+        1,
+        1,
+        1
+      ],
+      "x-avoidwork-tiny-lru-30397d7a76": [
+        1,
+        1,
+        0
+      ],
+      "x-avoidwork-tiny-lru-da90b42c31": [
+        1,
+        1,
+        1
+      ],
+      "x-azu-setup-npm-trusted-publish-6104f8bee9": [
+        0,
+        0,
+        0
+      ],
+      "x-blakeb056-six-degrees-aec5ecaebb": [
+        0,
+        0,
+        0
+      ],
+      "x-blucca-n8n-check-0d73b43caa": [
+        0,
+        0,
+        0
+      ],
+      "x-blucca-n8n-check-1c589621bf": [
+        0,
+        0,
+        0
+      ],
+      "x-blucca-n8n-check-a7fa85ded5": [
+        0,
+        0,
+        0
+      ],
+      "x-cccalana-gatewaycheck-2d961d088c": [
+        0,
+        0,
+        0
+      ],
+      "x-cheapestinference-claude-auto-retry-6d605a5d91": [
+        0,
+        0,
+        0
+      ],
+      "x-cheapestinference-claude-auto-retry-7a1ddf10b2": [
+        1,
+        1,
+        1
+      ],
+      "x-cheapestinference-claude-auto-retry-f859f12fea": [
+        0,
+        0,
+        0
+      ],
+      "x-codyrobertson-gh-issue-lease-f0f573c258": [
+        0,
+        1,
+        0
+      ],
+      "x-dgrr-studio-dice-141a1a8d6b": [
+        0,
+        0,
+        0
+      ],
+      "x-dhaupin-crashtest-5c6ce1d53f": [
+        0,
+        0,
+        0
+      ],
+      "x-dhaupin-crashtest-e70988c5b4": [
+        0,
+        0,
+        0
+      ],
+      "x-dhaupin-crashtest-eb4c5fee65": [
+        1,
+        1,
+        1
+      ],
+      "x-dirop1-pi-delay-prompt-a7948a14a4": [
+        0,
+        0,
+        0
+      ],
+      "x-drewthomas00-tcpa-quiet-hours-d929633b54": [
+        1,
+        1,
+        1
+      ],
+      "x-ducaoya-pi-hang-guard-b75099e5bc": [
+        0,
+        0,
+        0
+      ],
+      "x-evomap-gep-sdk-js-6a387bbe32": [
+        0,
+        0,
+        0
+      ],
+      "x-fugangcui-speakremix-codes-7bf8b8fb00": [
+        0,
+        0,
+        0
+      ],
+      "x-ghostpawjs-grimoire-4a1c83b504": [
+        1,
+        1,
+        1
+      ],
+      "x-ghostpawjs-grimoire-b7fc19a032": [
+        0,
+        0,
+        1
+      ],
+      "x-ghostpawjs-grimoire-c5aa4b66a3": [
+        0,
+        0,
+        0
+      ],
+      "x-groophylifefor-heap-analysis-10ddfecb6b": [
+        0,
+        0,
+        0
+      ],
+      "x-groophylifefor-heap-analysis-71cd48f8ba": [
+        0,
+        0,
+        0
+      ],
+      "x-groophylifefor-heap-analysis-bfc733de41": [
+        0,
+        0,
+        0
+      ],
+      "x-guorunjie-agentic-workflow-guard-79f4aec3b8": [
+        0,
+        0,
+        0
+      ],
+      "x-guorunjie-agentic-workflow-guard-bc30533f19": [
+        0,
+        0,
+        0
+      ],
+      "x-guorunjie-agentic-workflow-guard-c1322204ff": [
+        0,
+        0,
+        0
+      ],
+      "x-guotree-magpie-websearch-466d493835": [
+        0,
+        0,
+        0
+      ],
+      "x-guotree-magpie-websearch-a74cfdcbe9": [
+        0,
+        0,
+        0
+      ],
+      "x-guotree-magpie-websearch-c4d8db57f9": [
+        0,
+        0,
+        0
+      ],
+      "x-igormel81-dsh-chat-cost-8b37b31edf": [
+        0,
+        0,
+        0
+      ],
+      "x-insession-space-insession-sdk-29c8a3b74e": [
+        1,
+        1,
+        1
+      ],
+      "x-insession-space-insession-sdk-c721ee0c1d": [
+        1,
+        0,
+        1
+      ],
+      "x-insession-space-insession-sdk-f9057e96cd": [
+        0,
+        1,
+        0
+      ],
+      "x-johnhenry-mport-b70dabf4e7": [
+        0,
+        0,
+        0
+      ],
+      "x-johnhenry-spintax-8e582b7cde": [
+        1,
+        1,
+        1
+      ],
+      "x-kannakuron-dsh-ide-git-09c63b85e5": [
+        0,
+        0,
+        0
+      ],
+      "x-kannakuron-dsh-ide-git-317ae73aa6": [
+        0,
+        0,
+        0
+      ],
+      "x-kannakuron-dsh-ide-git-3599010391": [
+        0,
+        0,
+        0
+      ],
+      "x-l956615272-hub-dsh-token-usage-4fef2ea940": [
+        0,
+        0,
+        0
+      ],
+      "x-l956615272-hub-dsh-token-usage-76b731dfd1": [
+        0,
+        0,
+        0
+      ],
+      "x-l956615272-hub-dsh-token-usage-8c425815aa": [
+        0,
+        0,
+        0
+      ],
+      "x-legible-sh-mutex-13867857ca": [
+        0,
+        0,
+        0
+      ],
+      "x-legible-sh-mutex-3a0cb5dd56": [
+        0,
+        0,
+        0
+      ],
+      "x-lhf198-dsh-prompt-optimizer-42cfbd7f35": [
+        0,
+        0,
+        0
+      ],
+      "x-lhf198-dsh-prompt-optimizer-fe5772419b": [
+        1,
+        1,
+        0
+      ],
+      "x-lucastonidev-patrickuser-05e5089acf": [
+        1,
+        1,
+        1
+      ],
+      "x-magrinj-hermes-intl-22ec94ee24": [
+        0,
+        0,
+        0
+      ],
+      "x-magrinj-hermes-intl-e1877c8147": [
+        0,
+        0,
+        0
+      ],
+      "x-marko-js-htmljs-parser-a576b5c86e": [
+        1,
+        1,
+        1
+      ],
+      "x-metarhia-metawatch-af9528a554": [
+        0,
+        0,
+        0
+      ],
+      "x-metarhia-metawatch-e1b278f5c3": [
+        0,
+        1,
+        1
+      ],
+      "x-misterkante-cc-model-router-ced46f7612": [
+        0,
+        0,
+        0
+      ],
+      "x-mr-mihu-dsh-dbhub-live-534032da27": [
+        1,
+        1,
+        0
+      ],
+      "x-mr-mihu-dsh-dbhub-live-f9d568569b": [
+        0,
+        0,
+        0
+      ],
+      "x-mukundakatta-agentfit-510c32d490": [
+        1,
+        0,
+        1
+      ],
+      "x-nodemailer-libqp-7bbdcbeac4": [
+        1,
+        1,
+        1
+      ],
+      "x-opopeshku-cronalive-node-a6f621977e": [
+        1,
+        1,
+        1
+      ],
+      "x-otto-ottospace-mizan-f2f8fcb2c8": [
+        0,
+        1,
+        1
+      ],
+      "x-panpontomate-solana-risk-engine-e2582ea728": [
+        0,
+        0,
+        0
+      ],
+      "x-runcat-tommy-dsh-panda-calendar-667f1793e5": [
+        0,
+        0,
+        0
+      ],
+      "x-runcat-tommy-dsh-panda-calendar-ec35ab2529": [
+        0,
+        0,
+        0
+      ],
+      "x-sanchit07-dev-node-core-easy-kit-268de6812c": [
+        0,
+        0,
+        0
+      ],
+      "x-sanchit07-dev-node-core-easy-kit-39890fd99f": [
+        0,
+        0,
+        0
+      ],
+      "x-sanchit07-dev-node-core-easy-kit-70f95fc1b2": [
+        0,
+        0,
+        0
+      ],
+      "x-sandsoftwaresolutions-ss-duration-ac6449101c": [
+        0,
+        0,
+        0
+      ],
+      "x-sandsoftwaresolutions-ss-human-format-ade5993e4f": [
+        0,
+        0,
+        0
+      ],
+      "x-shelamkoff-event-bus-cc858589eb": [
+        0,
+        0,
+        0
+      ],
+      "x-short-io-envalid-unused-f77a6c7072": [
+        0,
+        0,
+        0
+      ],
+      "x-shrinivas-sn-adapter-ingestion-499701352b": [
+        1,
+        1,
+        1
+      ],
+      "x-sindresorhus-clone-regexp-0594242c88": [
+        1,
+        1,
+        1
+      ],
+      "x-spartawhy117-dsh-token-dash-ba4082dce3": [
+        0,
+        0,
+        0
+      ],
+      "x-toolbuilder-list-1914dfac5e": [
+        1,
+        1,
+        1
+      ],
+      "x-toolbuilder-list-2b73f7f42c": [
+        0,
+        1,
+        0
+      ],
+      "x-toolbuilder-list-bc22a50372": [
+        1,
+        1,
+        1
+      ],
+      "x-w8s-rng-with-intention-d6d0f34e4c": [
+        1,
+        1,
+        1
+      ],
+      "x-wenaixi-dsh-prompt-history-396b4d7ce7": [
+        0,
+        0,
+        0
+      ],
+      "x-wenaixi-dsh-prompt-history-87cd943992": [
+        0,
+        0,
+        0
+      ],
+      "x-wenaixi-dsh-prompt-history-f2c2ad01c0": [
+        0,
+        0,
+        0
+      ],
+      "x-yammm-ynode-ylog-d5c5c3f62e": [
+        1,
+        1,
+        1
+      ]
+    },
+    "OCR": {
+      "x-ahmtsahin-agent-context-bench-134ba49b33": [
+        0,
+        0,
+        0
+      ],
+      "x-ahmtsahin-agent-context-bench-3912f5ad87": [
+        0,
+        0,
+        0
+      ],
+      "x-ahmtsahin-agent-context-bench-b63c4acd3d": [
+        0,
+        0,
+        0
+      ],
+      "x-alannerfranklin-dsh-relay-isolation-dfccc5d2c1": [
+        0,
+        0,
+        0
+      ],
+      "x-antonioprosperi2-svg-beeladybug-universal-5f88e1d66c": [
+        0,
+        0,
+        0
+      ],
+      "x-antonioprosperi2-svg-beeladybug-universal-a89811cf4e": [
+        0,
+        0,
+        0
+      ],
+      "x-antonioprosperi2-svg-beeladybug-universal-b6e1d19aa0": [
+        0,
+        0,
+        0
+      ],
+      "x-avoidwork-filesize-js-109ae605ab": [
+        0,
+        1,
+        1
+      ],
+      "x-avoidwork-filesize-js-64b4a2611f": [
+        1,
+        1,
+        1
+      ],
+      "x-avoidwork-filesize-js-f5bd84b81b": [
+        1,
+        0,
+        0
+      ],
+      "x-avoidwork-tiny-lru-30397d7a76": [
+        1,
+        0,
+        1
+      ],
+      "x-avoidwork-tiny-lru-da90b42c31": [
+        1,
+        1,
+        1
+      ],
+      "x-azu-setup-npm-trusted-publish-6104f8bee9": [
+        0,
+        0,
+        0
+      ],
+      "x-blakeb056-six-degrees-aec5ecaebb": [
+        0,
+        0,
+        0
+      ],
+      "x-blucca-n8n-check-0d73b43caa": [
+        0,
+        0,
+        0
+      ],
+      "x-blucca-n8n-check-1c589621bf": [
+        0,
+        0,
+        0
+      ],
+      "x-blucca-n8n-check-a7fa85ded5": [
+        0,
+        0,
+        0
+      ],
+      "x-cccalana-gatewaycheck-2d961d088c": [
+        0,
+        0,
+        0
+      ],
+      "x-cheapestinference-claude-auto-retry-6d605a5d91": [
+        0,
+        0,
+        0
+      ],
+      "x-cheapestinference-claude-auto-retry-7a1ddf10b2": [
+        1,
+        1,
+        1
+      ],
+      "x-cheapestinference-claude-auto-retry-f859f12fea": [
+        0,
+        0,
+        0
+      ],
+      "x-codyrobertson-gh-issue-lease-f0f573c258": [
+        0,
+        0,
+        0
+      ],
+      "x-dgrr-studio-dice-141a1a8d6b": [
+        0,
+        0,
+        0
+      ],
+      "x-dhaupin-crashtest-5c6ce1d53f": [
+        0,
+        0,
+        0
+      ],
+      "x-dhaupin-crashtest-e70988c5b4": [
+        0,
+        0,
+        0
+      ],
+      "x-dhaupin-crashtest-eb4c5fee65": [
+        1,
+        1,
+        1
+      ],
+      "x-dirop1-pi-delay-prompt-a7948a14a4": [
+        0,
+        0,
+        0
+      ],
+      "x-drewthomas00-tcpa-quiet-hours-d929633b54": [
+        1,
+        1,
+        1
+      ],
+      "x-ducaoya-pi-hang-guard-b75099e5bc": [
+        0,
+        0,
+        0
+      ],
+      "x-evomap-gep-sdk-js-6a387bbe32": [
+        0,
+        0,
+        0
+      ],
+      "x-fugangcui-speakremix-codes-7bf8b8fb00": [
+        0,
+        0,
+        0
+      ],
+      "x-ghostpawjs-grimoire-4a1c83b504": [
+        1,
+        0,
+        1
+      ],
+      "x-ghostpawjs-grimoire-b7fc19a032": [
+        1,
+        1,
+        1
+      ],
+      "x-ghostpawjs-grimoire-c5aa4b66a3": [
+        0,
+        0,
+        0
+      ],
+      "x-groophylifefor-heap-analysis-10ddfecb6b": [
+        0,
+        0,
+        0
+      ],
+      "x-groophylifefor-heap-analysis-71cd48f8ba": [
+        0,
+        0,
+        0
+      ],
+      "x-groophylifefor-heap-analysis-bfc733de41": [
+        0,
+        0,
+        0
+      ],
+      "x-guorunjie-agentic-workflow-guard-79f4aec3b8": [
+        0,
+        0,
+        0
+      ],
+      "x-guorunjie-agentic-workflow-guard-bc30533f19": [
+        0,
+        0,
+        0
+      ],
+      "x-guorunjie-agentic-workflow-guard-c1322204ff": [
+        0,
+        0,
+        0
+      ],
+      "x-guotree-magpie-websearch-466d493835": [
+        0,
+        0,
+        0
+      ],
+      "x-guotree-magpie-websearch-a74cfdcbe9": [
+        0,
+        0,
+        0
+      ],
+      "x-guotree-magpie-websearch-c4d8db57f9": [
+        0,
+        0,
+        0
+      ],
+      "x-igormel81-dsh-chat-cost-8b37b31edf": [
+        0,
+        0,
+        0
+      ],
+      "x-insession-space-insession-sdk-29c8a3b74e": [
+        1,
+        1,
+        1
+      ],
+      "x-insession-space-insession-sdk-c721ee0c1d": [
+        0,
+        1,
+        1
+      ],
+      "x-insession-space-insession-sdk-f9057e96cd": [
+        1,
+        1,
+        1
+      ],
+      "x-johnhenry-mport-b70dabf4e7": [
+        0,
+        0,
+        0
+      ],
+      "x-johnhenry-spintax-8e582b7cde": [
+        1,
+        1,
+        1
+      ],
+      "x-kannakuron-dsh-ide-git-09c63b85e5": [
+        0,
+        0,
+        0
+      ],
+      "x-kannakuron-dsh-ide-git-317ae73aa6": [
+        0,
+        0,
+        0
+      ],
+      "x-kannakuron-dsh-ide-git-3599010391": [
+        0,
+        0,
+        0
+      ],
+      "x-l956615272-hub-dsh-token-usage-4fef2ea940": [
+        0,
+        0,
+        0
+      ],
+      "x-l956615272-hub-dsh-token-usage-76b731dfd1": [
+        0,
+        0,
+        0
+      ],
+      "x-l956615272-hub-dsh-token-usage-8c425815aa": [
+        0,
+        0,
+        0
+      ],
+      "x-legible-sh-mutex-13867857ca": [
+        0,
+        0,
+        0
+      ],
+      "x-legible-sh-mutex-3a0cb5dd56": [
+        0,
+        0,
+        0
+      ],
+      "x-lhf198-dsh-prompt-optimizer-42cfbd7f35": [
+        0,
+        0,
+        0
+      ],
+      "x-lhf198-dsh-prompt-optimizer-fe5772419b": [
+        1,
+        0,
+        1
+      ],
+      "x-lucastonidev-patrickuser-05e5089acf": [
+        1,
+        1,
+        1
+      ],
+      "x-magrinj-hermes-intl-22ec94ee24": [
+        1,
+        1,
+        1
+      ],
+      "x-magrinj-hermes-intl-e1877c8147": [
+        0,
+        0,
+        0
+      ],
+      "x-marko-js-htmljs-parser-a576b5c86e": [
+        1,
+        1,
+        1
+      ],
+      "x-metarhia-metawatch-af9528a554": [
+        0,
+        0,
+        0
+      ],
+      "x-metarhia-metawatch-e1b278f5c3": [
+        0,
+        1,
+        1
+      ],
+      "x-misterkante-cc-model-router-ced46f7612": [
+        0,
+        0,
+        0
+      ],
+      "x-mr-mihu-dsh-dbhub-live-534032da27": [
+        0,
+        1,
+        1
+      ],
+      "x-mr-mihu-dsh-dbhub-live-f9d568569b": [
+        0,
+        0,
+        0
+      ],
+      "x-mukundakatta-agentfit-510c32d490": [
+        1,
+        1,
+        1
+      ],
+      "x-nodemailer-libqp-7bbdcbeac4": [
+        1,
+        1,
+        1
+      ],
+      "x-opopeshku-cronalive-node-a6f621977e": [
+        1,
+        1,
+        1
+      ],
+      "x-otto-ottospace-mizan-f2f8fcb2c8": [
+        1,
+        1,
+        1
+      ],
+      "x-panpontomate-solana-risk-engine-e2582ea728": [
+        0,
+        0,
+        0
+      ],
+      "x-runcat-tommy-dsh-panda-calendar-667f1793e5": [
+        0,
+        0,
+        0
+      ],
+      "x-runcat-tommy-dsh-panda-calendar-ec35ab2529": [
+        0,
+        0,
+        0
+      ],
+      "x-sanchit07-dev-node-core-easy-kit-268de6812c": [
+        0,
+        0,
+        0
+      ],
+      "x-sanchit07-dev-node-core-easy-kit-39890fd99f": [
+        0,
+        0,
+        0
+      ],
+      "x-sanchit07-dev-node-core-easy-kit-70f95fc1b2": [
+        0,
+        0,
+        0
+      ],
+      "x-sandsoftwaresolutions-ss-duration-ac6449101c": [
+        0,
+        0,
+        0
+      ],
+      "x-sandsoftwaresolutions-ss-human-format-ade5993e4f": [
+        0,
+        0,
+        0
+      ],
+      "x-shelamkoff-event-bus-cc858589eb": [
+        0,
+        0,
+        0
+      ],
+      "x-short-io-envalid-unused-f77a6c7072": [
+        0,
+        0,
+        0
+      ],
+      "x-shrinivas-sn-adapter-ingestion-499701352b": [
+        1,
+        1,
+        1
+      ],
+      "x-sindresorhus-clone-regexp-0594242c88": [
+        1,
+        1,
+        1
+      ],
+      "x-spartawhy117-dsh-token-dash-ba4082dce3": [
+        0,
+        0,
+        0
+      ],
+      "x-toolbuilder-list-1914dfac5e": [
+        1,
+        1,
+        1
+      ],
+      "x-toolbuilder-list-2b73f7f42c": [
+        0,
+        1,
+        0
+      ],
+      "x-toolbuilder-list-bc22a50372": [
+        1,
+        1,
+        1
+      ],
+      "x-w8s-rng-with-intention-d6d0f34e4c": [
+        1,
+        1,
+        1
+      ],
+      "x-wenaixi-dsh-prompt-history-396b4d7ce7": [
+        0,
+        0,
+        0
+      ],
+      "x-wenaixi-dsh-prompt-history-87cd943992": [
+        0,
+        1,
+        1
+      ],
+      "x-wenaixi-dsh-prompt-history-f2c2ad01c0": [
+        0,
+        0,
+        0
+      ],
+      "x-yammm-ynode-ylog-d5c5c3f62e": [
+        1,
+        1,
+        1
+      ]
+    },
+    "PC": {
+      "x-ahmtsahin-agent-context-bench-134ba49b33": [
+        0,
+        0,
+        0
+      ],
+      "x-ahmtsahin-agent-context-bench-3912f5ad87": [
+        0,
+        0,
+        0
+      ],
+      "x-ahmtsahin-agent-context-bench-b63c4acd3d": [
+        0,
+        0,
+        0
+      ],
+      "x-alannerfranklin-dsh-relay-isolation-dfccc5d2c1": [
+        0,
+        0,
+        0
+      ],
+      "x-antonioprosperi2-svg-beeladybug-universal-5f88e1d66c": [
+        0,
+        0,
+        0
+      ],
+      "x-antonioprosperi2-svg-beeladybug-universal-a89811cf4e": [
+        0,
+        0,
+        0
+      ],
+      "x-antonioprosperi2-svg-beeladybug-universal-b6e1d19aa0": [
+        0,
+        0,
+        0
+      ],
+      "x-avoidwork-filesize-js-109ae605ab": [
+        0,
+        1,
+        0
+      ],
+      "x-avoidwork-filesize-js-64b4a2611f": [
+        1,
+        0,
+        1
+      ],
+      "x-avoidwork-filesize-js-f5bd84b81b": [
+        1,
+        0,
+        0
+      ],
+      "x-avoidwork-tiny-lru-30397d7a76": [
+        0,
+        0,
+        1
+      ],
+      "x-avoidwork-tiny-lru-da90b42c31": [
+        1,
+        1,
+        1
+      ],
+      "x-azu-setup-npm-trusted-publish-6104f8bee9": [
+        0,
+        0,
+        0
+      ],
+      "x-blakeb056-six-degrees-aec5ecaebb": [
+        0,
+        0,
+        0
+      ],
+      "x-blucca-n8n-check-0d73b43caa": [
+        0,
+        0,
+        0
+      ],
+      "x-blucca-n8n-check-1c589621bf": [
+        0,
+        0,
+        0
+      ],
+      "x-blucca-n8n-check-a7fa85ded5": [
+        0,
+        0,
+        0
+      ],
+      "x-cccalana-gatewaycheck-2d961d088c": [
+        0,
+        0,
+        0
+      ],
+      "x-cheapestinference-claude-auto-retry-6d605a5d91": [
+        0,
+        0,
+        0
+      ],
+      "x-cheapestinference-claude-auto-retry-7a1ddf10b2": [
+        1,
+        0,
+        1
+      ],
+      "x-cheapestinference-claude-auto-retry-f859f12fea": [
+        0,
+        0,
+        0
+      ],
+      "x-codyrobertson-gh-issue-lease-f0f573c258": [
+        0,
+        0,
+        1
+      ],
+      "x-dgrr-studio-dice-141a1a8d6b": [
+        0,
+        0,
+        0
+      ],
+      "x-dhaupin-crashtest-5c6ce1d53f": [
+        0,
+        0,
+        0
+      ],
+      "x-dhaupin-crashtest-e70988c5b4": [
+        0,
+        0,
+        0
+      ],
+      "x-dhaupin-crashtest-eb4c5fee65": [
+        1,
+        1,
+        1
+      ],
+      "x-dirop1-pi-delay-prompt-a7948a14a4": [
+        0,
+        0,
+        0
+      ],
+      "x-drewthomas00-tcpa-quiet-hours-d929633b54": [
+        1,
+        1,
+        1
+      ],
+      "x-ducaoya-pi-hang-guard-b75099e5bc": [
+        0,
+        0,
+        0
+      ],
+      "x-evomap-gep-sdk-js-6a387bbe32": [
+        0,
+        0,
+        0
+      ],
+      "x-fugangcui-speakremix-codes-7bf8b8fb00": [
+        0,
+        0,
+        0
+      ],
+      "x-ghostpawjs-grimoire-4a1c83b504": [
+        0,
+        0,
+        1
+      ],
+      "x-ghostpawjs-grimoire-b7fc19a032": [
+        1,
+        1,
+        1
+      ],
+      "x-ghostpawjs-grimoire-c5aa4b66a3": [
+        0,
+        0,
+        0
+      ],
+      "x-groophylifefor-heap-analysis-10ddfecb6b": [
+        0,
+        0,
+        0
+      ],
+      "x-groophylifefor-heap-analysis-71cd48f8ba": [
+        0,
+        0,
+        0
+      ],
+      "x-groophylifefor-heap-analysis-bfc733de41": [
+        0,
+        0,
+        0
+      ],
+      "x-guorunjie-agentic-workflow-guard-79f4aec3b8": [
+        0,
+        0,
+        0
+      ],
+      "x-guorunjie-agentic-workflow-guard-bc30533f19": [
+        0,
+        0,
+        0
+      ],
+      "x-guorunjie-agentic-workflow-guard-c1322204ff": [
+        0,
+        0,
+        0
+      ],
+      "x-guotree-magpie-websearch-466d493835": [
+        0,
+        0,
+        0
+      ],
+      "x-guotree-magpie-websearch-a74cfdcbe9": [
+        0,
+        0,
+        0
+      ],
+      "x-guotree-magpie-websearch-c4d8db57f9": [
+        0,
+        0,
+        0
+      ],
+      "x-igormel81-dsh-chat-cost-8b37b31edf": [
+        0,
+        0,
+        0
+      ],
+      "x-insession-space-insession-sdk-29c8a3b74e": [
+        1,
+        1,
+        1
+      ],
+      "x-insession-space-insession-sdk-c721ee0c1d": [
+        1,
+        0,
+        1
+      ],
+      "x-insession-space-insession-sdk-f9057e96cd": [
+        1,
+        1,
+        1
+      ],
+      "x-johnhenry-mport-b70dabf4e7": [
+        0,
+        0,
+        0
+      ],
+      "x-johnhenry-spintax-8e582b7cde": [
+        1,
+        1,
+        1
+      ],
+      "x-kannakuron-dsh-ide-git-09c63b85e5": [
+        0,
+        0,
+        0
+      ],
+      "x-kannakuron-dsh-ide-git-317ae73aa6": [
+        0,
+        0,
+        0
+      ],
+      "x-kannakuron-dsh-ide-git-3599010391": [
+        0,
+        0,
+        0
+      ],
+      "x-l956615272-hub-dsh-token-usage-4fef2ea940": [
+        1,
+        0,
+        0
+      ],
+      "x-l956615272-hub-dsh-token-usage-76b731dfd1": [
+        0,
+        0,
+        0
+      ],
+      "x-l956615272-hub-dsh-token-usage-8c425815aa": [
+        0,
+        0,
+        1
+      ],
+      "x-legible-sh-mutex-13867857ca": [
+        0,
+        0,
+        0
+      ],
+      "x-legible-sh-mutex-3a0cb5dd56": [
+        0,
+        1,
+        0
+      ],
+      "x-lhf198-dsh-prompt-optimizer-42cfbd7f35": [
+        0,
+        0,
+        0
+      ],
+      "x-lhf198-dsh-prompt-optimizer-fe5772419b": [
+        0,
+        0,
+        0
+      ],
+      "x-lucastonidev-patrickuser-05e5089acf": [
+        1,
+        1,
+        1
+      ],
+      "x-magrinj-hermes-intl-22ec94ee24": [
+        1,
+        0,
+        0
+      ],
+      "x-magrinj-hermes-intl-e1877c8147": [
+        0,
+        1,
+        0
+      ],
+      "x-marko-js-htmljs-parser-a576b5c86e": [
+        1,
+        0,
+        1
+      ],
+      "x-metarhia-metawatch-af9528a554": [
+        0,
+        0,
+        0
+      ],
+      "x-metarhia-metawatch-e1b278f5c3": [
+        0,
+        0,
+        0
+      ],
+      "x-misterkante-cc-model-router-ced46f7612": [
+        0,
+        0,
+        0
+      ],
+      "x-mr-mihu-dsh-dbhub-live-534032da27": [
+        0,
+        1,
+        0
+      ],
+      "x-mr-mihu-dsh-dbhub-live-f9d568569b": [
+        0,
+        0,
+        0
+      ],
+      "x-mukundakatta-agentfit-510c32d490": [
+        1,
+        1,
+        1
+      ],
+      "x-nodemailer-libqp-7bbdcbeac4": [
+        1,
+        1,
+        1
+      ],
+      "x-opopeshku-cronalive-node-a6f621977e": [
+        1,
+        1,
+        1
+      ],
+      "x-otto-ottospace-mizan-f2f8fcb2c8": [
+        1,
+        1,
+        1
+      ],
+      "x-panpontomate-solana-risk-engine-e2582ea728": [
+        0,
+        0,
+        0
+      ],
+      "x-runcat-tommy-dsh-panda-calendar-667f1793e5": [
+        0,
+        0,
+        0
+      ],
+      "x-runcat-tommy-dsh-panda-calendar-ec35ab2529": [
+        0,
+        0,
+        0
+      ],
+      "x-sanchit07-dev-node-core-easy-kit-268de6812c": [
+        0,
+        0,
+        0
+      ],
+      "x-sanchit07-dev-node-core-easy-kit-39890fd99f": [
+        0,
+        0,
+        0
+      ],
+      "x-sanchit07-dev-node-core-easy-kit-70f95fc1b2": [
+        0,
+        0,
+        0
+      ],
+      "x-sandsoftwaresolutions-ss-duration-ac6449101c": [
+        0,
+        0,
+        0
+      ],
+      "x-sandsoftwaresolutions-ss-human-format-ade5993e4f": [
+        0,
+        0,
+        0
+      ],
+      "x-shelamkoff-event-bus-cc858589eb": [
+        0,
+        0,
+        0
+      ],
+      "x-short-io-envalid-unused-f77a6c7072": [
+        0,
+        0,
+        0
+      ],
+      "x-shrinivas-sn-adapter-ingestion-499701352b": [
+        1,
+        1,
+        1
+      ],
+      "x-sindresorhus-clone-regexp-0594242c88": [
+        1,
+        1,
+        1
+      ],
+      "x-spartawhy117-dsh-token-dash-ba4082dce3": [
+        0,
+        0,
+        0
+      ],
+      "x-toolbuilder-list-1914dfac5e": [
+        1,
+        1,
+        1
+      ],
+      "x-toolbuilder-list-2b73f7f42c": [
+        1,
+        1,
+        1
+      ],
+      "x-toolbuilder-list-bc22a50372": [
+        1,
+        1,
+        1
+      ],
+      "x-w8s-rng-with-intention-d6d0f34e4c": [
+        1,
+        1,
+        1
+      ],
+      "x-wenaixi-dsh-prompt-history-396b4d7ce7": [
+        0,
+        0,
+        0
+      ],
+      "x-wenaixi-dsh-prompt-history-87cd943992": [
+        1,
+        1,
+        1
+      ],
+      "x-wenaixi-dsh-prompt-history-f2c2ad01c0": [
+        0,
+        0,
+        0
+      ],
+      "x-yammm-ynode-ylog-d5c5c3f62e": [
+        1,
+        1,
+        1
+      ]
+    },
+    "PCR": {
+      "x-ahmtsahin-agent-context-bench-134ba49b33": [
+        0,
+        0,
+        0
+      ],
+      "x-ahmtsahin-agent-context-bench-3912f5ad87": [
+        0,
+        0,
+        0
+      ],
+      "x-ahmtsahin-agent-context-bench-b63c4acd3d": [
+        0,
+        0,
+        0
+      ],
+      "x-alannerfranklin-dsh-relay-isolation-dfccc5d2c1": [
+        0,
+        0,
+        0
+      ],
+      "x-antonioprosperi2-svg-beeladybug-universal-5f88e1d66c": [
+        0,
+        0,
+        0
+      ],
+      "x-antonioprosperi2-svg-beeladybug-universal-a89811cf4e": [
+        0,
+        0,
+        0
+      ],
+      "x-antonioprosperi2-svg-beeladybug-universal-b6e1d19aa0": [
+        0,
+        0,
+        0
+      ],
+      "x-avoidwork-filesize-js-109ae605ab": [
+        0,
+        0,
+        0
+      ],
+      "x-avoidwork-filesize-js-64b4a2611f": [
+        1,
+        1,
+        1
+      ],
+      "x-avoidwork-filesize-js-f5bd84b81b": [
+        0,
+        0,
+        0
+      ],
+      "x-avoidwork-tiny-lru-30397d7a76": [
+        0,
+        1,
+        1
+      ],
+      "x-avoidwork-tiny-lru-da90b42c31": [
+        1,
+        1,
+        1
+      ],
+      "x-azu-setup-npm-trusted-publish-6104f8bee9": [
+        0,
+        0,
+        0
+      ],
+      "x-blakeb056-six-degrees-aec5ecaebb": [
+        0,
+        0,
+        0
+      ],
+      "x-blucca-n8n-check-0d73b43caa": [
+        0,
+        0,
+        0
+      ],
+      "x-blucca-n8n-check-1c589621bf": [
+        0,
+        0,
+        0
+      ],
+      "x-blucca-n8n-check-a7fa85ded5": [
+        0,
+        0,
+        0
+      ],
+      "x-cccalana-gatewaycheck-2d961d088c": [
+        0,
+        0,
+        0
+      ],
+      "x-cheapestinference-claude-auto-retry-6d605a5d91": [
+        0,
+        0,
+        0
+      ],
+      "x-cheapestinference-claude-auto-retry-7a1ddf10b2": [
+        1,
+        1,
+        1
+      ],
+      "x-cheapestinference-claude-auto-retry-f859f12fea": [
+        0,
+        0,
+        0
+      ],
+      "x-codyrobertson-gh-issue-lease-f0f573c258": [
+        0,
+        1,
+        0
+      ],
+      "x-dgrr-studio-dice-141a1a8d6b": [
+        0,
+        0,
+        0
+      ],
+      "x-dhaupin-crashtest-5c6ce1d53f": [
+        0,
+        0,
+        0
+      ],
+      "x-dhaupin-crashtest-e70988c5b4": [
+        0,
+        0,
+        0
+      ],
+      "x-dhaupin-crashtest-eb4c5fee65": [
+        1,
+        1,
+        1
+      ],
+      "x-dirop1-pi-delay-prompt-a7948a14a4": [
+        0,
+        0,
+        0
+      ],
+      "x-drewthomas00-tcpa-quiet-hours-d929633b54": [
+        1,
+        1,
+        1
+      ],
+      "x-ducaoya-pi-hang-guard-b75099e5bc": [
+        0,
+        0,
+        0
+      ],
+      "x-evomap-gep-sdk-js-6a387bbe32": [
+        0,
+        0,
+        0
+      ],
+      "x-fugangcui-speakremix-codes-7bf8b8fb00": [
+        0,
+        0,
+        0
+      ],
+      "x-ghostpawjs-grimoire-4a1c83b504": [
+        1,
+        1,
+        1
+      ],
+      "x-ghostpawjs-grimoire-b7fc19a032": [
+        1,
+        1,
+        1
+      ],
+      "x-ghostpawjs-grimoire-c5aa4b66a3": [
+        0,
+        0,
+        0
+      ],
+      "x-groophylifefor-heap-analysis-10ddfecb6b": [
+        0,
+        0,
+        0
+      ],
+      "x-groophylifefor-heap-analysis-71cd48f8ba": [
+        0,
+        0,
+        0
+      ],
+      "x-groophylifefor-heap-analysis-bfc733de41": [
+        0,
+        0,
+        0
+      ],
+      "x-guorunjie-agentic-workflow-guard-79f4aec3b8": [
+        0,
+        0,
+        0
+      ],
+      "x-guorunjie-agentic-workflow-guard-bc30533f19": [
+        0,
+        0,
+        0
+      ],
+      "x-guorunjie-agentic-workflow-guard-c1322204ff": [
+        0,
+        0,
+        0
+      ],
+      "x-guotree-magpie-websearch-466d493835": [
+        0,
+        0,
+        0
+      ],
+      "x-guotree-magpie-websearch-a74cfdcbe9": [
+        0,
+        0,
+        0
+      ],
+      "x-guotree-magpie-websearch-c4d8db57f9": [
+        0,
+        0,
+        0
+      ],
+      "x-igormel81-dsh-chat-cost-8b37b31edf": [
+        0,
+        0,
+        0
+      ],
+      "x-insession-space-insession-sdk-29c8a3b74e": [
+        1,
+        1,
+        1
+      ],
+      "x-insession-space-insession-sdk-c721ee0c1d": [
+        0,
+        0,
+        0
+      ],
+      "x-insession-space-insession-sdk-f9057e96cd": [
+        0,
+        1,
+        1
+      ],
+      "x-johnhenry-mport-b70dabf4e7": [
+        0,
+        0,
+        0
+      ],
+      "x-johnhenry-spintax-8e582b7cde": [
+        1,
+        1,
+        1
+      ],
+      "x-kannakuron-dsh-ide-git-09c63b85e5": [
+        0,
+        0,
+        0
+      ],
+      "x-kannakuron-dsh-ide-git-317ae73aa6": [
+        0,
+        0,
+        0
+      ],
+      "x-kannakuron-dsh-ide-git-3599010391": [
+        0,
+        0,
+        0
+      ],
+      "x-l956615272-hub-dsh-token-usage-4fef2ea940": [
+        0,
+        0,
+        0
+      ],
+      "x-l956615272-hub-dsh-token-usage-76b731dfd1": [
+        1,
+        0,
+        0
+      ],
+      "x-l956615272-hub-dsh-token-usage-8c425815aa": [
+        0,
+        1,
+        0
+      ],
+      "x-legible-sh-mutex-13867857ca": [
+        0,
+        0,
+        0
+      ],
+      "x-legible-sh-mutex-3a0cb5dd56": [
+        0,
+        0,
+        0
+      ],
+      "x-lhf198-dsh-prompt-optimizer-42cfbd7f35": [
+        0,
+        0,
+        0
+      ],
+      "x-lhf198-dsh-prompt-optimizer-fe5772419b": [
+        1,
+        0,
+        0
+      ],
+      "x-lucastonidev-patrickuser-05e5089acf": [
+        1,
+        1,
+        1
+      ],
+      "x-magrinj-hermes-intl-22ec94ee24": [
+        0,
+        0,
+        0
+      ],
+      "x-magrinj-hermes-intl-e1877c8147": [
+        1,
+        1,
+        0
+      ],
+      "x-marko-js-htmljs-parser-a576b5c86e": [
+        0,
+        1,
+        1
+      ],
+      "x-metarhia-metawatch-af9528a554": [
+        0,
+        0,
+        0
+      ],
+      "x-metarhia-metawatch-e1b278f5c3": [
+        0,
+        0,
+        0
+      ],
+      "x-misterkante-cc-model-router-ced46f7612": [
+        0,
+        0,
+        0
+      ],
+      "x-mr-mihu-dsh-dbhub-live-534032da27": [
+        0,
+        1,
+        0
+      ],
+      "x-mr-mihu-dsh-dbhub-live-f9d568569b": [
+        0,
+        0,
+        0
+      ],
+      "x-mukundakatta-agentfit-510c32d490": [
+        1,
+        1,
+        1
+      ],
+      "x-nodemailer-libqp-7bbdcbeac4": [
+        1,
+        1,
+        1
+      ],
+      "x-opopeshku-cronalive-node-a6f621977e": [
+        1,
+        1,
+        1
+      ],
+      "x-otto-ottospace-mizan-f2f8fcb2c8": [
+        1,
+        1,
+        1
+      ],
+      "x-panpontomate-solana-risk-engine-e2582ea728": [
+        0,
+        0,
+        0
+      ],
+      "x-runcat-tommy-dsh-panda-calendar-667f1793e5": [
+        0,
+        0,
+        0
+      ],
+      "x-runcat-tommy-dsh-panda-calendar-ec35ab2529": [
+        0,
+        0,
+        0
+      ],
+      "x-sanchit07-dev-node-core-easy-kit-268de6812c": [
+        0,
+        0,
+        0
+      ],
+      "x-sanchit07-dev-node-core-easy-kit-39890fd99f": [
+        0,
+        0,
+        0
+      ],
+      "x-sanchit07-dev-node-core-easy-kit-70f95fc1b2": [
+        0,
+        0,
+        0
+      ],
+      "x-sandsoftwaresolutions-ss-duration-ac6449101c": [
+        0,
+        0,
+        0
+      ],
+      "x-sandsoftwaresolutions-ss-human-format-ade5993e4f": [
+        0,
+        0,
+        0
+      ],
+      "x-shelamkoff-event-bus-cc858589eb": [
+        0,
+        0,
+        0
+      ],
+      "x-short-io-envalid-unused-f77a6c7072": [
+        0,
+        0,
+        0
+      ],
+      "x-shrinivas-sn-adapter-ingestion-499701352b": [
+        1,
+        1,
+        1
+      ],
+      "x-sindresorhus-clone-regexp-0594242c88": [
+        1,
+        0,
+        1
+      ],
+      "x-spartawhy117-dsh-token-dash-ba4082dce3": [
+        0,
+        0,
+        0
+      ],
+      "x-toolbuilder-list-1914dfac5e": [
+        1,
+        1,
+        1
+      ],
+      "x-toolbuilder-list-2b73f7f42c": [
+        0,
+        0,
+        0
+      ],
+      "x-toolbuilder-list-bc22a50372": [
+        1,
+        1,
+        1
+      ],
+      "x-w8s-rng-with-intention-d6d0f34e4c": [
+        1,
+        1,
+        1
+      ],
+      "x-wenaixi-dsh-prompt-history-396b4d7ce7": [
+        0,
+        0,
+        0
+      ],
+      "x-wenaixi-dsh-prompt-history-87cd943992": [
+        1,
+        1,
+        1
+      ],
+      "x-wenaixi-dsh-prompt-history-f2c2ad01c0": [
+        0,
+        0,
+        0
+      ],
+      "x-yammm-ynode-ylog-d5c5c3f62e": [
+        1,
+        1,
+        1
+      ]
+    }
+  },
+  "perTaskStrict": {
+    "OC": {
+      "x-ahmtsahin-agent-context-bench-134ba49b33": [
+        0,
+        0,
+        0
+      ],
+      "x-ahmtsahin-agent-context-bench-3912f5ad87": [
+        0,
+        0,
+        0
+      ],
+      "x-ahmtsahin-agent-context-bench-b63c4acd3d": [
+        0,
+        0,
+        0
+      ],
+      "x-alannerfranklin-dsh-relay-isolation-dfccc5d2c1": [
+        0,
+        0,
+        0
+      ],
+      "x-antonioprosperi2-svg-beeladybug-universal-5f88e1d66c": [
+        0,
+        0,
+        0
+      ],
+      "x-antonioprosperi2-svg-beeladybug-universal-a89811cf4e": [
+        0,
+        0,
+        0
+      ],
+      "x-antonioprosperi2-svg-beeladybug-universal-b6e1d19aa0": [
+        0,
+        0,
+        0
+      ],
+      "x-avoidwork-filesize-js-109ae605ab": [
+        0,
+        0,
+        0
+      ],
+      "x-avoidwork-filesize-js-64b4a2611f": [
+        0,
+        0,
+        0
+      ],
+      "x-avoidwork-filesize-js-f5bd84b81b": [
+        1,
+        0,
+        0
+      ],
+      "x-avoidwork-tiny-lru-30397d7a76": [
+        1,
+        0,
+        0
+      ],
+      "x-avoidwork-tiny-lru-da90b42c31": [
+        0,
+        0,
+        0
+      ],
+      "x-azu-setup-npm-trusted-publish-6104f8bee9": [
+        0,
+        0,
+        0
+      ],
+      "x-blakeb056-six-degrees-aec5ecaebb": [
+        0,
+        0,
+        0
+      ],
+      "x-blucca-n8n-check-0d73b43caa": [
+        0,
+        0,
+        0
+      ],
+      "x-blucca-n8n-check-1c589621bf": [
+        0,
+        0,
+        0
+      ],
+      "x-blucca-n8n-check-a7fa85ded5": [
+        0,
+        0,
+        0
+      ],
+      "x-cccalana-gatewaycheck-2d961d088c": [
+        0,
+        0,
+        0
+      ],
+      "x-cheapestinference-claude-auto-retry-6d605a5d91": [
+        0,
+        0,
+        0
+      ],
+      "x-cheapestinference-claude-auto-retry-7a1ddf10b2": [
+        0,
+        0,
+        0
+      ],
+      "x-cheapestinference-claude-auto-retry-f859f12fea": [
+        0,
+        0,
+        0
+      ],
+      "x-codyrobertson-gh-issue-lease-f0f573c258": [
+        0,
+        0,
+        0
+      ],
+      "x-dgrr-studio-dice-141a1a8d6b": [
+        0,
+        0,
+        0
+      ],
+      "x-dhaupin-crashtest-5c6ce1d53f": [
+        0,
+        0,
+        0
+      ],
+      "x-dhaupin-crashtest-e70988c5b4": [
+        0,
+        0,
+        0
+      ],
+      "x-dhaupin-crashtest-eb4c5fee65": [
+        0,
+        1,
+        1
+      ],
+      "x-dirop1-pi-delay-prompt-a7948a14a4": [
+        0,
+        0,
+        0
+      ],
+      "x-drewthomas00-tcpa-quiet-hours-d929633b54": [
+        1,
+        1,
+        1
+      ],
+      "x-ducaoya-pi-hang-guard-b75099e5bc": [
+        0,
+        0,
+        0
+      ],
+      "x-evomap-gep-sdk-js-6a387bbe32": [
+        0,
+        0,
+        0
+      ],
+      "x-fugangcui-speakremix-codes-7bf8b8fb00": [
+        0,
+        0,
+        0
+      ],
+      "x-ghostpawjs-grimoire-4a1c83b504": [
+        1,
+        1,
+        1
+      ],
+      "x-ghostpawjs-grimoire-b7fc19a032": [
+        0,
+        0,
+        1
+      ],
+      "x-ghostpawjs-grimoire-c5aa4b66a3": [
+        0,
+        0,
+        0
+      ],
+      "x-groophylifefor-heap-analysis-10ddfecb6b": [
+        0,
+        0,
+        0
+      ],
+      "x-groophylifefor-heap-analysis-71cd48f8ba": [
+        0,
+        0,
+        0
+      ],
+      "x-groophylifefor-heap-analysis-bfc733de41": [
+        0,
+        0,
+        0
+      ],
+      "x-guorunjie-agentic-workflow-guard-79f4aec3b8": [
+        0,
+        0,
+        0
+      ],
+      "x-guorunjie-agentic-workflow-guard-bc30533f19": [
+        0,
+        0,
+        0
+      ],
+      "x-guorunjie-agentic-workflow-guard-c1322204ff": [
+        0,
+        0,
+        0
+      ],
+      "x-guotree-magpie-websearch-466d493835": [
+        0,
+        0,
+        0
+      ],
+      "x-guotree-magpie-websearch-a74cfdcbe9": [
+        0,
+        0,
+        0
+      ],
+      "x-guotree-magpie-websearch-c4d8db57f9": [
+        0,
+        0,
+        0
+      ],
+      "x-igormel81-dsh-chat-cost-8b37b31edf": [
+        0,
+        0,
+        0
+      ],
+      "x-insession-space-insession-sdk-29c8a3b74e": [
+        0,
+        0,
+        0
+      ],
+      "x-insession-space-insession-sdk-c721ee0c1d": [
+        0,
+        0,
+        0
+      ],
+      "x-insession-space-insession-sdk-f9057e96cd": [
+        0,
+        0,
+        0
+      ],
+      "x-johnhenry-mport-b70dabf4e7": [
+        0,
+        0,
+        0
+      ],
+      "x-johnhenry-spintax-8e582b7cde": [
+        0,
+        1,
+        1
+      ],
+      "x-kannakuron-dsh-ide-git-09c63b85e5": [
+        0,
+        0,
+        0
+      ],
+      "x-kannakuron-dsh-ide-git-317ae73aa6": [
+        0,
+        0,
+        0
+      ],
+      "x-kannakuron-dsh-ide-git-3599010391": [
+        0,
+        0,
+        0
+      ],
+      "x-l956615272-hub-dsh-token-usage-4fef2ea940": [
+        0,
+        0,
+        0
+      ],
+      "x-l956615272-hub-dsh-token-usage-76b731dfd1": [
+        0,
+        0,
+        0
+      ],
+      "x-l956615272-hub-dsh-token-usage-8c425815aa": [
+        0,
+        0,
+        0
+      ],
+      "x-legible-sh-mutex-13867857ca": [
+        0,
+        0,
+        0
+      ],
+      "x-legible-sh-mutex-3a0cb5dd56": [
+        0,
+        0,
+        0
+      ],
+      "x-lhf198-dsh-prompt-optimizer-42cfbd7f35": [
+        0,
+        0,
+        0
+      ],
+      "x-lhf198-dsh-prompt-optimizer-fe5772419b": [
+        1,
+        1,
+        0
+      ],
+      "x-lucastonidev-patrickuser-05e5089acf": [
+        1,
+        0,
+        0
+      ],
+      "x-magrinj-hermes-intl-22ec94ee24": [
+        0,
+        0,
+        0
+      ],
+      "x-magrinj-hermes-intl-e1877c8147": [
+        0,
+        0,
+        0
+      ],
+      "x-marko-js-htmljs-parser-a576b5c86e": [
+        0,
+        0,
+        0
+      ],
+      "x-metarhia-metawatch-af9528a554": [
+        0,
+        0,
+        0
+      ],
+      "x-metarhia-metawatch-e1b278f5c3": [
+        0,
+        1,
+        1
+      ],
+      "x-misterkante-cc-model-router-ced46f7612": [
+        0,
+        0,
+        0
+      ],
+      "x-mr-mihu-dsh-dbhub-live-534032da27": [
+        0,
+        0,
+        0
+      ],
+      "x-mr-mihu-dsh-dbhub-live-f9d568569b": [
+        0,
+        0,
+        0
+      ],
+      "x-mukundakatta-agentfit-510c32d490": [
+        0,
+        0,
+        0
+      ],
+      "x-nodemailer-libqp-7bbdcbeac4": [
+        0,
+        0,
+        0
+      ],
+      "x-opopeshku-cronalive-node-a6f621977e": [
+        0,
+        1,
+        1
+      ],
+      "x-otto-ottospace-mizan-f2f8fcb2c8": [
+        0,
+        0,
+        0
+      ],
+      "x-panpontomate-solana-risk-engine-e2582ea728": [
+        0,
+        0,
+        0
+      ],
+      "x-runcat-tommy-dsh-panda-calendar-667f1793e5": [
+        0,
+        0,
+        0
+      ],
+      "x-runcat-tommy-dsh-panda-calendar-ec35ab2529": [
+        0,
+        0,
+        0
+      ],
+      "x-sanchit07-dev-node-core-easy-kit-268de6812c": [
+        0,
+        0,
+        0
+      ],
+      "x-sanchit07-dev-node-core-easy-kit-39890fd99f": [
+        0,
+        0,
+        0
+      ],
+      "x-sanchit07-dev-node-core-easy-kit-70f95fc1b2": [
+        0,
+        0,
+        0
+      ],
+      "x-sandsoftwaresolutions-ss-duration-ac6449101c": [
+        0,
+        0,
+        0
+      ],
+      "x-sandsoftwaresolutions-ss-human-format-ade5993e4f": [
+        0,
+        0,
+        0
+      ],
+      "x-shelamkoff-event-bus-cc858589eb": [
+        0,
+        0,
+        0
+      ],
+      "x-short-io-envalid-unused-f77a6c7072": [
+        0,
+        0,
+        0
+      ],
+      "x-shrinivas-sn-adapter-ingestion-499701352b": [
+        0,
+        0,
+        0
+      ],
+      "x-sindresorhus-clone-regexp-0594242c88": [
+        0,
+        0,
+        0
+      ],
+      "x-spartawhy117-dsh-token-dash-ba4082dce3": [
+        0,
+        0,
+        0
+      ],
+      "x-toolbuilder-list-1914dfac5e": [
+        1,
+        1,
+        1
+      ],
+      "x-toolbuilder-list-2b73f7f42c": [
+        0,
+        0,
+        0
+      ],
+      "x-toolbuilder-list-bc22a50372": [
+        0,
+        0,
+        0
+      ],
+      "x-w8s-rng-with-intention-d6d0f34e4c": [
+        0,
+        0,
+        0
+      ],
+      "x-wenaixi-dsh-prompt-history-396b4d7ce7": [
+        0,
+        0,
+        0
+      ],
+      "x-wenaixi-dsh-prompt-history-87cd943992": [
+        0,
+        0,
+        0
+      ],
+      "x-wenaixi-dsh-prompt-history-f2c2ad01c0": [
+        0,
+        0,
+        0
+      ],
+      "x-yammm-ynode-ylog-d5c5c3f62e": [
+        1,
+        1,
+        0
+      ]
+    },
+    "OCR": {
+      "x-ahmtsahin-agent-context-bench-134ba49b33": [
+        0,
+        0,
+        0
+      ],
+      "x-ahmtsahin-agent-context-bench-3912f5ad87": [
+        0,
+        0,
+        0
+      ],
+      "x-ahmtsahin-agent-context-bench-b63c4acd3d": [
+        0,
+        0,
+        0
+      ],
+      "x-alannerfranklin-dsh-relay-isolation-dfccc5d2c1": [
+        0,
+        0,
+        0
+      ],
+      "x-antonioprosperi2-svg-beeladybug-universal-5f88e1d66c": [
+        0,
+        0,
+        0
+      ],
+      "x-antonioprosperi2-svg-beeladybug-universal-a89811cf4e": [
+        0,
+        0,
+        0
+      ],
+      "x-antonioprosperi2-svg-beeladybug-universal-b6e1d19aa0": [
+        0,
+        0,
+        0
+      ],
+      "x-avoidwork-filesize-js-109ae605ab": [
+        0,
+        1,
+        1
+      ],
+      "x-avoidwork-filesize-js-64b4a2611f": [
+        1,
+        1,
+        1
+      ],
+      "x-avoidwork-filesize-js-f5bd84b81b": [
+        1,
+        0,
+        0
+      ],
+      "x-avoidwork-tiny-lru-30397d7a76": [
+        1,
+        0,
+        1
+      ],
+      "x-avoidwork-tiny-lru-da90b42c31": [
+        0,
+        0,
+        1
+      ],
+      "x-azu-setup-npm-trusted-publish-6104f8bee9": [
+        0,
+        0,
+        0
+      ],
+      "x-blakeb056-six-degrees-aec5ecaebb": [
+        0,
+        0,
+        0
+      ],
+      "x-blucca-n8n-check-0d73b43caa": [
+        0,
+        0,
+        0
+      ],
+      "x-blucca-n8n-check-1c589621bf": [
+        0,
+        0,
+        0
+      ],
+      "x-blucca-n8n-check-a7fa85ded5": [
+        0,
+        0,
+        0
+      ],
+      "x-cccalana-gatewaycheck-2d961d088c": [
+        0,
+        0,
+        0
+      ],
+      "x-cheapestinference-claude-auto-retry-6d605a5d91": [
+        0,
+        0,
+        0
+      ],
+      "x-cheapestinference-claude-auto-retry-7a1ddf10b2": [
+        1,
+        1,
+        1
+      ],
+      "x-cheapestinference-claude-auto-retry-f859f12fea": [
+        0,
+        0,
+        0
+      ],
+      "x-codyrobertson-gh-issue-lease-f0f573c258": [
+        0,
+        0,
+        0
+      ],
+      "x-dgrr-studio-dice-141a1a8d6b": [
+        0,
+        0,
+        0
+      ],
+      "x-dhaupin-crashtest-5c6ce1d53f": [
+        0,
+        0,
+        0
+      ],
+      "x-dhaupin-crashtest-e70988c5b4": [
+        0,
+        0,
+        0
+      ],
+      "x-dhaupin-crashtest-eb4c5fee65": [
+        1,
+        1,
+        0
+      ],
+      "x-dirop1-pi-delay-prompt-a7948a14a4": [
+        0,
+        0,
+        0
+      ],
+      "x-drewthomas00-tcpa-quiet-hours-d929633b54": [
+        1,
+        1,
+        1
+      ],
+      "x-ducaoya-pi-hang-guard-b75099e5bc": [
+        0,
+        0,
+        0
+      ],
+      "x-evomap-gep-sdk-js-6a387bbe32": [
+        0,
+        0,
+        0
+      ],
+      "x-fugangcui-speakremix-codes-7bf8b8fb00": [
+        0,
+        0,
+        0
+      ],
+      "x-ghostpawjs-grimoire-4a1c83b504": [
+        1,
+        0,
+        1
+      ],
+      "x-ghostpawjs-grimoire-b7fc19a032": [
+        1,
+        1,
+        1
+      ],
+      "x-ghostpawjs-grimoire-c5aa4b66a3": [
+        0,
+        0,
+        0
+      ],
+      "x-groophylifefor-heap-analysis-10ddfecb6b": [
+        0,
+        0,
+        0
+      ],
+      "x-groophylifefor-heap-analysis-71cd48f8ba": [
+        0,
+        0,
+        0
+      ],
+      "x-groophylifefor-heap-analysis-bfc733de41": [
+        0,
+        0,
+        0
+      ],
+      "x-guorunjie-agentic-workflow-guard-79f4aec3b8": [
+        0,
+        0,
+        0
+      ],
+      "x-guorunjie-agentic-workflow-guard-bc30533f19": [
+        0,
+        0,
+        0
+      ],
+      "x-guorunjie-agentic-workflow-guard-c1322204ff": [
+        0,
+        0,
+        0
+      ],
+      "x-guotree-magpie-websearch-466d493835": [
+        0,
+        0,
+        0
+      ],
+      "x-guotree-magpie-websearch-a74cfdcbe9": [
+        0,
+        0,
+        0
+      ],
+      "x-guotree-magpie-websearch-c4d8db57f9": [
+        0,
+        0,
+        0
+      ],
+      "x-igormel81-dsh-chat-cost-8b37b31edf": [
+        0,
+        0,
+        0
+      ],
+      "x-insession-space-insession-sdk-29c8a3b74e": [
+        1,
+        0,
+        0
+      ],
+      "x-insession-space-insession-sdk-c721ee0c1d": [
+        0,
+        1,
+        1
+      ],
+      "x-insession-space-insession-sdk-f9057e96cd": [
+        1,
+        1,
+        1
+      ],
+      "x-johnhenry-mport-b70dabf4e7": [
+        0,
+        0,
+        0
+      ],
+      "x-johnhenry-spintax-8e582b7cde": [
+        1,
+        1,
+        1
+      ],
+      "x-kannakuron-dsh-ide-git-09c63b85e5": [
+        0,
+        0,
+        0
+      ],
+      "x-kannakuron-dsh-ide-git-317ae73aa6": [
+        0,
+        0,
+        0
+      ],
+      "x-kannakuron-dsh-ide-git-3599010391": [
+        0,
+        0,
+        0
+      ],
+      "x-l956615272-hub-dsh-token-usage-4fef2ea940": [
+        0,
+        0,
+        0
+      ],
+      "x-l956615272-hub-dsh-token-usage-76b731dfd1": [
+        0,
+        0,
+        0
+      ],
+      "x-l956615272-hub-dsh-token-usage-8c425815aa": [
+        0,
+        0,
+        0
+      ],
+      "x-legible-sh-mutex-13867857ca": [
+        0,
+        0,
+        0
+      ],
+      "x-legible-sh-mutex-3a0cb5dd56": [
+        0,
+        0,
+        0
+      ],
+      "x-lhf198-dsh-prompt-optimizer-42cfbd7f35": [
+        0,
+        0,
+        0
+      ],
+      "x-lhf198-dsh-prompt-optimizer-fe5772419b": [
+        1,
+        0,
+        1
+      ],
+      "x-lucastonidev-patrickuser-05e5089acf": [
+        1,
+        1,
+        1
+      ],
+      "x-magrinj-hermes-intl-22ec94ee24": [
+        1,
+        1,
+        1
+      ],
+      "x-magrinj-hermes-intl-e1877c8147": [
+        0,
+        0,
+        0
+      ],
+      "x-marko-js-htmljs-parser-a576b5c86e": [
+        1,
+        1,
+        0
+      ],
+      "x-metarhia-metawatch-af9528a554": [
+        0,
+        0,
+        0
+      ],
+      "x-metarhia-metawatch-e1b278f5c3": [
+        0,
+        1,
+        1
+      ],
+      "x-misterkante-cc-model-router-ced46f7612": [
+        0,
+        0,
+        0
+      ],
+      "x-mr-mihu-dsh-dbhub-live-534032da27": [
+        0,
+        0,
+        0
+      ],
+      "x-mr-mihu-dsh-dbhub-live-f9d568569b": [
+        0,
+        0,
+        0
+      ],
+      "x-mukundakatta-agentfit-510c32d490": [
+        1,
+        0,
+        1
+      ],
+      "x-nodemailer-libqp-7bbdcbeac4": [
+        1,
+        1,
+        1
+      ],
+      "x-opopeshku-cronalive-node-a6f621977e": [
+        1,
+        1,
+        1
+      ],
+      "x-otto-ottospace-mizan-f2f8fcb2c8": [
+        1,
+        1,
+        1
+      ],
+      "x-panpontomate-solana-risk-engine-e2582ea728": [
+        0,
+        0,
+        0
+      ],
+      "x-runcat-tommy-dsh-panda-calendar-667f1793e5": [
+        0,
+        0,
+        0
+      ],
+      "x-runcat-tommy-dsh-panda-calendar-ec35ab2529": [
+        0,
+        0,
+        0
+      ],
+      "x-sanchit07-dev-node-core-easy-kit-268de6812c": [
+        0,
+        0,
+        0
+      ],
+      "x-sanchit07-dev-node-core-easy-kit-39890fd99f": [
+        0,
+        0,
+        0
+      ],
+      "x-sanchit07-dev-node-core-easy-kit-70f95fc1b2": [
+        0,
+        0,
+        0
+      ],
+      "x-sandsoftwaresolutions-ss-duration-ac6449101c": [
+        0,
+        0,
+        0
+      ],
+      "x-sandsoftwaresolutions-ss-human-format-ade5993e4f": [
+        0,
+        0,
+        0
+      ],
+      "x-shelamkoff-event-bus-cc858589eb": [
+        0,
+        0,
+        0
+      ],
+      "x-short-io-envalid-unused-f77a6c7072": [
+        0,
+        0,
+        0
+      ],
+      "x-shrinivas-sn-adapter-ingestion-499701352b": [
+        0,
+        1,
+        0
+      ],
+      "x-sindresorhus-clone-regexp-0594242c88": [
+        1,
+        0,
+        0
+      ],
+      "x-spartawhy117-dsh-token-dash-ba4082dce3": [
+        0,
+        0,
+        0
+      ],
+      "x-toolbuilder-list-1914dfac5e": [
+        1,
+        1,
+        1
+      ],
+      "x-toolbuilder-list-2b73f7f42c": [
+        0,
+        1,
+        0
+      ],
+      "x-toolbuilder-list-bc22a50372": [
+        1,
+        1,
+        1
+      ],
+      "x-w8s-rng-with-intention-d6d0f34e4c": [
+        0,
+        1,
+        1
+      ],
+      "x-wenaixi-dsh-prompt-history-396b4d7ce7": [
+        0,
+        0,
+        0
+      ],
+      "x-wenaixi-dsh-prompt-history-87cd943992": [
+        0,
+        1,
+        1
+      ],
+      "x-wenaixi-dsh-prompt-history-f2c2ad01c0": [
+        0,
+        0,
+        0
+      ],
+      "x-yammm-ynode-ylog-d5c5c3f62e": [
+        1,
+        1,
+        1
+      ]
+    },
+    "PC": {
+      "x-ahmtsahin-agent-context-bench-134ba49b33": [
+        0,
+        0,
+        0
+      ],
+      "x-ahmtsahin-agent-context-bench-3912f5ad87": [
+        0,
+        0,
+        0
+      ],
+      "x-ahmtsahin-agent-context-bench-b63c4acd3d": [
+        0,
+        0,
+        0
+      ],
+      "x-alannerfranklin-dsh-relay-isolation-dfccc5d2c1": [
+        0,
+        0,
+        0
+      ],
+      "x-antonioprosperi2-svg-beeladybug-universal-5f88e1d66c": [
+        0,
+        0,
+        0
+      ],
+      "x-antonioprosperi2-svg-beeladybug-universal-a89811cf4e": [
+        0,
+        0,
+        0
+      ],
+      "x-antonioprosperi2-svg-beeladybug-universal-b6e1d19aa0": [
+        0,
+        0,
+        0
+      ],
+      "x-avoidwork-filesize-js-109ae605ab": [
+        0,
+        1,
+        0
+      ],
+      "x-avoidwork-filesize-js-64b4a2611f": [
+        1,
+        0,
+        1
+      ],
+      "x-avoidwork-filesize-js-f5bd84b81b": [
+        1,
+        0,
+        0
+      ],
+      "x-avoidwork-tiny-lru-30397d7a76": [
+        0,
+        0,
+        1
+      ],
+      "x-avoidwork-tiny-lru-da90b42c31": [
+        1,
+        1,
+        1
+      ],
+      "x-azu-setup-npm-trusted-publish-6104f8bee9": [
+        0,
+        0,
+        0
+      ],
+      "x-blakeb056-six-degrees-aec5ecaebb": [
+        0,
+        0,
+        0
+      ],
+      "x-blucca-n8n-check-0d73b43caa": [
+        0,
+        0,
+        0
+      ],
+      "x-blucca-n8n-check-1c589621bf": [
+        0,
+        0,
+        0
+      ],
+      "x-blucca-n8n-check-a7fa85ded5": [
+        0,
+        0,
+        0
+      ],
+      "x-cccalana-gatewaycheck-2d961d088c": [
+        0,
+        0,
+        0
+      ],
+      "x-cheapestinference-claude-auto-retry-6d605a5d91": [
+        0,
+        0,
+        0
+      ],
+      "x-cheapestinference-claude-auto-retry-7a1ddf10b2": [
+        1,
+        0,
+        1
+      ],
+      "x-cheapestinference-claude-auto-retry-f859f12fea": [
+        0,
+        0,
+        0
+      ],
+      "x-codyrobertson-gh-issue-lease-f0f573c258": [
+        0,
+        0,
+        1
+      ],
+      "x-dgrr-studio-dice-141a1a8d6b": [
+        0,
+        0,
+        0
+      ],
+      "x-dhaupin-crashtest-5c6ce1d53f": [
+        0,
+        0,
+        0
+      ],
+      "x-dhaupin-crashtest-e70988c5b4": [
+        0,
+        0,
+        0
+      ],
+      "x-dhaupin-crashtest-eb4c5fee65": [
+        1,
+        1,
+        1
+      ],
+      "x-dirop1-pi-delay-prompt-a7948a14a4": [
+        0,
+        0,
+        0
+      ],
+      "x-drewthomas00-tcpa-quiet-hours-d929633b54": [
+        1,
+        1,
+        1
+      ],
+      "x-ducaoya-pi-hang-guard-b75099e5bc": [
+        0,
+        0,
+        0
+      ],
+      "x-evomap-gep-sdk-js-6a387bbe32": [
+        0,
+        0,
+        0
+      ],
+      "x-fugangcui-speakremix-codes-7bf8b8fb00": [
+        0,
+        0,
+        0
+      ],
+      "x-ghostpawjs-grimoire-4a1c83b504": [
+        0,
+        0,
+        1
+      ],
+      "x-ghostpawjs-grimoire-b7fc19a032": [
+        1,
+        1,
+        1
+      ],
+      "x-ghostpawjs-grimoire-c5aa4b66a3": [
+        0,
+        0,
+        0
+      ],
+      "x-groophylifefor-heap-analysis-10ddfecb6b": [
+        0,
+        0,
+        0
+      ],
+      "x-groophylifefor-heap-analysis-71cd48f8ba": [
+        0,
+        0,
+        0
+      ],
+      "x-groophylifefor-heap-analysis-bfc733de41": [
+        0,
+        0,
+        0
+      ],
+      "x-guorunjie-agentic-workflow-guard-79f4aec3b8": [
+        0,
+        0,
+        0
+      ],
+      "x-guorunjie-agentic-workflow-guard-bc30533f19": [
+        0,
+        0,
+        0
+      ],
+      "x-guorunjie-agentic-workflow-guard-c1322204ff": [
+        0,
+        0,
+        0
+      ],
+      "x-guotree-magpie-websearch-466d493835": [
+        0,
+        0,
+        0
+      ],
+      "x-guotree-magpie-websearch-a74cfdcbe9": [
+        0,
+        0,
+        0
+      ],
+      "x-guotree-magpie-websearch-c4d8db57f9": [
+        0,
+        0,
+        0
+      ],
+      "x-igormel81-dsh-chat-cost-8b37b31edf": [
+        0,
+        0,
+        0
+      ],
+      "x-insession-space-insession-sdk-29c8a3b74e": [
+        1,
+        1,
+        1
+      ],
+      "x-insession-space-insession-sdk-c721ee0c1d": [
+        1,
+        0,
+        1
+      ],
+      "x-insession-space-insession-sdk-f9057e96cd": [
+        1,
+        1,
+        1
+      ],
+      "x-johnhenry-mport-b70dabf4e7": [
+        0,
+        0,
+        0
+      ],
+      "x-johnhenry-spintax-8e582b7cde": [
+        1,
+        1,
+        1
+      ],
+      "x-kannakuron-dsh-ide-git-09c63b85e5": [
+        0,
+        0,
+        0
+      ],
+      "x-kannakuron-dsh-ide-git-317ae73aa6": [
+        0,
+        0,
+        0
+      ],
+      "x-kannakuron-dsh-ide-git-3599010391": [
+        0,
+        0,
+        0
+      ],
+      "x-l956615272-hub-dsh-token-usage-4fef2ea940": [
+        1,
+        0,
+        0
+      ],
+      "x-l956615272-hub-dsh-token-usage-76b731dfd1": [
+        0,
+        0,
+        0
+      ],
+      "x-l956615272-hub-dsh-token-usage-8c425815aa": [
+        0,
+        0,
+        1
+      ],
+      "x-legible-sh-mutex-13867857ca": [
+        0,
+        0,
+        0
+      ],
+      "x-legible-sh-mutex-3a0cb5dd56": [
+        0,
+        1,
+        0
+      ],
+      "x-lhf198-dsh-prompt-optimizer-42cfbd7f35": [
+        0,
+        0,
+        0
+      ],
+      "x-lhf198-dsh-prompt-optimizer-fe5772419b": [
+        0,
+        0,
+        0
+      ],
+      "x-lucastonidev-patrickuser-05e5089acf": [
+        1,
+        1,
+        1
+      ],
+      "x-magrinj-hermes-intl-22ec94ee24": [
+        1,
+        0,
+        0
+      ],
+      "x-magrinj-hermes-intl-e1877c8147": [
+        0,
+        1,
+        0
+      ],
+      "x-marko-js-htmljs-parser-a576b5c86e": [
+        1,
+        0,
+        1
+      ],
+      "x-metarhia-metawatch-af9528a554": [
+        0,
+        0,
+        0
+      ],
+      "x-metarhia-metawatch-e1b278f5c3": [
+        0,
+        0,
+        0
+      ],
+      "x-misterkante-cc-model-router-ced46f7612": [
+        0,
+        0,
+        0
+      ],
+      "x-mr-mihu-dsh-dbhub-live-534032da27": [
+        0,
+        0,
+        0
+      ],
+      "x-mr-mihu-dsh-dbhub-live-f9d568569b": [
+        0,
+        0,
+        0
+      ],
+      "x-mukundakatta-agentfit-510c32d490": [
+        1,
+        1,
+        0
+      ],
+      "x-nodemailer-libqp-7bbdcbeac4": [
+        1,
+        1,
+        1
+      ],
+      "x-opopeshku-cronalive-node-a6f621977e": [
+        0,
+        1,
+        1
+      ],
+      "x-otto-ottospace-mizan-f2f8fcb2c8": [
+        0,
+        1,
+        0
+      ],
+      "x-panpontomate-solana-risk-engine-e2582ea728": [
+        0,
+        0,
+        0
+      ],
+      "x-runcat-tommy-dsh-panda-calendar-667f1793e5": [
+        0,
+        0,
+        0
+      ],
+      "x-runcat-tommy-dsh-panda-calendar-ec35ab2529": [
+        0,
+        0,
+        0
+      ],
+      "x-sanchit07-dev-node-core-easy-kit-268de6812c": [
+        0,
+        0,
+        0
+      ],
+      "x-sanchit07-dev-node-core-easy-kit-39890fd99f": [
+        0,
+        0,
+        0
+      ],
+      "x-sanchit07-dev-node-core-easy-kit-70f95fc1b2": [
+        0,
+        0,
+        0
+      ],
+      "x-sandsoftwaresolutions-ss-duration-ac6449101c": [
+        0,
+        0,
+        0
+      ],
+      "x-sandsoftwaresolutions-ss-human-format-ade5993e4f": [
+        0,
+        0,
+        0
+      ],
+      "x-shelamkoff-event-bus-cc858589eb": [
+        0,
+        0,
+        0
+      ],
+      "x-short-io-envalid-unused-f77a6c7072": [
+        0,
+        0,
+        0
+      ],
+      "x-shrinivas-sn-adapter-ingestion-499701352b": [
+        0,
+        0,
+        0
+      ],
+      "x-sindresorhus-clone-regexp-0594242c88": [
+        1,
+        1,
+        1
+      ],
+      "x-spartawhy117-dsh-token-dash-ba4082dce3": [
+        0,
+        0,
+        0
+      ],
+      "x-toolbuilder-list-1914dfac5e": [
+        1,
+        1,
+        1
+      ],
+      "x-toolbuilder-list-2b73f7f42c": [
+        1,
+        1,
+        1
+      ],
+      "x-toolbuilder-list-bc22a50372": [
+        1,
+        1,
+        1
+      ],
+      "x-w8s-rng-with-intention-d6d0f34e4c": [
+        0,
+        1,
+        0
+      ],
+      "x-wenaixi-dsh-prompt-history-396b4d7ce7": [
+        0,
+        0,
+        0
+      ],
+      "x-wenaixi-dsh-prompt-history-87cd943992": [
+        1,
+        1,
+        1
+      ],
+      "x-wenaixi-dsh-prompt-history-f2c2ad01c0": [
+        0,
+        0,
+        0
+      ],
+      "x-yammm-ynode-ylog-d5c5c3f62e": [
+        1,
+        1,
+        1
+      ]
+    },
+    "PCR": {
+      "x-ahmtsahin-agent-context-bench-134ba49b33": [
+        0,
+        0,
+        0
+      ],
+      "x-ahmtsahin-agent-context-bench-3912f5ad87": [
+        0,
+        0,
+        0
+      ],
+      "x-ahmtsahin-agent-context-bench-b63c4acd3d": [
+        0,
+        0,
+        0
+      ],
+      "x-alannerfranklin-dsh-relay-isolation-dfccc5d2c1": [
+        0,
+        0,
+        0
+      ],
+      "x-antonioprosperi2-svg-beeladybug-universal-5f88e1d66c": [
+        0,
+        0,
+        0
+      ],
+      "x-antonioprosperi2-svg-beeladybug-universal-a89811cf4e": [
+        0,
+        0,
+        0
+      ],
+      "x-antonioprosperi2-svg-beeladybug-universal-b6e1d19aa0": [
+        0,
+        0,
+        0
+      ],
+      "x-avoidwork-filesize-js-109ae605ab": [
+        0,
+        0,
+        0
+      ],
+      "x-avoidwork-filesize-js-64b4a2611f": [
+        1,
+        1,
+        1
+      ],
+      "x-avoidwork-filesize-js-f5bd84b81b": [
+        0,
+        0,
+        0
+      ],
+      "x-avoidwork-tiny-lru-30397d7a76": [
+        0,
+        1,
+        1
+      ],
+      "x-avoidwork-tiny-lru-da90b42c31": [
+        1,
+        1,
+        1
+      ],
+      "x-azu-setup-npm-trusted-publish-6104f8bee9": [
+        0,
+        0,
+        0
+      ],
+      "x-blakeb056-six-degrees-aec5ecaebb": [
+        0,
+        0,
+        0
+      ],
+      "x-blucca-n8n-check-0d73b43caa": [
+        0,
+        0,
+        0
+      ],
+      "x-blucca-n8n-check-1c589621bf": [
+        0,
+        0,
+        0
+      ],
+      "x-blucca-n8n-check-a7fa85ded5": [
+        0,
+        0,
+        0
+      ],
+      "x-cccalana-gatewaycheck-2d961d088c": [
+        0,
+        0,
+        0
+      ],
+      "x-cheapestinference-claude-auto-retry-6d605a5d91": [
+        0,
+        0,
+        0
+      ],
+      "x-cheapestinference-claude-auto-retry-7a1ddf10b2": [
+        1,
+        1,
+        1
+      ],
+      "x-cheapestinference-claude-auto-retry-f859f12fea": [
+        0,
+        0,
+        0
+      ],
+      "x-codyrobertson-gh-issue-lease-f0f573c258": [
+        0,
+        1,
+        0
+      ],
+      "x-dgrr-studio-dice-141a1a8d6b": [
+        0,
+        0,
+        0
+      ],
+      "x-dhaupin-crashtest-5c6ce1d53f": [
+        0,
+        0,
+        0
+      ],
+      "x-dhaupin-crashtest-e70988c5b4": [
+        0,
+        0,
+        0
+      ],
+      "x-dhaupin-crashtest-eb4c5fee65": [
+        1,
+        1,
+        1
+      ],
+      "x-dirop1-pi-delay-prompt-a7948a14a4": [
+        0,
+        0,
+        0
+      ],
+      "x-drewthomas00-tcpa-quiet-hours-d929633b54": [
+        1,
+        1,
+        1
+      ],
+      "x-ducaoya-pi-hang-guard-b75099e5bc": [
+        0,
+        0,
+        0
+      ],
+      "x-evomap-gep-sdk-js-6a387bbe32": [
+        0,
+        0,
+        0
+      ],
+      "x-fugangcui-speakremix-codes-7bf8b8fb00": [
+        0,
+        0,
+        0
+      ],
+      "x-ghostpawjs-grimoire-4a1c83b504": [
+        1,
+        1,
+        1
+      ],
+      "x-ghostpawjs-grimoire-b7fc19a032": [
+        1,
+        1,
+        1
+      ],
+      "x-ghostpawjs-grimoire-c5aa4b66a3": [
+        0,
+        0,
+        0
+      ],
+      "x-groophylifefor-heap-analysis-10ddfecb6b": [
+        0,
+        0,
+        0
+      ],
+      "x-groophylifefor-heap-analysis-71cd48f8ba": [
+        0,
+        0,
+        0
+      ],
+      "x-groophylifefor-heap-analysis-bfc733de41": [
+        0,
+        0,
+        0
+      ],
+      "x-guorunjie-agentic-workflow-guard-79f4aec3b8": [
+        0,
+        0,
+        0
+      ],
+      "x-guorunjie-agentic-workflow-guard-bc30533f19": [
+        0,
+        0,
+        0
+      ],
+      "x-guorunjie-agentic-workflow-guard-c1322204ff": [
+        0,
+        0,
+        0
+      ],
+      "x-guotree-magpie-websearch-466d493835": [
+        0,
+        0,
+        0
+      ],
+      "x-guotree-magpie-websearch-a74cfdcbe9": [
+        0,
+        0,
+        0
+      ],
+      "x-guotree-magpie-websearch-c4d8db57f9": [
+        0,
+        0,
+        0
+      ],
+      "x-igormel81-dsh-chat-cost-8b37b31edf": [
+        0,
+        0,
+        0
+      ],
+      "x-insession-space-insession-sdk-29c8a3b74e": [
+        1,
+        1,
+        1
+      ],
+      "x-insession-space-insession-sdk-c721ee0c1d": [
+        0,
+        0,
+        0
+      ],
+      "x-insession-space-insession-sdk-f9057e96cd": [
+        0,
+        1,
+        1
+      ],
+      "x-johnhenry-mport-b70dabf4e7": [
+        0,
+        0,
+        0
+      ],
+      "x-johnhenry-spintax-8e582b7cde": [
+        1,
+        1,
+        1
+      ],
+      "x-kannakuron-dsh-ide-git-09c63b85e5": [
+        0,
+        0,
+        0
+      ],
+      "x-kannakuron-dsh-ide-git-317ae73aa6": [
+        0,
+        0,
+        0
+      ],
+      "x-kannakuron-dsh-ide-git-3599010391": [
+        0,
+        0,
+        0
+      ],
+      "x-l956615272-hub-dsh-token-usage-4fef2ea940": [
+        0,
+        0,
+        0
+      ],
+      "x-l956615272-hub-dsh-token-usage-76b731dfd1": [
+        1,
+        0,
+        0
+      ],
+      "x-l956615272-hub-dsh-token-usage-8c425815aa": [
+        0,
+        1,
+        0
+      ],
+      "x-legible-sh-mutex-13867857ca": [
+        0,
+        0,
+        0
+      ],
+      "x-legible-sh-mutex-3a0cb5dd56": [
+        0,
+        0,
+        0
+      ],
+      "x-lhf198-dsh-prompt-optimizer-42cfbd7f35": [
+        0,
+        0,
+        0
+      ],
+      "x-lhf198-dsh-prompt-optimizer-fe5772419b": [
+        1,
+        0,
+        0
+      ],
+      "x-lucastonidev-patrickuser-05e5089acf": [
+        1,
+        1,
+        1
+      ],
+      "x-magrinj-hermes-intl-22ec94ee24": [
+        0,
+        0,
+        0
+      ],
+      "x-magrinj-hermes-intl-e1877c8147": [
+        1,
+        1,
+        0
+      ],
+      "x-marko-js-htmljs-parser-a576b5c86e": [
+        0,
+        1,
+        1
+      ],
+      "x-metarhia-metawatch-af9528a554": [
+        0,
+        0,
+        0
+      ],
+      "x-metarhia-metawatch-e1b278f5c3": [
+        0,
+        0,
+        0
+      ],
+      "x-misterkante-cc-model-router-ced46f7612": [
+        0,
+        0,
+        0
+      ],
+      "x-mr-mihu-dsh-dbhub-live-534032da27": [
+        0,
+        0,
+        0
+      ],
+      "x-mr-mihu-dsh-dbhub-live-f9d568569b": [
+        0,
+        0,
+        0
+      ],
+      "x-mukundakatta-agentfit-510c32d490": [
+        1,
+        1,
+        1
+      ],
+      "x-nodemailer-libqp-7bbdcbeac4": [
+        1,
+        1,
+        1
+      ],
+      "x-opopeshku-cronalive-node-a6f621977e": [
+        1,
+        1,
+        1
+      ],
+      "x-otto-ottospace-mizan-f2f8fcb2c8": [
+        1,
+        1,
+        1
+      ],
+      "x-panpontomate-solana-risk-engine-e2582ea728": [
+        0,
+        0,
+        0
+      ],
+      "x-runcat-tommy-dsh-panda-calendar-667f1793e5": [
+        0,
+        0,
+        0
+      ],
+      "x-runcat-tommy-dsh-panda-calendar-ec35ab2529": [
+        0,
+        0,
+        0
+      ],
+      "x-sanchit07-dev-node-core-easy-kit-268de6812c": [
+        0,
+        0,
+        0
+      ],
+      "x-sanchit07-dev-node-core-easy-kit-39890fd99f": [
+        0,
+        0,
+        0
+      ],
+      "x-sanchit07-dev-node-core-easy-kit-70f95fc1b2": [
+        0,
+        0,
+        0
+      ],
+      "x-sandsoftwaresolutions-ss-duration-ac6449101c": [
+        0,
+        0,
+        0
+      ],
+      "x-sandsoftwaresolutions-ss-human-format-ade5993e4f": [
+        0,
+        0,
+        0
+      ],
+      "x-shelamkoff-event-bus-cc858589eb": [
+        0,
+        0,
+        0
+      ],
+      "x-short-io-envalid-unused-f77a6c7072": [
+        0,
+        0,
+        0
+      ],
+      "x-shrinivas-sn-adapter-ingestion-499701352b": [
+        1,
+        1,
+        1
+      ],
+      "x-sindresorhus-clone-regexp-0594242c88": [
+        1,
+        0,
+        0
+      ],
+      "x-spartawhy117-dsh-token-dash-ba4082dce3": [
+        0,
+        0,
+        0
+      ],
+      "x-toolbuilder-list-1914dfac5e": [
+        1,
+        1,
+        1
+      ],
+      "x-toolbuilder-list-2b73f7f42c": [
+        0,
+        0,
+        0
+      ],
+      "x-toolbuilder-list-bc22a50372": [
+        1,
+        1,
+        1
+      ],
+      "x-w8s-rng-with-intention-d6d0f34e4c": [
+        1,
+        1,
+        1
+      ],
+      "x-wenaixi-dsh-prompt-history-396b4d7ce7": [
+        0,
+        0,
+        0
+      ],
+      "x-wenaixi-dsh-prompt-history-87cd943992": [
+        1,
+        1,
+        1
+      ],
+      "x-wenaixi-dsh-prompt-history-f2c2ad01c0": [
+        0,
+        0,
+        0
+      ],
+      "x-yammm-ynode-ylog-d5c5c3f62e": [
+        1,
+        1,
+        1
+      ]
+    }
+  }
+}
