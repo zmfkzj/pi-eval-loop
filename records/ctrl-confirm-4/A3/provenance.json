@@ -1,0 +1,1245 @@
+{
+ "schema": "ctrl-confirm-4/A3-provenance@1",
+ "at": "2026-11-08T05:03:13.296056Z",
+ "lockedAt": "2026-11-08T04:33:59.754Z",
+ "lockEnvDigest": "d310908274d07f18ccb32568570a6e70bff353ddd0a705050b2202ed2a5d4d16",
+ "runtimeCtimes": {
+  "piModules(bun global)": {
+   "maxCtime": "2026-11-08T04:07:22.611472Z",
+   "path": "~/.bun/install/global/node_modules/@anthropic-ai/sdk/bin/cli"
+  },
+  "node(nvm v24.21.0)": {
+   "maxCtime": "2026-10-25T15:03:09.321138Z",
+   "path": "~/.nvm/versions/node/v24.21.0/lib/node_modules/@ast-grep/cli/sg"
+  },
+  "provider": {
+   "maxCtime": "2026-11-08T04:06:39.281578Z",
+   "path": "~/Code/oh-my-pi-extensions/cliproxyapi/node_modules/@router-for-me/pi-cliproxyapi-provider/extensions"
+  },
+  "orche/node_modules (excl. .vite caches)": {
+   "maxCtime": "2026-11-08T04:06:37.801496Z",
+   "path": "~/Code/oh-my-pi-extensions/orche/node_modules/.package-lock.json"
+  },
+  "harness OC": {
+   "maxCtime": "2026-11-08T03:17:11.862756Z",
+   "path": "~/Code/oh-my-pi-extensions/pi-eval-loop/state/ctrl-confirm-4/harness/OC/.built"
+  },
+  "harness OCR": {
+   "maxCtime": "2026-11-08T03:17:11.917755Z",
+   "path": "~/Code/oh-my-pi-extensions/pi-eval-loop/state/ctrl-confirm-4/harness/OCR/.built"
+  },
+  "orche/experiments/witness-replay/proxy.mjs": {
+   "maxCtime": "2026-10-25T15:07:18.873815Z"
+  },
+  "orche/experiments/witness-replay/bridge.mjs": {
+   "maxCtime": "2026-10-25T15:07:18.873815Z"
+  },
+  "orche/experiments/witness-replay/sandbox.ts": {
+   "maxCtime": "2026-10-25T15:03:10.336136Z"
+  },
+  "orche/experiments/ultra-ab/protocol.ts": {
+   "maxCtime": "2026-10-09T22:15:24.111675Z"
+  },
+  "/usr/bin/bwrap": {
+   "maxCtime": "2026-10-04T14:13:17.996931Z"
+  }
+ },
+ "summary": {
+  "dispatches": 49,
+  "results": 41,
+  "orphans": 8,
+  "earliestStart": "2026-11-08T04:34:00.102Z",
+  "latestStart": "2026-11-08T04:47:06.212Z",
+  "lastCodeRuntimeChange": "2026-11-08T04:07:22.611472Z",
+  "allResultsStartedAfterLastCodeChange": true,
+  "routeOnWire": {
+   "paths": [
+    "/backend-api/codex/responses"
+   ],
+   "models": [
+    "gpt-6-luna"
+   ],
+   "efforts": [
+    "medium"
+   ],
+   "respModels": [
+    "gpt-6-luna"
+   ]
+  },
+  "unitsWithoutWire": [
+   "PCR"
+  ],
+  "catalogRefreshedBeforeFirstPostEverywhere": true,
+  "recordEnvDigests": [
+   "d310908274d0"
+  ],
+  "byArm": {
+   "OC": 13,
+   "OCR": 13,
+   "PCR": 15
+  }
+ },
+ "units": [
+  {
+   "arm": "PCR",
+   "attempt": 1,
+   "startedAt": "2026-11-08T04:34:00.102Z",
+   "result": "completed",
+   "afterLastCodeChange": true,
+   "wireJournals": 1,
+   "sessions": 1,
+   "posts": 9,
+   "paths": [
+    "/backend-api/codex/responses"
+   ],
+   "models": [
+    "gpt-6-luna"
+   ],
+   "efforts": [
+    "medium"
+   ],
+   "respModels": [
+    "gpt-6-luna"
+   ],
+   "catalogRefreshedBeforeFirstPost": true,
+   "recordEnvDigest": "d310908274d0"
+  },
+  {
+   "arm": "OC",
+   "attempt": 1,
+   "startedAt": "2026-11-08T04:34:00.144Z",
+   "result": "completed",
+   "afterLastCodeChange": true,
+   "wireJournals": 1,
+   "sessions": 1,
+   "posts": 51,
+   "paths": [
+    "/backend-api/codex/responses"
+   ],
+   "models": [
+    "gpt-6-luna"
+   ],
+   "efforts": [
+    "medium"
+   ],
+   "respModels": [
+    "gpt-6-luna"
+   ],
+   "catalogRefreshedBeforeFirstPost": true,
+   "recordEnvDigest": "d310908274d0"
+  },
+  {
+   "arm": "OCR",
+   "attempt": 1,
+   "startedAt": "2026-11-08T04:34:00.184Z",
+   "result": "completed",
+   "afterLastCodeChange": true,
+   "wireJournals": 1,
+   "sessions": 1,
+   "posts": 43,
+   "paths": [
+    "/backend-api/codex/responses"
+   ],
+   "models": [
+    "gpt-6-luna"
+   ],
+   "efforts": [
+    "medium"
+   ],
+   "respModels": [
+    "gpt-6-luna"
+   ],
+   "catalogRefreshedBeforeFirstPost": true,
+   "recordEnvDigest": "d310908274d0"
+  },
+  {
+   "arm": "OC",
+   "attempt": 1,
+   "startedAt": "2026-11-08T04:34:00.221Z",
+   "result": "completed",
+   "afterLastCodeChange": true,
+   "wireJournals": 1,
+   "sessions": 1,
+   "posts": 24,
+   "paths": [
+    "/backend-api/codex/responses"
+   ],
+   "models": [
+    "gpt-6-luna"
+   ],
+   "efforts": [
+    "medium"
+   ],
+   "respModels": [
+    "gpt-6-luna"
+   ],
+   "catalogRefreshedBeforeFirstPost": true,
+   "recordEnvDigest": "d310908274d0"
+  },
+  {
+   "arm": "PCR",
+   "attempt": 1,
+   "startedAt": "2026-11-08T04:34:00.258Z",
+   "result": "completed",
+   "afterLastCodeChange": true,
+   "wireJournals": 1,
+   "sessions": 1,
+   "posts": 8,
+   "paths": [
+    "/backend-api/codex/responses"
+   ],
+   "models": [
+    "gpt-6-luna"
+   ],
+   "efforts": [
+    "medium"
+   ],
+   "respModels": [
+    "gpt-6-luna"
+   ],
+   "catalogRefreshedBeforeFirstPost": true,
+   "recordEnvDigest": "d310908274d0"
+  },
+  {
+   "arm": "OCR",
+   "attempt": 1,
+   "startedAt": "2026-11-08T04:34:00.291Z",
+   "result": "completed",
+   "afterLastCodeChange": true,
+   "wireJournals": 1,
+   "sessions": 1,
+   "posts": 16,
+   "paths": [
+    "/backend-api/codex/responses"
+   ],
+   "models": [
+    "gpt-6-luna"
+   ],
+   "efforts": [
+    "medium"
+   ],
+   "respModels": [
+    "gpt-6-luna"
+   ],
+   "catalogRefreshedBeforeFirstPost": true,
+   "recordEnvDigest": "d310908274d0"
+  },
+  {
+   "arm": "OC",
+   "attempt": 1,
+   "startedAt": "2026-11-08T04:34:00.326Z",
+   "result": "completed",
+   "afterLastCodeChange": true,
+   "wireJournals": 1,
+   "sessions": 1,
+   "posts": 27,
+   "paths": [
+    "/backend-api/codex/responses"
+   ],
+   "models": [
+    "gpt-6-luna"
+   ],
+   "efforts": [
+    "medium"
+   ],
+   "respModels": [
+    "gpt-6-luna"
+   ],
+   "catalogRefreshedBeforeFirstPost": true,
+   "recordEnvDigest": "d310908274d0"
+  },
+  {
+   "arm": "PCR",
+   "attempt": 1,
+   "startedAt": "2026-11-08T04:34:00.369Z",
+   "result": "completed",
+   "afterLastCodeChange": true,
+   "wireJournals": 1,
+   "sessions": 1,
+   "posts": 15,
+   "paths": [
+    "/backend-api/codex/responses"
+   ],
+   "models": [
+    "gpt-6-luna"
+   ],
+   "efforts": [
+    "medium"
+   ],
+   "respModels": [
+    "gpt-6-luna"
+   ],
+   "catalogRefreshedBeforeFirstPost": true,
+   "recordEnvDigest": "d310908274d0"
+  },
+  {
+   "arm": "OCR",
+   "attempt": 1,
+   "startedAt": "2026-11-08T04:34:31.244Z",
+   "result": "completed",
+   "afterLastCodeChange": true,
+   "wireJournals": 1,
+   "sessions": 1,
+   "posts": 37,
+   "paths": [
+    "/backend-api/codex/responses"
+   ],
+   "models": [
+    "gpt-6-luna"
+   ],
+   "efforts": [
+    "medium"
+   ],
+   "respModels": [
+    "gpt-6-luna"
+   ],
+   "catalogRefreshedBeforeFirstPost": true,
+   "recordEnvDigest": "d310908274d0"
+  },
+  {
+   "arm": "OCR",
+   "attempt": 1,
+   "startedAt": "2026-11-08T04:34:35.635Z",
+   "result": "completed",
+   "afterLastCodeChange": true,
+   "wireJournals": 1,
+   "sessions": 1,
+   "posts": 19,
+   "paths": [
+    "/backend-api/codex/responses"
+   ],
+   "models": [
+    "gpt-6-luna"
+   ],
+   "efforts": [
+    "medium"
+   ],
+   "respModels": [
+    "gpt-6-luna"
+   ],
+   "catalogRefreshedBeforeFirstPost": true,
+   "recordEnvDigest": "d310908274d0"
+  },
+  {
+   "arm": "PCR",
+   "attempt": 1,
+   "startedAt": "2026-11-08T04:35:20.598Z",
+   "result": "completed",
+   "afterLastCodeChange": true,
+   "wireJournals": 1,
+   "sessions": 1,
+   "posts": 11,
+   "paths": [
+    "/backend-api/codex/responses"
+   ],
+   "models": [
+    "gpt-6-luna"
+   ],
+   "efforts": [
+    "medium"
+   ],
+   "respModels": [
+    "gpt-6-luna"
+   ],
+   "catalogRefreshedBeforeFirstPost": true,
+   "recordEnvDigest": "d310908274d0"
+  },
+  {
+   "arm": "OC",
+   "attempt": 1,
+   "startedAt": "2026-11-08T04:35:51.293Z",
+   "result": "completed",
+   "afterLastCodeChange": true,
+   "wireJournals": 1,
+   "sessions": 1,
+   "posts": 24,
+   "paths": [
+    "/backend-api/codex/responses"
+   ],
+   "models": [
+    "gpt-6-luna"
+   ],
+   "efforts": [
+    "medium"
+   ],
+   "respModels": [
+    "gpt-6-luna"
+   ],
+   "catalogRefreshedBeforeFirstPost": true,
+   "recordEnvDigest": "d310908274d0"
+  },
+  {
+   "arm": "PCR",
+   "attempt": 1,
+   "startedAt": "2026-11-08T04:36:00.409Z",
+   "result": "completed",
+   "afterLastCodeChange": true,
+   "wireJournals": 1,
+   "sessions": 1,
+   "posts": 8,
+   "paths": [
+    "/backend-api/codex/responses"
+   ],
+   "models": [
+    "gpt-6-luna"
+   ],
+   "efforts": [
+    "medium"
+   ],
+   "respModels": [
+    "gpt-6-luna"
+   ],
+   "catalogRefreshedBeforeFirstPost": true,
+   "recordEnvDigest": "d310908274d0"
+  },
+  {
+   "arm": "OCR",
+   "attempt": 1,
+   "startedAt": "2026-11-08T04:36:10.390Z",
+   "result": "completed",
+   "afterLastCodeChange": true,
+   "wireJournals": 1,
+   "sessions": 1,
+   "posts": 15,
+   "paths": [
+    "/backend-api/codex/responses"
+   ],
+   "models": [
+    "gpt-6-luna"
+   ],
+   "efforts": [
+    "medium"
+   ],
+   "respModels": [
+    "gpt-6-luna"
+   ],
+   "catalogRefreshedBeforeFirstPost": true,
+   "recordEnvDigest": "d310908274d0"
+  },
+  {
+   "arm": "OC",
+   "attempt": 1,
+   "startedAt": "2026-11-08T04:36:12.001Z",
+   "result": "completed",
+   "afterLastCodeChange": true,
+   "wireJournals": 1,
+   "sessions": 1,
+   "posts": 17,
+   "paths": [
+    "/backend-api/codex/responses"
+   ],
+   "models": [
+    "gpt-6-luna"
+   ],
+   "efforts": [
+    "medium"
+   ],
+   "respModels": [
+    "gpt-6-luna"
+   ],
+   "catalogRefreshedBeforeFirstPost": true,
+   "recordEnvDigest": "d310908274d0"
+  },
+  {
+   "arm": "PCR",
+   "attempt": 1,
+   "startedAt": "2026-11-08T04:36:35.324Z",
+   "result": "completed",
+   "afterLastCodeChange": true,
+   "wireJournals": 1,
+   "sessions": 1,
+   "posts": 7,
+   "paths": [
+    "/backend-api/codex/responses"
+   ],
+   "models": [
+    "gpt-6-luna"
+   ],
+   "efforts": [
+    "medium"
+   ],
+   "respModels": [
+    "gpt-6-luna"
+   ],
+   "catalogRefreshedBeforeFirstPost": true,
+   "recordEnvDigest": "d310908274d0"
+  },
+  {
+   "arm": "OC",
+   "attempt": 1,
+   "startedAt": "2026-11-08T04:37:18.771Z",
+   "result": "completed",
+   "afterLastCodeChange": true,
+   "wireJournals": 1,
+   "sessions": 1,
+   "posts": 21,
+   "paths": [
+    "/backend-api/codex/responses"
+   ],
+   "models": [
+    "gpt-6-luna"
+   ],
+   "efforts": [
+    "medium"
+   ],
+   "respModels": [
+    "gpt-6-luna"
+   ],
+   "catalogRefreshedBeforeFirstPost": true,
+   "recordEnvDigest": "d310908274d0"
+  },
+  {
+   "arm": "OCR",
+   "attempt": 1,
+   "startedAt": "2026-11-08T04:37:20.950Z",
+   "result": "completed",
+   "afterLastCodeChange": true,
+   "wireJournals": 1,
+   "sessions": 1,
+   "posts": 18,
+   "paths": [
+    "/backend-api/codex/responses"
+   ],
+   "models": [
+    "gpt-6-luna"
+   ],
+   "efforts": [
+    "medium"
+   ],
+   "respModels": [
+    "gpt-6-luna"
+   ],
+   "catalogRefreshedBeforeFirstPost": true,
+   "recordEnvDigest": "d310908274d0"
+  },
+  {
+   "arm": "PCR",
+   "attempt": 1,
+   "startedAt": "2026-11-08T04:37:22.462Z",
+   "result": "completed",
+   "afterLastCodeChange": true,
+   "wireJournals": 1,
+   "sessions": 1,
+   "posts": 13,
+   "paths": [
+    "/backend-api/codex/responses"
+   ],
+   "models": [
+    "gpt-6-luna"
+   ],
+   "efforts": [
+    "medium"
+   ],
+   "respModels": [
+    "gpt-6-luna"
+   ],
+   "catalogRefreshedBeforeFirstPost": true,
+   "recordEnvDigest": "d310908274d0"
+  },
+  {
+   "arm": "OCR",
+   "attempt": 1,
+   "startedAt": "2026-11-08T04:37:55.032Z",
+   "result": "model_error",
+   "afterLastCodeChange": true,
+   "wireJournals": 1,
+   "sessions": 1,
+   "posts": 20,
+   "paths": [
+    "/backend-api/codex/responses"
+   ],
+   "models": [
+    "gpt-6-luna"
+   ],
+   "efforts": [
+    "medium"
+   ],
+   "respModels": [
+    "gpt-6-luna"
+   ],
+   "catalogRefreshedBeforeFirstPost": true,
+   "recordEnvDigest": "d310908274d0"
+  },
+  {
+   "arm": "OC",
+   "attempt": 1,
+   "startedAt": "2026-11-08T04:37:57.760Z",
+   "result": "completed",
+   "afterLastCodeChange": true,
+   "wireJournals": 1,
+   "sessions": 1,
+   "posts": 68,
+   "paths": [
+    "/backend-api/codex/responses"
+   ],
+   "models": [
+    "gpt-6-luna"
+   ],
+   "efforts": [
+    "medium"
+   ],
+   "respModels": [
+    "gpt-6-luna"
+   ],
+   "catalogRefreshedBeforeFirstPost": true,
+   "recordEnvDigest": "d310908274d0"
+  },
+  {
+   "arm": "OCR",
+   "attempt": 1,
+   "startedAt": "2026-11-08T04:38:14.352Z",
+   "result": "completed",
+   "afterLastCodeChange": true,
+   "wireJournals": 1,
+   "sessions": 1,
+   "posts": 29,
+   "paths": [
+    "/backend-api/codex/responses"
+   ],
+   "models": [
+    "gpt-6-luna"
+   ],
+   "efforts": [
+    "medium"
+   ],
+   "respModels": [
+    "gpt-6-luna"
+   ],
+   "catalogRefreshedBeforeFirstPost": true,
+   "recordEnvDigest": "d310908274d0"
+  },
+  {
+   "arm": "PCR",
+   "attempt": 1,
+   "startedAt": "2026-11-08T04:38:24.571Z",
+   "result": "completed",
+   "afterLastCodeChange": true,
+   "wireJournals": 1,
+   "sessions": 1,
+   "posts": 12,
+   "paths": [
+    "/backend-api/codex/responses"
+   ],
+   "models": [
+    "gpt-6-luna"
+   ],
+   "efforts": [
+    "medium"
+   ],
+   "respModels": [
+    "gpt-6-luna"
+   ],
+   "catalogRefreshedBeforeFirstPost": true,
+   "recordEnvDigest": "d310908274d0"
+  },
+  {
+   "arm": "OC",
+   "attempt": 1,
+   "startedAt": "2026-11-08T04:38:38.922Z",
+   "result": "completed",
+   "afterLastCodeChange": true,
+   "wireJournals": 1,
+   "sessions": 1,
+   "posts": 16,
+   "paths": [
+    "/backend-api/codex/responses"
+   ],
+   "models": [
+    "gpt-6-luna"
+   ],
+   "efforts": [
+    "medium"
+   ],
+   "respModels": [
+    "gpt-6-luna"
+   ],
+   "catalogRefreshedBeforeFirstPost": true,
+   "recordEnvDigest": "d310908274d0"
+  },
+  {
+   "arm": "OC",
+   "attempt": 1,
+   "startedAt": "2026-11-08T04:39:01.031Z",
+   "result": "completed",
+   "afterLastCodeChange": true,
+   "wireJournals": 1,
+   "sessions": 1,
+   "posts": 29,
+   "paths": [
+    "/backend-api/codex/responses"
+   ],
+   "models": [
+    "gpt-6-luna"
+   ],
+   "efforts": [
+    "medium"
+   ],
+   "respModels": [
+    "gpt-6-luna"
+   ],
+   "catalogRefreshedBeforeFirstPost": true,
+   "recordEnvDigest": "d310908274d0"
+  },
+  {
+   "arm": "OCR",
+   "attempt": 1,
+   "startedAt": "2026-11-08T04:39:04.584Z",
+   "result": "completed",
+   "afterLastCodeChange": true,
+   "wireJournals": 1,
+   "sessions": 1,
+   "posts": 26,
+   "paths": [
+    "/backend-api/codex/responses"
+   ],
+   "models": [
+    "gpt-6-luna"
+   ],
+   "efforts": [
+    "medium"
+   ],
+   "respModels": [
+    "gpt-6-luna"
+   ],
+   "catalogRefreshedBeforeFirstPost": true,
+   "recordEnvDigest": "d310908274d0"
+  },
+  {
+   "arm": "PCR",
+   "attempt": 1,
+   "startedAt": "2026-11-08T04:39:30.782Z",
+   "result": "completed",
+   "afterLastCodeChange": true,
+   "wireJournals": 1,
+   "sessions": 1,
+   "posts": 9,
+   "paths": [
+    "/backend-api/codex/responses"
+   ],
+   "models": [
+    "gpt-6-luna"
+   ],
+   "efforts": [
+    "medium"
+   ],
+   "respModels": [
+    "gpt-6-luna"
+   ],
+   "catalogRefreshedBeforeFirstPost": true,
+   "recordEnvDigest": "d310908274d0"
+  },
+  {
+   "arm": "PCR",
+   "attempt": 1,
+   "startedAt": "2026-11-08T04:39:34.871Z",
+   "result": "completed",
+   "afterLastCodeChange": true,
+   "wireJournals": 1,
+   "sessions": 1,
+   "posts": 11,
+   "paths": [
+    "/backend-api/codex/responses"
+   ],
+   "models": [
+    "gpt-6-luna"
+   ],
+   "efforts": [
+    "medium"
+   ],
+   "respModels": [
+    "gpt-6-luna"
+   ],
+   "catalogRefreshedBeforeFirstPost": true,
+   "recordEnvDigest": "d310908274d0"
+  },
+  {
+   "arm": "OCR",
+   "attempt": 1,
+   "startedAt": "2026-11-08T04:39:43.128Z",
+   "result": "completed",
+   "afterLastCodeChange": true,
+   "wireJournals": 1,
+   "sessions": 1,
+   "posts": 89,
+   "paths": [
+    "/backend-api/codex/responses"
+   ],
+   "models": [
+    "gpt-6-luna"
+   ],
+   "efforts": [
+    "medium"
+   ],
+   "respModels": [
+    "gpt-6-luna"
+   ],
+   "catalogRefreshedBeforeFirstPost": true,
+   "recordEnvDigest": "d310908274d0"
+  },
+  {
+   "arm": "OC",
+   "attempt": 1,
+   "startedAt": "2026-11-08T04:40:16.411Z",
+   "result": "completed",
+   "afterLastCodeChange": true,
+   "wireJournals": 1,
+   "sessions": 1,
+   "posts": 22,
+   "paths": [
+    "/backend-api/codex/responses"
+   ],
+   "models": [
+    "gpt-6-luna"
+   ],
+   "efforts": [
+    "medium"
+   ],
+   "respModels": [
+    "gpt-6-luna"
+   ],
+   "catalogRefreshedBeforeFirstPost": true,
+   "recordEnvDigest": "d310908274d0"
+  },
+  {
+   "arm": "OC",
+   "attempt": 1,
+   "startedAt": "2026-11-08T04:40:23.708Z",
+   "result": "completed",
+   "afterLastCodeChange": true,
+   "wireJournals": 1,
+   "sessions": 1,
+   "posts": 67,
+   "paths": [
+    "/backend-api/codex/responses"
+   ],
+   "models": [
+    "gpt-6-luna"
+   ],
+   "efforts": [
+    "medium"
+   ],
+   "respModels": [
+    "gpt-6-luna"
+   ],
+   "catalogRefreshedBeforeFirstPost": true,
+   "recordEnvDigest": "d310908274d0"
+  },
+  {
+   "arm": "PCR",
+   "attempt": 1,
+   "startedAt": "2026-11-08T04:40:37.272Z",
+   "result": "completed",
+   "afterLastCodeChange": true,
+   "wireJournals": 1,
+   "sessions": 1,
+   "posts": 13,
+   "paths": [
+    "/backend-api/codex/responses"
+   ],
+   "models": [
+    "gpt-6-luna"
+   ],
+   "efforts": [
+    "medium"
+   ],
+   "respModels": [
+    "gpt-6-luna"
+   ],
+   "catalogRefreshedBeforeFirstPost": true,
+   "recordEnvDigest": "d310908274d0"
+  },
+  {
+   "arm": "OCR",
+   "attempt": 1,
+   "startedAt": null,
+   "result": "ORPHAN (interrupted 04:48:21Z)",
+   "afterLastCodeChange": null,
+   "wireJournals": 1,
+   "sessions": 1,
+   "posts": 90,
+   "paths": [
+    "/backend-api/codex/responses"
+   ],
+   "models": [
+    "gpt-6-luna"
+   ],
+   "efforts": [
+    "medium"
+   ],
+   "respModels": [
+    "gpt-6-luna"
+   ],
+   "catalogRefreshedBeforeFirstPost": true,
+   "recordEnvDigest": null
+  },
+  {
+   "arm": "OCR",
+   "attempt": 1,
+   "startedAt": "2026-11-08T04:41:40.833Z",
+   "result": "completed",
+   "afterLastCodeChange": true,
+   "wireJournals": 1,
+   "sessions": 1,
+   "posts": 38,
+   "paths": [
+    "/backend-api/codex/responses"
+   ],
+   "models": [
+    "gpt-6-luna"
+   ],
+   "efforts": [
+    "medium"
+   ],
+   "respModels": [
+    "gpt-6-luna"
+   ],
+   "catalogRefreshedBeforeFirstPost": true,
+   "recordEnvDigest": "d310908274d0"
+  },
+  {
+   "arm": "PCR",
+   "attempt": 1,
+   "startedAt": "2026-11-08T04:42:18.390Z",
+   "result": "completed",
+   "afterLastCodeChange": true,
+   "wireJournals": 1,
+   "sessions": 1,
+   "posts": 13,
+   "paths": [
+    "/backend-api/codex/responses"
+   ],
+   "models": [
+    "gpt-6-luna"
+   ],
+   "efforts": [
+    "medium"
+   ],
+   "respModels": [
+    "gpt-6-luna"
+   ],
+   "catalogRefreshedBeforeFirstPost": true,
+   "recordEnvDigest": "d310908274d0"
+  },
+  {
+   "arm": "OC",
+   "attempt": 1,
+   "startedAt": "2026-11-08T04:43:10.066Z",
+   "result": "completed",
+   "afterLastCodeChange": true,
+   "wireJournals": 1,
+   "sessions": 1,
+   "posts": 26,
+   "paths": [
+    "/backend-api/codex/responses"
+   ],
+   "models": [
+    "gpt-6-luna"
+   ],
+   "efforts": [
+    "medium"
+   ],
+   "respModels": [
+    "gpt-6-luna"
+   ],
+   "catalogRefreshedBeforeFirstPost": true,
+   "recordEnvDigest": "d310908274d0"
+  },
+  {
+   "arm": "OCR",
+   "attempt": 1,
+   "startedAt": "2026-11-08T04:43:33.382Z",
+   "result": "completed",
+   "afterLastCodeChange": true,
+   "wireJournals": 1,
+   "sessions": 1,
+   "posts": 51,
+   "paths": [
+    "/backend-api/codex/responses"
+   ],
+   "models": [
+    "gpt-6-luna"
+   ],
+   "efforts": [
+    "medium"
+   ],
+   "respModels": [
+    "gpt-6-luna"
+   ],
+   "catalogRefreshedBeforeFirstPost": true,
+   "recordEnvDigest": "d310908274d0"
+  },
+  {
+   "arm": "OC",
+   "attempt": 1,
+   "startedAt": null,
+   "result": "ORPHAN (interrupted 04:48:21Z)",
+   "afterLastCodeChange": null,
+   "wireJournals": 1,
+   "sessions": 1,
+   "posts": 67,
+   "paths": [
+    "/backend-api/codex/responses"
+   ],
+   "models": [
+    "gpt-6-luna"
+   ],
+   "efforts": [
+    "medium"
+   ],
+   "respModels": [
+    "gpt-6-luna"
+   ],
+   "catalogRefreshedBeforeFirstPost": true,
+   "recordEnvDigest": null
+  },
+  {
+   "arm": "PCR",
+   "attempt": 1,
+   "startedAt": "2026-11-08T04:45:08.959Z",
+   "result": "completed",
+   "afterLastCodeChange": true,
+   "wireJournals": 1,
+   "sessions": 1,
+   "posts": 16,
+   "paths": [
+    "/backend-api/codex/responses"
+   ],
+   "models": [
+    "gpt-6-luna"
+   ],
+   "efforts": [
+    "medium"
+   ],
+   "respModels": [
+    "gpt-6-luna"
+   ],
+   "catalogRefreshedBeforeFirstPost": true,
+   "recordEnvDigest": "d310908274d0"
+  },
+  {
+   "arm": "OCR",
+   "attempt": 1,
+   "startedAt": "2026-11-08T04:45:35.629Z",
+   "result": "completed",
+   "afterLastCodeChange": true,
+   "wireJournals": 1,
+   "sessions": 1,
+   "posts": 26,
+   "paths": [
+    "/backend-api/codex/responses"
+   ],
+   "models": [
+    "gpt-6-luna"
+   ],
+   "efforts": [
+    "medium"
+   ],
+   "respModels": [
+    "gpt-6-luna"
+   ],
+   "catalogRefreshedBeforeFirstPost": true,
+   "recordEnvDigest": "d310908274d0"
+  },
+  {
+   "arm": "OC",
+   "attempt": 1,
+   "startedAt": "2026-11-08T04:45:47.429Z",
+   "result": "completed",
+   "afterLastCodeChange": true,
+   "wireJournals": 1,
+   "sessions": 1,
+   "posts": 18,
+   "paths": [
+    "/backend-api/codex/responses"
+   ],
+   "models": [
+    "gpt-6-luna"
+   ],
+   "efforts": [
+    "medium"
+   ],
+   "respModels": [
+    "gpt-6-luna"
+   ],
+   "catalogRefreshedBeforeFirstPost": true,
+   "recordEnvDigest": "d310908274d0"
+  },
+  {
+   "arm": "PCR",
+   "attempt": 1,
+   "startedAt": "2026-11-08T04:46:22.019Z",
+   "result": "completed",
+   "afterLastCodeChange": true,
+   "wireJournals": 1,
+   "sessions": 1,
+   "posts": 10,
+   "paths": [
+    "/backend-api/codex/responses"
+   ],
+   "models": [
+    "gpt-6-luna"
+   ],
+   "efforts": [
+    "medium"
+   ],
+   "respModels": [
+    "gpt-6-luna"
+   ],
+   "catalogRefreshedBeforeFirstPost": true,
+   "recordEnvDigest": "d310908274d0"
+  },
+  {
+   "arm": "OC",
+   "attempt": 1,
+   "startedAt": null,
+   "result": "ORPHAN (interrupted 04:48:21Z)",
+   "afterLastCodeChange": null,
+   "wireJournals": 1,
+   "sessions": 1,
+   "posts": 14,
+   "paths": [
+    "/backend-api/codex/responses"
+   ],
+   "models": [
+    "gpt-6-luna"
+   ],
+   "efforts": [
+    "medium"
+   ],
+   "respModels": [
+    "gpt-6-luna"
+   ],
+   "catalogRefreshedBeforeFirstPost": true,
+   "recordEnvDigest": null
+  },
+  {
+   "arm": "PCR",
+   "attempt": 1,
+   "startedAt": "2026-11-08T04:47:06.212Z",
+   "result": "completed",
+   "afterLastCodeChange": true,
+   "wireJournals": 1,
+   "sessions": 1,
+   "posts": 9,
+   "paths": [
+    "/backend-api/codex/responses"
+   ],
+   "models": [
+    "gpt-6-luna"
+   ],
+   "efforts": [
+    "medium"
+   ],
+   "respModels": [
+    "gpt-6-luna"
+   ],
+   "catalogRefreshedBeforeFirstPost": true,
+   "recordEnvDigest": "d310908274d0"
+  },
+  {
+   "arm": "OCR",
+   "attempt": 1,
+   "startedAt": null,
+   "result": "ORPHAN (interrupted 04:48:21Z)",
+   "afterLastCodeChange": null,
+   "wireJournals": 1,
+   "sessions": 1,
+   "posts": 12,
+   "paths": [
+    "/backend-api/codex/responses"
+   ],
+   "models": [
+    "gpt-6-luna"
+   ],
+   "efforts": [
+    "medium"
+   ],
+   "respModels": [
+    "gpt-6-luna"
+   ],
+   "catalogRefreshedBeforeFirstPost": true,
+   "recordEnvDigest": null
+  },
+  {
+   "arm": "OC",
+   "attempt": 1,
+   "startedAt": null,
+   "result": "ORPHAN (interrupted 04:48:21Z)",
+   "afterLastCodeChange": null,
+   "wireJournals": 1,
+   "sessions": 1,
+   "posts": 7,
+   "paths": [
+    "/backend-api/codex/responses"
+   ],
+   "models": [
+    "gpt-6-luna"
+   ],
+   "efforts": [
+    "medium"
+   ],
+   "respModels": [
+    "gpt-6-luna"
+   ],
+   "catalogRefreshedBeforeFirstPost": true,
+   "recordEnvDigest": null
+  },
+  {
+   "arm": "PCR",
+   "attempt": 1,
+   "startedAt": null,
+   "result": "ORPHAN (interrupted 04:48:21Z)",
+   "afterLastCodeChange": null,
+   "wireJournals": 1,
+   "sessions": 1,
+   "posts": 8,
+   "paths": [
+    "/backend-api/codex/responses"
+   ],
+   "models": [
+    "gpt-6-luna"
+   ],
+   "efforts": [
+    "medium"
+   ],
+   "respModels": [
+    "gpt-6-luna"
+   ],
+   "catalogRefreshedBeforeFirstPost": true,
+   "recordEnvDigest": null
+  },
+  {
+   "arm": "OCR",
+   "attempt": 1,
+   "startedAt": null,
+   "result": "ORPHAN (interrupted 04:48:21Z)",
+   "afterLastCodeChange": null,
+   "wireJournals": 1,
+   "sessions": 1,
+   "posts": 0,
+   "paths": [],
+   "models": [],
+   "efforts": [],
+   "respModels": [],
+   "catalogRefreshedBeforeFirstPost": true,
+   "recordEnvDigest": null
+  },
+  {
+   "arm": "PCR",
+   "attempt": 1,
+   "startedAt": null,
+   "result": "ORPHAN (interrupted 04:48:21Z)",
+   "afterLastCodeChange": null,
+   "wireJournals": 0,
+   "sessions": 0,
+   "posts": 0,
+   "paths": [],
+   "models": [],
+   "efforts": [],
+   "respModels": [],
+   "catalogRefreshedBeforeFirstPost": true,
+   "recordEnvDigest": null
+  }
+ ],
+ "note": "record environment_digest is copied from the lock by the runner (not measured per unit); per-unit provenance here = start time vs last change (ctime) of every runtime component + the attempt's own wire journal (route, catalog refresh). ctime cannot be set by user-space tools."
+}

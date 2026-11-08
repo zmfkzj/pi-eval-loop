@@ -4,7 +4,7 @@
 // CI/decision agreement check; strict and functional as sensitivity; provider-interrupted attempts scored as failures as a
 // sensitivity; resources from the resource ledger. Missing units are failures (complete design required for CONFIRMED).
 //   node pi-eval-loop/experiments/ctrl-confirm-4/analyze.mjs --state DIR
-import { readFileSync, writeFileSync } from "node:fs";
+import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { parseArgs } from "node:util";
 import { Ledger, digestOf } from "../../src/util.mjs";
@@ -60,8 +60,13 @@ export function auditState(stateDir, prereg, { datasetsRoot, holdoutLedger }) {
     const recs = holdoutLedger(resolve(datasetsRoot, x.path)).records();
     return { path: x.path, uses: recs.length, byThisState: recs.filter(u => u.stateDir === resolve(stateDir) && u.preregDigest === digestOf(prereg)).length };
   });
-  const ok = chain.length === 0 && open.size === 0 && withinCeilings && uses.every(u => u.uses === 1 && u.byThisState === 1);
-  return { ok, resourceChain: chain, openReservations: open.size, consumed, withinCeilings, holdoutUses: uses };
+  // A3: a runtime change seen AFTER an attempt (mid-unit) taints the evidence (audit not ok); one caught before a dispatch does not.
+  const drifts = resources.records().filter(e => e.type === "runtime-drift").map(e => ({ phase: e.phase, at: e.at, attemptId: e.attemptId, detail: e.detail }));
+  const midUnitDrifts = drifts.filter(d => d.phase === "mid-unit").length;
+  const cont = existsSync(join(stateDir, "continuation.json")) ? JSON.parse(readFileSync(join(stateDir, "continuation.json"), "utf8")) : null;
+  const continuation = cont ? { versions: cont.versions.map(v => ({ version: v.version, at: v.at, hash: v.hash, envDigest: v.binding?.envDigest, runtime: v.binding?.runtime?.manifestDigest ?? null, resultRecordsAtVersion: v.facts?.resultRecords ?? null })) } : null;
+  const ok = chain.length === 0 && open.size === 0 && withinCeilings && uses.every(u => u.uses === 1 && u.byThisState === 1) && midUnitDrifts === 0;
+  return { ok, resourceChain: chain, openReservations: open.size, consumed, withinCeilings, holdoutUses: uses, runtimeDrifts: drifts, midUnitDrifts, continuation };
 }
 
 /** The frozen analysis of a state + its audit, written to analysis.json (deterministic apart from the timestamp). */

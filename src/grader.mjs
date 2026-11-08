@@ -5,7 +5,7 @@
 import { cpSync, existsSync, readdirSync, rmSync, statSync } from "node:fs";
 import { join, relative } from "node:path";
 import { ensureDir } from "./util.mjs";
-import { runSandboxed } from "./sandbox.mjs";
+import { boxView, runSandboxed } from "./sandbox.mjs";
 
 export const GRADE = "/tmp/grade";
 const COPY_SKIP = /(^|\/)(\.git|node_modules)$/;
@@ -27,8 +27,9 @@ export function parseTap(text) {
 
 async function sandboxNode(env, gradeRoot, cwdInside, args, { timeoutMs, extraBinds = [] }) {
   const tmp = ensureDir(join(gradeRoot, "tmp"));
-  const binds = [{ from: env.nodeDir }, { from: gradeRoot, to: GRADE, rw: true }, ...extraBinds];
-  const run = await runSandboxed({ binds, env: { PATH: `${env.nodeDir}/bin:/usr/bin:/bin`, HOME: `${GRADE}/tmp`, TMPDIR: `${GRADE}/tmp`, LANG: "C.UTF-8", TZ: "UTC", NODE_OPTIONS: "" }, cwd: cwdInside, command: [env.node, ...args] }, { guardMs: timeoutMs, keep: 4 * 1024 * 1024 });
+  const box = boxView(env); // a frozen node tree is mounted where the host's tree is (same in-box paths)
+  const binds = [box.nodeBind, { from: gradeRoot, to: GRADE, rw: true }, ...extraBinds];
+  const run = await runSandboxed({ binds, env: { PATH: `${box.nodeDir}/bin:/usr/bin:/bin`, HOME: `${GRADE}/tmp`, TMPDIR: `${GRADE}/tmp`, LANG: "C.UTF-8", TZ: "UTC", NODE_OPTIONS: "" }, cwd: cwdInside, command: [box.node, ...args] }, { guardMs: timeoutMs, keep: 4 * 1024 * 1024 });
   void tmp;
   return run;
 }

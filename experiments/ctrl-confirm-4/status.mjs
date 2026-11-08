@@ -46,7 +46,9 @@ export function statusOf(stateDir, prereg, { datasetsRoot, now = Date.now() } = 
     grading: grading ? { validated: Object.keys(grading).length, failed: Object.values(grading).filter(g => !g.ok).length, of: prereg.holdout.taskIds.length } : null,
     progress: campaignJson ? { total: campaignJson.total, done: campaignJson.done, unsettled: campaignJson.unsettled, terminal: campaignJson.terminal, updatedAt: campaignJson.updatedAt } : null,
     resources: { consumed, reserved, openReservations: open.size, ceilings: caps, remaining, activeHours: Math.round(activeMs / 36_000) / 100, maxActiveHours: b.maxActiveHours, wallDeadline: campaign?.wallDeadline ?? null, planned: prereg.resources.planned },
-    pause, holdoutUses: uses, final,
+    continuation: (readJson(join(stateDir, "continuation.json"))?.versions ?? []).map(v => ({ version: v.version, at: v.at, runtime: v.binding?.runtime?.manifestDigest?.slice(0, 16) ?? null, envDigest: v.binding?.envDigest?.slice(0, 12) })),
+    runtimeDrifts: res.filter(e => e.type === "runtime-drift").map(e => ({ phase: e.phase, at: e.at, detail: e.detail })),
+    pause, holdoutUses: uses, final, envWatch: lines(join(stateDir, "env-watch.jsonl")).at(-1) ?? null, envDrift: lines(join(stateDir, "env-watch.jsonl")).filter(e => e.type === "ENV-DRIFT"),
   };
 }
 
@@ -62,6 +64,7 @@ if (import.meta.url === `file://${process.argv[1]}`) {
       s.progress ? `units: ${s.progress.done}/${s.progress.total} final, terminal ${JSON.stringify(s.progress.terminal)}` : "units: -",
       `requests ${pct("requests")}  input ${pct("input")}  output ${pct("output")}  API-eq $${r.consumed.costUsd.toFixed(2)} / $${r.ceilings.costUsd}`,
       `reserved now: ${r.openReservations} attempts; active ${r.activeHours} h / ${r.maxActiveHours} h; wall deadline ${r.wallDeadline ?? "-"}`,
-      `pause: ${s.pause ? `${s.pause.kind} @ ${s.pause.at}: ${s.pause.reason}` : "none"}`, `holdout uses: ${JSON.stringify(s.holdoutUses)}`, s.final ? `FINAL: ${s.final.reason}` : ""].filter(Boolean).join("\n") + "\n");
+      `pause: ${s.pause ? `${s.pause.kind} @ ${s.pause.at}: ${s.pause.reason}` : "none"}`, `holdout uses: ${JSON.stringify(s.holdoutUses)}`, `continuation: ${s.continuation.length ? s.continuation.map(v => `v${v.version} @ ${v.at} runtime ${v.runtime}`).join("; ") : "none"}; runtime drifts ${s.runtimeDrifts.length}${s.runtimeDrifts.length ? ` (${s.runtimeDrifts.map(d => d.phase).join(",")})` : ""}`,
+      `env watch: last ${s.envWatch ? `${s.envWatch.type} @ ${s.envWatch.at}` : "-"}; drift events ${s.envDrift.length}${s.envDrift.length ? ` (${s.envDrift.at(-1).changed.join(",")})` : ""}`, s.final ? `FINAL: ${s.final.reason}` : ""].filter(Boolean).join("\n") + "\n");
   }
 }

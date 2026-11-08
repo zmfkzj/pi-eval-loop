@@ -2,12 +2,12 @@
 // the pinned route, then the independent grader and the mechanical integrity checks. Everything that decides the record comes
 // from the controller's own observations: the process exit, the JSON event stream it captured, the wire journal its proxy wrote
 // outside the sandbox and the sandboxed grader.
-import { cpSync, existsSync, readFileSync, readdirSync, rmSync, writeFileSync, copyFileSync, mkdtempSync } from "node:fs";
+import { chmodSync, cpSync, existsSync, readFileSync, readdirSync, rmSync, writeFileSync, copyFileSync, mkdtempSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 import { execFileSync } from "node:child_process";
 import { ensureDir, textMap, treeDigest, walkFiles, sha256, redact } from "./util.mjs";
-import { BRIDGE, BRIDGE_PORT, LAUNCH, MOUNTS, PLACEHOLDER_KEY, completedModelCalls, harnessBinds, runSandboxed, startModelPath, wireEntries } from "./sandbox.mjs";
+import { BRIDGE, BRIDGE_PORT, LAUNCH, MOUNTS, PLACEHOLDER_KEY, boxView, completedModelCalls, harnessBinds, runSandboxed, startModelPath, wireEntries } from "./sandbox.mjs";
 import { gradeWorkspace } from "./grader.mjs";
 import { stageWorkspace } from "./datasets.mjs";
 import { makeRecord } from "./metrics.mjs";
@@ -85,11 +85,12 @@ export function terminalOf({ run, events, wire, totals, gateRefusals, stderr }) 
 
 /** Every mount of a task agent's sandbox (exported so the isolation tests probe exactly this set). */
 export function agentBinds({ env, box, launch, socket, harness }) {
+  const view = boxView(env); // a frozen node / pi tree is mounted where the host's trees are (same in-box paths)
   const binds = [
-    { from: env.nodeDir }, { from: env.piModules }, { from: box, to: BOX, rw: true },
+    view.nodeBind, view.piBind, { from: box, to: BOX, rw: true },
     { from: env.provider, to: MOUNTS.provider }, { from: BRIDGE, to: MOUNTS.bridge }, { from: launch, to: MOUNTS.launch }, { from: socket, to: MOUNTS.socket, rw: true },
   ];
-  if (harness.kind === "orche") binds.push(...harnessBinds(harness.dir, MOUNTS.harness), { from: join(env.orche, "node_modules"), to: `${MOUNTS.harness}/node_modules` });
+  if (harness.kind === "orche") binds.push(...harnessBinds(harness.dir, MOUNTS.harness), { from: env.orcheModules ?? join(env.orche, "node_modules"), to: `${MOUNTS.harness}/node_modules` });
   return binds;
 }
 
@@ -117,7 +118,7 @@ async function piAttempt({ harness, task, route, unit, env, box, evidence, sessi
   rmSync(box, { recursive: true, force: true });
   for (const dir of [agent, sessions, home, tmp]) ensureDir(dir);
   stageWorkspace(task, ws);
-  for (const name of ["cliproxyapi-models.json", "models.json"]) if (existsSync(join(env.agentDir, name))) copyFileSync(join(env.agentDir, name), join(agent, name));
+  for (const name of ["cliproxyapi-models.json", "models.json"]) { const from = join(env.catalogDir ?? env.agentDir, name); if (existsSync(from)) { copyFileSync(from, join(agent, name)); chmodSync(join(agent, name), 0o600); } } // writable private copy (the provider refreshes it), also from a read-only snapshot
   const bridgeUrl = `http://127.0.0.1:${BRIDGE_PORT}`;
   writeFileSync(join(agent, "cliproxyapi.json"), JSON.stringify({ apiKey: PLACEHOLDER_KEY, baseUrl: bridgeUrl, providerId: "cliproxyapi", providerName: "CLIProxyAPI" }), { mode: 0o600 });
   writeFileSync(join(agent, "settings.json"), JSON.stringify(piSettings(route), null, 2));
@@ -130,9 +131,9 @@ async function piAttempt({ harness, task, route, unit, env, box, evidence, sessi
   writeFileSync(launch, LAUNCH, { mode: 0o555 });
   const inside = (p) => p.replace(box, BOX);
   const sandboxEnv = {
-    PATH: `${env.nodeDir}/bin:/usr/local/bin:/usr/bin:/bin`, HOME: inside(home), TMPDIR: inside(tmp), LANG: "C.UTF-8", LC_ALL: "C.UTF-8", TERM: "dumb", TZ: "UTC",
+    PATH: `${boxView(env).nodeDir}/bin:/usr/local/bin:/usr/bin:/bin`, HOME: inside(home), TMPDIR: inside(tmp), LANG: "C.UTF-8", LC_ALL: "C.UTF-8", TERM: "dumb", TZ: "UTC",
     PI_CODING_AGENT_DIR: inside(agent), PI_CODING_AGENT_SESSION_DIR: inside(sessions), PI_SKIP_VERSION_CHECK: "1", PI_TELEMETRY: "0", PI_OFFLINE: "1",
-    CLIPROXYAPI_BASE_URL: bridgeUrl, CLIPROXYAPI_API_KEY: PLACEHOLDER_KEY, CLIPROXYAPI_FAST: "0", EL_NODE: env.node, EL_BRIDGE_READY: `${inside(tmp)}/.bridge-ready`,
+    CLIPROXYAPI_BASE_URL: bridgeUrl, CLIPROXYAPI_API_KEY: PLACEHOLDER_KEY, CLIPROXYAPI_FAST: "0", EL_NODE: boxView(env).node, EL_BRIDGE_READY: `${inside(tmp)}/.bridge-ready`,
   };
   const prompts = userTurns(task);
   const started = Date.now();
@@ -145,7 +146,7 @@ async function piAttempt({ harness, task, route, unit, env, box, evidence, sessi
     const suffix = turn === 0 ? "" : `-t${turn}`;
     const model = await startModelPath({ dir: join(control, `model${turn || ""}`), route, maxRequests: requestsLeft, upstream: env.upstream, agentDir: env.agentDir, keyOverride: env.keyOverride });
     const binds = agentBinds({ env, box, launch, socket: model.socket, harness });
-    const piArgs = [env.piCli, "--mode", "json", "-p", "--no-extensions", "--no-skills", "--no-prompt-templates", "--no-mcp", "--no-approve", "--no-context-files", "--offline",
+    const piArgs = [boxView(env).piCli, "--mode", "json", "-p", "--no-extensions", "--no-skills", "--no-prompt-templates", "--no-mcp", "--no-approve", "--no-context-files", "--offline",
       "-e", `${MOUNTS.provider}/extensions/index.ts`];
     if (harness.kind === "orche") piArgs.push("-e", `${MOUNTS.harness}/src/extension/index.ts`);
     // A harness-level system-prompt addition (an experiment arm such as pure Pi + a rule); the same flag Pi documents for users.
@@ -155,7 +156,7 @@ async function piAttempt({ harness, task, route, unit, env, box, evidence, sessi
     const turnStarted = Date.now();
     let sandboxPid;
     try {
-      run = await runSandboxed({ binds, env: sandboxEnv, cwd: inside(ws), command: ["/bin/sh", MOUNTS.launch, env.node, ...piArgs] }, { guardMs: turn === 0 ? unit.wallMs : wallLeft, stdout: eventsPath, stderr: stderrPath, keep: 64 * 1024, onSpawn: pid => { sandboxPid = pid; signalPids?.add(pid); } });
+      run = await runSandboxed({ binds, env: sandboxEnv, cwd: inside(ws), command: ["/bin/sh", MOUNTS.launch, boxView(env).node, ...piArgs] }, { guardMs: turn === 0 ? unit.wallMs : wallLeft, stdout: eventsPath, stderr: stderrPath, keep: 64 * 1024, onSpawn: pid => { sandboxPid = pid; signalPids?.add(pid); } });
     } finally {
       // A finished sandbox's process-group id may be reused later: the signal cleanup must never target it.
       if (sandboxPid !== undefined) signalPids?.delete(sandboxPid);

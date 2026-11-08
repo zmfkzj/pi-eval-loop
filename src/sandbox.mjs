@@ -34,12 +34,31 @@ export const harnessBinds = (dir, to, { rw = false } = {}) => HARNESS_RUNTIME.fi
 export function hostEnvironment() {
   const piCli = process.env.EVAL_LOOP_PI_CLI ?? join(homedir(), ".bun/install/global/node_modules/@earendil-works/pi-coding-agent/dist/bundle/cli.js");
   const piModules = resolve(piCli, "../../../../..");
+  const nodeDir = resolve(process.execPath, "../..");
   return {
-    node: process.execPath, nodeDir: resolve(process.execPath, "../.."), piCli, piModules,
+    node: process.execPath, nodeDir, piCli, piModules,
     provider: process.env.EVAL_LOOP_PROVIDER ?? join(UMBRELLA, "cliproxyapi/node_modules/@router-for-me/pi-cliproxyapi-provider"),
     agentDir: process.env.EVAL_LOOP_AGENT_DIR ?? join(homedir(), ".pi/agent"),
     upstream: process.env.EVAL_LOOP_UPSTREAM ?? "http://127.0.0.1:8317",
     bwrap: BWRAP, orche: ORCHE,
+    // Optional frozen copies (ctrl-confirm-4 runtime snapshot): the harness node_modules and the model catalog that every attempt
+    // copies into its private agent dir. Defaults are the shared umbrella / agent locations (unchanged behaviour).
+    orcheModules: process.env.EVAL_LOOP_ORCHE_MODULES ?? join(ORCHE, "node_modules"),
+    catalogDir: process.env.EVAL_LOOP_CATALOG_DIR ?? process.env.EVAL_LOOP_AGENT_DIR ?? join(homedir(), ".pi/agent"),
+    // Where the node and pi trees appear INSIDE a sandbox (default: where they are on the host). A snapshot is mounted at the
+    // original host locations so the agent sees the same paths (pi puts its install path into the system prompt).
+    boxNodeDir: process.env.EVAL_LOOP_BOX_NODE_DIR ?? nodeDir,
+    boxPiModules: process.env.EVAL_LOOP_BOX_PI_MODULES ?? piModules,
+  };
+}
+
+/** The node / pi locations as seen inside a sandbox + the binds that put them there (identity when no snapshot is used). */
+export function boxView(env) {
+  const nodeDir = env.boxNodeDir ?? env.nodeDir, piModules = env.boxPiModules ?? env.piModules;
+  const swap = (path, from, to) => (path === from || path.startsWith(`${from}/`) ? to + path.slice(from.length) : path);
+  return {
+    nodeDir, piModules, node: swap(env.node, env.nodeDir, nodeDir), piCli: swap(env.piCli, env.piModules, piModules),
+    nodeBind: { from: env.nodeDir, to: nodeDir }, piBind: { from: env.piModules, to: piModules },
   };
 }
 

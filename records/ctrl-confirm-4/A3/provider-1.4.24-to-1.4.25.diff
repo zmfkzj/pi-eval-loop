@@ -1,0 +1,247 @@
+diff -r /var/tmp/pi-arthur/pi-orche/01a1ae65-8846-769e-bd1e-7fd4e75793d7/W7/prov/1.4.24/package/extensions/codex-stream.ts /var/tmp/pi-arthur/pi-orche/01a1ae65-8846-769e-bd1e-7fd4e75793d7/W7/prov/1.4.25/package/extensions/codex-stream.ts
+21a22
+> import { getPackageDir } from "@earendil-works/pi-coding-agent";
+790a792,804
+> const CODEX_MODULE_FLAT_RELATIVE = join(
+> 	"node_modules",
+> 	"@earendil-works",
+> 	"pi-ai",
+> 	"dist",
+> 	"openai-codex-responses.js",
+> );
+> 
+> const CODEX_DIST_SUBPATHS = [
+> 	join("dist", "api", "openai-codex-responses.js"),
+> 	join("dist", "openai-codex-responses.js"),
+> ] as const;
+> 
+819a834,853
+> 		join(homeDirectory, ".pi", "runtime", CODEX_MODULE_RELATIVE),
+> 		join(homeDirectory, ".pi", "runtime", CODEX_MODULE_FLAT_RELATIVE),
+> 		join(
+> 			homeDirectory,
+> 			".pi",
+> 			"runtime",
+> 			"node_modules",
+> 			"@earendil-works",
+> 			"pi-coding-agent",
+> 			CODEX_MODULE_RELATIVE,
+> 		),
+> 		join(
+> 			homeDirectory,
+> 			".pi",
+> 			"runtime",
+> 			"node_modules",
+> 			"@earendil-works",
+> 			"pi-coding-agent",
+> 			CODEX_MODULE_FLAT_RELATIVE,
+> 		),
+1050,1059c1084,1110
+< 				const candidate = join(
+< 					nodeModulesDir,
+< 					"@earendil-works",
+< 					"pi-ai",
+< 					"dist",
+< 					"api",
+< 					"openai-codex-responses.js",
+< 				);
+< 				if (existsSync(candidate)) {
+< 					return candidate;
+---
+> 				for (const distSubpath of CODEX_DIST_SUBPATHS) {
+> 					const directCandidate = join(nodeModulesDir, "@earendil-works", "pi-ai", distSubpath);
+> 					if (existsSync(directCandidate)) {
+> 						return directCandidate;
+> 					}
+> 					const nestedCandidate = join(
+> 						nodeModulesDir,
+> 						"@earendil-works",
+> 						"pi-coding-agent",
+> 						"node_modules",
+> 						"@earendil-works",
+> 						"pi-ai",
+> 						distSubpath,
+> 					);
+> 					if (existsSync(nestedCandidate)) {
+> 						return nestedCandidate;
+> 					}
+> 				}
+> 			}
+> 
+> 			// Managed Pi launcher (<agentDir>/bin/pi -> <agentDir>/install/releases/<version>)
+> 			const managedInstallDir = join(dirname(dirname(real)), "install");
+> 			const managedCurrentVersionPath = join(managedInstallDir, "current-version");
+> 			if (existsSync(managedCurrentVersionPath)) {
+> 				const currentVersion = readFileSync(managedCurrentVersionPath, "utf8").trim();
+> 				if (currentVersion) {
+> 					queue.push(join(managedInstallDir, "releases", currentVersion, "package.json"));
+1074,1079c1125,1150
+< 				const homeJoinMatch = content.match(
+< 					/join\s*\(\s*(?:homedir\(\)|process\.env\.HOME)[^)]*["']([^"']+)["']\s*\)/,
+< 				);
+< 				if (homeJoinMatch) {
+< 					const home = process.env.HOME || process.env.USERPROFILE || homedir();
+< 					queue.push(join(home, homeJoinMatch[1]));
+---
+> 				const defaultHome = process.env.HOME || process.env.USERPROFILE || homedir();
+> 				for (const homeJoinMatch of content.matchAll(
+> 					/join\s*\(\s*(homedir\(\)|process\.env\.HOME\b|process\.env\.USERPROFILE\b)\s*,([^)]*)\)/g,
+> 				)) {
+> 					const baseExpr = homeJoinMatch[1] ?? "";
+> 					const baseHomes =
+> 						baseExpr === "process.env.USERPROFILE"
+> 							? [process.env.USERPROFILE || defaultHome]
+> 							: baseExpr === "process.env.HOME"
+> 								? [process.env.HOME || defaultHome]
+> 								: Array.from(new Set([homedir(), defaultHome].filter(Boolean)));
+> 					const argsText = homeJoinMatch[2] ?? "";
+> 					const segments = [...argsText.matchAll(/["'`]([^"'`\r\n]+)["'`]/g)]
+> 						.map((m) => m[1]?.trim())
+> 						.filter((s): s is string => Boolean(s));
+> 					if (segments.length > 0) {
+> 						for (const baseHome of baseHomes) {
+> 							queue.push(join(baseHome, ...segments));
+> 						}
+> 					}
+> 				}
+> 				for (const shellHomeMatch of content.matchAll(/["'`]?(?:~|\$HOME|\$\{HOME\})([\\/][^"'`\s\r\n]+)["'`]?/g)) {
+> 					const rel = shellHomeMatch[1]?.trim();
+> 					if (rel) {
+> 						queue.push(join(defaultHome, rel.replace(/^[\\/]+/, "")));
+> 					}
+1088a1160,1191
+> function resolveManagedInstallCandidates(homeDirectory: string): string[] {
+> 	const installDirs = [join(homeDirectory, ".pi", "agent", "install")];
+> 	const candidates: string[] = [];
+> 	for (const installDir of installDirs) {
+> 		try {
+> 			const currentVersionPath = join(installDir, "current-version");
+> 			if (!existsSync(currentVersionPath)) continue;
+> 			const currentVersion = readFileSync(currentVersionPath, "utf8").trim();
+> 			if (!currentVersion) continue;
+> 			const releaseDir = join(installDir, "releases", currentVersion);
+> 			candidates.push(
+> 				join(releaseDir, CODEX_MODULE_RELATIVE),
+> 				join(releaseDir, CODEX_MODULE_FLAT_RELATIVE),
+> 				join(releaseDir, "node_modules", "@earendil-works", "pi-coding-agent", CODEX_MODULE_RELATIVE),
+> 				join(releaseDir, "node_modules", "@earendil-works", "pi-coding-agent", CODEX_MODULE_FLAT_RELATIVE),
+> 			);
+> 		} catch {
+> 			// Ignore unreadable managed install state.
+> 		}
+> 	}
+> 	return candidates;
+> }
+> 
+> function expandCodexCandidateVariants(candidate: string): string[] {
+> 	const apiSuffix = join("dist", "api", "openai-codex-responses.js");
+> 	if (candidate.endsWith(apiSuffix)) {
+> 		const flatCandidate = `${candidate.slice(0, -apiSuffix.length)}${join("dist", "openai-codex-responses.js")}`;
+> 		return [candidate, flatCandidate];
+> 	}
+> 	return [candidate];
+> }
+> 
+1146c1249,1266
+< 	// Also check well-known CLI binaries if nodeEntry wasn't explicitly provided in options
+---
+> 	// Also check the active pi-coding-agent package root and well-known CLI binaries
+> 	// if nodeEntry wasn't explicitly provided in options (e.g. inside subagent runners).
+> 	if (!("nodeEntry" in options) && !("resolveSpecifier" in options)) {
+> 		try {
+> 			if (typeof getPackageDir === "function") {
+> 				const packageDir = getPackageDir();
+> 				if (packageDir) {
+> 					const bundledHostModule = resolveCodexModuleFromNodeEntry(join(packageDir, "package.json"));
+> 					if (bundledHostModule && existsSync(bundledHostModule)) {
+> 						return { path: bundledHostModule, dir: dirname(bundledHostModule) };
+> 					}
+> 				}
+> 			}
+> 		} catch {
+> 			// Ignore when host does not expose a resolvable package directory.
+> 		}
+> 	}
+> 
+1148a1269,1272
+> 			join(homeDirectory, ".pi", "bin", "pi"),
+> 			join(homeDirectory, ".pi", "agent", "bin", "pi"),
+> 			join(homeDirectory, ".pi", "runtime", "bin", "pi"),
+> 			join(homeDirectory, ".pi", "runtime", "node_modules", ".bin", "pi"),
+1175,1176c1299,1311
+< 		candidates.push(join(distDir, "api/openai-codex-responses.js"));
+< 		candidates.push(join(distDir, "openai-codex-responses.js"));
+---
+> 		const directCandidates = [
+> 			join(distDir, "api/openai-codex-responses.js"),
+> 			join(distDir, "openai-codex-responses.js"),
+> 		];
+> 		candidates.push(...directCandidates);
+> 		// Pi >=1.5 maps @earendil-works/pi-ai to pi-coding-agent's extension view
+> 		// rather than pi-ai/dist. Resolve the physical pi-ai module from that host entry.
+> 		if (!directCandidates.some((candidate) => existsSync(candidate))) {
+> 			const hostModule = resolveCodexModuleFromNodeEntry(main);
+> 			if (hostModule) {
+> 				candidates.push(hostModule);
+> 			}
+> 		}
+1180a1316,1327
+> 	if (!candidates.some((candidate) => candidate && existsSync(candidate))) {
+> 		try {
+> 			const hostEntry = fileURLToPath(resolveSpecifier("@earendil-works/pi-coding-agent"));
+> 			const hostModule = resolveCodexModuleFromNodeEntry(hostEntry);
+> 			if (hostModule) {
+> 				candidates.push(hostModule);
+> 			}
+> 		} catch {
+> 			// ignore
+> 		}
+> 	}
+> 
+1181a1329
+> 		candidates.push(...resolveManagedInstallCandidates(homeDirectory));
+1185,1187c1333,1337
+< 	for (const path of candidates) {
+< 		if (path && existsSync(path)) {
+< 			return { path, dir: dirname(path) };
+---
+> 	for (const candidate of candidates) {
+> 		for (const path of expandCodexCandidateVariants(candidate)) {
+> 			if (path && existsSync(path)) {
+> 				return { path, dir: dirname(path) };
+> 			}
+1206,1209c1356,1366
+< 		try {
+< 			return readFileSync(join(dirname(originalPath), "openai-responses-shared.js"), "utf8");
+< 		} catch {
+< 			return "";
+---
+> 		for (const candidate of [
+> 			join(dirname(originalPath), "openai-responses-shared.js"),
+> 			join(dirname(originalPath), "api", "openai-responses-shared.js"),
+> 		]) {
+> 			try {
+> 				if (existsSync(candidate)) {
+> 					return readFileSync(candidate, "utf8");
+> 				}
+> 			} catch {
+> 				// try next
+> 			}
+1210a1368
+> 		return "";
+diff -r /var/tmp/pi-arthur/pi-orche/01a1ae65-8846-769e-bd1e-7fd4e75793d7/W7/prov/1.4.24/package/extensions/index.ts /var/tmp/pi-arthur/pi-orche/01a1ae65-8846-769e-bd1e-7fd4e75793d7/W7/prov/1.4.25/package/extensions/index.ts
+798a799
+> 	let streamLoadError: string | undefined;
+799a801
+> 		const suffix = streamLoadError ? `: ${streamLoadError}` : "";
+801c803
+< 			`Codex protocol stream is unavailable for provider: ${identity.providerId} (api: ${CLIPROXYAPI_CODEX_API})`,
+---
+> 			`Codex protocol stream is unavailable for provider: ${identity.providerId} (api: ${CLIPROXYAPI_CODEX_API})${suffix}`,
+893a896
+> 		streamLoadError = message;
+diff -r /var/tmp/pi-arthur/pi-orche/01a1ae65-8846-769e-bd1e-7fd4e75793d7/W7/prov/1.4.24/package/package.json /var/tmp/pi-arthur/pi-orche/01a1ae65-8846-769e-bd1e-7fd4e75793d7/W7/prov/1.4.25/package/package.json
+3c3
+< 	"version": "1.4.24",
+---
+> 	"version": "1.4.25",

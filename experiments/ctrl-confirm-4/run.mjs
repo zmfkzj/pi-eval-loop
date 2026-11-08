@@ -25,13 +25,17 @@ import { INFRA, buildHarness, buildQueue, harnessIdentity, lockMismatches } from
 import { recordHoldoutUse } from "../ctrl-confirm-2/run.mjs";
 import { EXPERIMENT_DIR, loadPrereg } from "./lib.mjs";
 import { ResourceManager, RunnerLock, providerFailure, recordUsage, stopOrphans, wireUsage } from "./resources.mjs";
+import { RuntimeGuard, continuedLockProblems, effectiveLock, readContinuation } from "./runtime.mjs";
 
 /** Files whose bytes define this experiment beyond src/ (this directory + reused experiment code). */
 export function experimentFiles() {
-  const own = ["lib.mjs", "run.mjs", "resources.mjs", "power.mjs", "gate.mjs", "assemble.mjs", "analyze.mjs", "prereg.json", "PREREGISTRATION.md"].map(f => join(EXPERIMENT_DIR, f));
+  const own = ["lib.mjs", "run.mjs", "resources.mjs", "runtime.mjs", "power.mjs", "gate.mjs", "assemble.mjs", "analyze.mjs", "prereg.json", "PREREGISTRATION.md"].map(f => join(EXPERIMENT_DIR, f));
   const reused = ["ctrl-ablation/lib.mjs", "ctrl-confirm-2/lib.mjs", "ctrl-confirm-2/run.mjs", "ctrl-confirm-2/variants/OCR.diff", "ctrl-confirm-3/stats.mjs"].map(f => join(EXPERIMENT_DIR, "..", f));
   return [...own, ...reused].map(f => resolve(f)).filter(existsSync).sort();
 }
+
+/** Evaluator files outside this package's src/ (loaded from the orche working tree by every attempt: proxy, bridge, ...). */
+export const reusedEvaluatorFiles = () => evaluatorFiles().filter(f => !f.startsWith(resolve(EXPERIMENT_DIR, "../../src") + "/"));
 
 export const instructionOf = (task, prereg) => `${task.instruction.replace(/\s+$/, "")}\n\n${prereg.integrityContract}`;
 
@@ -94,13 +98,22 @@ export async function prepare({ stateDir, prereg, smoke = false, orcheDir = join
 
 export function lockState(stateDir, lock, queue) {
   const path = join(stateDir, "lock.json");
-  if (!existsSync(path)) { writeFileSync(join(stateDir, "queue.json"), JSON.stringify(queue, null, 1)); atomicWriteJson(path, { ...lock, lockedAt: new Date().toISOString() }); return JSON.parse(readFileSync(path, "utf8")); }
+  if (!existsSync(path)) {
+    if (readContinuation(stateDir)) throw new Error("a continuation exists without its lock.json");
+    const { runtime, ...first } = lock;
+    writeFileSync(join(stateDir, "queue.json"), JSON.stringify(queue, null, 1)); atomicWriteJson(path, { ...first, ...(runtime ? { runtime } : {}), lockedAt: new Date().toISOString() }); return JSON.parse(readFileSync(path, "utf8"));
+  }
   const recorded = JSON.parse(readFileSync(path, "utf8"));
-  const problems = lockMismatches(recorded, lock);
+  const eff = effectiveLock(stateDir, recorded);
+  if (eff.problems.length) throw new Error(`continuation damaged: ${eff.problems.join("; ")}`);
+  // A3: a continued state compares frozen fields with the ORIGINAL lock and the environment / files / runtime with the latest
+  // continuation version (runtime.mjs); an un-continued state keeps the original comparison (+ a recorded runtime, if any).
+  const problems = eff.version > 0 ? continuedLockProblems(recorded, eff.lock, lock, eff.version) : lockMismatches(recorded, lock);
+  if (eff.version === 0 && recorded.runtime && recorded.runtime.manifestDigest !== lock.runtime?.manifestDigest) problems.push("runtime snapshot changed");
   for (const id of new Set([...Object.keys(recorded.instructions ?? {}), ...Object.keys(lock.instructions ?? {})])) if (recorded.instructions?.[id] !== lock.instructions?.[id]) problems.push(`instructions.${id} changed`);
   if (JSON.stringify(recorded.holdoutSeals ?? null) !== JSON.stringify(lock.holdoutSeals ?? null)) problems.push("holdoutSeals changed");
-  if (problems.length) throw new Error(`lock mismatch (a changed experiment needs a new state directory): ${problems.join("; ")}`);
-  return recorded;
+  if (problems.length) throw new Error(`lock mismatch (a changed experiment needs a new state directory or a validated continuation): ${[...new Set(problems)].join("; ")}`);
+  return { ...eff.lock, continuation: eff.version };
 }
 
 /**
@@ -119,11 +132,18 @@ export function attemptPolicy(results, { maxRetries, maxProviderRetries }) {
 /** Evaluator with per-attempt reservations, settlement, wire preservation and orphan reconciliation (src/ unchanged). */
 export class ResourceEvaluator extends Evaluator {
   /** @param {any} options */
-  constructor({ rm, policy, orphanGraceMs = 5000, ...opts }) {
+  constructor({ rm, policy, orphanGraceMs = 5000, guard = null, ...opts }) {
     super(/** @type {any} */ (opts));
     /** @type {ResourceManager} */ this.rm = rm;
     /** @type {any} */ this.policy = policy;
     /** @type {number} */ this.orphanGraceMs = orphanGraceMs;
+    /** A3: runtime identity guard ({ id, check(): string | null }); null = no frozen runtime (smoke/tests without a snapshot). */
+    /** @type {any} */ this.guard = guard;
+  }
+  /** A3: a runtime identity change holds the campaign (operator decision) and is recorded in the resource ledger. */
+  runtimeDrift(phase, unitKey, attemptId, detail) {
+    this.rm.log({ type: "runtime-drift", phase, unitKey, attemptId, detail });
+    if (!this.rm.paused) this.rm.pause(`runtime identity changed (${phase}): ${detail}`, "runtime");
   }
   results(key) { return this.ledger.records().filter(r => r.unit_key === key && r.type === "result").map(r => r.record); }
   policyOf(key) { return attemptPolicy(this.results(key), this.policy); }
@@ -192,12 +212,15 @@ export class ResourceEvaluator extends Evaluator {
         const state = this.unitState(unit.key);
         if (this.policyOf(unit.key) === "final") return state.last;
         const attempt = state.attempts + 1, attemptId = `${unit.key}:a${attempt}`;
+        // A3: the frozen runtime is re-verified immediately before every dispatch; a change holds the campaign (nothing reserved).
+        const before = this.guard?.check() ?? null;
+        if (before) { this.runtimeDrift("pre-dispatch", unit.key, attemptId, before); return state.last; }
         // Admission + reservation are synchronous: no other worker can interleave between the check and the reservation.
         if (!this.rm.reserve(attemptId, { unitKey: unit.key, arm: harness.id, task: unit.task, repeat: unit.repeat, attempt })) return state.last; // refused/paused: unit stays unsettled
         const runId = `${harness.id}-${unit.task}-${unit.split}-r${unit.repeat}-a${attempt}-${unit.key.slice(0, 8)}`;
         const controlDir = mkdtempSync(join(tmpdir(), "el4-"));
         const evidence = join(this.stateDir, "evidence", harness.id, `${unit.split}-${unit.task}-r${unit.repeat}-a${attempt}-${unit.key.slice(0, 8)}`);
-        this.ledger.append({ type: "dispatch", unit_key: unit.key, attempt, attemptId, run_id: runId, controlDir, harness: { id: harness.id, kind: harness.kind, commit: harness.commit ?? null, mode: harness.mode ?? null }, task: unit.task, split: unit.split, repeat: unit.repeat, context, simulated: !!this.backend.simulated });
+        this.ledger.append({ type: "dispatch", unit_key: unit.key, attempt, attemptId, run_id: runId, controlDir, harness: { id: harness.id, kind: harness.kind, commit: harness.commit ?? null, mode: harness.mode ?? null }, task: unit.task, split: unit.split, repeat: unit.repeat, context, simulated: !!this.backend.simulated, ...(this.guard ? { runtime: this.guard.id } : {}) });
         let record;
         try {
           record = await this.backend.run({ harness, task: this.tasksById[unit.task], repeat: unit.repeat, split: unit.split, context, protocol: this.protocol, protocolDigest: this.protocolDigest, envDigest: this.envDigest, scratch: join(controlDir, "scratch"), controlDir, evidence, attempt, unitKey: unit.key, runId, grading: this.grading[unit.task] });
@@ -208,6 +231,11 @@ export class ResourceEvaluator extends Evaluator {
             terminal_status: completed > 0 ? "aborted" : "infra_error", terminal_detail: `controller error: ${String(error?.message ?? error).slice(0, 300)}`, model_requests_completed: completed, started_at: new Date().toISOString(), simulated: !!this.backend.simulated });
         }
         record.attempt = attempt; record.unit_key = unit.key;
+        // A3: verified again after the attempt, before its outcome is recorded. A change during the attempt is recorded WITH the
+        // attempt (the outcome is kept, never dropped or re-run) and holds the campaign for an operator decision.
+        const after = this.guard ? this.guard.check() : null;
+        if (this.guard) record.runtime = { id: this.guard.id, verifiedAfter: after === null, ...(after ? { drift: after } : {}) };
+        if (after) this.runtimeDrift("mid-unit", unit.key, attemptId, after);
         const measured = this.usageOf(controlDir, record);
         // Wire evidence is kept with the attempt before the control directory is removed (the runner also copies it on success).
         for (const f of wireJournals(controlDir)) cpSync(f, join(evidence, "controller-wire", f.slice(controlDir.length + 1)), { force: true });
@@ -232,12 +260,12 @@ export const unsettled = (queue, evaluator, harness, split) => queue.filter(u =>
  * campaign: missing units are failures in the analysis (no extension, no sample expansion). Rate-limit pauses may auto-resume after
  * a fixed wait (idle time is not active time); credit/auth/route pauses need an operator resume (same command).
  */
-export async function runCampaign({ stateDir, prereg, prepared, backend, rm, log = (l) => process.stderr.write(`${l}\n`), maxUnits = Infinity, resume = "", autoResumeRateMs = 0, maxAutoResumes = 6, sleep = (ms) => new Promise(r => setTimeout(r, ms)), orphanGraceMs = 5000 }) {
+export async function runCampaign({ stateDir, prereg, prepared, backend, rm, log = (l) => process.stderr.write(`${l}\n`), maxUnits = Infinity, resume = "", autoResumeRateMs = 0, maxAutoResumes = 6, sleep = (ms) => new Promise(r => setTimeout(r, ms)), orphanGraceMs = 5000, guard = null }) {
   const { tasksById, harness, grading, queue, lock } = prepared;
   const protocol = { route: prereg.route, unit: prereg.unit, infra: prereg.infra, parallelism: prereg.parallelism, capture: prereg.capture, integrity: prereg.integrity };
   const split = lock.smoke ? "smoke" : "confirmation";
   const policy = { maxRetries: prereg.infra.maxRetries, maxProviderRetries: prereg.infra.maxProviderRetries, pricing: prereg.pricing, unknownRequest: prereg.resources.unknownUsageRequestCharge };
-  const evaluator = new ResourceEvaluator({ rm, policy, orphanGraceMs, stateDir, protocol, protocolDigest: lock.preregDigest, envDigest: lock.envDigest, tasksById, grading, backend, log });
+  const evaluator = new ResourceEvaluator({ rm, policy, orphanGraceMs, guard, stateDir, protocol, protocolDigest: lock.preregDigest, envDigest: lock.envDigest, tasksById, grading, backend, log });
   await evaluator.reconcileAll();
   const campaignPath = join(stateDir, "campaign.json");
   const campaign = existsSync(campaignPath) ? JSON.parse(readFileSync(campaignPath, "utf8")) : {};
@@ -294,8 +322,8 @@ export function resourceManagerOf(stateDir, prereg, opts = {}) {
   return new ResourceManager({ stateDir, budget: prereg.budget, reserve: prereg.resources.reservePerAttempt, pricing: prereg.pricing, attemptTimeBoundMs, heartbeatMs: prereg.resources.heartbeatMs, overrunSlots: prereg.parallelism, ...opts });
 }
 
-/** Pause kinds that survive a restart until an operator resumes (A2: a service restart must not bypass them). */
-export const HELD_PAUSES = new Set(["credit", "auth", "route", "infra", "operator"]);
+/** Pause kinds that survive a restart until an operator resumes (A2: a service restart must not bypass them; A3: + runtime). */
+export const HELD_PAUSES = new Set(["credit", "auth", "route", "infra", "operator", "runtime"]);
 
 /** null = may dispatch; else the unresolved pause that holds this invocation (resolved only by --operator-resume). */
 export function heldPause(rm, operatorResume) {
@@ -318,8 +346,23 @@ async function main() {
   const env = hostEnvironment();
   const missing = (await prerequisites(env)).filter(p => !p.ok);
   if (missing.length) { lockFile.release(); process.stderr.write(`BLOCKED: missing prerequisites ${missing.map(m => m.name).join(", ")}\n`); process.exit(2); }
+  const blocked = (why) => { lockFile.release(); process.stderr.write(`BLOCKED: ${why}\n`); process.exit(2); };
+  // A3: frozen runtime. A continued state REQUIRES the snapshot its latest continuation binds; the snapshot is fully verified here
+  // (content, read-only, no escaping link, every runtime path of this process inside it) and re-checked before every dispatch.
+  const runtimeRoot = process.env.EVAL_LOOP_RUNTIME ? resolve(process.env.EVAL_LOOP_RUNTIME) : null;
+  const cont = readContinuation(stateDir);
+  if (cont && !runtimeRoot) blocked("this state was continued on a frozen runtime snapshot: set EVAL_LOOP_RUNTIME and the snapshot paths (runtime.mjs envFor)");
+  let guard = null;
+  if (runtimeRoot) {
+    try { guard = new RuntimeGuard({ root: runtimeRoot, manifestDigest: cont?.versions.at(-1)?.binding.runtime?.manifestDigest, extraFiles: reusedEvaluatorFiles() }); } catch (error) { blocked(`runtime snapshot unreadable: ${error.message}`); }
+    const problems = guard.start(env);
+    if (problems.length) blocked(`runtime snapshot invalid: ${problems.join("; ")}`);
+  }
   const prepared = await prepare({ stateDir, prereg, smoke: Boolean(values.smoke), env, datasetsRoot: undefined });
-  const lock = lockState(stateDir, prepared.lock, prepared.queue);
+  if (guard) prepared.lock.runtime = { root: guard.root, manifestDigest: guard.manifestDigest };
+  let lock;
+  try { lock = lockState(stateDir, prepared.lock, prepared.queue); } catch (error) { blocked(String(error.message ?? error)); }
+  if (guard) for (const h of Object.values(prepared.harness)) if (h.dir) guard.watchTree(h.dir);
   if (!values.smoke) for (const dir of prepared.batches) { const u = recordHoldoutUse(dir, { stateDir, experiment: prereg.id, preregDigest: lock.preregDigest, seal: lock.holdoutSeals[Object.keys(lock.holdoutSeals).find(k => dir.endsWith(k))] }); process.stderr.write(`holdout use of ${dir} ${u.reused ? "already recorded" : "recorded"} at ${u.use.at}\n`); }
   const rm = resourceManagerOf(stateDir, prereg);
   const held = heldPause(rm, values["operator-resume"]);
@@ -331,9 +374,13 @@ async function main() {
   }
   const resume = `node pi-eval-loop/experiments/ctrl-confirm-4/run.mjs --state ${stateDir} ${values.smoke ? "--smoke" : "--launch"}`;
   rm.startSession({ command: resume });
-  const onSignal = (signal) => { stopProxies("SIGTERM"); try { rm.log({ type: "active-end", reason: `signal ${signal}` }); rm.endSession(`signal ${signal}`); } catch { /* best effort */ } lockFile.release(); process.stderr.write(`interrupted by ${signal}\n`); process.exit(130); };
+  // A3: SIGUSR1 = graceful drain (nothing new is dispatched, in-flight attempts finish and are recorded, then the runner exits held).
+  // SIGTERM/SIGINT/SIGHUP stop at once (in-flight attempts become orphans that the next start reconciles) and also leave the state
+  // held, so no automatic restart continues after an interruption.
+  process.on("SIGUSR1", () => { if (!rm.paused) rm.pause("operator drain (SIGUSR1): nothing new is dispatched, in-flight attempts finish", "operator"); process.stderr.write("drain requested (SIGUSR1)\n"); });
+  const onSignal = (signal) => { stopProxies("SIGTERM"); try { if (!rm.paused) rm.pause(`interrupted by ${signal}`, "operator"); rm.log({ type: "active-end", reason: `signal ${signal}` }); rm.endSession(`signal ${signal}`); } catch { /* best effort */ } lockFile.release(); process.stderr.write(`interrupted by ${signal}\n`); process.exit(130); };
   for (const s of ["SIGINT", "SIGTERM", "SIGHUP"]) process.on(s, onSignal);
-  const summary = await runCampaign({ stateDir, prereg, prepared: { ...prepared, lock }, backend: realBackend(env), rm, maxUnits: values["max-units"] ? Number(values["max-units"]) : Infinity, resume, autoResumeRateMs: Number(values["auto-resume-rate-min"]) * 60_000 });
+  const summary = await runCampaign({ stateDir, prereg, prepared: { ...prepared, lock }, backend: realBackend(env), rm, guard, maxUnits: values["max-units"] ? Number(values["max-units"]) : Infinity, resume, autoResumeRateMs: Number(values["auto-resume-rate-min"]) * 60_000 });
   rm.endSession(summary.paused ? `paused: ${summary.paused.reason}` : "queue settled");
   lockFile.release();
   if (isFinal(summary)) {
