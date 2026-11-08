@@ -1,0 +1,7 @@
+{
+ "batch": "ctrl-confirm-4-holdout-46ca85d00b77",
+ "sealDigest": "b59b4fd1abea32cc9255aa80ea5669c40150e07dd0f03262f0a04aa62a401502",
+ "withdrawnAt": "2026-11-08T01:29:21Z",
+ "uses": 0,
+ "reason": "assembly defect, not exposure: a copy of this assembly's own conflict review was placed under pi-eval-loop/records/ (a root the exposure scan reads) before sealing, so all 232 test-mentioning candidates were excluded as \"named-in-earlier-experiments\" by their own review record (232/232 identical to the review's id list). No agent ever ran on any case. The batch is never used; it is kept unchanged as evidence and superseded by a re-seal of the same frozen candidates with the review kept outside scanned roots (selection rule, seed and caps unchanged)."
+}

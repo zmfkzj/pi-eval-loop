@@ -1,0 +1,5387 @@
+{
+  "at": "2026-11-08T01:49:11.293Z",
+  "batch": "ctrl-confirm-4-holdout-9678d4a6a0da",
+  "dir": "/home/arthur/Code/oh-my-pi-extensions/results/ctrl-confirm-4-holdout/ctrl-confirm-4-holdout-9678d4a6a0da",
+  "sealDigest": "a698916e3be90c1dbbf60e17b9784ad8b3c2b65212ffeb06486175be40a7bfa4",
+  "cutoff": "2026-11-08T01:00:00Z",
+  "tasks": 725,
+  "families": 399,
+  "owners": 365,
+  "familySizes": [
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+  ],
+  "taskIds": [
+    "x-1success0error-claude-session-cards-845a69446c",
+    "x-1success0error-claude-session-cards-bc9878e152",
+    "x-1success0error-claude-session-cards-e2f689bec8",
+    "x-42wp-dev-env-04b191c53e",
+    "x-42wp-dev-env-260c1464be",
+    "x-42wp-dev-env-de2b6eeb4b",
+    "x-6t9xstar-one-step-seo-ba183e6f30",
+    "x-6t9xstar-one-step-seo-f200a85d17",
+    "x-877007021-pi-memory-sessions-f4d895a252",
+    "x-aayushmainali-github-number-theory-2-14eb778003",
+    "x-aayushmainali-github-number-theory-2-588d968233",
+    "x-aayushmainali-github-number-theory-2-f5e267cd93",
+    "x-aboudjem-ui-ux-suite-6e0e84677d",
+    "x-aboudjem-ui-ux-suite-bb179bcb99",
+    "x-aboudjem-ui-ux-suite-c7657989e9",
+    "x-acus9345-dsh-block-hanging-commands-e413125ca0",
+    "x-acus9345-dsh-block-placeholder-edits-a08227434a",
+    "x-acus9345-dsh-block-placeholder-edits-b21e280be3",
+    "x-acus9345-dsh-enforce-package-manager-c6ffe79b0a",
+    "x-adarshakhatua-queue-list-231108fb75",
+    "x-adarshakhatua-queue-list-58f829f595",
+    "x-adarshakhatua-queue-list-7a695b926f",
+    "x-adrielrod-claude-bus-085fa408f7",
+    "x-adrielrod-claude-bus-68b622b5a8",
+    "x-adrielrod-claude-bus-91c358be4b",
+    "x-aemonge-pi-openspec-gate-243ff57e6c",
+    "x-aemonge-pi-openspec-gate-468c52d194",
+    "x-aemonge-pi-openspec-gate-b7608b89b3",
+    "x-agentelabs-wdk-policy-guard-e43b4220c3",
+    "x-agentic-control-plane-muse-code-acp-plugin-4abcdf47b4",
+    "x-agile-north-dockship-40cf6d0c6b",
+    "x-agile-north-dockship-7d16b1a1e7",
+    "x-agile-north-dockship-ee19cd49cc",
+    "x-ainzrimuru-cf-billing-guard-1095beccfe",
+    "x-ainzrimuru-cf-billing-guard-3cc13622a2",
+    "x-ainzrimuru-cf-billing-guard-90af29a600",
+    "x-airpineapplea-feiyu-memory-2d589b7003",
+    "x-alagrede-confluence-md-sync-86ee013d9f",
+    "x-alagrede-confluence-md-sync-8e228b94af",
+    "x-alagrede-confluence-md-sync-af937b42ac",
+    "x-alex-messer-hexo-ping-services-1fe76c7451",
+    "x-alex-messer-hexo-ping-services-335b05828f",
+    "x-alex-messer-hexo-ping-services-6929d0f583",
+    "x-alexandercreates-localize-me-01656b19bd",
+    "x-alexandercreates-localize-me-02f4b63961",
+    "x-alexandercreates-localize-me-f8aad365fb",
+    "x-allan-nava-agent-ledger-c59d3632e6",
+    "x-amarnotcool-teamapex-repotool-911ddce127",
+    "x-amarnotcool-teamapex-repotool-9acd2df66c",
+    "x-amarnotcool-teamapex-repotool-ae94f67e2e",
+    "x-amirsinaz-personal-agentic-os-0b048eab4d",
+    "x-amirsinaz-personal-agentic-os-a6330fc80d",
+    "x-amirsinaz-personal-agentic-os-c759996176",
+    "x-aotr-hue-shift-0da8f14dbd",
+    "x-aotr-hue-shift-7490d53c8f",
+    "x-aotr-hue-shift-904662d92e",
+    "x-arctumn-ordinal-words-3b63bed8e6",
+    "x-arlenman-dsh-backup-sync-2ef1a1fb55",
+    "x-arlenman-dsh-backup-sync-469fe75fd4",
+    "x-arlenman-dsh-backup-sync-6803e9e46c",
+    "x-arraypress-date-utils-0968801ff1",
+    "x-arraypress-date-utils-91c206ed8d",
+    "x-arraypress-file-utils-612da6fd5c",
+    "x-arraypress-security-headers-69556b8a5a",
+    "x-arraypress-security-headers-c483fe6411",
+    "x-arraypress-stripe-currencies-771ae4019f",
+    "x-arsennur-charto-7291025da9",
+    "x-aunysillyme-model-orchestrator-4a9aea7925",
+    "x-aunysillyme-model-orchestrator-5a7b3f463a",
+    "x-aunysillyme-model-orchestrator-6de0674e3f",
+    "x-aunysillyme-website-build-skill-9bb71f5e5b",
+    "x-aunysillyme-website-build-skill-a2fd247b16",
+    "x-avaui-dev-apogee-5619466de4",
+    "x-babul-cribsheet-a811859417",
+    "x-banal972-spb-seo-geo-c3581a909b",
+    "x-banal972-spb-seo-geo-cc90781342",
+    "x-berenyibence-real-cost-of-agent-f0d4d97711",
+    "x-betterlmy-pi-statusline-0a1777d78f",
+    "x-betterlmy-pi-statusline-8911c6cea7",
+    "x-betterlmy-pi-statusline-c04e2a4425",
+    "x-bg1avd-mcp-search-server-96727b06cc",
+    "x-bigbluebaby-codex2dsh-7c80e61138",
+    "x-bigbluebaby-codex2dsh-d53d49ab75",
+    "x-bingh0-ccr-051c11627f",
+    "x-bingh0-ccr-d6e04b590b",
+    "x-brahiandres1999-oss-omni-spec-8943e617f0",
+    "x-brahiandres1999-oss-omni-spec-927e5245a9",
+    "x-brahiandres1999-oss-omni-spec-cb21a17506",
+    "x-caioribeiroclw-pixel-pluribus-6b51312b94",
+    "x-caioribeiroclw-pixel-pluribus-82537e705f",
+    "x-caioribeiroclw-pixel-pluribus-fd0440d7cf",
+    "x-canyuda-agent-guard-25a61fd274",
+    "x-canyuda-agent-guard-60c4748ece",
+    "x-canyuda-agent-guard-f22221f021",
+    "x-cardin-opencode-fold-diffs-81c23c2500",
+    "x-cardin-opencode-fold-diffs-ada583de9f",
+    "x-cardin-opencode-fold-diffs-c29ff0bc30",
+    "x-chad3814-secret-provider-f823b0c9bb",
+    "x-champmk-modforge-32c1d6dddc",
+    "x-champmk-modforge-dc83515d68",
+    "x-chao5go-remote-fileshare-c56a6eca0c",
+    "x-chaoyue0307-mcp-guard-4b7c0a73d2",
+    "x-chaoyue0307-mcp-guard-840c1c43d0",
+    "x-chaoyue0307-mcp-guard-ffe0453f51",
+    "x-chenxu233-dsh-gemini-tool-schema-a0211b7eeb",
+    "x-chrystyan96-execfence-7c13724e6f",
+    "x-chxsong-pi-auto-continue-3627bb461b",
+    "x-cinorid-pi-persian-rtl-bundle-d68f2ff0d4",
+    "x-cinorid-pi-persian-rtl-bundle-f42971ad88",
+    "x-cityssm-node-utils-datetime-c3a1fc39ab",
+    "x-ckarefulon-dsh-tailscale-remote-5ac558c834",
+    "x-ckarefulon-dsh-tailscale-remote-e181fcf46a",
+    "x-clementprevot-pi-repo-overlay-7337dcd4a0",
+    "x-codesigils-zero-md-formatter-027c4860e2",
+    "x-cometkim-rkyv-js-805d6df79a",
+    "x-copperdesign-gcal-13e0d2bb5c",
+    "x-copperdesign-gcal-73db9bcbe4",
+    "x-copperdesign-gcal-9cc9fdc532",
+    "x-coratch-runwhy-91072a860d",
+    "x-coratch-runwhy-be746845fc",
+    "x-coratch-runwhy-d3123287ca",
+    "x-cujuju-solidjs-color-picker-93dabbc3a9",
+    "x-curioustorvald-iyagimusic-js-cda76cc700",
+    "x-dadwritestech-thisisfine-0ab9663825",
+    "x-dan-seo-ctx-autopsy-af15ae16dc",
+    "x-danielgap-pi-zai-usage-cbc1227a1c",
+    "x-darrenapfel-soundcheck-1a078af2f5",
+    "x-darrenapfel-soundcheck-34d87930f6",
+    "x-darrenapfel-soundcheck-dea722c530",
+    "x-data-unix-mcp-maltego-bc8ffa4d5e",
+    "x-davisliu2006-pi-permission-system-e388df8b47",
+    "x-dddmuc-dsh-delete-turn-0356b86c27",
+    "x-dddmuc-dsh-session-relocate-e473bec9b3",
+    "x-dddmuc-dsh-session-relocate-eb7743997f",
+    "x-dddmuc-dsh-url-router-22fc81d6fc",
+    "x-dddmuc-dsh-url-router-83ad48d01a",
+    "x-dddmuc-dsh-url-router-e8e6b207a6",
+    "x-denismrvoljak-pi-troupe-85ecaea2c4",
+    "x-denismrvoljak-pi-troupe-c5d30a7dc2",
+    "x-devacc8-dsh-billing-badge-196b7d6279",
+    "x-devmobilean27-rn-network-debugger-0082896f80",
+    "x-dgaidula-offline-csv-geocoder-dfb042b787",
+    "x-dgaidula-offline-csv-geocoder-e0e4c30daa",
+    "x-dhaupin-govstruct-05febec737",
+    "x-dhaupin-govstruct-4845ba340e",
+    "x-dhaupin-govstruct-e5e5434d72",
+    "x-dibrovnik-pvs-4f90136d92",
+    "x-dingchenhui0618-arch-dsh-poker-night-bced4953c2",
+    "x-dingchenhui0618-arch-dsh-poker-night-f47230d438",
+    "x-donatosilva-gentle-shell-minimax-usage-8c7f652696",
+    "x-donatosilva-gentle-shell-minimax-usage-a0daff770a",
+    "x-donatosilva-gentle-shell-minimax-usage-bfca824f53",
+    "x-donyue7-dsh-session-bus-046413a147",
+    "x-donyue7-dsh-session-bus-bd877c3af1",
+    "x-drumst0ck-pi-usage-limit-resume-41c85374c6",
+    "x-drumst0ck-pi-usage-limit-resume-ec9e2bb9f0",
+    "x-duanxiangchun-dsh-ollama-statistical-2bb51f3a65",
+    "x-duanxiangchun-dsh-ollama-statistical-531c3098e4",
+    "x-duhu2000-qcc-mcp-legal-oauth-48717ce508",
+    "x-dvnold-fm-bench-7a2adfd3b5",
+    "x-dvnold-fm-bench-b42756e75f",
+    "x-echo-smith-hy-memory4dsh-d40da88d2a",
+    "x-efolchmontiel-gentle-emote-5ba973fe19",
+    "x-ehk2509-json-to-express-23791d2553",
+    "x-ehk2509-json-to-express-56c6f1503a",
+    "x-ehk2509-json-to-express-c326be144d",
+    "x-emson-claudoro-979779c2dd",
+    "x-emson-claudoro-b993305335",
+    "x-emson-claudoro-c66a6b5c8d",
+    "x-enoughpower-dsh-git-graph-37be45da63",
+    "x-enoughpower-dsh-git-graph-644dffbb4e",
+    "x-eqdoc-indicato-ed0377b4c5",
+    "x-erkamyaman-capacitor-foldable-eee7836ba2",
+    "x-ershov-ilya-multi-agent-kit-f6672e95f6",
+    "x-excellent-so-usage-cache-7a2fdf42fe",
+    "x-expecho-ccreports-63267ae1e9",
+    "x-expecho-ccreports-ba585ac3bc",
+    "x-expecho-ccreports-fc960628a6",
+    "x-fatihdogann-turkce-utils-19e7aa2227",
+    "x-fatihdogann-turkce-utils-39e1c1f2bc",
+    "x-fatihdogann-turkce-utils-6e94ffc615",
+    "x-feibi-mochi-deepseek-harness-control-center-0df3974f9a",
+    "x-feibi-mochi-deepseek-harness-control-center-43650bb0e1",
+    "x-fixadero-gradle-to-js-1beb63558e",
+    "x-fixadero-gradle-to-js-841370944c",
+    "x-floezwerk-piagent-realtime-provider-cost-d72ccae24c",
+    "x-flyewi-eleventy-plugin-redirects-34dd3945e8",
+    "x-flyewi-eleventy-plugin-redirects-ed04acd777",
+    "x-frederick-wang-pi-glm-usage-927f220421",
+    "x-frederick-wang-pi-xai-usage-52986f390b",
+    "x-fusionpacttech-fusionpact-vectordb-3bf15739f9",
+    "x-fuyue521-dsh-desktop-shortcut-6bd601ca32",
+    "x-gautamverma40-tagmatic-5c8e129c24",
+    "x-gautamverma40-tagmatic-f0b94678a2",
+    "x-gengwg-dsh-kubectl-guard-983952c6bd",
+    "x-gengwg-dsh-kubectl-guard-a4d5889c15",
+    "x-geoqiao-pi-tools-490540773d",
+    "x-geoqiao-pi-tools-c9eb62cd14",
+    "x-ghostpawjs-affinity-b585eb48b2",
+    "x-ghostpawjs-affinity-fb5cfcffa2",
+    "x-ghostpawjs-codex-589d24e3ae",
+    "x-ghostpawjs-souls-af582cf709",
+    "x-gibrancorbin11-hub-wayleave-8427f40a2f",
+    "x-gitbytefree-dsh-pomodoro-pet-1e549c34f0",
+    "x-goodandready-dsh-kanban-3196dac911",
+    "x-goodandready-dsh-kanban-b58914fa9f",
+    "x-goodandready-dsh-messenger-gateway-6899cd0ebb",
+    "x-goodandready-dsh-messenger-gateway-fd42cf8ce2",
+    "x-goodandready-dsh-tts-eca4302cbe",
+    "x-goodandready-dsh-usage-guard-31580edf0b",
+    "x-gozajpeg-prins-424f0b5f7a",
+    "x-gridworkjs-core-586f2d6278",
+    "x-gridworkjs-core-77f7e65b21",
+    "x-guilianerde-skills-init-1e88e37f76",
+    "x-guilianerde-skills-init-353b3da2cc",
+    "x-hamr0-pulselog-0da35d7a98",
+    "x-hamr0-pulselog-7a47860c0c",
+    "x-hamr0-pulselog-db9e3ec1ed",
+    "x-haraka-message-stream-20ceedd273",
+    "x-haraka-message-stream-98561e18e4",
+    "x-harry5432-codeisotope-13d505aaca",
+    "x-harry5432-codeisotope-97d135b601",
+    "x-harry5432-codeisotope-a187b19d67",
+    "x-hasanimohammad-route-planner-a3080540b0",
+    "x-hasanimohammad-route-planner-ecce9a67ac",
+    "x-hellohub1212-dsh-windows-mcp-edc05b0fb8",
+    "x-helloqingtao-dsh-settings-arranger-0b9041362f",
+    "x-helloqingtao-dsh-settings-arranger-bec10fe715",
+    "x-hemv-857-agenttruth-4e380386cd",
+    "x-hemv-857-agenttruth-f7c4f326e2",
+    "x-hernancerm-playwright-traffic-1837f15c09",
+    "x-hernancerm-playwright-traffic-be00d32d2f",
+    "x-hernancerm-playwright-traffic-cbe7062bcf",
+    "x-hexmillionaire-agent-lanes-a35fd1abfd",
+    "x-hoeken-signalk-watch-schedule-1b8bff2a8a",
+    "x-hongtak-picochroma-03a03dcb3c",
+    "x-hongtak-picochroma-11454646fd",
+    "x-hongtak-picochroma-1e6311535c",
+    "x-hope-phenom-dsh-plugin-code-quality-2ece3930db",
+    "x-hope-phenom-dsh-plugin-code-quality-84c99e9b9b",
+    "x-hope-phenom-dsh-plugin-code-quality-9c99156b7c",
+    "x-hugo-w-pi-split-view-3f5ed6b535",
+    "x-huijoson-hudline-196da8a8ca",
+    "x-huzaifa-asif-mcp-catalog-snapshot-f0d6dc5a27",
+    "x-hyein-cbio-pi-codemode-usage-9d160822fb",
+    "x-hyein-cbio-pi-codemode-usage-b3cf3baf66",
+    "x-hypergraph-inc-companion-bc2bfd2773",
+    "x-ianwu5205-threads-backup-be1b66676c",
+    "x-ibrahimkalemci-claude-resume-hub-6c4b2ed0ca",
+    "x-ibrahimkalemci-claude-resume-hub-8363866680",
+    "x-ibrahimkalemci-claude-resume-hub-9df037c209",
+    "x-iclaudiumihaila-primer-verify-3d01276b06",
+    "x-igorguariroba-pi-watch-0d6cee6d8d",
+    "x-igorguariroba-pi-watch-36f8c4bc94",
+    "x-igorjpimenta-doppler-harness-47dea3e96d",
+    "x-immamdouhaboammar-unslop-preflight-aa5592a5d8",
+    "x-immamdouhaboammar-vibe-design-md-architect-23909bb68a",
+    "x-immamdouhaboammar-vibe-design-md-architect-aa5592a5d8",
+    "x-imtokenxinluo-dsh-session-doctor-8b06bb57d2",
+    "x-imtokenxinluo-dsh-session-doctor-eec0d42c30",
+    "x-investblog-slots-lite-1876c3d79e",
+    "x-investblog-slots-lite-339293f3d8",
+    "x-investblog-slots-lite-5576a4e011",
+    "x-iosdevsk-license-checker-9a3d3322a5",
+    "x-iricity-iricity-frontier-shared-6fc0f87902",
+    "x-isanchez-aguilar-quota-desk-9c060bcb8a",
+    "x-ishboogoo-fantasy-code-rpg-17c182a46d",
+    "x-ishboogoo-fantasy-code-rpg-721ef4e0b7",
+    "x-ishboogoo-fantasy-code-rpg-e243f0b221",
+    "x-ismail-elkorchi-argv-flags-26c90a26b3",
+    "x-itsmylife44-ctxrent-02959966cf",
+    "x-itsmylife44-ctxrent-100daa5073",
+    "x-itsmylife44-ctxrent-da1e05c299",
+    "x-itsyjs-corgi-f02bb913d1",
+    "x-ix-xs-node-comfort-fa9b718f4c",
+    "x-iyulab-tauri-kit-dev-10ddf7a424",
+    "x-iyulab-tauri-kit-dev-810136f94b",
+    "x-iyulab-tauri-kit-dev-d1ac015b55",
+    "x-j3pf-piquota-0c26daaf3e",
+    "x-j3pf-piquota-5f15797fc6",
+    "x-j3pf-piquota-ae2ddae413",
+    "x-jacobhammerle-eas-simulator-evidence-10634469da",
+    "x-janpauldahlke-dsh-agent-processes-813445cb98",
+    "x-jasondavies-critbit-js-dd19f99e45",
+    "x-jasondavies-critbit-js-ddb6387032",
+    "x-jasondavies-softheap-js-ca2941ae8e",
+    "x-jay-sharan-ledger-08b15a95d8",
+    "x-jay-sharan-ledger-db1b8fe9f5",
+    "x-jayli-cf-ech-921512eacb",
+    "x-jayli-pi-coder-ea749dfd60",
+    "x-jcv-pi-ghost-text-ea00b72c4e",
+    "x-jeonghun917-readfirst-0c16601a01",
+    "x-jeonghun917-readfirst-b83620558c",
+    "x-jhammant-quotamax-2e5ef39d3f",
+    "x-jhammant-quotamax-3b14fd3dac",
+    "x-jhowbhz-aut2fa-node-8631202700",
+    "x-jhowbhz-aut2fa-node-e950cb5bea",
+    "x-jhuanxx44-dsh-paste-path-27db094f85",
+    "x-jiekesu967-netprobe-cli-0a58dcd633",
+    "x-jiekesu967-netprobe-cli-37e8ad5f1a",
+    "x-jiekesu967-netprobe-cli-7869a171d0",
+    "x-jinwovo-secondsight-766fc1b132",
+    "x-jinwovo-secondsight-e11917c85b",
+    "x-jinwovo-secondsight-ee3fdf7394",
+    "x-johndworld-n8n-nodes-rempart-0d8a0d6637",
+    "x-johndworld-n8n-nodes-rempart-d5d7d186aa",
+    "x-johnhenry-wsh-529bede337",
+    "x-johnhenry-wsh-upon-star-529bede337",
+    "x-johnhenry-wsh-upon-star-9420576d0b",
+    "x-johnnydevriese-pi-captains-log-5da40dc9f2",
+    "x-josueavalosjim-taste-check-7690b62b74",
+    "x-juangh123-agentwarden-6780e9f69f",
+    "x-juangh123-agentwarden-6a477705e8",
+    "x-juangh123-agentwarden-b3f6807442",
+    "x-juliankang4-dsh-locale-ko-5ac9ad6adc",
+    "x-juliankang4-dsh-locale-ko-8dd39caa4c",
+    "x-juliantellez-wordwright-c29a9ecac9",
+    "x-k-nrs-tengri-9781541ed9",
+    "x-kadeangell-vite-plugin-native-rust-c2edce250d",
+    "x-kaktaknet-starlight-seo-258104d295",
+    "x-kaktaknet-starlight-seo-ca80c1681e",
+    "x-kangyishuai-dsh-plugins-89df918632",
+    "x-kangyishuai-dsh-plugins-a6b48034ac",
+    "x-kangyishuai-dsh-plugins-b848d261f3",
+    "x-katrinalaszlo-track-skill-b0cb64b21f",
+    "x-kenansulayman-freelist-8e5e758169",
+    "x-kevin-tou-fontdock-5893381ef4",
+    "x-kingi89-taivuta-5947dc9541",
+    "x-kingi89-taivuta-78d117ab6b",
+    "x-kody-bot-connector-kit-86eceb0839",
+    "x-kody-bot-connector-kit-9e8cd8e1c5",
+    "x-kulapard-pi-laconic-fd26a56f2e",
+    "x-kyrolloszakaria-claude-restarter-a6b0021a0e",
+    "x-kyrolloszakaria-claude-restarter-df8da5cc18",
+    "x-kyrolloszakaria-claude-restarter-efbfb85583",
+    "x-laaielichter-stashpad-ce1606a833",
+    "x-laaielichter-stashpad-e89755130e",
+    "x-laaielichter-stashpad-f565872fc1",
+    "x-lazy-jack-ltd-bipcircle-verifier-67ba14f1a1",
+    "x-lazy-jack-ltd-bipcircle-verifier-b4c71a984e",
+    "x-lazy-jack-ltd-bipcircle-verifier-ee0bbab9d3",
+    "x-lbailey94-whitemagic-plugins-9392aa1c69",
+    "x-lco117-dummy-llm-7bc25c430d",
+    "x-lco117-dummy-llm-c7ddfef212",
+    "x-lead788-vidia-api-45b341a7bc",
+    "x-leeguooooo-wrangler-accounts-2bfbdb3f27",
+    "x-leeguooooo-wrangler-accounts-32c5007cc1",
+    "x-leeguooooo-wrangler-accounts-f8aaaf6cdb",
+    "x-legible-sh-bigred-091c625275",
+    "x-legible-sh-bigred-c1b3ad7fdc",
+    "x-legible-sh-meter-dafebea7c3",
+    "x-legible-sh-meter-f079fb4ae1",
+    "x-legiosai-quartermaster-983632c98b",
+    "x-legiosai-quartermaster-a1c9b25a1d",
+    "x-legiosai-quartermaster-ae43b01853",
+    "x-li-qiang-dockhand-cli-399e9aa31d",
+    "x-li-qiang-dockhand-cli-5fa9f9f083",
+    "x-li-qiang-dockhand-cli-f6c762d18f",
+    "x-lilla021-opencode-ruby-upgrader-d7bc326ce9",
+    "x-lin-dongg-dsh-musage-card-27fd891081",
+    "x-linuxdino-cosmodrome-0a8bcbfe14",
+    "x-linuxdino-cosmodrome-1000e37165",
+    "x-liu-wen-wu-dsh-cerebrum-0b5b33fb5b",
+    "x-liu-wen-wu-dsh-cerebrum-41ada886e5",
+    "x-lnilluv-pi-opencode-go-rotation-c1a105f504",
+    "x-lnilluv-pi-opencode-go-rotation-e0811b8c43",
+    "x-longsien-fastdotcom-e28bb86b46",
+    "x-lordekeen-pi-qdrant-memory-12b8ebf020",
+    "x-lordekeen-pi-qdrant-memory-24fdad85f7",
+    "x-louisremi-dsh-always-on-7b3b0a88ed",
+    "x-lovenndme-dsh-profile-stats-46ebde935d",
+    "x-lovenndme-dsh-profile-stats-d7d72b9afa",
+    "x-lshades-solana-agent-kit-vaultbags-fbe14a1c6c",
+    "x-lshades-vaultbags-cli-6d1fae92d7",
+    "x-lucas7x7-droppier-1e5a79f14a",
+    "x-lucas7x7-droppier-7a561ba65f",
+    "x-lucas7x7-droppier-eb90bba554",
+    "x-lucky8197-dsh-devquest-b6f3b45c3c",
+    "x-lugabeeee-dsh-global-todo-50a3ef45e7",
+    "x-lugabeeee-dsh-global-todo-91805f6a08",
+    "x-lyraagent-pi-apply-patch-universal-148d17778f",
+    "x-lyraagent-pi-apply-patch-universal-ba3cb7eefe",
+    "x-m-colley-optimization-test-functions-98a3b5a081",
+    "x-m-sanchez-calibrated-103ba37349",
+    "x-m-sanchez-calibrated-2a7b29be5d",
+    "x-m-sanchez-training-forge-0d30097b9c",
+    "x-magna-illusions-petit-journal-10154f7ada",
+    "x-magna-illusions-petit-journal-77ceaa21db",
+    "x-mahmoud-helmy-m-ai-usage-inspector-5fc0a02ac4",
+    "x-mahmoud-helmy-m-ai-usage-inspector-7c28f674a2",
+    "x-mahmoud-helmy-m-ai-usage-inspector-f9eb5b1b56",
+    "x-mapbox-geojson-vt-6948037dbc",
+    "x-marcbachmann-cel-js-8076a896d8",
+    "x-marcusrdrigues-noxeval-a3119e80f7",
+    "x-mateuszingano-airlock-auth-41fe1f88e6",
+    "x-mateuszingano-airlock-auth-f58b359fc4",
+    "x-mateuszingano-airlock-auth-fa0b7d5e04",
+    "x-mateuszingano-airlock-ratelimit-3ea681f32a",
+    "x-matthewkim-11-tibodog-937e2a52e4",
+    "x-matthewkim-11-tibodog-f48cc14bb3",
+    "x-mbanderas-maestro-agora-542fdec973",
+    "x-mbanderas-maestro-agora-e72a95c47f",
+    "x-meat-daemon-404-dsh-plugin-immune-09ddd5b4d1",
+    "x-meat-daemon-404-dsh-plugin-immune-1e4c433292",
+    "x-meat-daemon-404-dsh-plugin-immune-39398536e1",
+    "x-mekanhan-control-arm-e4b18280fe",
+    "x-meshrix-platform-pactium-02cafcf140",
+    "x-meshrix-platform-pactium-066bb8aaf9",
+    "x-micdz-gpu-observatory-73cb9dedcd",
+    "x-migohe14-agy-insights-cedc7a7a96",
+    "x-milonpatowary-license-guard-d5cf047b9d",
+    "x-milonpatowary-license-guard-dbd69e8a20",
+    "x-milonpatowary-license-guard-ee7ac2ec4e",
+    "x-misolith-password-checker-0a3c84d51b",
+    "x-misolith-password-checker-0c285c8fc7",
+    "x-misolith-password-checker-39b60f574d",
+    "x-mitikasha-llc-fundquill-check-04619d29d3",
+    "x-mitikasha-llc-fundquill-check-533740d38d",
+    "x-miyashita337-claude-org-18768ebbe6",
+    "x-mk-elbaz-opencode-gemini-proxy-66b779fea0",
+    "x-model-geek-japanese-holidays-d41b19e551",
+    "x-moelzanaty3-redline-6cf4f8acfb",
+    "x-moelzanaty3-redline-845f1bf2f4",
+    "x-moelzanaty3-redline-a75ce837fe",
+    "x-molveau-skills-f515b053f9",
+    "x-mondalankan2007-a11y-seo-toolkit-72d10b3d49",
+    "x-mondalankan2007-a11y-seo-toolkit-7f4c577ec8",
+    "x-mondalankan2007-a11y-seo-toolkit-93310fa7e5",
+    "x-moshcoder-moshpit-dns-1a98a306c4",
+    "x-moshcoder-moshpit-dns-38e1a6f16d",
+    "x-moshcoder-moshpit-dns-577969b3dc",
+    "x-moutazideal-opencode-vitals-75092d327c",
+    "x-moutazideal-opencode-vitals-f895bbe941",
+    "x-mrbrunowolff-the-starter-kit-07ecf45af9",
+    "x-mrbrunowolff-the-starter-kit-724de3ae3b",
+    "x-mswinandmc-dsh-session-port-43a6b03c12",
+    "x-mswinandmc-dsh-session-port-76063a0729",
+    "x-mswinandmc-dsh-session-port-764faf634f",
+    "x-mukundakatta-agentguard-60e34eda76",
+    "x-munin92-n8n-nodes-scalable-capital-f17c9b1505",
+    "x-munin92-n8n-nodes-scalable-capital-ff1d66e070",
+    "x-muslewski-memory-atlas-08ea5c4491",
+    "x-muslewski-memory-atlas-faff18cc0f",
+    "x-mwiencek-mutate-cow-34eac1df8e",
+    "x-mwiencek-mutate-cow-93c81621de",
+    "x-mwiencek-mutate-cow-aefb5e05de",
+    "x-natte-dsh-sidebar-todo-b5b526f9d4",
+    "x-natte-dsh-sidebar-todo-c361759063",
+    "x-natte-dsh-sidebar-todo-ef0cf03790",
+    "x-netcatty-dsh-session-a4de033153",
+    "x-nethielchou-dsh-llm-keypool-ea794586a1",
+    "x-netlify-context-and-tools-3ac9351c82",
+    "x-nicoiakl-nyx5-648ce10572",
+    "x-nicoiakl-nyx5-84d2ae66e5",
+    "x-nightlab-agent-npm-release-check-d690cd10ac",
+    "x-nightlab-agent-npm-release-check-dc3b174b56",
+    "x-nightlab-agent-npm-release-check-edb7975f34",
+    "x-nika110-openhuddle-02ed3cd310",
+    "x-nika110-openhuddle-89c7090765",
+    "x-nilzx-dsh-whale-soul-c2479d398d",
+    "x-nisconder-portdoc-48075872f3",
+    "x-nometria-deploy-cli-fa50925e6f",
+    "x-novahiz-novahiz-1ed68f68f7",
+    "x-novahiz-novahiz-3af6216036",
+    "x-nureddinhaji-islamicons-83776f69d8",
+    "x-nwflower-dsh-file-claim-230e0f4cca",
+    "x-nwflower-dsh-file-claim-479f0445e2",
+    "x-nwflower-dsh-file-claim-9f7ffa99f9",
+    "x-ojastechnologies-sahajlipi-53b7fb50f8",
+    "x-ojastechnologies-sahajlipi-5baaad071a",
+    "x-okrasn-ai-usage-cost-48e5314578",
+    "x-okrasn-ai-usage-cost-8ba6e41fb4",
+    "x-onebugis-dsh-context-ops-7e69ed74fe",
+    "x-orderg-x-dsh-mobile-e7c3a258e4",
+    "x-orionsoftlimited-nigeria-paye-aaa7508151",
+    "x-osmanemraheroglu-technocore-did-tool-074d993fcc",
+    "x-outx-sec-coldxx-84937a19a4",
+    "x-outx-sec-coldxx-a7af0c7647",
+    "x-paibot-hq-sagasu-7abaa745ec",
+    "x-particlelight-dsh-all-usage-08c64848b8",
+    "x-particlelight-dsh-all-usage-405ce876b9",
+    "x-particlelight-dsh-all-usage-dd9b121d29",
+    "x-patrik-csak-bb26-50d7079e04",
+    "x-petercjl-npm-release-kit-62d6d0466a",
+    "x-petrovicistefan-mcp-dependency-doctor-2048e5c2eb",
+    "x-pex-gl-pex-math-0f4a6f07f8",
+    "x-phcz-are-we-there-yet-66d5428227",
+    "x-philipad-health-export-mcp-343e6c3773",
+    "x-philipad-health-export-mcp-622644fee0",
+    "x-philipad-health-export-mcp-6a622fca35",
+    "x-pianoprince-dsh-workspace-mover-42e8015071",
+    "x-pkistudio-dereditor-ead77ce957",
+    "x-plankmd-plankmd-448216fce9",
+    "x-poisons77-cc-pace-0b272dd9be",
+    "x-polunzh-dsh-task-notifier-f7a91c22db",
+    "x-pooriaarab-vibenotifications-11ba391b7b",
+    "x-pooriaarab-vibenotifications-c035f1e8b4",
+    "x-postalsys-ee-client-22676eb8c4",
+    "x-princealii-sanitrace-31a370bcb4",
+    "x-princealii-sanitrace-b7e9b1d20d",
+    "x-princealii-sanitrace-be20db41ae",
+    "x-psuvraneel-cyber-clone-proof-71df55e0c5",
+    "x-psuvraneel-cyber-clone-proof-b59a8d9e4f",
+    "x-psuvraneel-cyber-clone-proof-bf1f8aeb3c",
+    "x-qddfxp-pi-attachments-067c579d24",
+    "x-qddfxp-pi-attachments-ca404689c7",
+    "x-quigleybits-pi-usage-meters-234022ae31",
+    "x-quigleybits-pi-usage-meters-4a6f9b2bd0",
+    "x-quigleybits-pi-usage-meters-a28608a1a5",
+    "x-ragedpanda-time-sliced-4bf7b1eb56",
+    "x-ragedpanda-time-sliced-a199820f25",
+    "x-rajdeepratan-slashforge-415fb77a39",
+    "x-rajdeepratan-slashforge-bd9f4509dd",
+    "x-ramon-sg-agent-cloud-kit-49ec3a2b13",
+    "x-ramon-sg-agent-cloud-kit-e7db32898a",
+    "x-ramwin-dsh-turn-music-29d76999a0",
+    "x-ramwin-dsh-turn-music-5dd9102137",
+    "x-regrevia-dsh-pause-resume-65ddf0a5cb",
+    "x-regrevia-dsh-pause-resume-7e831c7f2c",
+    "x-regrevia-dsh-pause-resume-f8bcb15cf7",
+    "x-regt-urred-contextbase-098ed65f91",
+    "x-regt-urred-contextbase-bdab744422",
+    "x-regt-urred-contextbase-e912739983",
+    "x-rexxzyid-elaina-anchorguard-4150137269",
+    "x-rexxzyid-elaina-anchorguard-a3b73d1995",
+    "x-rexxzyid-elaina-anchorguard-fe641ed64b",
+    "x-rhein1-agoragentic-micro-ecf-0181c597d4",
+    "x-rhein1-agoragentic-micro-ecf-489b5efe60",
+    "x-rinne-node-optist-59e4349ae7",
+    "x-robot-friends-community-dopa-7e6345f6a5",
+    "x-robtandy-issue-attack-76567cfe55",
+    "x-robtandy-issue-attack-aa3546c4e7",
+    "x-robtandy-issue-attack-c7e821f7ac",
+    "x-rock3r-atc-a8ea5f29b1",
+    "x-romulocrj-js-pdf-40a73ab3c2",
+    "x-romulocrj-js-pdf-723c326683",
+    "x-romulocrj-js-pdf-fc3e27ad74",
+    "x-ronak-create-fablecut-eb5b6a8e89",
+    "x-rorena15-scopeburn-0edb0ad852",
+    "x-rorena15-scopeburn-193ff82094",
+    "x-rorena15-scopeburn-3882befc1d",
+    "x-roshcompanylabs-cut-at-k-ec0b4554f5",
+    "x-ruochenlyu-google-trends-now-23d61f9b5a",
+    "x-ruochenlyu-google-trends-now-25f61d011d",
+    "x-russellmoss-agent-guard-6f29d618ac",
+    "x-russellmoss-agent-guard-a8a2648a45",
+    "x-russellmoss-agent-guard-e4a229b9a9",
+    "x-sachind6-pi-resume-harness-0ba684218c",
+    "x-sachind6-pi-resume-harness-2cfae6429e",
+    "x-sadrmanesh-commerce-agent-skills-3410332b5e",
+    "x-sandsoftwaresolutions-ss-encodings-690cfd0f08",
+    "x-sandsoftwaresolutions-ss-fuzzy-find-f8be0964c1",
+    "x-sandsoftwaresolutions-ss-git-info-b5a02d8c01",
+    "x-sandsoftwaresolutions-ss-memo-50598f9b20",
+    "x-sandsoftwaresolutions-ss-nl-validate-c8eb37737a",
+    "x-sdshah09-design-doc-agent-skill-512a123d90",
+    "x-send-broadcast-broadcast-node-316a476db9",
+    "x-seoulpro-gap-tolerant-router-2b3196b1f6",
+    "x-seoulpro-render-handoff-contract-5a6d0fc265",
+    "x-seoulpro-render-handoff-contract-ca466e9538",
+    "x-shaheershoaib-receipts-7a89c3876e",
+    "x-shaheershoaib-receipts-80518bc4dc",
+    "x-shaheershoaib-receipts-d8a024df3e",
+    "x-shatzibitten-codepend-a50424117a",
+    "x-shelamkoff-infinite-scroll-6ee382d37f",
+    "x-shironxn-pi-ansicat-217a8f7890",
+    "x-shironxn-pi-ansicat-7cb46ff129",
+    "x-shironxn-pi-ansicat-7e74574281",
+    "x-shstkvch-theatre-cli-4c42fff689",
+    "x-shstkvch-theatre-cli-af6f9aa598",
+    "x-sidwiskers-gramless-f327de939e",
+    "x-sidwiskers-gramless-f9614e20cd",
+    "x-simantaturja-cccost-dashboard-8bda529507",
+    "x-simantaturja-cccost-dashboard-e2565d8ca6",
+    "x-sir-ad-claude-setup-skill-80d3306462",
+    "x-skillgauntlet-skillgauntlet-90cbb706ca",
+    "x-skillgauntlet-skillgauntlet-90d8086a03",
+    "x-skillgauntlet-skillgauntlet-d8b57cb0c9",
+    "x-slow-stack-dsh-study-desk-15fe7aa167",
+    "x-slow-stack-dsh-study-desk-9757f57377",
+    "x-slow-stack-dsh-study-desk-9f61b404c7",
+    "x-spark-ai-boy-dsh-obsidian-bridge-05faca330a",
+    "x-spobi-context-carwash-f7d3fc839d",
+    "x-spokospace-astro-split-build-aa5290b9f3",
+    "x-spokospace-astro-split-build-caa6245386",
+    "x-spokospace-astro-split-build-cf6f5f5e49",
+    "x-starfie1d1272-dsh-github-skills-1bfb23bfd4",
+    "x-stealth-alpha-fathom-9e295b0a74",
+    "x-strato-dan-dan-oss-recall-dashboard-25943e78f2",
+    "x-switch-afk-sol-epoch-516f4d6171",
+    "x-switch-afk-sol-holders-70aeda17ab",
+    "x-switch-afk-sol-pda-88ec6114c5",
+    "x-switch-afk-sol-priority-fee-02ea62fe0c",
+    "x-switch-afk-sol-priority-fee-4c2aaf0691",
+    "x-switch-afk-sol-stake-info-91b37c1175",
+    "x-t-crew-memory-pulse-333f08473b",
+    "x-t-crew-memory-pulse-a4d0b68c24",
+    "x-t-crew-memory-pulse-e3ac62e8c0",
+    "x-t0b0i7-devwell-cli-21b84a3529",
+    "x-tahmidrahman-release-graph-12f61bc562",
+    "x-tang0226-graph-js-32060bb418",
+    "x-tang0226-graph-js-4b3dd77ad4",
+    "x-tang0226-graph-js-6c98302351",
+    "x-tangyistudio-scroll-frame-sequence-4cdfa47ac0",
+    "x-tapaskar-archwhere-6f1863fc5b",
+    "x-tapaskar-archwhere-874f3c841c",
+    "x-tapaskar-archwhere-e679773209",
+    "x-theraccoonbear-exprforge-708edb909c",
+    "x-thinkofrain1213-deepseek-harness-wallet-patched-0df3974f9a",
+    "x-thinkofrain1213-deepseek-harness-wallet-patched-43650bb0e1",
+    "x-thomas783-pr-docent-727f4a7ff4",
+    "x-tiger-dreams-awesometime-1f759a5a3b",
+    "x-tiger-dreams-awesometime-fbd573bbe9",
+    "x-tiger-dreams-awesometime-fcfb680a90",
+    "x-tigercat1124-pi-optimize-prompt-12b59210b9",
+    "x-tigorlazuardi-claude-retry-5c2a373c60",
+    "x-tigorlazuardi-claude-retry-5f18bbd3a8",
+    "x-tigorlazuardi-claude-retry-96af0d174c",
+    "x-tikalk-adlc-cli-4965288454",
+    "x-tikalk-adlc-cli-7d67e9763e",
+    "x-timtarou-ai-hp-38a686ee55",
+    "x-tirthkparikh-figma-live-tokens-5375a9dc91",
+    "x-tirthkparikh-figma-live-tokens-754e9cddc1",
+    "x-tlewa-dsh-sidebar-row-menu-5c22882123",
+    "x-tlewa-dsh-sidebar-row-menu-c808f63e09",
+    "x-tobycai-dsh-sessions-manager-7070484c87",
+    "x-tobycai-dsh-sessions-manager-9cff783163",
+    "x-tobycai-dsh-sessions-manager-cbe05230ff",
+    "x-tools-for-agents-prism-0e26fcd95c",
+    "x-tools-for-agents-prism-10899fabfb",
+    "x-tools-for-agents-prism-697c24eab8",
+    "x-treetracetool-treetrace-3c7d2e0abb",
+    "x-treetracetool-treetrace-632c0a518e",
+    "x-treetracetool-treetrace-81d5699937",
+    "x-tricksterzero-hexo-yukari-ca6965c3ff",
+    "x-tricksterzero-hexo-yukari-ec48ad34c1",
+    "x-ttungx-pi-at-skills-a3084963a1",
+    "x-ubaidai-leakmoat-cli-2a848acae3",
+    "x-ubaidai-leakmoat-cli-9f51779914",
+    "x-ugurcandede-cc-cost-0903c9ac53",
+    "x-ugurcandede-cc-cost-9622afd88c",
+    "x-ugurcandede-cc-cost-f7d038f3c7",
+    "x-uniqueweb1-vibe-it-securely-453e75404d",
+    "x-ushikundesuyo-shiwake-mcp-30acc1ba3c",
+    "x-ushikundesuyo-shiwake-mcp-3f053b2cff",
+    "x-uurdemir-agent-hub-ui-073177f579",
+    "x-uurdemir-agent-hub-ui-213d5710bc",
+    "x-uurdemir-agent-hub-ui-2b4a6c3273",
+    "x-ux-yash-claude-limits-statusline-307419f9b2",
+    "x-vcesinger-homebridge-marstek-venus-c3dfa1a640",
+    "x-vcesinger-homebridge-marstek-venus-d3cc0e64ff",
+    "x-vcesinger-homebridge-marstek-venus-fd72acd8f1",
+    "x-vdaluz-astro-affiliate-4c8491b873",
+    "x-vdaluz-astro-affiliate-a862f077df",
+    "x-vdaluz-astro-affiliate-bd8166a9e0",
+    "x-vdaluz-astro-opt-in-analytics-2f7c5e66e3",
+    "x-vdaluz-astro-opt-in-analytics-98489c33d8",
+    "x-verdana-dsh-session-purge-3d33335ba8",
+    "x-verdana-dsh-session-purge-deb275ff27",
+    "x-verdana-dsh-session-purge-e39aced28f",
+    "x-vipperson1p-wq-vibehound-0b201e94aa",
+    "x-vipperson1p-wq-vibehound-3c2aadd23d",
+    "x-vipperson1p-wq-vibehound-6eadbf453e",
+    "x-vlsi-github-actions-random-matrix-38176176de",
+    "x-vlsi-github-actions-random-matrix-69941e3bd2",
+    "x-vlsi-github-actions-random-matrix-d952f6ad71",
+    "x-vlydev-cs2-masked-inspect-js-931f124e1f",
+    "x-vlydev-cs2-masked-inspect-js-965cadca53",
+    "x-vlydev-cs2-masked-inspect-js-db22e5a083",
+    "x-vlydev-cs2-masked-inspect-ts-0d26ae9914",
+    "x-vlydev-cs2-masked-inspect-ts-0e0bf0c4a4",
+    "x-wahyzmaster-office-sim-f34330ad3e",
+    "x-wang-lin-chang-dsh-vap-971ce297be",
+    "x-wang-lin-chang-dsh-vap-a4d2a920a2",
+    "x-wangjianming-pi-weather-widget-02f59d1c38",
+    "x-wangjianming-pi-weather-widget-617eee389f",
+    "x-weidows-dsh-whalechan-herself-d31a97c25f",
+    "x-whitequark-ipaddr-js-3e7c4e7794",
+    "x-whitequark-ipaddr-js-527b09fea9",
+    "x-whitequark-ipaddr-js-74ee4c5751",
+    "x-wjf1-dsh-portable-43d2482f03",
+    "x-wjf1-dsh-portable-4ca6c30c4b",
+    "x-woksin-pi-context-budget-99d60af99f",
+    "x-wrsilva-reis-mobile-2fddf18ded",
+    "x-wrsilva-reis-mobile-66b365903e",
+    "x-wrsilva-reis-mobile-a816f13dde",
+    "x-wzj998-cutccc-0f7a315107",
+    "x-wzj998-cutccc-5a91997f67",
+    "x-wzj998-cutccc-f8be87070b",
+    "x-xiaopb-dsh-mobile-layout-02893b80bb",
+    "x-xiaopb-dsh-mobile-layout-3a8a04e587",
+    "x-xiaopb-dsh-mobile-layout-c06628fd58",
+    "x-xinghe-labs-pi-model-config-1db0f57fe1",
+    "x-xursand7777-customergpt-sdk-0cffa0dd11",
+    "x-xursand7777-customergpt-sdk-8b2c8fd90c",
+    "x-xursand7777-customergpt-sdk-9c0f229ab9",
+    "x-yanglaofish-dsh-proxy-pro-b8b5949ec5",
+    "x-yann9-dsh-git-workbench-44fd5c2b8c",
+    "x-yann9-dsh-git-workbench-7c9cbb008a",
+    "x-yann9-dsh-git-workbench-a817778aa0",
+    "x-ydddp-nesting-proxy-9c9decea18",
+    "x-yersi88-dsh-ollama-tool-guard-88080cd1db",
+    "x-yezannnnn-relay-claude-14512f8eef",
+    "x-yezannnnn-relay-claude-d415f91b4b",
+    "x-yezannnnn-relay-claude-f6e2ce20c8",
+    "x-yklovepython-halfsize-bb4752db74",
+    "x-yokawasa-postman-cli-completion-57036e6426",
+    "x-yuefdev-tr-slugify-0e97c2c6d1",
+    "x-yuefdev-tr-slugify-fab1d1e612",
+    "x-yuefdev-tr-slugify-fea2e35089",
+    "x-yugimob-pi-opencode-go-rotation-442d763a43",
+    "x-yugimob-pi-opencode-go-rotation-8074d3dc33",
+    "x-z-zihan-build-meta-injector-105cd79519",
+    "x-zartyblartfast-kaspa-pof-api-2ed5da05dd",
+    "x-zartyblartfast-kaspa-pof-api-af0025385b",
+    "x-zeekyblast-stoatkit-27aef1b4ac",
+    "x-zerodoc-app-invoice2json-3336145037",
+    "x-zilongyang-dsh-session-mng-d251b41469",
+    "x-zilongyang-dsh-session-titler-1296879890",
+    "x-zilongyang-dsh-session-titler-632000e036",
+    "x-zilongyang-dsh-session-titler-b968e58948",
+    "x-zwarmex-slopfix-1484de0daa",
+    "x-zylzyqzz-dsh-mobile-pwa-7454907034",
+    "x-zylzyqzz-dsh-mobile-pwa-f92f5fd67d",
+    "x-zylzyqzz-dsh-mobile-pwa-ffd00879a2"
+  ],
+  "perFamily": {
+    "gh:1success0error/claude-session-cards": 3,
+    "gh:42wp/dev-env": 3,
+    "gh:6t9xstar/one-step-seo": 2,
+    "gh:877007021/pi-memory-sessions": 1,
+    "gh:aayushmainali-github/number-theory-2": 3,
+    "gh:aboudjem/ui-ux-suite": 3,
+    "gh:acus9345/dsh-block-hanging-commands": 1,
+    "gh:acus9345/dsh-block-placeholder-edits": 2,
+    "gh:acus9345/dsh-enforce-package-manager": 1,
+    "gh:adarshakhatua/queue-list": 3,
+    "gh:adrielrod/claude-bus": 3,
+    "gh:aemonge/pi-openspec-gate": 3,
+    "gh:agentelabs/wdk-policy-guard": 1,
+    "gh:agentic-control-plane/muse-code-acp-plugin": 1,
+    "gh:agile-north/dockship": 3,
+    "gh:ainzrimuru/cf-billing-guard": 3,
+    "gh:airpineapplea/feiyu-memory": 1,
+    "gh:alagrede/confluence-md-sync": 3,
+    "gh:alex-messer/hexo-ping-services": 3,
+    "gh:alexandercreates/localize-me": 3,
+    "gh:allan-nava/agent-ledger": 1,
+    "gh:amarnotcool/teamapex_repotool": 3,
+    "gh:amirsinaz/personal-agentic-os": 3,
+    "gh:aotr/hue-shift": 3,
+    "gh:arctumn/ordinal-words": 1,
+    "gh:arlenman/dsh-backup-sync": 3,
+    "gh:arraypress/date-utils": 2,
+    "gh:arraypress/file-utils": 1,
+    "gh:arraypress/security-headers": 2,
+    "gh:arraypress/stripe-currencies": 1,
+    "gh:arsennur/charto": 1,
+    "gh:aunysillyme/model-orchestrator": 3,
+    "gh:aunysillyme/website-build-skill": 2,
+    "gh:avaui-dev/apogee": 1,
+    "gh:babul/cribsheet": 1,
+    "gh:banal972/spb-seo-geo": 2,
+    "gh:berenyibence/real-cost-of-agent": 1,
+    "gh:betterlmy/pi-statusline": 3,
+    "gh:bg1avd/mcp-search-server": 1,
+    "gh:bigbluebaby/codex2dsh": 2,
+    "gh:bingh0/ccr": 2,
+    "gh:brahiandres1999-oss/omni-spec": 3,
+    "gh:caioribeiroclw-pixel/pluribus": 3,
+    "gh:canyuda/agent-guard": 3,
+    "gh:cardin/opencode-fold-diffs": 3,
+    "gh:chad3814/secret-provider": 1,
+    "gh:champmk/modforge": 2,
+    "gh:chao5go/remote-fileshare": 1,
+    "gh:chaoyue0307/mcp-guard": 3,
+    "gh:chenxu233/dsh-gemini-tool-schema": 1,
+    "gh:chrystyan96/execfence": 1,
+    "gh:chxsong/pi-auto-continue": 1,
+    "gh:cinorid/pi-persian-rtl-bundle": 2,
+    "gh:cityssm/node-utils-datetime": 1,
+    "gh:ckarefulon/dsh-tailscale-remote": 2,
+    "gh:clementprevot/pi-repo-overlay": 1,
+    "gh:codesigils/zero-md-formatter": 1,
+    "gh:cometkim/rkyv-js": 1,
+    "gh:copperdesign/gcal": 3,
+    "gh:coratch/runwhy": 3,
+    "gh:cujuju/solidjs-color-picker": 1,
+    "gh:curioustorvald/iyagimusic.js": 1,
+    "gh:dadwritestech/thisisfine": 1,
+    "gh:dan-seo/ctx-autopsy": 1,
+    "gh:danielgap/pi-zai-usage": 1,
+    "gh:darrenapfel/soundcheck": 3,
+    "gh:data-unix/mcp-maltego": 1,
+    "gh:davisliu2006/pi-permission-system": 1,
+    "gh:dddmuc/dsh-delete-turn": 1,
+    "gh:dddmuc/dsh-session-relocate": 2,
+    "gh:dddmuc/dsh-url-router": 3,
+    "gh:denismrvoljak/pi-troupe": 2,
+    "gh:devacc8/dsh-billing-badge": 1,
+    "gh:devmobilean27/rn_network_debugger": 1,
+    "gh:dgaidula/offline-csv-geocoder": 2,
+    "gh:dhaupin/govstruct": 3,
+    "gh:dibrovnik/pvs": 1,
+    "gh:dingchenhui0618-arch/dsh-poker-night": 2,
+    "gh:donatosilva/gentle-shell-minimax-usage": 3,
+    "gh:donyue7/dsh-session-bus": 2,
+    "gh:drumst0ck/pi-usage-limit-resume": 2,
+    "gh:duanxiangchun/dsh-ollama-statistical": 2,
+    "gh:duhu2000/qcc-mcp-legal-oauth": 1,
+    "gh:dvnold/fm-bench": 2,
+    "gh:echo-smith/hy-memory4dsh": 1,
+    "gh:efolchmontiel/gentle-emote": 1,
+    "gh:ehk2509/json-to-express": 3,
+    "gh:emson/claudoro": 3,
+    "gh:enoughpower/dsh-git-graph": 2,
+    "gh:eqdoc/indicato": 1,
+    "gh:erkamyaman/capacitor-foldable": 1,
+    "gh:ershov-ilya/multi-agent-kit": 1,
+    "gh:excellent-so/usage-cache": 1,
+    "gh:expecho/ccreports": 3,
+    "gh:fatihdogann/turkce-utils": 3,
+    "gh:feibi-mochi/deepseek-harness-control-center": 2,
+    "gh:fixadero/gradle-to-js": 2,
+    "gh:floezwerk/piagent-realtime-provider-cost": 1,
+    "gh:flyewi/eleventy-plugin-redirects": 2,
+    "gh:frederick-wang/pi-glm-usage": 1,
+    "gh:frederick-wang/pi-xai-usage": 1,
+    "gh:fusionpacttech/fusionpact-vectordb": 1,
+    "gh:fuyue521/dsh-desktop-shortcut": 1,
+    "gh:gautamverma40/tagmatic": 2,
+    "gh:gengwg/dsh-kubectl-guard": 2,
+    "gh:geoqiao/pi-tools": 2,
+    "gh:ghostpawjs/affinity": 2,
+    "gh:ghostpawjs/codex": 1,
+    "gh:ghostpawjs/souls": 1,
+    "gh:gibrancorbin11-hub/wayleave": 1,
+    "gh:gitbytefree/dsh-pomodoro-pet": 1,
+    "gh:goodandready/dsh-kanban": 2,
+    "gh:goodandready/dsh-messenger-gateway": 2,
+    "gh:goodandready/dsh-tts": 1,
+    "gh:goodandready/dsh-usage-guard": 1,
+    "gh:gozajpeg/prins": 1,
+    "gh:gridworkjs/core": 2,
+    "gh:guilianerde/skills-init": 2,
+    "gh:hamr0/pulselog": 3,
+    "gh:haraka/message-stream": 2,
+    "gh:harry5432/codeisotope": 3,
+    "gh:hasanimohammad/route-planner": 2,
+    "gh:hellohub1212/dsh-windows-mcp": 1,
+    "gh:helloqingtao/dsh-settings-arranger": 2,
+    "gh:hemv-857/agenttruth": 2,
+    "gh:hernancerm/playwright-traffic": 3,
+    "gh:hexmillionaire/agent-lanes": 1,
+    "gh:hoeken/signalk-watch-schedule": 1,
+    "gh:hongtak/picochroma": 3,
+    "gh:hope-phenom/dsh-plugin-code-quality": 3,
+    "gh:hugo-w/pi-split-view": 1,
+    "gh:huijoson/hudline": 1,
+    "gh:huzaifa-asif/mcp-catalog-snapshot": 1,
+    "gh:hyein-cbio/pi-codemode-usage": 2,
+    "gh:hypergraph-inc/companion": 1,
+    "gh:ianwu5205/threads-backup": 1,
+    "gh:ibrahimkalemci/claude-resume-hub": 3,
+    "gh:iclaudiumihaila/primer-verify": 1,
+    "gh:igorguariroba/pi-watch": 2,
+    "gh:igorjpimenta/doppler-harness": 1,
+    "gh:immamdouhaboammar/unslop-preflight": 1,
+    "gh:immamdouhaboammar/vibe-design-md-architect": 2,
+    "gh:imtokenxinluo/dsh-session-doctor": 2,
+    "gh:investblog/slots-lite": 3,
+    "gh:iosdevsk/license-checker": 1,
+    "gh:iricity/iricity-frontier-shared": 1,
+    "gh:isanchez-aguilar/quota-desk": 1,
+    "gh:ishboogoo/fantasy-code-rpg": 3,
+    "gh:ismail-elkorchi/argv-flags": 1,
+    "gh:itsmylife44/ctxrent": 3,
+    "gh:itsyjs/corgi": 1,
+    "gh:ix-xs/node-comfort": 1,
+    "gh:iyulab/tauri-kit-dev": 3,
+    "gh:j3pf/piquota": 3,
+    "gh:jacobhammerle/eas-simulator-evidence": 1,
+    "gh:janpauldahlke/dsh-agent-processes": 1,
+    "gh:jasondavies/critbit.js": 2,
+    "gh:jasondavies/softheap.js": 1,
+    "gh:jay-sharan/ledger": 2,
+    "gh:jayli/cf-ech": 1,
+    "gh:jayli/pi-coder": 1,
+    "gh:jcv/pi-ghost-text": 1,
+    "gh:jeonghun917/readfirst": 2,
+    "gh:jhammant/quotamax": 2,
+    "gh:jhowbhz/aut2fa-node": 2,
+    "gh:jhuanxx44/dsh-paste-path": 1,
+    "gh:jiekesu967/netprobe-cli": 3,
+    "gh:jinwovo/secondsight": 3,
+    "gh:johndworld/n8n-nodes-rempart": 2,
+    "gh:johnhenry/wsh": 1,
+    "gh:johnhenry/wsh-upon-star": 2,
+    "gh:johnnydevriese/pi-captains-log": 1,
+    "gh:josueavalosjim/taste-check": 1,
+    "gh:juangh123/agentwarden": 3,
+    "gh:juliankang4/dsh-locale-ko": 2,
+    "gh:juliantellez/wordwright": 1,
+    "gh:k-nrs/tengri": 1,
+    "gh:kadeangell/vite-plugin-native-rust": 1,
+    "gh:kaktaknet/starlight-seo": 2,
+    "gh:kangyishuai/dsh-plugins": 3,
+    "gh:katrinalaszlo/track-skill": 1,
+    "gh:kenansulayman/freelist": 1,
+    "gh:kevin-tou/fontdock": 1,
+    "gh:kingi89/taivuta": 2,
+    "gh:kody-bot/connector-kit": 2,
+    "gh:kulapard/pi-laconic": 1,
+    "gh:kyrolloszakaria/claude-restarter": 3,
+    "gh:laaielichter/stashpad": 3,
+    "gh:lazy-jack-ltd/bipcircle-verifier": 3,
+    "gh:lbailey94/whitemagic-plugins": 1,
+    "gh:lco117/dummy-llm": 2,
+    "gh:lead788/vidia-api": 1,
+    "gh:leeguooooo/wrangler-accounts": 3,
+    "gh:legible-sh/bigred": 2,
+    "gh:legible-sh/meter": 2,
+    "gh:legiosai/quartermaster": 3,
+    "gh:li-qiang/dockhand-cli": 3,
+    "gh:lilla021/opencode-ruby-upgrader": 1,
+    "gh:lin-dongg/dsh-musage-card": 1,
+    "gh:linuxdino/cosmodrome": 2,
+    "gh:liu-wen-wu/dsh-cerebrum": 2,
+    "gh:lnilluv/pi-opencode-go-rotation": 2,
+    "gh:longsien/fastdotcom": 1,
+    "gh:lordekeen/pi-qdrant-memory": 2,
+    "gh:louisremi/dsh-always-on": 1,
+    "gh:lovenndme/dsh-profile-stats": 2,
+    "gh:lshades/solana-agent-kit-vaultbags": 1,
+    "gh:lshades/vaultbags-cli": 1,
+    "gh:lucas7x7/droppier": 3,
+    "gh:lucky8197/dsh-devquest": 1,
+    "gh:lugabeeee/dsh-global-todo": 2,
+    "gh:lyraagent/pi-apply-patch-universal": 2,
+    "gh:m-colley/optimization-test-functions": 1,
+    "gh:m-sanchez/calibrated": 2,
+    "gh:m-sanchez/training-forge": 1,
+    "gh:magna-illusions/petit-journal": 2,
+    "gh:mahmoud-helmy-m/ai-usage-inspector": 3,
+    "gh:mapbox/geojson-vt": 1,
+    "gh:marcbachmann/cel-js": 1,
+    "gh:marcusrdrigues/noxeval": 1,
+    "gh:mateuszingano/airlock-auth": 3,
+    "gh:mateuszingano/airlock-ratelimit": 1,
+    "gh:matthewkim-11/tibodog": 2,
+    "gh:mbanderas/maestro-agora": 2,
+    "gh:meat-daemon-404/dsh-plugin-immune": 3,
+    "gh:mekanhan/control-arm": 1,
+    "gh:meshrix-platform/pactium": 2,
+    "gh:micdz/gpu-observatory": 1,
+    "gh:migohe14/agy-insights": 1,
+    "gh:milonpatowary/license-guard": 3,
+    "gh:misolith/password-checker": 3,
+    "gh:mitikasha-llc/fundquill-check": 2,
+    "gh:miyashita337/claude-org": 1,
+    "gh:mk-elbaz/opencode-gemini-proxy": 1,
+    "gh:model-geek/japanese-holidays": 1,
+    "gh:moelzanaty3/redline": 3,
+    "gh:molveau/skills": 1,
+    "gh:mondalankan2007-a11y/seo-toolkit": 3,
+    "gh:moshcoder/moshpit-dns": 3,
+    "gh:moutazideal/opencode-vitals": 2,
+    "gh:mrbrunowolff/the-starter-kit": 2,
+    "gh:mswinandmc/dsh-session-port": 3,
+    "gh:mukundakatta/agentguard": 1,
+    "gh:munin92/n8n-nodes-scalable-capital": 2,
+    "gh:muslewski/memory-atlas": 2,
+    "gh:mwiencek/mutate-cow": 3,
+    "gh:natte/dsh-sidebar-todo": 3,
+    "gh:netcatty/dsh-session": 1,
+    "gh:nethielchou/dsh-llm-keypool": 1,
+    "gh:netlify/context-and-tools": 1,
+    "gh:nicoiakl/nyx5": 2,
+    "gh:nightlab-agent/npm-release-check": 3,
+    "gh:nika110/openhuddle": 2,
+    "gh:nilzx/dsh-whale-soul": 1,
+    "gh:nisconder/portdoc": 1,
+    "gh:nometria/deploy-cli": 1,
+    "gh:novahiz/novahiz": 2,
+    "gh:nureddinhaji/islamicons": 1,
+    "gh:nwflower/dsh-file-claim": 3,
+    "gh:ojastechnologies/sahajlipi": 2,
+    "gh:okrasn/ai-usage-cost": 2,
+    "gh:onebugis/dsh-context-ops": 1,
+    "gh:orderg-x/dsh-mobile": 1,
+    "gh:orionsoftlimited/nigeria-paye": 1,
+    "gh:osmanemraheroglu/technocore-did-tool": 1,
+    "gh:outx-sec/coldxx": 2,
+    "gh:paibot-hq/sagasu": 1,
+    "gh:particlelight/dsh-all-usage": 3,
+    "gh:patrik-csak/bb26": 1,
+    "gh:petercjl/npm-release-kit": 1,
+    "gh:petrovicistefan/mcp-dependency-doctor": 1,
+    "gh:pex-gl/pex-math": 1,
+    "gh:phcz/are-we-there-yet": 1,
+    "gh:philipad/health-export-mcp": 3,
+    "gh:pianoprince/dsh-workspace-mover": 1,
+    "gh:pkistudio/dereditor": 1,
+    "gh:plankmd/plankmd": 1,
+    "gh:poisons77/cc-pace": 1,
+    "gh:polunzh/dsh-task-notifier": 1,
+    "gh:pooriaarab/vibenotifications": 2,
+    "gh:postalsys/ee-client": 1,
+    "gh:princealii/sanitrace": 3,
+    "gh:psuvraneel-cyber/clone-proof": 3,
+    "gh:qddfxp/pi-attachments": 2,
+    "gh:quigleybits/pi-usage-meters": 3,
+    "gh:ragedpanda/time-sliced": 2,
+    "gh:rajdeepratan/slashforge": 2,
+    "gh:ramon-sg/agent-cloud-kit": 2,
+    "gh:ramwin/dsh-turn-music": 2,
+    "gh:regrevia/dsh-pause-resume": 3,
+    "gh:regt-urred/contextbase": 3,
+    "gh:rexxzyid/elaina-anchorguard": 3,
+    "gh:rhein1/agoragentic-micro-ecf": 2,
+    "gh:rinne/node-optist": 1,
+    "gh:robot-friends-community/dopa": 1,
+    "gh:robtandy/issue_attack": 3,
+    "gh:rock3r/atc": 1,
+    "gh:romulocrj/js_pdf": 3,
+    "gh:ronak-create/fablecut": 1,
+    "gh:rorena15/scopeburn": 3,
+    "gh:roshcompanylabs/cut-at-k": 1,
+    "gh:ruochenlyu/google-trends-now": 2,
+    "gh:russellmoss/agent-guard": 3,
+    "gh:sachind6/pi-resume-harness": 2,
+    "gh:sadrmanesh/commerce-agent-skills": 1,
+    "gh:sandsoftwaresolutions/ss-encodings": 1,
+    "gh:sandsoftwaresolutions/ss-fuzzy-find": 1,
+    "gh:sandsoftwaresolutions/ss-git-info": 1,
+    "gh:sandsoftwaresolutions/ss-memo": 1,
+    "gh:sandsoftwaresolutions/ss-nl-validate": 1,
+    "gh:sdshah09/design-doc-agent-skill": 1,
+    "gh:send-broadcast/broadcast-node": 1,
+    "gh:seoulpro/gap-tolerant-router": 1,
+    "gh:seoulpro/render-handoff-contract": 2,
+    "gh:shaheershoaib/receipts": 3,
+    "gh:shatzibitten/codepend": 1,
+    "gh:shelamkoff/infinite-scroll": 1,
+    "gh:shironxn/pi-ansicat": 3,
+    "gh:shstkvch/theatre-cli": 2,
+    "gh:sidwiskers/gramless": 2,
+    "gh:simantaturja/cccost-dashboard": 2,
+    "gh:sir-ad/claude-setup-skill": 1,
+    "gh:skillgauntlet/skillgauntlet": 3,
+    "gh:slow-stack/dsh-study-desk": 3,
+    "gh:spark-ai-boy/dsh-obsidian-bridge": 1,
+    "gh:spobi/context-carwash": 1,
+    "gh:spokospace/astro-split-build": 3,
+    "gh:starfie1d1272/dsh-github-skills": 1,
+    "gh:stealth-alpha/fathom": 1,
+    "gh:strato-dan/dan-oss-recall-dashboard": 1,
+    "gh:switch-afk/sol-epoch": 1,
+    "gh:switch-afk/sol-holders": 1,
+    "gh:switch-afk/sol-pda": 1,
+    "gh:switch-afk/sol-priority-fee": 2,
+    "gh:switch-afk/sol-stake-info": 1,
+    "gh:t-crew/memory-pulse": 3,
+    "gh:t0b0i7/devwell-cli": 1,
+    "gh:tahmidrahman/release-graph": 1,
+    "gh:tang0226/graph-js": 3,
+    "gh:tangyistudio/scroll-frame-sequence": 1,
+    "gh:tapaskar/archwhere": 3,
+    "gh:theraccoonbear/exprforge": 1,
+    "gh:thinkofrain1213/deepseek-harness-wallet-patched": 2,
+    "gh:thomas783/pr-docent": 1,
+    "gh:tiger-dreams/awesometime": 3,
+    "gh:tigercat1124/pi-optimize-prompt": 1,
+    "gh:tigorlazuardi/claude-retry": 3,
+    "gh:tikalk/adlc-cli": 2,
+    "gh:timtarou/ai-hp": 1,
+    "gh:tirthkparikh/figma-live-tokens": 2,
+    "gh:tlewa/dsh-sidebar-row-menu": 2,
+    "gh:tobycai/dsh-sessions-manager": 3,
+    "gh:tools-for-agents/prism": 3,
+    "gh:treetracetool/treetrace": 3,
+    "gh:tricksterzero/hexo-yukari": 2,
+    "gh:ttungx/pi-at-skills": 1,
+    "gh:ubaidai/leakmoat-cli": 2,
+    "gh:ugurcandede/cc-cost": 3,
+    "gh:uniqueweb1/vibe-it-securely": 1,
+    "gh:ushikundesuyo/shiwake-mcp": 2,
+    "gh:uurdemir/agent-hub-ui": 3,
+    "gh:ux-yash/claude-limits-statusline": 1,
+    "gh:vcesinger/homebridge-marstek-venus": 3,
+    "gh:vdaluz/astro-affiliate": 3,
+    "gh:vdaluz/astro-opt-in-analytics": 2,
+    "gh:verdana/dsh-session-purge": 3,
+    "gh:vipperson1p-wq/vibehound": 3,
+    "gh:vlsi/github-actions-random-matrix": 3,
+    "gh:vlydev/cs2-masked-inspect-js": 3,
+    "gh:vlydev/cs2-masked-inspect-ts": 2,
+    "gh:wahyzmaster/office-sim": 1,
+    "gh:wang-lin-chang/dsh-vap": 2,
+    "gh:wangjianming/pi-weather-widget": 2,
+    "gh:weidows/dsh-whalechan-herself": 1,
+    "gh:whitequark/ipaddr.js": 3,
+    "gh:wjf1/dsh-portable": 2,
+    "gh:woksin/pi-context-budget": 1,
+    "gh:wrsilva/reis-mobile": 3,
+    "gh:wzj998/cutccc": 3,
+    "gh:xiaopb/dsh-mobile-layout": 3,
+    "gh:xinghe-labs/pi-model-config": 1,
+    "gh:xursand7777/customergpt-sdk": 3,
+    "gh:yanglaofish/dsh-proxy-pro": 1,
+    "gh:yann9/dsh-git-workbench": 3,
+    "gh:ydddp/nesting-proxy": 1,
+    "gh:yersi88/dsh-ollama-tool-guard": 1,
+    "gh:yezannnnn/relay-claude": 3,
+    "gh:yklovepython/halfsize": 1,
+    "gh:yokawasa/postman-cli-completion": 1,
+    "gh:yuefdev/tr-slugify": 3,
+    "gh:yugimob/pi-opencode-go-rotation": 2,
+    "gh:z-zihan/build-meta-injector": 1,
+    "gh:zartyblartfast/kaspa-pof-api": 2,
+    "gh:zeekyblast/stoatkit": 1,
+    "gh:zerodoc-app/invoice2json": 1,
+    "gh:zilongyang/dsh-session-mng": 1,
+    "gh:zilongyang/dsh-session-titler": 3,
+    "gh:zwarmex/slopfix": 1,
+    "gh:zylzyqzz/dsh-mobile-pwa": 3
+  },
+  "reusableBatch": {
+    "dir": "/home/arthur/Code/oh-my-pi-extensions/results/ctrl-confirm-3-holdout/ctrl-confirm-3-holdout-4206b2e38c1d",
+    "sealDigest": "b9e9a05559c9c242c112098079f3691827907ea5e6e87ffa77229906681df10b",
+    "uses": 0,
+    "tasks": 159
+  },
+  "decisions": [
+    {
+      "id": "x-mateuszingano-airlock-ratelimit-a7bde8f9f0",
+      "family": "gh:mateuszingano/airlock-ratelimit",
+      "decision": "excluded",
+      "why": "instruction-test-change-conflict: three existing tests are rewritten (declare topology, assert the 200 first): requires changing existing test lines"
+    },
+    {
+      "id": "x-rock3r-atc-00c89a531c",
+      "family": "gh:rock3r/atc",
+      "decision": "excluded",
+      "why": "instruction-test-change-conflict: \"test: skip read-only capture setup on Windows\": requires adding a skip to an existing test"
+    },
+    {
+      "id": "x-novahiz-novahiz-c8eb7f6fbc",
+      "family": "gh:novahiz/novahiz",
+      "decision": "excluded",
+      "why": "instruction-test-change-conflict: tests/bin-entrypoint.test.ts \"now asserts\" a changed contract: conservative - may require changing an existing assertion"
+    },
+    {
+      "id": "x-myooken-collect-node-modules-licenses-25a4cb7b31",
+      "family": "gh:myooken/collect-node-modules-licenses",
+      "decision": "excluded",
+      "why": "instruction-test-change-conflict: changes how existing snapshot tests run (forbidden-string checks under UPDATE_SNAPSHOTS=1, reuses update snapshots): requires changing existing test files"
+    },
+    {
+      "id": "x-6t9xstar-one-step-seo-491e54ea15",
+      "family": "gh:6t9xstar/one-step-seo",
+      "decision": "excluded",
+      "why": "instruction-test-change-conflict: an existing test (tests/security.test.mjs \"perfect GEO signals score 100\") changes behaviour and its fixture is rewritten: requires changing existing test lines"
+    },
+    {
+      "id": "x-bluecarbons-agentic-rss-parser-73506d2c6d",
+      "family": "gh:bluecarbons/agentic-rss-parser",
+      "decision": "excluded",
+      "why": "instruction-test-change-conflict: \"fixes flaky pruneOlderThan test\" (backdate instead of setTimeout race): requires changing an existing test"
+    },
+    {
+      "id": "x-theraccoonbear-exprforge-fa3fd98a55",
+      "family": "gh:theraccoonbear/exprforge",
+      "decision": "excluded",
+      "why": "instruction-test-change-conflict: test-only commit: consolidates suites, removes an earlier sample and drops stale todos in existing tests"
+    },
+    {
+      "id": "x-mk-elbaz-opencode-gemini-proxy-43a12ac299",
+      "family": "gh:mk-elbaz/opencode-gemini-proxy",
+      "decision": "excluded",
+      "why": "instruction-test-change-conflict: \"Update documentation and test suite\": explicit directive to update tests (conservative, rule of ctrl-confirm-2/3)"
+    },
+    {
+      "id": "x-xinghe-labs-pi-model-config-b4a7e042a0",
+      "family": "gh:xinghe-labs/pi-model-config",
+      "decision": "excluded",
+      "why": "instruction-test-change-conflict: fixes a bug in the existing test helper printCtx (scripted.test.js): requires changing existing test code"
+    },
+    {
+      "id": "x-bibennurbani-geekstack-flow-d97781b0f5",
+      "decision": "excluded",
+      "why": "after-collection-cutoff (2026-11-08T01:00:38.063Z > 2026-11-08T01:00:00Z)"
+    },
+    {
+      "id": "x-bibennurbani-geekstack-flow-40cb33fff8",
+      "decision": "excluded",
+      "why": "after-collection-cutoff (2026-11-08T01:00:50.942Z > 2026-11-08T01:00:00Z)"
+    },
+    {
+      "id": "x-haraka-message-stream-612ca5b1cd",
+      "family": "gh:haraka/message-stream",
+      "decision": "excluded",
+      "why": "engine-grader: the reference solution does not pass the hidden grading ({\"hidden\":{\"pass\":false"
+    },
+    {
+      "id": "x-immamdouhaboammar-unslop-preflight-860ee3ae16",
+      "family": "gh:immamdouhaboammar/unslop-preflight",
+      "decision": "excluded",
+      "why": "reference-breaks-visible-suite (engine)"
+    },
+    {
+      "id": "x-nicoiakl-nyx5-13cb961bfc",
+      "family": "gh:nicoiakl/nyx5",
+      "decision": "excluded",
+      "why": "reference-breaks-visible-suite (engine)"
+    },
+    {
+      "id": "x-johnhenry-wsh-c569bb8f34",
+      "family": "gh:johnhenry/wsh",
+      "decision": "excluded",
+      "why": "reference-breaks-visible-suite (engine)"
+    },
+    {
+      "id": "x-immamdouhaboammar-vibe-design-md-architect-860ee3ae16",
+      "family": "gh:immamdouhaboammar/vibe-design-md-architect",
+      "decision": "excluded",
+      "why": "reference-breaks-visible-suite (engine)"
+    },
+    {
+      "id": "x-jcv-pi-ghost-text-ea00b72c4e",
+      "family": "gh:jcv/pi-ghost-text",
+      "decision": "selected"
+    },
+    {
+      "id": "x-kody-bot-connector-kit-86eceb0839",
+      "family": "gh:kody-bot/connector-kit",
+      "decision": "selected"
+    },
+    {
+      "id": "x-kody-bot-connector-kit-9e8cd8e1c5",
+      "family": "gh:kody-bot/connector-kit",
+      "decision": "selected"
+    },
+    {
+      "id": "x-sdshah09-design-doc-agent-skill-512a123d90",
+      "family": "gh:sdshah09/design-doc-agent-skill",
+      "decision": "selected"
+    },
+    {
+      "id": "x-ghostpawjs-codex-589d24e3ae",
+      "family": "gh:ghostpawjs/codex",
+      "decision": "selected"
+    },
+    {
+      "id": "x-ghostpawjs-codex-8869c186f3",
+      "family": "gh:ghostpawjs/codex",
+      "decision": "eligible-not-selected (family/owner cap incl. the reusable batch)"
+    },
+    {
+      "id": "x-sandsoftwaresolutions-ss-memo-50598f9b20",
+      "family": "gh:sandsoftwaresolutions/ss-memo",
+      "decision": "selected"
+    },
+    {
+      "id": "x-switch-afk-sol-pda-b3f6472cd8",
+      "family": "gh:switch-afk/sol-pda",
+      "decision": "eligible-not-selected (family/owner cap incl. the reusable batch)"
+    },
+    {
+      "id": "x-switch-afk-sol-pda-88ec6114c5",
+      "family": "gh:switch-afk/sol-pda",
+      "decision": "selected"
+    },
+    {
+      "id": "x-liu-wen-wu-dsh-cerebrum-0b5b33fb5b",
+      "family": "gh:liu-wen-wu/dsh-cerebrum",
+      "decision": "selected"
+    },
+    {
+      "id": "x-liu-wen-wu-dsh-cerebrum-41ada886e5",
+      "family": "gh:liu-wen-wu/dsh-cerebrum",
+      "decision": "selected"
+    },
+    {
+      "id": "x-brahiandres1999-oss-omni-spec-8943e617f0",
+      "family": "gh:brahiandres1999-oss/omni-spec",
+      "decision": "selected"
+    },
+    {
+      "id": "x-brahiandres1999-oss-omni-spec-cb21a17506",
+      "family": "gh:brahiandres1999-oss/omni-spec",
+      "decision": "selected"
+    },
+    {
+      "id": "x-brahiandres1999-oss-omni-spec-927e5245a9",
+      "family": "gh:brahiandres1999-oss/omni-spec",
+      "decision": "selected"
+    },
+    {
+      "id": "x-robtandy-issue-attack-c7e821f7ac",
+      "family": "gh:robtandy/issue_attack",
+      "decision": "selected"
+    },
+    {
+      "id": "x-robtandy-issue-attack-76567cfe55",
+      "family": "gh:robtandy/issue_attack",
+      "decision": "selected"
+    },
+    {
+      "id": "x-robtandy-issue-attack-aa3546c4e7",
+      "family": "gh:robtandy/issue_attack",
+      "decision": "selected"
+    },
+    {
+      "id": "x-natte-dsh-sidebar-todo-ef0cf03790",
+      "family": "gh:natte/dsh-sidebar-todo",
+      "decision": "selected"
+    },
+    {
+      "id": "x-natte-dsh-sidebar-todo-c361759063",
+      "family": "gh:natte/dsh-sidebar-todo",
+      "decision": "selected"
+    },
+    {
+      "id": "x-natte-dsh-sidebar-todo-b5b526f9d4",
+      "family": "gh:natte/dsh-sidebar-todo",
+      "decision": "selected"
+    },
+    {
+      "id": "x-expecho-ccreports-ba585ac3bc",
+      "family": "gh:expecho/ccreports",
+      "decision": "selected"
+    },
+    {
+      "id": "x-expecho-ccreports-fc960628a6",
+      "family": "gh:expecho/ccreports",
+      "decision": "selected"
+    },
+    {
+      "id": "x-expecho-ccreports-63267ae1e9",
+      "family": "gh:expecho/ccreports",
+      "decision": "selected"
+    },
+    {
+      "id": "x-drumst0ck-pi-usage-limit-resume-ec9e2bb9f0",
+      "family": "gh:drumst0ck/pi-usage-limit-resume",
+      "decision": "selected"
+    },
+    {
+      "id": "x-drumst0ck-pi-usage-limit-resume-41c85374c6",
+      "family": "gh:drumst0ck/pi-usage-limit-resume",
+      "decision": "selected"
+    },
+    {
+      "id": "x-kulapard-pi-laconic-fd26a56f2e",
+      "family": "gh:kulapard/pi-laconic",
+      "decision": "selected"
+    },
+    {
+      "id": "x-jayli-pi-coder-ea749dfd60",
+      "family": "gh:jayli/pi-coder",
+      "decision": "selected"
+    },
+    {
+      "id": "x-mbanderas-maestro-agora-542fdec973",
+      "family": "gh:mbanderas/maestro-agora",
+      "decision": "selected"
+    },
+    {
+      "id": "x-mbanderas-maestro-agora-e72a95c47f",
+      "family": "gh:mbanderas/maestro-agora",
+      "decision": "selected"
+    },
+    {
+      "id": "x-nilzx-dsh-whale-soul-c2479d398d",
+      "family": "gh:nilzx/dsh-whale-soul",
+      "decision": "selected"
+    },
+    {
+      "id": "x-stealth-alpha-fathom-9e295b0a74",
+      "family": "gh:stealth-alpha/fathom",
+      "decision": "selected"
+    },
+    {
+      "id": "x-echo-smith-hy-memory4dsh-d40da88d2a",
+      "family": "gh:echo-smith/hy-memory4dsh",
+      "decision": "selected"
+    },
+    {
+      "id": "x-dddmuc-dsh-url-router-e8e6b207a6",
+      "family": "gh:dddmuc/dsh-url-router",
+      "decision": "selected"
+    },
+    {
+      "id": "x-dddmuc-dsh-url-router-83ad48d01a",
+      "family": "gh:dddmuc/dsh-url-router",
+      "decision": "selected"
+    },
+    {
+      "id": "x-dddmuc-dsh-url-router-22fc81d6fc",
+      "family": "gh:dddmuc/dsh-url-router",
+      "decision": "selected"
+    },
+    {
+      "id": "x-yugimob-pi-opencode-go-rotation-8074d3dc33",
+      "family": "gh:yugimob/pi-opencode-go-rotation",
+      "decision": "selected"
+    },
+    {
+      "id": "x-yugimob-pi-opencode-go-rotation-442d763a43",
+      "family": "gh:yugimob/pi-opencode-go-rotation",
+      "decision": "selected"
+    },
+    {
+      "id": "x-lnilluv-pi-opencode-go-rotation-c1a105f504",
+      "family": "gh:lnilluv/pi-opencode-go-rotation",
+      "decision": "selected"
+    },
+    {
+      "id": "x-lnilluv-pi-opencode-go-rotation-e0811b8c43",
+      "family": "gh:lnilluv/pi-opencode-go-rotation",
+      "decision": "selected"
+    },
+    {
+      "id": "x-donatosilva-gentle-shell-minimax-usage-bfca824f53",
+      "family": "gh:donatosilva/gentle-shell-minimax-usage",
+      "decision": "selected"
+    },
+    {
+      "id": "x-donatosilva-gentle-shell-minimax-usage-8c7f652696",
+      "family": "gh:donatosilva/gentle-shell-minimax-usage",
+      "decision": "selected"
+    },
+    {
+      "id": "x-donatosilva-gentle-shell-minimax-usage-a0daff770a",
+      "family": "gh:donatosilva/gentle-shell-minimax-usage",
+      "decision": "selected"
+    },
+    {
+      "id": "x-katrinalaszlo-track-skill-b0cb64b21f",
+      "family": "gh:katrinalaszlo/track-skill",
+      "decision": "selected"
+    },
+    {
+      "id": "x-ttungx-pi-at-skills-a3084963a1",
+      "family": "gh:ttungx/pi-at-skills",
+      "decision": "selected"
+    },
+    {
+      "id": "x-sadrmanesh-commerce-agent-skills-3410332b5e",
+      "family": "gh:sadrmanesh/commerce-agent-skills",
+      "decision": "selected"
+    },
+    {
+      "id": "x-jacobhammerle-eas-simulator-evidence-10634469da",
+      "family": "gh:jacobhammerle/eas-simulator-evidence",
+      "decision": "selected"
+    },
+    {
+      "id": "x-thinkofrain1213-deepseek-harness-wallet-patched-0df3974f9a",
+      "family": "gh:thinkofrain1213/deepseek-harness-wallet-patched",
+      "decision": "selected"
+    },
+    {
+      "id": "x-thinkofrain1213-deepseek-harness-wallet-patched-43650bb0e1",
+      "family": "gh:thinkofrain1213/deepseek-harness-wallet-patched",
+      "decision": "selected"
+    },
+    {
+      "id": "x-xiaopb-dsh-mobile-layout-02893b80bb",
+      "family": "gh:xiaopb/dsh-mobile-layout",
+      "decision": "selected"
+    },
+    {
+      "id": "x-xiaopb-dsh-mobile-layout-3a8a04e587",
+      "family": "gh:xiaopb/dsh-mobile-layout",
+      "decision": "selected"
+    },
+    {
+      "id": "x-xiaopb-dsh-mobile-layout-c06628fd58",
+      "family": "gh:xiaopb/dsh-mobile-layout",
+      "decision": "selected"
+    },
+    {
+      "id": "x-ianwu5205-threads-backup-be1b66676c",
+      "family": "gh:ianwu5205/threads-backup",
+      "decision": "selected"
+    },
+    {
+      "id": "x-janpauldahlke-dsh-agent-processes-813445cb98",
+      "family": "gh:janpauldahlke/dsh-agent-processes",
+      "decision": "selected"
+    },
+    {
+      "id": "x-shaheershoaib-receipts-80518bc4dc",
+      "family": "gh:shaheershoaib/receipts",
+      "decision": "selected"
+    },
+    {
+      "id": "x-shaheershoaib-receipts-d8a024df3e",
+      "family": "gh:shaheershoaib/receipts",
+      "decision": "selected"
+    },
+    {
+      "id": "x-shaheershoaib-receipts-7a89c3876e",
+      "family": "gh:shaheershoaib/receipts",
+      "decision": "selected"
+    },
+    {
+      "id": "x-42wp-dev-env-de2b6eeb4b",
+      "family": "gh:42wp/dev-env",
+      "decision": "selected"
+    },
+    {
+      "id": "x-42wp-dev-env-260c1464be",
+      "family": "gh:42wp/dev-env",
+      "decision": "selected"
+    },
+    {
+      "id": "x-42wp-dev-env-04b191c53e",
+      "family": "gh:42wp/dev-env",
+      "decision": "selected"
+    },
+    {
+      "id": "x-osmanemraheroglu-technocore-did-tool-074d993fcc",
+      "family": "gh:osmanemraheroglu/technocore-did-tool",
+      "decision": "selected"
+    },
+    {
+      "id": "x-sir-ad-claude-setup-skill-80d3306462",
+      "family": "gh:sir-ad/claude-setup-skill",
+      "decision": "selected"
+    },
+    {
+      "id": "x-seoulpro-gap-tolerant-router-2b3196b1f6",
+      "family": "gh:seoulpro/gap-tolerant-router",
+      "decision": "selected"
+    },
+    {
+      "id": "x-psuvraneel-cyber-clone-proof-b59a8d9e4f",
+      "family": "gh:psuvraneel-cyber/clone-proof",
+      "decision": "selected"
+    },
+    {
+      "id": "x-psuvraneel-cyber-clone-proof-bf1f8aeb3c",
+      "family": "gh:psuvraneel-cyber/clone-proof",
+      "decision": "selected"
+    },
+    {
+      "id": "x-psuvraneel-cyber-clone-proof-71df55e0c5",
+      "family": "gh:psuvraneel-cyber/clone-proof",
+      "decision": "selected"
+    },
+    {
+      "id": "x-ehk2509-json-to-express-c326be144d",
+      "family": "gh:ehk2509/json-to-express",
+      "decision": "selected"
+    },
+    {
+      "id": "x-ehk2509-json-to-express-56c6f1503a",
+      "family": "gh:ehk2509/json-to-express",
+      "decision": "selected"
+    },
+    {
+      "id": "x-ehk2509-json-to-express-23791d2553",
+      "family": "gh:ehk2509/json-to-express",
+      "decision": "selected"
+    },
+    {
+      "id": "x-orionsoftlimited-nigeria-paye-aaa7508151",
+      "family": "gh:orionsoftlimited/nigeria-paye",
+      "decision": "selected"
+    },
+    {
+      "id": "x-z-zihan-build-meta-injector-105cd79519",
+      "family": "gh:z-zihan/build-meta-injector",
+      "decision": "selected"
+    },
+    {
+      "id": "x-ragedpanda-time-sliced-4bf7b1eb56",
+      "family": "gh:ragedpanda/time-sliced",
+      "decision": "selected"
+    },
+    {
+      "id": "x-ragedpanda-time-sliced-a199820f25",
+      "family": "gh:ragedpanda/time-sliced",
+      "decision": "selected"
+    },
+    {
+      "id": "x-micdz-gpu-observatory-73cb9dedcd",
+      "family": "gh:micdz/gpu-observatory",
+      "decision": "selected"
+    },
+    {
+      "id": "x-floezwerk-piagent-realtime-provider-cost-d72ccae24c",
+      "family": "gh:floezwerk/piagent-realtime-provider-cost",
+      "decision": "selected"
+    },
+    {
+      "id": "x-banal972-spb-seo-geo-c3581a909b",
+      "family": "gh:banal972/spb-seo-geo",
+      "decision": "selected"
+    },
+    {
+      "id": "x-banal972-spb-seo-geo-cc90781342",
+      "family": "gh:banal972/spb-seo-geo",
+      "decision": "selected"
+    },
+    {
+      "id": "x-spobi-context-carwash-f7d3fc839d",
+      "family": "gh:spobi/context-carwash",
+      "decision": "selected"
+    },
+    {
+      "id": "x-ux-yash-claude-limits-statusline-307419f9b2",
+      "family": "gh:ux-yash/claude-limits-statusline",
+      "decision": "selected"
+    },
+    {
+      "id": "x-nika110-openhuddle-89c7090765",
+      "family": "gh:nika110/openhuddle",
+      "decision": "selected"
+    },
+    {
+      "id": "x-nika110-openhuddle-02ed3cd310",
+      "family": "gh:nika110/openhuddle",
+      "decision": "selected"
+    },
+    {
+      "id": "x-outx-sec-coldxx-84937a19a4",
+      "family": "gh:outx-sec/coldxx",
+      "decision": "selected"
+    },
+    {
+      "id": "x-outx-sec-coldxx-a7af0c7647",
+      "family": "gh:outx-sec/coldxx",
+      "decision": "selected"
+    },
+    {
+      "id": "x-huzaifa-asif-mcp-catalog-snapshot-f0d6dc5a27",
+      "family": "gh:huzaifa-asif/mcp-catalog-snapshot",
+      "decision": "selected"
+    },
+    {
+      "id": "x-gozajpeg-prins-424f0b5f7a",
+      "family": "gh:gozajpeg/prins",
+      "decision": "selected"
+    },
+    {
+      "id": "x-xursand7777-customergpt-sdk-0cffa0dd11",
+      "family": "gh:xursand7777/customergpt-sdk",
+      "decision": "selected"
+    },
+    {
+      "id": "x-xursand7777-customergpt-sdk-8b2c8fd90c",
+      "family": "gh:xursand7777/customergpt-sdk",
+      "decision": "selected"
+    },
+    {
+      "id": "x-xursand7777-customergpt-sdk-9c0f229ab9",
+      "family": "gh:xursand7777/customergpt-sdk",
+      "decision": "selected"
+    },
+    {
+      "id": "x-aotr-hue-shift-904662d92e",
+      "family": "gh:aotr/hue-shift",
+      "decision": "selected"
+    },
+    {
+      "id": "x-aotr-hue-shift-7490d53c8f",
+      "family": "gh:aotr/hue-shift",
+      "decision": "selected"
+    },
+    {
+      "id": "x-aotr-hue-shift-0da8f14dbd",
+      "family": "gh:aotr/hue-shift",
+      "decision": "selected"
+    },
+    {
+      "id": "x-coratch-runwhy-91072a860d",
+      "family": "gh:coratch/runwhy",
+      "decision": "selected"
+    },
+    {
+      "id": "x-coratch-runwhy-be746845fc",
+      "family": "gh:coratch/runwhy",
+      "decision": "selected"
+    },
+    {
+      "id": "x-coratch-runwhy-d3123287ca",
+      "family": "gh:coratch/runwhy",
+      "decision": "selected"
+    },
+    {
+      "id": "x-send-broadcast-broadcast-node-316a476db9",
+      "family": "gh:send-broadcast/broadcast-node",
+      "decision": "selected"
+    },
+    {
+      "id": "x-iosdevsk-license-checker-9a3d3322a5",
+      "family": "gh:iosdevsk/license-checker",
+      "decision": "selected"
+    },
+    {
+      "id": "x-igorguariroba-pi-watch-0d6cee6d8d",
+      "family": "gh:igorguariroba/pi-watch",
+      "decision": "selected"
+    },
+    {
+      "id": "x-igorguariroba-pi-watch-36f8c4bc94",
+      "family": "gh:igorguariroba/pi-watch",
+      "decision": "selected"
+    },
+    {
+      "id": "x-shelamkoff-infinite-scroll-6ee382d37f",
+      "family": "gh:shelamkoff/infinite-scroll",
+      "decision": "selected"
+    },
+    {
+      "id": "x-chxsong-pi-auto-continue-3627bb461b",
+      "family": "gh:chxsong/pi-auto-continue",
+      "decision": "selected"
+    },
+    {
+      "id": "x-tikalk-adlc-cli-7d67e9763e",
+      "family": "gh:tikalk/adlc-cli",
+      "decision": "selected"
+    },
+    {
+      "id": "x-tikalk-adlc-cli-4965288454",
+      "family": "gh:tikalk/adlc-cli",
+      "decision": "selected"
+    },
+    {
+      "id": "x-lshades-vaultbags-cli-6d1fae92d7",
+      "family": "gh:lshades/vaultbags-cli",
+      "decision": "selected"
+    },
+    {
+      "id": "x-donyue7-dsh-session-bus-046413a147",
+      "family": "gh:donyue7/dsh-session-bus",
+      "decision": "selected"
+    },
+    {
+      "id": "x-donyue7-dsh-session-bus-bd877c3af1",
+      "family": "gh:donyue7/dsh-session-bus",
+      "decision": "selected"
+    },
+    {
+      "id": "x-legible-sh-meter-f079fb4ae1",
+      "family": "gh:legible-sh/meter",
+      "decision": "selected"
+    },
+    {
+      "id": "x-legible-sh-meter-dafebea7c3",
+      "family": "gh:legible-sh/meter",
+      "decision": "selected"
+    },
+    {
+      "id": "x-pooriaarab-vibenotifications-11ba391b7b",
+      "family": "gh:pooriaarab/vibenotifications",
+      "decision": "selected"
+    },
+    {
+      "id": "x-pooriaarab-vibenotifications-c035f1e8b4",
+      "family": "gh:pooriaarab/vibenotifications",
+      "decision": "selected"
+    },
+    {
+      "id": "x-zartyblartfast-kaspa-pof-api-2ed5da05dd",
+      "family": "gh:zartyblartfast/kaspa-pof-api",
+      "decision": "selected"
+    },
+    {
+      "id": "x-zartyblartfast-kaspa-pof-api-af0025385b",
+      "family": "gh:zartyblartfast/kaspa-pof-api",
+      "decision": "selected"
+    },
+    {
+      "id": "x-gengwg-dsh-kubectl-guard-a4d5889c15",
+      "family": "gh:gengwg/dsh-kubectl-guard",
+      "decision": "selected"
+    },
+    {
+      "id": "x-gengwg-dsh-kubectl-guard-983952c6bd",
+      "family": "gh:gengwg/dsh-kubectl-guard",
+      "decision": "selected"
+    },
+    {
+      "id": "x-misolith-password-checker-0a3c84d51b",
+      "family": "gh:misolith/password-checker",
+      "decision": "selected"
+    },
+    {
+      "id": "x-misolith-password-checker-0c285c8fc7",
+      "family": "gh:misolith/password-checker",
+      "decision": "selected"
+    },
+    {
+      "id": "x-misolith-password-checker-39b60f574d",
+      "family": "gh:misolith/password-checker",
+      "decision": "selected"
+    },
+    {
+      "id": "x-cujuju-solidjs-color-picker-93dabbc3a9",
+      "family": "gh:cujuju/solidjs-color-picker",
+      "decision": "selected"
+    },
+    {
+      "id": "x-juliankang4-dsh-locale-ko-5ac9ad6adc",
+      "family": "gh:juliankang4/dsh-locale-ko",
+      "decision": "selected"
+    },
+    {
+      "id": "x-juliankang4-dsh-locale-ko-8dd39caa4c",
+      "family": "gh:juliankang4/dsh-locale-ko",
+      "decision": "selected"
+    },
+    {
+      "id": "x-sandsoftwaresolutions-ss-git-info-a5edc36c79",
+      "family": "gh:sandsoftwaresolutions/ss-git-info",
+      "decision": "eligible-not-selected (family/owner cap incl. the reusable batch)"
+    },
+    {
+      "id": "x-sandsoftwaresolutions-ss-git-info-b5a02d8c01",
+      "family": "gh:sandsoftwaresolutions/ss-git-info",
+      "decision": "selected"
+    },
+    {
+      "id": "x-lugabeeee-dsh-global-todo-50a3ef45e7",
+      "family": "gh:lugabeeee/dsh-global-todo",
+      "decision": "selected"
+    },
+    {
+      "id": "x-lugabeeee-dsh-global-todo-91805f6a08",
+      "family": "gh:lugabeeee/dsh-global-todo",
+      "decision": "selected"
+    },
+    {
+      "id": "x-philipad-health-export-mcp-6a622fca35",
+      "family": "gh:philipad/health-export-mcp",
+      "decision": "selected"
+    },
+    {
+      "id": "x-philipad-health-export-mcp-622644fee0",
+      "family": "gh:philipad/health-export-mcp",
+      "decision": "selected"
+    },
+    {
+      "id": "x-philipad-health-export-mcp-343e6c3773",
+      "family": "gh:philipad/health-export-mcp",
+      "decision": "selected"
+    },
+    {
+      "id": "x-lco117-dummy-llm-7bc25c430d",
+      "family": "gh:lco117/dummy-llm",
+      "decision": "selected"
+    },
+    {
+      "id": "x-lco117-dummy-llm-c7ddfef212",
+      "family": "gh:lco117/dummy-llm",
+      "decision": "selected"
+    },
+    {
+      "id": "x-yanglaofish-dsh-proxy-pro-b8b5949ec5",
+      "family": "gh:yanglaofish/dsh-proxy-pro",
+      "decision": "selected"
+    },
+    {
+      "id": "x-dhaupin-govstruct-4845ba340e",
+      "family": "gh:dhaupin/govstruct",
+      "decision": "selected"
+    },
+    {
+      "id": "x-dhaupin-govstruct-05febec737",
+      "family": "gh:dhaupin/govstruct",
+      "decision": "selected"
+    },
+    {
+      "id": "x-dhaupin-govstruct-e5e5434d72",
+      "family": "gh:dhaupin/govstruct",
+      "decision": "selected"
+    },
+    {
+      "id": "x-goodandready-dsh-usage-guard-3e83497f0b",
+      "family": "gh:goodandready/dsh-usage-guard",
+      "decision": "eligible-not-selected (family/owner cap incl. the reusable batch)"
+    },
+    {
+      "id": "x-goodandready-dsh-usage-guard-31580edf0b",
+      "family": "gh:goodandready/dsh-usage-guard",
+      "decision": "selected"
+    },
+    {
+      "id": "x-weidows-dsh-whalechan-herself-d31a97c25f",
+      "family": "gh:weidows/dsh-whalechan-herself",
+      "decision": "selected"
+    },
+    {
+      "id": "x-munin92-n8n-nodes-scalable-capital-f17c9b1505",
+      "family": "gh:munin92/n8n-nodes-scalable-capital",
+      "decision": "selected"
+    },
+    {
+      "id": "x-munin92-n8n-nodes-scalable-capital-ff1d66e070",
+      "family": "gh:munin92/n8n-nodes-scalable-capital",
+      "decision": "selected"
+    },
+    {
+      "id": "x-woksin-pi-context-budget-99d60af99f",
+      "family": "gh:woksin/pi-context-budget",
+      "decision": "selected"
+    },
+    {
+      "id": "x-guilianerde-skills-init-1e88e37f76",
+      "family": "gh:guilianerde/skills-init",
+      "decision": "selected"
+    },
+    {
+      "id": "x-guilianerde-skills-init-353b3da2cc",
+      "family": "gh:guilianerde/skills-init",
+      "decision": "selected"
+    },
+    {
+      "id": "x-lordekeen-pi-qdrant-memory-12b8ebf020",
+      "family": "gh:lordekeen/pi-qdrant-memory",
+      "decision": "selected"
+    },
+    {
+      "id": "x-lordekeen-pi-qdrant-memory-24fdad85f7",
+      "family": "gh:lordekeen/pi-qdrant-memory",
+      "decision": "selected"
+    },
+    {
+      "id": "x-hongtak-picochroma-03a03dcb3c",
+      "family": "gh:hongtak/picochroma",
+      "decision": "selected"
+    },
+    {
+      "id": "x-hongtak-picochroma-11454646fd",
+      "family": "gh:hongtak/picochroma",
+      "decision": "selected"
+    },
+    {
+      "id": "x-hongtak-picochroma-1e6311535c",
+      "family": "gh:hongtak/picochroma",
+      "decision": "selected"
+    },
+    {
+      "id": "x-danielgap-pi-zai-usage-cbc1227a1c",
+      "family": "gh:danielgap/pi-zai-usage",
+      "decision": "selected"
+    },
+    {
+      "id": "x-gridworkjs-core-77f7e65b21",
+      "family": "gh:gridworkjs/core",
+      "decision": "selected"
+    },
+    {
+      "id": "x-gridworkjs-core-586f2d6278",
+      "family": "gh:gridworkjs/core",
+      "decision": "selected"
+    },
+    {
+      "id": "x-aboudjem-ui-ux-suite-6e0e84677d",
+      "family": "gh:aboudjem/ui-ux-suite",
+      "decision": "selected"
+    },
+    {
+      "id": "x-aboudjem-ui-ux-suite-c7657989e9",
+      "family": "gh:aboudjem/ui-ux-suite",
+      "decision": "selected"
+    },
+    {
+      "id": "x-aboudjem-ui-ux-suite-bb179bcb99",
+      "family": "gh:aboudjem/ui-ux-suite",
+      "decision": "selected"
+    },
+    {
+      "id": "x-kangyishuai-dsh-plugins-89df918632",
+      "family": "gh:kangyishuai/dsh-plugins",
+      "decision": "selected"
+    },
+    {
+      "id": "x-kangyishuai-dsh-plugins-a6b48034ac",
+      "family": "gh:kangyishuai/dsh-plugins",
+      "decision": "selected"
+    },
+    {
+      "id": "x-kangyishuai-dsh-plugins-b848d261f3",
+      "family": "gh:kangyishuai/dsh-plugins",
+      "decision": "selected"
+    },
+    {
+      "id": "x-877007021-pi-memory-sessions-f4d895a252",
+      "family": "gh:877007021/pi-memory-sessions",
+      "decision": "selected"
+    },
+    {
+      "id": "x-johndworld-n8n-nodes-rempart-0d8a0d6637",
+      "family": "gh:johndworld/n8n-nodes-rempart",
+      "decision": "selected"
+    },
+    {
+      "id": "x-johndworld-n8n-nodes-rempart-d5d7d186aa",
+      "family": "gh:johndworld/n8n-nodes-rempart",
+      "decision": "selected"
+    },
+    {
+      "id": "x-okrasn-ai-usage-cost-8ba6e41fb4",
+      "family": "gh:okrasn/ai-usage-cost",
+      "decision": "selected"
+    },
+    {
+      "id": "x-okrasn-ai-usage-cost-48e5314578",
+      "family": "gh:okrasn/ai-usage-cost",
+      "decision": "selected"
+    },
+    {
+      "id": "x-1success0error-claude-session-cards-bc9878e152",
+      "family": "gh:1success0error/claude-session-cards",
+      "decision": "selected"
+    },
+    {
+      "id": "x-1success0error-claude-session-cards-e2f689bec8",
+      "family": "gh:1success0error/claude-session-cards",
+      "decision": "selected"
+    },
+    {
+      "id": "x-1success0error-claude-session-cards-845a69446c",
+      "family": "gh:1success0error/claude-session-cards",
+      "decision": "selected"
+    },
+    {
+      "id": "x-iclaudiumihaila-primer-verify-3d01276b06",
+      "family": "gh:iclaudiumihaila/primer-verify",
+      "decision": "selected"
+    },
+    {
+      "id": "x-juliantellez-wordwright-c29a9ecac9",
+      "family": "gh:juliantellez/wordwright",
+      "decision": "selected"
+    },
+    {
+      "id": "x-mateuszingano-airlock-ratelimit-3ea681f32a",
+      "family": "gh:mateuszingano/airlock-ratelimit",
+      "decision": "selected"
+    },
+    {
+      "id": "x-vdaluz-astro-opt-in-analytics-2f7c5e66e3",
+      "family": "gh:vdaluz/astro-opt-in-analytics",
+      "decision": "selected"
+    },
+    {
+      "id": "x-vdaluz-astro-opt-in-analytics-98489c33d8",
+      "family": "gh:vdaluz/astro-opt-in-analytics",
+      "decision": "selected"
+    },
+    {
+      "id": "x-russellmoss-agent-guard-e4a229b9a9",
+      "family": "gh:russellmoss/agent-guard",
+      "decision": "selected"
+    },
+    {
+      "id": "x-russellmoss-agent-guard-a8a2648a45",
+      "family": "gh:russellmoss/agent-guard",
+      "decision": "selected"
+    },
+    {
+      "id": "x-russellmoss-agent-guard-6f29d618ac",
+      "family": "gh:russellmoss/agent-guard",
+      "decision": "selected"
+    },
+    {
+      "id": "x-cinorid-pi-persian-rtl-bundle-f42971ad88",
+      "family": "gh:cinorid/pi-persian-rtl-bundle",
+      "decision": "selected"
+    },
+    {
+      "id": "x-cinorid-pi-persian-rtl-bundle-d68f2ff0d4",
+      "family": "gh:cinorid/pi-persian-rtl-bundle",
+      "decision": "selected"
+    },
+    {
+      "id": "x-verdana-dsh-session-purge-3d33335ba8",
+      "family": "gh:verdana/dsh-session-purge",
+      "decision": "selected"
+    },
+    {
+      "id": "x-verdana-dsh-session-purge-deb275ff27",
+      "family": "gh:verdana/dsh-session-purge",
+      "decision": "selected"
+    },
+    {
+      "id": "x-verdana-dsh-session-purge-e39aced28f",
+      "family": "gh:verdana/dsh-session-purge",
+      "decision": "selected"
+    },
+    {
+      "id": "x-rock3r-atc-a8ea5f29b1",
+      "family": "gh:rock3r/atc",
+      "decision": "selected"
+    },
+    {
+      "id": "x-li-qiang-dockhand-cli-5fa9f9f083",
+      "family": "gh:li-qiang/dockhand-cli",
+      "decision": "selected"
+    },
+    {
+      "id": "x-li-qiang-dockhand-cli-f6c762d18f",
+      "family": "gh:li-qiang/dockhand-cli",
+      "decision": "selected"
+    },
+    {
+      "id": "x-li-qiang-dockhand-cli-399e9aa31d",
+      "family": "gh:li-qiang/dockhand-cli",
+      "decision": "selected"
+    },
+    {
+      "id": "x-alagrede-confluence-md-sync-86ee013d9f",
+      "family": "gh:alagrede/confluence-md-sync",
+      "decision": "selected"
+    },
+    {
+      "id": "x-alagrede-confluence-md-sync-8e228b94af",
+      "family": "gh:alagrede/confluence-md-sync",
+      "decision": "selected"
+    },
+    {
+      "id": "x-alagrede-confluence-md-sync-af937b42ac",
+      "family": "gh:alagrede/confluence-md-sync",
+      "decision": "selected"
+    },
+    {
+      "id": "x-acus9345-dsh-enforce-package-manager-c6ffe79b0a",
+      "family": "gh:acus9345/dsh-enforce-package-manager",
+      "decision": "selected"
+    },
+    {
+      "id": "x-arsennur-charto-7291025da9",
+      "family": "gh:arsennur/charto",
+      "decision": "selected"
+    },
+    {
+      "id": "x-kingi89-taivuta-78d117ab6b",
+      "family": "gh:kingi89/taivuta",
+      "decision": "selected"
+    },
+    {
+      "id": "x-kingi89-taivuta-5947dc9541",
+      "family": "gh:kingi89/taivuta",
+      "decision": "selected"
+    },
+    {
+      "id": "x-ainzrimuru-cf-billing-guard-90af29a600",
+      "family": "gh:ainzrimuru/cf-billing-guard",
+      "decision": "selected"
+    },
+    {
+      "id": "x-ainzrimuru-cf-billing-guard-3cc13622a2",
+      "family": "gh:ainzrimuru/cf-billing-guard",
+      "decision": "selected"
+    },
+    {
+      "id": "x-ainzrimuru-cf-billing-guard-1095beccfe",
+      "family": "gh:ainzrimuru/cf-billing-guard",
+      "decision": "selected"
+    },
+    {
+      "id": "x-emson-claudoro-b993305335",
+      "family": "gh:emson/claudoro",
+      "decision": "selected"
+    },
+    {
+      "id": "x-emson-claudoro-979779c2dd",
+      "family": "gh:emson/claudoro",
+      "decision": "selected"
+    },
+    {
+      "id": "x-emson-claudoro-c66a6b5c8d",
+      "family": "gh:emson/claudoro",
+      "decision": "selected"
+    },
+    {
+      "id": "x-kyrolloszakaria-claude-restarter-efbfb85583",
+      "family": "gh:kyrolloszakaria/claude-restarter",
+      "decision": "selected"
+    },
+    {
+      "id": "x-kyrolloszakaria-claude-restarter-a6b0021a0e",
+      "family": "gh:kyrolloszakaria/claude-restarter",
+      "decision": "selected"
+    },
+    {
+      "id": "x-kyrolloszakaria-claude-restarter-df8da5cc18",
+      "family": "gh:kyrolloszakaria/claude-restarter",
+      "decision": "selected"
+    },
+    {
+      "id": "x-yokawasa-postman-cli-completion-57036e6426",
+      "family": "gh:yokawasa/postman-cli-completion",
+      "decision": "selected"
+    },
+    {
+      "id": "x-excellent-so-usage-cache-7a2fdf42fe",
+      "family": "gh:excellent-so/usage-cache",
+      "decision": "selected"
+    },
+    {
+      "id": "x-rexxzyid-elaina-anchorguard-4150137269",
+      "family": "gh:rexxzyid/elaina-anchorguard",
+      "decision": "selected"
+    },
+    {
+      "id": "x-rexxzyid-elaina-anchorguard-fe641ed64b",
+      "family": "gh:rexxzyid/elaina-anchorguard",
+      "decision": "selected"
+    },
+    {
+      "id": "x-rexxzyid-elaina-anchorguard-a3b73d1995",
+      "family": "gh:rexxzyid/elaina-anchorguard",
+      "decision": "selected"
+    },
+    {
+      "id": "x-vipperson1p-wq-vibehound-6eadbf453e",
+      "family": "gh:vipperson1p-wq/vibehound",
+      "decision": "selected"
+    },
+    {
+      "id": "x-vipperson1p-wq-vibehound-0b201e94aa",
+      "family": "gh:vipperson1p-wq/vibehound",
+      "decision": "selected"
+    },
+    {
+      "id": "x-vipperson1p-wq-vibehound-3c2aadd23d",
+      "family": "gh:vipperson1p-wq/vibehound",
+      "decision": "selected"
+    },
+    {
+      "id": "x-poisons77-cc-pace-0b272dd9be",
+      "family": "gh:poisons77/cc-pace",
+      "decision": "selected"
+    },
+    {
+      "id": "x-goodandready-dsh-tts-beeecc8bbb",
+      "family": "gh:goodandready/dsh-tts",
+      "decision": "eligible-not-selected (family/owner cap incl. the reusable batch)"
+    },
+    {
+      "id": "x-goodandready-dsh-tts-eca4302cbe",
+      "family": "gh:goodandready/dsh-tts",
+      "decision": "selected"
+    },
+    {
+      "id": "x-caioribeiroclw-pixel-pluribus-6b51312b94",
+      "family": "gh:caioribeiroclw-pixel/pluribus",
+      "decision": "selected"
+    },
+    {
+      "id": "x-caioribeiroclw-pixel-pluribus-fd0440d7cf",
+      "family": "gh:caioribeiroclw-pixel/pluribus",
+      "decision": "selected"
+    },
+    {
+      "id": "x-caioribeiroclw-pixel-pluribus-82537e705f",
+      "family": "gh:caioribeiroclw-pixel/pluribus",
+      "decision": "selected"
+    },
+    {
+      "id": "x-hope-phenom-dsh-plugin-code-quality-84c99e9b9b",
+      "family": "gh:hope-phenom/dsh-plugin-code-quality",
+      "decision": "selected"
+    },
+    {
+      "id": "x-hope-phenom-dsh-plugin-code-quality-2ece3930db",
+      "family": "gh:hope-phenom/dsh-plugin-code-quality",
+      "decision": "selected"
+    },
+    {
+      "id": "x-hope-phenom-dsh-plugin-code-quality-9c99156b7c",
+      "family": "gh:hope-phenom/dsh-plugin-code-quality",
+      "decision": "selected"
+    },
+    {
+      "id": "x-ojastechnologies-sahajlipi-53b7fb50f8",
+      "family": "gh:ojastechnologies/sahajlipi",
+      "decision": "selected"
+    },
+    {
+      "id": "x-ojastechnologies-sahajlipi-5baaad071a",
+      "family": "gh:ojastechnologies/sahajlipi",
+      "decision": "selected"
+    },
+    {
+      "id": "x-romulocrj-js-pdf-fc3e27ad74",
+      "family": "gh:romulocrj/js_pdf",
+      "decision": "selected"
+    },
+    {
+      "id": "x-romulocrj-js-pdf-723c326683",
+      "family": "gh:romulocrj/js_pdf",
+      "decision": "selected"
+    },
+    {
+      "id": "x-romulocrj-js-pdf-40a73ab3c2",
+      "family": "gh:romulocrj/js_pdf",
+      "decision": "selected"
+    },
+    {
+      "id": "x-hyein-cbio-pi-codemode-usage-b3cf3baf66",
+      "family": "gh:hyein-cbio/pi-codemode-usage",
+      "decision": "selected"
+    },
+    {
+      "id": "x-hyein-cbio-pi-codemode-usage-9d160822fb",
+      "family": "gh:hyein-cbio/pi-codemode-usage",
+      "decision": "selected"
+    },
+    {
+      "id": "x-fusionpacttech-fusionpact-vectordb-3bf15739f9",
+      "family": "gh:fusionpacttech/fusionpact-vectordb",
+      "decision": "selected"
+    },
+    {
+      "id": "x-harry5432-codeisotope-97d135b601",
+      "family": "gh:harry5432/codeisotope",
+      "decision": "selected"
+    },
+    {
+      "id": "x-harry5432-codeisotope-a187b19d67",
+      "family": "gh:harry5432/codeisotope",
+      "decision": "selected"
+    },
+    {
+      "id": "x-harry5432-codeisotope-13d505aaca",
+      "family": "gh:harry5432/codeisotope",
+      "decision": "selected"
+    },
+    {
+      "id": "x-simantaturja-cccost-dashboard-e2565d8ca6",
+      "family": "gh:simantaturja/cccost-dashboard",
+      "decision": "selected"
+    },
+    {
+      "id": "x-simantaturja-cccost-dashboard-8bda529507",
+      "family": "gh:simantaturja/cccost-dashboard",
+      "decision": "selected"
+    },
+    {
+      "id": "x-matthewkim-11-tibodog-f48cc14bb3",
+      "family": "gh:matthewkim-11/tibodog",
+      "decision": "selected"
+    },
+    {
+      "id": "x-matthewkim-11-tibodog-937e2a52e4",
+      "family": "gh:matthewkim-11/tibodog",
+      "decision": "selected"
+    },
+    {
+      "id": "x-alexandercreates-localize-me-f8aad365fb",
+      "family": "gh:alexandercreates/localize-me",
+      "decision": "selected"
+    },
+    {
+      "id": "x-alexandercreates-localize-me-01656b19bd",
+      "family": "gh:alexandercreates/localize-me",
+      "decision": "selected"
+    },
+    {
+      "id": "x-alexandercreates-localize-me-02f4b63961",
+      "family": "gh:alexandercreates/localize-me",
+      "decision": "selected"
+    },
+    {
+      "id": "x-tigercat1124-pi-optimize-prompt-12b59210b9",
+      "family": "gh:tigercat1124/pi-optimize-prompt",
+      "decision": "selected"
+    },
+    {
+      "id": "x-ubaidai-leakmoat-cli-2a848acae3",
+      "family": "gh:ubaidai/leakmoat-cli",
+      "decision": "selected"
+    },
+    {
+      "id": "x-ubaidai-leakmoat-cli-9f51779914",
+      "family": "gh:ubaidai/leakmoat-cli",
+      "decision": "selected"
+    },
+    {
+      "id": "x-bg1avd-mcp-search-server-96727b06cc",
+      "family": "gh:bg1avd/mcp-search-server",
+      "decision": "selected"
+    },
+    {
+      "id": "x-goodandready-dsh-messenger-gateway-fd42cf8ce2",
+      "family": "gh:goodandready/dsh-messenger-gateway",
+      "decision": "selected"
+    },
+    {
+      "id": "x-goodandready-dsh-messenger-gateway-6899cd0ebb",
+      "family": "gh:goodandready/dsh-messenger-gateway",
+      "decision": "selected"
+    },
+    {
+      "id": "x-goodandready-dsh-messenger-gateway-69c9d58c02",
+      "family": "gh:goodandready/dsh-messenger-gateway",
+      "decision": "eligible-not-selected (family/owner cap incl. the reusable batch)"
+    },
+    {
+      "id": "x-haraka-message-stream-98561e18e4",
+      "family": "gh:haraka/message-stream",
+      "decision": "selected"
+    },
+    {
+      "id": "x-haraka-message-stream-20ceedd273",
+      "family": "gh:haraka/message-stream",
+      "decision": "selected"
+    },
+    {
+      "id": "x-starfie1d1272-dsh-github-skills-1bfb23bfd4",
+      "family": "gh:starfie1d1272/dsh-github-skills",
+      "decision": "selected"
+    },
+    {
+      "id": "x-arraypress-file-utils-612da6fd5c",
+      "family": "gh:arraypress/file-utils",
+      "decision": "selected"
+    },
+    {
+      "id": "x-itsyjs-corgi-f02bb913d1",
+      "family": "gh:itsyjs/corgi",
+      "decision": "selected"
+    },
+    {
+      "id": "x-sandsoftwaresolutions-ss-encodings-690cfd0f08",
+      "family": "gh:sandsoftwaresolutions/ss-encodings",
+      "decision": "selected"
+    },
+    {
+      "id": "x-adrielrod-claude-bus-91c358be4b",
+      "family": "gh:adrielrod/claude-bus",
+      "decision": "selected"
+    },
+    {
+      "id": "x-adrielrod-claude-bus-085fa408f7",
+      "family": "gh:adrielrod/claude-bus",
+      "decision": "selected"
+    },
+    {
+      "id": "x-adrielrod-claude-bus-68b622b5a8",
+      "family": "gh:adrielrod/claude-bus",
+      "decision": "selected"
+    },
+    {
+      "id": "x-zilongyang-dsh-session-mng-d251b41469",
+      "family": "gh:zilongyang/dsh-session-mng",
+      "decision": "selected"
+    },
+    {
+      "id": "x-devacc8-dsh-billing-badge-196b7d6279",
+      "family": "gh:devacc8/dsh-billing-badge",
+      "decision": "selected"
+    },
+    {
+      "id": "x-seoulpro-render-handoff-contract-5a6d0fc265",
+      "family": "gh:seoulpro/render-handoff-contract",
+      "decision": "selected"
+    },
+    {
+      "id": "x-seoulpro-render-handoff-contract-ca466e9538",
+      "family": "gh:seoulpro/render-handoff-contract",
+      "decision": "selected"
+    },
+    {
+      "id": "x-dingchenhui0618-arch-dsh-poker-night-bced4953c2",
+      "family": "gh:dingchenhui0618-arch/dsh-poker-night",
+      "decision": "selected"
+    },
+    {
+      "id": "x-dingchenhui0618-arch-dsh-poker-night-f47230d438",
+      "family": "gh:dingchenhui0618-arch/dsh-poker-night",
+      "decision": "selected"
+    },
+    {
+      "id": "x-louisremi-dsh-always-on-7b3b0a88ed",
+      "family": "gh:louisremi/dsh-always-on",
+      "decision": "selected"
+    },
+    {
+      "id": "x-mekanhan-control-arm-e4b18280fe",
+      "family": "gh:mekanhan/control-arm",
+      "decision": "selected"
+    },
+    {
+      "id": "x-lucas7x7-droppier-1e5a79f14a",
+      "family": "gh:lucas7x7/droppier",
+      "decision": "selected"
+    },
+    {
+      "id": "x-lucas7x7-droppier-7a561ba65f",
+      "family": "gh:lucas7x7/droppier",
+      "decision": "selected"
+    },
+    {
+      "id": "x-lucas7x7-droppier-eb90bba554",
+      "family": "gh:lucas7x7/droppier",
+      "decision": "selected"
+    },
+    {
+      "id": "x-johnnydevriese-pi-captains-log-5da40dc9f2",
+      "family": "gh:johnnydevriese/pi-captains-log",
+      "decision": "selected"
+    },
+    {
+      "id": "x-j3pf-piquota-ae2ddae413",
+      "family": "gh:j3pf/piquota",
+      "decision": "selected"
+    },
+    {
+      "id": "x-j3pf-piquota-0c26daaf3e",
+      "family": "gh:j3pf/piquota",
+      "decision": "selected"
+    },
+    {
+      "id": "x-j3pf-piquota-5f15797fc6",
+      "family": "gh:j3pf/piquota",
+      "decision": "selected"
+    },
+    {
+      "id": "x-m-sanchez-probe-heads-e5bdd368fd",
+      "family": "gh:m-sanchez/probe-heads",
+      "decision": "eligible-not-selected (family/owner cap incl. the reusable batch)"
+    },
+    {
+      "id": "x-moutazideal-opencode-vitals-f895bbe941",
+      "family": "gh:moutazideal/opencode-vitals",
+      "decision": "selected"
+    },
+    {
+      "id": "x-moutazideal-opencode-vitals-75092d327c",
+      "family": "gh:moutazideal/opencode-vitals",
+      "decision": "selected"
+    },
+    {
+      "id": "x-milonpatowary-license-guard-ee7ac2ec4e",
+      "family": "gh:milonpatowary/license-guard",
+      "decision": "selected"
+    },
+    {
+      "id": "x-milonpatowary-license-guard-dbd69e8a20",
+      "family": "gh:milonpatowary/license-guard",
+      "decision": "selected"
+    },
+    {
+      "id": "x-milonpatowary-license-guard-d5cf047b9d",
+      "family": "gh:milonpatowary/license-guard",
+      "decision": "selected"
+    },
+    {
+      "id": "x-rorena15-scopeburn-0edb0ad852",
+      "family": "gh:rorena15/scopeburn",
+      "decision": "selected"
+    },
+    {
+      "id": "x-rorena15-scopeburn-193ff82094",
+      "family": "gh:rorena15/scopeburn",
+      "decision": "selected"
+    },
+    {
+      "id": "x-rorena15-scopeburn-3882befc1d",
+      "family": "gh:rorena15/scopeburn",
+      "decision": "selected"
+    },
+    {
+      "id": "x-hellohub1212-dsh-windows-mcp-edc05b0fb8",
+      "family": "gh:hellohub1212/dsh-windows-mcp",
+      "decision": "selected"
+    },
+    {
+      "id": "x-ramon-sg-agent-cloud-kit-e7db32898a",
+      "family": "gh:ramon-sg/agent-cloud-kit",
+      "decision": "selected"
+    },
+    {
+      "id": "x-ramon-sg-agent-cloud-kit-49ec3a2b13",
+      "family": "gh:ramon-sg/agent-cloud-kit",
+      "decision": "selected"
+    },
+    {
+      "id": "x-duanxiangchun-dsh-ollama-statistical-531c3098e4",
+      "family": "gh:duanxiangchun/dsh-ollama-statistical",
+      "decision": "selected"
+    },
+    {
+      "id": "x-duanxiangchun-dsh-ollama-statistical-2bb51f3a65",
+      "family": "gh:duanxiangchun/dsh-ollama-statistical",
+      "decision": "selected"
+    },
+    {
+      "id": "x-princealii-sanitrace-be20db41ae",
+      "family": "gh:princealii/sanitrace",
+      "decision": "selected"
+    },
+    {
+      "id": "x-princealii-sanitrace-b7e9b1d20d",
+      "family": "gh:princealii/sanitrace",
+      "decision": "selected"
+    },
+    {
+      "id": "x-princealii-sanitrace-31a370bcb4",
+      "family": "gh:princealii/sanitrace",
+      "decision": "selected"
+    },
+    {
+      "id": "x-legiosai-quartermaster-ae43b01853",
+      "family": "gh:legiosai/quartermaster",
+      "decision": "selected"
+    },
+    {
+      "id": "x-legiosai-quartermaster-a1c9b25a1d",
+      "family": "gh:legiosai/quartermaster",
+      "decision": "selected"
+    },
+    {
+      "id": "x-legiosai-quartermaster-983632c98b",
+      "family": "gh:legiosai/quartermaster",
+      "decision": "selected"
+    },
+    {
+      "id": "x-thomas783-pr-docent-727f4a7ff4",
+      "family": "gh:thomas783/pr-docent",
+      "decision": "selected"
+    },
+    {
+      "id": "x-shstkvch-theatre-cli-af6f9aa598",
+      "family": "gh:shstkvch/theatre-cli",
+      "decision": "selected"
+    },
+    {
+      "id": "x-shstkvch-theatre-cli-4c42fff689",
+      "family": "gh:shstkvch/theatre-cli",
+      "decision": "selected"
+    },
+    {
+      "id": "x-ushikundesuyo-shiwake-mcp-3f053b2cff",
+      "family": "gh:ushikundesuyo/shiwake-mcp",
+      "decision": "selected"
+    },
+    {
+      "id": "x-ushikundesuyo-shiwake-mcp-30acc1ba3c",
+      "family": "gh:ushikundesuyo/shiwake-mcp",
+      "decision": "selected"
+    },
+    {
+      "id": "x-wang-lin-chang-dsh-vap-a4d2a920a2",
+      "family": "gh:wang-lin-chang/dsh-vap",
+      "decision": "selected"
+    },
+    {
+      "id": "x-wang-lin-chang-dsh-vap-971ce297be",
+      "family": "gh:wang-lin-chang/dsh-vap",
+      "decision": "selected"
+    },
+    {
+      "id": "x-meshrix-platform-pactium-02cafcf140",
+      "family": "gh:meshrix-platform/pactium",
+      "decision": "selected"
+    },
+    {
+      "id": "x-meshrix-platform-pactium-066bb8aaf9",
+      "family": "gh:meshrix-platform/pactium",
+      "decision": "selected"
+    },
+    {
+      "id": "x-dibrovnik-pvs-4f90136d92",
+      "family": "gh:dibrovnik/pvs",
+      "decision": "selected"
+    },
+    {
+      "id": "x-rajdeepratan-slashforge-415fb77a39",
+      "family": "gh:rajdeepratan/slashforge",
+      "decision": "selected"
+    },
+    {
+      "id": "x-rajdeepratan-slashforge-bd9f4509dd",
+      "family": "gh:rajdeepratan/slashforge",
+      "decision": "selected"
+    },
+    {
+      "id": "x-itsmylife44-ctxrent-100daa5073",
+      "family": "gh:itsmylife44/ctxrent",
+      "decision": "selected"
+    },
+    {
+      "id": "x-itsmylife44-ctxrent-da1e05c299",
+      "family": "gh:itsmylife44/ctxrent",
+      "decision": "selected"
+    },
+    {
+      "id": "x-itsmylife44-ctxrent-02959966cf",
+      "family": "gh:itsmylife44/ctxrent",
+      "decision": "selected"
+    },
+    {
+      "id": "x-spokospace-astro-split-build-cf6f5f5e49",
+      "family": "gh:spokospace/astro-split-build",
+      "decision": "selected"
+    },
+    {
+      "id": "x-spokospace-astro-split-build-caa6245386",
+      "family": "gh:spokospace/astro-split-build",
+      "decision": "selected"
+    },
+    {
+      "id": "x-spokospace-astro-split-build-aa5290b9f3",
+      "family": "gh:spokospace/astro-split-build",
+      "decision": "selected"
+    },
+    {
+      "id": "x-airpineapplea-feiyu-memory-2d589b7003",
+      "family": "gh:airpineapplea/feiyu-memory",
+      "decision": "selected"
+    },
+    {
+      "id": "x-onebugis-dsh-context-ops-7e69ed74fe",
+      "family": "gh:onebugis/dsh-context-ops",
+      "decision": "selected"
+    },
+    {
+      "id": "x-hugo-w-pi-split-view-3f5ed6b535",
+      "family": "gh:hugo-w/pi-split-view",
+      "decision": "selected"
+    },
+    {
+      "id": "x-mitikasha-llc-fundquill-check-533740d38d",
+      "family": "gh:mitikasha-llc/fundquill-check",
+      "decision": "selected"
+    },
+    {
+      "id": "x-mitikasha-llc-fundquill-check-04619d29d3",
+      "family": "gh:mitikasha-llc/fundquill-check",
+      "decision": "selected"
+    },
+    {
+      "id": "x-mukundakatta-agentguard-60e34eda76",
+      "family": "gh:mukundakatta/agentguard",
+      "decision": "selected"
+    },
+    {
+      "id": "x-canyuda-agent-guard-60c4748ece",
+      "family": "gh:canyuda/agent-guard",
+      "decision": "selected"
+    },
+    {
+      "id": "x-canyuda-agent-guard-25a61fd274",
+      "family": "gh:canyuda/agent-guard",
+      "decision": "selected"
+    },
+    {
+      "id": "x-canyuda-agent-guard-f22221f021",
+      "family": "gh:canyuda/agent-guard",
+      "decision": "selected"
+    },
+    {
+      "id": "x-allan-nava-agent-ledger-c59d3632e6",
+      "family": "gh:allan-nava/agent-ledger",
+      "decision": "selected"
+    },
+    {
+      "id": "x-novahiz-novahiz-1ed68f68f7",
+      "family": "gh:novahiz/novahiz",
+      "decision": "selected"
+    },
+    {
+      "id": "x-novahiz-novahiz-3af6216036",
+      "family": "gh:novahiz/novahiz",
+      "decision": "selected"
+    },
+    {
+      "id": "x-amarnotcool-teamapex-repotool-ae94f67e2e",
+      "family": "gh:amarnotcool/teamapex_repotool",
+      "decision": "selected"
+    },
+    {
+      "id": "x-amarnotcool-teamapex-repotool-9acd2df66c",
+      "family": "gh:amarnotcool/teamapex_repotool",
+      "decision": "selected"
+    },
+    {
+      "id": "x-amarnotcool-teamapex-repotool-911ddce127",
+      "family": "gh:amarnotcool/teamapex_repotool",
+      "decision": "selected"
+    },
+    {
+      "id": "x-devmobilean27-rn-network-debugger-0082896f80",
+      "family": "gh:devmobilean27/rn_network_debugger",
+      "decision": "selected"
+    },
+    {
+      "id": "x-k-nrs-tengri-9781541ed9",
+      "family": "gh:k-nrs/tengri",
+      "decision": "selected"
+    },
+    {
+      "id": "x-isanchez-aguilar-quota-desk-9c060bcb8a",
+      "family": "gh:isanchez-aguilar/quota-desk",
+      "decision": "selected"
+    },
+    {
+      "id": "x-qddfxp-pi-attachments-067c579d24",
+      "family": "gh:qddfxp/pi-attachments",
+      "decision": "selected"
+    },
+    {
+      "id": "x-qddfxp-pi-attachments-ca404689c7",
+      "family": "gh:qddfxp/pi-attachments",
+      "decision": "selected"
+    },
+    {
+      "id": "x-wrsilva-reis-mobile-66b365903e",
+      "family": "gh:wrsilva/reis-mobile",
+      "decision": "selected"
+    },
+    {
+      "id": "x-wrsilva-reis-mobile-a816f13dde",
+      "family": "gh:wrsilva/reis-mobile",
+      "decision": "selected"
+    },
+    {
+      "id": "x-wrsilva-reis-mobile-2fddf18ded",
+      "family": "gh:wrsilva/reis-mobile",
+      "decision": "selected"
+    },
+    {
+      "id": "x-vlydev-cs2-masked-inspect-js-931f124e1f",
+      "family": "gh:vlydev/cs2-masked-inspect-js",
+      "decision": "selected"
+    },
+    {
+      "id": "x-vlydev-cs2-masked-inspect-js-965cadca53",
+      "family": "gh:vlydev/cs2-masked-inspect-js",
+      "decision": "selected"
+    },
+    {
+      "id": "x-vlydev-cs2-masked-inspect-js-db22e5a083",
+      "family": "gh:vlydev/cs2-masked-inspect-js",
+      "decision": "selected"
+    },
+    {
+      "id": "x-bigbluebaby-codex2dsh-d53d49ab75",
+      "family": "gh:bigbluebaby/codex2dsh",
+      "decision": "selected"
+    },
+    {
+      "id": "x-bigbluebaby-codex2dsh-7c80e61138",
+      "family": "gh:bigbluebaby/codex2dsh",
+      "decision": "selected"
+    },
+    {
+      "id": "x-phcz-are-we-there-yet-66d5428227",
+      "family": "gh:phcz/are-we-there-yet",
+      "decision": "selected"
+    },
+    {
+      "id": "x-hemv-857-agenttruth-f7c4f326e2",
+      "family": "gh:hemv-857/agenttruth",
+      "decision": "selected"
+    },
+    {
+      "id": "x-hemv-857-agenttruth-4e380386cd",
+      "family": "gh:hemv-857/agenttruth",
+      "decision": "selected"
+    },
+    {
+      "id": "x-plankmd-plankmd-448216fce9",
+      "family": "gh:plankmd/plankmd",
+      "decision": "selected"
+    },
+    {
+      "id": "x-feibi-mochi-deepseek-harness-control-center-0df3974f9a",
+      "family": "gh:feibi-mochi/deepseek-harness-control-center",
+      "decision": "selected"
+    },
+    {
+      "id": "x-feibi-mochi-deepseek-harness-control-center-43650bb0e1",
+      "family": "gh:feibi-mochi/deepseek-harness-control-center",
+      "decision": "selected"
+    },
+    {
+      "id": "x-longsien-fastdotcom-e28bb86b46",
+      "family": "gh:longsien/fastdotcom",
+      "decision": "selected"
+    },
+    {
+      "id": "x-wzj998-cutccc-f8be87070b",
+      "family": "gh:wzj998/cutccc",
+      "decision": "selected"
+    },
+    {
+      "id": "x-wzj998-cutccc-5a91997f67",
+      "family": "gh:wzj998/cutccc",
+      "decision": "selected"
+    },
+    {
+      "id": "x-wzj998-cutccc-0f7a315107",
+      "family": "gh:wzj998/cutccc",
+      "decision": "selected"
+    },
+    {
+      "id": "x-nethielchou-dsh-llm-keypool-ea794586a1",
+      "family": "gh:nethielchou/dsh-llm-keypool",
+      "decision": "selected"
+    },
+    {
+      "id": "x-aemonge-pi-openspec-gate-468c52d194",
+      "family": "gh:aemonge/pi-openspec-gate",
+      "decision": "selected"
+    },
+    {
+      "id": "x-aemonge-pi-openspec-gate-243ff57e6c",
+      "family": "gh:aemonge/pi-openspec-gate",
+      "decision": "selected"
+    },
+    {
+      "id": "x-aemonge-pi-openspec-gate-b7608b89b3",
+      "family": "gh:aemonge/pi-openspec-gate",
+      "decision": "selected"
+    },
+    {
+      "id": "x-immamdouhaboammar-unslop-preflight-aa5592a5d8",
+      "family": "gh:immamdouhaboammar/unslop-preflight",
+      "decision": "selected"
+    },
+    {
+      "id": "x-lazy-jack-ltd-bipcircle-verifier-67ba14f1a1",
+      "family": "gh:lazy-jack-ltd/bipcircle-verifier",
+      "decision": "selected"
+    },
+    {
+      "id": "x-lazy-jack-ltd-bipcircle-verifier-ee0bbab9d3",
+      "family": "gh:lazy-jack-ltd/bipcircle-verifier",
+      "decision": "selected"
+    },
+    {
+      "id": "x-lazy-jack-ltd-bipcircle-verifier-b4c71a984e",
+      "family": "gh:lazy-jack-ltd/bipcircle-verifier",
+      "decision": "selected"
+    },
+    {
+      "id": "x-tiger-dreams-awesometime-1f759a5a3b",
+      "family": "gh:tiger-dreams/awesometime",
+      "decision": "selected"
+    },
+    {
+      "id": "x-tiger-dreams-awesometime-fbd573bbe9",
+      "family": "gh:tiger-dreams/awesometime",
+      "decision": "selected"
+    },
+    {
+      "id": "x-tiger-dreams-awesometime-fcfb680a90",
+      "family": "gh:tiger-dreams/awesometime",
+      "decision": "selected"
+    },
+    {
+      "id": "x-mondalankan2007-a11y-seo-toolkit-7f4c577ec8",
+      "family": "gh:mondalankan2007-a11y/seo-toolkit",
+      "decision": "selected"
+    },
+    {
+      "id": "x-mondalankan2007-a11y-seo-toolkit-72d10b3d49",
+      "family": "gh:mondalankan2007-a11y/seo-toolkit",
+      "decision": "selected"
+    },
+    {
+      "id": "x-mondalankan2007-a11y-seo-toolkit-93310fa7e5",
+      "family": "gh:mondalankan2007-a11y/seo-toolkit",
+      "decision": "selected"
+    },
+    {
+      "id": "x-hasanimohammad-route-planner-ecce9a67ac",
+      "family": "gh:hasanimohammad/route-planner",
+      "decision": "selected"
+    },
+    {
+      "id": "x-hasanimohammad-route-planner-a3080540b0",
+      "family": "gh:hasanimohammad/route-planner",
+      "decision": "selected"
+    },
+    {
+      "id": "x-data-unix-mcp-maltego-bc8ffa4d5e",
+      "family": "gh:data-unix/mcp-maltego",
+      "decision": "selected"
+    },
+    {
+      "id": "x-moelzanaty3-redline-845f1bf2f4",
+      "family": "gh:moelzanaty3/redline",
+      "decision": "selected"
+    },
+    {
+      "id": "x-moelzanaty3-redline-6cf4f8acfb",
+      "family": "gh:moelzanaty3/redline",
+      "decision": "selected"
+    },
+    {
+      "id": "x-moelzanaty3-redline-a75ce837fe",
+      "family": "gh:moelzanaty3/redline",
+      "decision": "selected"
+    },
+    {
+      "id": "x-bingh0-ccr-051c11627f",
+      "family": "gh:bingh0/ccr",
+      "decision": "selected"
+    },
+    {
+      "id": "x-bingh0-ccr-d6e04b590b",
+      "family": "gh:bingh0/ccr",
+      "decision": "selected"
+    },
+    {
+      "id": "x-denismrvoljak-pi-troupe-85ecaea2c4",
+      "family": "gh:denismrvoljak/pi-troupe",
+      "decision": "selected"
+    },
+    {
+      "id": "x-denismrvoljak-pi-troupe-c5d30a7dc2",
+      "family": "gh:denismrvoljak/pi-troupe",
+      "decision": "selected"
+    },
+    {
+      "id": "x-sandsoftwaresolutions-ss-fuzzy-find-f8be0964c1",
+      "family": "gh:sandsoftwaresolutions/ss-fuzzy-find",
+      "decision": "selected"
+    },
+    {
+      "id": "x-mapbox-geojson-vt-6948037dbc",
+      "family": "gh:mapbox/geojson-vt",
+      "decision": "selected"
+    },
+    {
+      "id": "x-davisliu2006-pi-permission-system-e388df8b47",
+      "family": "gh:davisliu2006/pi-permission-system",
+      "decision": "selected"
+    },
+    {
+      "id": "x-agile-north-dockship-ee19cd49cc",
+      "family": "gh:agile-north/dockship",
+      "decision": "selected"
+    },
+    {
+      "id": "x-agile-north-dockship-40cf6d0c6b",
+      "family": "gh:agile-north/dockship",
+      "decision": "selected"
+    },
+    {
+      "id": "x-agile-north-dockship-7d16b1a1e7",
+      "family": "gh:agile-north/dockship",
+      "decision": "selected"
+    },
+    {
+      "id": "x-marcbachmann-cel-js-8076a896d8",
+      "family": "gh:marcbachmann/cel-js",
+      "decision": "selected"
+    },
+    {
+      "id": "x-tahmidrahman-release-graph-12f61bc562",
+      "family": "gh:tahmidrahman/release-graph",
+      "decision": "selected"
+    },
+    {
+      "id": "x-6t9xstar-one-step-seo-ba183e6f30",
+      "family": "gh:6t9xstar/one-step-seo",
+      "decision": "selected"
+    },
+    {
+      "id": "x-6t9xstar-one-step-seo-f200a85d17",
+      "family": "gh:6t9xstar/one-step-seo",
+      "decision": "selected"
+    },
+    {
+      "id": "x-t-crew-memory-pulse-a4d0b68c24",
+      "family": "gh:t-crew/memory-pulse",
+      "decision": "selected"
+    },
+    {
+      "id": "x-t-crew-memory-pulse-333f08473b",
+      "family": "gh:t-crew/memory-pulse",
+      "decision": "selected"
+    },
+    {
+      "id": "x-t-crew-memory-pulse-e3ac62e8c0",
+      "family": "gh:t-crew/memory-pulse",
+      "decision": "selected"
+    },
+    {
+      "id": "x-wahyzmaster-office-sim-f34330ad3e",
+      "family": "gh:wahyzmaster/office-sim",
+      "decision": "selected"
+    },
+    {
+      "id": "x-chao5go-remote-fileshare-c56a6eca0c",
+      "family": "gh:chao5go/remote-fileshare",
+      "decision": "selected"
+    },
+    {
+      "id": "x-skillgauntlet-skillgauntlet-d8b57cb0c9",
+      "family": "gh:skillgauntlet/skillgauntlet",
+      "decision": "selected"
+    },
+    {
+      "id": "x-skillgauntlet-skillgauntlet-90cbb706ca",
+      "family": "gh:skillgauntlet/skillgauntlet",
+      "decision": "selected"
+    },
+    {
+      "id": "x-skillgauntlet-skillgauntlet-90d8086a03",
+      "family": "gh:skillgauntlet/skillgauntlet",
+      "decision": "selected"
+    },
+    {
+      "id": "x-lovenndme-dsh-profile-stats-46ebde935d",
+      "family": "gh:lovenndme/dsh-profile-stats",
+      "decision": "selected"
+    },
+    {
+      "id": "x-lovenndme-dsh-profile-stats-d7d72b9afa",
+      "family": "gh:lovenndme/dsh-profile-stats",
+      "decision": "selected"
+    },
+    {
+      "id": "x-ershov-ilya-multi-agent-kit-f6672e95f6",
+      "family": "gh:ershov-ilya/multi-agent-kit",
+      "decision": "selected"
+    },
+    {
+      "id": "x-robot-friends-community-dopa-7e6345f6a5",
+      "family": "gh:robot-friends-community/dopa",
+      "decision": "selected"
+    },
+    {
+      "id": "x-jhuanxx44-dsh-paste-path-27db094f85",
+      "family": "gh:jhuanxx44/dsh-paste-path",
+      "decision": "selected"
+    },
+    {
+      "id": "x-pkistudio-dereditor-ead77ce957",
+      "family": "gh:pkistudio/dereditor",
+      "decision": "selected"
+    },
+    {
+      "id": "x-alex-messer-hexo-ping-services-6929d0f583",
+      "family": "gh:alex-messer/hexo-ping-services",
+      "decision": "selected"
+    },
+    {
+      "id": "x-alex-messer-hexo-ping-services-1fe76c7451",
+      "family": "gh:alex-messer/hexo-ping-services",
+      "decision": "selected"
+    },
+    {
+      "id": "x-alex-messer-hexo-ping-services-335b05828f",
+      "family": "gh:alex-messer/hexo-ping-services",
+      "decision": "selected"
+    },
+    {
+      "id": "x-iricity-iricity-frontier-shared-6fc0f87902",
+      "family": "gh:iricity/iricity-frontier-shared",
+      "decision": "selected"
+    },
+    {
+      "id": "x-arlenman-dsh-backup-sync-2ef1a1fb55",
+      "family": "gh:arlenman/dsh-backup-sync",
+      "decision": "selected"
+    },
+    {
+      "id": "x-arlenman-dsh-backup-sync-469fe75fd4",
+      "family": "gh:arlenman/dsh-backup-sync",
+      "decision": "selected"
+    },
+    {
+      "id": "x-arlenman-dsh-backup-sync-6803e9e46c",
+      "family": "gh:arlenman/dsh-backup-sync",
+      "decision": "selected"
+    },
+    {
+      "id": "x-slow-stack-dsh-study-desk-15fe7aa167",
+      "family": "gh:slow-stack/dsh-study-desk",
+      "decision": "selected"
+    },
+    {
+      "id": "x-slow-stack-dsh-study-desk-9757f57377",
+      "family": "gh:slow-stack/dsh-study-desk",
+      "decision": "selected"
+    },
+    {
+      "id": "x-slow-stack-dsh-study-desk-9f61b404c7",
+      "family": "gh:slow-stack/dsh-study-desk",
+      "decision": "selected"
+    },
+    {
+      "id": "x-mswinandmc-dsh-session-port-764faf634f",
+      "family": "gh:mswinandmc/dsh-session-port",
+      "decision": "selected"
+    },
+    {
+      "id": "x-mswinandmc-dsh-session-port-76063a0729",
+      "family": "gh:mswinandmc/dsh-session-port",
+      "decision": "selected"
+    },
+    {
+      "id": "x-mswinandmc-dsh-session-port-43a6b03c12",
+      "family": "gh:mswinandmc/dsh-session-port",
+      "decision": "selected"
+    },
+    {
+      "id": "x-ruochenlyu-google-trends-now-25f61d011d",
+      "family": "gh:ruochenlyu/google-trends-now",
+      "decision": "selected"
+    },
+    {
+      "id": "x-ruochenlyu-google-trends-now-23d61f9b5a",
+      "family": "gh:ruochenlyu/google-trends-now",
+      "decision": "selected"
+    },
+    {
+      "id": "x-theraccoonbear-exprforge-708edb909c",
+      "family": "gh:theraccoonbear/exprforge",
+      "decision": "selected"
+    },
+    {
+      "id": "x-wangjianming-pi-weather-widget-617eee389f",
+      "family": "gh:wangjianming/pi-weather-widget",
+      "decision": "selected"
+    },
+    {
+      "id": "x-wangjianming-pi-weather-widget-02f59d1c38",
+      "family": "gh:wangjianming/pi-weather-widget",
+      "decision": "selected"
+    },
+    {
+      "id": "x-lshades-solana-agent-kit-vaultbags-fbe14a1c6c",
+      "family": "gh:lshades/solana-agent-kit-vaultbags",
+      "decision": "selected"
+    },
+    {
+      "id": "x-hernancerm-playwright-traffic-cbe7062bcf",
+      "family": "gh:hernancerm/playwright-traffic",
+      "decision": "selected"
+    },
+    {
+      "id": "x-hernancerm-playwright-traffic-be00d32d2f",
+      "family": "gh:hernancerm/playwright-traffic",
+      "decision": "selected"
+    },
+    {
+      "id": "x-hernancerm-playwright-traffic-1837f15c09",
+      "family": "gh:hernancerm/playwright-traffic",
+      "decision": "selected"
+    },
+    {
+      "id": "x-m-sanchez-ab-significance-2deffb885e",
+      "family": "gh:m-sanchez/ab-significance",
+      "decision": "eligible-not-selected (family/owner cap incl. the reusable batch)"
+    },
+    {
+      "id": "x-m-sanchez-ab-significance-f06f785ada",
+      "family": "gh:m-sanchez/ab-significance",
+      "decision": "eligible-not-selected (family/owner cap incl. the reusable batch)"
+    },
+    {
+      "id": "x-m-sanchez-ab-significance-17f0591914",
+      "family": "gh:m-sanchez/ab-significance",
+      "decision": "eligible-not-selected (family/owner cap incl. the reusable batch)"
+    },
+    {
+      "id": "x-jiekesu967-netprobe-cli-37e8ad5f1a",
+      "family": "gh:jiekesu967/netprobe-cli",
+      "decision": "selected"
+    },
+    {
+      "id": "x-jiekesu967-netprobe-cli-7869a171d0",
+      "family": "gh:jiekesu967/netprobe-cli",
+      "decision": "selected"
+    },
+    {
+      "id": "x-jiekesu967-netprobe-cli-0a58dcd633",
+      "family": "gh:jiekesu967/netprobe-cli",
+      "decision": "selected"
+    },
+    {
+      "id": "x-rhein1-agoragentic-micro-ecf-0181c597d4",
+      "family": "gh:rhein1/agoragentic-micro-ecf",
+      "decision": "selected"
+    },
+    {
+      "id": "x-rhein1-agoragentic-micro-ecf-489b5efe60",
+      "family": "gh:rhein1/agoragentic-micro-ecf",
+      "decision": "selected"
+    },
+    {
+      "id": "x-efolchmontiel-gentle-emote-5ba973fe19",
+      "family": "gh:efolchmontiel/gentle-emote",
+      "decision": "selected"
+    },
+    {
+      "id": "x-hamr0-pulselog-7a47860c0c",
+      "family": "gh:hamr0/pulselog",
+      "decision": "selected"
+    },
+    {
+      "id": "x-hamr0-pulselog-db9e3ec1ed",
+      "family": "gh:hamr0/pulselog",
+      "decision": "selected"
+    },
+    {
+      "id": "x-hamr0-pulselog-0da35d7a98",
+      "family": "gh:hamr0/pulselog",
+      "decision": "selected"
+    },
+    {
+      "id": "x-tools-for-agents-prism-0e26fcd95c",
+      "family": "gh:tools-for-agents/prism",
+      "decision": "selected"
+    },
+    {
+      "id": "x-tools-for-agents-prism-10899fabfb",
+      "family": "gh:tools-for-agents/prism",
+      "decision": "selected"
+    },
+    {
+      "id": "x-tools-for-agents-prism-697c24eab8",
+      "family": "gh:tools-for-agents/prism",
+      "decision": "selected"
+    },
+    {
+      "id": "x-betterlmy-pi-statusline-8911c6cea7",
+      "family": "gh:betterlmy/pi-statusline",
+      "decision": "selected"
+    },
+    {
+      "id": "x-betterlmy-pi-statusline-c04e2a4425",
+      "family": "gh:betterlmy/pi-statusline",
+      "decision": "selected"
+    },
+    {
+      "id": "x-betterlmy-pi-statusline-0a1777d78f",
+      "family": "gh:betterlmy/pi-statusline",
+      "decision": "selected"
+    },
+    {
+      "id": "x-regt-urred-contextbase-098ed65f91",
+      "family": "gh:regt-urred/contextbase",
+      "decision": "selected"
+    },
+    {
+      "id": "x-regt-urred-contextbase-e912739983",
+      "family": "gh:regt-urred/contextbase",
+      "decision": "selected"
+    },
+    {
+      "id": "x-regt-urred-contextbase-bdab744422",
+      "family": "gh:regt-urred/contextbase",
+      "decision": "selected"
+    },
+    {
+      "id": "x-kadeangell-vite-plugin-native-rust-c2edce250d",
+      "family": "gh:kadeangell/vite-plugin-native-rust",
+      "decision": "selected"
+    },
+    {
+      "id": "x-yezannnnn-relay-claude-f6e2ce20c8",
+      "family": "gh:yezannnnn/relay-claude",
+      "decision": "selected"
+    },
+    {
+      "id": "x-yezannnnn-relay-claude-d415f91b4b",
+      "family": "gh:yezannnnn/relay-claude",
+      "decision": "selected"
+    },
+    {
+      "id": "x-yezannnnn-relay-claude-14512f8eef",
+      "family": "gh:yezannnnn/relay-claude",
+      "decision": "selected"
+    },
+    {
+      "id": "x-vlsi-github-actions-random-matrix-d952f6ad71",
+      "family": "gh:vlsi/github-actions-random-matrix",
+      "decision": "selected"
+    },
+    {
+      "id": "x-vlsi-github-actions-random-matrix-69941e3bd2",
+      "family": "gh:vlsi/github-actions-random-matrix",
+      "decision": "selected"
+    },
+    {
+      "id": "x-vlsi-github-actions-random-matrix-38176176de",
+      "family": "gh:vlsi/github-actions-random-matrix",
+      "decision": "selected"
+    },
+    {
+      "id": "x-nwflower-dsh-file-claim-230e0f4cca",
+      "family": "gh:nwflower/dsh-file-claim",
+      "decision": "selected"
+    },
+    {
+      "id": "x-nwflower-dsh-file-claim-479f0445e2",
+      "family": "gh:nwflower/dsh-file-claim",
+      "decision": "selected"
+    },
+    {
+      "id": "x-nwflower-dsh-file-claim-9f7ffa99f9",
+      "family": "gh:nwflower/dsh-file-claim",
+      "decision": "selected"
+    },
+    {
+      "id": "x-patrik-csak-bb26-50d7079e04",
+      "family": "gh:patrik-csak/bb26",
+      "decision": "selected"
+    },
+    {
+      "id": "x-switch-afk-sol-stake-info-91b37c1175",
+      "family": "gh:switch-afk/sol-stake-info",
+      "decision": "selected"
+    },
+    {
+      "id": "x-hexmillionaire-agent-lanes-a35fd1abfd",
+      "family": "gh:hexmillionaire/agent-lanes",
+      "decision": "selected"
+    },
+    {
+      "id": "x-nicoiakl-nyx5-84d2ae66e5",
+      "family": "gh:nicoiakl/nyx5",
+      "decision": "selected"
+    },
+    {
+      "id": "x-nicoiakl-nyx5-648ce10572",
+      "family": "gh:nicoiakl/nyx5",
+      "decision": "selected"
+    },
+    {
+      "id": "x-mk-elbaz-opencode-gemini-proxy-66b779fea0",
+      "family": "gh:mk-elbaz/opencode-gemini-proxy",
+      "decision": "selected"
+    },
+    {
+      "id": "x-regrevia-dsh-pause-resume-f8bcb15cf7",
+      "family": "gh:regrevia/dsh-pause-resume",
+      "decision": "selected"
+    },
+    {
+      "id": "x-regrevia-dsh-pause-resume-65ddf0a5cb",
+      "family": "gh:regrevia/dsh-pause-resume",
+      "decision": "selected"
+    },
+    {
+      "id": "x-regrevia-dsh-pause-resume-7e831c7f2c",
+      "family": "gh:regrevia/dsh-pause-resume",
+      "decision": "selected"
+    },
+    {
+      "id": "x-berenyibence-real-cost-of-agent-f0d4d97711",
+      "family": "gh:berenyibence/real-cost-of-agent",
+      "decision": "selected"
+    },
+    {
+      "id": "x-avaui-dev-apogee-5619466de4",
+      "family": "gh:avaui-dev/apogee",
+      "decision": "selected"
+    },
+    {
+      "id": "x-amirsinaz-personal-agentic-os-a6330fc80d",
+      "family": "gh:amirsinaz/personal-agentic-os",
+      "decision": "selected"
+    },
+    {
+      "id": "x-amirsinaz-personal-agentic-os-c759996176",
+      "family": "gh:amirsinaz/personal-agentic-os",
+      "decision": "selected"
+    },
+    {
+      "id": "x-amirsinaz-personal-agentic-os-0b048eab4d",
+      "family": "gh:amirsinaz/personal-agentic-os",
+      "decision": "selected"
+    },
+    {
+      "id": "x-tirthkparikh-figma-live-tokens-5375a9dc91",
+      "family": "gh:tirthkparikh/figma-live-tokens",
+      "decision": "selected"
+    },
+    {
+      "id": "x-tirthkparikh-figma-live-tokens-754e9cddc1",
+      "family": "gh:tirthkparikh/figma-live-tokens",
+      "decision": "selected"
+    },
+    {
+      "id": "x-muslewski-memory-atlas-faff18cc0f",
+      "family": "gh:muslewski/memory-atlas",
+      "decision": "selected"
+    },
+    {
+      "id": "x-muslewski-memory-atlas-08ea5c4491",
+      "family": "gh:muslewski/memory-atlas",
+      "decision": "selected"
+    },
+    {
+      "id": "x-flyewi-eleventy-plugin-redirects-34dd3945e8",
+      "family": "gh:flyewi/eleventy-plugin-redirects",
+      "decision": "selected"
+    },
+    {
+      "id": "x-flyewi-eleventy-plugin-redirects-ed04acd777",
+      "family": "gh:flyewi/eleventy-plugin-redirects",
+      "decision": "selected"
+    },
+    {
+      "id": "x-m-sanchez-calibrated-d0c022f632",
+      "family": "gh:m-sanchez/calibrated",
+      "decision": "eligible-not-selected (family/owner cap incl. the reusable batch)"
+    },
+    {
+      "id": "x-m-sanchez-calibrated-103ba37349",
+      "family": "gh:m-sanchez/calibrated",
+      "decision": "selected"
+    },
+    {
+      "id": "x-m-sanchez-calibrated-2a7b29be5d",
+      "family": "gh:m-sanchez/calibrated",
+      "decision": "selected"
+    },
+    {
+      "id": "x-codesigils-zero-md-formatter-027c4860e2",
+      "family": "gh:codesigils/zero-md-formatter",
+      "decision": "selected"
+    },
+    {
+      "id": "x-roshcompanylabs-cut-at-k-ec0b4554f5",
+      "family": "gh:roshcompanylabs/cut-at-k",
+      "decision": "selected"
+    },
+    {
+      "id": "x-ydddp-nesting-proxy-9c9decea18",
+      "family": "gh:ydddp/nesting-proxy",
+      "decision": "selected"
+    },
+    {
+      "id": "x-magna-illusions-petit-journal-77ceaa21db",
+      "family": "gh:magna-illusions/petit-journal",
+      "decision": "selected"
+    },
+    {
+      "id": "x-magna-illusions-petit-journal-10154f7ada",
+      "family": "gh:magna-illusions/petit-journal",
+      "decision": "selected"
+    },
+    {
+      "id": "x-yklovepython-halfsize-bb4752db74",
+      "family": "gh:yklovepython/halfsize",
+      "decision": "selected"
+    },
+    {
+      "id": "x-helloqingtao-dsh-settings-arranger-0b9041362f",
+      "family": "gh:helloqingtao/dsh-settings-arranger",
+      "decision": "selected"
+    },
+    {
+      "id": "x-helloqingtao-dsh-settings-arranger-bec10fe715",
+      "family": "gh:helloqingtao/dsh-settings-arranger",
+      "decision": "selected"
+    },
+    {
+      "id": "x-mateuszingano-airlock-auth-fa0b7d5e04",
+      "family": "gh:mateuszingano/airlock-auth",
+      "decision": "selected"
+    },
+    {
+      "id": "x-mateuszingano-airlock-auth-41fe1f88e6",
+      "family": "gh:mateuszingano/airlock-auth",
+      "decision": "selected"
+    },
+    {
+      "id": "x-mateuszingano-airlock-auth-f58b359fc4",
+      "family": "gh:mateuszingano/airlock-auth",
+      "decision": "selected"
+    },
+    {
+      "id": "x-juangh123-agentwarden-6a477705e8",
+      "family": "gh:juangh123/agentwarden",
+      "decision": "selected"
+    },
+    {
+      "id": "x-juangh123-agentwarden-b3f6807442",
+      "family": "gh:juangh123/agentwarden",
+      "decision": "selected"
+    },
+    {
+      "id": "x-juangh123-agentwarden-6780e9f69f",
+      "family": "gh:juangh123/agentwarden",
+      "decision": "selected"
+    },
+    {
+      "id": "x-jasondavies-softheap-js-ca2941ae8e",
+      "family": "gh:jasondavies/softheap.js",
+      "decision": "selected"
+    },
+    {
+      "id": "x-huijoson-hudline-196da8a8ca",
+      "family": "gh:huijoson/hudline",
+      "decision": "selected"
+    },
+    {
+      "id": "x-yersi88-dsh-ollama-tool-guard-88080cd1db",
+      "family": "gh:yersi88/dsh-ollama-tool-guard",
+      "decision": "selected"
+    },
+    {
+      "id": "x-ismail-elkorchi-argv-flags-26c90a26b3",
+      "family": "gh:ismail-elkorchi/argv-flags",
+      "decision": "selected"
+    },
+    {
+      "id": "x-johnhenry-wsh-upon-star-387a82e477",
+      "family": "gh:johnhenry/wsh-upon-star",
+      "decision": "eligible-not-selected (family/owner cap incl. the reusable batch)"
+    },
+    {
+      "id": "x-johnhenry-wsh-upon-star-529bede337",
+      "family": "gh:johnhenry/wsh-upon-star",
+      "decision": "selected"
+    },
+    {
+      "id": "x-johnhenry-wsh-upon-star-9420576d0b",
+      "family": "gh:johnhenry/wsh-upon-star",
+      "decision": "selected"
+    },
+    {
+      "id": "x-gitbytefree-dsh-pomodoro-pet-1e549c34f0",
+      "family": "gh:gitbytefree/dsh-pomodoro-pet",
+      "decision": "selected"
+    },
+    {
+      "id": "x-chad3814-secret-provider-f823b0c9bb",
+      "family": "gh:chad3814/secret-provider",
+      "decision": "selected"
+    },
+    {
+      "id": "x-hoeken-signalk-watch-schedule-1b8bff2a8a",
+      "family": "gh:hoeken/signalk-watch-schedule",
+      "decision": "selected"
+    },
+    {
+      "id": "x-frederick-wang-pi-glm-usage-927f220421",
+      "family": "gh:frederick-wang/pi-glm-usage",
+      "decision": "selected"
+    },
+    {
+      "id": "x-investblog-slots-lite-1876c3d79e",
+      "family": "gh:investblog/slots-lite",
+      "decision": "selected"
+    },
+    {
+      "id": "x-investblog-slots-lite-339293f3d8",
+      "family": "gh:investblog/slots-lite",
+      "decision": "selected"
+    },
+    {
+      "id": "x-investblog-slots-lite-5576a4e011",
+      "family": "gh:investblog/slots-lite",
+      "decision": "selected"
+    },
+    {
+      "id": "x-jinwovo-secondsight-e11917c85b",
+      "family": "gh:jinwovo/secondsight",
+      "decision": "selected"
+    },
+    {
+      "id": "x-jinwovo-secondsight-ee3fdf7394",
+      "family": "gh:jinwovo/secondsight",
+      "decision": "selected"
+    },
+    {
+      "id": "x-jinwovo-secondsight-766fc1b132",
+      "family": "gh:jinwovo/secondsight",
+      "decision": "selected"
+    },
+    {
+      "id": "x-yuefdev-tr-slugify-fab1d1e612",
+      "family": "gh:yuefdev/tr-slugify",
+      "decision": "selected"
+    },
+    {
+      "id": "x-yuefdev-tr-slugify-0e97c2c6d1",
+      "family": "gh:yuefdev/tr-slugify",
+      "decision": "selected"
+    },
+    {
+      "id": "x-yuefdev-tr-slugify-fea2e35089",
+      "family": "gh:yuefdev/tr-slugify",
+      "decision": "selected"
+    },
+    {
+      "id": "x-quigleybits-pi-usage-meters-4a6f9b2bd0",
+      "family": "gh:quigleybits/pi-usage-meters",
+      "decision": "selected"
+    },
+    {
+      "id": "x-quigleybits-pi-usage-meters-234022ae31",
+      "family": "gh:quigleybits/pi-usage-meters",
+      "decision": "selected"
+    },
+    {
+      "id": "x-quigleybits-pi-usage-meters-a28608a1a5",
+      "family": "gh:quigleybits/pi-usage-meters",
+      "decision": "selected"
+    },
+    {
+      "id": "x-sandsoftwaresolutions-ss-rate-limit-5002bc505e",
+      "family": "gh:sandsoftwaresolutions/ss-rate-limit",
+      "decision": "eligible-not-selected (family/owner cap incl. the reusable batch)"
+    },
+    {
+      "id": "x-marcusrdrigues-noxeval-a3119e80f7",
+      "family": "gh:marcusrdrigues/noxeval",
+      "decision": "selected"
+    },
+    {
+      "id": "x-netcatty-dsh-session-a4de033153",
+      "family": "gh:netcatty/dsh-session",
+      "decision": "selected"
+    },
+    {
+      "id": "x-ghostpawjs-affinity-fb5cfcffa2",
+      "family": "gh:ghostpawjs/affinity",
+      "decision": "selected"
+    },
+    {
+      "id": "x-ghostpawjs-affinity-b585eb48b2",
+      "family": "gh:ghostpawjs/affinity",
+      "decision": "selected"
+    },
+    {
+      "id": "x-miyashita337-claude-org-18768ebbe6",
+      "family": "gh:miyashita337/claude-org",
+      "decision": "selected"
+    },
+    {
+      "id": "x-rinne-node-optist-59e4349ae7",
+      "family": "gh:rinne/node-optist",
+      "decision": "selected"
+    },
+    {
+      "id": "x-adarshakhatua-queue-list-7a695b926f",
+      "family": "gh:adarshakhatua/queue-list",
+      "decision": "selected"
+    },
+    {
+      "id": "x-adarshakhatua-queue-list-58f829f595",
+      "family": "gh:adarshakhatua/queue-list",
+      "decision": "selected"
+    },
+    {
+      "id": "x-adarshakhatua-queue-list-231108fb75",
+      "family": "gh:adarshakhatua/queue-list",
+      "decision": "selected"
+    },
+    {
+      "id": "x-cometkim-rkyv-js-805d6df79a",
+      "family": "gh:cometkim/rkyv-js",
+      "decision": "selected"
+    },
+    {
+      "id": "x-chenxu233-dsh-gemini-tool-schema-a0211b7eeb",
+      "family": "gh:chenxu233/dsh-gemini-tool-schema",
+      "decision": "selected"
+    },
+    {
+      "id": "x-hypergraph-inc-companion-bc2bfd2773",
+      "family": "gh:hypergraph-inc/companion",
+      "decision": "selected"
+    },
+    {
+      "id": "x-sandsoftwaresolutions-ss-money-cents-7c2701ba59",
+      "family": "gh:sandsoftwaresolutions/ss-money-cents",
+      "decision": "eligible-not-selected (family/owner cap incl. the reusable batch)"
+    },
+    {
+      "id": "x-uurdemir-agent-hub-ui-073177f579",
+      "family": "gh:uurdemir/agent-hub-ui",
+      "decision": "selected"
+    },
+    {
+      "id": "x-uurdemir-agent-hub-ui-2b4a6c3273",
+      "family": "gh:uurdemir/agent-hub-ui",
+      "decision": "selected"
+    },
+    {
+      "id": "x-uurdemir-agent-hub-ui-213d5710bc",
+      "family": "gh:uurdemir/agent-hub-ui",
+      "decision": "selected"
+    },
+    {
+      "id": "x-acus9345-dsh-block-placeholder-edits-a08227434a",
+      "family": "gh:acus9345/dsh-block-placeholder-edits",
+      "decision": "selected"
+    },
+    {
+      "id": "x-acus9345-dsh-block-placeholder-edits-b21e280be3",
+      "family": "gh:acus9345/dsh-block-placeholder-edits",
+      "decision": "selected"
+    },
+    {
+      "id": "x-clementprevot-pi-repo-overlay-7337dcd4a0",
+      "family": "gh:clementprevot/pi-repo-overlay",
+      "decision": "selected"
+    },
+    {
+      "id": "x-m-colley-optimization-test-functions-98a3b5a081",
+      "family": "gh:m-colley/optimization-test-functions",
+      "decision": "selected"
+    },
+    {
+      "id": "x-ishboogoo-fantasy-code-rpg-e243f0b221",
+      "family": "gh:ishboogoo/fantasy-code-rpg",
+      "decision": "selected"
+    },
+    {
+      "id": "x-ishboogoo-fantasy-code-rpg-17c182a46d",
+      "family": "gh:ishboogoo/fantasy-code-rpg",
+      "decision": "selected"
+    },
+    {
+      "id": "x-ishboogoo-fantasy-code-rpg-721ef4e0b7",
+      "family": "gh:ishboogoo/fantasy-code-rpg",
+      "decision": "selected"
+    },
+    {
+      "id": "x-tigorlazuardi-claude-retry-5c2a373c60",
+      "family": "gh:tigorlazuardi/claude-retry",
+      "decision": "selected"
+    },
+    {
+      "id": "x-tigorlazuardi-claude-retry-96af0d174c",
+      "family": "gh:tigorlazuardi/claude-retry",
+      "decision": "selected"
+    },
+    {
+      "id": "x-tigorlazuardi-claude-retry-5f18bbd3a8",
+      "family": "gh:tigorlazuardi/claude-retry",
+      "decision": "selected"
+    },
+    {
+      "id": "x-arraypress-security-headers-69556b8a5a",
+      "family": "gh:arraypress/security-headers",
+      "decision": "selected"
+    },
+    {
+      "id": "x-arraypress-security-headers-c483fe6411",
+      "family": "gh:arraypress/security-headers",
+      "decision": "selected"
+    },
+    {
+      "id": "x-arraypress-security-headers-15405bce40",
+      "family": "gh:arraypress/security-headers",
+      "decision": "eligible-not-selected (family/owner cap incl. the reusable batch)"
+    },
+    {
+      "id": "x-yann9-dsh-git-workbench-7c9cbb008a",
+      "family": "gh:yann9/dsh-git-workbench",
+      "decision": "selected"
+    },
+    {
+      "id": "x-yann9-dsh-git-workbench-44fd5c2b8c",
+      "family": "gh:yann9/dsh-git-workbench",
+      "decision": "selected"
+    },
+    {
+      "id": "x-yann9-dsh-git-workbench-a817778aa0",
+      "family": "gh:yann9/dsh-git-workbench",
+      "decision": "selected"
+    },
+    {
+      "id": "x-eqdoc-indicato-ed0377b4c5",
+      "family": "gh:eqdoc/indicato",
+      "decision": "selected"
+    },
+    {
+      "id": "x-johnhenry-wsh-387a82e477",
+      "family": "gh:johnhenry/wsh",
+      "decision": "eligible-not-selected (family/owner cap incl. the reusable batch)"
+    },
+    {
+      "id": "x-johnhenry-wsh-529bede337",
+      "family": "gh:johnhenry/wsh",
+      "decision": "selected"
+    },
+    {
+      "id": "x-arctumn-ordinal-words-3b63bed8e6",
+      "family": "gh:arctumn/ordinal-words",
+      "decision": "selected"
+    },
+    {
+      "id": "x-ghostpawjs-souls-af582cf709",
+      "family": "gh:ghostpawjs/souls",
+      "decision": "selected"
+    },
+    {
+      "id": "x-sandsoftwaresolutions-ss-csv-safe-63ab9427d7",
+      "family": "gh:sandsoftwaresolutions/ss-csv-safe",
+      "decision": "eligible-not-selected (family/owner cap incl. the reusable batch)"
+    },
+    {
+      "id": "x-petrovicistefan-mcp-dependency-doctor-2048e5c2eb",
+      "family": "gh:petrovicistefan/mcp-dependency-doctor",
+      "decision": "selected"
+    },
+    {
+      "id": "x-frederick-wang-pi-xai-usage-52986f390b",
+      "family": "gh:frederick-wang/pi-xai-usage",
+      "decision": "selected"
+    },
+    {
+      "id": "x-lyraagent-pi-apply-patch-universal-ba3cb7eefe",
+      "family": "gh:lyraagent/pi-apply-patch-universal",
+      "decision": "selected"
+    },
+    {
+      "id": "x-lyraagent-pi-apply-patch-universal-148d17778f",
+      "family": "gh:lyraagent/pi-apply-patch-universal",
+      "decision": "selected"
+    },
+    {
+      "id": "x-postalsys-ee-client-22676eb8c4",
+      "family": "gh:postalsys/ee-client",
+      "decision": "selected"
+    },
+    {
+      "id": "x-babul-cribsheet-a811859417",
+      "family": "gh:babul/cribsheet",
+      "decision": "selected"
+    },
+    {
+      "id": "x-kevin-tou-fontdock-5893381ef4",
+      "family": "gh:kevin-tou/fontdock",
+      "decision": "selected"
+    },
+    {
+      "id": "x-jasondavies-critbit-js-ddb6387032",
+      "family": "gh:jasondavies/critbit.js",
+      "decision": "selected"
+    },
+    {
+      "id": "x-jasondavies-critbit-js-dd19f99e45",
+      "family": "gh:jasondavies/critbit.js",
+      "decision": "selected"
+    },
+    {
+      "id": "x-wjf1-dsh-portable-4ca6c30c4b",
+      "family": "gh:wjf1/dsh-portable",
+      "decision": "selected"
+    },
+    {
+      "id": "x-wjf1-dsh-portable-43d2482f03",
+      "family": "gh:wjf1/dsh-portable",
+      "decision": "selected"
+    },
+    {
+      "id": "x-zerodoc-app-invoice2json-3336145037",
+      "family": "gh:zerodoc-app/invoice2json",
+      "decision": "selected"
+    },
+    {
+      "id": "x-vdaluz-astro-affiliate-a862f077df",
+      "family": "gh:vdaluz/astro-affiliate",
+      "decision": "selected"
+    },
+    {
+      "id": "x-vdaluz-astro-affiliate-4c8491b873",
+      "family": "gh:vdaluz/astro-affiliate",
+      "decision": "selected"
+    },
+    {
+      "id": "x-vdaluz-astro-affiliate-bd8166a9e0",
+      "family": "gh:vdaluz/astro-affiliate",
+      "decision": "selected"
+    },
+    {
+      "id": "x-fuyue521-dsh-desktop-shortcut-6bd601ca32",
+      "family": "gh:fuyue521/dsh-desktop-shortcut",
+      "decision": "selected"
+    },
+    {
+      "id": "x-nureddinhaji-islamicons-83776f69d8",
+      "family": "gh:nureddinhaji/islamicons",
+      "decision": "selected"
+    },
+    {
+      "id": "x-switch-afk-sol-priority-fee-02ea62fe0c",
+      "family": "gh:switch-afk/sol-priority-fee",
+      "decision": "selected"
+    },
+    {
+      "id": "x-switch-afk-sol-priority-fee-aac430299f",
+      "family": "gh:switch-afk/sol-priority-fee",
+      "decision": "eligible-not-selected (family/owner cap incl. the reusable batch)"
+    },
+    {
+      "id": "x-switch-afk-sol-priority-fee-4c2aaf0691",
+      "family": "gh:switch-afk/sol-priority-fee",
+      "decision": "selected"
+    },
+    {
+      "id": "x-jhowbhz-aut2fa-node-8631202700",
+      "family": "gh:jhowbhz/aut2fa-node",
+      "decision": "selected"
+    },
+    {
+      "id": "x-jhowbhz-aut2fa-node-e950cb5bea",
+      "family": "gh:jhowbhz/aut2fa-node",
+      "decision": "selected"
+    },
+    {
+      "id": "x-leeguooooo-wrangler-accounts-f8aaaf6cdb",
+      "family": "gh:leeguooooo/wrangler-accounts",
+      "decision": "selected"
+    },
+    {
+      "id": "x-leeguooooo-wrangler-accounts-2bfbdb3f27",
+      "family": "gh:leeguooooo/wrangler-accounts",
+      "decision": "selected"
+    },
+    {
+      "id": "x-leeguooooo-wrangler-accounts-32c5007cc1",
+      "family": "gh:leeguooooo/wrangler-accounts",
+      "decision": "selected"
+    },
+    {
+      "id": "x-dgaidula-offline-csv-geocoder-e0e4c30daa",
+      "family": "gh:dgaidula/offline-csv-geocoder",
+      "decision": "selected"
+    },
+    {
+      "id": "x-dgaidula-offline-csv-geocoder-dfb042b787",
+      "family": "gh:dgaidula/offline-csv-geocoder",
+      "decision": "selected"
+    },
+    {
+      "id": "x-ckarefulon-dsh-tailscale-remote-5ac558c834",
+      "family": "gh:ckarefulon/dsh-tailscale-remote",
+      "decision": "selected"
+    },
+    {
+      "id": "x-ckarefulon-dsh-tailscale-remote-e181fcf46a",
+      "family": "gh:ckarefulon/dsh-tailscale-remote",
+      "decision": "selected"
+    },
+    {
+      "id": "x-sandsoftwaresolutions-ss-wait-for-c3ff40136e",
+      "family": "gh:sandsoftwaresolutions/ss-wait-for",
+      "decision": "eligible-not-selected (family/owner cap incl. the reusable batch)"
+    },
+    {
+      "id": "x-dadwritestech-thisisfine-0ab9663825",
+      "family": "gh:dadwritestech/thisisfine",
+      "decision": "selected"
+    },
+    {
+      "id": "x-zylzyqzz-dsh-mobile-pwa-7454907034",
+      "family": "gh:zylzyqzz/dsh-mobile-pwa",
+      "decision": "selected"
+    },
+    {
+      "id": "x-zylzyqzz-dsh-mobile-pwa-ffd00879a2",
+      "family": "gh:zylzyqzz/dsh-mobile-pwa",
+      "decision": "selected"
+    },
+    {
+      "id": "x-zylzyqzz-dsh-mobile-pwa-f92f5fd67d",
+      "family": "gh:zylzyqzz/dsh-mobile-pwa",
+      "decision": "selected"
+    },
+    {
+      "id": "x-vlydev-cs2-masked-inspect-ts-0e0bf0c4a4",
+      "family": "gh:vlydev/cs2-masked-inspect-ts",
+      "decision": "selected"
+    },
+    {
+      "id": "x-vlydev-cs2-masked-inspect-ts-0d26ae9914",
+      "family": "gh:vlydev/cs2-masked-inspect-ts",
+      "decision": "selected"
+    },
+    {
+      "id": "x-gautamverma40-tagmatic-f0b94678a2",
+      "family": "gh:gautamverma40/tagmatic",
+      "decision": "selected"
+    },
+    {
+      "id": "x-gautamverma40-tagmatic-5c8e129c24",
+      "family": "gh:gautamverma40/tagmatic",
+      "decision": "selected"
+    },
+    {
+      "id": "x-ramwin-dsh-turn-music-29d76999a0",
+      "family": "gh:ramwin/dsh-turn-music",
+      "decision": "selected"
+    },
+    {
+      "id": "x-ramwin-dsh-turn-music-5dd9102137",
+      "family": "gh:ramwin/dsh-turn-music",
+      "decision": "selected"
+    },
+    {
+      "id": "x-switch-afk-sol-holders-70aeda17ab",
+      "family": "gh:switch-afk/sol-holders",
+      "decision": "selected"
+    },
+    {
+      "id": "x-jeonghun917-readfirst-b83620558c",
+      "family": "gh:jeonghun917/readfirst",
+      "decision": "selected"
+    },
+    {
+      "id": "x-jeonghun917-readfirst-0c16601a01",
+      "family": "gh:jeonghun917/readfirst",
+      "decision": "selected"
+    },
+    {
+      "id": "x-duhu2000-qcc-mcp-legal-oauth-48717ce508",
+      "family": "gh:duhu2000/qcc-mcp-legal-oauth",
+      "decision": "selected"
+    },
+    {
+      "id": "x-fixadero-gradle-to-js-841370944c",
+      "family": "gh:fixadero/gradle-to-js",
+      "decision": "selected"
+    },
+    {
+      "id": "x-fixadero-gradle-to-js-1beb63558e",
+      "family": "gh:fixadero/gradle-to-js",
+      "decision": "selected"
+    },
+    {
+      "id": "x-dvnold-fm-bench-7a2adfd3b5",
+      "family": "gh:dvnold/fm-bench",
+      "decision": "selected"
+    },
+    {
+      "id": "x-dvnold-fm-bench-b42756e75f",
+      "family": "gh:dvnold/fm-bench",
+      "decision": "selected"
+    },
+    {
+      "id": "x-copperdesign-gcal-13e0d2bb5c",
+      "family": "gh:copperdesign/gcal",
+      "decision": "selected"
+    },
+    {
+      "id": "x-copperdesign-gcal-73db9bcbe4",
+      "family": "gh:copperdesign/gcal",
+      "decision": "selected"
+    },
+    {
+      "id": "x-copperdesign-gcal-9cc9fdc532",
+      "family": "gh:copperdesign/gcal",
+      "decision": "selected"
+    },
+    {
+      "id": "x-fatihdogann-turkce-utils-39e1c1f2bc",
+      "family": "gh:fatihdogann/turkce-utils",
+      "decision": "selected"
+    },
+    {
+      "id": "x-fatihdogann-turkce-utils-6e94ffc615",
+      "family": "gh:fatihdogann/turkce-utils",
+      "decision": "selected"
+    },
+    {
+      "id": "x-fatihdogann-turkce-utils-19e7aa2227",
+      "family": "gh:fatihdogann/turkce-utils",
+      "decision": "selected"
+    },
+    {
+      "id": "x-polunzh-dsh-task-notifier-f7a91c22db",
+      "family": "gh:polunzh/dsh-task-notifier",
+      "decision": "selected"
+    },
+    {
+      "id": "x-pex-gl-pex-math-0f4a6f07f8",
+      "family": "gh:pex-gl/pex-math",
+      "decision": "selected"
+    },
+    {
+      "id": "x-ugurcandede-cc-cost-9622afd88c",
+      "family": "gh:ugurcandede/cc-cost",
+      "decision": "selected"
+    },
+    {
+      "id": "x-ugurcandede-cc-cost-f7d038f3c7",
+      "family": "gh:ugurcandede/cc-cost",
+      "decision": "selected"
+    },
+    {
+      "id": "x-ugurcandede-cc-cost-0903c9ac53",
+      "family": "gh:ugurcandede/cc-cost",
+      "decision": "selected"
+    },
+    {
+      "id": "x-t0b0i7-devwell-cli-21b84a3529",
+      "family": "gh:t0b0i7/devwell-cli",
+      "decision": "selected"
+    },
+    {
+      "id": "x-zwarmex-slopfix-1484de0daa",
+      "family": "gh:zwarmex/slopfix",
+      "decision": "selected"
+    },
+    {
+      "id": "x-enoughpower-dsh-git-graph-37be45da63",
+      "family": "gh:enoughpower/dsh-git-graph",
+      "decision": "selected"
+    },
+    {
+      "id": "x-enoughpower-dsh-git-graph-644dffbb4e",
+      "family": "gh:enoughpower/dsh-git-graph",
+      "decision": "selected"
+    },
+    {
+      "id": "x-m-sanchez-training-forge-f68c9f2805",
+      "family": "gh:m-sanchez/training-forge",
+      "decision": "eligible-not-selected (family/owner cap incl. the reusable batch)"
+    },
+    {
+      "id": "x-m-sanchez-training-forge-4f36f9aa9e",
+      "family": "gh:m-sanchez/training-forge",
+      "decision": "eligible-not-selected (family/owner cap incl. the reusable batch)"
+    },
+    {
+      "id": "x-m-sanchez-training-forge-0d30097b9c",
+      "family": "gh:m-sanchez/training-forge",
+      "decision": "selected"
+    },
+    {
+      "id": "x-petercjl-npm-release-kit-62d6d0466a",
+      "family": "gh:petercjl/npm-release-kit",
+      "decision": "selected"
+    },
+    {
+      "id": "x-pianoprince-dsh-workspace-mover-42e8015071",
+      "family": "gh:pianoprince/dsh-workspace-mover",
+      "decision": "selected"
+    },
+    {
+      "id": "x-jay-sharan-ledger-db1b8fe9f5",
+      "family": "gh:jay-sharan/ledger",
+      "decision": "selected"
+    },
+    {
+      "id": "x-jay-sharan-ledger-08b15a95d8",
+      "family": "gh:jay-sharan/ledger",
+      "decision": "selected"
+    },
+    {
+      "id": "x-treetracetool-treetrace-81d5699937",
+      "family": "gh:treetracetool/treetrace",
+      "decision": "selected"
+    },
+    {
+      "id": "x-treetracetool-treetrace-632c0a518e",
+      "family": "gh:treetracetool/treetrace",
+      "decision": "selected"
+    },
+    {
+      "id": "x-treetracetool-treetrace-3c7d2e0abb",
+      "family": "gh:treetracetool/treetrace",
+      "decision": "selected"
+    },
+    {
+      "id": "x-immamdouhaboammar-vibe-design-md-architect-23909bb68a",
+      "family": "gh:immamdouhaboammar/vibe-design-md-architect",
+      "decision": "selected"
+    },
+    {
+      "id": "x-immamdouhaboammar-vibe-design-md-architect-aa5592a5d8",
+      "family": "gh:immamdouhaboammar/vibe-design-md-architect",
+      "decision": "selected"
+    },
+    {
+      "id": "x-kaktaknet-starlight-seo-ca80c1681e",
+      "family": "gh:kaktaknet/starlight-seo",
+      "decision": "selected"
+    },
+    {
+      "id": "x-kaktaknet-starlight-seo-258104d295",
+      "family": "gh:kaktaknet/starlight-seo",
+      "decision": "selected"
+    },
+    {
+      "id": "x-curioustorvald-iyagimusic-js-cda76cc700",
+      "family": "gh:curioustorvald/iyagimusic.js",
+      "decision": "selected"
+    },
+    {
+      "id": "x-model-geek-japanese-holidays-d41b19e551",
+      "family": "gh:model-geek/japanese-holidays",
+      "decision": "selected"
+    },
+    {
+      "id": "x-sachind6-pi-resume-harness-2cfae6429e",
+      "family": "gh:sachind6/pi-resume-harness",
+      "decision": "selected"
+    },
+    {
+      "id": "x-sachind6-pi-resume-harness-0ba684218c",
+      "family": "gh:sachind6/pi-resume-harness",
+      "decision": "selected"
+    },
+    {
+      "id": "x-xinghe-labs-pi-model-config-1db0f57fe1",
+      "family": "gh:xinghe-labs/pi-model-config",
+      "decision": "selected"
+    },
+    {
+      "id": "x-lbailey94-whitemagic-plugins-9392aa1c69",
+      "family": "gh:lbailey94/whitemagic-plugins",
+      "decision": "selected"
+    },
+    {
+      "id": "x-tricksterzero-hexo-yukari-ec48ad34c1",
+      "family": "gh:tricksterzero/hexo-yukari",
+      "decision": "selected"
+    },
+    {
+      "id": "x-tricksterzero-hexo-yukari-ca6965c3ff",
+      "family": "gh:tricksterzero/hexo-yukari",
+      "decision": "selected"
+    },
+    {
+      "id": "x-netlify-context-and-tools-3ac9351c82",
+      "family": "gh:netlify/context-and-tools",
+      "decision": "selected"
+    },
+    {
+      "id": "x-champmk-modforge-dc83515d68",
+      "family": "gh:champmk/modforge",
+      "decision": "selected"
+    },
+    {
+      "id": "x-champmk-modforge-32c1d6dddc",
+      "family": "gh:champmk/modforge",
+      "decision": "selected"
+    },
+    {
+      "id": "x-nisconder-portdoc-48075872f3",
+      "family": "gh:nisconder/portdoc",
+      "decision": "selected"
+    },
+    {
+      "id": "x-dan-seo-ctx-autopsy-af15ae16dc",
+      "family": "gh:dan-seo/ctx-autopsy",
+      "decision": "selected"
+    },
+    {
+      "id": "x-particlelight-dsh-all-usage-dd9b121d29",
+      "family": "gh:particlelight/dsh-all-usage",
+      "decision": "selected"
+    },
+    {
+      "id": "x-particlelight-dsh-all-usage-08c64848b8",
+      "family": "gh:particlelight/dsh-all-usage",
+      "decision": "selected"
+    },
+    {
+      "id": "x-particlelight-dsh-all-usage-405ce876b9",
+      "family": "gh:particlelight/dsh-all-usage",
+      "decision": "selected"
+    },
+    {
+      "id": "x-meat-daemon-404-dsh-plugin-immune-39398536e1",
+      "family": "gh:meat-daemon-404/dsh-plugin-immune",
+      "decision": "selected"
+    },
+    {
+      "id": "x-meat-daemon-404-dsh-plugin-immune-09ddd5b4d1",
+      "family": "gh:meat-daemon-404/dsh-plugin-immune",
+      "decision": "selected"
+    },
+    {
+      "id": "x-meat-daemon-404-dsh-plugin-immune-1e4c433292",
+      "family": "gh:meat-daemon-404/dsh-plugin-immune",
+      "decision": "selected"
+    },
+    {
+      "id": "x-ibrahimkalemci-claude-resume-hub-9df037c209",
+      "family": "gh:ibrahimkalemci/claude-resume-hub",
+      "decision": "selected"
+    },
+    {
+      "id": "x-ibrahimkalemci-claude-resume-hub-8363866680",
+      "family": "gh:ibrahimkalemci/claude-resume-hub",
+      "decision": "selected"
+    },
+    {
+      "id": "x-ibrahimkalemci-claude-resume-hub-6c4b2ed0ca",
+      "family": "gh:ibrahimkalemci/claude-resume-hub",
+      "decision": "selected"
+    },
+    {
+      "id": "x-uniqueweb1-vibe-it-securely-453e75404d",
+      "family": "gh:uniqueweb1/vibe-it-securely",
+      "decision": "selected"
+    },
+    {
+      "id": "x-goodandready-dsh-kanban-3196dac911",
+      "family": "gh:goodandready/dsh-kanban",
+      "decision": "selected"
+    },
+    {
+      "id": "x-goodandready-dsh-kanban-c18a99f103",
+      "family": "gh:goodandready/dsh-kanban",
+      "decision": "eligible-not-selected (family/owner cap incl. the reusable batch)"
+    },
+    {
+      "id": "x-goodandready-dsh-kanban-b58914fa9f",
+      "family": "gh:goodandready/dsh-kanban",
+      "decision": "selected"
+    },
+    {
+      "id": "x-dddmuc-dsh-delete-turn-f2ab06bcf7",
+      "family": "gh:dddmuc/dsh-delete-turn",
+      "decision": "eligible-not-selected (family/owner cap incl. the reusable batch)"
+    },
+    {
+      "id": "x-dddmuc-dsh-delete-turn-0356b86c27",
+      "family": "gh:dddmuc/dsh-delete-turn",
+      "decision": "selected"
+    },
+    {
+      "id": "x-moshcoder-moshpit-dns-38e1a6f16d",
+      "family": "gh:moshcoder/moshpit-dns",
+      "decision": "selected"
+    },
+    {
+      "id": "x-moshcoder-moshpit-dns-1a98a306c4",
+      "family": "gh:moshcoder/moshpit-dns",
+      "decision": "selected"
+    },
+    {
+      "id": "x-moshcoder-moshpit-dns-577969b3dc",
+      "family": "gh:moshcoder/moshpit-dns",
+      "decision": "selected"
+    },
+    {
+      "id": "x-ix-xs-node-comfort-fa9b718f4c",
+      "family": "gh:ix-xs/node-comfort",
+      "decision": "selected"
+    },
+    {
+      "id": "x-nightlab-agent-npm-release-check-d690cd10ac",
+      "family": "gh:nightlab-agent/npm-release-check",
+      "decision": "selected"
+    },
+    {
+      "id": "x-nightlab-agent-npm-release-check-dc3b174b56",
+      "family": "gh:nightlab-agent/npm-release-check",
+      "decision": "selected"
+    },
+    {
+      "id": "x-nightlab-agent-npm-release-check-edb7975f34",
+      "family": "gh:nightlab-agent/npm-release-check",
+      "decision": "selected"
+    },
+    {
+      "id": "x-ronak-create-fablecut-eb5b6a8e89",
+      "family": "gh:ronak-create/fablecut",
+      "decision": "selected"
+    },
+    {
+      "id": "x-sidwiskers-gramless-f9614e20cd",
+      "family": "gh:sidwiskers/gramless",
+      "decision": "selected"
+    },
+    {
+      "id": "x-sidwiskers-gramless-f327de939e",
+      "family": "gh:sidwiskers/gramless",
+      "decision": "selected"
+    },
+    {
+      "id": "x-lucky8197-dsh-devquest-b6f3b45c3c",
+      "family": "gh:lucky8197/dsh-devquest",
+      "decision": "selected"
+    },
+    {
+      "id": "x-agentic-control-plane-muse-code-acp-plugin-4abcdf47b4",
+      "family": "gh:agentic-control-plane/muse-code-acp-plugin",
+      "decision": "selected"
+    },
+    {
+      "id": "x-erkamyaman-capacitor-foldable-eee7836ba2",
+      "family": "gh:erkamyaman/capacitor-foldable",
+      "decision": "selected"
+    },
+    {
+      "id": "x-orderg-x-dsh-mobile-e7c3a258e4",
+      "family": "gh:orderg-x/dsh-mobile",
+      "decision": "selected"
+    },
+    {
+      "id": "x-tlewa-dsh-sidebar-row-menu-c808f63e09",
+      "family": "gh:tlewa/dsh-sidebar-row-menu",
+      "decision": "selected"
+    },
+    {
+      "id": "x-tlewa-dsh-sidebar-row-menu-5c22882123",
+      "family": "gh:tlewa/dsh-sidebar-row-menu",
+      "decision": "selected"
+    },
+    {
+      "id": "x-aunysillyme-website-build-skill-9bb71f5e5b",
+      "family": "gh:aunysillyme/website-build-skill",
+      "decision": "selected"
+    },
+    {
+      "id": "x-aunysillyme-website-build-skill-a2fd247b16",
+      "family": "gh:aunysillyme/website-build-skill",
+      "decision": "selected"
+    },
+    {
+      "id": "x-iyulab-tauri-kit-dev-810136f94b",
+      "family": "gh:iyulab/tauri-kit-dev",
+      "decision": "selected"
+    },
+    {
+      "id": "x-iyulab-tauri-kit-dev-d1ac015b55",
+      "family": "gh:iyulab/tauri-kit-dev",
+      "decision": "selected"
+    },
+    {
+      "id": "x-iyulab-tauri-kit-dev-10ddf7a424",
+      "family": "gh:iyulab/tauri-kit-dev",
+      "decision": "selected"
+    },
+    {
+      "id": "x-imtokenxinluo-dsh-session-doctor-eec0d42c30",
+      "family": "gh:imtokenxinluo/dsh-session-doctor",
+      "decision": "selected"
+    },
+    {
+      "id": "x-imtokenxinluo-dsh-session-doctor-8b06bb57d2",
+      "family": "gh:imtokenxinluo/dsh-session-doctor",
+      "decision": "selected"
+    },
+    {
+      "id": "x-zilongyang-dsh-session-titler-632000e036",
+      "family": "gh:zilongyang/dsh-session-titler",
+      "decision": "selected"
+    },
+    {
+      "id": "x-zilongyang-dsh-session-titler-b968e58948",
+      "family": "gh:zilongyang/dsh-session-titler",
+      "decision": "selected"
+    },
+    {
+      "id": "x-zilongyang-dsh-session-titler-1296879890",
+      "family": "gh:zilongyang/dsh-session-titler",
+      "decision": "selected"
+    },
+    {
+      "id": "x-josueavalosjim-taste-check-7690b62b74",
+      "family": "gh:josueavalosjim/taste-check",
+      "decision": "selected"
+    },
+    {
+      "id": "x-vcesinger-homebridge-marstek-venus-d3cc0e64ff",
+      "family": "gh:vcesinger/homebridge-marstek-venus",
+      "decision": "selected"
+    },
+    {
+      "id": "x-vcesinger-homebridge-marstek-venus-c3dfa1a640",
+      "family": "gh:vcesinger/homebridge-marstek-venus",
+      "decision": "selected"
+    },
+    {
+      "id": "x-vcesinger-homebridge-marstek-venus-fd72acd8f1",
+      "family": "gh:vcesinger/homebridge-marstek-venus",
+      "decision": "selected"
+    },
+    {
+      "id": "x-tobycai-dsh-sessions-manager-cbe05230ff",
+      "family": "gh:tobycai/dsh-sessions-manager",
+      "decision": "selected"
+    },
+    {
+      "id": "x-tobycai-dsh-sessions-manager-7070484c87",
+      "family": "gh:tobycai/dsh-sessions-manager",
+      "decision": "selected"
+    },
+    {
+      "id": "x-tobycai-dsh-sessions-manager-9cff783163",
+      "family": "gh:tobycai/dsh-sessions-manager",
+      "decision": "selected"
+    },
+    {
+      "id": "x-sandsoftwaresolutions-ss-nl-validate-c8eb37737a",
+      "family": "gh:sandsoftwaresolutions/ss-nl-validate",
+      "decision": "selected"
+    },
+    {
+      "id": "x-aayushmainali-github-number-theory-2-588d968233",
+      "family": "gh:aayushmainali-github/number-theory-2",
+      "decision": "selected"
+    },
+    {
+      "id": "x-aayushmainali-github-number-theory-2-14eb778003",
+      "family": "gh:aayushmainali-github/number-theory-2",
+      "decision": "selected"
+    },
+    {
+      "id": "x-aayushmainali-github-number-theory-2-f5e267cd93",
+      "family": "gh:aayushmainali-github/number-theory-2",
+      "decision": "selected"
+    },
+    {
+      "id": "x-spark-ai-boy-dsh-obsidian-bridge-05faca330a",
+      "family": "gh:spark-ai-boy/dsh-obsidian-bridge",
+      "decision": "selected"
+    },
+    {
+      "id": "x-paibot-hq-sagasu-7abaa745ec",
+      "family": "gh:paibot-hq/sagasu",
+      "decision": "selected"
+    },
+    {
+      "id": "x-jhammant-quotamax-3b14fd3dac",
+      "family": "gh:jhammant/quotamax",
+      "decision": "selected"
+    },
+    {
+      "id": "x-jhammant-quotamax-2e5ef39d3f",
+      "family": "gh:jhammant/quotamax",
+      "decision": "selected"
+    },
+    {
+      "id": "x-tapaskar-archwhere-874f3c841c",
+      "family": "gh:tapaskar/archwhere",
+      "decision": "selected"
+    },
+    {
+      "id": "x-tapaskar-archwhere-e679773209",
+      "family": "gh:tapaskar/archwhere",
+      "decision": "selected"
+    },
+    {
+      "id": "x-tapaskar-archwhere-6f1863fc5b",
+      "family": "gh:tapaskar/archwhere",
+      "decision": "selected"
+    },
+    {
+      "id": "x-darrenapfel-soundcheck-34d87930f6",
+      "family": "gh:darrenapfel/soundcheck",
+      "decision": "selected"
+    },
+    {
+      "id": "x-darrenapfel-soundcheck-1a078af2f5",
+      "family": "gh:darrenapfel/soundcheck",
+      "decision": "selected"
+    },
+    {
+      "id": "x-darrenapfel-soundcheck-dea722c530",
+      "family": "gh:darrenapfel/soundcheck",
+      "decision": "selected"
+    },
+    {
+      "id": "x-mrbrunowolff-the-starter-kit-07ecf45af9",
+      "family": "gh:mrbrunowolff/the-starter-kit",
+      "decision": "selected"
+    },
+    {
+      "id": "x-mrbrunowolff-the-starter-kit-724de3ae3b",
+      "family": "gh:mrbrunowolff/the-starter-kit",
+      "decision": "selected"
+    },
+    {
+      "id": "x-molveau-skills-f515b053f9",
+      "family": "gh:molveau/skills",
+      "decision": "selected"
+    },
+    {
+      "id": "x-jayli-cf-ech-921512eacb",
+      "family": "gh:jayli/cf-ech",
+      "decision": "selected"
+    },
+    {
+      "id": "x-linuxdino-cosmodrome-1000e37165",
+      "family": "gh:linuxdino/cosmodrome",
+      "decision": "selected"
+    },
+    {
+      "id": "x-linuxdino-cosmodrome-0a8bcbfe14",
+      "family": "gh:linuxdino/cosmodrome",
+      "decision": "selected"
+    },
+    {
+      "id": "x-laaielichter-stashpad-e89755130e",
+      "family": "gh:laaielichter/stashpad",
+      "decision": "selected"
+    },
+    {
+      "id": "x-laaielichter-stashpad-f565872fc1",
+      "family": "gh:laaielichter/stashpad",
+      "decision": "selected"
+    },
+    {
+      "id": "x-laaielichter-stashpad-ce1606a833",
+      "family": "gh:laaielichter/stashpad",
+      "decision": "selected"
+    },
+    {
+      "id": "x-agentelabs-wdk-policy-guard-e43b4220c3",
+      "family": "gh:agentelabs/wdk-policy-guard",
+      "decision": "selected"
+    },
+    {
+      "id": "x-shatzibitten-codepend-a50424117a",
+      "family": "gh:shatzibitten/codepend",
+      "decision": "selected"
+    },
+    {
+      "id": "x-arraypress-date-utils-91c206ed8d",
+      "family": "gh:arraypress/date-utils",
+      "decision": "selected"
+    },
+    {
+      "id": "x-arraypress-date-utils-0968801ff1",
+      "family": "gh:arraypress/date-utils",
+      "decision": "selected"
+    },
+    {
+      "id": "x-tang0226-graph-js-4b3dd77ad4",
+      "family": "gh:tang0226/graph-js",
+      "decision": "selected"
+    },
+    {
+      "id": "x-tang0226-graph-js-6c98302351",
+      "family": "gh:tang0226/graph-js",
+      "decision": "selected"
+    },
+    {
+      "id": "x-tang0226-graph-js-32060bb418",
+      "family": "gh:tang0226/graph-js",
+      "decision": "selected"
+    },
+    {
+      "id": "x-mahmoud-helmy-m-ai-usage-inspector-f9eb5b1b56",
+      "family": "gh:mahmoud-helmy-m/ai-usage-inspector",
+      "decision": "selected"
+    },
+    {
+      "id": "x-mahmoud-helmy-m-ai-usage-inspector-7c28f674a2",
+      "family": "gh:mahmoud-helmy-m/ai-usage-inspector",
+      "decision": "selected"
+    },
+    {
+      "id": "x-mahmoud-helmy-m-ai-usage-inspector-5fc0a02ac4",
+      "family": "gh:mahmoud-helmy-m/ai-usage-inspector",
+      "decision": "selected"
+    },
+    {
+      "id": "x-sandsoftwaresolutions-ss-changelog-kit-4686ea59a4",
+      "family": "gh:sandsoftwaresolutions/ss-changelog-kit",
+      "decision": "eligible-not-selected (family/owner cap incl. the reusable batch)"
+    },
+    {
+      "id": "x-geoqiao-pi-tools-c9eb62cd14",
+      "family": "gh:geoqiao/pi-tools",
+      "decision": "selected"
+    },
+    {
+      "id": "x-geoqiao-pi-tools-490540773d",
+      "family": "gh:geoqiao/pi-tools",
+      "decision": "selected"
+    },
+    {
+      "id": "x-migohe14-agy-insights-cedc7a7a96",
+      "family": "gh:migohe14/agy-insights",
+      "decision": "selected"
+    },
+    {
+      "id": "x-lin-dongg-dsh-musage-card-27fd891081",
+      "family": "gh:lin-dongg/dsh-musage-card",
+      "decision": "selected"
+    },
+    {
+      "id": "x-whitequark-ipaddr-js-3e7c4e7794",
+      "family": "gh:whitequark/ipaddr.js",
+      "decision": "selected"
+    },
+    {
+      "id": "x-whitequark-ipaddr-js-527b09fea9",
+      "family": "gh:whitequark/ipaddr.js",
+      "decision": "selected"
+    },
+    {
+      "id": "x-whitequark-ipaddr-js-74ee4c5751",
+      "family": "gh:whitequark/ipaddr.js",
+      "decision": "selected"
+    },
+    {
+      "id": "x-zeekyblast-stoatkit-27aef1b4ac",
+      "family": "gh:zeekyblast/stoatkit",
+      "decision": "selected"
+    },
+    {
+      "id": "x-aunysillyme-model-orchestrator-4a9aea7925",
+      "family": "gh:aunysillyme/model-orchestrator",
+      "decision": "selected"
+    },
+    {
+      "id": "x-aunysillyme-model-orchestrator-5a7b3f463a",
+      "family": "gh:aunysillyme/model-orchestrator",
+      "decision": "selected"
+    },
+    {
+      "id": "x-aunysillyme-model-orchestrator-6de0674e3f",
+      "family": "gh:aunysillyme/model-orchestrator",
+      "decision": "selected"
+    },
+    {
+      "id": "x-arraypress-stripe-currencies-771ae4019f",
+      "family": "gh:arraypress/stripe-currencies",
+      "decision": "selected"
+    },
+    {
+      "id": "x-switch-afk-sol-epoch-516f4d6171",
+      "family": "gh:switch-afk/sol-epoch",
+      "decision": "selected"
+    },
+    {
+      "id": "x-strato-dan-dan-oss-recall-dashboard-25943e78f2",
+      "family": "gh:strato-dan/dan-oss-recall-dashboard",
+      "decision": "selected"
+    },
+    {
+      "id": "x-acus9345-dsh-block-hanging-commands-e413125ca0",
+      "family": "gh:acus9345/dsh-block-hanging-commands",
+      "decision": "selected"
+    },
+    {
+      "id": "x-cardin-opencode-fold-diffs-c29ff0bc30",
+      "family": "gh:cardin/opencode-fold-diffs",
+      "decision": "selected"
+    },
+    {
+      "id": "x-cardin-opencode-fold-diffs-ada583de9f",
+      "family": "gh:cardin/opencode-fold-diffs",
+      "decision": "selected"
+    },
+    {
+      "id": "x-cardin-opencode-fold-diffs-81c23c2500",
+      "family": "gh:cardin/opencode-fold-diffs",
+      "decision": "selected"
+    },
+    {
+      "id": "x-shironxn-pi-ansicat-217a8f7890",
+      "family": "gh:shironxn/pi-ansicat",
+      "decision": "selected"
+    },
+    {
+      "id": "x-shironxn-pi-ansicat-7e74574281",
+      "family": "gh:shironxn/pi-ansicat",
+      "decision": "selected"
+    },
+    {
+      "id": "x-shironxn-pi-ansicat-7cb46ff129",
+      "family": "gh:shironxn/pi-ansicat",
+      "decision": "selected"
+    },
+    {
+      "id": "x-cityssm-node-utils-datetime-c3a1fc39ab",
+      "family": "gh:cityssm/node-utils-datetime",
+      "decision": "selected"
+    },
+    {
+      "id": "x-igorjpimenta-doppler-harness-47dea3e96d",
+      "family": "gh:igorjpimenta/doppler-harness",
+      "decision": "selected"
+    },
+    {
+      "id": "x-tangyistudio-scroll-frame-sequence-4cdfa47ac0",
+      "family": "gh:tangyistudio/scroll-frame-sequence",
+      "decision": "selected"
+    },
+    {
+      "id": "x-mwiencek-mutate-cow-93c81621de",
+      "family": "gh:mwiencek/mutate-cow",
+      "decision": "selected"
+    },
+    {
+      "id": "x-mwiencek-mutate-cow-aefb5e05de",
+      "family": "gh:mwiencek/mutate-cow",
+      "decision": "selected"
+    },
+    {
+      "id": "x-mwiencek-mutate-cow-34eac1df8e",
+      "family": "gh:mwiencek/mutate-cow",
+      "decision": "selected"
+    },
+    {
+      "id": "x-kenansulayman-freelist-8e5e758169",
+      "family": "gh:kenansulayman/freelist",
+      "decision": "selected"
+    },
+    {
+      "id": "x-lead788-vidia-api-45b341a7bc",
+      "family": "gh:lead788/vidia-api",
+      "decision": "selected"
+    },
+    {
+      "id": "x-dddmuc-dsh-session-relocate-e473bec9b3",
+      "family": "gh:dddmuc/dsh-session-relocate",
+      "decision": "selected"
+    },
+    {
+      "id": "x-dddmuc-dsh-session-relocate-eb7743997f",
+      "family": "gh:dddmuc/dsh-session-relocate",
+      "decision": "selected"
+    },
+    {
+      "id": "x-legible-sh-bigred-091c625275",
+      "family": "gh:legible-sh/bigred",
+      "decision": "selected"
+    },
+    {
+      "id": "x-legible-sh-bigred-c1b3ad7fdc",
+      "family": "gh:legible-sh/bigred",
+      "decision": "selected"
+    },
+    {
+      "id": "x-chrystyan96-execfence-7c13724e6f",
+      "family": "gh:chrystyan96/execfence",
+      "decision": "selected"
+    },
+    {
+      "id": "x-chaoyue0307-mcp-guard-ffe0453f51",
+      "family": "gh:chaoyue0307/mcp-guard",
+      "decision": "selected"
+    },
+    {
+      "id": "x-chaoyue0307-mcp-guard-4b7c0a73d2",
+      "family": "gh:chaoyue0307/mcp-guard",
+      "decision": "selected"
+    },
+    {
+      "id": "x-chaoyue0307-mcp-guard-840c1c43d0",
+      "family": "gh:chaoyue0307/mcp-guard",
+      "decision": "selected"
+    },
+    {
+      "id": "x-gibrancorbin11-hub-wayleave-8427f40a2f",
+      "family": "gh:gibrancorbin11-hub/wayleave",
+      "decision": "selected"
+    },
+    {
+      "id": "x-nometria-deploy-cli-fa50925e6f",
+      "family": "gh:nometria/deploy-cli",
+      "decision": "selected"
+    },
+    {
+      "id": "x-lilla021-opencode-ruby-upgrader-d7bc326ce9",
+      "family": "gh:lilla021/opencode-ruby-upgrader",
+      "decision": "selected"
+    },
+    {
+      "id": "x-timtarou-ai-hp-38a686ee55",
+      "family": "gh:timtarou/ai-hp",
+      "decision": "selected"
+    }
+  ],
+  "reviewDigest": "93a31c5a87422df80f42f1f67488bd3226283abb4b86912af125ad18264ecd7c"
+}
