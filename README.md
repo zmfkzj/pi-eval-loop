@@ -403,18 +403,18 @@ The series registry (`screening.registry`, hash-chained) is keyed by the runtime
 
 `screening.history` records holdout exposures that happened before this route. A candidate already exposed to a final holdout never gets another one. Neither does a candidate created after a parent's exposure (tuned after a holdout result).
 
-**Budget.** All attempts go through the ONE ledger of the config (its ceiling is fixed at creation) and the isolated runtime's outbound gate. `CappedBudget` refuses a reservation when this route's charged attempts (settled + open worst case, read from that ledger, tagged `meta.route = "screening"`) would exceed any of these:
-- `caps.dev` / `caps.holdout` (per stage);
-- `caps.perCandidate`;
-- `caps.perCycle`;
-- `caps.cumulative`.
+**Budget (policy `shared-total-only`, 2026-11-13: "공유 상한 하나만 사용").** All attempts go through the ONE ledger of the config (its ceiling is fixed at creation; for Terra it is the shared total that already counts earlier spend) and the isolated runtime's outbound gate. There is no per-stage, per-candidate, per-cycle or route-cumulative spending cap:
+- `StageBudget` only tags reservations (`meta.route = "screening"`, candidate, stage, cycle: reporting) and refuses new attempts after the stage's persisted deadline (`dev.maxHours`, `holdout.maxHours`: a time bound).
+- Before a pass is frozen, `passNeed` sizes it as 2 arms x tasks x repeats x `screening.estimate.attemptsPerUnit.{dev,holdout}` (operator estimate; default `unit.maxRequests`). The planner starts it only when the ledger's GLOBAL remaining allowance (settled + every role's open worst cases) covers it. A qualified candidate waiting for supply keeps its holdout need set aside from further dev; the internal track also sets aside its post-promotion assessment.
+- An estimate never ends a running pass. Each unit's worst case is reserved against the shared ledger, and a refusal mid-pass is a durable `budget-exhausted` stop (no partial result passes).
+- Migration: a legacy `screening.caps` section still loads but is **ignored and reported** (`preflight.budget.ignoredLegacy`); delete it. Registry init records and dev plans carry `budgetPolicy`/`budget.policy` instead of caps.
 
-It also refuses after the stage's persisted deadline (`dev.maxHours`, `holdout.maxHours`). Before any stage, the planner requires the whole stage cap as headroom. A qualified candidate waiting for supply keeps its holdout headroom reserved from further dev spending. In live mode, a ledger whose settled gate-covered charges exceed its outbound attempts is refused (settled proposal/review charges in the same ledger are not slack). A series lock admits one screening cycle at a time. With a config `route`, dev and holdout run on it and the registry names it on every paid result; a registry with results of another route is refused (`prerequisite-failed`).
+In live mode, a ledger whose settled gate-covered charges exceed its outbound attempts is refused (settled proposal/review charges in the same ledger are not slack). A series lock admits one screening cycle at a time. With a config `route`, dev and holdout run on it and the registry names it on every paid result; a registry with results of another route is refused (`prerequisite-failed`).
 
 **Waits and stops** (`exploration.code`):
 - model-free waits: `no-candidate`, `dev-supply-empty` (pending candidates but too few eligible development tasks; no refresh), `supply-empty` (only a qualified candidate waiting; triggers the refresh), `runtime-wait`;
-- stops: `budget-exhausted` (caps or ledger cannot fund the next stage, or a cumulative/global refusal mid-pass), `time-exhausted` (holdout deadline), `prerequisite-failed` (immutable input drift, grader failure). Nothing expands a cap.
-- A cap or deadline hit during dev ends the stage cheaply as `DEV_INCONCLUSIVE`.
+- stops: `budget-exhausted` (the shared ledger cannot cover the next pass, or a global refusal mid-pass), `time-exhausted` (holdout deadline), `prerequisite-failed` (immutable input drift, grader failure). Nothing expands the ledger.
+- A deadline hit during dev ends the stage cheaply as `DEV_INCONCLUSIVE`.
 
 **Tests:** `test/screening.test.mjs` runs the real CLI with a simulated target model. It covers:
 - smoke rejection without a model, archive dedupe;

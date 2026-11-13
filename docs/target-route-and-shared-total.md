@@ -52,7 +52,7 @@ ONE `RequestBudget` ledger (its `init` limit and scope are immutable) can carry 
 | Role | How it charges | Counts toward the limit | Funds outbound gate attempts |
 |---|---|---|---|
 | screening dev / holdout, exploration, confirmation, deployment smoke, post-confirmation, retries | `attemptAdmission` reservations (`meta.route` e.g. `screening`), gate `attempt` records | yes | yes (gate-covered) |
-| calibration (`calibrate.mjs --budget-ledger L --budget-limit N --budget-scope S --max-requests M`) | gate-covered reservations; `M` is an in-lock sub-ceiling | yes | yes |
+| calibration (`calibrate.mjs --budget-ledger L --budget-limit N --budget-scope S`) | gate-covered reservations against the ledger only (no `--max-requests`, no sub-ceiling since 2026-11-13) | yes | yes |
 | proposer (agent_workflow) | `reserve(max, { route: "proposal" })`, settle the proxy's forwarded count | yes | **no** (off-gate) |
 | reviewer (`review.mjs --budget-ledger L --budget-limit N --budget-scope S`) | `reserve(--max-requests, { route: "review" })` per session, settle forwarded | yes | **no** (off-gate) |
 
@@ -70,9 +70,23 @@ Rules (`src/request-budget.mjs`):
 - `reconcileDead`: dead gate-covered reservations settle at their attempt floor, dead off-gate ones at their FULL amount.
 - The screening dev slack check now compares `attempts` with `gatedCharged - gatedOpenAmount`: settled proposals or reviews in
   the same ledger no longer trip it, while any other gate-covered slack still fails closed.
-- Stricter stage limits stay sub-limits inside the same ledger: screening `caps` (dev, holdout, perCandidate, perCycle,
-  cumulative <= ledger limit), calibration `--max-requests` sub-ceiling, the autonomous `minRemaining` and confirmation headroom
-  (read from the shared `remaining`, so proposals and reviews already reduce them).
+- Budget policy `shared-total-only` (user decision 2026-11-13: "공유 상한 하나만 사용"): the ledger limit is the ONLY spending limit.
+  - Screening `caps` (dev, holdout, perCandidate, perCycle, cumulative), the internal track's cost fit and the calibration
+    `--max-requests` sub-ceiling (`RequestBudget.reserve` / `attemptAdmission` `subCap`) are removed: `subCap` throws, legacy
+    `screening.caps` are ignored and reported, and a shared-ledger calibration refuses `--max-requests` and a bounded approval.
+  - Admission checks that remain all read the shared `remaining` (settled + every role's open worst cases), so proposals and
+    reviews already reduce them. They are: per-unit worst-case reservations; the screening planner's
+    `passNeed` (sizing estimate: the next pass plus a waiting holdout / internal assessment); the autonomous `minRemaining`; and
+    confirmation affordability.
+  - Kept on purpose (not spending caps):
+    - termination bounds per run or session: `unit.maxRequests`, `wallMs`, the reviewer's per-session `--max-requests`,
+      stage deadlines;
+    - integrity and early elimination;
+    - no-progress stops;
+    - trial design (tasks, repeats, families);
+    - preregistered completed research campaigns (ctrl-confirm prereg budgets);
+    - confirmatory-1's own study ledger (no `--budget-limit`: limit = the approved `--max-requests` <= 4500, research
+      provenance).
 - An open reservation of any role still blocks a holdout batch from being consumed (unchanged, conservative).
 
 Limits of the accounting: proposal and review requests are counted by the route proxy (`forwarded`), not by an outbound gate,
@@ -103,8 +117,10 @@ For a series with one 300000 total that already spent attempts in older ledgers:
 4. Proposals: drop the separate `proposer.ledger` so the proposer reserves in `L` with `meta.route: "proposal"` (requires an
    engine release with this change: the slack check of earlier releases fails closed on it).
 5. Reviews: pass `--budget-ledger L --budget-limit 299715 --budget-scope "<exact scope>"` to `review.mjs`.
-6. Calibration: `calibrate.mjs --budget-ledger L --budget-limit 299715 --budget-scope "<exact scope>" --max-requests M
-   --route cliproxyapi/gpt-6.1-terra --effort medium --context <terra context> --runtime RT ...` (M approved, <= the limit).
+6. Calibration: `calibrate.mjs --budget-ledger L --budget-limit 299715 --budget-scope "<exact scope>"
+   --route cliproxyapi/gpt-6.1-terra --effort medium --context <terra context> --runtime RT ...` with an approval that states
+   `budgetPolicy: "shared-total-only"` and carries no `maxRequests` (an older bounded approval must be re-approved; it is never
+   widened).
 7. Autonomous mode additionally needs a Terra-registered confirmatory protocol (`"route"` in the protocol file), a readiness
    record bound to it and a Terra integrity screen (report with `route`, `screen.runs` with Terra `model_route`); none of these
    exist yet (`docs/terra-study-v4.md`).

@@ -8,17 +8,20 @@
 //              Its result is selection feedback only (evidence class "development"), never independent confirmation.
 //   3. holdout (only candidates the frozen dev rule qualified, at most once per candidate): ONE exploration-only pass on one fresh,
 //              sealed, unused, lineage-clean batch (src/exploration.mjs runHoldout, every existing safeguard), admitted only when the
-//              remaining caps cover it and fresh supply exists; otherwise the candidate waits (no target call).
+//              GLOBAL ledger's remaining allowance covers its estimated need and fresh supply exists; otherwise it waits (no target call).
 //
 // The best possible result is EXPLORATORY_SUPPORTED with adopt false: nothing is ever adopted, deployed, promoted, committed or
 // scheduled from here (the stable reference never changes). Strong confirmatory/adoptive modes are separate and untouched.
 //
 // Budget: every target attempt is admitted by the ONE durable ledger of the config (request-budget.mjs; its ceiling, e.g. a series
 // total shared with proposals and reviews, is fixed at creation and never changed here) through the isolated runtime's outbound
-// gate. On top of it, `CappedBudget` refuses any reservation that would push this route's charged attempts (settled usage +
-// open worst cases, read from the same durable ledger) past the per-stage, per-candidate, per-cycle or cumulative caps of the
-// config, or that starts after the stage's persisted deadline. Charged attempts bound actual attempts (the gate admits an
-// attempt only within the gate-covered charged total), so the caps bound actual provider attempts of this route. Exhaustion never expands anything: it is a durable wait or stop.
+// gate. Budget policy "shared-total-only" (user decision 2026-11-13: "공유 상한 하나만 사용"): there is NO per-stage, per-candidate,
+// per-cycle or route-cumulative spending cap. `StageBudget` only tags reservations (route, candidate, stage, cycle: reporting) and
+// refuses new attempts after the stage's persisted deadline (a time bound); affordability is the ONE ledger's remaining allowance
+// (settled usage + every role's open worst cases). Before a pass is frozen, `passNeed` sizes it (2 arms x tasks x repeats x an
+// attempts-per-unit estimate) and `planAction` admits it only when the GLOBAL remaining allowance covers it (plus a waiting
+// candidate's holdout / the internal assessment that must follow): an estimate sizes the admission, it never ends a running stage.
+// Legacy `screening.caps` are ignored and reported (`legacyBudgetFields`). Exhaustion never expands anything: a durable wait or stop.
 //
 // One cycle (one state directory) runs one action: smoke(+dev) of the next candidate in fair rotation, or the holdout of one
 // qualified candidate. The series registry (hash-chained, keyed by the candidate's runtime digest) persists dedupe, claims and
@@ -39,7 +42,7 @@ import { loadLocal, verifySeal } from "./datasets.mjs";
 import { poolState } from "./supply.mjs";
 import { exercismProblem, readRegistry } from "./lineage.mjs";
 import { acquireLock, atomicWriteJson, digestOf, ensureDir, fault, Ledger, LockBusyError, readJson, sha256 } from "./util.mjs";
-import { abandonAssessment, acceptanceDecision, noProgress, recordAcceptance, acceptanceRepeats, assessmentPlan, candidateDemand, finishAssessment, INTERNAL_EVIDENCE, ASSESSMENT_EVIDENCE, internalEnabled, internalPaths, pendingAssessment, promote, reconcile, rollback as internalRollback, stageFit } from "./internal-promotion.mjs";
+import { abandonAssessment, acceptanceDecision, noProgress, recordAcceptance, acceptanceRepeats, assessmentPlan, candidateDemand, finishAssessment, INTERNAL_EVIDENCE, ASSESSMENT_EVIDENCE, internalEnabled, internalPaths, pendingAssessment, promote, reconcile, rollback as internalRollback } from "./internal-promotion.mjs";
 
 export const ROUTE = "screening";
 export const REGISTRY_SCHEMA = "pi-eval-loop/screening-registry@1";
@@ -53,7 +56,14 @@ export const DEFAULT_ARCHIVE_INCLUDE = Object.freeze(["promoted", "dev_qualified
 export const SCREENING_WAIT_CODES = Object.freeze(["no-candidate", "dev-supply-empty", "supply-empty", "supply-wait", "supply-error", "runtime-wait"]);
 /** Dataset purposes that make a task prospectively development material (never a holdout). */
 export const DEV_PURPOSES = Object.freeze(["calibration", "development"]);
-const CAP_KEYS = ["dev", "holdout", "perCandidate", "perCycle", "cumulative"];
+/** Budget policy of every route of this engine: the one shared ledger ceiling, nothing else. */
+export const BUDGET_POLICY = "shared-total-only";
+/** Removed spending-cap fields that may still appear in old configs (ignored, reported by preflight). */
+export function legacyBudgetFields(c) {
+  const out = [];
+  if (c?.screening?.caps !== undefined) out.push("screening.caps (removed 2026-11-13: per-stage/per-candidate/per-cycle/cumulative caps are not enforced; the one shared ledger ceiling decides affordability; delete the section)");
+  return out;
+}
 const DEV_EVIDENCE = Object.freeze({ class: "development", confirmatoryClaim: false, generalizedClaim: false, note: "selection feedback on a small, reusable, previously exposed development task list: never independent confirmation, never an adoption" });
 
 // ------------------------------------------------------------------------------------------------------------------ config
@@ -85,10 +95,9 @@ export function screeningConfigProblems(c) {
   if (!(Number.isInteger(sc.dev?.promote?.minNetSuccesses) && sc.dev.promote.minNetSuccesses >= 1)) p.push("screening.dev.promote.minNetSuccesses (integer >= 1) required");
   pos(sc.dev?.maxHours, "screening.dev.maxHours"); pos(sc.holdout?.maxHours, "screening.holdout.maxHours");
   if (typeof sc.holdout?.enabled !== "boolean") p.push("screening.holdout.enabled (true/false) required");
-  for (const k of CAP_KEYS) posInt(sc.caps?.[k], `screening.caps.${k}`);
-  if (sc.caps && Number.isInteger(sc.caps.cumulative) && Number.isInteger(c.budget?.limit) && sc.caps.cumulative > c.budget.limit) p.push("screening.caps.cumulative cannot exceed the ledger limit");
-  if (sc.caps && sc.caps.perCycle < Math.max(sc.caps.dev ?? 0, sc.caps.holdout ?? 0)) p.push("screening.caps.perCycle must cover the larger stage cap (one stage per cycle)");
-  if (sc.caps && sc.caps.perCandidate < (sc.caps.dev ?? 0)) p.push("screening.caps.perCandidate must cover the dev cap");
+  // screening.caps: removed (legacy configs keep loading; the section is ignored and reported, never enforced).
+  const est = sc.estimate;
+  if (est !== undefined && !(est && typeof est === "object" && ["dev", "holdout"].every(k => est.attemptsPerUnit?.[k] === undefined || (Number.isInteger(est.attemptsPerUnit[k]) && est.attemptsPerUnit[k] > 0)))) p.push("screening.estimate.attemptsPerUnit.{dev,holdout} must be positive integers (sizing of global admission, not caps)");
   if (sc.smoke !== undefined && typeof sc.smoke?.checks !== "boolean") p.push("screening.smoke.checks must be true/false");
   return p;
 }
@@ -225,7 +234,7 @@ export function syncCandidates(cfg, { log = () => {} } = {}) {
   const sc = cfg.screening;
   const led = registryOf(cfg);
   let records = registryRecords(cfg);
-  if (!records.length) records = [led.append({ type: "init", schema: REGISTRY_SCHEMA, stable: { commit: cfg.stable.commit, runtimeDigest: cfg.stable.runtimeDigest }, caps: sc.caps, config: cfg.file })];
+  if (!records.length) records = [led.append({ type: "init", schema: REGISTRY_SCHEMA, stable: { commit: cfg.stable.commit, runtimeDigest: cfg.stable.runtimeDigest }, budgetPolicy: BUDGET_POLICY, config: cfg.file })];
   const init = records.find(r => r.type === "init");
   if (init.stable?.runtimeDigest !== cfg.stable.runtimeDigest) throw new Error("screening registry belongs to another stable reference (a new reference needs a new registry)");
   const known = new Set(records.filter(r => r.type === "candidate").map(r => r.key));
@@ -404,28 +413,21 @@ export function routeUsage(records, { key = null, stageId = null, cycle = null }
 }
 
 /**
- * A view of the durable RequestBudget that refuses reservations past the route caps or after the stage deadline. Check and
- * reserve are serialized in-process; across processes the series lock admits one screening cycle at a time, and the global
- * ceiling stays enforced by the inner ledger under its own lock.
+ * A view of the durable RequestBudget for one stage (budget policy shared-total-only): it tags every reservation (route,
+ * candidate, stage, cycle; reporting only) and refuses new attempts after the stage's persisted deadline (a time bound).
+ * There is no spending cap here: the ONE shared ledger admits or refuses each reservation under its own lock, across every role
+ * (screening, proposals, reviews, calibration) and process.
  */
-export class CappedBudget {
-  constructor(inner, { caps, stage, key, stageId, cycle, deadline }) {
-    Object.assign(this, { inner, caps, stage, key, stageId, cycle, deadline });
+export class StageBudget {
+  constructor(inner, { stage, key, stageId, cycle, deadline }) {
+    Object.assign(this, { inner, stage, key, stageId, cycle, deadline });
     this.refusal = null; this.chain = Promise.resolve();
   }
-  headroom(records = this.inner.verified()) {
-    const u = routeUsage(records, { key: this.key, stageId: this.stageId, cycle: this.cycle });
-    return { usage: u, left: Math.min(this.caps.cumulative - u.route, this.caps.perCandidate - u.candidate, this.caps[this.stage] - u.stage, this.caps.perCycle - u.cycle) };
-  }
-  status() { const s = this.inner.status(); const h = this.headroom(); return { ...s, remaining: Math.min(s.remaining, h.left), ledgerRemaining: s.remaining, route: h.usage }; }
+  status() { const s = this.inner.status(); const u = routeUsage(this.inner.verified(), { key: this.key, stageId: this.stageId, cycle: this.cycle }); return { ...s, ledgerRemaining: s.remaining, route: u }; }
   verified() { return this.inner.verified(); }
   reserve(amount, meta = {}) {
     const run = async () => {
       if (this.deadline && Date.now() > Date.parse(this.deadline)) { this.refusal = `request budget refused by the screening time bound: the ${this.stage} stage deadline ${this.deadline} has passed (no new attempt starts)`; return null; }
-      const recs = this.inner.verified();
-      const { usage: u } = this.headroom(recs);
-      const over = [["cumulative", u.route, this.caps.cumulative], ["per-candidate", u.candidate, this.caps.perCandidate], [`${this.stage} stage`, u.stage, this.caps[this.stage]], ["per-cycle", u.cycle, this.caps.perCycle]].find(([, used, cap]) => used + amount > cap);
-      if (over) { this.refusal = `request budget refused by the screening ${over[0]} cap: charged ${over[1]} + ${amount} would exceed ${over[2]}`; return null; }
       const t = await this.inner.reserve(amount, { ...meta, route: ROUTE, screeningKey: this.key, screeningStage: this.stageId, screeningCycle: this.cycle });
       if (!t) this.refusal = `${this.inner.refusal ?? "request budget refused"} (global ledger)`;
       else { this.reserved = (this.reserved ?? 0) + 1; fault(`screening:${this.stage}-reserve-${this.reserved}`); }
@@ -439,10 +441,27 @@ export class CappedBudget {
   reconcileDead(detail) { return this.inner.reconcileDead(detail); }
 }
 
-/** Remaining route headroom for a stage of `key` before anything is reserved (pure over ledger records). */
-export function stageHeadroom(records, caps, stage, key, ledgerRemaining) {
-  const u = routeUsage(records, { key });
-  return Math.min(ledgerRemaining, caps.cumulative - u.route, caps.perCandidate - u.candidate, caps[stage], caps.perCycle);
+/**
+ * Estimated attempts of one full paired pass (2 arms x tasks x repeats x attempts per unit). Sizing of the GLOBAL admission only:
+ * a pass is started when the shared ledger's remaining allowance covers it; a running pass is never cut at the estimate.
+ * attemptsPerUnit: screening.estimate.attemptsPerUnit.<stage> (operator estimate from measured costs), else the unit's request
+ * limit (one attempt per allowed request).
+ */
+export function passNeed(cfg, stage, tasks) {
+  const route = exploreProtocol(cfg.route);
+  const key = stage === "holdout" ? "holdout" : "dev";
+  const configured = cfg.screening?.estimate?.attemptsPerUnit?.[key];
+  const attemptsPerUnit = configured ?? route.unit.maxRequests;
+  const repeats = key === "holdout" ? route.holdout.repeats : cfg.screening.dev.repeats;
+  const units = 2 * tasks * repeats;
+  return { stage, units, attemptsPerUnit, need: units * attemptsPerUnit, basis: configured ? "screening.estimate.attemptsPerUnit" : "unit.maxRequests" };
+}
+
+/** Planned needs of the series' next actions (pure). Holdout size: the selected batch, else the batch rule's maximum. */
+export function seriesNeeds(cfg, { devTasks, holdoutTasks = null }) {
+  const dev = passNeed(cfg, "dev", devTasks);
+  const holdout = passNeed(cfg, "holdout", holdoutTasks ?? cfg.batchRule?.maxTasks ?? 8);
+  return { dev: dev.need, holdout: holdout.need, assessment: dev.need, detail: { dev, holdout } };
 }
 
 // ------------------------------------------------------------------------------------------------------------------ dev
@@ -545,20 +564,18 @@ export function staticSmoke(cand, stable) {
 /**
  * The next action of the series (pure over the candidate view, the ledger records and supply facts):
  *   { kind: "holdout", candidate } | { kind: "dev", candidate } | { wait: code, why } | { stop: code, why }.
- * Holdout first for a qualified candidate when affordable and supplied; dev of the next pending candidate in registration order
- * only while it leaves the cap headroom a waiting qualified candidate needs; otherwise a model-free wait or a stop.
+ * Holdout first for a qualified candidate when the shared ledger covers it and supply exists; dev of the next pending candidate in
+ * registration order only while it leaves the allowance a waiting qualified candidate needs; otherwise a model-free wait or a stop.
  */
-export function planAction(view, { caps, ledgerRemaining, records, supply, holdoutEnabled, devSupply = { ok: true }, internal = null }) {
-  const free = (stage, key) => stageHeadroom(records, caps, stage, key, ledgerRemaining);
-  const routeLeft = Math.min(ledgerRemaining, caps.cumulative - routeUsage(records).route);
+export function planAction(view, { ledgerRemaining, needs, supply, holdoutEnabled, devSupply = { ok: true }, internal = null }) {
   let qualified = view.filter(c => c.status === "qualified" && !c.taintedBy);
-  // Internal track (opt-in): the best development net first (ties: registration order); the acceptance needs the route headroom
-  // of its own stage AND of the assessment that must follow a promotion; at most maxWaitingQualified candidates wait.
+  // Internal track (opt-in): the best development net first (ties: registration order); the acceptance needs the GLOBAL remaining
+  // allowance for its own pass AND the assessment that must follow a promotion; at most maxWaitingQualified candidates wait.
   if (internal?.select === "best-dev-net") qualified = qualified.map((c, i) => ({ c, i })).sort((a, b) => ((b.c.results.dev?.net ?? 0) - (a.c.results.dev?.net ?? 0)) || (a.i - b.i)).map(x => x.c);
-  const holdoutNeeds = caps.holdout, follow = internal?.assessmentReserve ?? 0;
+  const holdoutNeeds = needs.holdout, follow = internal ? needs.assessment : 0;
   let reserveFor = 0, why = [], waiting = 0;
   if (holdoutEnabled) for (const c of qualified) {
-    if (free("holdout", c.key) < holdoutNeeds || routeLeft < holdoutNeeds + follow) { why.push(`${c.id}: holdout needs ${holdoutNeeds} attempts of cap headroom${follow ? ` plus ${follow} for the assessment after a promotion` : ""}, ${Math.min(free("holdout", c.key), routeLeft)} left`); continue; }
+    if (ledgerRemaining < holdoutNeeds + follow) { why.push(`${c.id}: holdout needs about ${holdoutNeeds} attempts${follow ? ` plus ${follow} for the assessment after a promotion` : ""} of the shared ledger, ${ledgerRemaining} remain`); continue; }
     if (!supply.ok) { why.push(`${c.id}: qualified, waiting for a fresh unused holdout batch (${supply.why})`); reserveFor = Math.max(reserveFor, holdoutNeeds + follow); waiting++; continue; }
     return { kind: "holdout", candidate: c };
   }
@@ -570,11 +587,11 @@ export function planAction(view, { caps, ledgerRemaining, records, supply, holdo
     return { wait: "dev-supply-empty", why: `${pending.length} pending candidate(s) wait: ${devSupply.why}` };
   }
   for (const c of pending) {
-    if (free("dev", c.key) < caps.dev || routeLeft - caps.dev < reserveFor) { why.push(`${c.id}: dev needs ${caps.dev} attempts of cap headroom${reserveFor ? ` while ${reserveFor} stay reserved for a qualified candidate's holdout` : ""}, ${free("dev", c.key)} left`); break; }
+    if (ledgerRemaining - reserveFor < needs.dev) { why.push(`${c.id}: dev needs about ${needs.dev} attempts of the shared ledger${reserveFor ? ` while ${reserveFor} stay set aside for a qualified candidate's holdout` : ""}, ${ledgerRemaining} remain`); break; }
     return { kind: "dev", candidate: c };
   }
   if (reserveFor) return { wait: "supply-empty", why: why.join(" | ") };
-  if (pending.length || (holdoutEnabled && qualified.length)) return { stop: "budget-exhausted", why: why.join(" | ") || "caps exhausted" };
+  if (pending.length || (holdoutEnabled && qualified.length)) return { stop: "budget-exhausted", why: why.join(" | ") || "shared ledger exhausted" };
   return { wait: "no-candidate", why: `no pending candidate (${view.length} registered: ${summarize(view)})` };
 }
 const summarize = (view) => Object.entries(view.reduce((m, c) => ({ ...m, [c.status]: (m[c.status] ?? 0) + 1 }), {})).map(([k, v]) => `${k} ${v}`).join(", ") || "none";
@@ -631,10 +648,9 @@ export async function screeningCycle(ctx) {
         const due = pendingAssessment(cfg);
         if (due?.pendingRollback) { const r = internalRollback(cfg, { releaseKey: due.releaseKey, reason: due.pendingRollback.why, by: "assessment" }); set({ ...s, screening: { stage: "assessment", candidate: due.candidate.id, key: due.to.release } }); return finishInternal("ROLLBACK", "completed", { internal: { decision: due.pendingRollback.verdict, rollback: r, releaseKey: due.releaseKey }, evidence: ASSESSMENT_EVIDENCE }); }
         if (due) {
-          const left = stageHeadroom(ledgerRecs, sc.caps, "dev", `assess:${due.to.release}`, budget.status().remaining);
-          const fit = stageFit({ tasks: devSet.eligible.length, repeats: sc.dev.repeats, attemptsPerUnit: internal.attemptsPerUnit.dev, cap: sc.caps.dev });
+          const left = budget.status().remaining, needA = passNeed(cfg, "dev", devSet.eligible.length).need;
           const overdue = due.assessBy && Date.now() > Date.parse(due.assessBy);
-          const cannot = overdue ? `assessment deadline ${due.assessBy} passed` : !devSet.ok ? `regression tasks unusable: ${devSet.why}` : !fit.ok ? `assessment cannot fit its cap: ${fit.why}` : left < sc.caps.dev ? `assessment needs ${sc.caps.dev} attempts of headroom, ${left} left` : null;
+          const cannot = overdue ? `assessment deadline ${due.assessBy} passed` : !devSet.ok ? `regression tasks unusable: ${devSet.why}` : left < needA ? `assessment needs about ${needA} attempts of the shared ledger, ${left} remain` : null;
           if (cannot) { const r = abandonAssessment(cfg, due, `${cannot}: an unassessed promotion is rolled back (fail closed)`); set({ ...s, screening: { stage: "assessment", candidate: due.candidate.id, key: due.to.release } }); return finishInternal("ROLLBACK_UNASSESSED", "completed", { internal: { decision: r.verdict, why: r.why, rollback: r.result, releaseKey: due.releaseKey }, evidence: ASSESSMENT_EVIDENCE }); }
           const devTasks = devSet.eligible.map(t => ({ id: t.id, dataset: t.dataset }));
           const plan = assessmentPlan(cfg, due, { devTasks, taskDigests: Object.fromEntries(devTasks.map(t => [t.id, dirDigest(join(t.dataset, t.id))])), seed: `${seed}:assessment` });
@@ -644,24 +660,22 @@ export async function screeningCycle(ctx) {
         }
       }
       if (s.phase === "init") {
-      const act = planAction(view, { caps: sc.caps, ledgerRemaining: budget.status().remaining, records: ledgerRecs, supply, holdoutEnabled: sc.holdout.enabled, devSupply: devSet,
-        internal: internal ? { select: internal.select ?? "best-dev-net", maxWaitingQualified: internal.maxWaitingQualified, assessmentReserve: internal.assessment.enabled ? sc.caps.dev : 0 } : null });
+      const needs = seriesNeeds(cfg, { devTasks: devSet.eligible.length, holdoutTasks: supply.pick?.coverage?.tasks ?? null });
+      if (internal && !internal.assessment.enabled) needs.assessment = 0;
+      const act = planAction(view, { ledgerRemaining: budget.status().remaining, needs, supply, holdoutEnabled: sc.holdout.enabled, devSupply: devSet,
+        internal: internal ? { select: internal.select ?? "best-dev-net", maxWaitingQualified: internal.maxWaitingQualified } : null });
       if (act.wait) return block(act.wait, act.why, true, "init");
       if (act.stop) return block(act.stop, act.why, false, "init");
       const c = act.candidate;
       const candidate = { id: c.id, key: c.key, dir: c.dir, identity: { id: c.id, kind: "orche", commit: c.commit, runtimeDigest: c.key } };
       const stable = { dir: cfg.stable.dir, commit: cfg.stable.commit, runtimeDigest: cfg.stable.runtimeDigest, ...(internal ? { releaseSeq: cfg.stable.releaseSeq ?? null } : {}) };
       if (internal) {
-        // The configured per-unit estimate must let the stage cap cover the whole pass (both arms) before anything is claimed.
-        const fit = act.kind === "dev" ? stageFit({ tasks: devSet.eligible.length, repeats: sc.dev.repeats, attemptsPerUnit: internal.attemptsPerUnit.dev, cap: sc.caps.dev })
-          : stageFit({ tasks: supply.pick?.coverage?.tasks ?? 0, repeats: acceptanceRepeats(cfg), attemptsPerUnit: internal.attemptsPerUnit.acceptance, cap: sc.caps.holdout });
-        if (!fit.ok) return block("prerequisite-failed", `internal ${act.kind === "dev" ? "dev" : "acceptance"} stage: ${fit.why} (nothing claimed, no batch consumed; caps or the estimate are a human decision)`, false, "init");
         const stuck = act.kind === "holdout" ? noProgress(cfg) : null;
         if (stuck) return block("no-progress", stuck, false, "init");
       }
       if (act.kind === "dev") {
         const devTasks = devSet.eligible.map(t => ({ id: t.id, dataset: t.dataset }));
-        const plan = { schema: "pi-eval-loop/screening-plan@1", stage: "dev", ...(cfg.route !== undefined ? { route: cfg.route } : {}), seed, stable, candidate, dev: { tasks: devTasks, repeats: sc.dev.repeats, promote: sc.dev.promote, taskDigests: Object.fromEntries(devTasks.map(t => [t.id, dirDigest(join(t.dataset, t.id))])), eligibility: { rule: "sealed calibration|development dataset, never reserved/used, no historical holdout id/family/Exercism problem, not excluded", rejected: devSet.rejected } }, caps: sc.caps, deadlineHours: sc.dev.maxHours };
+        const plan = { schema: "pi-eval-loop/screening-plan@1", stage: "dev", ...(cfg.route !== undefined ? { route: cfg.route } : {}), seed, stable, candidate, dev: { tasks: devTasks, repeats: sc.dev.repeats, promote: sc.dev.promote, taskDigests: Object.fromEntries(devTasks.map(t => [t.id, dirDigest(join(t.dataset, t.id))])), eligibility: { rule: "sealed calibration|development dataset, never reserved/used, no historical holdout id/family/Exercism problem, not excluded", rejected: devSet.rejected } }, budget: { policy: BUDGET_POLICY, estimate: needs.detail.dev }, deadlineHours: sc.dev.maxHours };
         atomicWriteJson(join(stateDir, "screen-plan.json"), plan);
         registryOf(cfg).append({ type: "claim", key: c.key, stage: "smoke", stateDir });
         set({ ...s, phase: "smoke", screening: { stage: "smoke", candidate: c.id, key: c.key, planSha256: sha256(readFileSync(join(stateDir, "screen-plan.json"))) } });
@@ -670,7 +684,7 @@ export async function screeningCycle(ctx) {
         const pick = supply.pick;
         const seal = verifySeal(pick.dir);
         if (!seal.ok) return block("supply-error", `batch seal: ${seal.why}`, true, "init");
-        const plan = { ...(cfg.route !== undefined ? { route: cfg.route } : {}), seed, stable, candidate, screen: { report: dev.report, reportSha256: dev.reportSha256, runs: dev.runs, tasks: cfg.screen.tasks }, holdout: { batch: pick.dir, seal: seal.seal.digest, pool: cfg.pool, minRemaining: sc.caps.holdout } };
+        const plan = { ...(cfg.route !== undefined ? { route: cfg.route } : {}), seed, stable, candidate, screen: { report: dev.report, reportSha256: dev.reportSha256, runs: dev.runs, tasks: cfg.screen.tasks }, holdout: { batch: pick.dir, seal: seal.seal.digest, pool: cfg.pool, minRemaining: needs.holdout } };
         // A selection dropped before consumption (pool would not hand out the batch) re-plans into a NEW sub-directory: a frozen
         // plan is never changed in place, and an unconsumed claim is not an exposure.
         const n = records.filter(r => r.type === "claim" && r.stage === "holdout" && r.stateDir === stateDir).length;
@@ -738,7 +752,7 @@ export async function screeningCycle(ctx) {
         const run = await ctx.setupRun({ stable: plan.stable, candidate: plan.candidate });
         if (run.out) return run.out;
         if (cfg.simulated && !deps.backend) run.backend = screeningSimBackend(cfg, { id: plan.candidate.id, key: plan.candidate.identity.runtimeDigest });
-        const capped = new CappedBudget(budget, { caps: sc.caps, stage: "dev", key: sc2.key, stageId: `${stateDir}:dev`, cycle: stateDir, deadline: sc2.deadline });
+        const capped = new StageBudget(budget, { stage: "dev", key: sc2.key, stageId: `${stateDir}:dev`, cycle: stateDir, deadline: sc2.deadline });
         const r = await runDev({ plan, state: devDir, backend: run.backend, budget: capped, bound: run.bound, validate: run.validate, envDigest: run.envDigest, parallelism: cfg.parallelism, log: deps.log ?? (() => {}) });
         if (r.blocked) return block("prerequisite-failed", r.blocked, false, "dev-running");
         if (r.paused) { const runtime = /isolated runtime/.test(r.paused); return block(runtime ? "runtime-wait" : "budget-exhausted", r.paused, runtime, "dev-running"); }
@@ -752,7 +766,7 @@ export async function screeningCycle(ctx) {
     // ---------------------------------------------------------------- holdout (exploration-only pass, at most once per candidate)
     if (["holdout-selected", "holdout-running"].includes(s.phase)) {
       const sc2 = s.screening;
-      const capped = new CappedBudget(budget, { caps: sc.caps, stage: "holdout", key: sc2.key, stageId: `${stateDir}:holdout`, cycle: stateDir, deadline: sc2.deadline });
+      const capped = new StageBudget(budget, { stage: "holdout", key: sc2.key, stageId: `${stateDir}:holdout`, cycle: stateDir, deadline: sc2.deadline });
       ready.budget = capped;
       if (cfg.simulated && !deps.backend) { const run = await ctx.setupRun(readJson(join(stateDir, sc2.planFile), {})); if (!run.out) run.backend = screeningSimBackend(cfg, { id: sc2.candidate, key: sc2.key }); }
       const x = await ctx.pass({ planFile: sc2.planFile, planSha: sc2.planSha256, sub: sc2.sub, back: "holdout-selected", dropTo: "init" });
@@ -806,7 +820,7 @@ export async function screeningCycle(ctx) {
         const run = await ctx.setupRun({ stable: plan.stable, candidate: plan.candidate });
         if (run.out) return run.out;
         if (cfg.simulated && !deps.backend) run.backend = screeningSimBackend(cfg, { id: plan.candidate.id, key: plan.candidate.identity.runtimeDigest }, "assessment");
-        const capped = new CappedBudget(budget, { caps: sc.caps, stage: "dev", key: `assess:${plan.candidate.identity.runtimeDigest}`, stageId: `${stateDir}:assessment`, cycle: stateDir, deadline: plan.deadline ?? null });
+        const capped = new StageBudget(budget, { stage: "dev", key: `assess:${plan.candidate.identity.runtimeDigest}`, stageId: `${stateDir}:assessment`, cycle: stateDir, deadline: plan.deadline ?? null });
         const r = await runDev({ plan, state: devDir, backend: run.backend, budget: capped, bound: run.bound, validate: run.validate, envDigest: run.envDigest, parallelism: cfg.parallelism, log: deps.log ?? (() => {}) });
         if (r.blocked) return block("prerequisite-failed", r.blocked, false, "internal-assessing");
         if (r.paused) { const runtime = /isolated runtime/.test(r.paused); return block(runtime ? "runtime-wait" : "budget-exhausted", r.paused, runtime, "internal-assessing"); }
@@ -836,9 +850,12 @@ export async function screeningPreflight(cfg, base, { budget, remaining, orcheDi
   if (cfg.screening.holdout.enabled && view.some(c => c.status === "qualified")) { try { const pick = nextBatch(cfg, { orcheDir }); supply = pick.none ? { ok: false, why: pick.none.slice(0, 2).join("; ") } : { ok: true, pick }; } catch (error) { supply = { ok: false, why: String(error.message).slice(0, 200) }; } }
   const devSet = devEligibility(cfg);
   const internal = internalEnabled(cfg) ? cfg.screening.internal : null;
-  const act = planAction([...view, ...placeholder], { caps: cfg.screening.caps, ledgerRemaining: remaining, records: budget.verified(), supply, holdoutEnabled: cfg.screening.holdout.enabled, devSupply: devSet,
-    internal: internal ? { select: internal.select ?? "best-dev-net", maxWaitingQualified: internal.maxWaitingQualified, assessmentReserve: internal.assessment.enabled ? cfg.screening.caps.dev : 0 } : null });
-  const facts = { devTasks: { eligible: devSet.eligible.length, rejected: devSet.rejected.length }, candidates: view.length, unregistered: unseen, statuses: summarize(view), routeCharged: routeUsage(budget.verified()).route, cumulativeCap: cfg.screening.caps.cumulative };
+  const needs = seriesNeeds(cfg, { devTasks: devSet.eligible.length, holdoutTasks: supply.pick?.coverage?.tasks ?? null });
+  if (internal && !internal.assessment.enabled) needs.assessment = 0;
+  const act = planAction([...view, ...placeholder], { ledgerRemaining: remaining, needs, supply, holdoutEnabled: cfg.screening.holdout.enabled, devSupply: devSet,
+    internal: internal ? { select: internal.select ?? "best-dev-net", maxWaitingQualified: internal.maxWaitingQualified } : null });
+  const facts = { devTasks: { eligible: devSet.eligible.length, rejected: devSet.rejected.length }, candidates: view.length, unregistered: unseen, statuses: summarize(view), routeCharged: routeUsage(budget.verified()).route,
+    budget: { policy: BUDGET_POLICY, ledgerRemaining: remaining, needs: { dev: needs.detail.dev, holdout: needs.detail.holdout, assessment: internal ? needs.assessment : null }, ignoredLegacy: legacyBudgetFields(cfg) } };
   if (internal) {
     // Consumer contract: candidateDemand.wanted false = do not start a paid proposal now (candidates already wait or budget stops).
     const waiting = view.filter(c => c.status === "qualified" && !c.taintedBy).length;

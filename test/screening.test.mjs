@@ -16,7 +16,7 @@ import { holdoutLedger, sealOf } from "../src/datasets.mjs";
 import { RequestBudget } from "../src/request-budget.mjs";
 import { runtimeDigest } from "../src/exploration.mjs";
 import { acquireLock, Ledger } from "../src/util.mjs";
-import { candidateView, planAction, routeUsage, devVerdict, CappedBudget, runDev, dirDigest, devEligibility, exposedDevTasks } from "../src/screening.mjs";
+import { candidateView, planAction, routeUsage, devVerdict, StageBudget, runDev, dirDigest, devEligibility, exposedDevTasks, passNeed, legacyBudgetFields } from "../src/screening.mjs";
 import { loadExploration } from "../src/explore-cycle.mjs";
 import { simulatedBackend } from "../src/evaluator.mjs";
 
@@ -68,8 +68,7 @@ function world(root, over = {}) {
       candidates: { sources: [{ kind: "archive", dir: arch }, { kind: "tree", id: "old-exposed", dir: exposed, identity: { runtimeDigest: runtimeDigest(exposed), commit: "old@1" } }], maxCandidates: 12 },
       history: [{ runtimeDigest: runtimeDigest(exposed), at: "2026-11-07T08:51:10.524Z", note: "consumed holdout before this route" }],
       dev: { tasks: [{ id: "d1", dataset: devDir }, { id: "d2", dataset: devDir }], repeats: 1, promote: { minNetSuccesses: 1 }, maxHours: 2 },
-      holdout: { enabled: true, maxHours: 4 }, smoke: { checks: true },
-      caps: { dev: 200, holdout: 400, perCandidate: 700, perCycle: 400, cumulative: 1500 } }, ...over };
+      holdout: { enabled: true, maxHours: 4 }, smoke: { checks: true }, estimate: { attemptsPerUnit: { dev: 20, holdout: 20 } } }, ...over };
   const file = join(root, "screening.json"); writeFileSync(file, JSON.stringify(cfg));
   return { cfg, file, pool, stable, arch, devDir };
 }
@@ -109,7 +108,7 @@ test("screening route: smoke -> dev -> fresh holdout only for a qualified candid
     for (const c of v1.filter(x => x.kind === "archive" && x.dir)) assert.notEqual(c.key, stableDigest, `${c.id}: the patch changed the materialized tree`);
     assert.equal(readFileSync(join(byId(cfg, "a1-good").dir, "src", "x.ts"), "utf8"), "export const s = 2;\n");
     const afterDev1 = charged(cfg);
-    assert.ok(afterDev1 > 0 && afterDev1 <= cfg.screening.caps.dev);
+    assert.ok(afterDev1 > 0);
     assert.equal(routeUsage(ledger(cfg).verified()).route, afterDev1, "every charged attempt is tagged with the screening route");
     // Retry of a completed cycle: idle, no attempt.
     o = run(["--resume", "--require-state", "--state", c(1), "--protocol", file]);
@@ -141,7 +140,6 @@ test("screening route: smoke -> dev -> fresh holdout only for a qualified candid
     assert.ok(["EXPLORATORY_SUPPORTED", "KEEP_STABLE", "INCONCLUSIVE"].includes(s.final.verdict)); assertNoAdoption(s); assert.equal(s.final.evidence.class, "exploratory");
     assert.equal(holdoutLedger(join(pool, "batches", A)).records().length, 1, "one use");
     assert.equal(byId(cfg, "a1-good").status, "holdout-done");
-    assert.ok(routeUsage(ledger(cfg).verified(), { key: byId(cfg, "a1-good").key }).candidate <= cfg.screening.caps.perCandidate);
     // Retry: idle, no second use.
     o = run(["--resume", "--require-state", "--state", c(6), "--protocol", file]); assert.equal(o.out.outcome, "idle"); assert.equal(holdoutLedger(join(pool, "batches", A)).records().length, 1);
     // More fresh supply: a1 never gets another holdout; nothing pending -> no-candidate wait, model-free.
@@ -161,36 +159,49 @@ test("screening route: smoke -> dev -> fresh holdout only for a qualified candid
   } finally { rmSync(root, { recursive: true, force: true }); }
 });
 
-test("screening caps and time bounds: exhausted cumulative cap stops before any call; stage cap and deadline end dev cheaply; cumulative refusal mid-pass is a durable stop", { timeout: 240_000 }, async () => {
+test("shared-total-only budget: tiny legacy caps are ignored (reported); global exhaustion and historical spend stop before any call; deadline ends dev cheaply; the ledger limit is never changed", { timeout: 300_000 }, async () => {
   const root = tempDir();
   try {
     const base = world(root);
-    const mk = (name, caps, dev = {}) => { const f = join(root, `${name}.json`); const cfg = { ...base.cfg, screening: { ...base.cfg.screening, registry: join(root, name, "registry.jsonl"), workDir: join(root, name, "work"), caps: { ...base.cfg.screening.caps, ...caps }, dev: { ...base.cfg.screening.dev, ...dev } }, budget: { ...base.cfg.budget, ledger: join(root, name, "ledger.jsonl"), scope: `test ${name}` } }; writeFileSync(f, JSON.stringify(cfg)); return { cfg, file: f }; };
-    // 1. Cumulative cap below one dev stage: preflight and run stop (not retryable), zero calls, nothing claimed.
-    let { cfg, file } = mk("tiny", { cumulative: 100 });
-    let pf = run(["--preflight", "--state", join(root, "t1"), "--protocol", file]); assert.equal(pf.out.code, "budget-exhausted");
-    let o = run(["--resume", "--state", join(root, "t1"), "--protocol", file]);
+    const mk = (name, { caps, dev = {}, limit = base.cfg.budget.limit } = {}) => { const f = join(root, `${name}.json`); const cfg = { ...base.cfg, screening: { ...base.cfg.screening, registry: join(root, name, "registry.jsonl"), workDir: join(root, name, "work"), ...(caps ? { caps } : {}), dev: { ...base.cfg.screening.dev, ...dev } }, budget: { ...base.cfg.budget, ledger: join(root, name, "ledger.jsonl"), limit, scope: `test ${name}` } }; writeFileSync(f, JSON.stringify(cfg)); return { cfg, file: f }; };
+    // 1. Legacy per-stage caps far below one dev stage: ignored (never enforced), reported by preflight; the affordable dev pass
+    //    runs to its verdict and charges more than every legacy cap.
+    let { cfg, file } = mk("legacy", { caps: { dev: 1, holdout: 1, perCandidate: 1, perCycle: 1, cumulative: 1 } });
+    assert.equal(legacyBudgetFields(cfg).length, 1);
+    let pf = run(["--preflight", "--state", join(root, "t1"), "--protocol", file]);
+    assert.equal(pf.out.code, "ok", JSON.stringify(pf.out)); assert.equal(pf.out.budget.policy, "shared-total-only"); assert.match(pf.out.budget.ignoredLegacy[0], /screening\.caps/);
+    assert.equal(pf.out.screening.budget.needs.dev.need, passNeed(cfg, "dev", 2).need);
+    // Killed mid-pass after a reservation, then resumed with the same legacy config: the frozen plan continues, still uncapped.
+    let o = run(["--resume", "--state", join(root, "t1"), "--protocol", file], { EVAL_LOOP_FAULT: "screening:dev-reserve-2" });
+    assert.equal(o.signal, "SIGKILL");
+    o = run(["--resume", "--require-state", "--state", join(root, "t1"), "--protocol", file]);
+    let s = status(join(root, "t1")); assert.equal(s.final.verdict, "DEV_PROMISING", JSON.stringify(s)); assert.ok(charged(cfg) > 1, "spent past every legacy cap");
+    const reg = new Ledger(cfg.screening.registry).records(); assert.equal(reg[0].budgetPolicy, "shared-total-only"); assert.equal(reg[0].caps, undefined);
+    const plan = JSON.parse(readFileSync(join(root, "t1", "screen-plan.json"), "utf8")); assert.equal(plan.caps, undefined); assert.equal(plan.budget.policy, "shared-total-only");
+    // 2. The GLOBAL ledger cannot cover one dev pass (limit below its estimated need): preflight and run stop before any call.
+    ({ cfg, file } = mk("tiny", { limit: passNeed(base.cfg, "dev", 2).need - 1 }));
+    pf = run(["--preflight", "--state", join(root, "t2"), "--protocol", file]); assert.equal(pf.out.code, "budget-exhausted");
+    o = run(["--resume", "--state", join(root, "t2"), "--protocol", file]);
     assert.equal(o.out.status.exploration.code, "budget-exhausted"); assert.equal(o.out.status.blocked.retryable, false); assert.equal(charged(cfg), 0);
-    o = run(["--resume", "--require-state", "--state", join(root, "t1"), "--protocol", file]); assert.equal(o.out.status.exploration.code, "budget-exhausted"); assert.equal(charged(cfg), 0);
-    // 2. Stage deadline already past: dev ends DEV_INCONCLUSIVE with nothing dispatched or charged (cheap end, completed).
-    ({ cfg, file } = mk("late", {}, { maxHours: 1e-9 }));
-    o = run(["--resume", "--state", join(root, "t2"), "--protocol", file]); let s = status(join(root, "t2"));
+    assert.match(o.out.status.blocked.reason, /shared ledger/);
+    // 3. Historical spend (other roles, settled) stays charged and counts: the remaining allowance decides, nothing is reset.
+    ({ cfg, file } = mk("hist"));
+    const led = ledger(cfg); const t = await led.reserve(4450, { route: "proposal", proposal: "old" }); await led.settle(t, 4450);
+    o = run(["--resume", "--state", join(root, "t3"), "--protocol", file]);
+    assert.equal(o.out.status.exploration.code, "budget-exhausted", JSON.stringify(o.out.status)); assert.equal(ledger(cfg).status().charged, 4450, "historical spend stays charged (no reset)");
+    // An OPEN reservation of another role counts the same way (in-flight worst case): a combined shortfall stops before any call.
+    ({ cfg, file } = mk("open"));
+    const led2 = ledger(cfg); await led2.reserve(4450, { route: "review" });
+    o = run(["--resume", "--state", join(root, "t3b"), "--protocol", file]);
+    assert.equal(o.out.status.exploration.code, "budget-exhausted"); assert.equal(ledger(cfg).status().charged, 4450);
+    // 4. Stage deadline already past (a time bound, not a spend cap): dev ends DEV_INCONCLUSIVE, nothing dispatched or charged.
+    ({ cfg, file } = mk("late", { dev: { maxHours: 1e-9 } }));
+    o = run(["--resume", "--state", join(root, "t4"), "--protocol", file]); s = status(join(root, "t4"));
     assert.equal(s.final.verdict, "DEV_INCONCLUSIVE"); assert.equal(s.exploration.outcome, "completed"); assert.equal(charged(cfg), 0);
-    assert.match(JSON.parse(readFileSync(join(root, "t2", "dev", "dev-report.json"), "utf8")).halted, /time bound/);
-    // 3. Stage cap hit mid-pass (each simulated reservation is 150, settled at 5): units stop at the cap, DEV_INCONCLUSIVE.
-    ({ cfg, file } = mk("stagecap", { dev: 160 }));
-    o = run(["--resume", "--state", join(root, "t3"), "--protocol", file]); s = status(join(root, "t3"));
-    assert.equal(s.final.verdict, "DEV_INCONCLUSIVE"); assert.ok(charged(cfg) <= 160); assert.match(JSON.parse(readFileSync(join(root, "t3", "dev", "dev-report.json"), "utf8")).halted, /dev stage cap/);
-    // 4. Cumulative headroom below a stage (earlier route usage): durable stop before the stage (not retryable); a restart dispatches nothing.
-    ({ cfg, file } = mk("cumcap", { cumulative: 200, dev: 200, perCandidate: 200, perCycle: 200, holdout: 200 }));
-    // pre-charge 45 attempts of the route on the same ledger (as if an earlier stage of this route used them)
-    const led = ledger(cfg); const t = await led.reserve(45, { route: "screening", screeningKey: "earlier", screeningStage: "x", screeningCycle: "x" }); await led.settle(t, 45);
-    o = run(["--resume", "--state", join(root, "t4"), "--protocol", file]);
-    assert.equal(o.out.status.exploration.code, "budget-exhausted", JSON.stringify(o.out.status)); assert.equal(o.out.status.blocked.retryable, false);
-    const c4 = charged(cfg); assert.ok(c4 <= 200);
-    o = run(["--resume", "--require-state", "--state", join(root, "t4"), "--protocol", file]); assert.equal(o.out.status.exploration.code, "budget-exhausted"); assert.equal(charged(cfg), c4);
-    // The ledger's 4500 ceiling is never changed: a config asking for another limit is refused (budget-unusable).
+    assert.match(JSON.parse(readFileSync(join(root, "t4", "dev", "dev-report.json"), "utf8")).halted, /time bound/);
+    // 5. The ledger's ceiling is never changed: a config asking for another limit is refused (budget-unusable).
     const bad = { ...cfg, budget: { ...cfg.budget, limit: 9000 } }; const bf = join(root, "bad.json"); writeFileSync(bf, JSON.stringify(bad));
+    ledger(cfg).status(); await ledger(cfg).reserve(1); 
     pf = run(["--preflight", "--state", join(root, "t5"), "--protocol", bf]); assert.equal(pf.out.code, "budget-unusable");
   } finally { rmSync(root, { recursive: true, force: true }); }
 });
@@ -243,15 +254,16 @@ test("screening pure rules: dev verdict, plan order, holdout reservation, cap vi
   assert.equal(devVerdict([rec("stable", "a", true), rec("stable", "b", false), rec("c1", "a", true), rec("c1", "b", false)], plan).verdict, "DEV_NEGATIVE");
   assert.equal(devVerdict([rec("stable", "a", false), rec("c1", "a", true)], plan).verdict, "DEV_INCONCLUSIVE");
   assert.equal(devVerdict([rec("stable", "a", false), rec("stable", "b", false), rec("c1", "a", true, { integrity: { violations: ["x"] } }), rec("c1", "b", true)], plan).verdict, "DEV_REJECTED");
-  // planAction: a qualified candidate waiting for supply keeps its holdout headroom reserved; dev of others only within the rest.
-  const caps = { dev: 100, holdout: 300, perCandidate: 400, perCycle: 300, cumulative: 450 };
+  // planAction (shared-total-only): only the GLOBAL remaining allowance against estimated needs; a qualified candidate waiting for
+  // supply keeps its holdout need set aside; dev of others only within the rest; no route/stage/candidate/cycle cap exists.
+  const needs = { dev: 100, holdout: 300, assessment: 100 };
   const v = [{ id: "q", key: "q", status: "qualified" }, { id: "p", key: "p", status: "pending" }];
-  assert.equal(planAction(v, { caps, ledgerRemaining: 4000, records: [], supply: { ok: false, why: "none" }, holdoutEnabled: true }).kind, "dev");
-  const used = [{ type: "reserve", id: "r1", amount: 100, meta: { route: "screening", screeningKey: "z" } }, { type: "settle", id: "r1", used: 100 }];
-  assert.equal(planAction(v, { caps, ledgerRemaining: 4000, records: used, supply: { ok: false, why: "none" }, holdoutEnabled: true }).wait, "supply-empty");
-  assert.equal(planAction(v, { caps, ledgerRemaining: 4000, records: used, supply: { ok: true, pick: {} }, holdoutEnabled: true }).kind, "holdout");
-  assert.equal(planAction([{ id: "q", key: "q", status: "qualified", taintedBy: "x" }], { caps, ledgerRemaining: 4000, records: [], supply: { ok: true }, holdoutEnabled: true }).wait, "no-candidate");
-  assert.equal(planAction(v, { caps, ledgerRemaining: 50, records: [], supply: { ok: true }, holdoutEnabled: true }).stop, "budget-exhausted");
+  assert.equal(planAction(v, { needs, ledgerRemaining: 400, supply: { ok: false, why: "none" }, holdoutEnabled: true }).kind, "dev", "400 - 300 set aside >= 100");
+  assert.equal(planAction(v, { needs, ledgerRemaining: 399, supply: { ok: false, why: "none" }, holdoutEnabled: true }).wait, "supply-empty", "dev would eat the waiting holdout's need");
+  assert.equal(planAction(v, { needs, ledgerRemaining: 300, supply: { ok: true, pick: {} }, holdoutEnabled: true }).kind, "holdout");
+  assert.equal(planAction([{ id: "q", key: "q", status: "qualified", taintedBy: "x" }], { needs, ledgerRemaining: 4000, supply: { ok: true }, holdoutEnabled: true }).wait, "no-candidate");
+  assert.equal(planAction(v, { needs, ledgerRemaining: 50, supply: { ok: true }, holdoutEnabled: true }).stop, "budget-exhausted");
+  assert.equal(planAction(v, { needs: { dev: 1e6, holdout: 1e6, assessment: 0 }, ledgerRemaining: 1e7, supply: { ok: true, pick: {} }, holdoutEnabled: true }).kind, "holdout", "large passes are admitted when the shared ledger covers them");
   // Tuned after a holdout: a child created after its parent's holdout exposure never qualifies for a holdout; an older one may.
   const pk = "a".repeat(64);
   const cfgT = { pool: "/nonexistent", screening: { history: [{ archivePkey: pk, at: "2026-11-05T22:50:09.264Z", note: "parent holdout" }] } };
@@ -263,22 +275,25 @@ test("screening pure rules: dev verdict, plan order, holdout reservation, cap vi
   const v2 = candidateView(recs2, { pool: "/nonexistent", screening: {} });
   assert.deepEqual(v2.find(x => x.id === "kid").devExposure.map(t => [t.id, t.inherited]), [["t1", "p1"]]);
   assert.equal(v2.find(x => x.id === "kid").status, "pending"); assert.equal(v2.find(x => x.id === "par").status, "pending");
-  // CappedBudget serializes concurrent reservations: two parallel reserves cannot both pass a cap that admits one.
+  // StageBudget: no cap of its own; two parallel reserves (and another role's) are admitted or refused by the ONE ledger only.
   const root = tempDir();
   try {
-    const inner = new RequestBudget({ path: join(root, "l.jsonl"), limit: 4500, scope: "t" });
-    const cb = new CappedBudget(inner, { caps: { dev: 200, holdout: 200, perCandidate: 200, perCycle: 200, cumulative: 200 }, stage: "dev", key: "k", stageId: "s", cycle: "c" });
+    const inner = new RequestBudget({ path: join(root, "l.jsonl"), limit: 200, scope: "t" });
+    const cb = new StageBudget(inner, { stage: "dev", key: "k", stageId: "s", cycle: "c" });
     const [a, b] = await Promise.all([cb.reserve(150, {}), cb.reserve(150, {})]);
-    assert.equal([a, b].filter(Boolean).length, 1); assert.match(cb.refusal, /cap/);
+    assert.equal([a, b].filter(Boolean).length, 1); assert.match(cb.refusal, /global ledger/);
     assert.equal(cb.status().remaining, 50);
-    // Mid-pass refusal by the cumulative cap (e.g. concurrent usage): runDev pauses (durable stop upstream), no dev result written.
+    assert.equal(await inner.reserve(51, { route: "proposal" }), null, "another role cannot pass the shared ceiling either");
+    const big = new StageBudget(new RequestBudget({ path: join(root, "big.jsonl"), limit: 300000, scope: "t" }), { stage: "holdout", key: "k", stageId: "s", cycle: "c" });
+    assert.ok(await big.reserve(100000, {}), "no stage-size refusal below the shared ceiling");
+    // Mid-pass refusal by the GLOBAL ledger (e.g. concurrent usage): runDev pauses (durable stop upstream), no dev result written.
     const devDir = dataset(join(root, "dev"), [["d1", "gh:d/1"], ["d2", "gh:d/2"]]);
     const stable = tree(join(root, "st"), "export const s = 1;\n"), cand = tree(join(root, "ca"), "export const s = 2;\n");
     const plan2 = { seed: "u", stable: { dir: stable, commit: "s", runtimeDigest: runtimeDigest(stable) }, candidate: { id: "u", dir: cand, identity: { commit: "c", runtimeDigest: runtimeDigest(cand) } }, dev: { tasks: [{ id: "d1", dataset: devDir }, { id: "d2", dataset: devDir }], repeats: 1, promote: { minNetSuccesses: 1 }, taskDigests: { d1: dirDigest(join(devDir, "d1")), d2: dirDigest(join(devDir, "d2")) } } };
-    const inner2 = new RequestBudget({ path: join(root, "l2.jsonl"), limit: 4500, scope: "t2" });
-    const cb2 = new CappedBudget(inner2, { caps: { dev: 1000, holdout: 1000, perCandidate: 1000, perCycle: 1000, cumulative: 160 }, stage: "dev", key: "k", stageId: "s", cycle: "c" });
+    const inner2 = new RequestBudget({ path: join(root, "l2.jsonl"), limit: 160, scope: "t2" });
+    const cb2 = new StageBudget(inner2, { stage: "dev", key: "k", stageId: "s", cycle: "c" });
     const r = await runDev({ plan: plan2, state: join(root, "devstate"), backend: simulatedBackend({ skill: () => ({ p: 0.5 }) }), budget: cb2, bound: null });
-    assert.match(r.paused, /cumulative cap/); assert.equal(existsSync(join(root, "devstate", "dev-report.json")), false);
+    assert.match(r.paused, /global ledger/); assert.equal(existsSync(join(root, "devstate", "dev-report.json")), false);
     assert.ok(inner2.status().charged <= 160);
   } finally { rmSync(root, { recursive: true, force: true }); }
 });

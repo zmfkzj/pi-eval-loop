@@ -17,15 +17,18 @@
 // rate-limit/overload failures (429/503) of the target model, so the calibration's load never pushes a peer into failures.
 // --dry-run prints the plan and the worst case and runs nothing.
 //
-//   node studies/confirmatory-1/calibrate.mjs --batch DIR --state DIR --harness-dir DIR --harness-commit SHA --max-requests N
+//   node studies/confirmatory-1/calibrate.mjs --batch DIR --state DIR --harness-dir DIR --harness-commit SHA
 //        --approval FILE --budget-ledger FILE --gateway-db FILE [--repeats 3] [--parallelism 3] [--dry-run]
-//        [--route PROVIDER/MODEL [--effort LEVEL]] [--context ID] [--budget-limit N --budget-scope S]
+//        [--route PROVIDER/MODEL [--effort LEVEL]] [--context ID] (--budget-limit N --budget-scope S | --max-requests N)
 //
 // Study identity (2026-11-13, docs/terra-study-v4.md): the defaults are confirmatory-1's (route = DEFAULT_PROTOCOL.route, context
 // "confirmatory-1:calibration", a ledger of its own whose limit IS the approved --max-requests, hard cap 4500). Another study
 // (e.g. Terra v4) names its route, its context and the identity of a SHARED series ledger (--budget-limit/--budget-scope = the
-// ledger's init limit and scope, e.g. 300000); then --max-requests (<= the ledger limit) is enforced as a sub-ceiling of this
-// context's reservations inside that ledger (RequestBudget.reserve subCap), across runs, resumes and concurrent processes.
+// ledger's init limit and scope, e.g. 300000). Budget policy shared-total-only (user decision 2026-11-13: "공유 상한 하나만 사용"):
+// with a shared ledger the ledger's ceiling is the ONLY spending limit. --max-requests is refused there (the former per-context
+// sub-ceiling is removed) and the approval must state budgetPolicy "shared-total-only" without a maxRequests ceiling: an older
+// approval that carried a ceiling is not silently extended into an unbounded one; it must be re-approved. The confirmatory-1
+// default (no --budget-limit) is unchanged research provenance: its own single study ledger whose limit IS --max-requests <= 4500.
 //
 // The harness directory is a read-only export of the stable orche commit, e.g.
 //   mkdir DIR && git -C <umbrella>/orche archive <commit> | tar -x -C DIR
@@ -76,9 +79,9 @@ export function calibrationPlan({ batch, harnessDir, harnessCommit, repeats = 3,
   if (holdoutLedger(batch).records().length) problems.push("batch carries a holdout use record");
   if (!harnessDir || !existsSync(join(harnessDir, "package.json"))) problems.push("--harness-dir: an exported stable orche tree (package.json missing)");
   if (!/^[0-9a-f]{40}$/.test(harnessCommit ?? "")) problems.push("--harness-commit: the full sha of the exported stable commit");
-  if (!(Number.isInteger(maxRequests) && maxRequests > 0)) problems.push("--max-requests: the approved aggregate request ceiling (a positive integer)");
-  else if (budgetLimit === undefined && maxRequests > HARD_CAP) problems.push(`--max-requests ${maxRequests} exceeds the study's hard cap ${HARD_CAP}`);
-  else if (budgetLimit !== undefined && maxRequests > budgetLimit) problems.push(`--max-requests ${maxRequests} exceeds the shared ledger's limit ${budgetLimit}`);
+  if (budgetLimit !== undefined) { if (maxRequests !== undefined) problems.push("--max-requests is not accepted with a shared ledger (budget policy shared-total-only: the shared ledger's ceiling is the only spending limit; the per-run sub-ceiling was removed)"); }
+  else if (!(Number.isInteger(maxRequests) && maxRequests > 0)) problems.push("--max-requests: the approved aggregate request ceiling of the study's own ledger (a positive integer)");
+  else if (maxRequests > HARD_CAP) problems.push(`--max-requests ${maxRequests} exceeds the study's hard cap ${HARD_CAP}`);
   if (budgetLimit !== undefined && !(Number.isInteger(budgetLimit) && budgetLimit > 0 && typeof budgetScope === "string" && budgetScope.trim())) problems.push("--budget-limit/--budget-scope: the shared ledger's exact init limit (positive integer) and scope");
   if (context !== undefined && !/^[A-Za-z0-9][A-Za-z0-9._:-]{0,79}$/.test(context)) problems.push("--context: 1-80 characters [A-Za-z0-9._:-]");
   if (!Number.isInteger(repeats) || repeats < 1 || repeats > 10) problems.push("--repeats must be an integer in 1..10");
@@ -95,15 +98,17 @@ export function calibrationPlan({ batch, harnessDir, harnessCommit, repeats = 3,
     rule: { feature: "declared-tier", hardMaxRate, minTasksPerLevel, censoring: CENSORING, exclusions },
     // Non-default identity only (a default plan keeps the digest of existing confirmatory-1 state directories).
     ...(context !== undefined && context !== CONTEXT ? { context } : {}),
-    budget: { maxRequests: maxRequests ?? null, ledger: budgetLedger ?? null, ...(budgetLimit !== undefined ? { ledgerLimit: budgetLimit, ledgerScope: budgetScope ?? null, subCap: true } : {}), perAttemptCeiling: perUnit, worstCaseFirstAttempts: units * perUnit, expectedRequests: Math.round(units * PILOT_PER_UNIT.requests), expectedInputTokens: Math.round(units * PILOT_PER_UNIT.inputTokens), expectationSource: PILOT_PER_UNIT.source, note: "every attempt (first try or infrastructure retry) reserves perAttemptCeiling in the global budget before dispatch; unsettled reservations stay charged in full; the run pauses (no report) when a reservation is refused" },
+    budget: { maxRequests: budgetLimit !== undefined ? null : maxRequests ?? null, ledger: budgetLedger ?? null, ...(budgetLimit !== undefined ? { ledgerLimit: budgetLimit, ledgerScope: budgetScope ?? null, policy: "shared-total-only" } : {}), perAttemptCeiling: perUnit, worstCaseFirstAttempts: units * perUnit, expectedRequests: Math.round(units * PILOT_PER_UNIT.requests), expectedInputTokens: Math.round(units * PILOT_PER_UNIT.inputTokens), expectationSource: PILOT_PER_UNIT.source, note: "every attempt (first try or infrastructure retry) reserves perAttemptCeiling in the global budget before dispatch; unsettled reservations stay charged in full; the run pauses (no report) when a reservation is refused" },
     problems,
   };
 }
 
 /**
  * Approval file (schema calibration-approval@2): { maxRequests, approvedBy, approvedAt, authorization: { kind, signature,
- * humanSignatory, verbatim, recordedBy }, scope: { pool | batchSeal, budgetLedger } }. maxRequests must EQUAL the requested
- * ceiling (<= HARD_CAP). An authorization relayed by an agent is recorded as such: kind "relayed-instruction" with no signature
+ * humanSignatory, verbatim, recordedBy }, scope: { pool | batchSeal, budgetLedger } }. Own study ledger: maxRequests must EQUAL
+ * the requested ceiling (<= HARD_CAP). Shared ledger (budget policy shared-total-only, 2026-11-13): { budgetPolicy:
+ * "shared-total-only", approvedBy, approvedAt, authorization, scope: { pool | batchSeal, budgetLedger } } WITHOUT maxRequests;
+ * an approval that still carries a ceiling is refused (re-approve: it is never silently widened). An authorization relayed by an agent is recorded as such: kind "relayed-instruction" with no signature
  * and humanSignatory false (an agent never signs for a person); kind "signed" needs a signature.
  */
 export function approvalProblems(path, maxRequests, plan) {
@@ -111,9 +116,13 @@ export function approvalProblems(path, maxRequests, plan) {
   let a;
   try { a = JSON.parse(readFileSync(path, "utf8")); } catch { return ["approval file unreadable"]; }
   const out = [];
-  const cap = plan.budget?.ledgerLimit ?? HARD_CAP;
-  if (!(Number.isInteger(a.maxRequests) && a.maxRequests > 0 && a.maxRequests <= cap)) out.push(`approval maxRequests ${a.maxRequests} must be a positive integer <= ${cap}`);
-  else if (a.maxRequests !== maxRequests) out.push(`approval maxRequests ${a.maxRequests} differs from --max-requests ${maxRequests} (the ceiling is exactly the approved one)`);
+  if (plan.budget?.ledgerLimit !== undefined) {
+    if (a.maxRequests !== undefined) out.push(`approval carries maxRequests ${a.maxRequests}: with a shared ledger the per-run ceiling was removed (budget policy shared-total-only); an approval of a bounded run is not extended into an unbounded one: re-approve with budgetPolicy "shared-total-only" and no maxRequests`);
+    if (a.budgetPolicy !== "shared-total-only") out.push("approval.budgetPolicy must be \"shared-total-only\" for a shared-ledger calibration (the approver authorizes spending up to the shared ceiling)");
+  } else {
+    if (!(Number.isInteger(a.maxRequests) && a.maxRequests > 0 && a.maxRequests <= HARD_CAP)) out.push(`approval maxRequests ${a.maxRequests} must be a positive integer <= ${HARD_CAP}`);
+    else if (a.maxRequests !== maxRequests) out.push(`approval maxRequests ${a.maxRequests} differs from --max-requests ${maxRequests} (the ceiling is exactly the approved one)`);
+  }
   if (!a.approvedBy || !a.approvedAt || Number.isNaN(Date.parse(a.approvedAt))) out.push("approval needs approvedBy and approvedAt");
   const z = a.authorization ?? {};
   if (z.kind === "signed") { if (!z.signature) out.push("a signed approval needs its signature"); }
@@ -211,8 +220,9 @@ export async function runCalibration({ plan, state, harnessDir, backend, protoco
     const bad = tasks.filter(t => !grading[t.id].ok).map(t => t.id);
     if (bad.length) { const summary = { paused: `grader validation failed: ${bad.join(", ")}`, ran: 0 }; atomicWriteJson(join(state, "calibration-summary.json"), summary); return { summary }; }
     const p = merge(structuredClone(protocol), { parallelism });
-    // A shared series ledger: this context's reservations are bounded by the approved ceiling (sub-cap under the ledger lock).
-    const admission = attemptAdmission(budget, bound, plan.budget?.subCap ? { subCap: { key: `calibration:${contextOf(plan)}`, limit: plan.budget.maxRequests } } : {});
+    // A frozen plan of the removed sub-ceiling contract is not resumed under the new policy (re-plan and re-approve).
+    if (plan.budget?.subCap) throw new Error("calibration plan carries the removed per-context sub-ceiling (budget.subCap): budget policy shared-total-only; use a new state directory with a re-approved plan");
+    const admission = attemptAdmission(budget, bound);
     const evaluator = new Evaluator({ stateDir: state, protocol: p, protocolDigest: planLock.plan, envDigest, tasksById, grading, backend, log, admission });
     const harness = { ...plan.harness, dir: harnessDir };
     const units = []; for (const id of plan.tasks) for (let r = 0; r < plan.repeats; r++) units.push({ task: id, split: "calibration", repeat: r });
@@ -257,7 +267,7 @@ export async function runCalibration({ plan, state, harnessDir, backend, protoco
 
 if (import.meta.url === `file://${process.argv[1]}`) {
   const { values } = parseArgs({ options: { batch: { type: "string" }, state: { type: "string" }, "harness-dir": { type: "string" }, "harness-commit": { type: "string" }, repeats: { type: "string", default: "3" }, parallelism: { type: "string", default: "1" }, "max-requests": { type: "string" }, approval: { type: "string" }, "budget-ledger": { type: "string" }, "budget-limit": { type: "string" }, "budget-scope": { type: "string" }, route: { type: "string" }, effort: { type: "string" }, context: { type: "string" }, "gateway-db": { type: "string" }, runtime: { type: "string" }, reviews: { type: "string" }, "pressure-minutes": { type: "string", default: "30" }, "hard-max-rate": { type: "string", default: "0.5" }, exclusions: { type: "string" }, "min-tasks-per-level": { type: "string", default: "3" }, "dry-run": { type: "boolean", default: false } } });
-  if (!values.batch) { process.stderr.write("usage: calibrate.mjs --batch DIR --state DIR --harness-dir DIR --harness-commit SHA --max-requests N --approval FILE --budget-ledger FILE --runtime DIR --gateway-db FILE --reviews DIR [--exclusions FILE] [--route PROVIDER/MODEL [--effort LEVEL]] [--context ID] [--budget-limit N --budget-scope S] [--dry-run]\n"); process.exit(64); }
+  if (!values.batch) { process.stderr.write("usage: calibrate.mjs --batch DIR --state DIR --harness-dir DIR --harness-commit SHA --approval FILE --budget-ledger FILE --runtime DIR --gateway-db FILE --reviews DIR [--exclusions FILE] [--route PROVIDER/MODEL [--effort LEVEL]] [--context ID] (--budget-limit N --budget-scope S | --max-requests N) [--dry-run]\n"); process.exit(64); }
   let protocol;
   try { protocol = studyProtocol({ route: values.route, effort: values.effort }); } catch (error) { process.stderr.write(`${error.message}\n`); process.exit(64); }
   if ((values["budget-limit"] === undefined) !== (values["budget-scope"] === undefined)) { process.stderr.write("--budget-limit and --budget-scope go together (the shared ledger's exact init limit and scope)\n"); process.exit(64); }

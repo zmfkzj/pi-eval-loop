@@ -10,18 +10,18 @@
  * (budget.admitAttempt), so K is only the reservation SIZE (room for gateway retries/redirects); the settlement records the
  * forwarded count and the ledger raises it to the attempt floor (RequestBudget.settle), never below the actual attempts. A
  * runtime check failing at settlement still settles (the floor keeps the count exact) and then halts.
- * `options.subCap` { key, limit } (2026-11-13) bounds this admission's reservations as one group inside a shared ledger
- * (RequestBudget.reserve), e.g. a calibration's approved ceiling within a 300000-attempt series ledger.
- * @param {any} budget @param {any} [bound] @param {{ subCap?: { key: string, limit: number } }} [options]
+ * Budget policy shared-total-only (2026-11-13): the former `options.subCap` group ceiling is removed; passing it throws.
+ * @param {any} budget @param {any} [bound] @param {any} [options]
  */
-export function attemptAdmission(budget, bound, { subCap } = {}) {
+export function attemptAdmission(budget, bound, options = {}) {
+  if (options?.subCap !== undefined) throw new Error("attemptAdmission: subCap was removed (budget policy shared-total-only: the ledger ceiling is the only limit)");
   const k = () => (bound ? bound() : { perRequest: 1 });
   const admission = {
     changed: null,
     async reserve(amount, meta) {
       const b = k();
       const K = b.perRequest;
-      const t = await budget.reserve(amount * K, { ...meta, perRequestAttempts: K, forwardCap: amount, gated: b.gated || undefined }, subCap ? { subCap } : undefined);
+      const t = await budget.reserve(amount * K, { ...meta, perRequestAttempts: K, forwardCap: amount, gated: b.gated || undefined });
       return t && { ...t, K, gated: !!b.gated };
     },
     async settle(ticket, used, detail) {

@@ -150,6 +150,8 @@ test("calibration runner: refuses holdouts and unapproved spending, never exceed
     // The SAME global budget is shared by a rerun in another state directory: it can only use what is left.
     const rerun = await runCalibration({ plan, state: join(root, "state-rerun"), harnessDir, backend, parallelism: 1, budget: tightBudget });
     assert.equal(rerun.summary.ran, 0); assert.ok(rerun.summary.budget.charged <= 200);
+    // shared-total-only: a frozen plan of the removed sub-ceiling contract is refused (re-plan + re-approve), nothing dispatched.
+    await assert.rejects(runCalibration({ plan: { ...plan, budget: { ...plan.budget, subCap: true } }, state: join(root, "state-subcap"), harnessDir, backend, parallelism: 1, budget: new RequestBudget({ path: join(root, "sub.jsonl"), limit: 300000, scope: "t" }) }), /removed per-context sub-ceiling/);
     const full = await runCalibration({ plan, state: join(root, "state-full"), harnessDir, backend, parallelism: 2, budget: new RequestBudget({ path: join(root, "roomy.jsonl"), limit: 4500, scope: "t" }) });
     assert.equal(full.summary.ran, 12); assert.equal(full.report.measuredWith.kind, "fixture"); assert.equal(full.summary.budget.charged, 60);
     assert.match(verifyCalibrationReport(full.report).join(" "), /not from a runner ledger/, "a simulated calibration is never evidence");

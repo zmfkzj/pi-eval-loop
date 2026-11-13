@@ -16,9 +16,9 @@ import { runtimeDigest } from "../src/exploration.mjs";
 import { Ledger } from "../src/util.mjs";
 import { Releases } from "../src/lifecycle.mjs";
 import { loadExploration } from "../src/explore-cycle.mjs";
-import { planAction } from "../src/screening.mjs";
+import { passNeed, planAction } from "../src/screening.mjs";
 import { offGateAdmission } from "../src/admission.mjs";
-import { assessmentDecision, candidateDemand, noProgress, recordAcceptance, currentStable, evalReleases, internalConfigProblems, internalLedger, pendingAssessment, promote, reconcile, rollback, stageFit } from "../src/internal-promotion.mjs";
+import { assessmentDecision, candidateDemand, noProgress, recordAcceptance, currentStable, evalReleases, internalConfigProblems, internalLedger, pendingAssessment, promote, reconcile, rollback } from "../src/internal-promotion.mjs";
 
 const BIN = fileURLToPath(new URL("../bin/eval-loop-explore.mjs", import.meta.url));
 const SRC = { dataset: "Exercism TS", label: "difficulty 9", value: 9, url: "https://example.org/x", tier: "hard" };
@@ -59,9 +59,8 @@ function world(root, internalOver = {}, over = {}) {
     screening: { registry: join(root, "plain-registry.jsonl"), workDir: join(root, "plain-work"),
       candidates: { sources: [{ kind: "archive", dir: arch }], maxCandidates: 12 },
       dev: { tasks: [{ id: "d1", dataset: devDir }, { id: "d2", dataset: devDir }], repeats: 1, promote: { minNetSuccesses: 1 }, maxHours: 2 },
-      holdout: { enabled: true, maxHours: 4 }, smoke: { checks: true },
-      caps: { dev: 200, holdout: 400, perCandidate: 700, perCycle: 400, cumulative: 3000 },
-      internal: { enabled: true, dir: join(root, "internal"), policy: "operational-unvalidated", maxWaitingQualified: 1, maxAcceptancesWithoutPromotion: 3, select: "best-dev-net", attemptsPerUnit: { dev: 5, acceptance: 5 }, assessment: { enabled: true, maxHours: 4 }, ...internalOver } }, ...over };
+      holdout: { enabled: true, maxHours: 4 }, smoke: { checks: true }, estimate: { attemptsPerUnit: { dev: 5, holdout: 5 } },
+      internal: { enabled: true, dir: join(root, "internal"), policy: "operational-unvalidated", maxWaitingQualified: 1, maxAcceptancesWithoutPromotion: 3, select: "best-dev-net", assessment: { enabled: true, maxHours: 4 }, ...internalOver } }, ...over };
   const file = join(root, "internal.json"); writeFileSync(file, JSON.stringify(cfg));
   return { cfg, file, pool, stable, arch };
 }
@@ -130,27 +129,47 @@ test("internal track: dev -> throttled wait -> acceptance on a fresh batch -> ev
     assert.notEqual(d1.runtimeDigest, back.runtimeDigest);
     // No research artifact anywhere: no deploy directory, no confirmation registration.
     assert.equal(readdirSync(root).includes("deploy"), false);
-    assert.ok(charged(cfg) <= cfg.screening.caps.cumulative);
+    assert.ok(charged(cfg) <= cfg.budget.limit);
   } finally { rmSync(root, { recursive: true, force: true }); }
 });
 
-test("internal track fail-closed edges: cost fit refuses before any claim; an unassessed promotion past its deadline is rolled back without a model call", { timeout: 400_000 }, async () => {
+test("internal track on the ONE shared ledger: acceptance waits until the global allowance covers it AND its assessment (batch untouched); another role spending the assessment's allowance after a promotion rolls it back without a model call; a passed deadline does the same", { timeout: 500_000 }, async () => {
   const root = tempDir();
   try {
-    let { cfg, file, pool } = world(root, { attemptsPerUnit: { dev: 5, acceptance: 50 }, assessment: { enabled: true, maxHours: 1e-7 } });
-    const c = (n) => join(root, "cycles", `c-${n}`);
+    let { cfg, file, pool } = world(join(root, "a"));
+    const c = (n) => join(root, "a", "cycles", `c-${n}`);
+    const led = () => new RequestBudget({ path: cfg.budget.ledger, limit: cfg.budget.limit, scope: cfg.budget.scope });
     let o = resume(file, c(1)); assert.equal(status(c(1)).final.verdict, "DEV_PROMISING");
     const A = seal(file, pool, "h");
+    const loaded = loadExploration(file);
+    const needs = { holdout: passNeed(loaded, "holdout", 6).need, assessment: passNeed(loaded, "dev", 2).need };
+    // Another role holds an open worst case leaving the holdout's own need but not holdout + assessment.
+    const hold = await led().reserve(led().status().remaining - (needs.holdout + needs.assessment - 1), { route: "proposal", proposal: "concurrent" });
+    assert.ok(hold);
+    let pf = run(["--preflight", "--state", c(2), "--protocol", file]);
+    assert.notEqual(pf.out.screening?.next, "holdout", JSON.stringify(pf.out));
+    o = resume(file, c(2)); let s = status(c(2));
+    assert.notEqual(s.exploration.stage, "holdout", "no acceptance while the shared ledger cannot also cover its assessment");
+    assert.equal(holdoutLedger(join(pool, "batches", A)).records().length, 0, "the scarce batch was not consumed");
+    // The other role settles (frees its unused worst case): the acceptance is admitted and promotes.
+    await led().settle(hold, 0);
+    o = resume(file, c(3)); s = status(c(3)); assert.equal(s.final.verdict, "INTERNAL_PROMOTED", JSON.stringify(s.final));
+    // After the promotion, another role takes the assessment's allowance: the assessment cannot run -> fail closed, no model call.
+    const take = await led().reserve(led().status().remaining - (needs.assessment - 1), { route: "review" });
+    assert.ok(take);
+    const mid = led().status().charged;
+    o = resume(file, c(4)); s = status(c(4)); assert.equal(s.final.verdict, "ROLLBACK_UNASSESSED", JSON.stringify(s.final));
+    assert.match(run(["internal-status", "--protocol", file]).out.assessments.at(-1).why, /shared ledger/);
+    assert.equal(led().status().charged, mid, "no model call"); assert.equal(currentStable(loaded).runtimeDigest, cfg.stable.runtimeDigest);
+    // Deadline variant (time bound, not a spend cap): an unassessed promotion past assessBy rolls back without a model call.
+    ({ cfg, file, pool } = world(join(root, "b"), { assessment: { enabled: true, maxHours: 1e-7 } }));
+    const d = (n) => join(root, "b", "cycles", `c-${n}`);
+    o = resume(file, d(1)); assert.equal(status(d(1)).final.verdict, "DEV_PROMISING");
+    seal(file, pool, "h");
+    o = resume(file, d(2)); assert.equal(status(d(2)).final.verdict, "INTERNAL_PROMOTED", JSON.stringify(status(d(2)).final));
     const before = charged(cfg);
-    o = resume(file, c(2)); assert.equal(o.out.status.exploration.code, "prerequisite-failed", JSON.stringify(o.out.status)); assert.equal(o.out.status.blocked.retryable, false);
-    assert.match(o.out.status.blocked.reason, /would be cut short/);
-    assert.equal(holdoutLedger(join(pool, "batches", A)).records().length, 0, "the scarce batch was not consumed"); assert.equal(charged(cfg), before);
-    // Operator fixes the estimate (a new config = a new cycle directory); acceptance -> promotion; deadline passes -> rollback.
-    cfg.screening.internal.attemptsPerUnit.acceptance = 5; writeFileSync(file, JSON.stringify(cfg));
-    o = resume(file, c(3)); assert.equal(status(c(3)).final.verdict, "INTERNAL_PROMOTED", JSON.stringify(status(c(3)).final));
-    const mid = charged(cfg);
-    o = resume(file, c(4)); const s = status(c(4)); assert.equal(s.final.verdict, "ROLLBACK_UNASSESSED", JSON.stringify(s.final));
-    assert.equal(charged(cfg), mid, "no model call"); assert.equal(currentStable(loadExploration(file)).runtimeDigest, cfg.stable.runtimeDigest);
+    o = resume(file, d(3)); s = status(d(3)); assert.equal(s.final.verdict, "ROLLBACK_UNASSESSED", JSON.stringify(s.final));
+    assert.equal(charged(cfg), before, "no model call"); assert.equal(currentStable(loadExploration(file)).runtimeDigest, cfg.stable.runtimeDigest);
   } finally { rmSync(root, { recursive: true, force: true }); }
 });
 
@@ -161,6 +180,7 @@ test("internal track units: stale baseline, A->B->A, exact rollback, reconcile a
     const loaded = loadExploration(file);
     assert.deepEqual(internalConfigProblems(loaded), []);
     assert.ok(internalConfigProblems({ ...cfg, screening: { ...cfg.screening, internal: { ...cfg.screening.internal, policy: "validated" } } }).some(p => /operational-unvalidated/.test(p)));
+    assert.ok(internalConfigProblems({ ...cfg, screening: { ...cfg.screening, internal: { ...cfg.screening.internal, attemptsPerUnit: { dev: 5, acceptance: 5 } } } }).some(p => /moved to screening\.estimate/.test(p)), "the removed cost-fit field is refused explicitly");
     const plain = { ...cfg, screening: { ...cfg.screening } }; delete plain.screening.internal;
     assert.deepEqual(internalConfigProblems(plain), [], "plain screening keeps working without the section");
     const R = evalReleases(loaded); R.init(loaded.stable);
@@ -208,13 +228,12 @@ test("internal track units: stale baseline, A->B->A, exact rollback, reconcile a
     assert.equal(assessmentDecision({ verdict: "DEV_INCONCLUSIVE", measured: 3, planned: 4, net: 1 }).verdict, "ROLLBACK_UNASSESSED");
     assert.equal(assessmentDecision({ verdict: "DEV_NEGATIVE", measured: 4, planned: 4, net: -1 }).rollback, true);
     assert.equal(assessmentDecision({ verdict: "DEV_NEGATIVE", measured: 4, planned: 4, net: 0 }).verdict, "KEEP");
-    assert.equal(stageFit({ tasks: 6, repeats: 3, attemptsPerUnit: 20, cap: 700 }).ok, false);
     assert.deepEqual(candidateDemand({ pending: 0, waiting: 0, maxWaitingQualified: 1, budgetStop: false }).wanted, true);
     // Throttling: maxWaitingQualified 2 -> dev continues while one waits, stops when two wait; best development net first.
     const q = (id, net) => ({ id, key: id, status: "qualified", results: { dev: { net } }, claims: {} });
     const pend = { id: "p", key: "p", status: "pending", results: {}, claims: {} };
-    const opts = { caps: cfg.screening.caps, ledgerRemaining: 5000, records: [], supply: { ok: false, why: "none" }, holdoutEnabled: true };
-    const internal = { select: "best-dev-net", maxWaitingQualified: 2, assessmentReserve: 200 };
+    const opts = { needs: { dev: 20, holdout: 180, assessment: 20 }, ledgerRemaining: 5000, supply: { ok: false, why: "none" }, holdoutEnabled: true };
+    const internal = { select: "best-dev-net", maxWaitingQualified: 2 };
     assert.equal(planAction([q("a", 1), pend], { ...opts, internal }).kind, "dev");
     assert.equal(planAction([q("a", 1), q("b", 3), pend], { ...opts, internal }).wait, "supply-empty");
     assert.equal(planAction([q("a", 1), q("b", 3)], { ...opts, supply: { ok: true }, internal }).candidate.id, "b");

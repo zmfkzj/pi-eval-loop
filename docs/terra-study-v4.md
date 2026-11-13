@@ -16,8 +16,8 @@ study must re-measure them; the v3 numbers below are quoted only to size the gap
 |---|---|---|
 | target route of a calibration | `calibrate.mjs --route PROVIDER/MODEL [--effort LEVEL]` (`studyProtocol`); runner, plan, report and environment digest all use it; a non-default route must be in the runtime's model catalog | `DEFAULT_PROTOCOL.route` (cliproxyapi/gpt-6-luna medium) |
 | evaluator context (state identity) | `calibrate.mjs --context ID` | `confirmatory-1:calibration` |
-| shared series ledger | `calibrate.mjs --budget-ledger L --budget-limit N --budget-scope S` (N/S = the ledger's init record exactly; RequestBudget refuses another identity); `--max-requests` (<= N, approved) becomes a sub-ceiling of this context's reservations inside L, enforced under the ledger lock across runs, resumes and concurrent processes (`RequestBudget.reserve(.., { subCap })`, `attemptAdmission(.., { subCap })`) | a ledger of its own whose limit is `--max-requests` (hard cap 4500) |
-| approval ceiling | the approval's `maxRequests` must be <= the shared ledger limit (instead of 4500) and equal `--max-requests` | <= 4500 |
+| shared series ledger | `calibrate.mjs --budget-ledger L --budget-limit N --budget-scope S` (N/S = the ledger's init record exactly; RequestBudget refuses another identity). Budget policy `shared-total-only` (2026-11-13): the ledger limit is the only spending limit; `--max-requests` is refused with a shared ledger and the former per-context sub-ceiling (`subCap`) is removed (passing it throws); a frozen plan carrying `budget.subCap` is refused (re-plan) | a ledger of its own whose limit is `--max-requests` (hard cap 4500) |
+| approval | shared ledger: `budgetPolicy: "shared-total-only"` and NO `maxRequests` (an older approval with a ceiling is refused: re-approve, never widened) | `maxRequests` <= 4500, equal to `--max-requests` |
 | runtime ledger identity | `isolated-runtime.mjs prepare --budget-limit N --budget-scope S` (both or neither); calibrate blocks when the runtime's gate charges another identity | 4500 / confirmatory-1 scope |
 | models catalog of a runtime | `isolated-runtime.mjs prepare --models FILE` | `~/.pi/agent/cliproxyapi-models.json` (read only) |
 | runtime directory | `prepare/start/stop/status/resnapshot --dir D`, `calibrate.mjs --runtime D` | none |
@@ -38,11 +38,11 @@ node pi-eval-loop/studies/confirmatory-1/isolated-runtime.mjs prepare --dir RUNT
   --models CATALOG.json --credential SOURCE.json
 # 2. plan only (model-free, writes nothing): shows route, context, ledger identity, worst case and every blocker
 node pi-eval-loop/studies/confirmatory-1/calibrate.mjs --dry-run --batch CALIBRATION_BATCH --harness-dir STABLE_EXPORT \
-  --harness-commit SHA --max-requests 20000 --approval APPROVAL.json --budget-ledger LEDGER \
+  --harness-commit SHA --approval APPROVAL.json --budget-ledger LEDGER \
   --budget-limit 300000 --budget-scope "<exact init scope of LEDGER>" \
   --route cliproxyapi/gpt-6.1-terra --effort medium --context terra-v4:calibration \
   --runtime RUNTIME --gateway-db GATEWAY_USAGE.db --reviews REVIEWS --state STATE
-# 3. the same without --dry-run runs it (chargeable: needs an explicit approval for its --max-requests)
+# 3. the same without --dry-run runs it (chargeable: needs an approval with budgetPolicy "shared-total-only")
 # 4. pilot / power from the Terra calibration ledger (offline)
 node pi-eval-loop/studies/confirmatory-1/pilot.mjs --runs STATE/runs.jsonl --campaign "terra-v4 calibration <date>" --out PILOT.json
 node pi-eval-loop/studies/confirmatory-1/power.mjs --pilot PILOT.json --out POWER.json

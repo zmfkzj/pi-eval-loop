@@ -7,6 +7,11 @@
 // a task with both is adjudicated twice, each session only on its own dispute kind.
 //
 //   node studies/confirmatory-1/adjudicate.mjs --reviews DIR --task DIR [--task DIR ...] [--xai grok-4.7] [--google gemini-3-flash]
+//        [--budget-ledger L --budget-limit N --budget-scope S [--max-requests 80] [--gateway-config CFG] [--require-attempt-bound]]
+// Shared series ledger (2026-11-13, budget policy shared-total-only): with the three ledger flags every adjudication session is
+// charged like a review (chargedReview: off-gate route "review", worst case reserved before the session, settled at the forwarded
+// count or kept in full on a failure); a refused reservation runs nothing. --max-requests is the per-session request limit (a
+// termination bound of one session, also its reservation size), not a separate allowance.
 import { cpSync, existsSync, readFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { parseArgs } from "node:util";
@@ -25,7 +30,14 @@ export function adjudicationsFor(triage) {
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {
-  const { values } = parseArgs({ options: { reviews: { type: "string" }, task: { type: "string", multiple: true }, xai: { type: "string", default: "grok-4.7" }, google: { type: "string", default: "gemini-3-flash" }, scratch: { type: "string" }, parallel: { type: "string", default: "3" }, withhold: { type: "string", multiple: true, default: [] } } });
+  const { values } = parseArgs({ options: { reviews: { type: "string" }, task: { type: "string", multiple: true }, xai: { type: "string", default: "grok-4.7" }, google: { type: "string", default: "gemini-3-flash" }, scratch: { type: "string" }, parallel: { type: "string", default: "3" }, withhold: { type: "string", multiple: true, default: [] }, "budget-ledger": { type: "string" }, "budget-limit": { type: "string" }, "budget-scope": { type: "string" }, "max-requests": { type: "string", default: "80" }, "gateway-config": { type: "string" }, "require-attempt-bound": { type: "boolean" } } });
+  const ledgerArgs = ["budget-ledger", "budget-limit", "budget-scope"].filter(k => values[k] !== undefined);
+  if (ledgerArgs.length && ledgerArgs.length !== 3) { process.stderr.write("--budget-ledger, --budget-limit and --budget-scope go together\n"); process.exit(64); }
+  const maxRequests = Number(values["max-requests"]);
+  if (!(Number.isInteger(maxRequests) && maxRequests > 0)) { process.stderr.write("--max-requests must be a positive integer (per-session request limit)\n"); process.exit(64); }
+  const { RequestBudget, gatewayAttemptBound } = await import("../../src/request-budget.mjs");
+  const { chargedReview } = await import("./review.mjs");
+  const budget = ledgerArgs.length ? new RequestBudget({ path: resolve(values["budget-ledger"]), limit: Number(values["budget-limit"]), scope: values["budget-scope"] }) : null;
   const { hostEnvironment } = await import("../../src/sandbox.mjs");
   const { loadLocal } = await import("../../src/datasets.mjs");
   const env = hostEnvironment();
@@ -54,7 +66,9 @@ if (import.meta.url === `file://${process.argv[1]}`) {
       const extra = { review: ctx, ...(job.scope === "blind" ? { blind: join(triage.blind.dir, "output", "tests") } : { mutants: join(triage.adversarial.dir, "output", "mutants"), blind: join(triage.blind.dir, "output", "tests") }) };
       const out = join(reviews, task.id, `adjudicate-${job.scope}-${model}-${new Date().toISOString().replace(/[:.]/g, "")}`);
       try {
-        const rec = await reviewSession({ task, role: "adjudicate", route: { provider: "cliproxyapi", model, effort: "high" }, out, env, withheld: values.withhold, scratchRoot, extra });
+        const bound = values["gateway-config"] ? () => gatewayAttemptBound({ config: resolve(values["gateway-config"]), model }) : null;
+        const rec = await chargedReview({ budget, maxRequests, bound, requireBound: values["require-attempt-bound"] === true, meta: { task: task.id, role: "adjudicate", model, out } },
+          () => reviewSession({ task, role: "adjudicate", route: { provider: "cliproxyapi", model, effort: "high" }, out, env, maxRequests, withheld: values.withhold, scratchRoot, extra }));
         let adjudication = null; try { adjudication = JSON.parse(readFileSync(join(out, "output", "adjudication.json"), "utf8")); } catch { /* missing */ }
         atomicWriteJson(join(out, "mechanical.json"), { scope: job.scope, adjudication });
         results.push({ task: task.id, scope: job.scope, model, completed: rec.run.completed, verdict: adjudication?.verdict ?? null, remedy: adjudication?.remedy ?? null });

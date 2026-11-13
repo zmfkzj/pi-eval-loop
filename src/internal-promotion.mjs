@@ -9,13 +9,13 @@
 //                      dev screening stops, and preflight reports candidateDemand false so the consumer stops paid proposals.
 //   3. acceptance      ONE pass of the best-dev-net qualified candidate on ONE fresh, sealed, unused, lineage-clean batch: the
 //                      screening holdout stage unchanged (exploration eligibility, one use, every existing safeguard). It runs
-//                      only when the configured per-unit attempt estimate says the stage cap covers the whole pass, so a scarce
-//                      batch is never consumed by a pass that the cap would cut short.
+//                      only when the ONE shared ledger's remaining allowance covers the estimated pass AND the assessment that
+//                      must follow (budget policy shared-total-only: there is no stage cap).
 //   4. promotion       only a completed pass with verdict EXPLORATORY_SUPPORTED and zero candidate integrity violations moves the
 //                      EVALUATION-STABLE pointer (Releases, compare-and-swap against the stable the pass measured; a moved
 //                      pointer refuses the promotion as STALE_BASELINE). Evidence class "internal-acceptance".
 //   5. assessment      the next cycle's first action: promoted vs previous stable, paired on the regression (dev) tasks, under its
-//                      own caps. A critical candidate problem or a negative net rolls the pointer back (CAS, idempotent).
+//                      shared ledger. A critical candidate problem or a negative net rolls the pointer back (CAS, idempotent).
 //
 // Epochs: every evaluation stable has its own screening registry and work directory (`<dir>/epochs/<digest16>/`), so the screening
 // registry stays bound to ONE stable as before. Exposure is durable across epochs: every candidate that any epoch exposed to a
@@ -29,6 +29,9 @@ import { Releases } from "./lifecycle.mjs";
 import { exploreProtocol } from "./exploration.mjs";
 import { routeKey } from "./protocol.mjs";
 import { fault, Ledger } from "./util.mjs";
+// screening.mjs imports this module; passNeed is resolved lazily at call time (circular import, no top-level use).
+import * as screening from "./screening.mjs";
+const passNeed = (...a) => screening.passNeed(...a);
 
 export const INTERNAL_SCHEMA = "pi-eval-loop/internal-promotion@1";
 export const INTERNAL_STATUS_SCHEMA = "pi-eval-loop/internal-status@1";
@@ -55,14 +58,11 @@ export function internalConfigProblems(c) {
   if (c.screening?.holdout?.enabled !== true) p.push("screening.internal needs screening.holdout.enabled true (acceptance is the holdout stage)");
   posInt(i.maxWaitingQualified, "screening.internal.maxWaitingQualified");
   posInt(i.maxAcceptancesWithoutPromotion, "screening.internal.maxAcceptancesWithoutPromotion");
-  posInt(i.attemptsPerUnit?.dev, "screening.internal.attemptsPerUnit.dev");
-  posInt(i.attemptsPerUnit?.acceptance, "screening.internal.attemptsPerUnit.acceptance");
+  if (i.attemptsPerUnit !== undefined) p.push("screening.internal.attemptsPerUnit moved to screening.estimate.attemptsPerUnit {dev, holdout} (sizing of the shared-ledger admission only; budget policy shared-total-only)");
   if (typeof i.assessment?.enabled !== "boolean") p.push("screening.internal.assessment.enabled (true/false) required");
   if (i.assessment?.enabled === true && !(typeof i.assessment.maxHours === "number" && i.assessment.maxHours > 0)) p.push("screening.internal.assessment.maxHours (positive number: a promotion not assessed by then is rolled back) required");
   if (i.select !== undefined && !SELECT.includes(i.select)) p.push(`screening.internal.select must be one of ${SELECT.join(", ")}`);
   if (i.policy !== "operational-unvalidated") p.push("screening.internal.policy must be \"operational-unvalidated\" (acknowledges that the promotion rule is an operational policy, not a validated statistical guarantee)");
-  const caps = c.screening?.caps ?? {};
-  if (i.assessment?.enabled === true && Number.isInteger(caps.cumulative) && Number.isInteger(caps.holdout) && Number.isInteger(caps.dev) && caps.cumulative < caps.holdout + caps.dev) p.push("screening.caps.cumulative must cover one acceptance plus its assessment (holdout + dev)");
   if (typeof i.dir === "string" && typeof c.screening?.registry === "string" && c.screening.registry.startsWith(`${i.dir}/`)) p.push("screening.registry must lie outside screening.internal.dir (the track keeps one registry per epoch there)");
   return p;
 }
@@ -150,12 +150,6 @@ export async function effectiveConfig(cfg, stable) {
 }
 
 // ------------------------------------------------------------------------------------------------------------------ acceptance
-/** Planned target units of a pass and whether the stage cap covers them at the configured per-unit attempt estimate. */
-export function stageFit({ tasks, repeats, attemptsPerUnit, cap }) {
-  const units = 2 * tasks * repeats;
-  const need = units * attemptsPerUnit;
-  return { units, need, cap, ok: need <= cap, why: need <= cap ? "" : `${units} planned units x ${attemptsPerUnit} attempts/unit (configured estimate) = ${need} > stage cap ${cap}: the pass would be cut short` };
-}
 export const acceptanceRepeats = (cfg) => exploreProtocol(cfg.route).holdout.repeats;
 
 /** Promotion decision over an acceptance pass result (pure; the rule is fixed before the pass). */
@@ -296,7 +290,7 @@ function runRecords(file) {
 
 /**
  * Recorded cost and rejection evidence of the track (model-free): per-unit target attempts by stage on the target route, the
- * integrity violation rate of each arm in development passes, and the fit of the configured per-unit estimates to the caps.
+ * integrity violation rate of each arm in development passes, and the shared-ledger sizing (passNeed) of each stage.
  * Measured per-unit counts are forwarded requests as recorded by the unit's route proxy (gated: raised to the attempt floor).
  */
 export function costEvidence(cfg, registries) {
@@ -316,16 +310,14 @@ export function costEvidence(cfg, registries) {
     }
   }
   for (const r of existsSync(internalPaths(cfg).registry) ? internalRecords(cfg) : []) if (r.type === "assessment" && r.runs) for (const x of runRecords(r.runs)) if (x.model_route === key) by.assessment.push(x.model_requests);
-  const i = cfg.screening.internal, caps = cfg.screening.caps;
   const devTasks = cfg.screening.dev.tasks.length;
-  const fit = {
-    dev: stageFit({ tasks: devTasks, repeats: cfg.screening.dev.repeats, attemptsPerUnit: i.attemptsPerUnit.dev, cap: caps.dev }),
-    acceptance: stageFit({ tasks: (cfg.batchRule?.maxTasks ?? 8), repeats: acceptanceRepeats(cfg), attemptsPerUnit: i.attemptsPerUnit.acceptance, cap: caps.holdout }),
-  };
+  const needs = { dev: passNeed(cfg, "dev", devTasks), acceptance: passNeed(cfg, "holdout", cfg.batchRule?.maxTasks ?? 8) };
   const measured = { dev: stats(by.dev), acceptance: stats(by.acceptance), assessment: stats(by.assessment) };
-  return { route: key, unit: "target attempts per unit as charged by the unit's route proxy (gated runtime: raised to the outbound attempt floor)", measured,
+  const estOf = (k) => (k === "acceptance" ? needs.acceptance : needs.dev).attemptsPerUnit;
+  return { route: key, unit: "target attempts per unit as charged by the unit's route proxy (gated runtime: raised to the outbound attempt floor)", budgetPolicy: "shared-total-only", measured,
     integrityViolations: { stableUnits: { violating: viol.stable[0], of: viol.stable[1] }, candidateUnits: { violating: viol.candidate[0], of: viol.candidate[1] } },
-    configured: i.attemptsPerUnit, fit, note: "caps are never changed here; a configured estimate below the measured p90 is reported as a risk", risks: Object.entries(measured).filter(([k, m]) => m.n && i.attemptsPerUnit[k === "assessment" ? "dev" : k] < m.p90).map(([k, m]) => `${k}: measured p90 ${m.p90} > configured ${i.attemptsPerUnit[k === "assessment" ? "dev" : k]} attempts/unit`) };
+    needs, note: "needs size the admission against the ONE shared ledger (no stage cap); a per-unit estimate below the measured p90 is reported as a risk",
+    risks: Object.entries(measured).filter(([k, m]) => m.n && estOf(k) < m.p90).map(([k, m]) => `${k}: measured p90 ${m.p90} > estimated ${estOf(k)} attempts/unit`) };
 }
 
 /** internal-status@1 (read-only, model-free): evaluation stable, promotions/assessments/rollbacks, exposure, waiting, supply, cost. */
@@ -356,7 +348,7 @@ export async function internalStatus(cfg, { supply = null } = {}) {
 
 /** Is a new paid proposal useful now? (consumer gate; pure over the preflight facts) */
 export function candidateDemand({ pending, waiting, maxWaitingQualified, budgetStop }) {
-  if (budgetStop) return { wanted: false, why: "budget or caps exhausted" };
+  if (budgetStop) return { wanted: false, why: "the shared ledger cannot cover the next pass" };
   if (waiting >= maxWaitingQualified) return { wanted: false, why: `${waiting} qualified candidate(s) already wait for a fresh acceptance batch (maxWaitingQualified ${maxWaitingQualified})` };
   if (pending > 0) return { wanted: false, why: `${pending} registered candidate(s) still wait for smoke/dev` };
   return { wanted: true, why: "no pending candidate and fewer qualified candidates waiting than allowed" };

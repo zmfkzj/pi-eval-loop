@@ -36,48 +36,45 @@ test("calibration plan: confirmatory-1 defaults keep their identity; a Terra pla
   assert.deepEqual(def.route, DEFAULT_PROTOCOL.route);
   assert.equal(contextOf(def), CONTEXT);
   assert.ok(calibrationPlan({ ...base, maxRequests: 4501 }).problems.some(p => /hard cap 4500/.test(p)));
-  const terra = calibrationPlan({ ...base, protocol: studyProtocol({ route: "cliproxyapi/gpt-6.1-terra" }), maxRequests: 20000, context: "terra-v4:calibration", budgetLimit: 300000, budgetScope: TERRA_SCOPE });
-  assert.ok(!terra.problems.some(p => /cap|limit|context|budget-limit/.test(p)), terra.problems.join("; "));
-  assert.deepEqual([terra.route.model, terra.context, terra.budget.ledgerLimit, terra.budget.ledgerScope, terra.budget.subCap, terra.budget.maxRequests], ["gpt-6.1-terra", "terra-v4:calibration", 300000, TERRA_SCOPE, true, 20000]);
-  assert.notEqual(digestOf({ ...terra, problems: undefined }), digestOf({ ...calibrationPlan({ ...base, protocol: studyProtocol({ route: "cliproxyapi/gpt-6.1-terra", effort: "high" }), maxRequests: 20000, context: "terra-v4:calibration", budgetLimit: 300000, budgetScope: TERRA_SCOPE }), problems: undefined }), "effort is part of the resume identity");
-  assert.ok(calibrationPlan({ ...base, maxRequests: 300001, budgetLimit: 300000, budgetScope: TERRA_SCOPE }).problems.some(p => /exceeds the shared ledger's limit 300000/.test(p)));
-  assert.ok(calibrationPlan({ ...base, maxRequests: 10, budgetLimit: 300000 }).problems.some(p => /budget-scope/.test(p)));
+  // Shared ledger (budget policy shared-total-only): no per-run ceiling, no sub-cap; --max-requests is refused.
+  const terra = calibrationPlan({ ...base, protocol: studyProtocol({ route: "cliproxyapi/gpt-6.1-terra" }), context: "terra-v4:calibration", budgetLimit: 300000, budgetScope: TERRA_SCOPE });
+  assert.ok(!terra.problems.some(p => /cap|limit|context|budget-limit|max-requests/.test(p)), terra.problems.join("; "));
+  assert.deepEqual([terra.route.model, terra.context, terra.budget.ledgerLimit, terra.budget.ledgerScope, terra.budget.policy, terra.budget.maxRequests, "subCap" in terra.budget], ["gpt-6.1-terra", "terra-v4:calibration", 300000, TERRA_SCOPE, "shared-total-only", null, false]);
+  assert.notEqual(digestOf({ ...terra, problems: undefined }), digestOf({ ...calibrationPlan({ ...base, protocol: studyProtocol({ route: "cliproxyapi/gpt-6.1-terra", effort: "high" }), context: "terra-v4:calibration", budgetLimit: 300000, budgetScope: TERRA_SCOPE }), problems: undefined }), "effort is part of the resume identity");
+  assert.ok(calibrationPlan({ ...base, maxRequests: 20000, budgetLimit: 300000, budgetScope: TERRA_SCOPE }).problems.some(p => /--max-requests is not accepted with a shared ledger/.test(p)), "a legacy per-run ceiling is refused, never silently kept");
+  assert.ok(calibrationPlan({ ...base, budgetLimit: 300000 }).problems.some(p => /budget-scope/.test(p)));
   assert.ok(calibrationPlan({ ...base, maxRequests: 10, context: "bad context!" }).problems.some(p => /--context/.test(p)));
-  // Approval: capped by the shared ledger limit instead of 4500.
+  // Approval: a shared-ledger approval states the policy and carries no ceiling; an old bounded approval is not widened.
   const root = tempDir();
-  const approval = join(root, "approval.json");
-  writeFileSync(approval, JSON.stringify({ maxRequests: 20000, approvedBy: "op", approvedAt: "2026-11-13T00:00:00Z", authorization: { kind: "signed", signature: "s" }, scope: { batchSeal: terra.seal, budgetLedger: "/x/ledger.jsonl" } }));
-  assert.ok(!approvalProblems(approval, 20000, terra).some(p => /must be a positive integer/.test(p)));
-  assert.ok(approvalProblems(approval, 20000, def).some(p => new RegExp(`<= ${HARD_CAP}`).test(p)));
+  const approval = join(root, "approval.json"), old = join(root, "old.json");
+  const common = { approvedBy: "op", approvedAt: "2026-11-13T00:00:00Z", authorization: { kind: "signed", signature: "s" }, scope: { batchSeal: terra.seal, budgetLedger: "/x/ledger.jsonl" } };
+  writeFileSync(approval, JSON.stringify({ budgetPolicy: "shared-total-only", ...common }));
+  writeFileSync(old, JSON.stringify({ maxRequests: 20000, ...common }));
+  assert.deepEqual(approvalProblems(approval, 0, terra).filter(p => /maxRequests|budgetPolicy/.test(p)), []);
+  assert.ok(approvalProblems(old, 0, terra).some(p => /re-approve/.test(p)), "a bounded approval is not extended into an unbounded one");
+  assert.ok(approvalProblems(old, 0, terra).some(p => /budgetPolicy/.test(p)));
+  // confirmatory-1's own study ledger (default, research provenance): unchanged, maxRequests <= 4500 and equal to the approval.
+  assert.ok(approvalProblems(old, 20000, def).some(p => new RegExp(`<= ${HARD_CAP}`).test(p)));
 });
 
-test("shared ledger sub-ceiling: a context's reservations are capped inside the 300000 ledger under its lock (concurrent, resumed, settled)", async () => {
+test("shared-total-only: the former sub-ceiling API is removed (throws), and a calibration's reservations are bounded only by the shared ledger", async () => {
   const root = tempDir();
   const path = join(root, "budget", "series.jsonl");
   const a = new RequestBudget({ path, limit: 300000, scope: TERRA_SCOPE }), b = new RequestBudget({ path, limit: 300000, scope: TERRA_SCOPE });
-  const cap = { subCap: { key: "calibration:terra-v4:calibration", limit: 10 } };
-  const other = await a.reserve(500, { route: "screening" });
-  assert.ok(other, "reservations outside the group do not count against it");
-  const both = await Promise.all([a.reserve(6, {}, cap), b.reserve(6, {}, cap)]);
-  assert.equal(both.filter(Boolean).length, 1, "two processes cannot both pass the sub-ceiling");
-  const held = both.find(Boolean);
-  assert.equal(await a.reserve(5, {}, cap), null);
-  assert.match(a.refusal, /sub-ceiling 10 of calibration:terra-v4:calibration: charged 6/);
-  await a.settle(held, 2);
-  // A resumed process (a new instance) sees the settled usage: 2 + 8 <= 10.
-  const resumed = new RequestBudget({ path, limit: 300000, scope: TERRA_SCOPE });
-  assert.ok(await resumed.reserve(8, {}, cap));
-  assert.equal(await resumed.reserve(1, {}, cap), null);
-  const rec = new Ledger(path).records().filter(r => r.type === "reserve" && r.meta?.subCap);
-  assert.ok(rec.every(r => r.meta.subCapLimit === 10));
-  assert.equal(resumed.status().limit, 300000);
+  await assert.rejects(a.reserve(6, {}, { subCap: { key: "calibration:terra-v4:calibration", limit: 10 } }), /subCap was removed/);
+  assert.throws(() => attemptAdmission(a, () => ({ perRequest: 2 }), { subCap: { key: "g", limit: 7 } }), /subCap was removed/);
+  // A calibration admission reserves amount x K against the global ledger only: 6 + 2 > 7 would have been refused before.
+  const adm = attemptAdmission(a, () => ({ perRequest: 2 }));
+  assert.ok(await adm.reserve(3, {})); assert.ok(await adm.reserve(1, {}));
+  // Concurrent processes still share ONE ceiling under the ledger lock (fail closed at the global limit).
+  const tight = join(root, "budget", "tight.jsonl");
+  const t1 = new RequestBudget({ path: tight, limit: 10, scope: TERRA_SCOPE }), t2 = new RequestBudget({ path: tight, limit: 10, scope: TERRA_SCOPE });
+  const both = await Promise.all([t1.reserve(6), t2.reserve(6)]);
+  assert.equal(both.filter(Boolean).length, 1, "two processes cannot both pass the global ceiling");
+  assert.match((both[0] ? t2 : t1).refusal, /request ceiling 10/);
+  assert.equal(b.status().limit, 300000);
   await assert.rejects(new RequestBudget({ path, limit: 4500, scope: TERRA_SCOPE }).reserve(1), /created with limit 300000/);
   await assert.rejects(new RequestBudget({ path, limit: 300000, scope: BUDGET_SCOPE }).reserve(1), /scope differs/);
-  await assert.rejects(a.reserve(1, {}, { subCap: { key: "k", limit: 300001 } }), /subCap/);
-  // Through the admission used by calibrations: amount x K is reserved within the group.
-  const adm = attemptAdmission(new RequestBudget({ path: join(root, "b2.jsonl"), limit: 300000, scope: TERRA_SCOPE }), () => ({ perRequest: 2 }), { subCap: { key: "g", limit: 7 } });
-  assert.ok(await adm.reserve(3, {}));
-  assert.equal(await adm.reserve(1, {}), null, "6 + 2 > 7");
 });
 
 test("calibrate --dry-run with Terra flags: plan shows route, context and ledger identity; the ledger is not touched; misbound runtime and missing catalog model block", () => {
@@ -88,12 +85,12 @@ test("calibrate --dry-run with Terra flags: plan shows route, context and ledger
   const rt = join(root, "rt"); mkdirSync(join(rt, "agent"), { recursive: true });
   writeFileSync(join(rt, "agent", "cliproxyapi-models.json"), JSON.stringify({ models: [{ id: "gpt-6-luna" }] }));
   writeFileSync(join(rt, "manifest.json"), JSON.stringify({ schema: "pi-eval-loop/isolated-runtime@1", mode: "live", budget: { path: ledger, limit: 4500, scope: BUDGET_SCOPE }, upstream: "http://127.0.0.1:1", agentDir: join(rt, "agent") }));
-  const args = ["--batch", join(root, "nobatch"), "--harness-dir", root, "--harness-commit", "b".repeat(40), "--max-requests", "20000", "--budget-ledger", ledger, "--budget-limit", "300000", "--budget-scope", TERRA_SCOPE, "--route", "cliproxyapi/gpt-6.1-terra", "--effort", "medium", "--context", "terra-v4:calibration", "--runtime", rt, "--gateway-db", join(root, "none.db"), "--dry-run"];
+  const args = ["--batch", join(root, "nobatch"), "--harness-dir", root, "--harness-commit", "b".repeat(40), "--budget-ledger", ledger, "--budget-limit", "300000", "--budget-scope", TERRA_SCOPE, "--route", "cliproxyapi/gpt-6.1-terra", "--effort", "medium", "--context", "terra-v4:calibration", "--runtime", rt, "--gateway-db", join(root, "none.db"), "--dry-run"];
   const env = { ...process.env }; delete env.EVAL_LOOP_UPSTREAM; delete env.EVAL_LOOP_AGENT_DIR;
   const r = spawnSync(process.execPath, [CALIBRATE, ...args], { encoding: "utf8", env });
   assert.equal(r.status, 2, r.stderr);
   const out = JSON.parse(r.stdout);
-  assert.deepEqual([out.route.model, out.route.effort, out.context, out.budget.ledgerLimit, out.budget.maxRequests, out.modelCalls, out.wouldRun], ["gpt-6.1-terra", "medium", "terra-v4:calibration", 300000, 20000, 0, false]);
+  assert.deepEqual([out.route.model, out.route.effort, out.context, out.budget.ledgerLimit, out.budget.maxRequests, out.modelCalls, out.wouldRun], ["gpt-6.1-terra", "medium", "terra-v4:calibration", 300000, null, 0, false]);
   assert.ok(out.blocked.some(b => /another ledger identity/.test(b)), out.blocked.join("\n"));
   assert.ok(out.blocked.some(b => /not in the runtime's model catalog/.test(b)));
   assert.deepEqual(readFileSync(ledger), before, "a dry run never writes the ledger");
@@ -141,4 +138,26 @@ test("exploreProtocol(route): absent = the unchanged package default; explicit =
   for (const bad of [null, "cliproxyapi/gpt-6.1-terra", { provider: "cliproxyapi", model: "gpt-6.1-terra" }, { provider: "cliproxyapi", model: "gpt-6.1-terra", effort: "turbo" }, { provider: "", model: "m", effort: "low" }, { provider: "p", model: "m", effort: "low", x: 1 }])
     assert.throws(() => exploreProtocol(bad), /target route/, JSON.stringify(bad));
   assert.deepEqual(routeProblems({ provider: "cliproxyapi", model: "bts/gpt-6.1-terra", effort: "ultra" }), []);
+});
+
+test("shared-total-only leaves research design and gates unchanged: confirmatory-1 v3 sizes, exploration holdout rule, confirmatory default calibration ceiling", async () => {
+  const { readFileSync: rf } = await import("node:fs");
+  const v3 = JSON.parse(rf(new URL("../studies/confirmatory-1/protocol-v3.json", import.meta.url), "utf8"));
+  assert.deepEqual([v3.holdout.minTasks, v3.holdout.minFamilies, v3.holdout.repeats, v3.analysisPlan.minHardTasks, v3.analysisPlan.confirmation.minTasks], [144, 48, 5, 48, 144]);
+  const { exploreProtocol: ep } = await import("../src/exploration.mjs");
+  const h = ep().holdout;
+  assert.deepEqual([h.minTasks, h.minFamilies, h.repeats, h.maxUses], [6, 4, 3, 1]);
+  assert.equal(HARD_CAP, 4500, "confirmatory-1's own study ledger keeps its registered ceiling (research provenance)");
+});
+
+test("adjudicate CLI joins the shared ledger like review (off-gate route review): incomplete ledger identity or a bad per-session limit is refused before any session", () => {
+  const ADJ = new URL("../studies/confirmatory-1/adjudicate.mjs", import.meta.url).pathname;
+  const root = tempDir();
+  let r = spawnSync(process.execPath, [ADJ, "--reviews", root, "--budget-ledger", join(root, "l.jsonl")], { encoding: "utf8" });
+  assert.equal(r.status, 64); assert.match(r.stderr, /go together/);
+  r = spawnSync(process.execPath, [ADJ, "--reviews", root, "--max-requests", "0"], { encoding: "utf8" });
+  assert.equal(r.status, 64); assert.match(r.stderr, /per-session request limit/);
+  // No task: nothing runs, nothing is charged, the ledger file is not created.
+  r = spawnSync(process.execPath, [ADJ, "--reviews", root, "--budget-ledger", join(root, "l.jsonl"), "--budget-limit", "300000", "--budget-scope", "t"], { encoding: "utf8" });
+  assert.equal(r.status, 0, r.stderr); assert.deepEqual(JSON.parse(r.stdout), []);
 });

@@ -27,7 +27,7 @@ import { batchLineageProblems, BATCH_RULE, forbiddenSet, lineageRepos, minimaOfE
 import { RequestBudget, gatewayPressureMeter } from "./request-budget.mjs";
 import { batchEvidenceProblems, DEFAULT_SUPPLY, firstEligibleBatch, mergeSupply, poolPolicy, poolState, recoverPool, registryOf, retireBatch } from "./supply.mjs";
 import { acquireLock, atomicWriteJson, digestOf, ensureDir, inspectLock, LockBusyError, readJson, sha256 } from "./util.mjs";
-import { screeningConfigProblems, screeningCycle, screeningExclusionTasks, screeningPreflight, screeningStatus } from "./screening.mjs";
+import { BUDGET_POLICY, legacyBudgetFields, screeningConfigProblems, screeningCycle, screeningExclusionTasks, screeningPreflight, screeningStatus } from "./screening.mjs";
 import { currentStable, effectiveConfig, evalReleases, internalConfigProblems, internalEnabled } from "./internal-promotion.mjs";
 
 export const EXPLORATION_SCHEMA = "pi-eval-loop/exploration@1";
@@ -69,7 +69,7 @@ export function loadExploration(file) {
   if (c.schema !== EXPLORATION_SCHEMA) p.push(`schema must be ${EXPLORATION_SCHEMA}`);
   if (c.route !== undefined) p.push(...routeProblems(c.route));
   // mode screening (src/screening.mjs): candidates come from the bounded source and the development tasks are the screening
-  // tasks; no fixed candidate, no pre-accepted screen report, no whole-pass minRemaining (the route caps size every stage).
+  // tasks; no fixed candidate, no pre-accepted screen report, no whole-pass minRemaining (each stage is sized by passNeed against the one shared ledger).
   const scr = c.mode === "screening";
   if (scr) { if (c.candidate !== undefined || c.screen !== undefined || c.confirmation !== undefined) p.push("mode screening takes its candidates from screening.candidates and its development tasks from screening.dev (no candidate, screen or confirmation section)"); p.push(...screeningConfigProblems(c)); p.push(...internalConfigProblems(c)); }
   else {
@@ -261,7 +261,7 @@ export async function explorePreflight(cfgFile, stateDir, deps = {}) {
   r.mode = cfg.mode;
   if (internalEnabled(cfg)) { try { cfg = await effectiveConfig(cfg, currentStable(cfg)); } catch (error) { return { ...r, code: "prerequisite-failed", reasons: [`internal track: ${String(error.message).slice(0, 300)}`] }; } }
   const { problems, remaining, budget } = await readiness(cfg, deps);
-  r.budget = { remaining, minRemaining: cfg.budget.minRemaining ?? null, limit: cfg.budget.limit, ...(screening(cfg) ? { caps: cfg.screening.caps } : {}) };
+  r.budget = { policy: BUDGET_POLICY, remaining, minRemaining: cfg.budget.minRemaining ?? null, limit: cfg.budget.limit, ...(screening(cfg) ? { ignoredLegacy: legacyBudgetFields(cfg) } : {}) };
   if (problems.length) return { ...r, code: problems[0].code, reasons: problems.map(p => p.why) };
   if (screening(cfg)) return screeningPreflight(cfg, r, { budget, remaining, orcheDir: await orcheOf(cfg, deps), nextBatch });
   let pick; try { pick = nextBatch(cfg, { orcheDir: await orcheOf(cfg, deps) }); } catch (error) { return { ...r, code: "supply-error", reasons: [String(error.message).slice(0, 300)] }; }
