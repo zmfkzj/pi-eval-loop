@@ -137,9 +137,13 @@ export class RequestBudget {
    * Reserve `amount` requests (the attempt's worst case) before dispatch. Resolves { id, amount } or null when admitting it could
    * exceed the ceiling (this.refusal says why). Throws BudgetError when the accounting itself is unusable (fail closed: the caller
    * must halt, never run unmetered).
-   * @param {number} amount @param {any} [meta]
+   * `subCap` { key, limit } (optional, 2026-11-13): a ceiling for one group of reservations inside a larger shared ledger (e.g.
+   * a calibration's approved request ceiling within a series ledger). The group is every reservation whose meta.subCap equals
+   * `key` (settled: used; open: amount), checked under the same lock, so concurrent and resumed processes share it.
+   * @param {number} amount @param {any} [meta] @param {{ subCap?: { key: string, limit: number } }} [options]
    */
-  async reserve(amount, meta = {}) {
+  async reserve(amount, meta = {}, { subCap } = {}) {
+    if (subCap !== undefined && !(typeof subCap?.key === "string" && subCap.key && Number.isInteger(subCap.limit) && subCap.limit > 0 && subCap.limit <= this.limit)) throw new BudgetError("request budget: subCap needs a key and an integer limit in 1..limit", "EBUDGETCONFIG");
     if (!(Number.isInteger(amount) && amount > 0)) throw new BudgetError(`request budget: reservation amount ${amount} is not a positive integer`, "EBUDGETCONFIG");
     return this.#locked(() => {
       const records = this.verified();
@@ -164,6 +168,19 @@ export class RequestBudget {
       if (totals.charged + amount > this.limit || (meterCounts.length && worstMeter + amount > this.limit - this.meterMargin)) {
         this.refusal = `request ceiling ${this.limit}: charged ${totals.charged} (open ${totals.openReservations} x worst case = ${totals.openAmount})${meterCounts.length ? `, meters ${meterCounts.map(m => `${m.name}=${m.count}`).join(", ")}` : ""}; reserving ${amount} more could exceed it`;
         return null;
+      }
+      if (subCap) {
+        /** @type {Map<string, number>} */ const group = new Map();
+        for (const r of all) {
+          if (r.type === "reserve" && r.meta?.subCap === subCap.key) group.set(r.id, r.amount);
+          else if (r.type === "settle" && group.has(r.id)) group.set(r.id, Math.max(r.used ?? 0, 0));
+        }
+        const groupCharged = [...group.values()].reduce((s, x) => s + x, 0);
+        if (groupCharged + amount > subCap.limit) {
+          this.refusal = `sub-ceiling ${subCap.limit} of ${subCap.key}: charged ${groupCharged}; reserving ${amount} more could exceed it`;
+          return null;
+        }
+        meta = { ...meta, subCap: subCap.key, subCapLimit: subCap.limit };
       }
       const id = `r-${randomBytes(6).toString("hex")}`;
       this.#append({ type: "reserve", id, amount, pid: process.pid, chargedBefore: totals.charged, meters: meterCounts, meta });

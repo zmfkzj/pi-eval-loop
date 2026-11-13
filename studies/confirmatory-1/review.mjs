@@ -23,7 +23,7 @@ import { cpSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, write
 import { join, relative, resolve } from "node:path";
 import { parseArgs } from "node:util";
 import { randomBytes } from "node:crypto";
-import { BRIDGE, BRIDGE_PORT, LAUNCH, MOUNTS, PLACEHOLDER_KEY, completedModelCalls, runSandboxed, startModelPath, wireEntries } from "../../src/sandbox.mjs";
+import { BRIDGE, BRIDGE_PORT, LAUNCH, MOUNTS, allowedEndpoints, completedModelCalls, privateProviderSetup, runSandboxed, startModelPath, wireEntries } from "../../src/sandbox.mjs";
 import { piSettings } from "../../src/runner.mjs";
 import { gradeWorkspace, testFilesOf } from "../../src/grader.mjs";
 import { ensureDir, sha256, atomicWriteJson } from "../../src/util.mjs";
@@ -122,17 +122,17 @@ export async function reviewSession({ task, role, route, out, env, maxRequests =
   const inputs = manifest(ws);
   for (const name of ["cliproxyapi-models.json", "models.json"]) if (existsSync(join(env.agentDir, name))) copyFileSync(join(env.agentDir, name), join(agent, name));
   const bridgeUrl = `http://127.0.0.1:${BRIDGE_PORT}`;
-  writeFileSync(join(agent, "cliproxyapi.json"), JSON.stringify({ apiKey: PLACEHOLDER_KEY, baseUrl: bridgeUrl, providerId: "cliproxyapi", providerName: "CLIProxyAPI" }), { mode: 0o600 });
+  const providerEnv = privateProviderSetup({ env, agent, home, bridgeUrl, providerName: route.provider, catalogDir: env.agentDir });
   writeFileSync(join(agent, "settings.json"), JSON.stringify(piSettings(route), null, 2));
   const launch = join(control, "launch.sh"); writeFileSync(launch, LAUNCH, { mode: 0o555 });
-  const model = await startModelPath({ dir: join(control, "model"), route, maxRequests, upstream: env.upstream, agentDir: env.agentDir });
+  const model = await startModelPath({ dir: join(control, "model"), route, maxRequests, upstream: env.upstream, agentDir: env.agentDir, allowed: allowedEndpoints(env) });
   const inside = (p) => p.replace(box, BOX);
   const binds = reviewerBinds({ env, box, launch, socket: model.socket });
   const sessionId = `rv-${role}-${task.id}-${randomBytes(3).toString("hex")}`;
   const sandboxEnv = {
     PATH: `${env.nodeDir}/bin:/usr/local/bin:/usr/bin:/bin`, HOME: inside(home), TMPDIR: inside(tmp), LANG: "C.UTF-8", LC_ALL: "C.UTF-8", TERM: "dumb", TZ: "UTC",
     PI_CODING_AGENT_DIR: inside(agent), PI_CODING_AGENT_SESSION_DIR: inside(sessions), PI_SKIP_VERSION_CHECK: "1", PI_TELEMETRY: "0", PI_OFFLINE: "1",
-    CLIPROXYAPI_BASE_URL: bridgeUrl, CLIPROXYAPI_API_KEY: PLACEHOLDER_KEY, CLIPROXYAPI_FAST: "0", EL_NODE: env.node, EL_BRIDGE_READY: `${inside(tmp)}/.bridge-ready`,
+    ...providerEnv, EL_NODE: env.node, EL_BRIDGE_READY: `${inside(tmp)}/.bridge-ready`,
   };
   const probe = await denialProbe({ binds, sandboxEnv, cwd: inside(ws), withheld: [task.dir, join(task.dir, "hidden"), join(task.dir, "reference"), join(task.dir, "review"), join(env.agentDir, "cliproxyapi.json"), ...withheld], visibleControl: [`${BOX}/ws/INSTRUCTION.md`, `${BOX}/ws/repo`] });
   const piArgs = [env.piCli, "--mode", "json", "-p", "--no-extensions", "--no-skills", "--no-prompt-templates", "--no-mcp", "--no-approve", "--no-context-files", "--offline", "-e", `${MOUNTS.provider}/extensions/index.ts`,

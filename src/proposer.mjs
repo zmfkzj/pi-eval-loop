@@ -7,7 +7,7 @@
 import { cpSync, existsSync, lstatSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync, copyFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
-import { BRIDGE, BRIDGE_PORT, HARNESS_RUNTIME, LAUNCH, MOUNTS, PLACEHOLDER_KEY, completedModelCalls, runSandboxed, startModelPath, wireEntries } from "./sandbox.mjs";
+import { BRIDGE, BRIDGE_PORT, HARNESS_RUNTIME, LAUNCH, MOUNTS, allowedEndpoints, completedModelCalls, privateProviderSetup, runSandboxed, startModelPath, wireEntries } from "./sandbox.mjs";
 import { ensureDir, walkFiles } from "./util.mjs";
 import { FAILURE_CLASSES, GATE_BLOCKING } from "./analysis.mjs";
 
@@ -79,10 +79,10 @@ export async function proposeReal({ worktree, evidenceDir, protocol, env, parent
   for (const d of [agent, home, tmp, out, sessions]) ensureDir(d);
   for (const name of ["cliproxyapi-models.json", "models.json"]) if (existsSync(join(env.agentDir, name))) copyFileSync(join(env.agentDir, name), join(agent, name));
   const bridgeUrl = `http://127.0.0.1:${BRIDGE_PORT}`;
-  writeFileSync(join(agent, "cliproxyapi.json"), JSON.stringify({ apiKey: PLACEHOLDER_KEY, baseUrl: bridgeUrl, providerId: "cliproxyapi", providerName: "CLIProxyAPI" }), { mode: 0o600 });
+  const providerEnv = privateProviderSetup({ env, agent, home, bridgeUrl, providerName: route.provider, catalogDir: env.agentDir });
   writeFileSync(join(agent, "settings.json"), JSON.stringify({ defaultProvider: route.provider, defaultModel: route.model, defaultThinkingLevel: route.effort, quietStartup: true, transport: "sse" }));
   const launch = join(control, "launch.sh"); writeFileSync(launch, LAUNCH, { mode: 0o555 });
-  const model = await startModelPath({ dir: join(control, "model"), route, maxRequests: protocol.proposer.maxRequests, upstream: env.upstream, agentDir: env.agentDir, keyOverride: env.keyOverride });
+  const model = await startModelPath({ dir: join(control, "model"), route, maxRequests: protocol.proposer.maxRequests, upstream: env.upstream, agentDir: env.agentDir, keyOverride: env.keyOverride, allowed: allowedEndpoints(env) });
   ensureDir(logDir);
   const harnessDir = harnessCopy(worktree, join(control, "harness"));
   const binds = [
@@ -94,7 +94,7 @@ export async function proposeReal({ worktree, evidenceDir, protocol, env, parent
   const prompt = proposerPrompt({ parentId, targetClass, protocol, blockedClasses });
   writeFileSync(join(logDir, "prompt.txt"), prompt);
   const args = [env.piCli, "--mode", "json", "-p", "--no-extensions", "--no-skills", "--no-prompt-templates", "--no-mcp", "--no-approve", "--no-context-files", "--offline", "-e", `${MOUNTS.provider}/extensions/index.ts`, "--model", `${route.provider}/${route.model}`, "--thinking", route.effort, "--session-dir", `${WORK}/box/sessions`, "--", prompt];
-  const sandboxEnv = { PATH: `${env.nodeDir}/bin:/usr/local/bin:/usr/bin:/bin`, HOME: `${WORK}/box/home`, TMPDIR: `${WORK}/box/tmp`, LANG: "C.UTF-8", TERM: "dumb", PI_CODING_AGENT_DIR: `${WORK}/box/agent`, PI_SKIP_VERSION_CHECK: "1", PI_TELEMETRY: "0", PI_OFFLINE: "1", CLIPROXYAPI_BASE_URL: bridgeUrl, CLIPROXYAPI_API_KEY: PLACEHOLDER_KEY, CLIPROXYAPI_FAST: "0", EL_NODE: env.node, EL_BRIDGE_READY: `${WORK}/box/tmp/.bridge-ready` };
+  const sandboxEnv = { PATH: `${env.nodeDir}/bin:/usr/local/bin:/usr/bin:/bin`, HOME: `${WORK}/box/home`, TMPDIR: `${WORK}/box/tmp`, LANG: "C.UTF-8", TERM: "dumb", PI_CODING_AGENT_DIR: `${WORK}/box/agent`, PI_SKIP_VERSION_CHECK: "1", PI_TELEMETRY: "0", PI_OFFLINE: "1", ...providerEnv, EL_NODE: env.node, EL_BRIDGE_READY: `${WORK}/box/tmp/.bridge-ready` };
   let run;
   try { run = await runSandboxed({ binds, env: sandboxEnv, cwd: WORK, command: ["/bin/sh", MOUNTS.launch, env.node, ...args] }, { guardMs: protocol.proposer.wallMs, stdout: join(logDir, "events.jsonl"), stderr: join(logDir, "stderr.txt"), keep: 16 * 1024 }); }
   finally { await model.stop(); }

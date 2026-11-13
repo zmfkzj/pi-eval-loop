@@ -10,15 +10,18 @@
  * (budget.admitAttempt), so K is only the reservation SIZE (room for gateway retries/redirects); the settlement records the
  * forwarded count and the ledger raises it to the attempt floor (RequestBudget.settle), never below the actual attempts. A
  * runtime check failing at settlement still settles (the floor keeps the count exact) and then halts.
+ * `options.subCap` { key, limit } (2026-11-13) bounds this admission's reservations as one group inside a shared ledger
+ * (RequestBudget.reserve), e.g. a calibration's approved ceiling within a 300000-attempt series ledger.
+ * @param {any} budget @param {any} [bound] @param {{ subCap?: { key: string, limit: number } }} [options]
  */
-export function attemptAdmission(budget, bound) {
+export function attemptAdmission(budget, bound, { subCap } = {}) {
   const k = () => (bound ? bound() : { perRequest: 1 });
   const admission = {
     changed: null,
     async reserve(amount, meta) {
       const b = k();
       const K = b.perRequest;
-      const t = await budget.reserve(amount * K, { ...meta, perRequestAttempts: K, forwardCap: amount, gated: b.gated || undefined });
+      const t = await budget.reserve(amount * K, { ...meta, perRequestAttempts: K, forwardCap: amount, gated: b.gated || undefined }, subCap ? { subCap } : undefined);
       return t && { ...t, K, gated: !!b.gated };
     },
     async settle(ticket, used, detail) {

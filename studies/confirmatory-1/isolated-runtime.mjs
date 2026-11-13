@@ -1,10 +1,15 @@
 #!/usr/bin/env node
 // Isolated calibration runtime CLI (2026-11-07; ISOLATED-RUNTIME.md). Model-free except what calibrate.mjs later sends through it.
 //
-//   node isolated-runtime.mjs prepare  --dir D --budget-ledger L [--credential F] [--outer-port 18420] [--binary B]
+//   node isolated-runtime.mjs prepare  --dir D --budget-ledger L [--budget-limit N --budget-scope S] [--models F] [--credential F]
+//                                        [--outer-port 18420] [--binary B]   (defaults: confirmatory-1 4500 / scope, LIVE.models)
 //   node isolated-runtime.mjs start    --dir D          (detached supervisor: gate + host bridge + bwrap sandbox with the gateway)
 //   node isolated-runtime.mjs status   --dir D          (problems, attempt counts; prints no secret)
 //   node isolated-runtime.mjs stop     --dir D
+//   node isolated-runtime.mjs resnapshot --dir D [--credential F]
+//                                      (model-free; stopped, unused runtime only; one JSON line pi-eval-loop/runtime-resnapshot@1;
+//                                       exit 0 done, 1 refused, 2 source within the 96 h + 6 h lead, 3 busy, 64 usage;
+//                                       docs/runtime-resnapshot.md)
 //   node isolated-runtime.mjs selftest --scratch S      (real binary, local TLS stand-in for chatgpt.com, throwaway ledger;
 //                                                        never touches the study ledger or the provider)
 import { spawn, execFileSync } from "node:child_process";
@@ -17,8 +22,8 @@ import http2 from "node:http2";
 import { RequestBudget } from "../../src/request-budget.mjs";
 import { startOutboundGate } from "../../src/outbound-gate.mjs";
 import { tcpToUnix } from "../../src/runtime-bridge.mjs";
-import { PORTS, gatewayPids, prepareRuntime, runtimeProblems, snapshotCredential } from "../../src/isolated-runtime.mjs";
-import { sleep } from "../../src/util.mjs";
+import { PORTS, RESNAPSHOT_EXIT, RESNAPSHOT_SCHEMA, gatewayPids, prepareRuntime, resnapshotRuntime, runtimeLockPath, runtimeProblems, snapshotCredential } from "../../src/isolated-runtime.mjs";
+import { acquireLock, sleep } from "../../src/util.mjs";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const SRC = resolve(HERE, "../../src");
@@ -30,6 +35,19 @@ export const LIVE = {
 };
 // Same ledger identity as calibrate.mjs (one global budget).
 export const BUDGET = { limit: 4500, scope: "confirmatory-1: target-model calibration requests (all runs, resumes and reruns)" };
+
+/**
+ * Ledger identity of a runtime's attempt gate: the confirmatory-1 default (4500 / its scope) unless both are given, e.g. a
+ * Terra series ledger `--budget-limit 300000 --budget-scope "<the ledger's init scope>"`. The identity must equal the ledger's
+ * init record (RequestBudget refuses any other), so a runtime never charges a ledger under another identity.
+ * @param {{ limit?: string | number, scope?: string }} [options]
+ */
+export function budgetIdentity({ limit, scope } = {}) {
+  if (limit === undefined && scope === undefined) return { ...BUDGET };
+  if (limit === undefined || scope === undefined || !String(scope).trim()) throw new Error("--budget-limit and --budget-scope go together (the ledger's exact init limit and scope)");
+  if (!/^[1-9][0-9]*$/.test(String(limit))) throw new Error("--budget-limit must be a positive integer");
+  return { limit: Number(limit), scope: String(scope) };
+}
 
 /** bwrap argv for the gateway sandbox (no network but loopback; only <dir>, node and the bridge script visible under /home). */
 export function sandboxArgs({ dir, env = {} }) {
@@ -61,6 +79,13 @@ async function supervise(dir) {
 
 /** Start detached and wait until the runtime verifies (or fail). */
 export async function startRuntime(dir, { timeoutMs = 45_000, mode = "live" } = {}) {
+  // Serialized with `resnapshot` (the credential is never replaced while a start is in progress, and vice versa).
+  let lock;
+  try { lock = acquireLock(runtimeLockPath(dir)); } catch (error) { throw new Error(`runtime operation in progress (${runtimeLockPath(dir)}): ${String(error?.message ?? error).slice(0, 200)}`); }
+  try { return await startRuntimeLocked(dir, { timeoutMs, mode }); } finally { lock.release(); }
+}
+
+async function startRuntimeLocked(dir, { timeoutMs, mode }) {
   const st = (() => { try { return JSON.parse(readFileSync(join(dir, "state.json"), "utf8")); } catch { return null; } })();
   if (st && existsSync(`/proc/${st.supervisor}`)) throw new Error(`runtime already running (supervisor ${st.supervisor})`);
   const log = openSync(join(dir, "logs", "supervisor.log"), "a", 0o600);
@@ -221,16 +246,37 @@ export async function selftest(scratch) {
   return results;
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) {
+/**
+ * `resnapshot` CLI: exactly one JSON line on stdout for EVERY outcome (usage errors included), nothing on stderr that could carry
+ * credential content. Exit codes: RESNAPSHOT_EXIT.
+ */
+export function resnapshotCli(argv, { now = Date.now() } = {}) {
+  let values;
+  try { ({ values } = parseArgs({ args: argv, options: { dir: { type: "string" }, credential: { type: "string" } }, strict: true, allowPositionals: false })); }
+  catch { return { exit: RESNAPSHOT_EXIT.usage, result: { schema: RESNAPSHOT_SCHEMA, ok: false, usableUntil: null, code: "usage", problems: ["usage: isolated-runtime.mjs resnapshot --dir D [--credential F]"] } }; }
+  if (!values.dir) return { exit: RESNAPSHOT_EXIT.usage, result: { schema: RESNAPSHOT_SCHEMA, ok: false, usableUntil: null, code: "usage", problems: ["usage: isolated-runtime.mjs resnapshot --dir D [--credential F]"] } };
+  try { return resnapshotRuntime({ dir: values.dir, credential: values.credential, now }); }
+  catch { return { exit: RESNAPSHOT_EXIT.refused, result: { schema: RESNAPSHOT_SCHEMA, ok: false, usableUntil: null, code: "internal-error", problems: ["resnapshot failed unexpectedly before any change could be confirmed; inspect the runtime (status) before use"] } }; }
+}
+
+if (import.meta.url === `file://${process.argv[1]}` && process.argv[2] === "resnapshot") {
+  // Test hook (never set in production): a fixed clock, so lead-boundary tests are exact.
+  const now = process.env.EVAL_LOOP_TEST_NOW_MS ? Number(process.env.EVAL_LOOP_TEST_NOW_MS) : Date.now();
+  const { exit, result } = resnapshotCli(process.argv.slice(3), { now });
+  process.stdout.write(`${JSON.stringify(result)}\n`);
+  process.exit(exit);
+} else if (import.meta.url === `file://${process.argv[1]}`) {
   const cmd = process.argv[2];
-  const { values } = parseArgs({ args: process.argv.slice(3), options: { dir: { type: "string" }, "budget-ledger": { type: "string" }, credential: { type: "string", default: LIVE.credential }, binary: { type: "string", default: LIVE.binary }, "outer-port": { type: "string", default: "18420" }, scratch: { type: "string" } } });
+  const { values } = parseArgs({ args: process.argv.slice(3), options: { dir: { type: "string" }, "budget-ledger": { type: "string" }, "budget-limit": { type: "string" }, "budget-scope": { type: "string" }, models: { type: "string", default: LIVE.models }, credential: { type: "string", default: LIVE.credential }, binary: { type: "string", default: LIVE.binary }, "outer-port": { type: "string", default: "18420" }, scratch: { type: "string" } } });
   const dir = values.dir && resolve(values.dir);
   try {
     if (cmd === "prepare") {
       if (!dir || !values["budget-ledger"]) throw new Error("prepare needs --dir and --budget-ledger");
+      const budget = budgetIdentity({ limit: values["budget-limit"], scope: values["budget-scope"] });
+      if (!existsSync(values.models)) throw new Error(`--models ${values.models}: model catalog not found`);
       const credential = snapshotCredential({ source: values.credential });
-      const m = prepareRuntime({ dir, binary: values.binary, credential, modelsCatalog: LIVE.models, outerPort: Number(values["outer-port"]), mode: "live", budget: { path: resolve(values["budget-ledger"]), ...BUDGET } });
-      process.stdout.write(`${JSON.stringify({ prepared: dir, credential: m.credential, configSha256: m.configSha256, ports: m.ports })}\n`);
+      const m = prepareRuntime({ dir, binary: values.binary, credential, modelsCatalog: resolve(values.models), outerPort: Number(values["outer-port"]), mode: "live", budget: { path: resolve(values["budget-ledger"]), ...budget } });
+      process.stdout.write(`${JSON.stringify({ prepared: dir, credential: m.credential, configSha256: m.configSha256, ports: m.ports, budget: m.budget })}\n`);
     } else if (cmd === "supervise") await supervise(dir);
     else if (cmd === "start") { const r = await startRuntime(dir); process.stdout.write(`${JSON.stringify({ started: dir, supervisor: r.pid, problems: runtimeProblems(dir) })}\n`); }
     else if (cmd === "stop") { stopRuntime(dir); process.stdout.write(`${JSON.stringify({ stopped: await waitStopped(dir) })}\n`); }
@@ -239,6 +285,6 @@ if (import.meta.url === `file://${process.argv[1]}`) {
       const b = new RequestBudget({ path: m.budget.path, limit: m.budget.limit, scope: m.budget.scope });
       process.stdout.write(`${JSON.stringify({ dir, mode: m.mode, problems: runtimeProblems(dir, { running: true, mode: m.mode }), credential: m.credential, budget: (() => { try { const s = b.status(); return { limit: s.limit, charged: s.charged, attempts: s.attempts, openReservations: s.openReservations, remaining: s.remaining }; } catch (e) { return { error: e.message }; } })() })}\n`);
     } else if (cmd === "selftest") { const r = await selftest(resolve(values.scratch)); process.stdout.write(`${JSON.stringify(r, null, 1)}\n`); process.exit(r.ok ? 0 : 1); }
-    else { process.stderr.write("usage: isolated-runtime.mjs prepare|start|status|stop|selftest ...\n"); process.exit(64); }
+    else { process.stderr.write("usage: isolated-runtime.mjs prepare|start|status|stop|resnapshot|selftest ...\n"); process.exit(64); }
   } catch (error) { process.stderr.write(`isolated-runtime: ${error?.message ?? error}\n`); process.exit(2); }
 }

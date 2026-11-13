@@ -9,6 +9,8 @@
 // estimand of that campaign is NOT used, because the evaluator that would run the confirmatory holdout does not apply it.
 //
 //   node studies/confirmatory-1/pilot.mjs --runs <ctrl-ablation-1>/runs.jsonl [--out studies/confirmatory-1/pilot.json]
+//        [--campaign LABEL]   (provenance label of the source campaign; default the ctrl-ablation-1 / gpt-6-luna one. Another
+//                              study, e.g. Terra v4, names its own campaign and route here: the label is never inferred)
 //
 // Only exposed suite task ids, families, tiers and 0/1 outcomes are written (no prompt, test or solution content).
 import { readFileSync, writeFileSync } from "node:fs";
@@ -23,7 +25,10 @@ export const legacyValid = (r) => functionalOf(r) && !legacyViolation(r) && r.te
 /** Tier of an orche suite task from its id (docs/design.md §4: a easy, b/c medium, d/p hard). */
 export const suiteTier = (id) => (/^[dp]/.test(id) ? "hard" : /^[bc]/.test(id) ? "medium" : "easy");
 
-export function extractPilot(runsPath) {
+export const DEFAULT_CAMPAIGN = "ctrl-ablation-1 discovery (randomized interleaved blocks, 2026-11-06, cliproxyapi/gpt-6-luna medium)";
+
+/** @param {string} runsPath @param {{ campaign?: string }} [options] */
+export function extractPilot(runsPath, { campaign = DEFAULT_CAMPAIGN } = {}) {
   const bytes = readFileSync(runsPath);
   const ledger = new Ledger(runsPath);
   const chain = ledger.verify();
@@ -47,13 +52,13 @@ export function extractPilot(runsPath) {
     t.outcomes[r.repeat] = legacyValid(r) ? 1 : 0;
   }
   for (const [id, arm] of Object.entries(arms)) for (const [task, t] of Object.entries(arm.tasks)) if (t.outcomes.length !== 3 || t.outcomes.some(x => x === undefined)) throw new Error(`pilot: incomplete design ${id}/${task}`);
-  return { schema: "pi-eval-loop/confirmatory-1-pilot@1", source: { path: runsPath, sha256: createHash("sha256").update(bytes).digest("hex"), units: final.size, campaign: "ctrl-ablation-1 discovery (randomized interleaved blocks, 2026-11-06, cliproxyapi/gpt-6-luna medium)" }, estimand: "legacy-valid (completed, hidden pass, visible not failed, no line-based integrity violation, no leak, no harness crash)", arms };
+  return { schema: "pi-eval-loop/confirmatory-1-pilot@1", source: { path: runsPath, sha256: createHash("sha256").update(bytes).digest("hex"), units: final.size, campaign, routes: [...new Set([...final.values()].map(r => r.model_route).filter(Boolean))].sort() }, estimand: "legacy-valid (completed, hidden pass, visible not failed, no line-based integrity violation, no leak, no harness crash)", arms };
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {
-  const { values } = parseArgs({ options: { runs: { type: "string" }, out: { type: "string" } } });
-  if (!values.runs) { process.stderr.write("usage: pilot.mjs --runs runs.jsonl [--out pilot.json]\n"); process.exit(64); }
-  const pilot = extractPilot(values.runs);
+  const { values } = parseArgs({ options: { runs: { type: "string" }, out: { type: "string" }, campaign: { type: "string" } } });
+  if (!values.runs) { process.stderr.write("usage: pilot.mjs --runs runs.jsonl [--out pilot.json] [--campaign LABEL]\n"); process.exit(64); }
+  const pilot = extractPilot(values.runs, values.campaign ? { campaign: values.campaign } : {});
   const text = `${JSON.stringify(pilot, null, 1)}\n`;
   if (values.out) writeFileSync(values.out, text); else process.stdout.write(text);
 }

@@ -20,7 +20,97 @@ export const { bwrapArgs, runSandboxed, HIDDEN_ROOTS, BWRAP } = sandboxModule;
 export const BRIDGE_PORT = 18317;
 export const MOUNTS = { socket: "/run/eval-loop/model.sock", bridge: "/opt/eval-loop/bridge.mjs", launch: "/opt/eval-loop/launch.sh", provider: "/opt/eval-loop/provider", harness: "/opt/eval-loop/harness" };
 export const PLACEHOLDER_KEY = "pi-eval-loop-placeholder-key";
+/** Endpoint gate of the legacy provider (@router-for-me/pi-cliproxyapi-provider 1.x: Codex backend paths). */
 export const ALLOWED = [{ method: "GET", path: /^\/v1\/models(\?|$)/ }, { method: "POST", path: /^\/backend-api\/codex\/responses(\?|$)/ }, { method: "POST", path: /^\/backend-api\/responses(\?|$)/ }];
+/** Endpoint gate of pi-cliproxyapi-provider 0.16.x: the OpenAI-compatible root `<base>/v1` (GPT routes use the Responses API). */
+export const CPA_ALLOWED = [{ method: "GET", path: /^\/v1\/models(\?|$)/ }, { method: "POST", path: /^\/v1\/responses(\?|$)/ }];
+
+// ------------------------------------------------------------------------------------------------------ provider packages
+// Two CLIProxyAPI provider packages exist with different configuration semantics (docs/provider-compat.md):
+//   legacy  @router-for-me/pi-cliproxyapi-provider 1.x: reads <PI_CODING_AGENT_DIR>/cliproxyapi.json (+ cliproxyapi-models.json),
+//           base URL = host root, Codex backend paths;
+//   cpa     pi-cliproxyapi-provider 0.16.x (github.com/0xRichardH): reads $HOME/.pi/agent/pi-cliproxyapi-provider/config.json
+//           (connection; CLIPROXYAPI_* environment overrides it), registers its default name "cpa" unless providerName is set,
+//           and in offline / print mode serves the model list ONLY from its snapshot
+//           $HOME/.cache/pi-cliproxyapi-provider/<base64url(providerName \n baseUrl)>/cpa-models.json; base URL = <root>/v1,
+//           GPT routes POST <base>/responses.
+/** Provider package locations in the umbrella's cliproxyapi bundle: the current unscoped package first, the legacy one second. */
+export const PROVIDER_CANDIDATES = [join(UMBRELLA, "cliproxyapi/node_modules/pi-cliproxyapi-provider"), join(UMBRELLA, "cliproxyapi/node_modules/@router-for-me/pi-cliproxyapi-provider")];
+/** The first installed candidate (else the current package's path, which prerequisites() then reports as missing). */
+export const defaultProviderDir = (candidates = PROVIDER_CANDIDATES) => candidates.find(dir => existsSync(join(dir, "extensions/index.ts"))) ?? candidates[0];
+export const PROVIDER_LAYOUTS = ["legacy", "cpa"];
+/** Unscoped package versions whose configuration layout was verified against the package source (config.ts, discovery.ts). */
+export const CPA_SUPPORTED = /^0\.16\.\d+$/;
+
+/**
+ * Configuration layout of a provider package: { layout, name, version, supported, detail }. An unscoped pi-cliproxyapi-provider
+ * 0.16.x is "cpa"; the scoped package (or a tree without a package name, as before) is "legacy". Another unscoped version is
+ * reported unsupported (its layout was not verified) unless EVAL_LOOP_PROVIDER_LAYOUT names the layout explicitly.
+ */
+export function providerLayout(dir, override = process.env.EVAL_LOOP_PROVIDER_LAYOUT) {
+  let pkg = {};
+  try { pkg = JSON.parse(readFileSync(join(dir, "package.json"), "utf8")); } catch { /* no package.json: legacy tree */ }
+  const name = typeof pkg.name === "string" ? pkg.name : undefined, version = typeof pkg.version === "string" ? pkg.version : undefined;
+  const id = `${name ?? "(unnamed)"}@${version ?? "?"}`;
+  if (override) {
+    if (!PROVIDER_LAYOUTS.includes(override)) return { layout: null, name, version, supported: false, detail: `EVAL_LOOP_PROVIDER_LAYOUT=${override}: must be ${PROVIDER_LAYOUTS.join(" | ")}` };
+    return { layout: override, name, version, supported: true, detail: `${id}: layout ${override} (EVAL_LOOP_PROVIDER_LAYOUT)` };
+  }
+  if (name === "pi-cliproxyapi-provider") {
+    const supported = CPA_SUPPORTED.test(version ?? "");
+    return { layout: "cpa", name, version, supported, detail: supported ? `${id}: layout cpa` : `${id}: unverified version (supported 0.16.x; set EVAL_LOOP_PROVIDER_LAYOUT=cpa to accept its layout explicitly)` };
+  }
+  return { layout: "legacy", name, version, supported: true, detail: `${id}: layout legacy` };
+}
+/** Layout of an environment's provider (hostEnvironment records it; hand-built environments are resolved here). */
+export const layoutOf = (env) => env.providerLayout ?? providerLayout(env.provider).layout ?? "legacy";
+/** The endpoint gate of an environment's provider. */
+export const allowedEndpoints = (env) => (layoutOf(env) === "cpa" ? CPA_ALLOWED : ALLOWED);
+
+/**
+ * CPA model-list entries for a private provider snapshot, from a catalog directory: a frozen `cpa-models.json` (the provider's
+ * own cache envelope { fetchedAt, data }, a /v1/models response { data } or a plain array) when present, else the model ids of
+ * `cliproxyapi-models.json` (the catalog the legacy provider and the route proxy's price table use). [] when neither exists.
+ */
+export function cpaModelEntries(catalogDir) {
+  const read = (name) => { try { return JSON.parse(readFileSync(join(catalogDir, name), "utf8")); } catch { return undefined; } };
+  const keep = (m) => m && typeof m.id === "string" && m.id.trim() !== "";
+  const shape = (m) => ({ id: m.id, object: typeof m.object === "string" ? m.object : "model", ...(typeof m.owned_by === "string" ? { owned_by: m.owned_by } : {}), ...(typeof m.created === "number" ? { created: m.created } : {}) });
+  const frozen = read("cpa-models.json");
+  const list = Array.isArray(frozen) ? frozen : Array.isArray(frozen?.data) ? frozen.data : Array.isArray(read("cliproxyapi-models.json")?.models) ? read("cliproxyapi-models.json").models : [];
+  const out = new Map();
+  for (const m of list.filter(keep)) out.set(m.id, shape(m));
+  return [...out.values()].sort((a, b) => a.id.localeCompare(b.id));
+}
+
+/**
+ * Write the provider configuration of ONE sandboxed Pi (task agent, proposer, reviewer) into its private agent dir / HOME (host
+ * paths) and return the CLIPROXYAPI_* variables of its sandbox environment. Both layouts point the provider at the in-box bridge
+ * with the placeholder key (the real key exists only in the host-side route proxy). `providerName` is the route's provider (the
+ * `--model` prefix); `catalogDir` supplies the cpa model snapshot.
+ */
+export function privateProviderSetup({ env, agent, home, bridgeUrl, providerName, catalogDir }) {
+  if (layoutOf(env) === "cpa") {
+    const baseUrl = `${bridgeUrl}/v1`;
+    const configDir = ensureDir(join(home, ".pi/agent/pi-cliproxyapi-provider"));
+    writeFileSync(join(configDir, "config.json"), `${JSON.stringify({ providerName, baseUrl, authRequired: true, authHeader: true }, null, 2)}\n`, { mode: 0o600 });
+    const cache = ensureDir(join(home, ".cache/pi-cliproxyapi-provider", Buffer.from(`${providerName}\n${baseUrl}`).toString("base64url")));
+    writeFileSync(join(cache, "cpa-models.json"), `${JSON.stringify({ fetchedAt: Date.now(), data: cpaModelEntries(catalogDir) })}\n`, { mode: 0o600 });
+    return { CLIPROXYAPI_BASE_URL: baseUrl, CLIPROXYAPI_PROVIDER_NAME: providerName, CLIPROXYAPI_API_KEY: PLACEHOLDER_KEY, CLIPROXYAPI_FAST: "0" };
+  }
+  writeFileSync(join(agent, "cliproxyapi.json"), JSON.stringify({ apiKey: PLACEHOLDER_KEY, baseUrl: bridgeUrl, providerId: "cliproxyapi", providerName: "CLIProxyAPI" }), { mode: 0o600 });
+  return { CLIPROXYAPI_BASE_URL: bridgeUrl, CLIPROXYAPI_API_KEY: PLACEHOLDER_KEY, CLIPROXYAPI_FAST: "0" };
+}
+
+/**
+ * The upstream key of an agent dir (host side only; never printed): `cliproxyapi.json` apiKey (legacy layout, isolated runtimes),
+ * else a literal `apiKey` of `pi-cliproxyapi-provider/config.json` (a `!command` expression is not executed). "" when absent.
+ */
+export function upstreamKey(agentDir) {
+  try { const k = JSON.parse(readFileSync(join(agentDir, "cliproxyapi.json"), "utf8")).apiKey; if (k) return String(k); } catch { /* absent */ }
+  try { const k = JSON.parse(readFileSync(join(agentDir, "pi-cliproxyapi-provider/config.json"), "utf8")).apiKey; if (typeof k === "string" && k && !k.startsWith("!")) return k; } catch { /* absent */ }
+  return "";
+}
 
 /**
  * The ONLY parts of an orche harness checkout that a sandboxed agent (task agent or proposer) ever sees: the extension runtime.
@@ -37,7 +127,7 @@ export function hostEnvironment() {
   const nodeDir = resolve(process.execPath, "../..");
   return {
     node: process.execPath, nodeDir, piCli, piModules,
-    provider: process.env.EVAL_LOOP_PROVIDER ?? join(UMBRELLA, "cliproxyapi/node_modules/@router-for-me/pi-cliproxyapi-provider"),
+    provider: process.env.EVAL_LOOP_PROVIDER ?? defaultProviderDir(),
     agentDir: process.env.EVAL_LOOP_AGENT_DIR ?? join(homedir(), ".pi/agent"),
     upstream: process.env.EVAL_LOOP_UPSTREAM ?? "http://127.0.0.1:8317",
     bwrap: BWRAP, orche: ORCHE,
@@ -68,7 +158,9 @@ const fileHash = (path) => { try { return sha256(readFileSync(path)); } catch { 
 /** Digest of everything that must be identical across compared arms (not the harness itself). */
 export function environmentDigest(env, route) {
   const providerPkg = (() => { try { return JSON.parse(readFileSync(join(env.provider, "package.json"), "utf8")).version; } catch { return undefined; } })();
-  const facts = { node: process.version, piCli: fileHash(env.piCli), piVersion: (() => { try { return JSON.parse(readFileSync(resolve(env.piCli, "../../../package.json"), "utf8")).version; } catch { return undefined; } })(), provider: providerPkg, providerIndex: fileHash(join(env.provider, "extensions/index.ts")), bwrap: fileHash(env.bwrap), route, hiddenRoots: HIDDEN_ROOTS, gate: ALLOWED.map(a => `${a.method} ${a.path}`) };
+  // The gate entry is the endpoint gate of the environment's provider layout (legacy: unchanged since protocol-1, so a legacy
+  // environment keeps its digest).
+  const facts = { node: process.version, piCli: fileHash(env.piCli), piVersion: (() => { try { return JSON.parse(readFileSync(resolve(env.piCli, "../../../package.json"), "utf8")).version; } catch { return undefined; } })(), provider: providerPkg, providerIndex: fileHash(join(env.provider, "extensions/index.ts")), bwrap: fileHash(env.bwrap), route, hiddenRoots: HIDDEN_ROOTS, gate: allowedEndpoints(env).map(a => `${a.method} ${a.path}`) };
   return { digest: digestOf(facts), facts };
 }
 
@@ -91,13 +183,15 @@ export async function prerequisites(env = hostEnvironment()) {
   const sandboxProbe = existsSync(env.bwrap) ? (() => { try { execFileSync(env.bwrap, bwrapArgs({ binds: [], env: { PATH: "/usr/bin:/bin" }, cwd: "/", command: ["/bin/true"] }), { stdio: "ignore", timeout: 20_000 }); return true; } catch { return false; } })() : false;
   add("bwrap-namespaces", sandboxProbe, sandboxProbe ? "user/net/pid namespaces usable" : "bwrap cannot create the sandbox (unprivileged user namespaces?)");
   add("pi-cli", existsSync(env.piCli), env.piCli);
-  add("provider", existsSync(join(env.provider, "extensions/index.ts")), env.provider);
+  const pl = providerLayout(env.provider);
+  add("provider", existsSync(join(env.provider, "extensions/index.ts")) && pl.supported, `${env.provider} (${pl.detail})`);
   add("orche", existsSync(join(env.orche, "src/extension/index.ts")) && existsSync(join(env.orche, "node_modules")), env.orche);
   add("git", version("git", ["--version"]), version("git", ["--version"]) ?? "missing");
-  let credential = false;
-  try { credential = !!JSON.parse(readFileSync(join(env.agentDir, "cliproxyapi.json"), "utf8")).apiKey; } catch { /* absent */ }
-  add("credentials", credential, credential ? "cliproxyapi.json apiKey: set" : `no apiKey in ${join(env.agentDir, "cliproxyapi.json")}`);
-  add("model-catalog", existsSync(join(env.agentDir, "cliproxyapi-models.json")), join(env.agentDir, "cliproxyapi-models.json"));
+  const credential = !!upstreamKey(env.agentDir);
+  add("credentials", credential, credential ? "upstream apiKey: set" : `no apiKey in ${join(env.agentDir, "cliproxyapi.json")} or ${join(env.agentDir, "pi-cliproxyapi-provider/config.json")}`);
+  const catalogDir = env.catalogDir ?? env.agentDir;
+  const catalogs = ["cliproxyapi-models.json", "cpa-models.json"].map(name => join(catalogDir, name)).filter(existsSync);
+  add("model-catalog", catalogs.length > 0, catalogs[0] ?? `no cliproxyapi-models.json or cpa-models.json in ${catalogDir}`);
   const up = await upstreamReachable(env.upstream);
   add("upstream", up.ok, up.ok ? `${env.upstream} answered ${up.status}` : `${env.upstream}: ${up.error}`);
   return out;
@@ -123,14 +217,15 @@ export function stopProxies(/** @type {any} */ signal = "SIGTERM") { for (const 
 
 /**
  * Start the route proxy (orche proxy.mjs: pinned model+effort, request budget, key substitution, wire journal) on a private unix
- * socket, and the endpoint gate on the socket the sandbox gets. Resolves with { socket, wireLog, totals(), stop() }.
+ * socket, and the endpoint gate on the socket the sandbox gets. `allowed` = the endpoint gate of the sandbox's provider layout
+ * (allowedEndpoints(env); default the legacy gate). Resolves with { socket, wireLog, totals(), stop() }.
  */
-export async function startModelPath({ dir, route, maxRequests, upstream, agentDir, keyOverride }) {
+export async function startModelPath({ dir, route, maxRequests, upstream, agentDir, keyOverride, allowed = ALLOWED }) {
   ensureDir(dir);
   const proxySocket = join(dir, "proxy.sock"), gateSocket = join(dir, "gate.sock"), keyFile = join(dir, "key"), envelope = join(dir, "envelope.json");
   const wireLog = join(dir, "wire.jsonl");
   let key = keyOverride;
-  if (key === undefined) { try { key = String(JSON.parse(readFileSync(join(agentDir, "cliproxyapi.json"), "utf8")).apiKey ?? ""); } catch { key = ""; } }
+  if (key === undefined) key = upstreamKey(agentDir);
   writeFileSync(keyFile, key, { mode: 0o600 });
   writeFileSync(envelope, JSON.stringify({ route: { model: route.model, effort: route.effort }, maxRequests, placeholderKey: PLACEHOLDER_KEY, prices: catalogPrices(agentDir, route.model) }));
   const child = spawn(process.execPath, [PROXY, "--listen", proxySocket, "--target", upstream, "--log", wireLog, "--envelope", envelope, "--key-file", keyFile], { stdio: ["ignore", "pipe", "pipe"], detached: false });
@@ -149,8 +244,8 @@ export async function startModelPath({ dir, route, maxRequests, upstream, agentD
   } catch (error) { try { child.kill("SIGKILL"); } catch { /* gone */ } throw error; } finally { rmSync(keyFile, { force: true }); }
   const gateLog = [];
   const gate = http.createServer((req, res) => {
-    const allowed = ALLOWED.some(a => a.method === req.method && a.path.test(req.url ?? ""));
-    if (!allowed) { gateLog.push({ at: new Date().toISOString(), method: req.method, path: String(req.url).slice(0, 200) }); res.writeHead(403, { "content-type": "application/json" }); res.end(JSON.stringify({ error: { type: "eval_loop_endpoint_refused", message: "endpoint not permitted" } })); req.resume(); return; }
+    const admitted = allowed.some(a => a.method === req.method && a.path.test(req.url ?? ""));
+    if (!admitted) { gateLog.push({ at: new Date().toISOString(), method: req.method, path: String(req.url).slice(0, 200) }); res.writeHead(403, { "content-type": "application/json" }); res.end(JSON.stringify({ error: { type: "eval_loop_endpoint_refused", message: "endpoint not permitted" } })); req.resume(); return; }
     const up = http.request({ socketPath: proxySocket, path: req.url, method: req.method, headers: req.headers }, upRes => { res.writeHead(upRes.statusCode ?? 502, upRes.headers); upRes.pipe(res); });
     up.on("error", () => { if (!res.headersSent) res.writeHead(502); res.end(); });
     res.on("close", () => { if (!res.writableFinished) up.destroy(); });

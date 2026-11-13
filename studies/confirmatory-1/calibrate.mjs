@@ -19,6 +19,13 @@
 //
 //   node studies/confirmatory-1/calibrate.mjs --batch DIR --state DIR --harness-dir DIR --harness-commit SHA --max-requests N
 //        --approval FILE --budget-ledger FILE --gateway-db FILE [--repeats 3] [--parallelism 3] [--dry-run]
+//        [--route PROVIDER/MODEL [--effort LEVEL]] [--context ID] [--budget-limit N --budget-scope S]
+//
+// Study identity (2026-11-13, docs/terra-study-v4.md): the defaults are confirmatory-1's (route = DEFAULT_PROTOCOL.route, context
+// "confirmatory-1:calibration", a ledger of its own whose limit IS the approved --max-requests, hard cap 4500). Another study
+// (e.g. Terra v4) names its route, its context and the identity of a SHARED series ledger (--budget-limit/--budget-scope = the
+// ledger's init limit and scope, e.g. 300000); then --max-requests (<= the ledger limit) is enforced as a sub-ceiling of this
+// context's reservations inside that ledger (RequestBudget.reserve subCap), across runs, resumes and concurrent processes.
 //
 // The harness directory is a read-only export of the stable orche commit, e.g.
 //   mkdir DIR && git -C <umbrella>/orche archive <commit> | tar -x -C DIR
@@ -35,6 +42,8 @@ import { runtimeProblems } from "../../src/isolated-runtime.mjs";
 import { Ledger, acquireLock, atomicWriteJson, digestOf, ensureDir, readJson, sha256 } from "../../src/util.mjs";
 
 export const CONTEXT = "confirmatory-1:calibration";
+/** The evaluator context of a plan (confirmatory-1's unless the plan names another study's). */
+export const contextOf = (plan) => plan?.context ?? CONTEXT;
 /** The study's hard cap (user decision 2026-11-07: "요청 4500 유지"); no approval or CLI value can raise it. */
 export const HARD_CAP = 4500;
 export const BUDGET_SCOPE = "confirmatory-1: target-model calibration requests (all runs, resumes and reruns)";
@@ -43,8 +52,31 @@ export const GATED_RESERVATION_FACTOR = 2;
 /** Pilot usage of the stable arm S in ctrl-ablation-1 (81 units): requests and input tokens per unit (expectations, not bounds). */
 export const PILOT_PER_UNIT = { requests: 1954 / 81, inputTokens: 18.56e6 / 81, source: "records/ctrl-ablation-1/discovery (live checkout), arm S" };
 
+export const EFFORTS = ["minimal", "low", "medium", "high", "xhigh", "max", "ultra"];
+/**
+ * The runner protocol of a study: DEFAULT_PROTOCOL itself (confirmatory-1, unchanged identity) unless a route is named, e.g.
+ * studyProtocol({ route: "cliproxyapi/gpt-6.1-terra", effort: "medium" }). Throws on a malformed route or effort.
+ * @param {{ route?: string, effort?: string }} [options]
+ */
+export function studyProtocol({ route, effort } = {}) {
+  if (route === undefined) { if (effort !== undefined) throw new Error("--effort needs --route"); return DEFAULT_PROTOCOL; }
+  const m = /^([A-Za-z0-9._-]+)\/([A-Za-z0-9._-][A-Za-z0-9._/-]*)$/.exec(route);
+  if (!m) throw new Error(`--route ${route}: PROVIDER/MODEL (e.g. cliproxyapi/gpt-6.1-terra)`);
+  const level = effort ?? DEFAULT_PROTOCOL.route.effort;
+  if (!EFFORTS.includes(level)) throw new Error(`--effort ${level}: one of ${EFFORTS.join(", ")}`);
+  return merge(structuredClone(DEFAULT_PROTOCOL), { route: { provider: m[1], model: m[2], effort: level } });
+}
+
+/** Model ids of an agent dir's catalogs (cliproxyapi-models.json, cpa-models.json); [] when none is readable. */
+export function catalogModels(agentDir) {
+  const ids = new Set();
+  try { for (const x of JSON.parse(readFileSync(join(agentDir, "cliproxyapi-models.json"), "utf8")).models ?? []) if (typeof x?.id === "string") ids.add(x.id); } catch { /* absent */ }
+  try { const c = JSON.parse(readFileSync(join(agentDir, "cpa-models.json"), "utf8")); for (const x of (Array.isArray(c) ? c : c?.data ?? [])) if (typeof x?.id === "string") ids.add(x.id); } catch { /* absent */ }
+  return [...ids];
+}
+
 /** The calibration plan: units, identity and worst case. Model-free. */
-export function calibrationPlan({ batch, harnessDir, harnessCommit, repeats = 3, protocol = DEFAULT_PROTOCOL, maxRequests, hardMaxRate, minTasksPerLevel, budgetLedger, exclusions = [] }) {
+export function calibrationPlan({ batch, harnessDir, harnessCommit, repeats = 3, protocol = DEFAULT_PROTOCOL, maxRequests, hardMaxRate, minTasksPerLevel, budgetLedger, exclusions = [], context, budgetLimit, budgetScope }) {
   const problems = [];
   if (datasetPurpose(batch) !== "calibration") problems.push("batch is not a calibration-purpose set (a holdout is never run for calibration)");
   const seal = verifySeal(batch);
@@ -53,7 +85,10 @@ export function calibrationPlan({ batch, harnessDir, harnessCommit, repeats = 3,
   if (!harnessDir || !existsSync(join(harnessDir, "package.json"))) problems.push("--harness-dir: an exported stable orche tree (package.json missing)");
   if (!/^[0-9a-f]{40}$/.test(harnessCommit ?? "")) problems.push("--harness-commit: the full sha of the exported stable commit");
   if (!(Number.isInteger(maxRequests) && maxRequests > 0)) problems.push("--max-requests: the approved aggregate request ceiling (a positive integer)");
-  else if (maxRequests > HARD_CAP) problems.push(`--max-requests ${maxRequests} exceeds the study's hard cap ${HARD_CAP}`);
+  else if (budgetLimit === undefined && maxRequests > HARD_CAP) problems.push(`--max-requests ${maxRequests} exceeds the study's hard cap ${HARD_CAP}`);
+  else if (budgetLimit !== undefined && maxRequests > budgetLimit) problems.push(`--max-requests ${maxRequests} exceeds the shared ledger's limit ${budgetLimit}`);
+  if (budgetLimit !== undefined && !(Number.isInteger(budgetLimit) && budgetLimit > 0 && typeof budgetScope === "string" && budgetScope.trim())) problems.push("--budget-limit/--budget-scope: the shared ledger's exact init limit (positive integer) and scope");
+  if (context !== undefined && !/^[A-Za-z0-9][A-Za-z0-9._:-]{0,79}$/.test(context)) problems.push("--context: 1-80 characters [A-Za-z0-9._:-]");
   if (!Number.isInteger(repeats) || repeats < 1 || repeats > 10) problems.push("--repeats must be an integer in 1..10");
   if (!(hardMaxRate > 0 && hardMaxRate < 1) || !(Number.isInteger(minTasksPerLevel) && minTasksPerLevel >= 1)) problems.push("calibration rule (hardMaxRate, minTasksPerLevel) must be pre-registered");
   const tasks = seal.ok ? loadLocal(batch) : [];
@@ -66,7 +101,9 @@ export function calibrationPlan({ batch, harnessDir, harnessCommit, repeats = 3,
     schema: "pi-eval-loop/calibration-plan@3", batch, seal: seal.seal?.digest ?? null, tasks: measured, allTasks: tasks.map(t => t.id).sort(), families: [...new Set(tasks.map(t => t.family))].sort(),
     harness: { id: "stable", kind: "orche", commit: harnessCommit ?? null, mode: protocol.target.mode }, route: protocol.route, repeats, units,
     rule: { feature: "declared-tier", hardMaxRate, minTasksPerLevel, censoring: CENSORING, exclusions },
-    budget: { maxRequests: maxRequests ?? null, ledger: budgetLedger ?? null, perAttemptCeiling: perUnit, worstCaseFirstAttempts: units * perUnit, expectedRequests: Math.round(units * PILOT_PER_UNIT.requests), expectedInputTokens: Math.round(units * PILOT_PER_UNIT.inputTokens), expectationSource: PILOT_PER_UNIT.source, note: "every attempt (first try or infrastructure retry) reserves perAttemptCeiling in the global budget before dispatch; unsettled reservations stay charged in full; the run pauses (no report) when a reservation is refused" },
+    // Non-default identity only (a default plan keeps the digest of existing confirmatory-1 state directories).
+    ...(context !== undefined && context !== CONTEXT ? { context } : {}),
+    budget: { maxRequests: maxRequests ?? null, ledger: budgetLedger ?? null, ...(budgetLimit !== undefined ? { ledgerLimit: budgetLimit, ledgerScope: budgetScope ?? null, subCap: true } : {}), perAttemptCeiling: perUnit, worstCaseFirstAttempts: units * perUnit, expectedRequests: Math.round(units * PILOT_PER_UNIT.requests), expectedInputTokens: Math.round(units * PILOT_PER_UNIT.inputTokens), expectationSource: PILOT_PER_UNIT.source, note: "every attempt (first try or infrastructure retry) reserves perAttemptCeiling in the global budget before dispatch; unsettled reservations stay charged in full; the run pauses (no report) when a reservation is refused" },
     problems,
   };
 }
@@ -82,7 +119,8 @@ export function approvalProblems(path, maxRequests, plan) {
   let a;
   try { a = JSON.parse(readFileSync(path, "utf8")); } catch { return ["approval file unreadable"]; }
   const out = [];
-  if (!(Number.isInteger(a.maxRequests) && a.maxRequests > 0 && a.maxRequests <= HARD_CAP)) out.push(`approval maxRequests ${a.maxRequests} must be a positive integer <= ${HARD_CAP}`);
+  const cap = plan.budget?.ledgerLimit ?? HARD_CAP;
+  if (!(Number.isInteger(a.maxRequests) && a.maxRequests > 0 && a.maxRequests <= cap)) out.push(`approval maxRequests ${a.maxRequests} must be a positive integer <= ${cap}`);
   else if (a.maxRequests !== maxRequests) out.push(`approval maxRequests ${a.maxRequests} differs from --max-requests ${maxRequests} (the ceiling is exactly the approved one)`);
   if (!a.approvedBy || !a.approvedAt || Number.isNaN(Date.parse(a.approvedAt))) out.push("approval needs approvedBy and approvedAt");
   const z = a.authorization ?? {};
@@ -154,7 +192,7 @@ export { pressureVerdict } from "../../src/admission.mjs";
 /** Status of a (possibly partial) calibration: unit classes from the runner ledger and the budget. */
 export function calibrationStatus({ plan, state, budget, simulated = false }) {
   const runs = join(state, "runs.jsonl");
-  const classes = unitClassesFromLedger(runs, { harnessId: "stable", context: CONTEXT, repeats: plan.repeats, tasks: plan.tasks, allowSimulated: simulated });
+  const classes = unitClassesFromLedger(runs, { harnessId: "stable", context: contextOf(plan), repeats: plan.repeats, tasks: plan.tasks, allowSimulated: simulated });
   return { schema: "pi-eval-loop/calibration-status@1", at: new Date().toISOString(), plan: { batch: plan.batch, seal: plan.seal, units: plan.units, repeats: plan.repeats }, unitClasses: classes.counts, byTask: classes.byTask, budget: budget ? budget.status() : null };
 }
 
@@ -165,6 +203,8 @@ export function calibrationStatus({ plan, state, budget, simulated = false }) {
  */
 export async function runCalibration({ plan, state, harnessDir, backend, protocol = DEFAULT_PROTOCOL, parallelism = 1, log = () => {}, validate, envDigest, budget, bound, pressure = null, watchIntervalMs = 15_000 }) {
   if (!budget) throw new Error("calibration: a RequestBudget is required (no unmetered run)");
+  // The plan's route is the measured route: the runner protocol must carry exactly it (never the default route by omission).
+  if (plan.route && JSON.stringify(protocol.route) !== JSON.stringify(plan.route)) throw new Error(`calibration: protocol route ${protocol.route?.provider}/${protocol.route?.model} differs from the plan's ${plan.route.provider}/${plan.route.model}`);
   ensureDir(state);
   const lock = acquireLock(join(state, "calibration.lock"));
   try {
@@ -179,7 +219,8 @@ export async function runCalibration({ plan, state, harnessDir, backend, protoco
     const bad = tasks.filter(t => !grading[t.id].ok).map(t => t.id);
     if (bad.length) { const summary = { paused: `grader validation failed: ${bad.join(", ")}`, ran: 0 }; atomicWriteJson(join(state, "calibration-summary.json"), summary); return { summary }; }
     const p = merge(structuredClone(protocol), { parallelism });
-    const admission = attemptAdmission(budget, bound);
+    // A shared series ledger: this context's reservations are bounded by the approved ceiling (sub-cap under the ledger lock).
+    const admission = attemptAdmission(budget, bound, plan.budget?.subCap ? { subCap: { key: `calibration:${contextOf(plan)}`, limit: plan.budget.maxRequests } } : {});
     const evaluator = new Evaluator({ stateDir: state, protocol: p, protocolDigest: planLock.plan, envDigest, tasksById, grading, backend, log, admission });
     const harness = { ...plan.harness, dir: harnessDir };
     const units = []; for (const id of plan.tasks) for (let r = 0; r < plan.repeats; r++) units.push({ task: id, split: "calibration", repeat: r });
@@ -194,7 +235,7 @@ export async function runCalibration({ plan, state, harnessDir, backend, protoco
       };
       timer = setInterval(tick, watchIntervalMs); timer.unref?.();
     }
-    try { await evaluator.evaluate(harness, units, CONTEXT); } finally { if (timer) clearInterval(timer); }
+    try { await evaluator.evaluate(harness, units, contextOf(plan)); } finally { if (timer) clearInterval(timer); }
     const status = { ...calibrationStatus({ plan, state, budget, simulated: !!backend.simulated }), simulated: !!backend.simulated, halted: evaluator.halted, peerEvents: events };
     atomicWriteJson(join(state, "calibration-status.json"), status);
     const summary = { ran: evaluator.records().length, planned: units.length, paused: evaluator.halted, simulated: !!backend.simulated, unitClasses: status.unitClasses, budget: status.budget && { limit: status.budget.limit, charged: status.budget.charged, settledUsed: status.budget.settledUsed, openReservations: status.budget.openReservations, remaining: status.budget.remaining, meters: status.budget.meters }, at: new Date().toISOString() };
@@ -208,9 +249,9 @@ export async function runCalibration({ plan, state, harnessDir, backend, protoco
         /** @type {Record<string, number[]>} */ const outcomes = {}; for (const r of evaluator.records()) (outcomes[r.task_id] ??= [])[r.repeat] = r.task_success ? 1 : 0;
         report = buildCalibrationReport({ batchDir: plan.batch, outcomes, feature: plan.rule.feature, hardMaxRate: plan.rule.hardMaxRate, minTasksPerLevel: plan.rule.minTasksPerLevel, exclusions: plan.rule.exclusions ?? [], measuredWith: { kind: "fixture", note: "simulated backend (plumbing check only)" } });
       } else {
-        const outcomes = outcomesFromLedger(ledger, { harnessId: "stable", context: CONTEXT, repeats: plan.repeats, tasks: plan.tasks, censoring: plan.rule.censoring });
-        const unitClasses = unitClassesFromLedger(ledger, { harnessId: "stable", context: CONTEXT, repeats: plan.repeats, tasks: plan.tasks });
-        report = buildCalibrationReport({ batchDir: plan.batch, outcomes, feature: plan.rule.feature, hardMaxRate: plan.rule.hardMaxRate, minTasksPerLevel: plan.rule.minTasksPerLevel, censoring: plan.rule.censoring, unitClasses, exclusions: plan.rule.exclusions ?? [], measuredWith: { kind: "runner-ledger", ledger, harnessId: "stable", harnessCommit: plan.harness.commit, context: CONTEXT, repeats: plan.repeats, route: `${plan.route.provider}/${plan.route.model}`, protocolDigest: planLock.plan } });
+        const outcomes = outcomesFromLedger(ledger, { harnessId: "stable", context: contextOf(plan), repeats: plan.repeats, tasks: plan.tasks, censoring: plan.rule.censoring });
+        const unitClasses = unitClassesFromLedger(ledger, { harnessId: "stable", context: contextOf(plan), repeats: plan.repeats, tasks: plan.tasks });
+        report = buildCalibrationReport({ batchDir: plan.batch, outcomes, feature: plan.rule.feature, hardMaxRate: plan.rule.hardMaxRate, minTasksPerLevel: plan.rule.minTasksPerLevel, censoring: plan.rule.censoring, unitClasses, exclusions: plan.rule.exclusions ?? [], measuredWith: { kind: "runner-ledger", ledger, harnessId: "stable", harnessCommit: plan.harness.commit, context: contextOf(plan), repeats: plan.repeats, route: `${plan.route.provider}/${plan.route.model}`, protocolDigest: planLock.plan } });
       }
     } catch (error) {
       // The partial status above stays the record; no report is built from an incomplete measurement.
@@ -223,12 +264,15 @@ export async function runCalibration({ plan, state, harnessDir, backend, protoco
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {
-  const { values } = parseArgs({ options: { batch: { type: "string" }, state: { type: "string" }, "harness-dir": { type: "string" }, "harness-commit": { type: "string" }, repeats: { type: "string", default: "3" }, parallelism: { type: "string", default: "1" }, "max-requests": { type: "string" }, approval: { type: "string" }, "budget-ledger": { type: "string" }, "gateway-db": { type: "string" }, runtime: { type: "string" }, reviews: { type: "string" }, "pressure-minutes": { type: "string", default: "30" }, "hard-max-rate": { type: "string", default: "0.5" }, exclusions: { type: "string" }, "min-tasks-per-level": { type: "string", default: "3" }, "dry-run": { type: "boolean", default: false } } });
-  if (!values.batch) { process.stderr.write("usage: calibrate.mjs --batch DIR --state DIR --harness-dir DIR --harness-commit SHA --max-requests N --approval FILE --budget-ledger FILE --runtime DIR --gateway-db FILE --reviews DIR [--exclusions FILE] [--dry-run]\n"); process.exit(64); }
+  const { values } = parseArgs({ options: { batch: { type: "string" }, state: { type: "string" }, "harness-dir": { type: "string" }, "harness-commit": { type: "string" }, repeats: { type: "string", default: "3" }, parallelism: { type: "string", default: "1" }, "max-requests": { type: "string" }, approval: { type: "string" }, "budget-ledger": { type: "string" }, "budget-limit": { type: "string" }, "budget-scope": { type: "string" }, route: { type: "string" }, effort: { type: "string" }, context: { type: "string" }, "gateway-db": { type: "string" }, runtime: { type: "string" }, reviews: { type: "string" }, "pressure-minutes": { type: "string", default: "30" }, "hard-max-rate": { type: "string", default: "0.5" }, exclusions: { type: "string" }, "min-tasks-per-level": { type: "string", default: "3" }, "dry-run": { type: "boolean", default: false } } });
+  if (!values.batch) { process.stderr.write("usage: calibrate.mjs --batch DIR --state DIR --harness-dir DIR --harness-commit SHA --max-requests N --approval FILE --budget-ledger FILE --runtime DIR --gateway-db FILE --reviews DIR [--exclusions FILE] [--route PROVIDER/MODEL [--effort LEVEL]] [--context ID] [--budget-limit N --budget-scope S] [--dry-run]\n"); process.exit(64); }
+  let protocol;
+  try { protocol = studyProtocol({ route: values.route, effort: values.effort }); } catch (error) { process.stderr.write(`${error.message}\n`); process.exit(64); }
+  if ((values["budget-limit"] === undefined) !== (values["budget-scope"] === undefined)) { process.stderr.write("--budget-limit and --budget-scope go together (the shared ledger's exact init limit and scope)\n"); process.exit(64); }
   const int = (v) => (v !== undefined && /^[0-9]+$/.test(v) ? Number(v) : NaN);
   const parallelism = int(values.parallelism);
   if (!(parallelism >= 1 && parallelism <= 4)) { process.stderr.write("--parallelism must be an integer in 1..4\n"); process.exit(64); }
-  const plan = calibrationPlan({ batch: resolve(values.batch), harnessDir: values["harness-dir"] && resolve(values["harness-dir"]), harnessCommit: values["harness-commit"], repeats: int(values.repeats), maxRequests: values["max-requests"] ? int(values["max-requests"]) : undefined, hardMaxRate: Number(values["hard-max-rate"]), minTasksPerLevel: int(values["min-tasks-per-level"]), budgetLedger: values["budget-ledger"] && resolve(values["budget-ledger"]), exclusions: values.exclusions ? JSON.parse(readFileSync(values.exclusions, "utf8")).exclusions : [] });
+  const plan = calibrationPlan({ batch: resolve(values.batch), harnessDir: values["harness-dir"] && resolve(values["harness-dir"]), harnessCommit: values["harness-commit"], repeats: int(values.repeats), protocol, maxRequests: values["max-requests"] ? int(values["max-requests"]) : undefined, hardMaxRate: Number(values["hard-max-rate"]), minTasksPerLevel: int(values["min-tasks-per-level"]), budgetLedger: values["budget-ledger"] && resolve(values["budget-ledger"]), exclusions: values.exclusions ? JSON.parse(readFileSync(values.exclusions, "utf8")).exclusions : [], context: values.context, budgetLimit: values["budget-limit"] !== undefined ? int(values["budget-limit"]) : undefined, budgetScope: values["budget-scope"] });
   const approval = approvalProblems(values.approval, plan.budget.maxRequests ?? 0, plan);
   const blocked = [...plan.problems, ...approval];
   if (!values["budget-ledger"]) blocked.push("--budget-ledger: the study's global request budget ledger");
@@ -242,6 +286,10 @@ if (import.meta.url === `file://${process.argv[1]}`) {
     const dir = resolve(values.runtime);
     try {
       runtime = JSON.parse(readFileSync(join(dir, "manifest.json"), "utf8"));
+      // A shared series ledger: the runtime's gate must charge exactly that ledger identity (path checked by runtimeProblems).
+      if (plan.budget.ledgerLimit !== undefined && (runtime.budget?.limit !== plan.budget.ledgerLimit || runtime.budget?.scope !== plan.budget.ledgerScope)) blocked.push("the runtime's gate charges another ledger identity (limit/scope) than --budget-limit/--budget-scope: misbound runtime");
+      // The measured route must be served by the runtime's model catalog (no silent fallback to another model).
+      if (values.route !== undefined && !catalogModels(runtime.agentDir).includes(plan.route.model)) blocked.push(`route ${plan.route.provider}/${plan.route.model} is not in the runtime's model catalog (${runtime.agentDir})`);
       const check = () => runtimeProblems(dir, { running: true, mode: "live", budgetPath: values["budget-ledger"] && resolve(values["budget-ledger"]) });
       attemptBound = () => { const p = check(); if (p.length) throw new Error(`isolated runtime: ${p.join("; ")}`); return { perRequest: GATED_RESERVATION_FACTOR, gated: true, basis: "outbound attempt gate (every provider attempt admitted against this ledger); factor = reservation size per forwarded request (retry 0, redirects)" }; };
       bound = attemptBound();
@@ -257,7 +305,7 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   else blocked.push(...knownDefectProblems({ reviews: resolve(values.reviews), plan }));
   let budget = null;
   if (!blocked.length) {
-    budget = new RequestBudget({ path: resolve(values["budget-ledger"]), limit: plan.budget.maxRequests, scope: BUDGET_SCOPE });
+    budget = new RequestBudget({ path: resolve(values["budget-ledger"]), limit: plan.budget.ledgerLimit ?? plan.budget.maxRequests, scope: plan.budget.ledgerScope ?? BUDGET_SCOPE });
     try { budget.status(); } catch (error) { blocked.push(`budget: ${error.message}`); }
   }
   const pressure = values["gateway-db"] && existsSync(values["gateway-db"]) ? gatewayPressureMeter({ db: resolve(values["gateway-db"]), model: plan.route.model }) : null;
@@ -277,7 +325,7 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   if (missing.length) { process.stderr.write(`BLOCKED: missing prerequisites ${missing.map(m => m.name).join(", ")}\n`); process.exit(2); }
   for (const s of ["SIGINT", "SIGTERM", "SIGHUP"]) process.on(s, () => { stopProxies("SIGTERM"); process.exit(130); });
   const state = resolve(values.state);
-  const out = await runCalibration({ plan, state, harnessDir: resolve(values["harness-dir"]), backend: realBackend(env), parallelism, budget, bound: attemptBound, pressure, log: (l) => process.stderr.write(`${l.replace(/ PASS$/, "")}\n`), validate: (t) => validateGrader({ task: t, scratch: join(state, "grading-scratch", t.id), env }), envDigest: environmentDigest(env, DEFAULT_PROTOCOL.route) });
+  const out = await runCalibration({ plan, state, harnessDir: resolve(values["harness-dir"]), backend: realBackend(env), protocol, parallelism, budget, bound: attemptBound, pressure, log: (l) => process.stderr.write(`${l.replace(/ PASS$/, "")}\n`), validate: (t) => validateGrader({ task: t, scratch: join(state, "grading-scratch", t.id), env }), envDigest: environmentDigest(env, plan.route) });
   process.stdout.write(`${JSON.stringify({ ...out.summary, unitClasses: out.summary.unitClasses })}\n`);
   process.exit(out.report ? 0 : 2);
 }

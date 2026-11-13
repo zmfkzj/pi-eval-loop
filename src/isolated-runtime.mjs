@@ -15,10 +15,10 @@
 // allowlist excludes the token endpoint). The snapshot is used only while the token is valid for longer than the gateway's
 // proactive refresh lead (96 h, sdk/cliproxy/auth/types.go CodexOuterRefreshLead) plus a margin, so the private gateway never
 // even attempts a refresh; an expired or revoked token fails closed (401, counted as an attempt).
-import { chmodSync, copyFileSync, existsSync, mkdirSync, readFileSync, readdirSync, readlinkSync, writeFileSync } from "node:fs";
+import { chmodSync, copyFileSync, existsSync, mkdirSync, readFileSync, readdirSync, readlinkSync, statSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { randomBytes } from "node:crypto";
-import { sha256 } from "./util.mjs";
+import { LockBusyError, acquireLock, atomicWrite, ensureDir, sha256 } from "./util.mjs";
 
 export const PINNED_GATEWAY = { version: "8.0.57", commit: "c2f402b4", sha256: "047e384525c93abe1c98cdf3769ed5b720f621030f9777254c2985c11904c985" };
 export const CODEX_REFRESH_LEAD_H = 96;
@@ -30,7 +30,9 @@ export const PORTS = { gw: 18418, gate: 18419 };
 export function jwtExpiryMs(token) {
   const part = String(token ?? "").split(".")[1];
   if (!part) throw new Error("access token is not a JWT");
-  const claims = JSON.parse(Buffer.from(part.replace(/-/g, "+").replace(/_/g, "/"), "base64").toString("utf8"));
+  let claims;
+  // Never echo token material: a parse error message can quote its input.
+  try { claims = JSON.parse(Buffer.from(part.replace(/-/g, "+").replace(/_/g, "/"), "base64").toString("utf8")); } catch { throw new Error("access token claims are unreadable"); }
   if (!Number.isFinite(claims.exp)) throw new Error("access token has no exp claim");
   return claims.exp * 1000;
 }
@@ -41,15 +43,28 @@ export function jwtExpiryMs(token) {
  * @returns {{ snapshot: any, facts: any }}
  */
 export function snapshotCredential({ source, now = Date.now(), minHours = 6 }) {
-  const raw = readFileSync(source, "utf8");
-  const a = JSON.parse(raw);
-  if (a.type !== "codex") throw new Error("credential snapshot: not a codex OAuth credential");
-  if (a.disabled === true) throw new Error("credential snapshot: the credential is disabled in the live gateway");
-  if (String(a.prefix ?? "").trim()) throw new Error("credential snapshot: a prefixed credential is not the one serving the unprefixed target route");
-  if (!a.access_token || !a.account_id) throw new Error("credential snapshot: access_token/account_id missing");
-  const exp = jwtExpiryMs(a.access_token);
+  let a;
+  try { a = JSON.parse(readFileSync(source, "utf8")); } catch (error) { throw new CredentialError(error?.code === "ENOENT" ? `credential snapshot: ${source} not found` : `credential snapshot: ${source} unreadable or not JSON`, "source-invalid"); }
+  return snapshotOf(a, { source, now, minHours });
+}
+
+/** A credential refusal with a stable code ("source-invalid" | "source-in-refresh-lead"); messages never quote credential content. */
+export class CredentialError extends Error {
+  /** @param {string} message @param {string} code */
+  constructor(message, code) { super(message); this.code = code; }
+}
+
+/** snapshotCredential on an already parsed auth object `a` (same checks, same semantics). */
+export function snapshotOf(a, { source, now = Date.now(), minHours = 6 }) {
+  if (!a || typeof a !== "object") throw new CredentialError("credential snapshot: not a codex OAuth credential", "source-invalid");
+  if (a.type !== "codex") throw new CredentialError("credential snapshot: not a codex OAuth credential", "source-invalid");
+  if (a.disabled === true) throw new CredentialError("credential snapshot: the credential is disabled in the live gateway", "source-invalid");
+  if (String(a.prefix ?? "").trim()) throw new CredentialError("credential snapshot: a prefixed credential is not the one serving the unprefixed target route", "source-invalid");
+  if (!a.access_token || !a.account_id || typeof a.access_token !== "string") throw new CredentialError("credential snapshot: access_token/account_id missing", "source-invalid");
+  let exp;
+  try { exp = jwtExpiryMs(a.access_token); } catch (error) { throw new CredentialError(`credential snapshot: ${error.message}`, "source-invalid"); }
   const usableUntil = exp - (CODEX_REFRESH_LEAD_H + minHours) * 3600_000;
-  if (usableUntil <= now) throw new Error(`credential snapshot: token expires ${new Date(exp).toISOString()}; within the ${CODEX_REFRESH_LEAD_H} h refresh lead + ${minHours} h margin the private gateway would try to refresh (refused: re-snapshot after the live gateway has refreshed)`);
+  if (usableUntil <= now) throw new CredentialError(`credential snapshot: token expires ${new Date(exp).toISOString()}; within the ${CODEX_REFRESH_LEAD_H} h refresh lead + ${minHours} h margin the private gateway would try to refresh (refused: re-snapshot after the live gateway has refreshed)`, "source-in-refresh-lead");
   const snapshot = { type: "codex", access_token: a.access_token, account_id: a.account_id, email: a.email, plan_type: a.plan_type, expired: new Date(exp).toISOString(), last_refresh: a.last_refresh, disabled: false, prefix: "", websockets: false, priority: 0, note: "pi-eval-loop isolated calibration runtime: access-token-only snapshot (no refresh token)" };
   return { snapshot, facts: { sourceFile: source, sourceLastRefresh: a.last_refresh ?? null, accessTokenSha256: sha256(a.access_token).slice(0, 16), accountIdSha256: sha256(a.account_id).slice(0, 16), expiresAt: new Date(exp).toISOString(), usableUntil: new Date(usableUntil).toISOString(), refreshTokenCopied: false, idTokenCopied: false } };
 }
@@ -212,4 +227,115 @@ export function runtimeProblems(dir, { running = true, now = Date.now(), mode = 
     }
   }
   return out;
+}
+
+// ------------------------------------------------------------------------------------------------ unattended re-snapshot
+// (2026-11-13; docs/runtime-resnapshot.md) Replace a STOPPED runtime's access-token-only snapshot with the live source's current
+// token: same account, no refresh/id token, the live source only read (never refreshed or written), config, ports, agent dir and
+// budget binding untouched. Model-free; nothing secret is returned.
+export const RESNAPSHOT_SCHEMA = "pi-eval-loop/runtime-resnapshot@1";
+/** Margin (h) beyond the gateway's refresh lead: the same 96 h + 6 h readiness lead `prepare` uses (snapshotCredential default). */
+export const RESNAPSHOT_MIN_HOURS = 6;
+/** Exit codes: 0 completed, 1 refused (operator attention; nothing changed), 2 source within the lead (wait for the live gateway's
+ *  refresh; nothing changed), 3 runtime busy (running or used; nothing changed), 64 usage. */
+export const RESNAPSHOT_EXIT = { ok: 0, refused: 1, sourceInLead: 2, busy: 3, usage: 64 };
+/** Lock serializing runtime operations (start, resnapshot) on one runtime directory. */
+export const runtimeLockPath = (dir) => join(dir, ".runtime-op.lock");
+
+const alive = (pid) => { try { process.kill(pid, 0); return true; } catch (error) { return error.code === "EPERM"; } };
+
+/**
+ * Activity of a runtime directory: [] only when it is provably idle (no live supervisor or sandbox of state.json, no gateway
+ * process of its binary, no live registered user in <dir>/users). Anything unverifiable counts as activity (fail closed).
+ */
+export function runtimeActivity(dir) {
+  const out = [];
+  let st = null;
+  try { st = JSON.parse(readFileSync(join(dir, "state.json"), "utf8")); } catch (error) { if (error.code !== "ENOENT") out.push("state.json unreadable: activity unverifiable"); }
+  for (const role of ["supervisor", "sandbox"]) if (Number.isInteger(st?.[role]) && alive(st[role])) out.push(`${role} ${st[role]} is running`);
+  try { const g = gatewayPids(dir); if (g.length) out.push(`gateway process(es) ${g.join(", ")} running`); } catch { out.push("gateway processes unverifiable"); }
+  const users = join(dir, "users");
+  if (existsSync(users)) {
+    try {
+      for (const name of readdirSync(users)) {
+        if (!name.endsWith(".json")) continue;
+        let pid = Number(name.replace(/\.json$/, ""));
+        if (!Number.isInteger(pid)) { try { pid = Number(JSON.parse(readFileSync(join(users, name), "utf8")).pid); } catch { out.push(`users/${name} unreadable: activity unverifiable`); continue; } }
+        if (Number.isInteger(pid) && pid > 0 && alive(pid)) out.push(`runtime user ${pid} (users/${name}) is live`);
+      }
+    } catch { out.push("users directory unreadable: activity unverifiable"); }
+  }
+  return out;
+}
+
+const isoOrNull = (v) => (typeof v === "string" && Number.isFinite(Date.parse(v)) ? new Date(Date.parse(v)).toISOString() : null);
+
+/**
+ * Re-snapshot a stopped runtime from its live source credential (default: the manifest's credential.sourceFile).
+ * Returns { exit, result } where result = { schema, ok, usableUntil, code?, problems }. On every non-zero exit nothing in the
+ * runtime changed. `hooks.beforeManifest` (tests) runs after the snapshot was replaced and before the manifest is written.
+ * @param {{ dir: string, credential?: string, now?: number, hooks?: { beforeManifest?: () => void } }} options
+ */
+export function resnapshotRuntime({ dir, credential, now = Date.now(), hooks = {} }) {
+  const done = (exit, code, problems, usableUntil) => ({ exit, result: { schema: RESNAPSHOT_SCHEMA, ok: exit === 0, usableUntil: usableUntil ?? null, ...(code ? { code } : {}), problems } });
+  dir = resolve(dir);
+  let m;
+  try { m = JSON.parse(readFileSync(join(dir, "manifest.json"), "utf8")); } catch { return done(RESNAPSHOT_EXIT.refused, "runtime-invalid", [`no readable runtime manifest in ${dir}`]); }
+  const current = isoOrNull(m?.credential?.usableUntil);
+  if (m?.schema !== RUNTIME_SCHEMA) return done(RESNAPSHOT_EXIT.refused, "runtime-invalid", ["runtime manifest schema"], current);
+  let lock;
+  try { lock = acquireLock(runtimeLockPath(dir)); } catch (error) {
+    if (error instanceof LockBusyError) return done(RESNAPSHOT_EXIT.busy, "busy", [`another runtime operation holds ${runtimeLockPath(dir)}`], current);
+    return done(RESNAPSHOT_EXIT.busy, "busy", ["runtime operation lock unavailable: activity unverifiable"], current);
+  }
+  try {
+    const activity = runtimeActivity(dir);
+    if (activity.length) return done(RESNAPSHOT_EXIT.busy, "busy", activity, current);
+    // The runtime's single credential and its account (compared with the source below).
+    let names;
+    try { names = readdirSync(join(dir, "auth")).filter(n => n.endsWith(".json")); } catch { return done(RESNAPSHOT_EXIT.refused, "runtime-invalid", ["runtime auth directory unreadable"], current); }
+    if (names.length !== 1) return done(RESNAPSHOT_EXIT.refused, "runtime-invalid", [`runtime auth dir holds ${names.length} credentials (exactly one)`], current);
+    const authPath = join(dir, "auth", names[0]);
+    let old, oldText;
+    try { oldText = readFileSync(authPath, "utf8"); old = JSON.parse(oldText); } catch { return done(RESNAPSHOT_EXIT.refused, "runtime-invalid", [`${names[0]} unreadable`], current); }
+    if (!old?.account_id) return done(RESNAPSHOT_EXIT.refused, "account-unverifiable", [`${names[0]} names no account`], current);
+    const source = credential ? resolve(credential) : m.credential?.sourceFile;
+    if (!source) return done(RESNAPSHOT_EXIT.refused, "no-source", ["no --credential and no credential.sourceFile in the manifest"], current);
+    let a;
+    try { a = JSON.parse(readFileSync(source, "utf8")); } catch (error) { return done(RESNAPSHOT_EXIT.refused, error?.code === "ENOENT" ? "source-missing" : "source-invalid", [error?.code === "ENOENT" ? `source credential ${source} not found` : `source credential ${source} unreadable or not JSON`], current); }
+    let snap;
+    try { snap = snapshotOf(a, { source, now, minHours: RESNAPSHOT_MIN_HOURS }); } catch (error) {
+      const code = error instanceof CredentialError ? error.code : "source-invalid";
+      const why = error instanceof CredentialError ? error.message : "credential snapshot: source credential invalid";
+      return done(code === "source-in-refresh-lead" ? RESNAPSHOT_EXIT.sourceInLead : RESNAPSHOT_EXIT.refused, code, [why], current);
+    }
+    // Account continuity: the source must be the account of the runtime's snapshot AND of the manifest's recorded facts.
+    const problems = [];
+    if (snap.snapshot.account_id !== old.account_id) problems.push("source account differs from the runtime snapshot's account");
+    if (m.credential?.accountIdSha256 && m.credential.accountIdSha256 !== snap.facts.accountIdSha256) problems.push("source account differs from the manifest's credential.accountIdSha256");
+    if (problems.length) return done(RESNAPSHOT_EXIT.refused, "account-mismatch", problems, current);
+    let oldExp = null; try { oldExp = jwtExpiryMs(old.access_token); } catch { /* unreadable old token: any valid source replaces it */ }
+    const newExp = Date.parse(snap.facts.expiresAt);
+    if (oldExp !== null && newExp < oldExp) return done(RESNAPSHOT_EXIT.refused, "source-older", [`source token expires ${snap.facts.expiresAt}, before the runtime snapshot's ${new Date(oldExp).toISOString()}`], current);
+    const sameToken = old.access_token === snap.snapshot.access_token;
+    const facts = { ...snap.facts };
+    const factsCurrent = ["sourceFile", "accessTokenSha256", "accountIdSha256", "expiresAt", "usableUntil"].every(k => m.credential?.[k] === facts[k]) && m.credential?.refreshTokenCopied === false && m.credential?.idTokenCopied === false;
+    if (sameToken && factsCurrent && !old.refresh_token && !old.id_token) return done(RESNAPSHOT_EXIT.ok, "unchanged", [], facts.usableUntil);
+    const modeOf = (p) => { try { return statSync(p).mode & 0o777; } catch { return 0o600; } };
+    const authMode = modeOf(authPath), manifestMode = modeOf(join(dir, "manifest.json"));
+    const at = new Date(now).toISOString();
+    const manifest = { ...m, credential: { ...facts, resnapshotAt: at } };
+    const snapshotChanged = !sameToken || !!old.refresh_token || !!old.id_token || oldText !== JSON.stringify(snap.snapshot, null, 2);
+    if (snapshotChanged) atomicWrite(authPath, JSON.stringify(snap.snapshot, null, 2), authMode);
+    try {
+      hooks.beforeManifest?.();
+      atomicWrite(join(dir, "manifest.json"), `${JSON.stringify(manifest, null, 2)}\n`, manifestMode);
+    } catch {
+      // Keep snapshot and manifest consistent: restore the previous snapshot bytes (the manifest was not replaced).
+      if (snapshotChanged) { try { atomicWrite(authPath, oldText, authMode); } catch { return done(RESNAPSHOT_EXIT.refused, "write-failed-inconsistent", ["manifest write failed and the previous snapshot could not be restored: inspect the runtime before use"], current); } }
+      return done(RESNAPSHOT_EXIT.refused, "write-failed", ["manifest write failed; the previous snapshot was restored (nothing changed)"], current);
+    }
+    try { ensureDir(join(dir, "logs")); writeFileSync(join(dir, "logs", "resnapshot.jsonl"), `${JSON.stringify({ at, from: { accessTokenSha256: m.credential?.accessTokenSha256 ?? null, expiresAt: m.credential?.expiresAt ?? null, usableUntil: current }, to: { accessTokenSha256: facts.accessTokenSha256, expiresAt: facts.expiresAt, usableUntil: facts.usableUntil }, snapshotReplaced: snapshotChanged })}\n`, { flag: "a", mode: 0o600 }); } catch { /* audit trail only */ }
+    return done(RESNAPSHOT_EXIT.ok, snapshotChanged ? "resnapshotted" : "repaired", [], facts.usableUntil);
+  } finally { lock.release(); }
 }

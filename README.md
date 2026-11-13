@@ -44,6 +44,18 @@ Inside Pi: `/eval-loop status|report|doctor|help`. The loop itself never runs in
 If a prerequisite is missing (bwrap with namespaces, Pi CLI, provider, orche, git, credentials, model catalog, upstream), the run
 ends as `BLOCKED` and is recorded as such. No simulated result is ever presented as a measurement.
 
+### Provider, runtime credential and study identity (2026-11-13)
+
+- Provider: the unscoped `pi-cliproxyapi-provider` 0.16.x of the cliproxyapi bundle is the default (the legacy
+  `@router-for-me/pi-cliproxyapi-provider` 1.x still works); each sandbox gets the configuration layout of its package.
+  Overrides `EVAL_LOOP_PROVIDER`, `EVAL_LOOP_PROVIDER_LAYOUT`, `EVAL_LOOP_CATALOG_DIR`: `docs/provider-compat.md`.
+- `node studies/confirmatory-1/isolated-runtime.mjs resnapshot --dir D [--credential F]`: model-free re-snapshot of a stopped
+  isolated runtime's access token (one JSON line `pi-eval-loop/runtime-resnapshot@1`; exit 0 / 1 / 2 lead / 3 busy):
+  `docs/runtime-resnapshot.md`.
+- `calibrate.mjs --route --effort --context --budget-limit --budget-scope`, `isolated-runtime.mjs prepare --budget-limit
+  --budget-scope --models`, `pilot.mjs --campaign`: another study (Terra v4) without confirmatory-1's 4500 / gpt-6-luna
+  identity. Tooling only; the Terra readiness blockers are listed in `docs/terra-study-v4.md`.
+
 ## Unattended operation contract
 
 For cron, systemd or a Temporal activity that calls the CLI repeatedly. Schemas and codes are defined in `src/contract.mjs`.

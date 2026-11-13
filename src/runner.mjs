@@ -7,7 +7,7 @@ import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 import { execFileSync } from "node:child_process";
 import { ensureDir, textMap, treeDigest, walkFiles, sha256, redact } from "./util.mjs";
-import { BRIDGE, BRIDGE_PORT, LAUNCH, MOUNTS, PLACEHOLDER_KEY, boxView, completedModelCalls, harnessBinds, runSandboxed, startModelPath, wireEntries } from "./sandbox.mjs";
+import { BRIDGE, BRIDGE_PORT, LAUNCH, MOUNTS, allowedEndpoints, boxView, completedModelCalls, harnessBinds, privateProviderSetup, runSandboxed, startModelPath, wireEntries } from "./sandbox.mjs";
 import { gradeWorkspace } from "./grader.mjs";
 import { stageWorkspace } from "./datasets.mjs";
 import { makeRecord } from "./metrics.mjs";
@@ -120,7 +120,8 @@ async function piAttempt({ harness, task, route, unit, env, box, evidence, sessi
   stageWorkspace(task, ws);
   for (const name of ["cliproxyapi-models.json", "models.json"]) { const from = join(env.catalogDir ?? env.agentDir, name); if (existsSync(from)) { copyFileSync(from, join(agent, name)); chmodSync(join(agent, name), 0o600); } } // writable private copy (the provider refreshes it), also from a read-only snapshot
   const bridgeUrl = `http://127.0.0.1:${BRIDGE_PORT}`;
-  writeFileSync(join(agent, "cliproxyapi.json"), JSON.stringify({ apiKey: PLACEHOLDER_KEY, baseUrl: bridgeUrl, providerId: "cliproxyapi", providerName: "CLIProxyAPI" }), { mode: 0o600 });
+  // Provider configuration of the private agent dir / HOME for the provider package's layout (sandbox.mjs privateProviderSetup).
+  const providerEnv = privateProviderSetup({ env, agent, home, bridgeUrl, providerName: route.provider, catalogDir: env.catalogDir ?? env.agentDir });
   writeFileSync(join(agent, "settings.json"), JSON.stringify(piSettings(route), null, 2));
   const runtimeConfig = harness.kind === "orche" ? orcheConfig(route, harness.mode, unit, harness.orcheConfig) : undefined;
   if (runtimeConfig) writeFileSync(join(agent, "orche.config.json"), JSON.stringify(runtimeConfig, null, 2));
@@ -133,7 +134,7 @@ async function piAttempt({ harness, task, route, unit, env, box, evidence, sessi
   const sandboxEnv = {
     PATH: `${boxView(env).nodeDir}/bin:/usr/local/bin:/usr/bin:/bin`, HOME: inside(home), TMPDIR: inside(tmp), LANG: "C.UTF-8", LC_ALL: "C.UTF-8", TERM: "dumb", TZ: "UTC",
     PI_CODING_AGENT_DIR: inside(agent), PI_CODING_AGENT_SESSION_DIR: inside(sessions), PI_SKIP_VERSION_CHECK: "1", PI_TELEMETRY: "0", PI_OFFLINE: "1",
-    CLIPROXYAPI_BASE_URL: bridgeUrl, CLIPROXYAPI_API_KEY: PLACEHOLDER_KEY, CLIPROXYAPI_FAST: "0", EL_NODE: boxView(env).node, EL_BRIDGE_READY: `${inside(tmp)}/.bridge-ready`,
+    ...providerEnv, EL_NODE: boxView(env).node, EL_BRIDGE_READY: `${inside(tmp)}/.bridge-ready`,
   };
   const prompts = userTurns(task);
   const started = Date.now();
@@ -144,7 +145,7 @@ async function piAttempt({ harness, task, route, unit, env, box, evidence, sessi
     const requestsLeft = unit.maxRequests - (totals.forwarded ?? 0), wallLeft = unit.wallMs - (Date.now() - started);
     if (turn > 0 && (requestsLeft <= 0 || wallLeft <= 0)) { terminal = requestsLeft <= 0 ? { status: "agent_error", detail: `request budget exhausted before turn ${turn + 1}` } : { status: "timeout", detail: `unit wall-time guard before turn ${turn + 1}` }; break; }
     const suffix = turn === 0 ? "" : `-t${turn}`;
-    const model = await startModelPath({ dir: join(control, `model${turn || ""}`), route, maxRequests: requestsLeft, upstream: env.upstream, agentDir: env.agentDir, keyOverride: env.keyOverride });
+    const model = await startModelPath({ dir: join(control, `model${turn || ""}`), route, maxRequests: requestsLeft, upstream: env.upstream, agentDir: env.agentDir, keyOverride: env.keyOverride, allowed: allowedEndpoints(env) });
     const binds = agentBinds({ env, box, launch, socket: model.socket, harness });
     const piArgs = [boxView(env).piCli, "--mode", "json", "-p", "--no-extensions", "--no-skills", "--no-prompt-templates", "--no-mcp", "--no-approve", "--no-context-files", "--offline",
       "-e", `${MOUNTS.provider}/extensions/index.ts`];
