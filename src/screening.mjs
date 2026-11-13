@@ -13,12 +13,12 @@
 // The best possible result is EXPLORATORY_SUPPORTED with adopt false: nothing is ever adopted, deployed, promoted, committed or
 // scheduled from here (the stable reference never changes). Strong confirmatory/adoptive modes are separate and untouched.
 //
-// Budget: every target attempt is admitted by the ONE durable ledger of the config (request-budget.mjs; its 4500 ceiling is fixed
-// at creation and never changed here) through the isolated runtime's outbound gate. On top of it, `CappedBudget` refuses any
-// reservation that would push this route's charged attempts (settled usage + open worst cases, read from the same durable ledger)
-// past the per-stage, per-candidate, per-cycle or cumulative caps of the config, or that starts after the stage's persisted
-// deadline. Charged attempts bound actual attempts (the gate admits an attempt only within the charged total), so the caps bound
-// actual provider attempts of this route. Exhaustion never expands anything: it is a durable wait or stop.
+// Budget: every target attempt is admitted by the ONE durable ledger of the config (request-budget.mjs; its ceiling, e.g. a series
+// total shared with proposals and reviews, is fixed at creation and never changed here) through the isolated runtime's outbound
+// gate. On top of it, `CappedBudget` refuses any reservation that would push this route's charged attempts (settled usage +
+// open worst cases, read from the same durable ledger) past the per-stage, per-candidate, per-cycle or cumulative caps of the
+// config, or that starts after the stage's persisted deadline. Charged attempts bound actual attempts (the gate admits an
+// attempt only within the gate-covered charged total), so the caps bound actual provider attempts of this route. Exhaustion never expands anything: it is a durable wait or stop.
 //
 // One cycle (one state directory) runs one action: smoke(+dev) of the next candidate in fair rotation, or the holdout of one
 // qualified candidate. The series registry (hash-chained, keyed by the candidate's runtime digest) persists dedupe, claims and
@@ -33,7 +33,7 @@ import { attemptAdmission } from "./admission.mjs";
 import { criticalProblems } from "./gate.mjs";
 import { finalAttempts } from "./metrics.mjs";
 import { interleavedSchedule, scheduleProblems } from "./design.mjs";
-import { merge } from "./protocol.mjs";
+import { merge, routeKey, sameRoute } from "./protocol.mjs";
 import { patchKey } from "./archive.mjs";
 import { loadLocal, verifySeal } from "./datasets.mjs";
 import { poolState } from "./supply.mjs";
@@ -94,6 +94,21 @@ export function screeningConfigProblems(c) {
 
 // ------------------------------------------------------------------------------------------------------------------ registry
 const registryOf = (cfg) => new Ledger(cfg.screening.registry);
+
+/** Registry stages that run the target model. */
+const MODEL_STAGES = Object.freeze(["dev", "holdout"]);
+/**
+ * Target-route consistency of a series registry (pure): every paid stage result must have been measured on the config's target
+ * route (a result without `route` predates route selection and was measured on the package default). Development and holdout
+ * results of another model or effort are never reused as selection evidence: a route change needs a new registry.
+ */
+export function registryRouteProblems(records, cfg) {
+  const target = exploreProtocol(cfg.route).route, def = exploreProtocol().route;
+  const foreign = records.filter(r => r.type === "result" && MODEL_STAGES.includes(r.stage) && !sameRoute(r.route ?? def, target));
+  if (!foreign.length) return [];
+  const r0 = foreign[0].route ?? def;
+  return [`screening registry holds ${foreign.length} dev/holdout result(s) measured on ${routeKey(r0)} (${r0.effort}), not on the target route ${routeKey(target)} (${target.effort}): a route change needs a new registry (no evidence carries across routes)`];
+}
 
 /** Verified registry records (throws when the chain is broken: fail closed). */
 export function registryRecords(cfg) {
@@ -484,7 +499,7 @@ export async function runDev({ plan, state, backend, budget, bound, validate, en
     for (const t of tasks) if (!grading[t.id]) { grading[t.id] = validate ? await validate(t) : { ok: true, expected: {}, baselineFailing: [] }; atomicWriteJson(join(state, "grading.json"), grading); }
     const bad = tasks.filter(t => !grading[t.id].ok).map(t => t.id);
     if (bad.length) return { blocked: `grader validation failed for development task(s) ${bad.join(", ")} (not run)` };
-    const p = merge(exploreProtocol(), { parallelism });
+    const p = merge(exploreProtocol(plan.route), { parallelism });
     p.integrity = { strictTestFiles: true }; p.capture = { transcripts: true };
     const tasksById = Object.fromEntries(tasks.map(t => [t.id, t]));
     const base = attemptAdmission(budget, bound);
@@ -585,6 +600,8 @@ export async function screeningCycle(ctx) {
     if (s.phase === "init") {
       try { syncCandidates(cfg, { log: deps.log ?? (() => {}) }); } catch (error) { return block("prerequisite-failed", `candidate registry: ${String(error.message).slice(0, 250)}`, false, "init"); }
       const records = registryRecords(cfg);
+      const mixed = registryRouteProblems(records, cfg);
+      if (mixed.length) return block("prerequisite-failed", mixed.join(" | "), false, "init");
       const view = candidateView(records, cfg);
       let supply = { ok: false, why: "holdout disabled" };
       if (sc.holdout.enabled && view.some(c => c.status === "qualified")) {
@@ -602,7 +619,7 @@ export async function screeningCycle(ctx) {
       const seed = `${cfg.seriesSeed ?? "screening"}:${basename(stateDir)}`;
       if (act.kind === "dev") {
         const devTasks = devSet.eligible.map(t => ({ id: t.id, dataset: t.dataset }));
-        const plan = { schema: "pi-eval-loop/screening-plan@1", stage: "dev", seed, stable, candidate, dev: { tasks: devTasks, repeats: sc.dev.repeats, promote: sc.dev.promote, taskDigests: Object.fromEntries(devTasks.map(t => [t.id, dirDigest(join(t.dataset, t.id))])), eligibility: { rule: "sealed calibration|development dataset, never reserved/used, no historical holdout id/family/Exercism problem, not excluded", rejected: devSet.rejected } }, caps: sc.caps, deadlineHours: sc.dev.maxHours };
+        const plan = { schema: "pi-eval-loop/screening-plan@1", stage: "dev", ...(cfg.route !== undefined ? { route: cfg.route } : {}), seed, stable, candidate, dev: { tasks: devTasks, repeats: sc.dev.repeats, promote: sc.dev.promote, taskDigests: Object.fromEntries(devTasks.map(t => [t.id, dirDigest(join(t.dataset, t.id))])), eligibility: { rule: "sealed calibration|development dataset, never reserved/used, no historical holdout id/family/Exercism problem, not excluded", rejected: devSet.rejected } }, caps: sc.caps, deadlineHours: sc.dev.maxHours };
         atomicWriteJson(join(stateDir, "screen-plan.json"), plan);
         registryOf(cfg).append({ type: "claim", key: c.key, stage: "smoke", stateDir });
         set({ ...s, phase: "smoke", screening: { stage: "smoke", candidate: c.id, key: c.key, planSha256: sha256(readFileSync(join(stateDir, "screen-plan.json"))) } });
@@ -611,7 +628,7 @@ export async function screeningCycle(ctx) {
         const pick = supply.pick;
         const seal = verifySeal(pick.dir);
         if (!seal.ok) return block("supply-error", `batch seal: ${seal.why}`, true, "init");
-        const plan = { seed, stable, candidate, screen: { report: dev.report, reportSha256: dev.reportSha256, runs: dev.runs, tasks: cfg.screen.tasks }, holdout: { batch: pick.dir, seal: seal.seal.digest, pool: cfg.pool, minRemaining: sc.caps.holdout } };
+        const plan = { ...(cfg.route !== undefined ? { route: cfg.route } : {}), seed, stable, candidate, screen: { report: dev.report, reportSha256: dev.reportSha256, runs: dev.runs, tasks: cfg.screen.tasks }, holdout: { batch: pick.dir, seal: seal.seal.digest, pool: cfg.pool, minRemaining: sc.caps.holdout } };
         // A selection dropped before consumption (pool would not hand out the batch) re-plans into a NEW sub-directory: a frozen
         // plan is never changed in place, and an unconsumed claim is not an exposure.
         const n = records.filter(r => r.type === "claim" && r.stage === "holdout" && r.stateDir === stateDir).length;
@@ -624,7 +641,8 @@ export async function screeningCycle(ctx) {
     }
     const scs = s.screening;
     const cand = () => { const v = candidateView(registryRecords(cfg), cfg).find(x => x.key === scs.key); if (!v) throw new Error(`candidate ${scs.key} not in the registry`); return v; };
-    const record = (stage, verdict, extra = {}) => { if (!cand().results[stage]) registryOf(cfg).append({ type: "result", key: scs.key, stage, verdict, stateDir, ...extra }); };
+    // Paid stage results name the target route they were measured on (registryRouteProblems refuses mixing routes).
+    const record = (stage, verdict, extra = {}) => { if (!cand().results[stage]) registryOf(cfg).append({ type: "result", key: scs.key, stage, verdict, stateDir, ...(MODEL_STAGES.includes(stage) ? { route: exploreProtocol(cfg.route).route } : {}), ...extra }); };
     const finish = (verdict, outcomeName, extra = {}) => { set({ ...s, outcome: outcomeName }); return ctx.done(null, { verdict, candidate: scs.candidate, adopt: false, explorationOnly: true, stage: scs.stage, ...extra }); };
     // ---------------------------------------------------------------- smoke (model-free)
     if (s.phase === "smoke") {
@@ -671,7 +689,9 @@ export async function screeningCycle(ctx) {
       if (!report) {
         const recheck = devEligibility(cfg, plan.dev.tasks);
         if (recheck.rejected.length) return block("prerequisite-failed", `frozen development task(s) no longer eligible: ${recheck.rejected.slice(0, 2).map(r => `${r.id}: ${r.why.slice(0, 200)}`).join(" | ")}`, false, "dev-running");
-        if (!cfg.simulated && (() => { const st = budget.status(); return st.attempts < st.charged - st.openAmount; })()) return block("prerequisite-failed", "the ledger's settled charges exceed its outbound attempts (slack an attempt could use outside this stage's reservations): fail closed", false, "dev-running");
+        // Gate-covered charges only: off-gate routes (RETAINED_ROUTES: proposals, reviews) are charged in the same ledger but never
+        // count as outbound-attempt allowance (request-budget.mjs budgetTotals), so their settlements cannot create slack here.
+        if (!cfg.simulated && (() => { const st = budget.status(); return st.attempts < st.gatedCharged - st.gatedOpenAmount; })()) return block("prerequisite-failed", "the ledger's settled gate-covered charges exceed its outbound attempts (slack an attempt could use outside this stage's reservations): fail closed", false, "dev-running");
         const run = await ctx.setupRun({ stable: plan.stable, candidate: plan.candidate });
         if (run.out) return run.out;
         if (cfg.simulated && !deps.backend) run.backend = screeningSimBackend(cfg, { id: plan.candidate.id, key: plan.candidate.identity.runtimeDigest });
@@ -713,6 +733,8 @@ export async function screeningCycle(ctx) {
 export async function screeningPreflight(cfg, base, { budget, remaining, orcheDir, nextBatch }) {
   let records = [];
   try { records = existsSync(cfg.screening.registry) ? registryRecords(cfg) : []; } catch (error) { return { ...base, code: "prerequisite-failed", reasons: [String(error.message).slice(0, 300)] }; }
+  const mixed = registryRouteProblems(records, cfg);
+  if (mixed.length) return { ...base, code: "prerequisite-failed", reasons: mixed };
   const view = candidateView(records, cfg);
   // Sources not yet registered count as pending (registration is model-free and happens at cycle init).
   const seen = new Set(records.filter(r => r.type === "candidate" || r.type === "alias").map(r => r.sourceId));

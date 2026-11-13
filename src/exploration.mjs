@@ -10,7 +10,7 @@ import { holdoutHard, holdoutLedger, holdoutStatus, loadLocal, verifySeal, datas
 import { adoptionCompare, adoptionDecision, criticalProblems, familyAdoptionCompare } from "./gate.mjs";
 import { finalAttempts, missingUnits, pairsOf } from "./metrics.mjs";
 import { confirmatoryChecks, evidenceLabel, executionOrder, interleavedSchedule, planCompleteness, planPath, scheduleProblems, spendAlpha } from "./design.mjs";
-import { DEFAULT_PROTOCOL, merge } from "./protocol.mjs";
+import { DEFAULT_PROTOCOL, merge, routeKey, routeProblems } from "./protocol.mjs";
 import { reserveBatch, assignmentFor, firstEligibleBatch } from "./supply.mjs";
 import { acquireLock, atomicWriteJson, digestOf, ensureDir, fault, readJson, sha256 } from "./util.mjs";
 import { attemptAdmission, pressureVerdict } from "./admission.mjs";
@@ -45,13 +45,19 @@ export const HOLDOUT_CONTEXT = "exploratory-1:holdout";
  * cross-provider review for low-exposure tasks, no family of an earlier holdout/calibration/development set, account share
  * <= 0.5, strict existing-test immutability, all transcripts captured and leak-scanned, exploratory plan (never ADOPT).
  */
-export function exploreProtocol() {
+export function exploreProtocol(route) {
   const p = merge(structuredClone(DEFAULT_PROTOCOL), {
     holdout: { acceptedProvenance: ["external", "private-reviewed"], hardBasis: ["source"], privateReview: "cross-provider", priorFamilyReuse: "forbid", maxOwnerShare: 0.5, execution: "interleaved" },
     analysisPlan: { mode: "exploratory" },
   });
   p.integrity = { strictTestFiles: true };
   p.capture = { transcripts: true };
+  // Only the target route changes; the proposer remains independently selected. Omission keeps the original default identity.
+  if (route !== undefined) {
+    const problems = routeProblems(route);
+    if (problems.length) throw new Error(`target route: ${problems.join("; ")}`);
+    p.route = { ...route };
+  }
   return p;
 }
 
@@ -157,7 +163,7 @@ export async function runScreen({ plan, state, backend, budget, bound, validate,
     for (const t of tasks) if (!grading[t.id]) { grading[t.id] = validate ? await validate(t) : { ok: true, expected: {}, baselineFailing: [] }; atomicWriteJson(join(state, "grading.json"), grading); }
     const bad = tasks.filter(t => !grading[t.id].ok).map(t => t.id);
     if (bad.length) { const out = { accepted: false, problems: [`grader validation failed: ${bad.join(", ")}`] }; atomicWriteJson(join(state, "screen-report.json"), out); return out; }
-    const p = merge(exploreProtocol(), { parallelism });
+    const p = merge(exploreProtocol(plan.route), { parallelism });
     p.integrity = { strictTestFiles: true }; p.capture = { transcripts: true };
     const evaluator = new Evaluator({ stateDir: state, protocol: p, protocolDigest: digest, envDigest, tasksById, grading, backend, log, admission: attemptAdmission(budget, bound) });
     const units = []; for (const e of plan.tasks) for (let r = 0; r < plan.repeats; r++) units.push({ task: e.id, split: "screen", repeat: r });
@@ -165,7 +171,7 @@ export async function runScreen({ plan, state, backend, budget, bound, validate,
     const timer = pressureWatch(pressure, evaluator, events);
     try { await evaluator.evaluate(harnessOf("c1", plan), units, SCREEN_CONTEXT); } finally { if (timer) clearInterval(timer); }
     const verdict = screenVerdict(evaluator.records(), { ...plan, simulated: !!backend.simulated });
-    const report = { schema: "pi-eval-loop/exploratory-screen@1", planDigest: digest, candidate: plan.candidate.identity, simulated: !!backend.simulated, halted: evaluator.halted ?? null, peerEvents: events, ...verdict, accepted: verdict.accepted && !evaluator.halted, budget: (() => { const s = budget.status(); return { charged: s.charged, attempts: s.attempts, openReservations: s.openReservations, remaining: s.remaining }; })(), at: new Date().toISOString() };
+    const report = { schema: "pi-eval-loop/exploratory-screen@1", planDigest: digest, candidate: plan.candidate.identity, route: p.route, simulated: !!backend.simulated, halted: evaluator.halted ?? null, peerEvents: events, ...verdict, accepted: verdict.accepted && !evaluator.halted, budget: (() => { const s = budget.status(); return { charged: s.charged, attempts: s.attempts, openReservations: s.openReservations, remaining: s.remaining }; })(), at: new Date().toISOString() };
     if (evaluator.halted) report.problems = [...report.problems, `halted: ${evaluator.halted}`];
     atomicWriteJson(join(state, "screen-report.json"), report);
     return report;
@@ -196,7 +202,7 @@ export async function runHoldout({ plan, state, backend, budget, bound, validate
     // decision) or "confirmation" (independent post-adoption confirmation: previous release vs adopted). Without it: exploratory.
     const conf = plan.analysis?.mode === "confirmatory" ? plan.analysis : null;
     if (conf && !["holdout", "confirmation"].includes(conf.purpose)) throw new Error("holdout: analysis.purpose must be holdout|confirmation");
-    const p = merge(merge(exploreProtocol(), conf ? conf.protocol : {}), { parallelism });
+    const p = merge(merge(exploreProtocol(plan.route), conf ? conf.protocol : {}), { parallelism });
     p.integrity = { strictTestFiles: true }; p.capture = { transcripts: true };
     const finish = (final) => { const f = { ...final, purpose: conf?.purpose ?? "exploration", planDigest: digest, evidence: final.evidence ?? evidenceLabel(p, { adopt: false }), at: new Date().toISOString() }; atomicWriteJson(join(state, "final.json"), f); return f; };
     const batch = plan.holdout.batch;
@@ -290,12 +296,12 @@ export async function runHoldout({ plan, state, backend, budget, bound, validate
     const critical = criticalProblems([...screenRecords, ...records], "c1", { reference: "stable" });
     const holdRecs = finalAttempts(records.filter(r => passKeys.has(r.unit_key)));
     const envs = new Set(holdRecs.map(r => envKey(r.environment_digest)));
-    const routeOk = holdRecs.length > 0 && envs.size === 1 && holdRecs.every(r => r.terminal_status !== "route_violation");
+    const routeOk = holdRecs.length > 0 && envs.size === 1 && holdRecs.every(r => r.terminal_status !== "route_violation" && r.model_route === routeKey(p.route) && r.thinking_effort === p.route.effort);
     const infraRate = holdRecs.length ? holdRecs.filter(r => ["infra_error", "model_unavailable"].includes(r.terminal_status)).length / holdRecs.length : 0;
     // chk: the arms' checks, run before consumption (checks.json).
     const ap = p.analysisPlan;
     const confirmatory = conf && !incomplete.length ? confirmatoryChecks(pairs.map(t => ({ ...t, provenance: tasksById[t.task]?.provenance })), { alpha: ap.alpha, minEffect: ap.minEffect, minTasks: ap.minTasks, minFamilies: ap.minFamilies, minHardTasks: ap.minHardTasks, lowExposure: ap.lowExposure, draws: p.bootstrap.draws, permutationDraws: ap.permutationDraws, seed: `${plan.seed}:${conf.purpose}` }) : null;
-    let decision = adoptionDecision(cmp, p, { holdoutIndependent: status?.independent === true, holdoutWhy: status?.why, critical, checksPassed: chk.pass, checksDetail: chk.problems?.join("; ") || "ok", routeOk, routeDetail: `${envs.size} environment digest(s)`, incomplete, infraRate, familyCmp, confirmatory });
+    let decision = adoptionDecision(cmp, p, { holdoutIndependent: status?.independent === true, holdoutWhy: status?.why, critical, checksPassed: chk.pass, checksDetail: chk.problems?.join("; ") || "ok", routeOk, routeDetail: `${envs.size} environment digest(s), target route ${routeKey(p.route)} (${p.route.effort})`, incomplete, infraRate, familyCmp, confirmatory });
     if (!conf && decision.adopt) throw new Error("exploratory plan produced an adopt decision (gate contract violated)");
     if (conf?.purpose === "confirmation") {
       // Independent post-adoption confirmation: CONFIRMED only when the full gate AND the confirmatory checks pass on this

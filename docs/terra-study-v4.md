@@ -65,5 +65,6 @@ node pi-eval-loop/studies/confirmatory-1/power.mjs --pilot PILOT.json --out POWE
    rule: independent authoring sources (or eligible external tasks) must hold more than half of each holdout.
 6. **Approvals.** A chargeable calibration needs its recorded approval (`calibration-approval@2`); holdout runs, adoption and
    confirmation need separate human approval.
-7. **Target route of the recurring exploration / screening / autonomous protocols** (outside this tooling): `exploreProtocol()`
-   merges `DEFAULT_PROTOCOL` and so runs gpt-6-luna; a config-selected route for those routes is not part of this release.
+7. ~~Target route of the recurring exploration / screening / autonomous protocols~~ (resolved 2026-11-13 by the config
+   `route` field and one shared attempt total: `docs/target-route-and-shared-total.md`). Engine support only: no Terra run,
+   registration, readiness or supply exists because of it.

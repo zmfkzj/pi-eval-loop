@@ -22,7 +22,7 @@ import { EXIT, OUTCOME_SCHEMA, STATUS_SCHEMA } from "./contract.mjs";
 import { verifySeal } from "./datasets.mjs";
 import { exploreProtocol, planTasks, runHoldout, runtimeDigest as treeDigest } from "./exploration.mjs";
 import { confirmationPolicy, PACKAGE_DIR as LC_PACKAGE, Releases, runSmoke, testProtocol } from "./lifecycle.mjs";
-import { merge } from "./protocol.mjs";
+import { merge, routeKey, routeProblems, sameRoute } from "./protocol.mjs";
 import { batchLineageProblems, BATCH_RULE, forbiddenSet, lineageRepos, minimaOfExplore, selectAndSeal, sourcesProblems } from "./lineage.mjs";
 import { RequestBudget, gatewayPressureMeter } from "./request-budget.mjs";
 import { batchEvidenceProblems, DEFAULT_SUPPLY, firstEligibleBatch, mergeSupply, poolPolicy, poolState, recoverPool, registryOf, retireBatch } from "./supply.mjs";
@@ -44,6 +44,8 @@ const STATE = "explore.json";
 const autonomous = (cfg) => cfg.mode === "autonomous";
 const screening = (cfg) => cfg.mode === "screening";
 const releasesOf = (cfg) => new Releases(cfg.confirmation.deploy.dir);
+/** The target route of a config: its explicit `route`, else the package default. */
+const targetRoute = (cfg) => exploreProtocol(cfg.route).route;
 /** The stable arm: in autonomous mode the deployed release (release history), else the configured stable tree. */
 function stableOf(cfg) {
   if (!autonomous(cfg)) return cfg.stable;
@@ -64,6 +66,7 @@ export function loadExploration(file) {
   const p = [];
   const abs = (v, k) => { if (typeof v !== "string" || !v.startsWith("/")) p.push(`${k} must be an absolute path`); };
   if (c.schema !== EXPLORATION_SCHEMA) p.push(`schema must be ${EXPLORATION_SCHEMA}`);
+  if (c.route !== undefined) p.push(...routeProblems(c.route));
   // mode screening (src/screening.mjs): candidates come from the bounded source and the development tasks are the screening
   // tasks; no fixed candidate, no pre-accepted screen report, no whole-pass minRemaining (the route caps size every stage).
   const scr = c.mode === "screening";
@@ -165,6 +168,11 @@ async function readiness(cfg, deps, { pre = true } = {}) {
   try { stable = stableOf(cfg); if (runtimeDigest(stable.dir) !== stable.runtimeDigest) problems.push({ code: "prerequisite-failed", why: "stable tree differs from its frozen identity" }); } catch (error) { problems.push({ code: "prerequisite-failed", why: `stable / deployed release unusable (fail closed): ${String(error.message).slice(0, 200)}` }); }
   const report = screening(cfg) ? { accepted: true } : readJson(cfg.screen.report, null);
   if (!screening(cfg) && (!report?.accepted || !existsSync(cfg.screen.report) || sha256(readFileSync(cfg.screen.report)) !== cfg.screen.reportSha256)) problems.push({ code: "prerequisite-failed", why: "no accepted integrity screen bound to this config" });
+  // The integrity screen is evidence about ONE target route (a report without `route` predates route selection: the default).
+  else if (!screening(cfg)) {
+    const measured = report.route ?? exploreProtocol().route, target = targetRoute(cfg);
+    if (!sameRoute(measured, target)) problems.push({ code: "prerequisite-failed", why: `the integrity screen was measured on ${routeKey(measured)} (${measured.effort}), not on the target route ${routeKey(target)} (${target.effort}): no evidence carries across routes` });
+  }
   let budget = null, remaining = null;
   try { budget = budgetOf(cfg); const s = budget.status(); remaining = s.remaining; if (!screening(cfg) && s.remaining < cfg.budget.minRemaining) problems.push({ code: "budget-exhausted", why: `request budget: ${s.remaining} attempts remain of ${cfg.budget.limit}; the plan needs >= ${cfg.budget.minRemaining} (no new cycle; extending the cap is a human decision)` }); }
   catch (error) { problems.push({ code: "budget-unusable", why: `request budget unusable (fail closed): ${String(error.message).slice(0, 200)}` }); }
@@ -175,18 +183,26 @@ async function readiness(cfg, deps, { pre = true } = {}) {
     const pol = confirmationPolicy(cfg, { remaining: remaining === null ? null : remaining - cfg.budget.minRemaining, reserved: cfg.budget.minRemaining });
     for (const x of pol.problems) problems.push(x);
   }
+  if (cfg.route !== undefined && !cfg.simulated) {
+    try {
+      const { routeCatalogProblems } = await import("./isolated-runtime.mjs");
+      const m = readJson(join(cfg.runtime.dir, "manifest.json"), null);
+      if (!m?.agentDir) throw new Error("runtime manifest has no agentDir");
+      for (const why of routeCatalogProblems(m.agentDir, cfg.route)) problems.push({ code: "prerequisite-failed", why });
+    } catch (error) { problems.push({ code: "prerequisite-failed", why: `route catalog validation unavailable: ${String(error.message).slice(0, 200)}` }); }
+  }
   const rt = await (deps.runtimeCheck ?? defaultRuntimeCheck)(cfg);
   if (rt.length) problems.push({ code: "runtime-wait", why: `isolated runtime not usable: ${rt.join("; ").slice(0, 300)}` });
   problems.sort((a, b) => rank(a.code) - rank(b.code));
   return { problems, budget, remaining };
 }
 
-async function defaultRuntimeCheck(cfg) {
+export async function defaultRuntimeCheck(cfg) {
   if (cfg.simulated) return [];
   const { runtimeProblems } = await import("./isolated-runtime.mjs");
   const out = runtimeProblems(cfg.runtime.dir, { running: false, mode: cfg.runtime.mode ?? "live", budgetPath: cfg.budget.ledger });
   if (cfg.gatewayDb) {
-    try { const n = gatewayPressureMeter({ db: cfg.gatewayDb, model: exploreProtocol().route.model }).read(Date.now() - (cfg.pressureMinutes ?? 30) * 60_000); if (n > 0) out.push(`peer protection: ${n} target-model 429/503 failures recently`); }
+    try { const n = gatewayPressureMeter({ db: cfg.gatewayDb, model: exploreProtocol(cfg.route).route.model }).read(Date.now() - (cfg.pressureMinutes ?? 30) * 60_000); if (n > 0) out.push(`peer protection: ${n} target-model 429/503 failures recently`); }
     catch (error) { out.push(`pressure meter: ${error.message}`); }
   }
   return out;
@@ -218,7 +234,7 @@ export function nextBatch(cfg, { orcheDir, protocol = null } = {}) {
   if (!orcheDir) throw new Error("nextBatch: orcheDir (the exposure corpus) is required");
   // An exploration never takes a batch sealed for a confirmatory test (larger than the exploration batch rule).
   const excludeSeals = protocol ? [] : [...poolState(cfg.pool).batches.values()].filter(b => b.tasks.length > (cfg.batchRule?.maxTasks ?? BATCH_RULE.maxTasks)).map(b => b.sealDigest);
-  const pick = firstEligibleBatch(cfg.pool, protocol ?? exploreProtocol(), { orcheDir, excludeSeals });
+  const pick = firstEligibleBatch(cfg.pool, protocol ?? exploreProtocol(cfg.route), { orcheDir, excludeSeals });
   if (pick.none) return { none: pick.none };
   const lp = batchLineageProblems({ pool: cfg.pool, batch: pick.batch, screenPlan: cfg.screen, sources: cfg.lineage });
   if (lp.length) return { none: [`${pick.batch}: lineage re-check failed (a refresh retires it): ${lp[0]}`] };
@@ -269,7 +285,7 @@ export async function runExploreCycle(cfgFile, stateDir, { requireState = false,
     const evaluator = evaluatorFiles();
     if (!s) {
       s = { schema: CYCLE_SCHEMA, phase: "init", config: cfg.file, configDigest: cfg.digest, createdAt: new Date().toISOString() };
-      atomicWriteJson(join(stateDir, "protocol.lock.json"), { schema: "pi-eval-loop/explore-lock@1", protocolDigest: cfg.digest, config: cfg.file, evaluator });
+      atomicWriteJson(join(stateDir, "protocol.lock.json"), { schema: "pi-eval-loop/explore-lock@1", protocolDigest: cfg.digest, config: cfg.file, ...(cfg.route !== undefined ? { route: cfg.route } : {}), evaluator });
       save(stateDir, s);
     }
     // A cycle is bound to its config and evaluator: a change is never continued in the same directory.
@@ -378,7 +394,7 @@ export async function runExploreCycle(cfgFile, stateDir, { requireState = false,
         if (pick.none) return block("supply-empty", `no eligible unused holdout batch in the supply pool: ${pick.none.slice(0, 3).join("; ")}`, true, "init");
         const seal = verifySeal(pick.dir);
         if (!seal.ok) return block("supply-error", `batch seal: ${seal.why}`, true, "init");
-        const plan = { seed: `${cfg.seriesSeed ?? "exploration"}:${basename(stateDir)}`, stable: stableOf(cfg), candidate: cfg.candidate, screen: cfg.screen, holdout: { batch: pick.dir, seal: seal.seal.digest, pool: cfg.pool, minRemaining: cfg.budget.minRemaining } };
+        const plan = { ...(cfg.route !== undefined ? { route: cfg.route } : {}), seed: `${cfg.seriesSeed ?? "exploration"}:${basename(stateDir)}`, stable: stableOf(cfg), candidate: cfg.candidate, screen: cfg.screen, holdout: { batch: pick.dir, seal: seal.seal.digest, pool: cfg.pool, minRemaining: cfg.budget.minRemaining } };
         atomicWriteJson(join(stateDir, "plan.json"), plan);
         s = { ...s, phase: "selected", batch: pick.dir, planSha256: sha256(readFileSync(join(stateDir, "plan.json"))) };
         save(stateDir, s);
@@ -446,7 +462,7 @@ async function lifecycle(ctx) {
       const cur = R.current({ repair: true });
       if (cur.runtimeDigest !== s.exploration.stable) return done("explored-negative", { ...s.final, reasons: [...(s.final.reasons ?? []), "deployed release changed since the exploration: its evidence is stale for the current baseline"] });
       if (treeDigest(cfg.candidate.dir) !== cfg.candidate.identity.runtimeDigest) return block("prerequisite-failed", "candidate tree changed since the exploration (stale)", false, "promoted");
-      const reg = { schema: "pi-eval-loop/confirmation-registration@1", registeredAt: new Date().toISOString(), candidate: cfg.candidate, stable: { dir: cur.dir, commit: cur.commit ?? `release:${cur.release.slice(0, 16)}`, runtimeDigest: cur.runtimeDigest, release: cur.release },
+      const reg = { schema: "pi-eval-loop/confirmation-registration@1", registeredAt: new Date().toISOString(), ...(cfg.route !== undefined ? { route: cfg.route } : {}), candidate: cfg.candidate, stable: { dir: cur.dir, commit: cur.commit ?? `release:${cur.release.slice(0, 16)}`, runtimeDigest: cur.runtimeDigest, release: cur.release },
         protocol: pol.registered, protocolSha256: pol.protocolSha256, readinessSha256: pol.readinessSha256, exploration: { finalSha256: s.exploration.finalSha256, verdict: s.exploration.verdict }, units: pol.units, attemptsPerUnit: cfg.confirmation.attemptsPerUnit, smokeAttempts: cfg.confirmation.smokeAttempts };
       if (!existsSync(regFile)) writeFileSync(regFile, `${JSON.stringify(reg, null, 1)}\n`, { mode: 0o400, flag: "wx" });
       ctx.s = { ...s, phase: "confirm-wait", registrationSha256: sha256(readFileSync(regFile)) }; save(stateDir, ctx.s);
@@ -457,7 +473,7 @@ async function lifecycle(ctx) {
     if (s.phase === "confirm-wait" || s.phase === "postconfirm-wait") {
       const purpose = s.phase === "confirm-wait" ? "holdout" : "confirmation";
       const part = testProtocol(reg.protocol, purpose);
-      const p = merge(exploreProtocol(), part);
+      const p = merge(exploreProtocol(cfg.route), part);
       try { recoverPool(cfg.pool); retireContaminated(cfg); } catch (error) { return block("supply-error", `pool recovery / re-check: ${error.message}`, true, s.phase); }
       const pick = nextBatch(cfg, { orcheDir: ctx.orcheDir, protocol: p });
       const ap = p.analysisPlan;
@@ -474,7 +490,7 @@ async function lifecycle(ctx) {
       const left = budgetOf(cfg).status();
       if (left.remaining < need) return block("confirmation-infeasible", `the ${purpose} pass on ${pick.batch} needs ${need} attempts (${units} units x ${reg.attemptsPerUnit}${purpose === "holdout" ? ` + post-confirmation ${reg.units.post} units + smoke` : ""}); the ledger has ${left.remaining} (never raised here)`, false, s.phase);
       const adopted = purpose === "confirmation" ? s.adoption : null;
-      const plan = { seed: `${cfg.seriesSeed ?? "lifecycle"}:${basename(stateDir)}:${purpose}`, screen: cfg.screen,
+      const plan = { ...(cfg.route !== undefined ? { route: cfg.route } : {}), seed: `${cfg.seriesSeed ?? "lifecycle"}:${basename(stateDir)}:${purpose}`, screen: cfg.screen,
         stable: purpose === "holdout" ? reg.stable : { dir: join(R.dir, "releases", adopted.previous.release), commit: adopted.previous.commit ?? `release:${adopted.previous.release.slice(0, 16)}`, runtimeDigest: adopted.previous.runtimeDigest },
         candidate: purpose === "holdout" ? reg.candidate : { dir: join(R.dir, "releases", adopted.release), identity: { commit: reg.candidate.identity.commit, runtimeDigest: adopted.release } },
         holdout: { batch: pick.dir, seal: seal.seal.digest, pool: cfg.pool, minRemaining: need }, analysis: { mode: "confirmatory", purpose, protocol: part, base: LC_PACKAGE, registrationSha256: s.registrationSha256 } };
@@ -517,7 +533,7 @@ async function lifecycle(ctx) {
       const run = await ctx.setupRun({ stable: { dir: cur.dir }, candidate: { dir: cur.dir } });
       if (run.out) return run.out;
       const task = planTasks(cfg.screen.tasks)[0];
-      const sm = await runSmoke({ state: join(stateDir, "smoke"), harness: { id: "deployed", kind: "orche", commit: reg.candidate.identity.commit, mode: "single", dir: cur.dir }, task, backend: run.backend, budget: ctx.ready.budget, bound: run.bound, envDigest: run.envDigest, validate: run.validate });
+      const sm = await runSmoke({ state: join(stateDir, "smoke"), route: cfg.route, harness: { id: "deployed", kind: "orche", commit: reg.candidate.identity.commit, mode: "single", dir: cur.dir }, task, backend: run.backend, budget: ctx.ready.budget, bound: run.bound, envDigest: run.envDigest, validate: run.validate });
       if (sm.paused) { const budgetHalt = !/isolated runtime/.test(sm.paused) && BUDGET_RE.test(sm.paused); return block(budgetHalt ? "budget-exhausted" : "runtime-wait", sm.paused, !budgetHalt, "smoke"); }
       if (!sm.ok) {
         const rb = R.rollback({ key: stateDir, reason: `post-adoption smoke: ${sm.terminal ?? sm.why}` });
@@ -596,7 +612,7 @@ async function liveDeps(cfg, stateDir, plan) {
     const c = compareChecks(out.stable, out.c1);
     return { ...c, results: Object.fromEntries(Object.entries(out.c1.results).map(([k, v]) => [k, { pass: v.pass, failing: v.failing }])) };
   };
-  return { backend: realBackend(env), validate: (t) => validateGrader({ task: t, scratch: join(stateDir, "grading-scratch", t.id), env }), checks, envDigest: environmentDigest(env, exploreProtocol().route), orcheDir: ORCHE };
+  return { backend: realBackend(env), validate: (t) => validateGrader({ task: t, scratch: join(stateDir, "grading-scratch", t.id), env }), checks, envDigest: environmentDigest(env, exploreProtocol(cfg.route).route), orcheDir: ORCHE };
 }
 
 // ------------------------------------------------------------------------------------------------------------------ refresh
@@ -626,7 +642,7 @@ export async function refreshExploration(cfgFile, { maxCasesPerRepo = 2, maxBatc
     if (demand) {
       const pol = confirmationPolicy(cfg);
       if (!pol.problems.some(x => x.code === "config-invalid")) {
-        pc = merge(exploreProtocol(), testProtocol(pol.registered, demand.purpose === "confirmation" ? "confirmation" : "holdout"));
+        pc = merge(exploreProtocol(cfg.route), testProtocol(pol.registered, demand.purpose === "confirmation" ? "confirmation" : "holdout"));
         const { sealableCases } = await import("./supply.mjs");
         const have = nextBatch(cfg, { orcheDir, protocol: pc });
         if (have.none && sealableCases(cfg.pool, poolState(cfg.pool), { requireEvidence: requiredEvidence(cfg) }).length >= pc.holdout.minTasks) {

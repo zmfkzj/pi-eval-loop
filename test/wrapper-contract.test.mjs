@@ -87,7 +87,7 @@ test("wrapper contract: proposal reservations share the ledger ceiling, stay out
   try {
     const path = join(root, "confirmatory-1.jsonl");
     const b = new RequestBudget({ path, limit: 4500, scope: "confirmatory-1" });
-    assert.deepEqual([...RETAINED_ROUTES], ["proposal"]);
+    assert.deepEqual([...RETAINED_ROUTES], ["proposal", "review"]);
     // A settled proposal: the worst case is reserved first, then settled at the proxy's forwarded count.
     const p1 = await b.reserve(120, { route: "proposal", proposal: "p-1" });
     assert.equal(b.status().remaining, 4380, "the worst case leaves the shared ceiling at reservation");

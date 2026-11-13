@@ -162,6 +162,23 @@ export async function reviewSession({ task, role, route, out, env, maxRequests =
   return record;
 }
 
+/**
+ * Run one review session charged to a shared series ledger (budget null: uncharged, as before). The worst case (the session's
+ * request cap) is reserved BEFORE the session starts under the off-gate route "review" (request-budget.mjs RETAINED_ROUTES:
+ * counted toward the one limit, never outbound-attempt allowance) and settled at the proxy's forwarded count; a session that
+ * throws keeps its full worst case; a refused reservation runs nothing (throws).
+ */
+export async function chargedReview({ budget, maxRequests, meta = {} }, session) {
+  if (!budget) return session();
+  const ticket = await budget.reserve(maxRequests, { ...meta, route: "review" });
+  if (!ticket) throw new Error(`review budget refused: ${budget.refusal}`);
+  let rec;
+  try { rec = await session(); }
+  catch (error) { await budget.settle(ticket, ticket.amount, { purpose: "review", failed: String(error?.message ?? error).slice(0, 200) }); throw error; }
+  await budget.settle(ticket, Math.min(ticket.amount, Number.isInteger(rec?.run?.forwarded) ? rec.run.forwarded : ticket.amount), { purpose: "review" });
+  return rec;
+}
+
 /** Overlay `parts` (directories copied in order onto a copy of the starting repo) and run `tests` (a test tree) with the grader. */
 export async function gradeOverlay({ task, parts, tests, scratch, env, timeoutMs = 120_000 }) {
   const ws = ensureDir(join(scratch, "ws"));
@@ -199,7 +216,12 @@ export async function mechanicalChecks({ task, role, out, env, scratchRoot = "/t
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {
-  const { values } = parseArgs({ options: { task: { type: "string", multiple: true }, role: { type: "string" }, model: { type: "string" }, effort: { type: "string", default: "high" }, out: { type: "string" }, parallel: { type: "string", default: "3" }, "max-requests": { type: "string", default: "80" }, scratch: { type: "string" }, withhold: { type: "string", multiple: true, default: [] } } });
+  const { values } = parseArgs({ options: { task: { type: "string", multiple: true }, role: { type: "string" }, model: { type: "string" }, effort: { type: "string", default: "high" }, out: { type: "string" }, parallel: { type: "string", default: "3" }, "max-requests": { type: "string", default: "80" }, scratch: { type: "string" }, withhold: { type: "string", multiple: true, default: [] }, "budget-ledger": { type: "string" }, "budget-limit": { type: "string" }, "budget-scope": { type: "string" } } });
+  // Optional shared series ledger (all three or none; its init limit/scope exactly): every session is charged (chargedReview).
+  const ledgerArgs = ["budget-ledger", "budget-limit", "budget-scope"].filter(k => values[k] !== undefined);
+  if (ledgerArgs.length && ledgerArgs.length !== 3) { process.stderr.write("--budget-ledger, --budget-limit and --budget-scope go together\n"); process.exit(64); }
+  const { RequestBudget } = await import("../../src/request-budget.mjs");
+  const budget = ledgerArgs.length ? new RequestBudget({ path: resolve(values["budget-ledger"]), limit: Number(values["budget-limit"]), scope: values["budget-scope"] }) : null;
   const { hostEnvironment } = await import("../../src/sandbox.mjs");
   const { loadLocal } = await import("../../src/datasets.mjs");
   const env = hostEnvironment();
@@ -212,7 +234,8 @@ if (import.meta.url === `file://${process.argv[1]}`) {
       const out = join(resolve(values.out), task.id, `${values.role}-${values.model}-${new Date().toISOString().replace(/[:.]/g, "")}`);
       try {
         const scratchRoot = ensureDir(resolve(values.scratch ?? join(resolve(values.out), "..", "scratch")));
-        const rec = await reviewSession({ task, role: values.role, route, out, env, maxRequests: Number(values["max-requests"]), withheld: values.withhold, scratchRoot });
+        const maxRequests = Number(values["max-requests"]);
+        const rec = await chargedReview({ budget, maxRequests, meta: { task: task.id, role: values.role, model: values.model, out } }, () => reviewSession({ task, role: values.role, route, out, env, maxRequests, withheld: values.withhold, scratchRoot }));
         const mech = await mechanicalChecks({ task, role: values.role, out, env, scratchRoot });
         atomicWriteJson(join(out, "mechanical.json"), mech);
         results.push({ task: task.id, out, forwarded: rec.run.forwarded, exit: rec.run.exit, models: rec.reviewer.responseModels, probeVisible: rec.access.denialProbe.filter(p => p.visible).length });

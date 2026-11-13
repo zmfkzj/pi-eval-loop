@@ -34,30 +34,33 @@ function stage(pool, id, family, hard) {
 const stageN = (pool, tag, n) => { for (let i = 1; i <= n; i++) stage(pool, `${tag}${i}`, `gh:${tag}${i}/r`, i === 1); };
 
 /** A world: arms, screen (with measured runs), lineage, pool, registered confirmatory protocol + readiness, release dir. */
-function world(root, { ready = "fulfilled", limit = 4500, alphaTotal = 0.2, confirmationRequired = true, apu = 6, minRemaining = 120 } = {}) {
+function world(root, { ready = "fulfilled", limit = 4500, alphaTotal = 0.2, confirmationRequired = true, apu = 6, minRemaining = 120, route, registeredRoute = route, screenRoute = route } = {}) {
   const cand = tree(join(root, "cand"), "export const c = 1;\n"), stable = tree(join(root, "stable"), "export const s = 1;\n");
-  const report = join(root, "screen-report.json"); writeFileSync(report, JSON.stringify({ accepted: true }));
-  const runs = join(root, "screen-runs.jsonl"); writeFileSync(runs, `${JSON.stringify({ type: "result", record: { model_requests: 5 } })}\n`);
+  const report = join(root, "screen-report.json"); writeFileSync(report, JSON.stringify({ accepted: true, ...(screenRoute ? { route: screenRoute } : {}) }));
+  const runs = join(root, "screen-runs.jsonl"); writeFileSync(runs, `${JSON.stringify({ type: "result", record: { model_requests: 5, ...(screenRoute ? { model_route: `${screenRoute.provider}/${screenRoute.model}`, thinking_effort: screenRoute.effort } : {}) } })}\n`);
   const reg = join(root, "old-registry.jsonl"); new Ledger(reg).append({ type: "case", caseId: "x-old-1", family: "gh:old/repo", status: "eligible" });
   const pool = join(root, "pool"); mkdirSync(pool, { recursive: true }); mkdirSync(join(root, "orche"));
   writeFileSync(join(pool, "POLICY.json"), JSON.stringify({ schema: "pi-eval-loop/pool-policy@1", autoSeal: false }));
   const rationale = join(root, "rationale.md"); writeFileSync(rationale, "power simulation (fixture)\n");
-  const protocol = { holdout: { repeats: 3, minTasks: 8, minFamilies: 8, acceptedProvenance: ["external", "private-reviewed"], hardBasis: ["source"], execution: "interleaved", maxOwnerShare: 0.5, priorFamilyReuse: "forbid", privateReview: "cross-provider" }, adoption: { requireFamilyLevel: true },
+  const protocol = { ...(registeredRoute ? { route: registeredRoute } : {}), holdout: { repeats: 3, minTasks: 8, minFamilies: 8, acceptedProvenance: ["external", "private-reviewed"], hardBasis: ["source"], execution: "interleaved", maxOwnerShare: 0.5, priorFamilyReuse: "forbid", privateReview: "cross-provider" }, adoption: { requireFamilyLevel: true },
     analysisPlan: { mode: "confirmatory", registeredAt: "2026-11-07T00:00:00Z", rationale: { document: rationale, sha256: sha256(readFileSync(rationale)) }, minEffect: 0.05, alpha: 0.05, minTasks: 8, minFamilies: 8, minHardTasks: 1, permutationDraws: 2000,
       series: { id: "test-series", ledger: join(root, "series", "ledger.jsonl"), alphaTotal }, lowExposure: { required: false, minTasks: null, provenance: ["private-reviewed"] }, confirmation: { required: confirmationRequired, pool, alpha: 0.05, minTasks: 8, minFamilies: 8 } } };
   const protoFile = join(root, "protocol.json"); writeFileSync(protoFile, JSON.stringify(protocol));
   const readiness = join(root, "readiness.json"); writeFileSync(readiness, JSON.stringify({ protocolSha256: sha256(readFileSync(protoFile)), conditions: [{ id: "analysis-plan", status: ready, reasons: ready === "fulfilled" ? [] : ["power not established"] }] }));
-  const cfg = { schema: "pi-eval-loop/exploration@1", mode: "autonomous", seriesSeed: "lc", candidate: { dir: cand, identity: { commit: "cand@1", runtimeDigest: runtimeDigest(cand) } }, stable: { dir: stable, commit: "stable@1", runtimeDigest: runtimeDigest(stable) },
+  const cfg = { schema: "pi-eval-loop/exploration@1", mode: "autonomous", ...(route ? { route } : {}), seriesSeed: "lc", candidate: { dir: cand, identity: { commit: "cand@1", runtimeDigest: runtimeDigest(cand) } }, stable: { dir: stable, commit: "stable@1", runtimeDigest: runtimeDigest(stable) },
     screen: { report, reportSha256: sha256(readFileSync(report)), runs, tasks: [{ id: "d1", dataset: dataset(join(root, "screen-tasks"), [["d1", "gh:dev/x"]]) }] }, pool, lineage: { registries: [reg], datasets: [dataset(join(root, "old-holdout"), [["o1", "gh:old/ds"]])] },
     budget: { ledger: join(root, "budget", "ledger.jsonl"), limit, scope: "lc", minRemaining }, runtime: { simulated: true }, simulation: { enabled: true, p: { stable: 0.05, c1: 0.95 } }, orcheDir: join(root, "orche"), parallelism: 2,
     batchRule: { seed: "lc", maxTasks: 6, maxPerFamily: 1, maxPerOwner: 3, maxOwnerShare: 0.5, preferFreshFamilies: true }, supply: { collector: "none" },
     confirmation: { protocol: protoFile, protocolSha256: sha256(readFileSync(protoFile)), readiness, attemptsPerUnit: apu, smokeAttempts: 10, deploy: { dir: join(root, "deploy") } } };
   const file = join(root, "lifecycle.json"); writeFileSync(file, JSON.stringify(cfg));
   const W = { p: { stable: 0.05, c1: 0.95 }, smokeFail: false };
-  const backend = simulatedBackend({ seed: "lc", skill: (h, t, o) => ({ p: W.p[h.id] ?? 0.5, crash: W.smokeFail && o.split === "smoke" }) });
+  const inner = simulatedBackend({ seed: "lc", skill: (h, t, o) => ({ p: W.p[h.id] ?? 0.5, crash: W.smokeFail && o.split === "smoke" }) });
+  // Every target call with the route the engine handed to the backend (the runner uses exactly this protocol.route).
+  const calls = [];
+  const backend = { simulated: true, run: (input) => { calls.push({ split: input.split, context: input.context, route: { ...input.protocol.route }, proposer: input.protocol.proposer.route.model }); return inner.run(input); } };
   const deps = { backend, orcheDir: cfg.orcheDir };
   const ledger = () => new RequestBudget({ path: cfg.budget.ledger, limit, scope: "lc" }).status();
-  return { cfg, file, pool, W, deps, ledger, releases: new Releases(cfg.confirmation.deploy.dir) };
+  return { cfg, file, pool, W, deps, ledger, calls, releases: new Releases(cfg.confirmation.deploy.dir) };
 }
 const refresh = async (w) => refreshExploration(w.file, { deps: { orcheDir: w.cfg.orcheDir } });
 const uses = (pool) => [...poolState(pool).batches.values()].reduce((n, b) => n + (existsSync(join(pool, "batches", b.batch, "USES.jsonl")) ? holdoutLedger(join(pool, "batches", b.batch)).records().length : 0), 0);
@@ -286,5 +289,72 @@ test("lifecycle ledger exhaustion: headroom for the selected confirmatory batch 
     assert.equal(uses(w.pool), usesBefore, "the confirmatory batch was not consumed");
     assert.equal(poolState(w.pool).records.filter(r => r.type === "reserve").length, 1, "only the exploration batch was ever reserved");
     assert.equal(w.releases.current().runtimeDigest, w.cfg.stable.runtimeDigest);
+  } finally { rmSync(root, { recursive: true, force: true }); }
+});
+
+const TERRA = Object.freeze({ provider: "cliproxyapi", model: "gpt-6.1-terra", effort: "medium" });
+const runRecords = (file) => existsSync(file) ? readFileSync(file, "utf8").split("\n").filter(Boolean).map(l => JSON.parse(l)).filter(e => e.type === "result").map(e => e.record) : [];
+
+test("lifecycle target route: an explicit cliproxyapi/gpt-6.1-terra reaches exploration, confirmation, deployment smoke and post-confirmation (records, plans, registration), the proposer route is untouched", { timeout: 300_000 }, async () => {
+  const root = tempDir();
+  try {
+    const w = world(root, { route: TERRA });
+    stageN(w.pool, "e", 6); assert.equal((await refresh(w)).code, 0);
+    const state = join(root, "c-1");
+    let o = await runExploreCycle(w.file, state, { deps: w.deps });
+    assert.equal(o.status.lifecycle.stage, "confirm-wait", JSON.stringify(o.status?.blocked));
+    stageN(w.pool, "k", 8); await refresh(w);
+    o = await runExploreCycle(w.file, state, { requireState: true, deps: w.deps });
+    assert.equal(o.status.lifecycle.stage, "postconfirm-wait", JSON.stringify(o.status?.blocked ?? o.status?.lifecycle));
+    stageN(w.pool, "m", 8); await refresh(w);
+    o = await runExploreCycle(w.file, state, { requireState: true, deps: w.deps });
+    assert.equal(o.outcome, "cycle_done", JSON.stringify(o.status?.blocked ?? o));
+    assert.equal(o.status.lifecycle.outcome, "confirmed");
+    // Every phase dispatched target calls, all with the selected route; the proposer keeps its own default route.
+    assert.deepEqual([...new Set(w.calls.map(c => c.split))].sort(), ["holdout", "smoke"]);
+    assert.deepEqual(new Set(w.calls.map(c => c.context)).size >= 2, true);
+    assert.ok(w.calls.every(c => c.route.provider === TERRA.provider && c.route.model === TERRA.model && c.route.effort === TERRA.effort), JSON.stringify(w.calls.find(c => c.route.model !== TERRA.model)));
+    assert.ok(w.calls.every(c => c.proposer === "gpt-6.1-sol"));
+    for (const sub of ["holdout", "confirm", "smoke", "postconfirm"]) {
+      const recs = runRecords(join(state, sub, "runs.jsonl"));
+      assert.ok(recs.length > 0, `${sub} has records`);
+      assert.ok(recs.every(r => r.model_route === "cliproxyapi/gpt-6.1-terra" && r.thinking_effort === "medium"), `${sub}: every evidence record names the selected model_route`);
+    }
+    for (const f of ["plan.json", "confirm-plan.json", "postconfirm-plan.json", "registration.json", "protocol.lock.json"]) assert.deepEqual(JSON.parse(readFileSync(join(state, f), "utf8")).route, TERRA, `${f} binds the route`);
+  } finally { rmSync(root, { recursive: true, force: true }); }
+});
+
+test("lifecycle target route: luna-registered protocol, luna integrity screen or luna-measured attempts never start a Terra exploration; provider, model and effort are each part of the identity; malformed routes are config errors", { timeout: 120_000 }, async () => {
+  const root = tempDir();
+  try {
+    const pre = async (w, dir) => explorePreflight(w.file, join(root, dir), { orcheDir: w.cfg.orcheDir });
+    const LUNA = { provider: "cliproxyapi", model: "gpt-6-luna", effort: "medium" };
+    // Registered without a route = registered on the package default (luna): refused for a Terra target.
+    let w = world(join(root, "a"), { route: TERRA, registeredRoute: null });
+    let pf = await pre(w, "a-s"); assert.equal(pf.code, "config-invalid"); assert.match(pf.reasons.join(" "), /registered for cliproxyapi\/gpt-6-luna \(medium\), not for the target route cliproxyapi\/gpt-6.1-terra/);
+    for (const [name, other] of [["effort", { ...TERRA, effort: "high" }], ["model", { ...TERRA, model: "gpt-6-luna" }], ["provider", { ...TERRA, provider: "other" }]]) {
+      w = world(join(root, `r-${name}`), { route: TERRA, registeredRoute: other });
+      pf = await pre(w, `r-${name}-s`); assert.equal(pf.code, "config-invalid", name); assert.match(pf.reasons.join(" "), /not for the target route/, name);
+    }
+    // Integrity screen measured on luna (no route field) for a Terra config.
+    w = world(join(root, "b"), { route: TERRA, screenRoute: null });
+    pf = await pre(w, "b-s"); assert.equal(pf.code, "prerequisite-failed"); assert.match(pf.reasons.join(" "), /integrity screen was measured on cliproxyapi\/gpt-6-luna \(medium\), not on the target route/);
+    // Measured attempts per unit only from records of the target route.
+    w = world(join(root, "c"), { route: TERRA });
+    writeFileSync(w.cfg.screen.runs, `${JSON.stringify({ type: "result", record: { model_requests: 5, model_route: "cliproxyapi/gpt-6-luna", thinking_effort: "medium" } })}\n`);
+    pf = await pre(w, "c-s"); assert.equal(pf.code, "confirmation-plan-not-ready"); assert.match(pf.reasons.join(" "), /no measured per-unit attempt counts/);
+    // Default behaviour unchanged: no route anywhere = luna everywhere, accepted.
+    w = world(join(root, "d"));
+    stageN(w.pool, "e", 6); await refresh(w);
+    pf = await pre(w, "d-s"); assert.equal(pf.ok, true, JSON.stringify(pf));
+    w = world(join(root, "e"), { route: LUNA, registeredRoute: null, screenRoute: null });
+    stageN(w.pool, "e", 6); await refresh(w);
+    pf = await pre(w, "e-s"); assert.equal(pf.ok, true, "an explicit default route equals the implicit one");
+    // Malformed routes: null, missing effort, unsupported effort, extra key.
+    for (const bad of [null, { provider: "cliproxyapi", model: "gpt-6.1-terra" }, { ...TERRA, effort: "turbo" }, { ...TERRA, extra: 1 }, { ...TERRA, model: "" }]) {
+      w = world(join(root, `m-${Math.random().toString(16).slice(2)}`));
+      writeFileSync(w.file, JSON.stringify({ ...w.cfg, route: bad }));
+      pf = await pre(w, "m-s"); assert.equal(pf.code, "config-invalid", JSON.stringify(bad)); assert.match(pf.reasons.join(" "), /route/);
+    }
   } finally { rmSync(root, { recursive: true, force: true }); }
 });

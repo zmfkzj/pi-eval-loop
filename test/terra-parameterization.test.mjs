@@ -126,3 +126,19 @@ test("pilot provenance: --campaign labels another study's source; observed route
   assert.deepEqual([p.source.campaign, p.source.routes], ["terra-v4 pilot (example label)", ["cliproxyapi/gpt-6.1-terra"]]);
   assert.deepEqual(p.arms.S.tasks["a1-x"].outcomes, [0, 1, 1]);
 });
+
+test("exploreProtocol(route): absent = the unchanged package default; explicit = only the target route changes (proposer independent); malformed = throws", async () => {
+  const { exploreProtocol } = await import("../src/exploration.mjs");
+  const { DEFAULT_PROTOCOL: D, routeProblems } = await import("../src/protocol.mjs");
+  const { digestOf } = await import("../src/util.mjs");
+  const base = exploreProtocol();
+  assert.deepEqual(base.route, D.route);
+  assert.equal(digestOf(exploreProtocol(undefined)), digestOf(base));
+  const terra = exploreProtocol({ provider: "cliproxyapi", model: "gpt-6.1-terra", effort: "medium" });
+  assert.deepEqual(terra.route, { provider: "cliproxyapi", model: "gpt-6.1-terra", effort: "medium" });
+  assert.deepEqual(terra.proposer, base.proposer);
+  assert.deepEqual({ ...terra, route: base.route }, base, "nothing but the target route differs");
+  for (const bad of [null, "cliproxyapi/gpt-6.1-terra", { provider: "cliproxyapi", model: "gpt-6.1-terra" }, { provider: "cliproxyapi", model: "gpt-6.1-terra", effort: "turbo" }, { provider: "", model: "m", effort: "low" }, { provider: "p", model: "m", effort: "low", x: 1 }])
+    assert.throws(() => exploreProtocol(bad), /target route/, JSON.stringify(bad));
+  assert.deepEqual(routeProblems({ provider: "cliproxyapi", model: "bts/gpt-6.1-terra", effort: "ultra" }), []);
+});

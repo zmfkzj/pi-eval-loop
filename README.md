@@ -55,6 +55,11 @@ ends as `BLOCKED` and is recorded as such. No simulated result is ever presented
 - `calibrate.mjs --route --effort --context --budget-limit --budget-scope`, `isolated-runtime.mjs prepare --budget-limit
   --budget-scope --models`, `pilot.mjs --campaign`: another study (Terra v4) without confirmatory-1's 4500 / gpt-6-luna
   identity. Tooling only; the Terra readiness blockers are listed in `docs/terra-study-v4.md`.
+- Exploration / screening / autonomous configs: top-level `route: {provider, model, effort}` selects the TARGET route of every
+  target-model phase (validated against the isolated runtime's catalog snapshot; bound into plans, registration, records and
+  digests; the proposer route is separate). One ledger can carry the whole series total: proposals (`meta.route "proposal"`)
+  and reviews (`review.mjs --budget-ledger/--budget-limit/--budget-scope`, `meta.route "review"`) count toward its limit but never
+  fund outbound attempts: `docs/target-route-and-shared-total.md`.
 
 ## Unattended operation contract
 
@@ -286,7 +291,7 @@ A budget refusal in the middle of a pass pauses the pass. It stays blocked with 
 - a foreign `EVAL_LOOP_UPSTREAM` or agent dir;
 - an expired token (any mode).
 
-It auto-starts the runtime when configured, and stops it when no other cycle uses it. It settles reservations left open by dead cycles at the attempt floor (`RequestBudget.reconcileDead`). A dead owner's `meta.route: "proposal"` reservation (agent_workflow's proposer, which shares the ledger) is settled at its full worst case instead, never lowered.
+It auto-starts the runtime when configured, and stops it when no other cycle uses it. It settles reservations left open by dead cycles at the attempt floor (`RequestBudget.reconcileDead`). A dead owner's off-gate reservation (`meta.route` `"proposal"` from agent_workflow's proposer or `"review"`, which share the ledger) is settled at its full worst case instead, never lowered; off-gate charges count toward the ledger limit but never fund outbound attempts.
 
 `test/explore-runtime.test.mjs` runs the pinned binary in bwrap against a TLS stand-in and checks that the provider never receives more requests than the gate admitted against the fixture ledger, across:
 - expired credentials, a misbound ledger and a shared-gateway upstream;
@@ -404,7 +409,7 @@ The series registry (`screening.registry`, hash-chained) is keyed by the runtime
 - `caps.perCycle`;
 - `caps.cumulative`.
 
-It also refuses after the stage's persisted deadline (`dev.maxHours`, `holdout.maxHours`). Before any stage, the planner requires the whole stage cap as headroom. A qualified candidate waiting for supply keeps its holdout headroom reserved from further dev spending. In live mode, a ledger whose settled charges exceed its outbound attempts is refused. A series lock admits one screening cycle at a time.
+It also refuses after the stage's persisted deadline (`dev.maxHours`, `holdout.maxHours`). Before any stage, the planner requires the whole stage cap as headroom. A qualified candidate waiting for supply keeps its holdout headroom reserved from further dev spending. In live mode, a ledger whose settled gate-covered charges exceed its outbound attempts is refused (settled proposal/review charges in the same ledger are not slack). A series lock admits one screening cycle at a time. With a config `route`, dev and holdout run on it and the registry names it on every paid result; a registry with results of another route is refused (`prerequisite-failed`).
 
 **Waits and stops** (`exploration.code`):
 - model-free waits: `no-candidate`, `dev-supply-empty` (pending candidates but too few eligible development tasks; no refresh), `supply-empty` (only a qualified candidate waiting; triggers the refresh), `runtime-wait`;

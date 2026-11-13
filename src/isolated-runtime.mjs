@@ -10,7 +10,8 @@
 // (0400, hash pinned in the manifest): nobody else can hot-reload it.
 //
 // Credential: an ACCESS-TOKEN-ONLY snapshot of the operator's configured codex OAuth credential (the one the live gateway uses
-// for cliproxyapi/gpt-6-luna, i.e. the approved target route). The refresh token is never copied, so refresh state is not
+// for the codex target models, e.g. cliproxyapi/gpt-6-luna or gpt-6.1-terra; the route a config selects must be in the runtime's
+// own model catalog snapshot, routeCatalogProblems). The refresh token is never copied, so refresh state is not
 // duplicated and cannot race the live gateway's rotation; refresh is impossible anyway (no network but the gate, whose
 // allowlist excludes the token endpoint). The snapshot is used only while the token is valid for longer than the gateway's
 // proactive refresh lead (96 h, sdk/cliproxy/auth/types.go CodexOuterRefreshLead) plus a margin, so the private gateway never
@@ -35,6 +36,27 @@ export function jwtExpiryMs(token) {
   try { claims = JSON.parse(Buffer.from(part.replace(/-/g, "+").replace(/_/g, "/"), "base64").toString("utf8")); } catch { throw new Error("access token claims are unreadable"); }
   if (!Number.isFinite(claims.exp)) throw new Error("access token has no exp claim");
   return claims.exp * 1000;
+}
+
+/** Model entries of an agent dir's catalogs (cliproxyapi-models.json, cpa-models.json) by id; empty when none is readable. */
+export function catalogEntries(agentDir) {
+  const out = new Map();
+  try { for (const x of JSON.parse(readFileSync(join(agentDir, "cliproxyapi-models.json"), "utf8")).models ?? []) if (typeof x?.id === "string") out.set(x.id, x); } catch { /* absent */ }
+  try { const c = JSON.parse(readFileSync(join(agentDir, "cpa-models.json"), "utf8")); for (const x of (Array.isArray(c) ? c : c?.data ?? [])) if (typeof x?.id === "string" && !out.has(x.id)) out.set(x.id, x); } catch { /* absent */ }
+  return out;
+}
+/** Model ids of an agent dir's catalogs. */
+export const catalogModels = (agentDir) => [...catalogEntries(agentDir).keys()];
+/**
+ * Problems of serving `route` from the isolated runtime's OWN catalog snapshot (its agent dir, never the mutable global one):
+ * the model must be listed, and an entry with a thinkingLevelMap must map the effort to a level (null = unsupported).
+ */
+export function routeCatalogProblems(agentDir, route) {
+  const e = catalogEntries(agentDir).get(route.model);
+  if (!e) return [`route ${route.provider}/${route.model} is not in the runtime's model catalog (${agentDir})`];
+  const map = e.thinkingLevelMap;
+  if (map && typeof map === "object" && (map[route.effort] === null || map[route.effort] === undefined)) return [`route ${route.provider}/${route.model} does not support effort ${route.effort} in the runtime's model catalog`];
+  return [];
 }
 
 /**

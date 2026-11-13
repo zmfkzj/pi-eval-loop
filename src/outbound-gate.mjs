@@ -10,9 +10,10 @@
 // binary against a local TLS stand-in before any chargeable call.
 //
 // Per CONNECT, BEFORE the upstream connection is opened, the gate calls budget.admitAttempt() (src/request-budget.mjs): one
-// durable `attempt` record in the study's single cumulative ledger, admitted only while attempts + 1 <= the charged total
-// (settled usage + open reservations <= limit). A refusal, an unusable ledger, a host outside the allowlist or a non-CONNECT
-// request is answered 403/503 and nothing leaves. The gate never terminates TLS: it sees no prompt, answer or token.
+// durable `attempt` record in the study's single cumulative ledger, admitted only while attempts + 1 <= the charged total of
+// GATE-COVERED reservations (settled usage + open reservations; off-gate proposal/review charges count toward the limit but
+// never fund an attempt) and a gate-covered reservation is open. A refusal, an unusable ledger, a host outside the allowlist or
+// a non-CONNECT request is answered 403/503 and nothing leaves. The gate never terminates TLS: it sees no prompt, answer or token.
 import http from "node:http";
 import net from "node:net";
 import { appendFileSync, existsSync, rmSync } from "node:fs";

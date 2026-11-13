@@ -36,9 +36,9 @@ import { parseArgs } from "node:util";
 import { Evaluator, realBackend, wireJournals } from "../../src/evaluator.mjs";
 import { datasetPurpose, holdoutLedger, loadLocal, verifySeal } from "../../src/datasets.mjs";
 import { CENSORING, buildCalibrationReport, exclusionProblems, outcomesFromLedger, unitClassesFromLedger } from "../../src/calibration.mjs";
-import { DEFAULT_PROTOCOL, merge } from "../../src/protocol.mjs";
+import { DEFAULT_PROTOCOL, EFFORTS, merge } from "../../src/protocol.mjs";
 import { RequestBudget, gatewayPressureMeter } from "../../src/request-budget.mjs";
-import { runtimeProblems } from "../../src/isolated-runtime.mjs";
+import { catalogModels, routeCatalogProblems, runtimeProblems } from "../../src/isolated-runtime.mjs";
 import { Ledger, acquireLock, atomicWriteJson, digestOf, ensureDir, readJson, sha256 } from "../../src/util.mjs";
 
 export const CONTEXT = "confirmatory-1:calibration";
@@ -52,7 +52,7 @@ export const GATED_RESERVATION_FACTOR = 2;
 /** Pilot usage of the stable arm S in ctrl-ablation-1 (81 units): requests and input tokens per unit (expectations, not bounds). */
 export const PILOT_PER_UNIT = { requests: 1954 / 81, inputTokens: 18.56e6 / 81, source: "records/ctrl-ablation-1/discovery (live checkout), arm S" };
 
-export const EFFORTS = ["minimal", "low", "medium", "high", "xhigh", "max", "ultra"];
+export { EFFORTS, catalogModels };
 /**
  * The runner protocol of a study: DEFAULT_PROTOCOL itself (confirmatory-1, unchanged identity) unless a route is named, e.g.
  * studyProtocol({ route: "cliproxyapi/gpt-6.1-terra", effort: "medium" }). Throws on a malformed route or effort.
@@ -65,14 +65,6 @@ export function studyProtocol({ route, effort } = {}) {
   const level = effort ?? DEFAULT_PROTOCOL.route.effort;
   if (!EFFORTS.includes(level)) throw new Error(`--effort ${level}: one of ${EFFORTS.join(", ")}`);
   return merge(structuredClone(DEFAULT_PROTOCOL), { route: { provider: m[1], model: m[2], effort: level } });
-}
-
-/** Model ids of an agent dir's catalogs (cliproxyapi-models.json, cpa-models.json); [] when none is readable. */
-export function catalogModels(agentDir) {
-  const ids = new Set();
-  try { for (const x of JSON.parse(readFileSync(join(agentDir, "cliproxyapi-models.json"), "utf8")).models ?? []) if (typeof x?.id === "string") ids.add(x.id); } catch { /* absent */ }
-  try { const c = JSON.parse(readFileSync(join(agentDir, "cpa-models.json"), "utf8")); for (const x of (Array.isArray(c) ? c : c?.data ?? [])) if (typeof x?.id === "string") ids.add(x.id); } catch { /* absent */ }
-  return [...ids];
 }
 
 /** The calibration plan: units, identity and worst case. Model-free. */
@@ -289,7 +281,7 @@ if (import.meta.url === `file://${process.argv[1]}`) {
       // A shared series ledger: the runtime's gate must charge exactly that ledger identity (path checked by runtimeProblems).
       if (plan.budget.ledgerLimit !== undefined && (runtime.budget?.limit !== plan.budget.ledgerLimit || runtime.budget?.scope !== plan.budget.ledgerScope)) blocked.push("the runtime's gate charges another ledger identity (limit/scope) than --budget-limit/--budget-scope: misbound runtime");
       // The measured route must be served by the runtime's model catalog (no silent fallback to another model).
-      if (values.route !== undefined && !catalogModels(runtime.agentDir).includes(plan.route.model)) blocked.push(`route ${plan.route.provider}/${plan.route.model} is not in the runtime's model catalog (${runtime.agentDir})`);
+      if (values.route !== undefined) blocked.push(...routeCatalogProblems(runtime.agentDir, plan.route));
       const check = () => runtimeProblems(dir, { running: true, mode: "live", budgetPath: values["budget-ledger"] && resolve(values["budget-ledger"]) });
       attemptBound = () => { const p = check(); if (p.length) throw new Error(`isolated runtime: ${p.join("; ")}`); return { perRequest: GATED_RESERVATION_FACTOR, gated: true, basis: "outbound attempt gate (every provider attempt admitted against this ledger); factor = reservation size per forwarded request (retry 0, redirects)" }; };
       bound = attemptBound();

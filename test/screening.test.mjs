@@ -374,3 +374,77 @@ test("dev-supply wait and dev-set change: ineligible set waits model-free with p
     assert.deepEqual([...new Set(exposedDevTasks(cB).map(t => t.id))].sort(), ["d1", "d2", "e1", "e2"]);
   } finally { rmSync(root, { recursive: true, force: true }); }
 });
+
+const TERRA = Object.freeze({ provider: "cliproxyapi", model: "gpt-6.1-terra", effort: "medium" });
+const results = (file) => readFileSync(file, "utf8").split("\n").filter(Boolean).map(l => JSON.parse(l)).filter(e => e.type === "result").map(e => e.record);
+
+test("screening target route: explicit cliproxyapi/gpt-6.1-terra reaches dev and holdout (records, plans, registry); a registry or state of another route is never reused", { timeout: 300_000 }, async () => {
+  const root = tempDir();
+  try {
+    const { cfg, file, pool } = world(root, { route: TERRA });
+    const c = (n) => join(root, "cycles", `c-${n}`);
+    let o = run(["--resume", "--state", c(1), "--protocol", file]);
+    assert.equal(o.out.outcome, "cycle_done", o.err);
+    assert.equal(status(c(1)).final.verdict, "DEV_PROMISING");
+    assert.deepEqual(JSON.parse(readFileSync(join(c(1), "screen-plan.json"), "utf8")).route, TERRA);
+    const dev = results(join(c(1), "dev", "runs.jsonl"));
+    assert.ok(dev.length > 0 && dev.every(r => r.model_route === "cliproxyapi/gpt-6.1-terra" && r.thinking_effort === "medium"));
+    const devResult = new Ledger(cfg.screening.registry).records().find(r => r.type === "result" && r.stage === "dev");
+    assert.deepEqual(devResult.route, TERRA, "the registry names the route the dev evidence was measured on");
+    for (let i = 2; i <= 5; i++) run(["--resume", "--state", c(i), "--protocol", file]);
+    for (let i = 1; i <= 6; i++) stage(pool, `h${i}`, `gh:h${i}/r`, { hard: i === 1 });
+    assert.equal(run(["refresh", "--protocol", file]).code, 0);
+    o = run(["--resume", "--state", c(6), "--protocol", file]);
+    assert.equal(o.out.outcome, "cycle_done", JSON.stringify(o.out));
+    assert.equal(status(c(6)).exploration.stage, "holdout");
+    const hold = results(join(c(6), "holdout", "runs.jsonl"));
+    assert.ok(hold.length > 0 && hold.every(r => r.model_route === "cliproxyapi/gpt-6.1-terra" && r.thinking_effort === "medium"));
+    assert.deepEqual(JSON.parse(readFileSync(join(c(6), "holdout-plan.json"), "utf8")).route, TERRA);
+    // Effort only changed: the registry's Terra/medium evidence is not reused and the bound state refuses the new config.
+    const changed = join(root, "screening-high.json");
+    writeFileSync(changed, JSON.stringify({ ...cfg, route: { ...TERRA, effort: "high" } }));
+    const pf = run(["--preflight", "--state", c(9), "--protocol", changed]);
+    assert.equal(pf.out.code, "prerequisite-failed"); assert.match(pf.out.reasons.join(" "), /measured on cliproxyapi\/gpt-6.1-terra \(medium\), not on the target route cliproxyapi\/gpt-6.1-terra \(high\)/);
+    const before = charged(cfg);
+    o = run(["--resume", "--state", c(9), "--protocol", changed]);
+    assert.equal(o.out.status.exploration.code, "prerequisite-failed"); assert.equal(charged(cfg), before, "no attempt under the changed route");
+    o = run(["--resume", "--require-state", "--state", c(6), "--protocol", changed]);
+    assert.equal(o.out.outcome, "state_error", "a state bound to the Terra/medium config never continues under another route");
+    // The package-default series (no route) refuses a registry measured on Terra too.
+    writeFileSync(changed, JSON.stringify({ ...cfg, route: undefined }));
+    assert.equal(run(["--preflight", "--state", c(10), "--protocol", changed]).out.code, "prerequisite-failed");
+  } finally { rmSync(root, { recursive: true, force: true }); }
+});
+
+test("screening target route, live config (model-free preflight): the route is validated against the isolated runtime's own catalog snapshot (model and effort) and the peer-pressure meter watches the selected model", { timeout: 120_000 }, async () => {
+  const root = tempDir();
+  try {
+    const { cfg } = world(root, { route: TERRA });
+    const rt = join(root, "runtime"); mkdirSync(join(rt, "agent"), { recursive: true }); mkdirSync(join(rt, "auth"));
+    writeFileSync(join(rt, "manifest.json"), JSON.stringify({ agentDir: join(rt, "agent") }));
+    const catalog = (models) => writeFileSync(join(rt, "agent", "cliproxyapi-models.json"), JSON.stringify({ models }));
+    const levels = { off: null, minimal: null, low: "low", medium: "medium", high: "high" };
+    const live = (over) => { const f = join(root, `live-${Math.random().toString(16).slice(2)}.json`); const c = { ...cfg, ...over, runtime: { dir: rt }, simulation: undefined }; writeFileSync(f, JSON.stringify(c)); return f; };
+    const { explorePreflight } = await import("../src/explore-cycle.mjs");
+    const pre = (f, deps = { runtimeCheck: async () => [] }) => explorePreflight(f, join(root, "pf-state"), { orcheDir: cfg.orcheDir, ...deps });
+    catalog([{ id: "gpt-6-luna", thinkingLevelMap: levels }]);
+    let pf = await pre(live({}));
+    assert.equal(pf.code, "prerequisite-failed"); assert.match(pf.reasons.join(" "), /gpt-6.1-terra is not in the runtime's model catalog/);
+    catalog([{ id: "gpt-6.1-terra", thinkingLevelMap: levels }]);
+    pf = await pre(live({ route: { ...TERRA, effort: "minimal" } }));
+    assert.equal(pf.code, "prerequisite-failed"); assert.match(pf.reasons.join(" "), /does not support effort minimal/);
+    pf = await pre(live({}));
+    assert.notEqual(pf.code, "prerequisite-failed", JSON.stringify(pf.reasons));
+    // Default runtime check: the pressure meter counts only the selected model's 429/503 failures.
+    const db = join(root, "usage.db");
+    const { DatabaseSync } = process.getBuiltinModule("node:sqlite");
+    const h = new DatabaseSync(db); h.exec("CREATE TABLE usage_events (model TEXT, timestamp_ms INTEGER, failed INTEGER, failure_status INTEGER)");
+    const ins = h.prepare("INSERT INTO usage_events VALUES (?, ?, ?, ?)");
+    for (const m of ["gpt-6-luna", "gpt-6-luna", "gpt-6.1-terra"]) ins.run(m, Date.now(), 1, 429);
+    h.close();
+    const { defaultRuntimeCheck, loadExploration: load } = await import("../src/explore-cycle.mjs");
+    const out = await defaultRuntimeCheck(load(live({ gatewayDb: db })));
+    assert.ok(out.includes("peer protection: 1 target-model 429/503 failures recently"), JSON.stringify(out));
+    assert.ok((await defaultRuntimeCheck(load(live({ gatewayDb: db, route: undefined })))).includes("peer protection: 2 target-model 429/503 failures recently"), "default route: luna");
+  } finally { rmSync(root, { recursive: true, force: true }); }
+});

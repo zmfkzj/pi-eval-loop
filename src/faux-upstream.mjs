@@ -50,7 +50,7 @@ export async function startFauxUpstream({ tasks, model, seed = "faux", port = 0 
       const text = userText(body.input);
       const task = tasks.find(t => text.includes(t.instruction.slice(0, 120)));
       const marked = String(body.instructions ?? "").includes(SKILL_MARKER) || JSON.stringify(body.input ?? []).includes(SKILL_MARKER);
-      requests.push({ session, task: task?.id, marked, path: req.url });
+      requests.push({ session, task: task?.id, marked, path: req.url, model: body.model ?? null, effort: body.reasoning?.effort ?? null });
       if (!plans.has(session)) {
         const rng = createRng(`${seed}:${drawKey}`);
         const policy = task?.policy ?? { solve: 0 };

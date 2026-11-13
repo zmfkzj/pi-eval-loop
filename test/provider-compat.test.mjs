@@ -154,6 +154,27 @@ test(`real sandbox, installed pi-cliproxyapi-provider ${installedVersion}: the p
   } finally { await faux.stop(); }
 });
 
+test(`real sandbox, installed pi-cliproxyapi-provider ${installedVersion}: the engine's selected target route (exploreProtocol + Evaluator + realBackend) sends cliproxyapi/gpt-6.1-terra upstream and records it (faux upstream, no live model)`, { skip, timeout: 240_000 }, async () => {
+  const { loadSuite } = await import("../src/datasets.mjs");
+  const { startFauxUpstream } = await import("../src/faux-upstream.mjs");
+  const { Evaluator, realBackend } = await import("../src/evaluator.mjs");
+  const { exploreProtocol } = await import("../src/exploration.mjs");
+  const task = loadSuite(join(UMBRELLA, "orche/fixtures/suite")).find(t => t.id === "a1-rounding");
+  const faux = await startFauxUpstream({ tasks: [{ ...task, policy: { solve: 1 } }], model: "gpt-6.1-terra", seed: "route" });
+  try {
+    const root = tempDir();
+    const env = realEnv(root, faux.url);
+    const route = { provider: "cliproxyapi", model: "gpt-6.1-terra", effort: "medium" };
+    const protocol = merge(exploreProtocol(route), { unit: { wallMs: 150_000, graderMs: 60_000 }, parallelism: 1 });
+    const evaluator = new Evaluator({ stateDir: join(root, "state"), protocol, protocolDigest: "p", envDigest: environmentDigest(env, protocol.route), tasksById: { [task.id]: task }, grading: { [task.id]: { ok: true, expected: {}, baselineFailing: [] } }, backend: realBackend(env) });
+    const [rec] = await evaluator.evaluate({ id: "stable", kind: "pure" }, [{ task: task.id, split: "dev", repeat: 0 }], "route-check");
+    assert.equal(rec.terminal_status, "completed", rec.terminal_detail);
+    assert.equal(rec.model_route, "cliproxyapi/gpt-6.1-terra"); assert.equal(rec.thinking_effort, "medium");
+    assert.ok(faux.requests.length >= 1 && faux.requests.every(r => r.model === "gpt-6.1-terra"), JSON.stringify(faux.requests.map(r => [r.model, r.effort])));
+    assert.equal(environmentDigest(env, protocol.route).facts.route.model, "gpt-6.1-terra");
+  } finally { await faux.stop(); }
+});
+
 test("prerequisites name the provider package and its layout", { skip: existsSync(join(INSTALLED, "package.json")) ? false : "no installed provider" }, async () => {
   const env = { ...env0, provider: INSTALLED, upstream: "http://127.0.0.1:9" };
   const p = (await prerequisites(env)).find(x => x.name === "provider");

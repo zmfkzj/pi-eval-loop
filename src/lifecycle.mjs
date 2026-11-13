@@ -11,7 +11,7 @@ import { fileURLToPath } from "node:url";
 import { Evaluator } from "./evaluator.mjs";
 import { planCompleteness, planPath, seriesFits } from "./design.mjs";
 import { exploreProtocol, runtimeDigest } from "./exploration.mjs";
-import { merge } from "./protocol.mjs";
+import { merge, routeKey, routeProblems, sameRoute } from "./protocol.mjs";
 import { acquireLock, atomicWriteJson, digestOf, ensureDir, fault, Ledger, readJson, sha256 } from "./util.mjs";
 import { attemptAdmission } from "./admission.mjs";
 
@@ -42,7 +42,11 @@ export function confirmationPolicy(cfg, { remaining = null, reserved = 0 } = {})
   let reg; try { reg = JSON.parse(readFileSync(c.protocol, "utf8")); } catch (error) { return bad(`confirmation.protocol unreadable: ${error.message}`); }
   if (reg?.analysisPlan?.mode !== "confirmatory") return bad("confirmation.protocol must register a confirmatory analysis plan");
   const part = { holdout: reg.holdout ?? {}, adoption: reg.adoption ?? {}, analysisPlan: reg.analysisPlan };
-  let p; try { p = merge(exploreProtocol(), part); } catch (error) { return bad(`confirmation.protocol does not fit the protocol schema: ${error.message}`); }
+  let p; try { p = merge(exploreProtocol(cfg.route), part); } catch (error) { return bad(`confirmation.protocol does not fit the protocol schema: ${error.message}`); }
+  // The registered protocol is evidence about ONE target route: a protocol without `route` was registered on the package default.
+  if (reg.route !== undefined && routeProblems(reg.route).length) return bad(`confirmation.protocol route: ${routeProblems(reg.route).join("; ")}`);
+  const registeredRoute = reg.route ?? exploreProtocol().route;
+  if (!sameRoute(registeredRoute, p.route)) return bad(`confirmation.protocol was registered for ${routeKey(registeredRoute)} (${registeredRoute.effort}), not for the target route ${routeKey(p.route)} (${p.route.effort}): register a protocol for this route (no evidence carries across routes)`);
   const plan = p.analysisPlan;
   // Floors: a registered protocol may only be stricter than the exploration route's original gates (never disable a check).
   for (const f of floorProblems(p)) return bad(`confirmation.protocol weakens an original gate: ${f}`);
@@ -52,7 +56,7 @@ export function confirmationPolicy(cfg, { remaining = null, reserved = 0 } = {})
     if (!fit.ok) problems.push({ code: "confirmation-infeasible", why: `series error budget: ${fit.why}` });
   }
   // attemptsPerUnit must cover the largest per-unit attempt count actually measured on this candidate's screen (no guess below it).
-  const measured = measuredAttemptsPerUnit(cfg);
+  const measured = measuredAttemptsPerUnit(cfg, p.route);
   if (measured === null) problems.push({ code: "confirmation-plan-not-ready", why: "no measured per-unit attempt counts (screen.runs) to size the confirmation budget" });
   else if (c.attemptsPerUnit < measured) return bad(`confirmation.attemptsPerUnit ${c.attemptsPerUnit} is below the measured per-unit maximum ${measured}`);
   let readinessSha256 = null;
@@ -102,12 +106,17 @@ export function floorProblems(p) {
   return out;
 }
 
-/** The largest per-unit target attempt count measured in the candidate's screen (screen.runs), or null. */
-export function measuredAttemptsPerUnit(cfg) {
+/**
+ * The largest per-unit target attempt count measured in the candidate's screen (screen.runs) on `route` (default: the package
+ * route; a record without model_route counts only for it), or null.
+ */
+export function measuredAttemptsPerUnit(cfg, route = exploreProtocol().route) {
+  const isDefault = sameRoute(route, exploreProtocol().route);
+  const onRoute = (r) => r.model_route === undefined ? isDefault : r.model_route === routeKey(route) && (r.thinking_effort === undefined || r.thinking_effort === route.effort);
   const f = cfg.screen?.runs;
   if (!f || !existsSync(f)) return null;
   let max = null;
-  for (const l of readFileSync(f, "utf8").split("\n")) { if (!l) continue; let e; try { e = JSON.parse(l); } catch { continue; } if (e?.type === "result" && Number.isFinite(e.record?.model_requests)) max = Math.max(max ?? 0, e.record.model_requests); }
+  for (const l of readFileSync(f, "utf8").split("\n")) { if (!l) continue; let e; try { e = JSON.parse(l); } catch { continue; } if (e?.type === "result" && Number.isFinite(e.record?.model_requests) && onRoute(e.record)) max = Math.max(max ?? 0, e.record.model_requests); }
   return max;
 }
 
@@ -201,15 +210,15 @@ export class Releases {
  * Post-adoption smoke: the deployed harness must load and run (terminal status completed; pass/fail of the task does not matter)
  * on one development task, through the same attempt admission. Recorded in <state>/smoke.json (resume returns it).
  */
-export async function runSmoke({ state, harness, task, backend, budget, bound, envDigest, validate, protocolDigest }) {
+export async function runSmoke({ state, route, harness, task, backend, budget, bound, envDigest, validate, protocolDigest }) {
   const f = join(state, "smoke.json");
   const done = readJson(f, null);
   if (done) return done;
   ensureDir(state, 0o700);
-  const p = exploreProtocol();
+  const p = exploreProtocol(route);
   const grading = { [task.id]: validate ? await validate(task) : { ok: true, expected: {}, baselineFailing: [] } };
   if (!grading[task.id].ok) { const out = { ok: false, why: `smoke task grader invalid: ${task.id}`, at: new Date().toISOString() }; atomicWriteJson(f, out); return out; }
-  const evaluator = new Evaluator({ stateDir: state, protocol: p, protocolDigest: protocolDigest ?? digestOf({ smoke: harness.commit }), envDigest, tasksById: { [task.id]: task }, grading, backend, log: () => {}, admission: attemptAdmission(budget, bound) });
+  const evaluator = new Evaluator({ stateDir: state, protocol: p, protocolDigest: protocolDigest ?? digestOf(route === undefined ? { smoke: harness.commit } : { smoke: harness.commit, route: p.route }), envDigest, tasksById: { [task.id]: task }, grading, backend, log: () => {}, admission: attemptAdmission(budget, bound) });
   const [rec] = await evaluator.evaluate(harness, [{ task: task.id, split: "smoke", repeat: 0 }], "lifecycle:smoke");
   if (evaluator.halted) return { paused: evaluator.halted };
   const out = { ok: rec?.terminal_status === "completed", terminal: rec?.terminal_status ?? null, detail: String(rec?.terminal_detail ?? "").slice(0, 200), requests: rec?.model_requests ?? 0, at: new Date().toISOString() };

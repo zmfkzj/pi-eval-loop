@@ -133,6 +133,24 @@ export function loadProtocol(overridePath) {
   return protocol;
 }
 
+/** Thinking levels a route may name (pi --thinking). */
+export const EFFORTS = Object.freeze(["minimal", "low", "medium", "high", "xhigh", "max", "ultra"]);
+const ROUTE_PART = /^[A-Za-z0-9._-][A-Za-z0-9._/-]*$/;
+/** Problems of an explicitly selected target route {provider, model, effort} (pure; [] = well-formed). */
+export function routeProblems(route) {
+  if (!isObject(route)) return ["route must be an object {provider, model, effort}"];
+  const out = [];
+  for (const k of Object.keys(route)) if (!["provider", "model", "effort"].includes(k)) out.push(`route.${k} is not a route field`);
+  if (typeof route.provider !== "string" || !/^[A-Za-z0-9._-]+$/.test(route.provider)) out.push("route.provider must be a provider id");
+  if (typeof route.model !== "string" || !ROUTE_PART.test(route.model)) out.push("route.model must be a model id");
+  if (!EFFORTS.includes(route.effort)) out.push(`route.effort must be one of ${EFFORTS.join(", ")}`);
+  return out;
+}
+/** "provider/model" of a route (the records' model_route). */
+export const routeKey = (route) => `${route.provider}/${route.model}`;
+/** Same provider, model and effort. */
+export const sameRoute = (a, b) => routeKey(a) === routeKey(b) && a.effort === b.effort;
+
 /** Evaluator files whose bytes define the evaluation (controller, grader, imported orche experiment modules). */
 export function evaluatorFiles(orcheDir = join(UMBRELLA, "orche")) {
   const own = walkFiles(join(PACKAGE_DIR, "src")).filter(f => f.symlink === undefined).map(f => join(PACKAGE_DIR, "src", f.path));

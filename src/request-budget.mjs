@@ -22,8 +22,15 @@ import { randomBytes } from "node:crypto";
 import { Ledger, LockBusyError, acquireLock, atomicWriteJson, sha256, sleep } from "./util.mjs";
 
 export const BUDGET_SCHEMA = "pi-eval-loop/request-budget@1";
-/** Reservation routes (meta.route) that reconcileDead settles at their full amount: an abandoned one keeps its worst case. */
-export const RETAINED_ROUTES = Object.freeze(["proposal"]);
+/**
+ * OFF-GATE reservation routes (meta.route): requests that pass a route proxy, never the isolated runtime's outbound attempt gate
+ * (proposer, reviewer sessions). They are charged in the SAME ledger and count toward its one limit like every other
+ * reservation, but they never fund outbound attempts (the gate admits attempts only within the gate-covered charges), their
+ * settlement is not raised to the attempt floor, and reconcileDead settles an abandoned one at its FULL amount (worst case kept).
+ */
+export const RETAINED_ROUTES = Object.freeze(["proposal", "review"]);
+/** True when a reservation record belongs to an off-gate route. */
+export const offGate = (reserve) => RETAINED_ROUTES.includes(reserve?.meta?.route);
 
 export class BudgetError extends Error {
   /** @param {string} message @param {string} code */
@@ -46,19 +53,22 @@ export function budgetTotals(records) {
       else if (r.used > x.amount) problems.push(`reservation ${r.id}: used ${r.used} exceeds its reserved worst case ${x.amount} (per-attempt cap breached)`);
     }
   }
-  let charged = 0, settledUsed = 0, open = 0, openAmount = 0;
+  let charged = 0, settledUsed = 0, open = 0, openAmount = 0, gatedCharged = 0, gatedOpen = 0, gatedOpenAmount = 0;
   for (const x of res.values()) {
     // An overrun (used > amount) is charged at what was used: the ledger never under-counts.
-    if (x.settled) { charged += Math.max(x.used ?? x.amount, 0); settledUsed += x.used ?? 0; }
-    else { charged += x.amount; open++; openAmount += x.amount; }
+    const c = x.settled ? Math.max(x.used ?? x.amount, 0) : x.amount;
+    charged += c;
+    if (x.settled) settledUsed += x.used ?? 0; else { open++; openAmount += x.amount; }
+    if (!offGate(x)) { gatedCharged += c; if (!x.settled) { gatedOpen++; gatedOpenAmount += x.amount; } }
   }
   // Outbound attempts admitted by the attempt gate (src/outbound-gate.mjs): each one is an actual provider attempt that the gate
   // let leave the isolated runtime. Invariant (checked by the gate before every admission, kept by settle's floor): attempts never
-  // exceed what the ledger charges, so the charged total is a conservative bound on actual attempts at every moment.
+  // exceed what the ledger charges for GATE-COVERED reservations (off-gate routes excluded: their requests are other requests),
+  // so the gate-covered charge is a conservative bound on actual attempts at every moment and the total adds the off-gate spend.
   const attempts = records.filter(r => r.type === "attempt").length;
-  if (attempts > charged) problems.push(`outbound attempts ${attempts} exceed the charged total ${charged} (an attempt left without a covering reservation)`);
+  if (attempts > gatedCharged) problems.push(`outbound attempts ${attempts} exceed the charged total ${gatedCharged} of gate-covered reservations${gatedCharged !== charged ? ` (off-gate charges ${charged - gatedCharged} never cover attempts)` : ""} (an attempt left without a covering reservation)`);
   const limit = init?.limit ?? null;
-  return { limit, charged, settledUsed, openReservations: open, openAmount, reservations: res.size, attempts, remaining: limit === null ? null : limit - charged, problems };
+  return { limit, charged, settledUsed, openReservations: open, openAmount, reservations: res.size, attempts, gatedCharged, gatedOpenReservations: gatedOpen, gatedOpenAmount, offGateCharged: charged - gatedCharged, remaining: limit === null ? null : limit - charged, problems };
 }
 
 /**
@@ -190,8 +200,9 @@ export class RequestBudget {
 
   /**
    * Settle a reservation with the observed request count (never more than once). The recorded `used` is raised to the attempt
-   * floor when the gate admitted more outbound attempts than the other charges cover (attempts - (charged - amount)), so the
-   * charged total never falls below the actual attempts; the floor never exceeds `amount` while the gate invariant holds.
+   * floor when the gate admitted more outbound attempts than the other gate-covered charges cover (attempts - (gatedCharged -
+   * amount)), so the gate-covered charged total never falls below the actual attempts (an off-gate reservation has no
+   * floor); the floor never exceeds `amount` while the gate invariant holds.
    * @param {{ id: string }} ticket @param {number} used @param {any} [detail]
    */
   async settle(ticket, used, detail = {}) {
@@ -202,7 +213,9 @@ export class RequestBudget {
       if (!x) throw new BudgetError(`request budget: unknown reservation ${ticket.id}`, "EBUDGETLEDGER");
       if (records.some(r => r.type === "settle" && r.id === ticket.id)) throw new BudgetError(`request budget: reservation ${ticket.id} already settled`, "EBUDGETLEDGER");
       const totals = budgetTotals(records);
-      const floor = Math.max(0, totals.attempts - (totals.charged - x.amount));
+      // Gate-covered reservations: floor = attempts not covered by the other gate-covered charges. Off-gate ones: no floor
+      // (outbound attempts are never theirs), so their settlement is exactly the reported count (callers clamp to the amount).
+      const floor = offGate(x) ? 0 : Math.max(0, totals.attempts - (totals.gatedCharged - x.amount));
       const final = Math.max(used, floor);
       this.#append({ type: "settle", id: ticket.id, used: final, reported: final !== used ? used : undefined, attemptFloor: totals.attempts ? floor : undefined, overrun: final > x.amount || undefined, detail });
       return { used: final, reported: used, floor };
@@ -247,8 +260,10 @@ export class RequestBudget {
       if (!records.length) { this.refusal = "no reservation exists (the budget ledger is not initialised)"; return null; }
       const totals = budgetTotals(records);
       if (totals.problems.length) throw new BudgetError(`request budget ledger inconsistent: ${totals.problems.slice(0, 2).join("; ")}`, "EBUDGETLEDGER");
-      if (totals.attempts + 1 > totals.charged || totals.attempts + 1 > this.limit) {
-        this.refusal = `outbound attempt refused: ${totals.attempts} attempts already cover the charged total ${totals.charged} (open reservations ${totals.openReservations}, limit ${this.limit})`;
+      // Only gate-covered charges fund attempts, and only while a gate-covered reservation is open: settled slack or an off-gate
+      // reservation (proposal, review) never lets traffic leave outside a running unit.
+      if (totals.attempts + 1 > totals.gatedCharged || totals.attempts + 1 > this.limit || totals.gatedOpenReservations === 0) {
+        this.refusal = `outbound attempt refused: ${totals.attempts} attempts already cover the charged total ${totals.gatedCharged} (gate-covered; open gate-covered reservations ${totals.gatedOpenReservations}, off-gate charges ${totals.offGateCharged}, limit ${this.limit})`;
         return null;
       }
       return this.#append({ type: "attempt", pid: process.pid, n: totals.attempts + 1, meta });
