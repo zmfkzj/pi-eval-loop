@@ -1,0 +1,30 @@
+{
+  "PC": {
+    "units": 2,
+    "ok": 2,
+    "failing": {},
+    "contractReachedWorker": 0,
+    "handoffs": 0
+  },
+  "PCR": {
+    "units": 2,
+    "ok": 2,
+    "failing": {},
+    "contractReachedWorker": 0,
+    "handoffs": 0
+  },
+  "OCR": {
+    "units": 2,
+    "ok": 2,
+    "failing": {},
+    "contractReachedWorker": 2,
+    "handoffs": 2
+  },
+  "OC": {
+    "units": 2,
+    "ok": 2,
+    "failing": {},
+    "contractReachedWorker": 2,
+    "handoffs": 2
+  }
+}

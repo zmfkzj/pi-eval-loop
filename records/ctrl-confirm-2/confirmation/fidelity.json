@@ -1,0 +1,75 @@
+{
+  "PCR": {
+    "units": 279,
+    "ok": 279,
+    "failing": {},
+    "contractReachedWorker": 0,
+    "handoffs": 0
+  },
+  "PC": {
+    "units": 279,
+    "ok": 279,
+    "failing": {},
+    "contractReachedWorker": 0,
+    "handoffs": 0
+  },
+  "OCR": {
+    "units": 279,
+    "ok": 275,
+    "failing": {
+      "mainSession": [
+        "OCR-x-l956615272-hub-dsh-token-usage-8c425815aa-confirmation-r0-a1-1bcbc028",
+        "OCR-x-blakeb056-six-degrees-aec5ecaebb-confirmation-r1-a1-f7e85b95",
+        "OCR-x-metarhia-metawatch-e1b278f5c3-confirmation-r0-a1-97ed29d1",
+        "OCR-x-sandsoftwaresolutions-ss-human-format-ade5993e4f-confirmation-r2-a1-c94992e5"
+      ],
+      "contractInTask": [
+        "OCR-x-l956615272-hub-dsh-token-usage-8c425815aa-confirmation-r0-a1-1bcbc028",
+        "OCR-x-blakeb056-six-degrees-aec5ecaebb-confirmation-r1-a1-f7e85b95",
+        "OCR-x-metarhia-metawatch-e1b278f5c3-confirmation-r0-a1-97ed29d1",
+        "OCR-x-sandsoftwaresolutions-ss-human-format-ade5993e4f-confirmation-r2-a1-c94992e5"
+      ],
+      "delegated": [
+        "OCR-x-l956615272-hub-dsh-token-usage-8c425815aa-confirmation-r0-a1-1bcbc028",
+        "OCR-x-blakeb056-six-degrees-aec5ecaebb-confirmation-r1-a1-f7e85b95",
+        "OCR-x-metarhia-metawatch-e1b278f5c3-confirmation-r0-a1-97ed29d1",
+        "OCR-x-sandsoftwaresolutions-ss-human-format-ade5993e4f-confirmation-r2-a1-c94992e5"
+      ],
+      "ruleInEveryOrcheSession": [
+        "OCR-x-l956615272-hub-dsh-token-usage-8c425815aa-confirmation-r0-a1-1bcbc028",
+        "OCR-x-blakeb056-six-degrees-aec5ecaebb-confirmation-r1-a1-f7e85b95",
+        "OCR-x-metarhia-metawatch-e1b278f5c3-confirmation-r0-a1-97ed29d1",
+        "OCR-x-sandsoftwaresolutions-ss-human-format-ade5993e4f-confirmation-r2-a1-c94992e5"
+      ]
+    },
+    "contractReachedWorker": 274,
+    "handoffs": 383
+  },
+  "OC": {
+    "units": 279,
+    "ok": 274,
+    "failing": {
+      "mainSession": [
+        "OC-x-ahmtsahin-agent-context-bench-b63c4acd3d-confirmation-r2-a1-af00e173",
+        "OC-x-l956615272-hub-dsh-token-usage-8c425815aa-confirmation-r0-a1-e17c55e5",
+        "OC-x-blakeb056-six-degrees-aec5ecaebb-confirmation-r1-a1-f75b2eaa",
+        "OC-x-metarhia-metawatch-e1b278f5c3-confirmation-r0-a1-2ba89655"
+      ],
+      "contractInTask": [
+        "OC-x-ahmtsahin-agent-context-bench-b63c4acd3d-confirmation-r2-a1-af00e173",
+        "OC-x-l956615272-hub-dsh-token-usage-8c425815aa-confirmation-r0-a1-e17c55e5",
+        "OC-x-blakeb056-six-degrees-aec5ecaebb-confirmation-r1-a1-f75b2eaa",
+        "OC-x-metarhia-metawatch-e1b278f5c3-confirmation-r0-a1-2ba89655"
+      ],
+      "delegated": [
+        "OC-x-ahmtsahin-agent-context-bench-b63c4acd3d-confirmation-r2-a1-af00e173",
+        "OC-x-l956615272-hub-dsh-token-usage-8c425815aa-confirmation-r0-a1-e17c55e5",
+        "OC-x-blakeb056-six-degrees-aec5ecaebb-confirmation-r1-a1-f75b2eaa",
+        "OC-x-metarhia-metawatch-e1b278f5c3-confirmation-r0-a1-2ba89655",
+        "OC-x-kannakuron-dsh-ide-git-09c63b85e5-confirmation-r1-a1-bf214426"
+      ]
+    },
+    "contractReachedWorker": 269,
+    "handoffs": 400
+  }
+}

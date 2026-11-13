@@ -1,0 +1,628 @@
+{
+  "at": "2026-11-06T13:49:15.978Z",
+  "batch": "ctrl-confirm-2-holdout-3e83b1b2af67",
+  "dir": "/home/arthur/Code/oh-my-pi-extensions/results/ctrl-confirm-2-holdout/ctrl-confirm-2-holdout-3e83b1b2af67",
+  "sealDigest": "1dbe71800c0fa04b5648aca1a47bdf9013f95a7fd399176f6e3bf2c72aa2b7ca",
+  "tasks": 93,
+  "families": 54,
+  "owners": 51,
+  "taskIds": [
+    "x-ahmtsahin-agent-context-bench-134ba49b33",
+    "x-ahmtsahin-agent-context-bench-3912f5ad87",
+    "x-ahmtsahin-agent-context-bench-b63c4acd3d",
+    "x-alannerfranklin-dsh-relay-isolation-dfccc5d2c1",
+    "x-antonioprosperi2-svg-beeladybug-universal-5f88e1d66c",
+    "x-antonioprosperi2-svg-beeladybug-universal-a89811cf4e",
+    "x-antonioprosperi2-svg-beeladybug-universal-b6e1d19aa0",
+    "x-avoidwork-filesize-js-109ae605ab",
+    "x-avoidwork-filesize-js-64b4a2611f",
+    "x-avoidwork-filesize-js-f5bd84b81b",
+    "x-avoidwork-tiny-lru-30397d7a76",
+    "x-avoidwork-tiny-lru-da90b42c31",
+    "x-azu-setup-npm-trusted-publish-6104f8bee9",
+    "x-blakeb056-six-degrees-aec5ecaebb",
+    "x-blucca-n8n-check-0d73b43caa",
+    "x-blucca-n8n-check-1c589621bf",
+    "x-blucca-n8n-check-a7fa85ded5",
+    "x-cccalana-gatewaycheck-2d961d088c",
+    "x-cheapestinference-claude-auto-retry-6d605a5d91",
+    "x-cheapestinference-claude-auto-retry-7a1ddf10b2",
+    "x-cheapestinference-claude-auto-retry-f859f12fea",
+    "x-codyrobertson-gh-issue-lease-f0f573c258",
+    "x-dgrr-studio-dice-141a1a8d6b",
+    "x-dhaupin-crashtest-5c6ce1d53f",
+    "x-dhaupin-crashtest-e70988c5b4",
+    "x-dhaupin-crashtest-eb4c5fee65",
+    "x-dirop1-pi-delay-prompt-a7948a14a4",
+    "x-drewthomas00-tcpa-quiet-hours-d929633b54",
+    "x-ducaoya-pi-hang-guard-b75099e5bc",
+    "x-evomap-gep-sdk-js-6a387bbe32",
+    "x-fugangcui-speakremix-codes-7bf8b8fb00",
+    "x-ghostpawjs-grimoire-4a1c83b504",
+    "x-ghostpawjs-grimoire-b7fc19a032",
+    "x-ghostpawjs-grimoire-c5aa4b66a3",
+    "x-groophylifefor-heap-analysis-10ddfecb6b",
+    "x-groophylifefor-heap-analysis-71cd48f8ba",
+    "x-groophylifefor-heap-analysis-bfc733de41",
+    "x-guorunjie-agentic-workflow-guard-79f4aec3b8",
+    "x-guorunjie-agentic-workflow-guard-bc30533f19",
+    "x-guorunjie-agentic-workflow-guard-c1322204ff",
+    "x-guotree-magpie-websearch-466d493835",
+    "x-guotree-magpie-websearch-a74cfdcbe9",
+    "x-guotree-magpie-websearch-c4d8db57f9",
+    "x-igormel81-dsh-chat-cost-8b37b31edf",
+    "x-insession-space-insession-sdk-29c8a3b74e",
+    "x-insession-space-insession-sdk-c721ee0c1d",
+    "x-insession-space-insession-sdk-f9057e96cd",
+    "x-johnhenry-mport-b70dabf4e7",
+    "x-johnhenry-spintax-8e582b7cde",
+    "x-kannakuron-dsh-ide-git-09c63b85e5",
+    "x-kannakuron-dsh-ide-git-317ae73aa6",
+    "x-kannakuron-dsh-ide-git-3599010391",
+    "x-l956615272-hub-dsh-token-usage-4fef2ea940",
+    "x-l956615272-hub-dsh-token-usage-76b731dfd1",
+    "x-l956615272-hub-dsh-token-usage-8c425815aa",
+    "x-legible-sh-mutex-13867857ca",
+    "x-legible-sh-mutex-3a0cb5dd56",
+    "x-lhf198-dsh-prompt-optimizer-42cfbd7f35",
+    "x-lhf198-dsh-prompt-optimizer-fe5772419b",
+    "x-lucastonidev-patrickuser-05e5089acf",
+    "x-magrinj-hermes-intl-22ec94ee24",
+    "x-magrinj-hermes-intl-e1877c8147",
+    "x-marko-js-htmljs-parser-a576b5c86e",
+    "x-metarhia-metawatch-af9528a554",
+    "x-metarhia-metawatch-e1b278f5c3",
+    "x-misterkante-cc-model-router-ced46f7612",
+    "x-mr-mihu-dsh-dbhub-live-534032da27",
+    "x-mr-mihu-dsh-dbhub-live-f9d568569b",
+    "x-mukundakatta-agentfit-510c32d490",
+    "x-nodemailer-libqp-7bbdcbeac4",
+    "x-opopeshku-cronalive-node-a6f621977e",
+    "x-otto-ottospace-mizan-f2f8fcb2c8",
+    "x-panpontomate-solana-risk-engine-e2582ea728",
+    "x-runcat-tommy-dsh-panda-calendar-667f1793e5",
+    "x-runcat-tommy-dsh-panda-calendar-ec35ab2529",
+    "x-sanchit07-dev-node-core-easy-kit-268de6812c",
+    "x-sanchit07-dev-node-core-easy-kit-39890fd99f",
+    "x-sanchit07-dev-node-core-easy-kit-70f95fc1b2",
+    "x-sandsoftwaresolutions-ss-duration-ac6449101c",
+    "x-sandsoftwaresolutions-ss-human-format-ade5993e4f",
+    "x-shelamkoff-event-bus-cc858589eb",
+    "x-short-io-envalid-unused-f77a6c7072",
+    "x-shrinivas-sn-adapter-ingestion-499701352b",
+    "x-sindresorhus-clone-regexp-0594242c88",
+    "x-spartawhy117-dsh-token-dash-ba4082dce3",
+    "x-toolbuilder-list-1914dfac5e",
+    "x-toolbuilder-list-2b73f7f42c",
+    "x-toolbuilder-list-bc22a50372",
+    "x-w8s-rng-with-intention-d6d0f34e4c",
+    "x-wenaixi-dsh-prompt-history-396b4d7ce7",
+    "x-wenaixi-dsh-prompt-history-87cd943992",
+    "x-wenaixi-dsh-prompt-history-f2c2ad01c0",
+    "x-yammm-ynode-ylog-d5c5c3f62e"
+  ],
+  "perFamily": {
+    "gh:ahmtsahin/agent-context-bench": 3,
+    "gh:alannerfranklin/dsh-relay-isolation": 1,
+    "gh:antonioprosperi2-svg/beeladybug-universal": 3,
+    "gh:avoidwork/filesize.js": 3,
+    "gh:avoidwork/tiny-lru": 2,
+    "gh:azu/setup-npm-trusted-publish": 1,
+    "gh:blakeb056/six-degrees": 1,
+    "gh:blucca/n8n-check": 3,
+    "gh:cccalana/gatewaycheck": 1,
+    "gh:cheapestinference/claude-auto-retry": 3,
+    "gh:codyrobertson/gh-issue-lease": 1,
+    "gh:dgrr-studio/dice": 1,
+    "gh:dhaupin/crashtest": 3,
+    "gh:dirop1/pi-delay-prompt": 1,
+    "gh:drewthomas00/tcpa-quiet-hours": 1,
+    "gh:ducaoya/pi-hang-guard": 1,
+    "gh:evomap/gep-sdk-js": 1,
+    "gh:fugangcui/speakremix-codes": 1,
+    "gh:ghostpawjs/grimoire": 3,
+    "gh:groophylifefor/heap-analysis": 3,
+    "gh:guorunjie/agentic-workflow-guard": 3,
+    "gh:guotree/magpie-websearch": 3,
+    "gh:igormel81/dsh-chat-cost": 1,
+    "gh:insession-space/insession-sdk": 3,
+    "gh:johnhenry/mport": 1,
+    "gh:johnhenry/spintax": 1,
+    "gh:kannakuron/dsh-ide-git": 3,
+    "gh:l956615272-hub/dsh-token-usage": 3,
+    "gh:legible-sh/mutex": 2,
+    "gh:lhf198/dsh-prompt-optimizer": 2,
+    "gh:lucastonidev/patrickuser": 1,
+    "gh:magrinj/hermes-intl": 2,
+    "gh:marko-js/htmljs-parser": 1,
+    "gh:metarhia/metawatch": 2,
+    "gh:misterkante/cc-model-router": 1,
+    "gh:mr-mihu/dsh-dbhub-live": 2,
+    "gh:mukundakatta/agentfit": 1,
+    "gh:nodemailer/libqp": 1,
+    "gh:opopeshku/cronalive-node": 1,
+    "gh:otto-ottospace/mizan": 1,
+    "gh:panpontomate/solana-risk-engine": 1,
+    "gh:runcat-tommy/dsh-panda-calendar": 2,
+    "gh:sanchit07-dev/node-core-easy-kit": 3,
+    "gh:sandsoftwaresolutions/ss-duration": 1,
+    "gh:sandsoftwaresolutions/ss-human-format": 1,
+    "gh:shelamkoff/event-bus": 1,
+    "gh:short-io/envalid-unused": 1,
+    "gh:shrinivas-sn/adapter-ingestion": 1,
+    "gh:sindresorhus/clone-regexp": 1,
+    "gh:spartawhy117/dsh-token-dash": 1,
+    "gh:toolbuilder/list": 3,
+    "gh:w8s/rng-with-intention": 1,
+    "gh:wenaixi/dsh-prompt-history": 3,
+    "gh:yammm/ynode-ylog": 1
+  },
+  "decisions": [
+    {
+      "id": "x-avoidwork-tiny-lru-30397d7a76",
+      "family": "gh:avoidwork/tiny-lru",
+      "decision": "selected"
+    },
+    {
+      "id": "x-avoidwork-tiny-lru-da90b42c31",
+      "family": "gh:avoidwork/tiny-lru",
+      "decision": "selected"
+    },
+    {
+      "id": "x-marko-js-htmljs-parser-a576b5c86e",
+      "family": "gh:marko-js/htmljs-parser",
+      "decision": "selected"
+    },
+    {
+      "id": "x-sindresorhus-clone-regexp-0594242c88",
+      "family": "gh:sindresorhus/clone-regexp",
+      "decision": "selected"
+    },
+    {
+      "id": "x-avoidwork-filesize-js-109ae605ab",
+      "family": "gh:avoidwork/filesize.js",
+      "decision": "selected"
+    },
+    {
+      "id": "x-avoidwork-filesize-js-f5bd84b81b",
+      "family": "gh:avoidwork/filesize.js",
+      "decision": "selected"
+    },
+    {
+      "id": "x-avoidwork-filesize-js-64b4a2611f",
+      "family": "gh:avoidwork/filesize.js",
+      "decision": "selected"
+    },
+    {
+      "id": "x-metarhia-metawatch-af9528a554",
+      "family": "gh:metarhia/metawatch",
+      "decision": "selected"
+    },
+    {
+      "id": "x-metarhia-metawatch-e1b278f5c3",
+      "family": "gh:metarhia/metawatch",
+      "decision": "selected"
+    },
+    {
+      "id": "x-dhaupin-crashtest-e70988c5b4",
+      "family": "gh:dhaupin/crashtest",
+      "decision": "selected"
+    },
+    {
+      "id": "x-dhaupin-crashtest-eb4c5fee65",
+      "family": "gh:dhaupin/crashtest",
+      "decision": "selected"
+    },
+    {
+      "id": "x-dhaupin-crashtest-5c6ce1d53f",
+      "family": "gh:dhaupin/crashtest",
+      "decision": "selected"
+    },
+    {
+      "id": "x-w8s-rng-with-intention-d6d0f34e4c",
+      "family": "gh:w8s/rng-with-intention",
+      "decision": "selected"
+    },
+    {
+      "id": "x-short-io-envalid-unused-f77a6c7072",
+      "family": "gh:short-io/envalid-unused",
+      "decision": "selected"
+    },
+    {
+      "id": "x-ghostpawjs-grimoire-c5aa4b66a3",
+      "family": "gh:ghostpawjs/grimoire",
+      "decision": "selected"
+    },
+    {
+      "id": "x-ghostpawjs-grimoire-4a1c83b504",
+      "family": "gh:ghostpawjs/grimoire",
+      "decision": "selected"
+    },
+    {
+      "id": "x-ghostpawjs-grimoire-b7fc19a032",
+      "family": "gh:ghostpawjs/grimoire",
+      "decision": "selected"
+    },
+    {
+      "id": "x-antonioprosperi2-svg-beeladybug-universal-b6e1d19aa0",
+      "family": "gh:antonioprosperi2-svg/beeladybug-universal",
+      "decision": "selected"
+    },
+    {
+      "id": "x-antonioprosperi2-svg-beeladybug-universal-a89811cf4e",
+      "family": "gh:antonioprosperi2-svg/beeladybug-universal",
+      "decision": "selected"
+    },
+    {
+      "id": "x-antonioprosperi2-svg-beeladybug-universal-5f88e1d66c",
+      "family": "gh:antonioprosperi2-svg/beeladybug-universal",
+      "decision": "selected"
+    },
+    {
+      "id": "x-drewthomas00-tcpa-quiet-hours-d929633b54",
+      "family": "gh:drewthomas00/tcpa-quiet-hours",
+      "decision": "selected"
+    },
+    {
+      "id": "x-spartawhy117-dsh-token-dash-ba4082dce3",
+      "family": "gh:spartawhy117/dsh-token-dash",
+      "decision": "selected"
+    },
+    {
+      "id": "x-mukundakatta-agentfit-510c32d490",
+      "family": "gh:mukundakatta/agentfit",
+      "decision": "selected"
+    },
+    {
+      "id": "x-lhf198-dsh-prompt-optimizer-fe5772419b",
+      "family": "gh:lhf198/dsh-prompt-optimizer",
+      "decision": "selected"
+    },
+    {
+      "id": "x-lhf198-dsh-prompt-optimizer-42cfbd7f35",
+      "family": "gh:lhf198/dsh-prompt-optimizer",
+      "decision": "selected"
+    },
+    {
+      "id": "x-kannakuron-dsh-ide-git-09c63b85e5",
+      "family": "gh:kannakuron/dsh-ide-git",
+      "decision": "selected"
+    },
+    {
+      "id": "x-kannakuron-dsh-ide-git-3599010391",
+      "family": "gh:kannakuron/dsh-ide-git",
+      "decision": "selected"
+    },
+    {
+      "id": "x-kannakuron-dsh-ide-git-317ae73aa6",
+      "family": "gh:kannakuron/dsh-ide-git",
+      "decision": "selected"
+    },
+    {
+      "id": "x-magrinj-hermes-intl-e1877c8147",
+      "family": "gh:magrinj/hermes-intl",
+      "decision": "selected"
+    },
+    {
+      "id": "x-magrinj-hermes-intl-22ec94ee24",
+      "family": "gh:magrinj/hermes-intl",
+      "decision": "selected"
+    },
+    {
+      "id": "x-dirop1-pi-delay-prompt-a7948a14a4",
+      "family": "gh:dirop1/pi-delay-prompt",
+      "decision": "selected"
+    },
+    {
+      "id": "x-cheapestinference-claude-auto-retry-f859f12fea",
+      "family": "gh:cheapestinference/claude-auto-retry",
+      "decision": "selected"
+    },
+    {
+      "id": "x-cheapestinference-claude-auto-retry-6d605a5d91",
+      "family": "gh:cheapestinference/claude-auto-retry",
+      "decision": "selected"
+    },
+    {
+      "id": "x-cheapestinference-claude-auto-retry-7a1ddf10b2",
+      "family": "gh:cheapestinference/claude-auto-retry",
+      "decision": "selected"
+    },
+    {
+      "id": "x-panpontomate-solana-risk-engine-e2582ea728",
+      "family": "gh:panpontomate/solana-risk-engine",
+      "decision": "selected"
+    },
+    {
+      "id": "x-toolbuilder-list-2b73f7f42c",
+      "family": "gh:toolbuilder/list",
+      "decision": "selected"
+    },
+    {
+      "id": "x-toolbuilder-list-1914dfac5e",
+      "family": "gh:toolbuilder/list",
+      "decision": "selected"
+    },
+    {
+      "id": "x-toolbuilder-list-bc22a50372",
+      "family": "gh:toolbuilder/list",
+      "decision": "selected"
+    },
+    {
+      "id": "x-ahmtsahin-agent-context-bench-134ba49b33",
+      "family": "gh:ahmtsahin/agent-context-bench",
+      "decision": "selected"
+    },
+    {
+      "id": "x-ahmtsahin-agent-context-bench-3912f5ad87",
+      "family": "gh:ahmtsahin/agent-context-bench",
+      "decision": "selected"
+    },
+    {
+      "id": "x-ahmtsahin-agent-context-bench-b63c4acd3d",
+      "family": "gh:ahmtsahin/agent-context-bench",
+      "decision": "selected"
+    },
+    {
+      "id": "x-sandsoftwaresolutions-ss-human-format-ade5993e4f",
+      "family": "gh:sandsoftwaresolutions/ss-human-format",
+      "decision": "selected"
+    },
+    {
+      "id": "x-yammm-ynode-ylog-d5c5c3f62e",
+      "family": "gh:yammm/ynode-ylog",
+      "decision": "selected"
+    },
+    {
+      "id": "x-fugangcui-speakremix-codes-7bf8b8fb00",
+      "family": "gh:fugangcui/speakremix-codes",
+      "decision": "selected"
+    },
+    {
+      "id": "x-ducaoya-pi-hang-guard-b75099e5bc",
+      "family": "gh:ducaoya/pi-hang-guard",
+      "decision": "selected"
+    },
+    {
+      "id": "x-sandsoftwaresolutions-ss-duration-ac6449101c",
+      "family": "gh:sandsoftwaresolutions/ss-duration",
+      "decision": "selected"
+    },
+    {
+      "id": "x-runcat-tommy-dsh-panda-calendar-ec35ab2529",
+      "family": "gh:runcat-tommy/dsh-panda-calendar",
+      "decision": "selected"
+    },
+    {
+      "id": "x-runcat-tommy-dsh-panda-calendar-667f1793e5",
+      "family": "gh:runcat-tommy/dsh-panda-calendar",
+      "decision": "selected"
+    },
+    {
+      "id": "x-mr-mihu-dsh-dbhub-live-534032da27",
+      "family": "gh:mr-mihu/dsh-dbhub-live",
+      "decision": "selected"
+    },
+    {
+      "id": "x-mr-mihu-dsh-dbhub-live-f9d568569b",
+      "family": "gh:mr-mihu/dsh-dbhub-live",
+      "decision": "selected"
+    },
+    {
+      "id": "x-blakeb056-six-degrees-aec5ecaebb",
+      "family": "gh:blakeb056/six-degrees",
+      "decision": "selected"
+    },
+    {
+      "id": "x-sanchit07-dev-node-core-easy-kit-39890fd99f",
+      "family": "gh:sanchit07-dev/node-core-easy-kit",
+      "decision": "selected"
+    },
+    {
+      "id": "x-sanchit07-dev-node-core-easy-kit-70f95fc1b2",
+      "family": "gh:sanchit07-dev/node-core-easy-kit",
+      "decision": "selected"
+    },
+    {
+      "id": "x-sanchit07-dev-node-core-easy-kit-268de6812c",
+      "family": "gh:sanchit07-dev/node-core-easy-kit",
+      "decision": "selected"
+    },
+    {
+      "id": "x-dgrr-studio-dice-141a1a8d6b",
+      "family": "gh:dgrr-studio/dice",
+      "decision": "selected"
+    },
+    {
+      "id": "x-l956615272-hub-dsh-token-usage-8c425815aa",
+      "family": "gh:l956615272-hub/dsh-token-usage",
+      "decision": "selected"
+    },
+    {
+      "id": "x-l956615272-hub-dsh-token-usage-4fef2ea940",
+      "family": "gh:l956615272-hub/dsh-token-usage",
+      "decision": "selected"
+    },
+    {
+      "id": "x-l956615272-hub-dsh-token-usage-76b731dfd1",
+      "family": "gh:l956615272-hub/dsh-token-usage",
+      "decision": "selected"
+    },
+    {
+      "id": "x-igormel81-dsh-chat-cost-8b37b31edf",
+      "family": "gh:igormel81/dsh-chat-cost",
+      "decision": "selected"
+    },
+    {
+      "id": "x-codyrobertson-gh-issue-lease-f0f573c258",
+      "family": "gh:codyrobertson/gh-issue-lease",
+      "decision": "selected"
+    },
+    {
+      "id": "x-evomap-gep-sdk-js-6a387bbe32",
+      "family": "gh:evomap/gep-sdk-js",
+      "decision": "selected"
+    },
+    {
+      "id": "x-guotree-magpie-websearch-a74cfdcbe9",
+      "family": "gh:guotree/magpie-websearch",
+      "decision": "selected"
+    },
+    {
+      "id": "x-guotree-magpie-websearch-c4d8db57f9",
+      "family": "gh:guotree/magpie-websearch",
+      "decision": "selected"
+    },
+    {
+      "id": "x-guotree-magpie-websearch-466d493835",
+      "family": "gh:guotree/magpie-websearch",
+      "decision": "selected"
+    },
+    {
+      "id": "x-nodemailer-libqp-7bbdcbeac4",
+      "family": "gh:nodemailer/libqp",
+      "decision": "selected"
+    },
+    {
+      "id": "x-johnhenry-spintax-8e582b7cde",
+      "family": "gh:johnhenry/spintax",
+      "decision": "selected"
+    },
+    {
+      "id": "x-lucastonidev-patrickuser-05e5089acf",
+      "family": "gh:lucastonidev/patrickuser",
+      "decision": "selected"
+    },
+    {
+      "id": "x-shelamkoff-event-bus-cc858589eb",
+      "family": "gh:shelamkoff/event-bus",
+      "decision": "selected"
+    },
+    {
+      "id": "x-johnhenry-mport-b70dabf4e7",
+      "family": "gh:johnhenry/mport",
+      "decision": "selected"
+    },
+    {
+      "id": "x-shrinivas-sn-adapter-ingestion-499701352b",
+      "family": "gh:shrinivas-sn/adapter-ingestion",
+      "decision": "selected"
+    },
+    {
+      "id": "x-misterkante-cc-model-router-ced46f7612",
+      "family": "gh:misterkante/cc-model-router",
+      "decision": "selected"
+    },
+    {
+      "id": "x-wenaixi-dsh-prompt-history-396b4d7ce7",
+      "family": "gh:wenaixi/dsh-prompt-history",
+      "decision": "selected"
+    },
+    {
+      "id": "x-wenaixi-dsh-prompt-history-87cd943992",
+      "family": "gh:wenaixi/dsh-prompt-history",
+      "decision": "selected"
+    },
+    {
+      "id": "x-wenaixi-dsh-prompt-history-f2c2ad01c0",
+      "family": "gh:wenaixi/dsh-prompt-history",
+      "decision": "selected"
+    },
+    {
+      "id": "x-groophylifefor-heap-analysis-10ddfecb6b",
+      "family": "gh:groophylifefor/heap-analysis",
+      "decision": "selected"
+    },
+    {
+      "id": "x-groophylifefor-heap-analysis-bfc733de41",
+      "family": "gh:groophylifefor/heap-analysis",
+      "decision": "selected"
+    },
+    {
+      "id": "x-groophylifefor-heap-analysis-71cd48f8ba",
+      "family": "gh:groophylifefor/heap-analysis",
+      "decision": "selected"
+    },
+    {
+      "id": "x-insession-space-insession-sdk-29c8a3b74e",
+      "family": "gh:insession-space/insession-sdk",
+      "decision": "selected"
+    },
+    {
+      "id": "x-insession-space-insession-sdk-f9057e96cd",
+      "family": "gh:insession-space/insession-sdk",
+      "decision": "selected"
+    },
+    {
+      "id": "x-insession-space-insession-sdk-c721ee0c1d",
+      "family": "gh:insession-space/insession-sdk",
+      "decision": "selected"
+    },
+    {
+      "id": "x-alannerfranklin-dsh-relay-isolation-dfccc5d2c1",
+      "family": "gh:alannerfranklin/dsh-relay-isolation",
+      "decision": "selected"
+    },
+    {
+      "id": "x-azu-setup-npm-trusted-publish-6104f8bee9",
+      "family": "gh:azu/setup-npm-trusted-publish",
+      "decision": "selected"
+    },
+    {
+      "id": "x-legible-sh-mutex-3a0cb5dd56",
+      "family": "gh:legible-sh/mutex",
+      "decision": "selected"
+    },
+    {
+      "id": "x-legible-sh-mutex-13867857ca",
+      "family": "gh:legible-sh/mutex",
+      "decision": "selected"
+    },
+    {
+      "id": "x-opopeshku-cronalive-node-a6f621977e",
+      "family": "gh:opopeshku/cronalive-node",
+      "decision": "selected"
+    },
+    {
+      "id": "x-otto-ottospace-mizan-f2f8fcb2c8",
+      "family": "gh:otto-ottospace/mizan",
+      "decision": "selected"
+    },
+    {
+      "id": "x-cccalana-gatewaycheck-2d961d088c",
+      "family": "gh:cccalana/gatewaycheck",
+      "decision": "selected"
+    },
+    {
+      "id": "x-blucca-n8n-check-0d73b43caa",
+      "family": "gh:blucca/n8n-check",
+      "decision": "selected"
+    },
+    {
+      "id": "x-blucca-n8n-check-1c589621bf",
+      "family": "gh:blucca/n8n-check",
+      "decision": "selected"
+    },
+    {
+      "id": "x-blucca-n8n-check-a7fa85ded5",
+      "family": "gh:blucca/n8n-check",
+      "decision": "selected"
+    },
+    {
+      "id": "x-guorunjie-agentic-workflow-guard-c1322204ff",
+      "family": "gh:guorunjie/agentic-workflow-guard",
+      "decision": "selected"
+    },
+    {
+      "id": "x-guorunjie-agentic-workflow-guard-79f4aec3b8",
+      "family": "gh:guorunjie/agentic-workflow-guard",
+      "decision": "selected"
+    },
+    {
+      "id": "x-guorunjie-agentic-workflow-guard-bc30533f19",
+      "family": "gh:guorunjie/agentic-workflow-guard",
+      "decision": "selected"
+    }
+  ],
+  "reviewDigest": "6be1dec06eafaed08e184d9bd234a3d317ca5e20f20963e66a74d6e3670368dd"
+}

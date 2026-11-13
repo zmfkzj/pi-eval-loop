@@ -1,0 +1,708 @@
+{
+  "units": 8,
+  "design": {
+    "arms": [
+      "OC",
+      "OCR",
+      "PC",
+      "PCR"
+    ],
+    "tasks": [
+      "a6-typo-message",
+      "c4-malformed-lines"
+    ],
+    "repeats": 1,
+    "scheduled": 8
+  },
+  "complete": true,
+  "missing": [],
+  "summary": {
+    "OC": {
+      "units": 2,
+      "legacy": {
+        "tasks": 2,
+        "units": 2,
+        "successes": 2,
+        "rate": 1,
+        "reliable": 1,
+        "reliableTasks": 2,
+        "noneTasks": 0,
+        "mixedTasks": 0,
+        "inconsistency": 0
+      },
+      "strict": {
+        "tasks": 2,
+        "units": 2,
+        "successes": 1,
+        "rate": 0.5,
+        "reliable": 0.5,
+        "reliableTasks": 1,
+        "noneTasks": 1,
+        "mixedTasks": 0,
+        "inconsistency": 0
+      },
+      "functional": {
+        "tasks": 2,
+        "units": 2,
+        "successes": 2,
+        "rate": 1,
+        "reliable": 1,
+        "reliableTasks": 2,
+        "noneTasks": 0,
+        "mixedTasks": 0,
+        "inconsistency": 0
+      },
+      "legacyFail": 0,
+      "strictFail": 1,
+      "strictOnly": 1,
+      "leaks": 0,
+      "critical": 0,
+      "terminal": {
+        "completed": 2
+      },
+      "infra": 0,
+      "requests": 27,
+      "inputTokens": 194773,
+      "outputTokens": 4012,
+      "cacheTokens": 125952,
+      "wallHours": 0.04191,
+      "atRequestCeiling": 0
+    },
+    "OCR": {
+      "units": 2,
+      "legacy": {
+        "tasks": 2,
+        "units": 2,
+        "successes": 2,
+        "rate": 1,
+        "reliable": 1,
+        "reliableTasks": 2,
+        "noneTasks": 0,
+        "mixedTasks": 0,
+        "inconsistency": 0
+      },
+      "strict": {
+        "tasks": 2,
+        "units": 2,
+        "successes": 2,
+        "rate": 1,
+        "reliable": 1,
+        "reliableTasks": 2,
+        "noneTasks": 0,
+        "mixedTasks": 0,
+        "inconsistency": 0
+      },
+      "functional": {
+        "tasks": 2,
+        "units": 2,
+        "successes": 2,
+        "rate": 1,
+        "reliable": 1,
+        "reliableTasks": 2,
+        "noneTasks": 0,
+        "mixedTasks": 0,
+        "inconsistency": 0
+      },
+      "legacyFail": 0,
+      "strictFail": 0,
+      "strictOnly": 0,
+      "leaks": 0,
+      "critical": 0,
+      "terminal": {
+        "completed": 2
+      },
+      "infra": 0,
+      "requests": 25,
+      "inputTokens": 196976,
+      "outputTokens": 4058,
+      "cacheTokens": 118016,
+      "wallHours": 0.039786388888888885,
+      "atRequestCeiling": 0
+    },
+    "PC": {
+      "units": 2,
+      "legacy": {
+        "tasks": 2,
+        "units": 2,
+        "successes": 2,
+        "rate": 1,
+        "reliable": 1,
+        "reliableTasks": 2,
+        "noneTasks": 0,
+        "mixedTasks": 0,
+        "inconsistency": 0
+      },
+      "strict": {
+        "tasks": 2,
+        "units": 2,
+        "successes": 2,
+        "rate": 1,
+        "reliable": 1,
+        "reliableTasks": 2,
+        "noneTasks": 0,
+        "mixedTasks": 0,
+        "inconsistency": 0
+      },
+      "functional": {
+        "tasks": 2,
+        "units": 2,
+        "successes": 2,
+        "rate": 1,
+        "reliable": 1,
+        "reliableTasks": 2,
+        "noneTasks": 0,
+        "mixedTasks": 0,
+        "inconsistency": 0
+      },
+      "legacyFail": 0,
+      "strictFail": 0,
+      "strictOnly": 0,
+      "leaks": 0,
+      "critical": 0,
+      "terminal": {
+        "completed": 2
+      },
+      "infra": 0,
+      "requests": 13,
+      "inputTokens": 30938,
+      "outputTokens": 786,
+      "cacheTokens": 12288,
+      "wallHours": 0.012192777777777778,
+      "atRequestCeiling": 0
+    },
+    "PCR": {
+      "units": 2,
+      "legacy": {
+        "tasks": 2,
+        "units": 2,
+        "successes": 2,
+        "rate": 1,
+        "reliable": 1,
+        "reliableTasks": 2,
+        "noneTasks": 0,
+        "mixedTasks": 0,
+        "inconsistency": 0
+      },
+      "strict": {
+        "tasks": 2,
+        "units": 2,
+        "successes": 2,
+        "rate": 1,
+        "reliable": 1,
+        "reliableTasks": 2,
+        "noneTasks": 0,
+        "mixedTasks": 0,
+        "inconsistency": 0
+      },
+      "functional": {
+        "tasks": 2,
+        "units": 2,
+        "successes": 2,
+        "rate": 1,
+        "reliable": 1,
+        "reliableTasks": 2,
+        "noneTasks": 0,
+        "mixedTasks": 0,
+        "inconsistency": 0
+      },
+      "legacyFail": 0,
+      "strictFail": 0,
+      "strictOnly": 0,
+      "leaks": 0,
+      "critical": 0,
+      "terminal": {
+        "completed": 2
+      },
+      "infra": 0,
+      "requests": 14,
+      "inputTokens": 40999,
+      "outputTokens": 824,
+      "cacheTokens": 26240,
+      "wallHours": 0.012881111111111112,
+      "atRequestCeiling": 0
+    }
+  },
+  "primary": {
+    "legacy": {
+      "tasks": 2,
+      "families": 2,
+      "rate": {
+        "estimate": 0,
+        "ci95": [
+          0,
+          0
+        ],
+        "pOneSided": 1,
+        "pTwoSided": 1,
+        "better": 0,
+        "worse": 0
+      },
+      "reliable": {
+        "estimate": 0,
+        "ci95": [
+          0,
+          0
+        ],
+        "pOneSided": 1,
+        "pTwoSided": 1,
+        "better": 0,
+        "worse": 0
+      }
+    },
+    "strict": {
+      "tasks": 2,
+      "families": 2,
+      "rate": {
+        "estimate": 0.5,
+        "ci95": [
+          0,
+          1
+        ],
+        "pOneSided": 0.5026248687565622,
+        "pTwoSided": 1,
+        "better": 1,
+        "worse": 0
+      },
+      "reliable": {
+        "estimate": 0.5,
+        "ci95": [
+          0,
+          1
+        ],
+        "pOneSided": 0.5016749162541873,
+        "pTwoSided": 1,
+        "better": 1,
+        "worse": 0
+      }
+    },
+    "functional": {
+      "tasks": 2,
+      "families": 2,
+      "rate": {
+        "estimate": 0,
+        "ci95": [
+          0,
+          0
+        ],
+        "pOneSided": 1,
+        "pTwoSided": 1,
+        "better": 0,
+        "worse": 0
+      },
+      "reliable": {
+        "estimate": 0,
+        "ci95": [
+          0,
+          0
+        ],
+        "pOneSided": 1,
+        "pTwoSided": 1,
+        "better": 0,
+        "worse": 0
+      }
+    }
+  },
+  "decision": {
+    "verdict": "INCONCLUSIVE",
+    "why": "at least one co-primary endpoint did not reach its preregistered bound (absence of evidence, not evidence of no effect)"
+  },
+  "verdict": {
+    "verdict": "KEEP_STABLE",
+    "why": "primary INCONCLUSIVE"
+  },
+  "secondary": {
+    "OCR-PCR": {
+      "legacy": {
+        "tasks": 2,
+        "families": 2,
+        "rate": {
+          "estimate": 0,
+          "ci95": [
+            0,
+            0
+          ],
+          "pOneSided": 1,
+          "pTwoSided": 1,
+          "better": 0,
+          "worse": 0
+        },
+        "reliable": {
+          "estimate": 0,
+          "ci95": [
+            0,
+            0
+          ],
+          "pOneSided": 1,
+          "pTwoSided": 1,
+          "better": 0,
+          "worse": 0
+        }
+      },
+      "strict": {
+        "tasks": 2,
+        "families": 2,
+        "rate": {
+          "estimate": 0,
+          "ci95": [
+            0,
+            0
+          ],
+          "pOneSided": 1,
+          "pTwoSided": 1,
+          "better": 0,
+          "worse": 0
+        },
+        "reliable": {
+          "estimate": 0,
+          "ci95": [
+            0,
+            0
+          ],
+          "pOneSided": 1,
+          "pTwoSided": 1,
+          "better": 0,
+          "worse": 0
+        }
+      },
+      "functional": {
+        "tasks": 2,
+        "families": 2,
+        "rate": {
+          "estimate": 0,
+          "ci95": [
+            0,
+            0
+          ],
+          "pOneSided": 1,
+          "pTwoSided": 1,
+          "better": 0,
+          "worse": 0
+        },
+        "reliable": {
+          "estimate": 0,
+          "ci95": [
+            0,
+            0
+          ],
+          "pOneSided": 1,
+          "pTwoSided": 1,
+          "better": 0,
+          "worse": 0
+        }
+      }
+    },
+    "PCR-PC": {
+      "legacy": {
+        "tasks": 2,
+        "families": 2,
+        "rate": {
+          "estimate": 0,
+          "ci95": [
+            0,
+            0
+          ],
+          "pOneSided": 1,
+          "pTwoSided": 1,
+          "better": 0,
+          "worse": 0
+        },
+        "reliable": {
+          "estimate": 0,
+          "ci95": [
+            0,
+            0
+          ],
+          "pOneSided": 1,
+          "pTwoSided": 1,
+          "better": 0,
+          "worse": 0
+        }
+      },
+      "strict": {
+        "tasks": 2,
+        "families": 2,
+        "rate": {
+          "estimate": 0,
+          "ci95": [
+            0,
+            0
+          ],
+          "pOneSided": 1,
+          "pTwoSided": 1,
+          "better": 0,
+          "worse": 0
+        },
+        "reliable": {
+          "estimate": 0,
+          "ci95": [
+            0,
+            0
+          ],
+          "pOneSided": 1,
+          "pTwoSided": 1,
+          "better": 0,
+          "worse": 0
+        }
+      },
+      "functional": {
+        "tasks": 2,
+        "families": 2,
+        "rate": {
+          "estimate": 0,
+          "ci95": [
+            0,
+            0
+          ],
+          "pOneSided": 1,
+          "pTwoSided": 1,
+          "better": 0,
+          "worse": 0
+        },
+        "reliable": {
+          "estimate": 0,
+          "ci95": [
+            0,
+            0
+          ],
+          "pOneSided": 1,
+          "pTwoSided": 1,
+          "better": 0,
+          "worse": 0
+        }
+      }
+    },
+    "OC-PC": {
+      "legacy": {
+        "tasks": 2,
+        "families": 2,
+        "rate": {
+          "estimate": 0,
+          "ci95": [
+            0,
+            0
+          ],
+          "pOneSided": 1,
+          "pTwoSided": 1,
+          "better": 0,
+          "worse": 0
+        },
+        "reliable": {
+          "estimate": 0,
+          "ci95": [
+            0,
+            0
+          ],
+          "pOneSided": 1,
+          "pTwoSided": 1,
+          "better": 0,
+          "worse": 0
+        }
+      },
+      "strict": {
+        "tasks": 2,
+        "families": 2,
+        "rate": {
+          "estimate": -0.5,
+          "ci95": [
+            -1,
+            0
+          ],
+          "pOneSided": 1,
+          "pTwoSided": 1,
+          "better": 0,
+          "worse": 1
+        },
+        "reliable": {
+          "estimate": -0.5,
+          "ci95": [
+            -1,
+            0
+          ],
+          "pOneSided": 1,
+          "pTwoSided": 1,
+          "better": 0,
+          "worse": 1
+        }
+      },
+      "functional": {
+        "tasks": 2,
+        "families": 2,
+        "rate": {
+          "estimate": 0,
+          "ci95": [
+            0,
+            0
+          ],
+          "pOneSided": 1,
+          "pTwoSided": 1,
+          "better": 0,
+          "worse": 0
+        },
+        "reliable": {
+          "estimate": 0,
+          "ci95": [
+            0,
+            0
+          ],
+          "pOneSided": 1,
+          "pTwoSided": 1,
+          "better": 0,
+          "worse": 0
+        }
+      }
+    }
+  },
+  "holmSecondary": {
+    "OCR-PCR:E1": 1,
+    "OCR-PCR:E2": 1,
+    "PCR-PC:E1": 1,
+    "PCR-PC:E2": 1,
+    "OC-PC:E1": 1,
+    "OC-PC:E2": 1
+  },
+  "interaction": 0,
+  "families": {
+    "pkg:ledger": {
+      "OC": {
+        "tasks": 1,
+        "units": 1,
+        "valid": 1
+      },
+      "OCR": {
+        "tasks": 1,
+        "units": 1,
+        "valid": 1
+      },
+      "PC": {
+        "tasks": 1,
+        "units": 1,
+        "valid": 1
+      },
+      "PCR": {
+        "tasks": 1,
+        "units": 1,
+        "valid": 1
+      }
+    },
+    "pkg:logtool": {
+      "OC": {
+        "tasks": 1,
+        "units": 1,
+        "valid": 1
+      },
+      "OCR": {
+        "tasks": 1,
+        "units": 1,
+        "valid": 1
+      },
+      "PC": {
+        "tasks": 1,
+        "units": 1,
+        "valid": 1
+      },
+      "PCR": {
+        "tasks": 1,
+        "units": 1,
+        "valid": 1
+      }
+    }
+  },
+  "familyRegressions": [],
+  "sensitivityNoInfra": {
+    "excluded": 0,
+    "primary": {
+      "tasks": 2,
+      "families": 2,
+      "rate": {
+        "estimate": 0,
+        "ci95": [
+          0,
+          0
+        ],
+        "pOneSided": 1,
+        "pTwoSided": 1,
+        "better": 0,
+        "worse": 0
+      },
+      "reliable": {
+        "estimate": 0,
+        "ci95": [
+          0,
+          0
+        ],
+        "pOneSided": 1,
+        "pTwoSided": 1,
+        "better": 0,
+        "worse": 0
+      }
+    }
+  },
+  "perTask": {
+    "OC": {
+      "a6-typo-message": [
+        1
+      ],
+      "c4-malformed-lines": [
+        1
+      ]
+    },
+    "OCR": {
+      "a6-typo-message": [
+        1
+      ],
+      "c4-malformed-lines": [
+        1
+      ]
+    },
+    "PC": {
+      "a6-typo-message": [
+        1
+      ],
+      "c4-malformed-lines": [
+        1
+      ]
+    },
+    "PCR": {
+      "a6-typo-message": [
+        1
+      ],
+      "c4-malformed-lines": [
+        1
+      ]
+    }
+  },
+  "perTaskStrict": {
+    "OC": {
+      "a6-typo-message": [
+        1
+      ],
+      "c4-malformed-lines": [
+        0
+      ]
+    },
+    "OCR": {
+      "a6-typo-message": [
+        1
+      ],
+      "c4-malformed-lines": [
+        1
+      ]
+    },
+    "PC": {
+      "a6-typo-message": [
+        1
+      ],
+      "c4-malformed-lines": [
+        1
+      ]
+    },
+    "PCR": {
+      "a6-typo-message": [
+        1
+      ],
+      "c4-malformed-lines": [
+        1
+      ]
+    }
+  }
+}

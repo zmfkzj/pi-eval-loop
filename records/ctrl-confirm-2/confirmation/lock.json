@@ -1,0 +1,824 @@
+{
+  "experiment": "ctrl-confirm-2",
+  "smoke": false,
+  "preregDigest": "c57de71464d075dbd97beed902edea44c36d3143debc2accf18ae0277daea9a0",
+  "envDigest": "f5ce141053523d5762388ddb6f4c826c8470ea7156015a8e2045359bd7ff22a9",
+  "queueDigest": "7f9d9fd8ad46981322c466308512a26e9c7f45e61ab71ef9e1109c5415d11d0b",
+  "files": {
+    "pi-eval-loop/src/ablation.mjs": "9ef9aaa20a507283baa86f0fa342867cbdae02af28ecec8068e607dd7725e2c9",
+    "pi-eval-loop/src/analysis.mjs": "d79f1987fbe987ca8d8bbfe041059eafc50ee29e6294692e7dc5f090e4bffc65",
+    "pi-eval-loop/src/app.mjs": "b4dc838f74b4df512f8b311652b083d7221d494be468056db1adc115f1f6aeb6",
+    "pi-eval-loop/src/archive.mjs": "5011acbb8d78f20e525db0700bb76e3e349e989a4efe531ff02eec55a4194b58",
+    "pi-eval-loop/src/checks.mjs": "5e818cfb7934890fa4bdb297dc74ff6b5cd0f03ed9366a164a18927e3f754de5",
+    "pi-eval-loop/src/cli.mjs": "204dda8579ca4239ea3118ed375a1c1690e79c6e553af72e7790f417efdd0abe",
+    "pi-eval-loop/src/contract.mjs": "8d814d70577d66234c5296cd3a6c63f7ea91d66797e9700aee813e087182ed3d",
+    "pi-eval-loop/src/datasets.mjs": "31c15c11c8eaa48259c2f534bb68d82c081f65f39e952607a416598d4314be15",
+    "pi-eval-loop/src/deploy.mjs": "3254278b2ed206c72b8c634ff5fb60ed1b7c6e0b07ee8b837144682c6811a966",
+    "pi-eval-loop/src/evaluator.mjs": "58f1e8d3ef78d8f70665b63a74f803683e02a0733ea8e04c62345afc06e7fd99",
+    "pi-eval-loop/src/faux-upstream.mjs": "7e98f2587472a936054fb2631c147dfa326de6eb34f026d16be64b5452731cad",
+    "pi-eval-loop/src/gate.mjs": "ace1c43e2e6e31cdc936b45d3bb5998d31d2bd4e3ab000764e1117e985b4d8c5",
+    "pi-eval-loop/src/grader.mjs": "ee2e91e1119c18f59503d2388171b9b68482e6d7ac6c3603631a017fee6cc615",
+    "pi-eval-loop/src/integrity.mjs": "1340b9fcd3b58a2c728d29cb5d4e775b4b6c0ce6864c25af4fc86e8e4d5d9cb6",
+    "pi-eval-loop/src/loop.mjs": "0db95ca0401d899b6bc547a5f58b15835b71167e7d735dd5df76b5e0b1bcf3d5",
+    "pi-eval-loop/src/metrics.mjs": "beb60e6c00c9d3402a4057bc32729a37cb6f7d7eb54194b020db82bf0b708ec8",
+    "pi-eval-loop/src/proposer.mjs": "ce781b5a39dcda59c8a99a3caece8274568a682ffa9a37e418b01b8001121cd8",
+    "pi-eval-loop/src/protocol.mjs": "9318470a1267b64eb5910ce7118d114a6cd62e03c2f3a37bdc480b3b526e0439",
+    "pi-eval-loop/src/report.mjs": "5af79cfdbbf223ce4ef8929e3b320e3958f086a285039cd01bc605cb581ec7e4",
+    "pi-eval-loop/src/rng.mjs": "7cb24904a94176a514cb29c82149bab5bfd0717db2ad9a103b4fec78e9e7b500",
+    "pi-eval-loop/src/runner.mjs": "d413e41e8b20ad374d29ca94ae6efb7fdf536a7e5e611732792742625b1490a6",
+    "pi-eval-loop/src/sandbox.mjs": "053174801d5c2ea7c01cfe8ed3a77debc3a1def4bd5cc4ba7c5d78ff0123c1e3",
+    "pi-eval-loop/src/selftest.mjs": "7fd97c27099557d23719d7231a49dee173d5a92e209fec8a22ee8712cb7908b1",
+    "pi-eval-loop/src/stats.mjs": "a423cdfb7b542380d922f2bb15ac3d2e9ac365db0053a3386aacd6b5ffec469c",
+    "pi-eval-loop/src/supply-cli.mjs": "b0b2745afbef48b652bd0c71ced8bd33ec2276ea17abc7c74219d13694498a2e",
+    "pi-eval-loop/src/supply-exercism.mjs": "c3423f964df574f44852535ac670dd3272de46fdb7a22c9d5ec556b64932890d",
+    "pi-eval-loop/src/supply.mjs": "d862ac1d631f01502201eae835354d3405d846eb2f5f51251d1e28a2ee578cfe",
+    "pi-eval-loop/src/util.mjs": "ad13afc4ad29399a29284d522f4af59e886345deefd0e658252aa5d8f7f194da",
+    "pi-eval-loop/src/worktree.mjs": "8318216d433cd73928378980aad56da70d9648095539ec5afd5c4cb336178199",
+    "orche/experiments/witness-replay/proxy.mjs": "67f839177a9961efe1354208e79fab8506316260f4ee51af27cf96dd99746ef5",
+    "orche/experiments/witness-replay/bridge.mjs": "85dc52cf5a467c1db776d68f4f20cfc2497ae22006c02232a56ec7c82fc28ab2",
+    "orche/experiments/witness-replay/sandbox.ts": "89fb3b861abf0507be3d3a429905b8305e818fc9b5aaf55c11159a5b9ede0871",
+    "orche/experiments/ultra-ab/protocol.ts": "c080e3efc4d0bfdbfe6f236902e6c6c94944d58da9664b8846ebcb0353ca53f6",
+    "pi-eval-loop/experiments/ctrl-ablation/fidelity.mjs": "a7c8a7e0b37a85480238be63d1cb735f0cbe19164532db4406126feb9ab9e0ce",
+    "pi-eval-loop/experiments/ctrl-ablation/lib.mjs": "ce71c1564f532ea81d6fa6cb0432dc895170b515a54b5674d23d4e5434f9c018",
+    "pi-eval-loop/experiments/ctrl-confirm-2/PREREGISTRATION.md": "f4ef1a125ec215aacf359f405430715e9fa82086814541312a975d9d521fdd77",
+    "pi-eval-loop/experiments/ctrl-confirm-2/analyze.mjs": "79c7326b598661bf5309e1d15bfac5e17a8d952f4f975001bb66fdb38de75775",
+    "pi-eval-loop/experiments/ctrl-confirm-2/assemble.mjs": "c0711ce74130e1f523f367520997f6b055da09799f9f15de795d3d32feb2bcf2",
+    "pi-eval-loop/experiments/ctrl-confirm-2/fidelity.mjs": "96c243943b0f55d019af3954d18a4d782aade0d333641b140c49cb5fb2ba4ec1",
+    "pi-eval-loop/experiments/ctrl-confirm-2/lib.mjs": "b571c847021beeb944e1774472a15b8ce26b9ce0161c7f88297a10171f5bb3c7",
+    "pi-eval-loop/experiments/ctrl-confirm-2/power.mjs": "fb11a29d2a6bcd61656929d186415645290990f2d38c6df7c9d2111d4f8afb26",
+    "pi-eval-loop/experiments/ctrl-confirm-2/prereg.json": "e952d916ab1450c1d0a35d25b4e84e73c18fc9157b9767c72390bd5a7679f756",
+    "pi-eval-loop/experiments/ctrl-confirm-2/run.mjs": "08c20b1da07a2427aee7973b80b9e93ffd0470278724a142bed5b4193e534b40",
+    "pi-eval-loop/experiments/ctrl-confirm-2/supply.mjs": "8d42bf6668a6445c1170f3e846da5b99dfaa9476f86e817cab70e8eb9e1242bb",
+    "pi-eval-loop/experiments/ctrl-confirm-2/variants/OCR.diff": "1c36e2b7eeae1864ba1649966ba20d1fc464ca6ee95fcbdc824fb632599d4694"
+  },
+  "harness": {
+    "OC": {
+      "identity": "e831a6b2bc19f0c707b55505db33a11b2c9d4d4a:single",
+      "tree": "6bfbe380e9782c21c65554d181631130ae4a2ea21ff00df6ef283b829f1e6195"
+    },
+    "OCR": {
+      "identity": "e831a6b2bc19f0c707b55505db33a11b2c9d4d4a:single+1c36e2b7eeae1864",
+      "tree": "503ae17237e202cb501f05d50ddeaadbcf8e17f58d5486c9d09102eb53190f16"
+    },
+    "PC": {
+      "identity": "pure",
+      "tree": null
+    },
+    "PCR": {
+      "identity": "pure+fb8e0a93e3e33541",
+      "tree": null
+    }
+  },
+  "tasks": {
+    "x-ahmtsahin-agent-context-bench-134ba49b33": "3a4f2932368051e8b30c59e120375a8f47c91a98f03c0edb91ff71ac255a0094",
+    "x-ahmtsahin-agent-context-bench-3912f5ad87": "9de83d7aa22660ae1ac96088012f8b4a1bbbdf17e2717ac63dac2053d5921989",
+    "x-ahmtsahin-agent-context-bench-b63c4acd3d": "10a0ece30f24cfeb8e9688607f1c931909be5b4d367e81c5223f94e0e6b73a6c",
+    "x-alannerfranklin-dsh-relay-isolation-dfccc5d2c1": "bd170e64453fc5c9ac9a8d7dab2aee55d1dabe4abe7d22a82afffb6c328e7fa9",
+    "x-antonioprosperi2-svg-beeladybug-universal-5f88e1d66c": "a49916f3c127ec885a3ff482e52c4ddacf0ca01f15d40c5933c746407a675dab",
+    "x-antonioprosperi2-svg-beeladybug-universal-a89811cf4e": "c74167f21c41b23faf4fe4037540de5ceef1831d9d7092ef5bdb4641dc34bb7d",
+    "x-antonioprosperi2-svg-beeladybug-universal-b6e1d19aa0": "16658af66f102aef712b7cd0ea4369a5ce044695911e20d0b863b10737ddb5f0",
+    "x-avoidwork-filesize-js-109ae605ab": "5909aa1cac46fc3fa504ad3370f86709441b72e67f84e6d5778f4ce05f880753",
+    "x-avoidwork-filesize-js-64b4a2611f": "7867d83497bcdc46d40939b31984d03c0e416dfeda37e2837f3bd5ed1cd85ce0",
+    "x-avoidwork-filesize-js-f5bd84b81b": "d5bdaec83b2a72df486bde7ed95c04552cc735bf526de3718ed0f2b2f7a7b496",
+    "x-avoidwork-tiny-lru-30397d7a76": "86647e6fbafc950ba40370e02bf10704179d1b86bbee953a41f3637dbe83f4a0",
+    "x-avoidwork-tiny-lru-da90b42c31": "e6a05cde30daddd1738dc706bb5796005189377715185e33872692e6bbfb7fb3",
+    "x-azu-setup-npm-trusted-publish-6104f8bee9": "c675465bc9401985fa8777f7c72ec024a57a28a71ed49e91b0b38ea78e80bc9c",
+    "x-blakeb056-six-degrees-aec5ecaebb": "34a6dcb62c18b6f937bf675730581e8492e597a7bdeeb0f4c9648736b555c46d",
+    "x-blucca-n8n-check-0d73b43caa": "07aebec4259d0b674d3642193e0b0be4e9953c6a39547710734586f98815554a",
+    "x-blucca-n8n-check-1c589621bf": "259e6ae7c38c8686222653b1d40731f1f284eb07939b6d72ccc39925b6890217",
+    "x-blucca-n8n-check-a7fa85ded5": "d72e588c6bd9ced3f9bbababdf01d29a4db3895c4c2580812a74a15bacbd0dd1",
+    "x-cccalana-gatewaycheck-2d961d088c": "d9dee08338dbfcbd2fbb9f626d7c5b225c761bd73f855ac96454de68f5cf247c",
+    "x-cheapestinference-claude-auto-retry-6d605a5d91": "8b8957b41a5b09d0cba9ef189cf5cab400ee325d046aeb6e1ae473294af738ee",
+    "x-cheapestinference-claude-auto-retry-7a1ddf10b2": "0e5d22c7d18e04d154a836f3bea4d092bd6c21898a13c8d2ba001b05af657bac",
+    "x-cheapestinference-claude-auto-retry-f859f12fea": "a310eaa17115da621ff0c92f9e9c98fe7fc263d29b244966b1693af87f5f60e3",
+    "x-codyrobertson-gh-issue-lease-f0f573c258": "df3227efcc842a66916016651c3a3613a3d5ebe610a53e42c1780af65994d39c",
+    "x-dgrr-studio-dice-141a1a8d6b": "b460af4692877125e0ce8ef6004f8e86778642fa6b65cc28c993f040b5d42a4a",
+    "x-dhaupin-crashtest-5c6ce1d53f": "80a8a436387b2d8cea92b9c90056a9c751e5e26faa02e56aa3c6695fe71cc571",
+    "x-dhaupin-crashtest-e70988c5b4": "a261d1b0eca8e16688c781d060926aab9b17a5641894d8f9d9f3166376e2e006",
+    "x-dhaupin-crashtest-eb4c5fee65": "91f41962ed071e701e876d1aedcfe34d371e3502f83fe5fd6173aca67c339faa",
+    "x-dirop1-pi-delay-prompt-a7948a14a4": "b096efff8fc6681e6f14f5c57ec26e4d887c5dfe80e16cfeac11205021e8079f",
+    "x-drewthomas00-tcpa-quiet-hours-d929633b54": "356c1c5030d5c541e4a08d9760d83800cb75345d4c8905d8f16ef33602bc158f",
+    "x-ducaoya-pi-hang-guard-b75099e5bc": "95f91221758fcb9cd6e9a0930185b2c21697906dcd8164f044618c63286bfcc9",
+    "x-evomap-gep-sdk-js-6a387bbe32": "a9a2dd95b9d2a77ff0ad5451fc90c4aa33d742e55388d7984aa91f76a57de9d3",
+    "x-fugangcui-speakremix-codes-7bf8b8fb00": "7feeabbfa356db5eb4c6983472fcc0d056380fd6e6d6464abbbc2bf3215fcddf",
+    "x-ghostpawjs-grimoire-4a1c83b504": "8895870483cb7e4f9386f206619762f068f97d8c686fa901b62d6011d1d73b50",
+    "x-ghostpawjs-grimoire-b7fc19a032": "2c3921ced0d7a0c52e2bff2407eb90f5754b85ea17836b833ba1853e44cfeeee",
+    "x-ghostpawjs-grimoire-c5aa4b66a3": "f6a7a28a445649df6384e644fcc3f8355cc6f49beaaf1114ece7fc5a1968d3f9",
+    "x-groophylifefor-heap-analysis-10ddfecb6b": "9b13267b619a475b1570422cde531fbecea0b31af574769a17ff11722910c391",
+    "x-groophylifefor-heap-analysis-71cd48f8ba": "14db5ca37473eb126980fc904c11d9560328ad32c52afaf1a6c8b8975fcb3324",
+    "x-groophylifefor-heap-analysis-bfc733de41": "735fe0cf8193a35ffe34298633bf49a1933b96dee57f97e1176f7081dae65562",
+    "x-guorunjie-agentic-workflow-guard-79f4aec3b8": "c14f092f9097241520b00d70fe0aabfd467eff05dbf2fe24c8fb37770878887b",
+    "x-guorunjie-agentic-workflow-guard-bc30533f19": "4b2bcd649c2418bb371ea22251a939b874e8439a72b2dc6031d5e97d17f296cb",
+    "x-guorunjie-agentic-workflow-guard-c1322204ff": "eda31b3d981f7597b5b57b0ec9066a0505e4b5b684593215d796cf852c613d7e",
+    "x-guotree-magpie-websearch-466d493835": "d2b3cd6d9972cbb9503474dab81686c7a12b6030e61f73a90f2efdadacc9d561",
+    "x-guotree-magpie-websearch-a74cfdcbe9": "77412a79609fb8be6ac423bc5675faa879b2833d5c2b24ae27ca6589728583bb",
+    "x-guotree-magpie-websearch-c4d8db57f9": "4b19469db412d3854ab3a6226ef12c872f637d53416a156ae76fdd68db26c7cc",
+    "x-igormel81-dsh-chat-cost-8b37b31edf": "6ffdc641efb8655ffe5eb9051dca38be8f5ace9000214ea954c90ba47342c217",
+    "x-insession-space-insession-sdk-29c8a3b74e": "cf0392be5592e8c768717a2ac394125bc180279f3b664301960eca0cfb72872f",
+    "x-insession-space-insession-sdk-c721ee0c1d": "baa24ce5e150493795d4cc097e2c26f4bb2014b5bff386b565ea7c6788123060",
+    "x-insession-space-insession-sdk-f9057e96cd": "6c274ea20e953754f5c0e2c04e69cd88a5cd4438407c2cba438c8ae6279653e5",
+    "x-johnhenry-mport-b70dabf4e7": "8bcf7d845ef54542f35b2297939a25ab9d0068e2c37f38c263a410553d376f3b",
+    "x-johnhenry-spintax-8e582b7cde": "e8310d647f3fc1025fef980647ee1324bdd58a6d2ef2c3a564f19cefef7f16a6",
+    "x-kannakuron-dsh-ide-git-09c63b85e5": "83c99e04ea37f63c89aaa82b9c8d90bbe3cf7e604217fc26983e8d971fe0afdf",
+    "x-kannakuron-dsh-ide-git-317ae73aa6": "a67b0bad98fb277544e73b7a2cc7d620138b139f3da9725a63dbb84745a409b0",
+    "x-kannakuron-dsh-ide-git-3599010391": "3f30e748964905770e726f6497d216db82237223592a1f9dafeb0b7dacd8cec4",
+    "x-l956615272-hub-dsh-token-usage-4fef2ea940": "7335f68f50ee6b51d03ec3e8fb283c0528675991b68671761fb7aa8b66f7fdc8",
+    "x-l956615272-hub-dsh-token-usage-76b731dfd1": "142d7259185fe8325daa7057efb9079d8f3335d7074304ad6942ad4c1b171952",
+    "x-l956615272-hub-dsh-token-usage-8c425815aa": "7148ff49be6d5baec397b7a82f9dc4d0bcfdbb8d2e129838e7b801e5cff042f7",
+    "x-legible-sh-mutex-13867857ca": "10c5f09811e99e0795c530cc34b31a65d10d249d2186ac2632663de761491600",
+    "x-legible-sh-mutex-3a0cb5dd56": "bb07e903f4985a408bcb619c8d3d222bf7482b9016a0f3b4d60979ff5bad6547",
+    "x-lhf198-dsh-prompt-optimizer-42cfbd7f35": "4ae63516a0b06035fbb519d7487f4b6fafcf511e1108acf56ec0474e636c1ff4",
+    "x-lhf198-dsh-prompt-optimizer-fe5772419b": "e854a936030aa5477c8cf99e5ca2691fdc6b8647937b85cb0767fdc27bd49d1f",
+    "x-lucastonidev-patrickuser-05e5089acf": "4aa557b609ef80a23bbe9443d8d7736c940da302fae6bf6391fa1afc52af47b9",
+    "x-magrinj-hermes-intl-22ec94ee24": "bf242f49f5dd9db1881647e9f9a5ee619eee5d0f4d9c58d60a263b7548680569",
+    "x-magrinj-hermes-intl-e1877c8147": "805c154a124f3dcf1d72003a06b8e9cc04b132953afe89a6264b4fed0831a547",
+    "x-marko-js-htmljs-parser-a576b5c86e": "a122cf7c697c2a4f89446034c2552e1af87a431a99900c6169a44b814ab3f50e",
+    "x-metarhia-metawatch-af9528a554": "6f72a9dcd799036d428a347f72c89e6fb6bef80143c7e4156325b479fae96640",
+    "x-metarhia-metawatch-e1b278f5c3": "7c61c6d17ad85493ca08acb34481bd39352961e67cf96d16c35c6ac25b46ca55",
+    "x-misterkante-cc-model-router-ced46f7612": "e7ae1ca09d439463f0dea695a3322b8dd6ed07b0001e3a0780cd275114b50856",
+    "x-mr-mihu-dsh-dbhub-live-534032da27": "70280b9ba542dca65418c5ba5dcc1f6d976e06e558c901f4ba4181ea02846f94",
+    "x-mr-mihu-dsh-dbhub-live-f9d568569b": "2d58a0873ae376420ec42cf4edf0d78deb45077761ec5efca4afd344f194dca2",
+    "x-mukundakatta-agentfit-510c32d490": "848a15445607421e99534121b307d3f16ace83d625d0887c26609d4ad4088613",
+    "x-nodemailer-libqp-7bbdcbeac4": "cef5e00973ab74ec332fd6a2e9c3b10ac85b656a8edf74a662d055d833277b78",
+    "x-opopeshku-cronalive-node-a6f621977e": "7b4f3883631515949fb5b4ab0ea3bedccaca56ab8b957cd82a997a439807589a",
+    "x-otto-ottospace-mizan-f2f8fcb2c8": "a3d5e344c0a8bbed3189bc9e88101bdb9df0aad834102ff429313f44aec6bafa",
+    "x-panpontomate-solana-risk-engine-e2582ea728": "e12dee789438f35d788be36831adb22e0b74c604c5e5e7ae3bb1b45d22c1508f",
+    "x-runcat-tommy-dsh-panda-calendar-667f1793e5": "6a4235524e299b6df746d3c2e214f65bac96bb6c6ec619effcbe561427184ffb",
+    "x-runcat-tommy-dsh-panda-calendar-ec35ab2529": "9fb662d53bb9a982c1fe5626d64746acef876a989d79327ef0a1eecd6bf0f60f",
+    "x-sanchit07-dev-node-core-easy-kit-268de6812c": "c132ee5412cd6abdedefefb2a583d6bb24b53b94deb1c28c443f7a7bcde99f19",
+    "x-sanchit07-dev-node-core-easy-kit-39890fd99f": "0e1ccd658e1248d8f657828df4a2cc39ef7dd9b9f937ffcc47b691bd58e7c4e8",
+    "x-sanchit07-dev-node-core-easy-kit-70f95fc1b2": "690687269e72516d2f0b19e70ccbfb3b0169f00f0d26de7412be66d7a06d51f4",
+    "x-sandsoftwaresolutions-ss-duration-ac6449101c": "5ae10219cbabefa01bd968e6bfffd91d6ee7e0b9fb57e767572ac7fe1e096d26",
+    "x-sandsoftwaresolutions-ss-human-format-ade5993e4f": "d80321bc18e7b94fe86ce629cb273d3c21e472d13178e792c8e02dd5a855bb0c",
+    "x-shelamkoff-event-bus-cc858589eb": "3624f60db4ab80667277faed3671f0f656c295045982f4b276a151eaa2412cec",
+    "x-short-io-envalid-unused-f77a6c7072": "1e47679fce3d252c7eb80140f2adab4619b5af234ba58f8f8bb6b8d563dee4a9",
+    "x-shrinivas-sn-adapter-ingestion-499701352b": "08eb3b8ea55e931b0a32646496f18fc6c4bc1193acb56678319a8f0a97e65a0f",
+    "x-sindresorhus-clone-regexp-0594242c88": "98211be84d801f1f3175f4ed6159398fb00a148ecb45e4c3a5200096c9a7a344",
+    "x-spartawhy117-dsh-token-dash-ba4082dce3": "fc2587d2727dad448ed5a3faa1a9446aec6a4fab6466450973b55a516d9b74b2",
+    "x-toolbuilder-list-1914dfac5e": "61f277a3e8020a51c91b0a09ff621397fd9fe3faf4890c7a2784337c01335b1a",
+    "x-toolbuilder-list-2b73f7f42c": "69e29cd95f218979af9db52ed1742ce6332e89d5cf54ec78ea5c2db8a99bebf0",
+    "x-toolbuilder-list-bc22a50372": "2640e067a53b45d5c83b10d969043e277157739b618276e84e09a550cadf2a95",
+    "x-w8s-rng-with-intention-d6d0f34e4c": "b069f009a870febfea0ed2d3ce064f1b2ace90d71d1d4050486af84ebde6877a",
+    "x-wenaixi-dsh-prompt-history-396b4d7ce7": "7a4e7c73873b79a61436d267ada880802a0f2729b95d5533ca3363d1e713a044",
+    "x-wenaixi-dsh-prompt-history-87cd943992": "e734ed4cd432b899e32aaff26cee1654b1877f2c3ce506775af33b54ca88e1d9",
+    "x-wenaixi-dsh-prompt-history-f2c2ad01c0": "3d84055b055b34bcef1136ea50446e0d6447ae016893e5195098f0ef52440a45",
+    "x-yammm-ynode-ylog-d5c5c3f62e": "478496b512df89d9f4b83d4a7905c4f4b94144b717b53a08247296170cd26a7f"
+  },
+  "instructions": {
+    "x-ahmtsahin-agent-context-bench-134ba49b33": "31298519668a35266049c097824724bb666674fa8e838b991a739a622ed6c662",
+    "x-ahmtsahin-agent-context-bench-3912f5ad87": "8a4dde14b11e56d0a0aafd801276710aea5f5bfbcd9c63de2674d2333ea20762",
+    "x-ahmtsahin-agent-context-bench-b63c4acd3d": "5da485579091f6b1e95c5e5e9bdd7864eae8f045cf32ae09d09360be774fe983",
+    "x-alannerfranklin-dsh-relay-isolation-dfccc5d2c1": "fc134f20a719cd42d6c6b4d6bf60a2af8dbd6c7db03738652f6ef6b5bc213058",
+    "x-antonioprosperi2-svg-beeladybug-universal-5f88e1d66c": "c1c34197d81504b838d5b0d58686ca6cbf70af0944394aafdbd82ab6038f941f",
+    "x-antonioprosperi2-svg-beeladybug-universal-a89811cf4e": "b4ea3e4258f9691d50994cfc6ce216422cb48a52827b6165d78de978ccc42ca5",
+    "x-antonioprosperi2-svg-beeladybug-universal-b6e1d19aa0": "d9c39b9c86268e8141d4941a98fc8459af9241298413433a1184d149b2c00b0c",
+    "x-avoidwork-filesize-js-109ae605ab": "aa09d0d882eb1fdecbb9f4b9a9db1e96974ebb1b172a16963f0ec1aaed4e3cfd",
+    "x-avoidwork-filesize-js-64b4a2611f": "39f60909957d5ec0e38805f1565074f21db506a53c0b4edc2db09c16f5bb8311",
+    "x-avoidwork-filesize-js-f5bd84b81b": "ebaa1f4cbffcd88c54417614e8a2b5f1098cb248c1f65f7282589b808542aa67",
+    "x-avoidwork-tiny-lru-30397d7a76": "8636327969327e621feaab423e6115dfe87e6e14db08ad7c166c0d754b450bbe",
+    "x-avoidwork-tiny-lru-da90b42c31": "9279dddc71a7c862144c9467b0a6902a07c0a98861d9c2f13f0bd97879622546",
+    "x-azu-setup-npm-trusted-publish-6104f8bee9": "757f31b7991c6d1bbb599bf2c5e1ac436293fcc8b8d9daa1d39242b4efae7560",
+    "x-blakeb056-six-degrees-aec5ecaebb": "011e18ded2b6e559f6dc3eb3e04b5b234325986d056345ae02d77acfef74f790",
+    "x-blucca-n8n-check-0d73b43caa": "9afc247773f96fcbc9258434fdd7c0990b79293b0101c3c37a171639b1d24697",
+    "x-blucca-n8n-check-1c589621bf": "e78c6cce59ee2d256301799676cc5ad9a8b225ded836b5f54fc78b877e30ced8",
+    "x-blucca-n8n-check-a7fa85ded5": "56af9c2172bc7c8c73ea6b8d5615eaa7b331151c258774fc98af556a623b912f",
+    "x-cccalana-gatewaycheck-2d961d088c": "e4541dd34a1045619d8390841b9babe7616da2b0cb8c84de59748944073dcb4d",
+    "x-cheapestinference-claude-auto-retry-6d605a5d91": "2c1e2662018c2d08799e14da2d840835a73bbe725fc3ca5fbf7f6b309f922c5f",
+    "x-cheapestinference-claude-auto-retry-7a1ddf10b2": "7cdfc9a511825a822be1a95b671392dcabc06df462daf41cc33177abcd927cf7",
+    "x-cheapestinference-claude-auto-retry-f859f12fea": "79f7ab6cef292e4816e3b92185ea3942421bdcf5ef6bef34b313a562e2b1c39c",
+    "x-codyrobertson-gh-issue-lease-f0f573c258": "75691c8bd8f3e1c5f5b1053233a09a6d603e78e132b93e38d12e4152e32e56ed",
+    "x-dgrr-studio-dice-141a1a8d6b": "a2c900f5ed627b54ae3eaa8273881643d0a753fe229b2ea9672fb61dad06304c",
+    "x-dhaupin-crashtest-5c6ce1d53f": "a06530dda24d47ad1b34393f0e734e9645e2fcaea3c528d1a674dc0130a803ed",
+    "x-dhaupin-crashtest-e70988c5b4": "cf04ea25aff8605e574dfbbe32256666dda72e0c866c6d307104e0c8bfc0aad5",
+    "x-dhaupin-crashtest-eb4c5fee65": "d916541c975759f70b5f92c6c4dbf813e381c3508ea5ef5aaa74ad1994456bc6",
+    "x-dirop1-pi-delay-prompt-a7948a14a4": "1a25977b02fc2600755ddb6d9c296bd984e904e0ef25ff2aa66662aac2eda0df",
+    "x-drewthomas00-tcpa-quiet-hours-d929633b54": "ad8fea1a90526479ffbfb7ada5f14aa32b52ee0247fe7f390c3e8faea0c94fe1",
+    "x-ducaoya-pi-hang-guard-b75099e5bc": "ea4c9e5aa899d03b2911758bad0eb9962e5e70354dc7e3065e1f809f67763703",
+    "x-evomap-gep-sdk-js-6a387bbe32": "f15c84823f6e29f99cff05de155e520ba07462254e0887a368d3a75d9c185da1",
+    "x-fugangcui-speakremix-codes-7bf8b8fb00": "9ae7adea2b3fa409be85c0b1f9b198040e789532375391a00c4358b9697a51f0",
+    "x-ghostpawjs-grimoire-4a1c83b504": "0396a427042ee2abddf06b05d65659501c4ea13090a43d1a588b8d806c90edc4",
+    "x-ghostpawjs-grimoire-b7fc19a032": "2ad565d545837a57b50540f1d5f3e8219dd44781cd5f752a358dbcc4492800bb",
+    "x-ghostpawjs-grimoire-c5aa4b66a3": "278c5df7e44df35548904e7a5b7c797c03478d24959c3699c23093293edb1543",
+    "x-groophylifefor-heap-analysis-10ddfecb6b": "67bd5bf1b4fb8dfba4269fe2192967661e4a9ca387d3f66ecc229a80583b342a",
+    "x-groophylifefor-heap-analysis-71cd48f8ba": "11873badeb34f34f8596349775419b24b9059ffa86e5bcda99581c4c5962d561",
+    "x-groophylifefor-heap-analysis-bfc733de41": "71b95d318a6f1ef66c4da5869edf768c273a6d785c126bf95c1d317b670c5a02",
+    "x-guorunjie-agentic-workflow-guard-79f4aec3b8": "c373ff69deba73a964a74a5d5873172041bd614fed07b910318afdfdcefa2dc6",
+    "x-guorunjie-agentic-workflow-guard-bc30533f19": "4c01a531ddc060e0f043016d2e091a191bb3b54e5ddfe6bba8b03b49f0818c04",
+    "x-guorunjie-agentic-workflow-guard-c1322204ff": "66575702322b9f69dfea361c3c182cb5e41cceadb0b32100e6cdaf9b4223cac2",
+    "x-guotree-magpie-websearch-466d493835": "d91811261f40335804bd4f28caadd152411dda4703ac9282bbe92d4130e129fa",
+    "x-guotree-magpie-websearch-a74cfdcbe9": "e6b1084558a71948168c581c73bf4082a41f21e8b9f39ea3df2b23654862aee1",
+    "x-guotree-magpie-websearch-c4d8db57f9": "ee8f183b28732947a080e27369f73ea0aa071c389c633f27648d4ef8bf075157",
+    "x-igormel81-dsh-chat-cost-8b37b31edf": "96541315252f83708638d46ce44499eb4b7be0ef8ea2cc4b218e41836dc72225",
+    "x-insession-space-insession-sdk-29c8a3b74e": "322cb90ddd40fc7297ad45691b8b4bf017ecd48cbae62a73a40c30c5c6ae5aa7",
+    "x-insession-space-insession-sdk-c721ee0c1d": "876c656d4c59792229a36703d32bfc08626b4853baaf7abf41bf53c862f672ec",
+    "x-insession-space-insession-sdk-f9057e96cd": "ee1a86caf795c11503d35714a4a1af9437eb5e5bdc92210db8f9615c49c39257",
+    "x-johnhenry-mport-b70dabf4e7": "994cd6ca17fca7261002fec4c0e533059baae51e6b5bdc3796b066396584f98b",
+    "x-johnhenry-spintax-8e582b7cde": "d2a8dfb6867edde4185020141ed9f41471b1c321105e1ecc3d7ff770bbc9704b",
+    "x-kannakuron-dsh-ide-git-09c63b85e5": "07f4c4d6867d38254795c0e3f84c9fec511382e2129fb9223977d0084bc2972b",
+    "x-kannakuron-dsh-ide-git-317ae73aa6": "584b3972e75484d26d5d0795a69e1a6176f2746899fe79e2782d5bebce6e2268",
+    "x-kannakuron-dsh-ide-git-3599010391": "41a15b79e6a81ded7dd496b3e8e397ec7f76bdae61eb17fc6bcd9966ac1f83a6",
+    "x-l956615272-hub-dsh-token-usage-4fef2ea940": "637175420f92ba21b211dc5538ca44dfb5ec10231f52c2f23e3677fe00a90805",
+    "x-l956615272-hub-dsh-token-usage-76b731dfd1": "3135e28d7f99de9ee63b0cec583c76170683a3cd17d3a171a2125dac3ce59356",
+    "x-l956615272-hub-dsh-token-usage-8c425815aa": "9c8dbf6d575909c9e11e90bcf3558d93b700970868f80c37019b2917833be37f",
+    "x-legible-sh-mutex-13867857ca": "823819f6d929f20b974c5531cc920f5a0f64edeb63ddbfc4ebce664696e79e87",
+    "x-legible-sh-mutex-3a0cb5dd56": "4fa383a543cf6cb8fc0240b212e6f1d10a0d32316043002fba35843086e17a20",
+    "x-lhf198-dsh-prompt-optimizer-42cfbd7f35": "04f5cd2eafe2fd2b0e1bc8d1735f2db7ac69bb33358cde1ce75a10bf92d8b6e3",
+    "x-lhf198-dsh-prompt-optimizer-fe5772419b": "fd9b2d07e8d2c37e4c7912ff13342d333c2ad515db0fd9825457e72a4ba797d2",
+    "x-lucastonidev-patrickuser-05e5089acf": "ab1a7320a56ac4350b79cbe9729640fcb18ea7ef3a4e9fb9be1285ee8c0fa8c0",
+    "x-magrinj-hermes-intl-22ec94ee24": "ed085aa98687bcd605b5df0584d851d8b88bdf58f356c98b40ed1f80e27c5573",
+    "x-magrinj-hermes-intl-e1877c8147": "a556296ea3b6c6fce90940c6c56dc57df449ce6515394814e277989de9f2ab83",
+    "x-marko-js-htmljs-parser-a576b5c86e": "95db4412c43c861beea5f2a2a9123f0beecb952ca091ffd9fc87c3654dcdfb32",
+    "x-metarhia-metawatch-af9528a554": "fa647d3503f20e0b8a15e630150c809d15797482216d18464c9bd4bc1ea15885",
+    "x-metarhia-metawatch-e1b278f5c3": "b34ac64cc2085dbded7c52509ccef07ff0c522a3bf2e4e4e8d861b83c0855fcc",
+    "x-misterkante-cc-model-router-ced46f7612": "0f0f476de5d34308a8ebbb8519a089a5f69c14bed09f53c0ae956685b46114b4",
+    "x-mr-mihu-dsh-dbhub-live-534032da27": "d42d1fd0485574bf82782c8512ce7800524103656e425c6187775d1c7d1d3e01",
+    "x-mr-mihu-dsh-dbhub-live-f9d568569b": "d626692090bc6b14b35b1501afa97fa3efa18fd438c135f4b8b6a5914505168e",
+    "x-mukundakatta-agentfit-510c32d490": "a59833341728fe6e149f7481ef8e640a96cca49d32fd0391c71cc541e3de7301",
+    "x-nodemailer-libqp-7bbdcbeac4": "1608edb7493ba6f7a7c20003dfcf9fd728b8206f377ff627ea0913a930d0cb87",
+    "x-opopeshku-cronalive-node-a6f621977e": "de496f17f26b2b34a482eba67a75270f544a2d82d5bf365cb3faa3a3dbebe1dd",
+    "x-otto-ottospace-mizan-f2f8fcb2c8": "b8e5b34bde4c9f7bc191402a234f3d02e341b22a66f54621b38892cbb2c1a5d4",
+    "x-panpontomate-solana-risk-engine-e2582ea728": "5d000037f4d6b1c95c8846f7102a1eed7960be6a2ea063bd79014afcc682d2e7",
+    "x-runcat-tommy-dsh-panda-calendar-667f1793e5": "b9c8fbba39b9f167f33d7dd1a6a0360e094f35c9aa66ea87b8d5dfcdd6ae1b4f",
+    "x-runcat-tommy-dsh-panda-calendar-ec35ab2529": "a3894d43d3c41f0dd99150e0f6eb4437cea685fb3782202d2f96d50467bb21a5",
+    "x-sanchit07-dev-node-core-easy-kit-268de6812c": "005a4a1bf60e8ed4e5d780f469fab8caaff8fd832a8d19bf61e3e2879cfc2471",
+    "x-sanchit07-dev-node-core-easy-kit-39890fd99f": "f62b2fd425c59dcce40aae6583720e2a4b513f427914394d1da955f6ea06668a",
+    "x-sanchit07-dev-node-core-easy-kit-70f95fc1b2": "89219355bbb9b19dea9d2786dfa0e8c700c7d364c1ff5dde3e992e6e2a9eef5b",
+    "x-sandsoftwaresolutions-ss-duration-ac6449101c": "d3a244bf7ce324890d230b4fad890fc5f8bdcdd2adf06e2bbeb0464ce23f19ff",
+    "x-sandsoftwaresolutions-ss-human-format-ade5993e4f": "dc6452ad7a0b6631f294d4eaf146abb97eed0dd103a7c837c05c5a221ea19464",
+    "x-shelamkoff-event-bus-cc858589eb": "0321b38921b7f5c707b041d779d4dea1b4056a4b508a1431d29fec6277807abc",
+    "x-short-io-envalid-unused-f77a6c7072": "31a44865228f5ffb5ec33fdbffe66681acfd535133acb817104c5a2933a344ba",
+    "x-shrinivas-sn-adapter-ingestion-499701352b": "0978bfa81f42060de5a1a5dc44ee30f668454577a022dc81f46ef19b242a3658",
+    "x-sindresorhus-clone-regexp-0594242c88": "cdd4533f4779b5ded8c79587b0546a70fb11a08c53940e4cec2984fcd8679eed",
+    "x-spartawhy117-dsh-token-dash-ba4082dce3": "8e84898424c4d0b9964da568cef2891486e3ee322214eb36052b45f79e0bf9c1",
+    "x-toolbuilder-list-1914dfac5e": "dcac29a1fd1a769b050f0e0bb0b0dc8dde4dff2b2160d1ca11070831281867b3",
+    "x-toolbuilder-list-2b73f7f42c": "5459a674f36aeda9de0828d23e93edebed4cfcc140be523cec46b4dc9a7aa6ed",
+    "x-toolbuilder-list-bc22a50372": "98971b23b303feb0374b08c29547c934711e7d3b6dcf21d7d7ed24175c6388ac",
+    "x-w8s-rng-with-intention-d6d0f34e4c": "5fe8bd3bce46dea9d4af76908e240919af0291b1be31eda2b6d0c12c459c07da",
+    "x-wenaixi-dsh-prompt-history-396b4d7ce7": "d1f166895def14dc006ef4c375aa26bfa6a914c3ea0bb9ae92dc8405a7638085",
+    "x-wenaixi-dsh-prompt-history-87cd943992": "ebf8b813d9e130021bc4e2cd5b78366e3ee75f8292baad68dc3119d2f83b85a4",
+    "x-wenaixi-dsh-prompt-history-f2c2ad01c0": "beceda3553c6ac356a44bea5634a9d66f767b6796c72117c7f7b036a114d28fc",
+    "x-yammm-ynode-ylog-d5c5c3f62e": "f8b0f4070f37ea699690dc2de0df02b89f24974e67cb3a61fff722f7e822fcf2"
+  },
+  "grading": {
+    "x-ahmtsahin-agent-context-bench-134ba49b33": {
+      "expected": {
+        "hiddenTests": 33
+      },
+      "baselineFailing": []
+    },
+    "x-ahmtsahin-agent-context-bench-3912f5ad87": {
+      "expected": {
+        "hiddenTests": 32
+      },
+      "baselineFailing": []
+    },
+    "x-ahmtsahin-agent-context-bench-b63c4acd3d": {
+      "expected": {
+        "hiddenTests": 31
+      },
+      "baselineFailing": []
+    },
+    "x-alannerfranklin-dsh-relay-isolation-dfccc5d2c1": {
+      "expected": {
+        "hiddenTests": 7
+      },
+      "baselineFailing": []
+    },
+    "x-antonioprosperi2-svg-beeladybug-universal-5f88e1d66c": {
+      "expected": {
+        "hiddenTests": 7
+      },
+      "baselineFailing": []
+    },
+    "x-antonioprosperi2-svg-beeladybug-universal-a89811cf4e": {
+      "expected": {
+        "hiddenTests": 16
+      },
+      "baselineFailing": []
+    },
+    "x-antonioprosperi2-svg-beeladybug-universal-b6e1d19aa0": {
+      "expected": {
+        "hiddenTests": 9
+      },
+      "baselineFailing": []
+    },
+    "x-avoidwork-filesize-js-109ae605ab": {
+      "expected": {
+        "hiddenTests": 198
+      },
+      "baselineFailing": []
+    },
+    "x-avoidwork-filesize-js-64b4a2611f": {
+      "expected": {
+        "hiddenTests": 196
+      },
+      "baselineFailing": []
+    },
+    "x-avoidwork-filesize-js-f5bd84b81b": {
+      "expected": {
+        "hiddenTests": 197
+      },
+      "baselineFailing": []
+    },
+    "x-avoidwork-tiny-lru-30397d7a76": {
+      "expected": {
+        "hiddenTests": 173
+      },
+      "baselineFailing": []
+    },
+    "x-avoidwork-tiny-lru-da90b42c31": {
+      "expected": {
+        "hiddenTests": 172
+      },
+      "baselineFailing": []
+    },
+    "x-azu-setup-npm-trusted-publish-6104f8bee9": {
+      "expected": {
+        "hiddenTests": 8
+      },
+      "baselineFailing": []
+    },
+    "x-blakeb056-six-degrees-aec5ecaebb": {
+      "expected": {
+        "hiddenTests": 2
+      },
+      "baselineFailing": []
+    },
+    "x-blucca-n8n-check-0d73b43caa": {
+      "expected": {
+        "hiddenTests": 3
+      },
+      "baselineFailing": []
+    },
+    "x-blucca-n8n-check-1c589621bf": {
+      "expected": {
+        "hiddenTests": 6
+      },
+      "baselineFailing": []
+    },
+    "x-blucca-n8n-check-a7fa85ded5": {
+      "expected": {
+        "hiddenTests": 23
+      },
+      "baselineFailing": []
+    },
+    "x-cccalana-gatewaycheck-2d961d088c": {
+      "expected": {
+        "hiddenTests": 4
+      },
+      "baselineFailing": []
+    },
+    "x-cheapestinference-claude-auto-retry-6d605a5d91": {
+      "expected": {
+        "hiddenTests": 197
+      },
+      "baselineFailing": []
+    },
+    "x-cheapestinference-claude-auto-retry-7a1ddf10b2": {
+      "expected": {
+        "hiddenTests": 30
+      },
+      "baselineFailing": []
+    },
+    "x-cheapestinference-claude-auto-retry-f859f12fea": {
+      "expected": {
+        "hiddenTests": 17
+      },
+      "baselineFailing": []
+    },
+    "x-codyrobertson-gh-issue-lease-f0f573c258": {
+      "expected": {
+        "hiddenTests": 29
+      },
+      "baselineFailing": []
+    },
+    "x-dgrr-studio-dice-141a1a8d6b": {
+      "expected": {
+        "hiddenTests": 10
+      },
+      "baselineFailing": []
+    },
+    "x-dhaupin-crashtest-5c6ce1d53f": {
+      "expected": {
+        "hiddenTests": 46
+      },
+      "baselineFailing": []
+    },
+    "x-dhaupin-crashtest-e70988c5b4": {
+      "expected": {
+        "hiddenTests": 21
+      },
+      "baselineFailing": []
+    },
+    "x-dhaupin-crashtest-eb4c5fee65": {
+      "expected": {
+        "hiddenTests": 5
+      },
+      "baselineFailing": []
+    },
+    "x-dirop1-pi-delay-prompt-a7948a14a4": {
+      "expected": {
+        "hiddenTests": 3
+      },
+      "baselineFailing": []
+    },
+    "x-drewthomas00-tcpa-quiet-hours-d929633b54": {
+      "expected": {
+        "hiddenTests": 128
+      },
+      "baselineFailing": []
+    },
+    "x-ducaoya-pi-hang-guard-b75099e5bc": {
+      "expected": {
+        "hiddenTests": 44
+      },
+      "baselineFailing": []
+    },
+    "x-evomap-gep-sdk-js-6a387bbe32": {
+      "expected": {
+        "hiddenTests": 5
+      },
+      "baselineFailing": []
+    },
+    "x-fugangcui-speakremix-codes-7bf8b8fb00": {
+      "expected": {
+        "hiddenTests": 10
+      },
+      "baselineFailing": []
+    },
+    "x-ghostpawjs-grimoire-4a1c83b504": {
+      "expected": {
+        "hiddenTests": 6
+      },
+      "baselineFailing": []
+    },
+    "x-ghostpawjs-grimoire-b7fc19a032": {
+      "expected": {
+        "hiddenTests": 6
+      },
+      "baselineFailing": []
+    },
+    "x-ghostpawjs-grimoire-c5aa4b66a3": {
+      "expected": {
+        "hiddenTests": 8
+      },
+      "baselineFailing": []
+    },
+    "x-groophylifefor-heap-analysis-10ddfecb6b": {
+      "expected": {
+        "hiddenTests": 20
+      },
+      "baselineFailing": []
+    },
+    "x-groophylifefor-heap-analysis-71cd48f8ba": {
+      "expected": {
+        "hiddenTests": 13
+      },
+      "baselineFailing": []
+    },
+    "x-groophylifefor-heap-analysis-bfc733de41": {
+      "expected": {
+        "hiddenTests": 9
+      },
+      "baselineFailing": []
+    },
+    "x-guorunjie-agentic-workflow-guard-79f4aec3b8": {
+      "expected": {
+        "hiddenTests": 6
+      },
+      "baselineFailing": []
+    },
+    "x-guorunjie-agentic-workflow-guard-bc30533f19": {
+      "expected": {
+        "hiddenTests": 14
+      },
+      "baselineFailing": []
+    },
+    "x-guorunjie-agentic-workflow-guard-c1322204ff": {
+      "expected": {
+        "hiddenTests": 11
+      },
+      "baselineFailing": []
+    },
+    "x-guotree-magpie-websearch-466d493835": {
+      "expected": {
+        "hiddenTests": 5
+      },
+      "baselineFailing": []
+    },
+    "x-guotree-magpie-websearch-a74cfdcbe9": {
+      "expected": {
+        "hiddenTests": 42
+      },
+      "baselineFailing": []
+    },
+    "x-guotree-magpie-websearch-c4d8db57f9": {
+      "expected": {
+        "hiddenTests": 11
+      },
+      "baselineFailing": []
+    },
+    "x-igormel81-dsh-chat-cost-8b37b31edf": {
+      "expected": {
+        "hiddenTests": 8
+      },
+      "baselineFailing": []
+    },
+    "x-insession-space-insession-sdk-29c8a3b74e": {
+      "expected": {
+        "hiddenTests": 77
+      },
+      "baselineFailing": []
+    },
+    "x-insession-space-insession-sdk-c721ee0c1d": {
+      "expected": {
+        "hiddenTests": 65
+      },
+      "baselineFailing": []
+    },
+    "x-insession-space-insession-sdk-f9057e96cd": {
+      "expected": {
+        "hiddenTests": 68
+      },
+      "baselineFailing": []
+    },
+    "x-johnhenry-mport-b70dabf4e7": {
+      "expected": {
+        "hiddenTests": 35
+      },
+      "baselineFailing": []
+    },
+    "x-johnhenry-spintax-8e582b7cde": {
+      "expected": {
+        "hiddenTests": 8
+      },
+      "baselineFailing": []
+    },
+    "x-kannakuron-dsh-ide-git-09c63b85e5": {
+      "expected": {
+        "hiddenTests": 56
+      },
+      "baselineFailing": []
+    },
+    "x-kannakuron-dsh-ide-git-317ae73aa6": {
+      "expected": {
+        "hiddenTests": 52
+      },
+      "baselineFailing": []
+    },
+    "x-kannakuron-dsh-ide-git-3599010391": {
+      "expected": {
+        "hiddenTests": 53
+      },
+      "baselineFailing": []
+    },
+    "x-l956615272-hub-dsh-token-usage-4fef2ea940": {
+      "expected": {
+        "hiddenTests": 17
+      },
+      "baselineFailing": []
+    },
+    "x-l956615272-hub-dsh-token-usage-76b731dfd1": {
+      "expected": {
+        "hiddenTests": 9
+      },
+      "baselineFailing": []
+    },
+    "x-l956615272-hub-dsh-token-usage-8c425815aa": {
+      "expected": {
+        "hiddenTests": 19
+      },
+      "baselineFailing": []
+    },
+    "x-legible-sh-mutex-13867857ca": {
+      "expected": {
+        "hiddenTests": 17
+      },
+      "baselineFailing": []
+    },
+    "x-legible-sh-mutex-3a0cb5dd56": {
+      "expected": {
+        "hiddenTests": 5
+      },
+      "baselineFailing": []
+    },
+    "x-lhf198-dsh-prompt-optimizer-42cfbd7f35": {
+      "expected": {
+        "hiddenTests": 1
+      },
+      "baselineFailing": []
+    },
+    "x-lhf198-dsh-prompt-optimizer-fe5772419b": {
+      "expected": {
+        "hiddenTests": 1
+      },
+      "baselineFailing": []
+    },
+    "x-lucastonidev-patrickuser-05e5089acf": {
+      "expected": {
+        "hiddenTests": 2
+      },
+      "baselineFailing": []
+    },
+    "x-magrinj-hermes-intl-22ec94ee24": {
+      "expected": {
+        "hiddenTests": 1
+      },
+      "baselineFailing": []
+    },
+    "x-magrinj-hermes-intl-e1877c8147": {
+      "expected": {
+        "hiddenTests": 1
+      },
+      "baselineFailing": []
+    },
+    "x-marko-js-htmljs-parser-a576b5c86e": {
+      "expected": {
+        "hiddenTests": 34
+      },
+      "baselineFailing": []
+    },
+    "x-metarhia-metawatch-af9528a554": {
+      "expected": {
+        "hiddenTests": 18
+      },
+      "baselineFailing": []
+    },
+    "x-metarhia-metawatch-e1b278f5c3": {
+      "expected": {
+        "hiddenTests": 16
+      },
+      "baselineFailing": []
+    },
+    "x-misterkante-cc-model-router-ced46f7612": {
+      "expected": {
+        "hiddenTests": 1
+      },
+      "baselineFailing": []
+    },
+    "x-mr-mihu-dsh-dbhub-live-534032da27": {
+      "expected": {
+        "hiddenTests": 5
+      },
+      "baselineFailing": []
+    },
+    "x-mr-mihu-dsh-dbhub-live-f9d568569b": {
+      "expected": {
+        "hiddenTests": 4
+      },
+      "baselineFailing": []
+    },
+    "x-mukundakatta-agentfit-510c32d490": {
+      "expected": {
+        "hiddenTests": 17
+      },
+      "baselineFailing": []
+    },
+    "x-nodemailer-libqp-7bbdcbeac4": {
+      "expected": {
+        "hiddenTests": 18
+      },
+      "baselineFailing": []
+    },
+    "x-opopeshku-cronalive-node-a6f621977e": {
+      "expected": {
+        "hiddenTests": 2
+      },
+      "baselineFailing": []
+    },
+    "x-otto-ottospace-mizan-f2f8fcb2c8": {
+      "expected": {
+        "hiddenTests": 13
+      },
+      "baselineFailing": []
+    },
+    "x-panpontomate-solana-risk-engine-e2582ea728": {
+      "expected": {
+        "hiddenTests": 5
+      },
+      "baselineFailing": []
+    },
+    "x-runcat-tommy-dsh-panda-calendar-667f1793e5": {
+      "expected": {
+        "hiddenTests": 17
+      },
+      "baselineFailing": []
+    },
+    "x-runcat-tommy-dsh-panda-calendar-ec35ab2529": {
+      "expected": {
+        "hiddenTests": 24
+      },
+      "baselineFailing": []
+    },
+    "x-sanchit07-dev-node-core-easy-kit-268de6812c": {
+      "expected": {
+        "hiddenTests": 19
+      },
+      "baselineFailing": []
+    },
+    "x-sanchit07-dev-node-core-easy-kit-39890fd99f": {
+      "expected": {
+        "hiddenTests": 22
+      },
+      "baselineFailing": []
+    },
+    "x-sanchit07-dev-node-core-easy-kit-70f95fc1b2": {
+      "expected": {
+        "hiddenTests": 20
+      },
+      "baselineFailing": []
+    },
+    "x-sandsoftwaresolutions-ss-duration-ac6449101c": {
+      "expected": {
+        "hiddenTests": 10
+      },
+      "baselineFailing": []
+    },
+    "x-sandsoftwaresolutions-ss-human-format-ade5993e4f": {
+      "expected": {
+        "hiddenTests": 14
+      },
+      "baselineFailing": []
+    },
+    "x-shelamkoff-event-bus-cc858589eb": {
+      "expected": {
+        "hiddenTests": 14
+      },
+      "baselineFailing": []
+    },
+    "x-short-io-envalid-unused-f77a6c7072": {
+      "expected": {
+        "hiddenTests": 20
+      },
+      "baselineFailing": []
+    },
+    "x-shrinivas-sn-adapter-ingestion-499701352b": {
+      "expected": {
+        "hiddenTests": 6
+      },
+      "baselineFailing": []
+    },
+    "x-sindresorhus-clone-regexp-0594242c88": {
+      "expected": {
+        "hiddenTests": 34
+      },
+      "baselineFailing": []
+    },
+    "x-spartawhy117-dsh-token-dash-ba4082dce3": {
+      "expected": {
+        "hiddenTests": 1
+      },
+      "baselineFailing": []
+    },
+    "x-toolbuilder-list-1914dfac5e": {
+      "expected": {
+        "hiddenTests": 30
+      },
+      "baselineFailing": []
+    },
+    "x-toolbuilder-list-2b73f7f42c": {
+      "expected": {
+        "hiddenTests": 32
+      },
+      "baselineFailing": []
+    },
+    "x-toolbuilder-list-bc22a50372": {
+      "expected": {
+        "hiddenTests": 30
+      },
+      "baselineFailing": []
+    },
+    "x-w8s-rng-with-intention-d6d0f34e4c": {
+      "expected": {
+        "hiddenTests": 7
+      },
+      "baselineFailing": []
+    },
+    "x-wenaixi-dsh-prompt-history-396b4d7ce7": {
+      "expected": {
+        "hiddenTests": 4
+      },
+      "baselineFailing": []
+    },
+    "x-wenaixi-dsh-prompt-history-87cd943992": {
+      "expected": {
+        "hiddenTests": 5
+      },
+      "baselineFailing": []
+    },
+    "x-wenaixi-dsh-prompt-history-f2c2ad01c0": {
+      "expected": {
+        "hiddenTests": 10
+      },
+      "baselineFailing": []
+    },
+    "x-yammm-ynode-ylog-d5c5c3f62e": {
+      "expected": {
+        "hiddenTests": 46
+      },
+      "baselineFailing": []
+    }
+  },
+  "holdoutSeal": "1dbe71800c0fa04b5648aca1a47bdf9013f95a7fd399176f6e3bf2c72aa2b7ca",
+  "lockedAt": "2026-11-06T13:57:31.882Z"
+}
