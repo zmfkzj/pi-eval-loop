@@ -23,7 +23,9 @@ function child(body) {
   const waiters = [];
   proc.stdout.on("data", (chunk) => { out += chunk; let i; while ((i = out.indexOf("\n")) >= 0) { lines.push(out.slice(0, i)); out = out.slice(i + 1); waiters.splice(0).forEach(w => w()); } });
   const next = () => new Promise((ok) => { if (lines.length) ok(lines.shift()); else waiters.push(() => ok(lines.shift())); });
-  const exited = new Promise((ok) => proc.once("exit", ok));
+  // "close" (stdout drained and process gone), not "exit": a line still in the pipe is never lost, and a child that dies without
+  // reporting resolves its waiters with "exit:<code>" instead of hanging the test.
+  const exited = new Promise((ok) => proc.once("close", (code) => { lines.push(`exit:${code}`); waiters.splice(0).forEach(w => w()); ok(code); }));
   return { proc, next, exited };
 }
 

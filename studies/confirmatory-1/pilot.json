@@ -1,0 +1,2512 @@
+{
+ "schema": "pi-eval-loop/confirmatory-1-pilot@1",
+ "source": {
+  "path": "/home/arthur/Code/oh-my-pi-extensions/pi-eval-loop/records/ctrl-ablation-1/discovery/runs.jsonl",
+  "sha256": "fa847b1642cd1732a902663db1beef5f72b23c5e40f63e98a74b4f85097635df",
+  "units": 810,
+  "campaign": "ctrl-ablation-1 discovery (randomized interleaved blocks, 2026-11-06, cliproxyapi/gpt-6-luna medium)"
+ },
+ "estimand": "legacy-valid (completed, hidden pass, visible not failed, no line-based integrity violation, no leak, no harness crash)",
+ "arms": {
+  "P3": {
+   "tasks": {
+    "c4-malformed-lines": {
+     "family": "pkg:logtool",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "d2-keyed-queue": {
+     "family": "pkg:d2-keyed-queue",
+     "tier": "hard",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "c1-timezone": {
+     "family": "pkg:logtool",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "d1-transactional-outbox": {
+     "family": "pkg:d1-transactional-outbox",
+     "tier": "hard",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "a6-typo-message": {
+     "family": "pkg:ledger",
+     "tier": "easy",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "d3-money-migration-ko": {
+     "family": "pkg:d3-money-migration-ko",
+     "tier": "hard",
+     "outcomes": [
+      1,
+      1,
+      0
+     ]
+    },
+    "c6-csv-export": {
+     "family": "pkg:logtool",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "d4-cache-fencing": {
+     "family": "pkg:d4-cache-fencing",
+     "tier": "hard",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "d8-build-graph": {
+     "family": "pkg:d8-build-graph",
+     "tier": "hard",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "b2-patch-endpoint": {
+     "family": "pkg:minihttp",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "a2-discount-codes": {
+     "family": "pkg:ledger",
+     "tier": "easy",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "p2-handler-migration": {
+     "family": "p-series",
+     "tier": "hard",
+     "outcomes": [
+      0,
+      0,
+      0
+     ]
+    },
+    "p3-library-features-ko": {
+     "family": "p-series",
+     "tier": "hard",
+     "outcomes": [
+      0,
+      0,
+      0
+     ]
+    },
+    "a7-auth-rotation": {
+     "family": "pkg:invoice-sync",
+     "tier": "easy",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "b5-ctx-migration": {
+     "family": "pkg:minihttp",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "a4-tests-fx": {
+     "family": "pkg:ledger",
+     "tier": "easy",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "b3-pagination": {
+     "family": "pkg:minihttp",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "c2-since-flag-ko": {
+     "family": "pkg:logtool",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "b1-static-traversal": {
+     "family": "pkg:minihttp",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "d7-config-reload": {
+     "family": "pkg:d7-config-reload",
+     "tier": "hard",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "a3-refactor-tax": {
+     "family": "pkg:ledger",
+     "tier": "easy",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "p1-ticket-batch": {
+     "family": "p-series",
+     "tier": "hard",
+     "outcomes": [
+      0,
+      0,
+      0
+     ]
+    },
+    "b6-route-cache": {
+     "family": "pkg:minihttp",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "d5-streaming-ingest-ko": {
+     "family": "pkg:d5-streaming-ingest-ko",
+     "tier": "hard",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "c5-aggregate-perf": {
+     "family": "pkg:logtool",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "d6-snapshot-pagination": {
+     "family": "pkg:d6-snapshot-pagination",
+     "tier": "hard",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "a1-rounding": {
+     "family": "pkg:ledger",
+     "tier": "easy",
+     "outcomes": [
+      0,
+      0,
+      1
+     ]
+    }
+   },
+   "runs": 81,
+   "legacyViolationRuns": 0,
+   "routeOrCrash": 0
+  },
+  "D1": {
+   "tasks": {
+    "c4-malformed-lines": {
+     "family": "pkg:logtool",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "d2-keyed-queue": {
+     "family": "pkg:d2-keyed-queue",
+     "tier": "hard",
+     "outcomes": [
+      1,
+      1,
+      0
+     ]
+    },
+    "c1-timezone": {
+     "family": "pkg:logtool",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "d1-transactional-outbox": {
+     "family": "pkg:d1-transactional-outbox",
+     "tier": "hard",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "a6-typo-message": {
+     "family": "pkg:ledger",
+     "tier": "easy",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "d3-money-migration-ko": {
+     "family": "pkg:d3-money-migration-ko",
+     "tier": "hard",
+     "outcomes": [
+      1,
+      0,
+      1
+     ]
+    },
+    "c6-csv-export": {
+     "family": "pkg:logtool",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "d4-cache-fencing": {
+     "family": "pkg:d4-cache-fencing",
+     "tier": "hard",
+     "outcomes": [
+      0,
+      0,
+      0
+     ]
+    },
+    "d8-build-graph": {
+     "family": "pkg:d8-build-graph",
+     "tier": "hard",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "b2-patch-endpoint": {
+     "family": "pkg:minihttp",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "a2-discount-codes": {
+     "family": "pkg:ledger",
+     "tier": "easy",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "p2-handler-migration": {
+     "family": "p-series",
+     "tier": "hard",
+     "outcomes": [
+      0,
+      0,
+      1
+     ]
+    },
+    "p3-library-features-ko": {
+     "family": "p-series",
+     "tier": "hard",
+     "outcomes": [
+      0,
+      0,
+      0
+     ]
+    },
+    "a7-auth-rotation": {
+     "family": "pkg:invoice-sync",
+     "tier": "easy",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "b5-ctx-migration": {
+     "family": "pkg:minihttp",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "a4-tests-fx": {
+     "family": "pkg:ledger",
+     "tier": "easy",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "b3-pagination": {
+     "family": "pkg:minihttp",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "c2-since-flag-ko": {
+     "family": "pkg:logtool",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "b1-static-traversal": {
+     "family": "pkg:minihttp",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "d7-config-reload": {
+     "family": "pkg:d7-config-reload",
+     "tier": "hard",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "a3-refactor-tax": {
+     "family": "pkg:ledger",
+     "tier": "easy",
+     "outcomes": [
+      0,
+      1,
+      1
+     ]
+    },
+    "p1-ticket-batch": {
+     "family": "p-series",
+     "tier": "hard",
+     "outcomes": [
+      0,
+      0,
+      0
+     ]
+    },
+    "b6-route-cache": {
+     "family": "pkg:minihttp",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "d5-streaming-ingest-ko": {
+     "family": "pkg:d5-streaming-ingest-ko",
+     "tier": "hard",
+     "outcomes": [
+      0,
+      1,
+      0
+     ]
+    },
+    "c5-aggregate-perf": {
+     "family": "pkg:logtool",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      1,
+      0
+     ]
+    },
+    "d6-snapshot-pagination": {
+     "family": "pkg:d6-snapshot-pagination",
+     "tier": "hard",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "a1-rounding": {
+     "family": "pkg:ledger",
+     "tier": "easy",
+     "outcomes": [
+      0,
+      1,
+      0
+     ]
+    }
+   },
+   "runs": 81,
+   "legacyViolationRuns": 7,
+   "routeOrCrash": 0
+  },
+  "T1": {
+   "tasks": {
+    "c4-malformed-lines": {
+     "family": "pkg:logtool",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      1,
+      0
+     ]
+    },
+    "d2-keyed-queue": {
+     "family": "pkg:d2-keyed-queue",
+     "tier": "hard",
+     "outcomes": [
+      0,
+      1,
+      1
+     ]
+    },
+    "c1-timezone": {
+     "family": "pkg:logtool",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "d1-transactional-outbox": {
+     "family": "pkg:d1-transactional-outbox",
+     "tier": "hard",
+     "outcomes": [
+      0,
+      0,
+      0
+     ]
+    },
+    "a6-typo-message": {
+     "family": "pkg:ledger",
+     "tier": "easy",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "d3-money-migration-ko": {
+     "family": "pkg:d3-money-migration-ko",
+     "tier": "hard",
+     "outcomes": [
+      0,
+      0,
+      0
+     ]
+    },
+    "c6-csv-export": {
+     "family": "pkg:logtool",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "d4-cache-fencing": {
+     "family": "pkg:d4-cache-fencing",
+     "tier": "hard",
+     "outcomes": [
+      0,
+      0,
+      0
+     ]
+    },
+    "d8-build-graph": {
+     "family": "pkg:d8-build-graph",
+     "tier": "hard",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "b2-patch-endpoint": {
+     "family": "pkg:minihttp",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "a2-discount-codes": {
+     "family": "pkg:ledger",
+     "tier": "easy",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "p2-handler-migration": {
+     "family": "p-series",
+     "tier": "hard",
+     "outcomes": [
+      0,
+      0,
+      0
+     ]
+    },
+    "p3-library-features-ko": {
+     "family": "p-series",
+     "tier": "hard",
+     "outcomes": [
+      1,
+      0,
+      0
+     ]
+    },
+    "a7-auth-rotation": {
+     "family": "pkg:invoice-sync",
+     "tier": "easy",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "b5-ctx-migration": {
+     "family": "pkg:minihttp",
+     "tier": "medium",
+     "outcomes": [
+      0,
+      0,
+      1
+     ]
+    },
+    "a4-tests-fx": {
+     "family": "pkg:ledger",
+     "tier": "easy",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "b3-pagination": {
+     "family": "pkg:minihttp",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "c2-since-flag-ko": {
+     "family": "pkg:logtool",
+     "tier": "medium",
+     "outcomes": [
+      0,
+      1,
+      1
+     ]
+    },
+    "b1-static-traversal": {
+     "family": "pkg:minihttp",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "d7-config-reload": {
+     "family": "pkg:d7-config-reload",
+     "tier": "hard",
+     "outcomes": [
+      1,
+      0,
+      1
+     ]
+    },
+    "a3-refactor-tax": {
+     "family": "pkg:ledger",
+     "tier": "easy",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "b6-route-cache": {
+     "family": "pkg:minihttp",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "p1-ticket-batch": {
+     "family": "p-series",
+     "tier": "hard",
+     "outcomes": [
+      0,
+      0,
+      0
+     ]
+    },
+    "d5-streaming-ingest-ko": {
+     "family": "pkg:d5-streaming-ingest-ko",
+     "tier": "hard",
+     "outcomes": [
+      0,
+      0,
+      0
+     ]
+    },
+    "c5-aggregate-perf": {
+     "family": "pkg:logtool",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "d6-snapshot-pagination": {
+     "family": "pkg:d6-snapshot-pagination",
+     "tier": "hard",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "a1-rounding": {
+     "family": "pkg:ledger",
+     "tier": "easy",
+     "outcomes": [
+      1,
+      0,
+      0
+     ]
+    }
+   },
+   "runs": 81,
+   "legacyViolationRuns": 17,
+   "routeOrCrash": 0
+  },
+  "D2": {
+   "tasks": {
+    "c4-malformed-lines": {
+     "family": "pkg:logtool",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "d2-keyed-queue": {
+     "family": "pkg:d2-keyed-queue",
+     "tier": "hard",
+     "outcomes": [
+      1,
+      1,
+      0
+     ]
+    },
+    "c1-timezone": {
+     "family": "pkg:logtool",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "d1-transactional-outbox": {
+     "family": "pkg:d1-transactional-outbox",
+     "tier": "hard",
+     "outcomes": [
+      0,
+      1,
+      0
+     ]
+    },
+    "a6-typo-message": {
+     "family": "pkg:ledger",
+     "tier": "easy",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "d3-money-migration-ko": {
+     "family": "pkg:d3-money-migration-ko",
+     "tier": "hard",
+     "outcomes": [
+      1,
+      1,
+      0
+     ]
+    },
+    "c6-csv-export": {
+     "family": "pkg:logtool",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "d4-cache-fencing": {
+     "family": "pkg:d4-cache-fencing",
+     "tier": "hard",
+     "outcomes": [
+      1,
+      0,
+      0
+     ]
+    },
+    "d8-build-graph": {
+     "family": "pkg:d8-build-graph",
+     "tier": "hard",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "b2-patch-endpoint": {
+     "family": "pkg:minihttp",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "a2-discount-codes": {
+     "family": "pkg:ledger",
+     "tier": "easy",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "p2-handler-migration": {
+     "family": "p-series",
+     "tier": "hard",
+     "outcomes": [
+      0,
+      0,
+      1
+     ]
+    },
+    "p3-library-features-ko": {
+     "family": "p-series",
+     "tier": "hard",
+     "outcomes": [
+      0,
+      1,
+      0
+     ]
+    },
+    "a7-auth-rotation": {
+     "family": "pkg:invoice-sync",
+     "tier": "easy",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "b5-ctx-migration": {
+     "family": "pkg:minihttp",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "a4-tests-fx": {
+     "family": "pkg:ledger",
+     "tier": "easy",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "b3-pagination": {
+     "family": "pkg:minihttp",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "c2-since-flag-ko": {
+     "family": "pkg:logtool",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "b1-static-traversal": {
+     "family": "pkg:minihttp",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "d7-config-reload": {
+     "family": "pkg:d7-config-reload",
+     "tier": "hard",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "a3-refactor-tax": {
+     "family": "pkg:ledger",
+     "tier": "easy",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "p1-ticket-batch": {
+     "family": "p-series",
+     "tier": "hard",
+     "outcomes": [
+      0,
+      0,
+      0
+     ]
+    },
+    "b6-route-cache": {
+     "family": "pkg:minihttp",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "d5-streaming-ingest-ko": {
+     "family": "pkg:d5-streaming-ingest-ko",
+     "tier": "hard",
+     "outcomes": [
+      0,
+      1,
+      0
+     ]
+    },
+    "c5-aggregate-perf": {
+     "family": "pkg:logtool",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "d6-snapshot-pagination": {
+     "family": "pkg:d6-snapshot-pagination",
+     "tier": "hard",
+     "outcomes": [
+      1,
+      0,
+      0
+     ]
+    },
+    "a1-rounding": {
+     "family": "pkg:ledger",
+     "tier": "easy",
+     "outcomes": [
+      0,
+      0,
+      0
+     ]
+    }
+   },
+   "runs": 81,
+   "legacyViolationRuns": 9,
+   "routeOrCrash": 0
+  },
+  "V2": {
+   "tasks": {
+    "c4-malformed-lines": {
+     "family": "pkg:logtool",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "d2-keyed-queue": {
+     "family": "pkg:d2-keyed-queue",
+     "tier": "hard",
+     "outcomes": [
+      0,
+      0,
+      1
+     ]
+    },
+    "c1-timezone": {
+     "family": "pkg:logtool",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "a6-typo-message": {
+     "family": "pkg:ledger",
+     "tier": "easy",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "d1-transactional-outbox": {
+     "family": "pkg:d1-transactional-outbox",
+     "tier": "hard",
+     "outcomes": [
+      0,
+      0,
+      0
+     ]
+    },
+    "d3-money-migration-ko": {
+     "family": "pkg:d3-money-migration-ko",
+     "tier": "hard",
+     "outcomes": [
+      0,
+      0,
+      1
+     ]
+    },
+    "c6-csv-export": {
+     "family": "pkg:logtool",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "d4-cache-fencing": {
+     "family": "pkg:d4-cache-fencing",
+     "tier": "hard",
+     "outcomes": [
+      0,
+      0,
+      0
+     ]
+    },
+    "d8-build-graph": {
+     "family": "pkg:d8-build-graph",
+     "tier": "hard",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "b2-patch-endpoint": {
+     "family": "pkg:minihttp",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "a2-discount-codes": {
+     "family": "pkg:ledger",
+     "tier": "easy",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "p2-handler-migration": {
+     "family": "p-series",
+     "tier": "hard",
+     "outcomes": [
+      0,
+      0,
+      0
+     ]
+    },
+    "p3-library-features-ko": {
+     "family": "p-series",
+     "tier": "hard",
+     "outcomes": [
+      0,
+      0,
+      0
+     ]
+    },
+    "a7-auth-rotation": {
+     "family": "pkg:invoice-sync",
+     "tier": "easy",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "b5-ctx-migration": {
+     "family": "pkg:minihttp",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      1,
+      0
+     ]
+    },
+    "a4-tests-fx": {
+     "family": "pkg:ledger",
+     "tier": "easy",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "b3-pagination": {
+     "family": "pkg:minihttp",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "c2-since-flag-ko": {
+     "family": "pkg:logtool",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "b1-static-traversal": {
+     "family": "pkg:minihttp",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      1,
+      0
+     ]
+    },
+    "a3-refactor-tax": {
+     "family": "pkg:ledger",
+     "tier": "easy",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "d7-config-reload": {
+     "family": "pkg:d7-config-reload",
+     "tier": "hard",
+     "outcomes": [
+      1,
+      1,
+      0
+     ]
+    },
+    "p1-ticket-batch": {
+     "family": "p-series",
+     "tier": "hard",
+     "outcomes": [
+      0,
+      0,
+      0
+     ]
+    },
+    "b6-route-cache": {
+     "family": "pkg:minihttp",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "d5-streaming-ingest-ko": {
+     "family": "pkg:d5-streaming-ingest-ko",
+     "tier": "hard",
+     "outcomes": [
+      1,
+      1,
+      0
+     ]
+    },
+    "c5-aggregate-perf": {
+     "family": "pkg:logtool",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "d6-snapshot-pagination": {
+     "family": "pkg:d6-snapshot-pagination",
+     "tier": "hard",
+     "outcomes": [
+      0,
+      1,
+      0
+     ]
+    },
+    "a1-rounding": {
+     "family": "pkg:ledger",
+     "tier": "easy",
+     "outcomes": [
+      1,
+      0,
+      0
+     ]
+    }
+   },
+   "runs": 81,
+   "legacyViolationRuns": 13,
+   "routeOrCrash": 0
+  },
+  "B0": {
+   "tasks": {
+    "c4-malformed-lines": {
+     "family": "pkg:logtool",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "d2-keyed-queue": {
+     "family": "pkg:d2-keyed-queue",
+     "tier": "hard",
+     "outcomes": [
+      0,
+      1,
+      1
+     ]
+    },
+    "c1-timezone": {
+     "family": "pkg:logtool",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "d1-transactional-outbox": {
+     "family": "pkg:d1-transactional-outbox",
+     "tier": "hard",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "a6-typo-message": {
+     "family": "pkg:ledger",
+     "tier": "easy",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "d3-money-migration-ko": {
+     "family": "pkg:d3-money-migration-ko",
+     "tier": "hard",
+     "outcomes": [
+      0,
+      1,
+      1
+     ]
+    },
+    "c6-csv-export": {
+     "family": "pkg:logtool",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "d4-cache-fencing": {
+     "family": "pkg:d4-cache-fencing",
+     "tier": "hard",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "d8-build-graph": {
+     "family": "pkg:d8-build-graph",
+     "tier": "hard",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "b2-patch-endpoint": {
+     "family": "pkg:minihttp",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "a2-discount-codes": {
+     "family": "pkg:ledger",
+     "tier": "easy",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "p2-handler-migration": {
+     "family": "p-series",
+     "tier": "hard",
+     "outcomes": [
+      0,
+      0,
+      0
+     ]
+    },
+    "p3-library-features-ko": {
+     "family": "p-series",
+     "tier": "hard",
+     "outcomes": [
+      0,
+      0,
+      0
+     ]
+    },
+    "a7-auth-rotation": {
+     "family": "pkg:invoice-sync",
+     "tier": "easy",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "b5-ctx-migration": {
+     "family": "pkg:minihttp",
+     "tier": "medium",
+     "outcomes": [
+      0,
+      0,
+      1
+     ]
+    },
+    "a4-tests-fx": {
+     "family": "pkg:ledger",
+     "tier": "easy",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "b3-pagination": {
+     "family": "pkg:minihttp",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "c2-since-flag-ko": {
+     "family": "pkg:logtool",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "b1-static-traversal": {
+     "family": "pkg:minihttp",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "d7-config-reload": {
+     "family": "pkg:d7-config-reload",
+     "tier": "hard",
+     "outcomes": [
+      1,
+      1,
+      0
+     ]
+    },
+    "a3-refactor-tax": {
+     "family": "pkg:ledger",
+     "tier": "easy",
+     "outcomes": [
+      1,
+      0,
+      1
+     ]
+    },
+    "p1-ticket-batch": {
+     "family": "p-series",
+     "tier": "hard",
+     "outcomes": [
+      0,
+      0,
+      0
+     ]
+    },
+    "b6-route-cache": {
+     "family": "pkg:minihttp",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "d5-streaming-ingest-ko": {
+     "family": "pkg:d5-streaming-ingest-ko",
+     "tier": "hard",
+     "outcomes": [
+      0,
+      0,
+      1
+     ]
+    },
+    "c5-aggregate-perf": {
+     "family": "pkg:logtool",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "d6-snapshot-pagination": {
+     "family": "pkg:d6-snapshot-pagination",
+     "tier": "hard",
+     "outcomes": [
+      0,
+      0,
+      1
+     ]
+    },
+    "a1-rounding": {
+     "family": "pkg:ledger",
+     "tier": "easy",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    }
+   },
+   "runs": 81,
+   "legacyViolationRuns": 4,
+   "routeOrCrash": 0
+  },
+  "V1": {
+   "tasks": {
+    "c4-malformed-lines": {
+     "family": "pkg:logtool",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "c1-timezone": {
+     "family": "pkg:logtool",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "d2-keyed-queue": {
+     "family": "pkg:d2-keyed-queue",
+     "tier": "hard",
+     "outcomes": [
+      0,
+      1,
+      1
+     ]
+    },
+    "d1-transactional-outbox": {
+     "family": "pkg:d1-transactional-outbox",
+     "tier": "hard",
+     "outcomes": [
+      0,
+      0,
+      0
+     ]
+    },
+    "a6-typo-message": {
+     "family": "pkg:ledger",
+     "tier": "easy",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "d3-money-migration-ko": {
+     "family": "pkg:d3-money-migration-ko",
+     "tier": "hard",
+     "outcomes": [
+      0,
+      1,
+      0
+     ]
+    },
+    "c6-csv-export": {
+     "family": "pkg:logtool",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      1,
+      0
+     ]
+    },
+    "d4-cache-fencing": {
+     "family": "pkg:d4-cache-fencing",
+     "tier": "hard",
+     "outcomes": [
+      0,
+      0,
+      0
+     ]
+    },
+    "d8-build-graph": {
+     "family": "pkg:d8-build-graph",
+     "tier": "hard",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "b2-patch-endpoint": {
+     "family": "pkg:minihttp",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "a2-discount-codes": {
+     "family": "pkg:ledger",
+     "tier": "easy",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "p2-handler-migration": {
+     "family": "p-series",
+     "tier": "hard",
+     "outcomes": [
+      0,
+      1,
+      0
+     ]
+    },
+    "p3-library-features-ko": {
+     "family": "p-series",
+     "tier": "hard",
+     "outcomes": [
+      0,
+      1,
+      1
+     ]
+    },
+    "a7-auth-rotation": {
+     "family": "pkg:invoice-sync",
+     "tier": "easy",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "b5-ctx-migration": {
+     "family": "pkg:minihttp",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "a4-tests-fx": {
+     "family": "pkg:ledger",
+     "tier": "easy",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "b3-pagination": {
+     "family": "pkg:minihttp",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "c2-since-flag-ko": {
+     "family": "pkg:logtool",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "b1-static-traversal": {
+     "family": "pkg:minihttp",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "d7-config-reload": {
+     "family": "pkg:d7-config-reload",
+     "tier": "hard",
+     "outcomes": [
+      1,
+      0,
+      0
+     ]
+    },
+    "a3-refactor-tax": {
+     "family": "pkg:ledger",
+     "tier": "easy",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "p1-ticket-batch": {
+     "family": "p-series",
+     "tier": "hard",
+     "outcomes": [
+      0,
+      0,
+      0
+     ]
+    },
+    "b6-route-cache": {
+     "family": "pkg:minihttp",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "d5-streaming-ingest-ko": {
+     "family": "pkg:d5-streaming-ingest-ko",
+     "tier": "hard",
+     "outcomes": [
+      1,
+      0,
+      0
+     ]
+    },
+    "c5-aggregate-perf": {
+     "family": "pkg:logtool",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "d6-snapshot-pagination": {
+     "family": "pkg:d6-snapshot-pagination",
+     "tier": "hard",
+     "outcomes": [
+      0,
+      1,
+      0
+     ]
+    },
+    "a1-rounding": {
+     "family": "pkg:ledger",
+     "tier": "easy",
+     "outcomes": [
+      0,
+      1,
+      0
+     ]
+    }
+   },
+   "runs": 81,
+   "legacyViolationRuns": 13,
+   "routeOrCrash": 0
+  },
+  "S": {
+   "tasks": {
+    "c4-malformed-lines": {
+     "family": "pkg:logtool",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "d2-keyed-queue": {
+     "family": "pkg:d2-keyed-queue",
+     "tier": "hard",
+     "outcomes": [
+      0,
+      0,
+      0
+     ]
+    },
+    "c1-timezone": {
+     "family": "pkg:logtool",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "d1-transactional-outbox": {
+     "family": "pkg:d1-transactional-outbox",
+     "tier": "hard",
+     "outcomes": [
+      1,
+      0,
+      1
+     ]
+    },
+    "a6-typo-message": {
+     "family": "pkg:ledger",
+     "tier": "easy",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "d3-money-migration-ko": {
+     "family": "pkg:d3-money-migration-ko",
+     "tier": "hard",
+     "outcomes": [
+      0,
+      1,
+      0
+     ]
+    },
+    "c6-csv-export": {
+     "family": "pkg:logtool",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "d4-cache-fencing": {
+     "family": "pkg:d4-cache-fencing",
+     "tier": "hard",
+     "outcomes": [
+      0,
+      0,
+      0
+     ]
+    },
+    "d8-build-graph": {
+     "family": "pkg:d8-build-graph",
+     "tier": "hard",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "b2-patch-endpoint": {
+     "family": "pkg:minihttp",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "a2-discount-codes": {
+     "family": "pkg:ledger",
+     "tier": "easy",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "p3-library-features-ko": {
+     "family": "p-series",
+     "tier": "hard",
+     "outcomes": [
+      0,
+      1,
+      0
+     ]
+    },
+    "p2-handler-migration": {
+     "family": "p-series",
+     "tier": "hard",
+     "outcomes": [
+      0,
+      0,
+      0
+     ]
+    },
+    "a7-auth-rotation": {
+     "family": "pkg:invoice-sync",
+     "tier": "easy",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "b5-ctx-migration": {
+     "family": "pkg:minihttp",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "a4-tests-fx": {
+     "family": "pkg:ledger",
+     "tier": "easy",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "b3-pagination": {
+     "family": "pkg:minihttp",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "c2-since-flag-ko": {
+     "family": "pkg:logtool",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "b1-static-traversal": {
+     "family": "pkg:minihttp",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      1,
+      0
+     ]
+    },
+    "d7-config-reload": {
+     "family": "pkg:d7-config-reload",
+     "tier": "hard",
+     "outcomes": [
+      1,
+      1,
+      0
+     ]
+    },
+    "a3-refactor-tax": {
+     "family": "pkg:ledger",
+     "tier": "easy",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "p1-ticket-batch": {
+     "family": "p-series",
+     "tier": "hard",
+     "outcomes": [
+      0,
+      0,
+      0
+     ]
+    },
+    "b6-route-cache": {
+     "family": "pkg:minihttp",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "d5-streaming-ingest-ko": {
+     "family": "pkg:d5-streaming-ingest-ko",
+     "tier": "hard",
+     "outcomes": [
+      0,
+      0,
+      0
+     ]
+    },
+    "c5-aggregate-perf": {
+     "family": "pkg:logtool",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "d6-snapshot-pagination": {
+     "family": "pkg:d6-snapshot-pagination",
+     "tier": "hard",
+     "outcomes": [
+      0,
+      1,
+      0
+     ]
+    },
+    "a1-rounding": {
+     "family": "pkg:ledger",
+     "tier": "easy",
+     "outcomes": [
+      0,
+      0,
+      0
+     ]
+    }
+   },
+   "runs": 81,
+   "legacyViolationRuns": 13,
+   "routeOrCrash": 0
+  },
+  "P1": {
+   "tasks": {
+    "c4-malformed-lines": {
+     "family": "pkg:logtool",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "d2-keyed-queue": {
+     "family": "pkg:d2-keyed-queue",
+     "tier": "hard",
+     "outcomes": [
+      1,
+      1,
+      0
+     ]
+    },
+    "c1-timezone": {
+     "family": "pkg:logtool",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "d1-transactional-outbox": {
+     "family": "pkg:d1-transactional-outbox",
+     "tier": "hard",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "a6-typo-message": {
+     "family": "pkg:ledger",
+     "tier": "easy",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "d3-money-migration-ko": {
+     "family": "pkg:d3-money-migration-ko",
+     "tier": "hard",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "c6-csv-export": {
+     "family": "pkg:logtool",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "d4-cache-fencing": {
+     "family": "pkg:d4-cache-fencing",
+     "tier": "hard",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "b2-patch-endpoint": {
+     "family": "pkg:minihttp",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "d8-build-graph": {
+     "family": "pkg:d8-build-graph",
+     "tier": "hard",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "a2-discount-codes": {
+     "family": "pkg:ledger",
+     "tier": "easy",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "p2-handler-migration": {
+     "family": "p-series",
+     "tier": "hard",
+     "outcomes": [
+      0,
+      0,
+      0
+     ]
+    },
+    "p3-library-features-ko": {
+     "family": "p-series",
+     "tier": "hard",
+     "outcomes": [
+      0,
+      0,
+      0
+     ]
+    },
+    "a7-auth-rotation": {
+     "family": "pkg:invoice-sync",
+     "tier": "easy",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "b5-ctx-migration": {
+     "family": "pkg:minihttp",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      0,
+      1
+     ]
+    },
+    "a4-tests-fx": {
+     "family": "pkg:ledger",
+     "tier": "easy",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "b3-pagination": {
+     "family": "pkg:minihttp",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "c2-since-flag-ko": {
+     "family": "pkg:logtool",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "b1-static-traversal": {
+     "family": "pkg:minihttp",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "d7-config-reload": {
+     "family": "pkg:d7-config-reload",
+     "tier": "hard",
+     "outcomes": [
+      0,
+      0,
+      1
+     ]
+    },
+    "a3-refactor-tax": {
+     "family": "pkg:ledger",
+     "tier": "easy",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "p1-ticket-batch": {
+     "family": "p-series",
+     "tier": "hard",
+     "outcomes": [
+      0,
+      0,
+      0
+     ]
+    },
+    "b6-route-cache": {
+     "family": "pkg:minihttp",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "d5-streaming-ingest-ko": {
+     "family": "pkg:d5-streaming-ingest-ko",
+     "tier": "hard",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "c5-aggregate-perf": {
+     "family": "pkg:logtool",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "d6-snapshot-pagination": {
+     "family": "pkg:d6-snapshot-pagination",
+     "tier": "hard",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "a1-rounding": {
+     "family": "pkg:ledger",
+     "tier": "easy",
+     "outcomes": [
+      0,
+      1,
+      0
+     ]
+    }
+   },
+   "runs": 81,
+   "legacyViolationRuns": 0,
+   "routeOrCrash": 0
+  },
+  "P2": {
+   "tasks": {
+    "c4-malformed-lines": {
+     "family": "pkg:logtool",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "d2-keyed-queue": {
+     "family": "pkg:d2-keyed-queue",
+     "tier": "hard",
+     "outcomes": [
+      0,
+      1,
+      1
+     ]
+    },
+    "c1-timezone": {
+     "family": "pkg:logtool",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "d1-transactional-outbox": {
+     "family": "pkg:d1-transactional-outbox",
+     "tier": "hard",
+     "outcomes": [
+      0,
+      0,
+      0
+     ]
+    },
+    "a6-typo-message": {
+     "family": "pkg:ledger",
+     "tier": "easy",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "d3-money-migration-ko": {
+     "family": "pkg:d3-money-migration-ko",
+     "tier": "hard",
+     "outcomes": [
+      0,
+      1,
+      1
+     ]
+    },
+    "c6-csv-export": {
+     "family": "pkg:logtool",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "d4-cache-fencing": {
+     "family": "pkg:d4-cache-fencing",
+     "tier": "hard",
+     "outcomes": [
+      1,
+      1,
+      0
+     ]
+    },
+    "d8-build-graph": {
+     "family": "pkg:d8-build-graph",
+     "tier": "hard",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "b2-patch-endpoint": {
+     "family": "pkg:minihttp",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "a2-discount-codes": {
+     "family": "pkg:ledger",
+     "tier": "easy",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "p2-handler-migration": {
+     "family": "p-series",
+     "tier": "hard",
+     "outcomes": [
+      0,
+      0,
+      0
+     ]
+    },
+    "p3-library-features-ko": {
+     "family": "p-series",
+     "tier": "hard",
+     "outcomes": [
+      0,
+      0,
+      0
+     ]
+    },
+    "a7-auth-rotation": {
+     "family": "pkg:invoice-sync",
+     "tier": "easy",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "b5-ctx-migration": {
+     "family": "pkg:minihttp",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "a4-tests-fx": {
+     "family": "pkg:ledger",
+     "tier": "easy",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "b3-pagination": {
+     "family": "pkg:minihttp",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "c2-since-flag-ko": {
+     "family": "pkg:logtool",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "b1-static-traversal": {
+     "family": "pkg:minihttp",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "d7-config-reload": {
+     "family": "pkg:d7-config-reload",
+     "tier": "hard",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "a3-refactor-tax": {
+     "family": "pkg:ledger",
+     "tier": "easy",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "p1-ticket-batch": {
+     "family": "p-series",
+     "tier": "hard",
+     "outcomes": [
+      0,
+      0,
+      0
+     ]
+    },
+    "b6-route-cache": {
+     "family": "pkg:minihttp",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "d5-streaming-ingest-ko": {
+     "family": "pkg:d5-streaming-ingest-ko",
+     "tier": "hard",
+     "outcomes": [
+      0,
+      0,
+      0
+     ]
+    },
+    "c5-aggregate-perf": {
+     "family": "pkg:logtool",
+     "tier": "medium",
+     "outcomes": [
+      1,
+      1,
+      1
+     ]
+    },
+    "d6-snapshot-pagination": {
+     "family": "pkg:d6-snapshot-pagination",
+     "tier": "hard",
+     "outcomes": [
+      0,
+      1,
+      1
+     ]
+    },
+    "a1-rounding": {
+     "family": "pkg:ledger",
+     "tier": "easy",
+     "outcomes": [
+      0,
+      0,
+      1
+     ]
+    }
+   },
+   "runs": 81,
+   "legacyViolationRuns": 9,
+   "routeOrCrash": 0
+  }
+ }
+}

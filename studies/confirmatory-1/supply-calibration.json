@@ -1,0 +1,3 @@
+{
+  "batch": { "maxTasks": 12, "maxPerFamily": 2, "maxPerOwner": 12, "maxOwnerShare": 1, "seed": "confirmatory-1-calibration" }
+}

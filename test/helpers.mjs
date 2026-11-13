@@ -5,7 +5,7 @@ import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { bindingOf, DEFAULT_PROTOCOL, merge } from "../src/protocol.mjs";
-import { digestOf } from "../src/util.mjs";
+import { digestOf, sha256 } from "../src/util.mjs";
 import { sealOf } from "../src/datasets.mjs";
 import { simulatedBackend } from "../src/evaluator.mjs";
 import { Loop } from "../src/loop.mjs";
@@ -82,6 +82,30 @@ export function testProtocol(overrides = {}) {
   }), overrides);
 }
 
+/**
+ * protocol-4 adopts only under a complete confirmatory plan. Tests of the adoption/deploy mechanics use this fixture plan:
+ * illustrative values (not recommendations), a rationale document and a series ledger in one per-process temporary directory
+ * (alphaTotal large enough for every experiment of one test file; each spend is bound to its own state directory).
+ */
+let planDir;
+function fixturePlanDir() {
+  if (planDir) return planDir;
+  planDir = tempDir("el-plan-");
+  writeFileSync(join(planDir, "rationale.md"), PLAN_RATIONALE);
+  process.once("exit", () => { try { rmSync(planDir, { recursive: true, force: true }); } catch { /* best effort */ } });
+  return planDir;
+}
+const PLAN_RATIONALE = "# Test fixture plan: illustrative values to exercise adoption mechanics; not a sample-size justification.\n";
+export function adoptableProtocol(overrides = {}) {
+  const dir = fixturePlanDir();
+  return merge(testProtocol({
+    holdout: { priorFamilyReuse: "forbid" },
+    analysisPlan: { mode: "confirmatory", registeredAt: "2026-11-06T00:00:00Z", rationale: { document: join(dir, "rationale.md"), sha256: digestOfText(PLAN_RATIONALE) }, minEffect: 0.1, alpha: 0.01, minTasks: 6, minFamilies: 4, minHardTasks: 1, permutationDraws: 2000,
+      series: { id: "test-fixture-series", ledger: join(dir, "series.jsonl"), alphaTotal: 0.99 }, lowExposure: { required: false }, confirmation: { required: false } },
+  }), overrides);
+}
+const digestOfText = (text) => sha256(text);
+
 export const edit = (text) => (dir) => writeFileSync(join(dir, "src/skill.txt"), `${text}\n`);
 
 /**
@@ -89,7 +113,7 @@ export const edit = (text) => (dir) => writeFileSync(join(dir, "src/skill.txt"),
  *   strategy?: "pareto" | "greedy", prerequisites?: () => Promise<Array<{ name: string, ok: boolean }>>, checks?: (worktree: string, which?: string[], logDir?: string) => Promise<any>,
  *   backend?: { run(input: any): Promise<any>, simulated?: boolean }, stateName?: string, fixtures?: any, fault?: any, holdoutFromProtocol?: boolean }} options
  */
-export function makeLoop({ root, protocol = testProtocol(), entries, skill = skillOf, strategy = "pareto", prerequisites, checks, backend, stateName = "state", fixtures, fault, holdoutFromProtocol = false }) {
+export function makeLoop({ root, protocol = adoptableProtocol(), entries, skill = skillOf, strategy = "pareto", prerequisites, checks, backend, stateName = "state", fixtures, fault, holdoutFromProtocol = false }) {
   const fx = fixtures ?? (() => { const u = makeUmbrella(root); const tasks = makeTasks(root, TRAIN_DEV); const holdout = makeHoldout(root, HOLDOUT); return { ...u, tasks, holdout }; })();
   const loop = new Loop({
     stateDir: join(root, stateName), protocol, strategy, umbrella: fx.umbrella, orche: fx.orche, envDigest: "test-env", log: () => {},

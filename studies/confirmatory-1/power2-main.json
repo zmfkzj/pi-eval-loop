@@ -1,0 +1,3572 @@
+{
+ "schema": "pi-eval-loop/confirmatory-1-power2@1",
+ "generatedAt": "2026-11-07T02:05:15.126Z",
+ "evidence": {
+  "path": "studies/confirmatory-1/evidence-v2.json"
+ },
+ "pools": {
+  "private": {
+   "source": "pilot:S",
+   "tasks": 27,
+   "families": 13,
+   "mean": 0.2222222222222222,
+   "strength": 2,
+   "infra": 0,
+   "integrityRate": 0.6419753086419753
+  },
+  "external": {
+   "source": "c2:OC",
+   "tasks": 87,
+   "families": 51,
+   "mean": 0.09302325581395349,
+   "strength": 2,
+   "infra": 0.022727272727272728,
+   "integrityRate": 0.48295454545454547
+  },
+  "template": {
+   "source": "c2:OC",
+   "tasks": 87,
+   "families": 51,
+   "mean": 0.09302325581395349,
+   "strength": 2,
+   "infra": 0.022727272727272728,
+   "integrityRate": 0.48295454545454547,
+   "contrast": "OCR-OC",
+   "rawDelta": 0.1569767441860465
+  }
+ },
+ "infraRateUsed": 0.022727272727272728,
+ "reps": 150,
+ "notes": "draws/permutationDraws 2000 in simulation (protocol 10000/20000); mcse = binomial Monte Carlo SE",
+ "results": [
+  {
+   "scenario": {
+    "model": "logit",
+    "sigmaFamily": 0.5,
+    "sigmaTask": 0.75,
+    "effect": 0,
+    "v": 0,
+    "q": 0.022727272727272728,
+    "beta": -0.18794839014663012,
+    "scale": -0.18794839014663012,
+    "achieved": -1.425520022240661e-13
+   },
+   "plan": {
+    "repeats": 3,
+    "perFamily": 3,
+    "alpha": 0.0125,
+    "confAlpha": 0.0125,
+    "minEffect": 0.05,
+    "draws": 2000,
+    "permutationDraws": 2000,
+    "privateShare": 0.5,
+    "tasks": 96,
+    "confTasks": 96,
+    "minHardTasks": 33,
+    "lowExposureMin": 48
+   },
+   "reps": 150,
+   "adopt": {
+    "p": 0,
+    "mcse": 0
+   },
+   "confirmed": {
+    "p": 0,
+    "mcse": 0
+   },
+   "adoptAndConfirmed": {
+    "p": 0,
+    "mcse": 0
+   },
+   "holdoutReasons": {
+    "family-regression": 102,
+    "task-support": 47,
+    "family-support": 1
+   },
+   "confirmationReasons": {
+    "randomization test": 149,
+    "family-clustered P": 1
+   }
+  },
+  {
+   "scenario": {
+    "model": "logit",
+    "sigmaFamily": 0.5,
+    "sigmaTask": 0.75,
+    "effect": 0.1,
+    "v": 0,
+    "q": 0.022727272727272728,
+    "beta": 0.6609449809584476,
+    "scale": 0.6609449809584476,
+    "achieved": 0.10000000000024323
+   },
+   "plan": {
+    "repeats": 3,
+    "perFamily": 3,
+    "alpha": 0.0125,
+    "confAlpha": 0.0125,
+    "minEffect": 0.05,
+    "draws": 2000,
+    "permutationDraws": 2000,
+    "privateShare": 0.5,
+    "tasks": 96,
+    "confTasks": 96,
+    "minHardTasks": 33,
+    "lowExposureMin": 48
+   },
+   "reps": 150,
+   "adopt": {
+    "p": 0.13333333333333333,
+    "mcse": 0.02775554665954844
+   },
+   "confirmed": {
+    "p": 0.18666666666666668,
+    "mcse": 0.031814275854530276
+   },
+   "adoptAndConfirmed": {
+    "p": 0.03333333333333333,
+    "mcse": 0.0146565621758588
+   },
+   "holdoutReasons": {
+    "failed:family-clustered P": 9,
+    "task-support": 52,
+    "family-support": 22,
+    "family-regression": 47,
+    "adopt": 20
+   },
+   "confirmationReasons": {
+    "randomization test": 33,
+    "family-clustered P": 89,
+    "ok": 28
+   }
+  },
+  {
+   "scenario": {
+    "model": "template",
+    "effect": 0.1,
+    "v": 0,
+    "q": 0.022727272727272728,
+    "beta": 0.6266201028811338,
+    "scale": 0.6266201028811338,
+    "achieved": 0.0999999999995429
+   },
+   "plan": {
+    "repeats": 3,
+    "perFamily": 3,
+    "alpha": 0.0125,
+    "confAlpha": 0.0125,
+    "minEffect": 0.05,
+    "draws": 2000,
+    "permutationDraws": 2000,
+    "privateShare": 0.5,
+    "tasks": 96,
+    "confTasks": 96,
+    "minHardTasks": 33,
+    "lowExposureMin": 48
+   },
+   "reps": 150,
+   "adopt": {
+    "p": 0.06,
+    "mcse": 0.019390719429665314
+   },
+   "confirmed": {
+    "p": 0.21333333333333335,
+    "mcse": 0.03344868928395872
+   },
+   "adoptAndConfirmed": {
+    "p": 0.006666666666666667,
+    "mcse": 0.006644407283433801
+   },
+   "holdoutReasons": {
+    "task-support": 65,
+    "family-regression": 48,
+    "family-support": 25,
+    "adopt": 9,
+    "failed:family-clustered P": 3
+   },
+   "confirmationReasons": {
+    "family-clustered P": 91,
+    "ok": 32,
+    "randomization test": 27
+   }
+  },
+  {
+   "scenario": {
+    "model": "logit",
+    "sigmaFamily": 0.5,
+    "sigmaTask": 0.75,
+    "effect": 0.15,
+    "v": 0,
+    "q": 0.022727272727272728,
+    "beta": 1.0076517110901477,
+    "scale": 1.0076517110901477,
+    "achieved": 0.14999999999953506
+   },
+   "plan": {
+    "repeats": 3,
+    "perFamily": 3,
+    "alpha": 0.0125,
+    "confAlpha": 0.0125,
+    "minEffect": 0.05,
+    "draws": 2000,
+    "permutationDraws": 2000,
+    "privateShare": 0.5,
+    "tasks": 96,
+    "confTasks": 96,
+    "minHardTasks": 33,
+    "lowExposureMin": 48
+   },
+   "reps": 150,
+   "adopt": {
+    "p": 0.5,
+    "mcse": 0.040824829046386304
+   },
+   "confirmed": {
+    "p": 0.5733333333333334,
+    "mcse": 0.040383348236801946
+   },
+   "adoptAndConfirmed": {
+    "p": 0.32,
+    "mcse": 0.03808761828556186
+   },
+   "holdoutReasons": {
+    "adopt": 75,
+    "family-regression": 29,
+    "task-support": 18,
+    "family-support": 18,
+    "failed:family-clustered P": 10
+   },
+   "confirmationReasons": {
+    "ok": 86,
+    "family-clustered P": 62,
+    "randomization test": 2
+   }
+  },
+  {
+   "scenario": {
+    "model": "template",
+    "effect": 0.15,
+    "v": 0,
+    "q": 0.022727272727272728,
+    "beta": 0.935113113879197,
+    "scale": 0.935113113879197,
+    "achieved": 0.15000000000057095
+   },
+   "plan": {
+    "repeats": 3,
+    "perFamily": 3,
+    "alpha": 0.0125,
+    "confAlpha": 0.0125,
+    "minEffect": 0.05,
+    "draws": 2000,
+    "permutationDraws": 2000,
+    "privateShare": 0.5,
+    "tasks": 96,
+    "confTasks": 96,
+    "minHardTasks": 33,
+    "lowExposureMin": 48
+   },
+   "reps": 150,
+   "adopt": {
+    "p": 0.32666666666666666,
+    "mcse": 0.038293215722505866
+   },
+   "confirmed": {
+    "p": 0.56,
+    "mcse": 0.04052982440952177
+   },
+   "adoptAndConfirmed": {
+    "p": 0.16666666666666666,
+    "mcse": 0.03042903097250923
+   },
+   "holdoutReasons": {
+    "family-support": 34,
+    "task-support": 26,
+    "adopt": 49,
+    "family-regression": 30,
+    "failed:family-clustered P": 11
+   },
+   "confirmationReasons": {
+    "family-clustered P": 64,
+    "ok": 84,
+    "randomization test": 2
+   }
+  },
+  {
+   "scenario": {
+    "model": "logit",
+    "sigmaFamily": 0.5,
+    "sigmaTask": 0.75,
+    "effect": 0.2,
+    "v": 0,
+    "q": 0.022727272727272728,
+    "beta": 1.329276097680122,
+    "scale": 1.329276097680122,
+    "achieved": 0.2000000000000745
+   },
+   "plan": {
+    "repeats": 3,
+    "perFamily": 3,
+    "alpha": 0.0125,
+    "confAlpha": 0.0125,
+    "minEffect": 0.05,
+    "draws": 2000,
+    "permutationDraws": 2000,
+    "privateShare": 0.5,
+    "tasks": 96,
+    "confTasks": 96,
+    "minHardTasks": 33,
+    "lowExposureMin": 48
+   },
+   "reps": 150,
+   "adopt": {
+    "p": 0.8133333333333334,
+    "mcse": 0.031814275854530276
+   },
+   "confirmed": {
+    "p": 0.9466666666666667,
+    "mcse": 0.018346459947155818
+   },
+   "adoptAndConfirmed": {
+    "p": 0.7733333333333333,
+    "mcse": 0.034184683596496734
+   },
+   "holdoutReasons": {
+    "adopt": 122,
+    "task-support": 6,
+    "family-regression": 10,
+    "family-support": 12
+   },
+   "confirmationReasons": {
+    "ok": 142,
+    "family-clustered P": 8
+   }
+  },
+  {
+   "scenario": {
+    "model": "template",
+    "effect": 0.2,
+    "v": 0,
+    "q": 0.022727272727272728,
+    "beta": 1.2565951571850746,
+    "scale": 1.2565951571850746,
+    "achieved": 0.20000000000054116
+   },
+   "plan": {
+    "repeats": 3,
+    "perFamily": 3,
+    "alpha": 0.0125,
+    "confAlpha": 0.0125,
+    "minEffect": 0.05,
+    "draws": 2000,
+    "permutationDraws": 2000,
+    "privateShare": 0.5,
+    "tasks": 96,
+    "confTasks": 96,
+    "minHardTasks": 33,
+    "lowExposureMin": 48
+   },
+   "reps": 150,
+   "adopt": {
+    "p": 0.62,
+    "mcse": 0.0396316371938716
+   },
+   "confirmed": {
+    "p": 0.92,
+    "mcse": 0.022150996967781528
+   },
+   "adoptAndConfirmed": {
+    "p": 0.5733333333333334,
+    "mcse": 0.040383348236801946
+   },
+   "holdoutReasons": {
+    "family-regression": 29,
+    "task-support": 14,
+    "adopt": 93,
+    "family-support": 13,
+    "failed:family-clustered P": 1
+   },
+   "confirmationReasons": {
+    "ok": 138,
+    "family-clustered P": 11,
+    "randomization test": 1
+   }
+  },
+  {
+   "scenario": {
+    "model": "logit",
+    "sigmaFamily": 0,
+    "sigmaTask": 0,
+    "effect": 0,
+    "v": 0,
+    "q": 0.022727272727272728,
+    "note": "sharp null",
+    "beta": 0,
+    "scale": 0,
+    "achieved": 0
+   },
+   "plan": {
+    "repeats": 3,
+    "perFamily": 3,
+    "alpha": 0.0125,
+    "confAlpha": 0.0125,
+    "minEffect": 0.05,
+    "draws": 2000,
+    "permutationDraws": 2000,
+    "privateShare": 0.5,
+    "tasks": 96,
+    "confTasks": 96,
+    "minHardTasks": 33,
+    "lowExposureMin": 48
+   },
+   "reps": 150,
+   "adopt": {
+    "p": 0,
+    "mcse": 0
+   },
+   "confirmed": {
+    "p": 0,
+    "mcse": 0
+   },
+   "adoptAndConfirmed": {
+    "p": 0,
+    "mcse": 0
+   },
+   "holdoutReasons": {
+    "family-regression": 80,
+    "task-support": 70
+   },
+   "confirmationReasons": {
+    "randomization test": 149,
+    "family-clustered P": 1
+   }
+  },
+  {
+   "scenario": {
+    "model": "logit",
+    "sigmaFamily": 1,
+    "sigmaTask": 1,
+    "effect": 0.15,
+    "v": 0,
+    "q": 0.022727272727272728,
+    "note": "larger heterogeneity",
+    "beta": 0.8629292415025702,
+    "scale": 0.8629292415025702,
+    "achieved": 0.1499999999999395
+   },
+   "plan": {
+    "repeats": 3,
+    "perFamily": 3,
+    "alpha": 0.0125,
+    "confAlpha": 0.0125,
+    "minEffect": 0.05,
+    "draws": 2000,
+    "permutationDraws": 2000,
+    "privateShare": 0.5,
+    "tasks": 96,
+    "confTasks": 96,
+    "minHardTasks": 33,
+    "lowExposureMin": 48
+   },
+   "reps": 150,
+   "adopt": {
+    "p": 0.37333333333333335,
+    "mcse": 0.039493084251596554
+   },
+   "confirmed": {
+    "p": 0.5933333333333334,
+    "mcse": 0.040107263588938506
+   },
+   "adoptAndConfirmed": {
+    "p": 0.20666666666666667,
+    "mcse": 0.033061110644336145
+   },
+   "holdoutReasons": {
+    "family-regression": 46,
+    "task-support": 23,
+    "adopt": 56,
+    "family-support": 19,
+    "failed:family-clustered P": 6
+   },
+   "confirmationReasons": {
+    "ok": 89,
+    "randomization test": 7,
+    "family-clustered P": 54
+   }
+  },
+  {
+   "scenario": {
+    "model": "logit",
+    "sigmaFamily": 0.5,
+    "sigmaTask": 0.75,
+    "effect": 0,
+    "v": 0,
+    "q": 0.022727272727272728,
+    "beta": -0.18794839014663012,
+    "scale": -0.18794839014663012,
+    "achieved": -1.425520022240661e-13
+   },
+   "plan": {
+    "repeats": 5,
+    "perFamily": 3,
+    "alpha": 0.0125,
+    "confAlpha": 0.0125,
+    "minEffect": 0.05,
+    "draws": 2000,
+    "permutationDraws": 2000,
+    "privateShare": 0.5,
+    "tasks": 96,
+    "confTasks": 96,
+    "minHardTasks": 33,
+    "lowExposureMin": 48
+   },
+   "reps": 150,
+   "adopt": {
+    "p": 0,
+    "mcse": 0
+   },
+   "confirmed": {
+    "p": 0,
+    "mcse": 0
+   },
+   "adoptAndConfirmed": {
+    "p": 0,
+    "mcse": 0
+   },
+   "holdoutReasons": {
+    "task-support": 68,
+    "family-regression": 81,
+    "family-support": 1
+   },
+   "confirmationReasons": {
+    "randomization test": 146,
+    "family-clustered P": 4
+   }
+  },
+  {
+   "scenario": {
+    "model": "logit",
+    "sigmaFamily": 0.5,
+    "sigmaTask": 0.75,
+    "effect": 0.1,
+    "v": 0,
+    "q": 0.022727272727272728,
+    "beta": 0.6609449809584476,
+    "scale": 0.6609449809584476,
+    "achieved": 0.10000000000024323
+   },
+   "plan": {
+    "repeats": 5,
+    "perFamily": 3,
+    "alpha": 0.0125,
+    "confAlpha": 0.0125,
+    "minEffect": 0.05,
+    "draws": 2000,
+    "permutationDraws": 2000,
+    "privateShare": 0.5,
+    "tasks": 96,
+    "confTasks": 96,
+    "minHardTasks": 33,
+    "lowExposureMin": 48
+   },
+   "reps": 150,
+   "adopt": {
+    "p": 0.37333333333333335,
+    "mcse": 0.039493084251596554
+   },
+   "confirmed": {
+    "p": 0.38666666666666666,
+    "mcse": 0.03976225643794674
+   },
+   "adoptAndConfirmed": {
+    "p": 0.08666666666666667,
+    "mcse": 0.022971802360801027
+   },
+   "holdoutReasons": {
+    "adopt": 56,
+    "family-regression": 16,
+    "task-support": 31,
+    "family-support": 32,
+    "failed:family-clustered P": 15
+   },
+   "confirmationReasons": {
+    "randomization test": 13,
+    "ok": 58,
+    "family-clustered P": 79
+   }
+  },
+  {
+   "scenario": {
+    "model": "template",
+    "effect": 0.1,
+    "v": 0,
+    "q": 0.022727272727272728,
+    "beta": 0.6266201028811338,
+    "scale": 0.6266201028811338,
+    "achieved": 0.0999999999995429
+   },
+   "plan": {
+    "repeats": 5,
+    "perFamily": 3,
+    "alpha": 0.0125,
+    "confAlpha": 0.0125,
+    "minEffect": 0.05,
+    "draws": 2000,
+    "permutationDraws": 2000,
+    "privateShare": 0.5,
+    "tasks": 96,
+    "confTasks": 96,
+    "minHardTasks": 33,
+    "lowExposureMin": 48
+   },
+   "reps": 150,
+   "adopt": {
+    "p": 0.18,
+    "mcse": 0.03136877428271625
+   },
+   "confirmed": {
+    "p": 0.35333333333333333,
+    "mcse": 0.03902895411434003
+   },
+   "adoptAndConfirmed": {
+    "p": 0.05333333333333334,
+    "mcse": 0.018346459947155815
+   },
+   "holdoutReasons": {
+    "task-support": 63,
+    "failed:family-clustered P": 3,
+    "adopt": 27,
+    "family-support": 43,
+    "family-regression": 14
+   },
+   "confirmationReasons": {
+    "ok": 53,
+    "family-clustered P": 85,
+    "randomization test": 12
+   }
+  },
+  {
+   "scenario": {
+    "model": "logit",
+    "sigmaFamily": 0.5,
+    "sigmaTask": 0.75,
+    "effect": 0.15,
+    "v": 0,
+    "q": 0.022727272727272728,
+    "beta": 1.0076517110901477,
+    "scale": 1.0076517110901477,
+    "achieved": 0.14999999999953506
+   },
+   "plan": {
+    "repeats": 5,
+    "perFamily": 3,
+    "alpha": 0.0125,
+    "confAlpha": 0.0125,
+    "minEffect": 0.05,
+    "draws": 2000,
+    "permutationDraws": 2000,
+    "privateShare": 0.5,
+    "tasks": 96,
+    "confTasks": 96,
+    "minHardTasks": 33,
+    "lowExposureMin": 48
+   },
+   "reps": 150,
+   "adopt": {
+    "p": 0.7333333333333333,
+    "mcse": 0.036106837353937604
+   },
+   "confirmed": {
+    "p": 0.8933333333333333,
+    "mcse": 0.02520435000668058
+   },
+   "adoptAndConfirmed": {
+    "p": 0.6733333333333333,
+    "mcse": 0.038293215722505866
+   },
+   "holdoutReasons": {
+    "adopt": 110,
+    "family-support": 18,
+    "failed:family-clustered P": 2,
+    "family-regression": 13,
+    "task-support": 7
+   },
+   "confirmationReasons": {
+    "ok": 134,
+    "family-clustered P": 16
+   }
+  },
+  {
+   "scenario": {
+    "model": "template",
+    "effect": 0.15,
+    "v": 0,
+    "q": 0.022727272727272728,
+    "beta": 0.935113113879197,
+    "scale": 0.935113113879197,
+    "achieved": 0.15000000000057095
+   },
+   "plan": {
+    "repeats": 5,
+    "perFamily": 3,
+    "alpha": 0.0125,
+    "confAlpha": 0.0125,
+    "minEffect": 0.05,
+    "draws": 2000,
+    "permutationDraws": 2000,
+    "privateShare": 0.5,
+    "tasks": 96,
+    "confTasks": 96,
+    "minHardTasks": 33,
+    "lowExposureMin": 48
+   },
+   "reps": 150,
+   "adopt": {
+    "p": 0.62,
+    "mcse": 0.0396316371938716
+   },
+   "confirmed": {
+    "p": 0.86,
+    "mcse": 0.028331372481167703
+   },
+   "adoptAndConfirmed": {
+    "p": 0.5266666666666666,
+    "mcse": 0.04076672571995359
+   },
+   "holdoutReasons": {
+    "adopt": 93,
+    "family-support": 31,
+    "failed:family-clustered P": 2,
+    "task-support": 16,
+    "family-regression": 8
+   },
+   "confirmationReasons": {
+    "family-clustered P": 21,
+    "ok": 129
+   }
+  },
+  {
+   "scenario": {
+    "model": "logit",
+    "sigmaFamily": 0.5,
+    "sigmaTask": 0.75,
+    "effect": 0.2,
+    "v": 0,
+    "q": 0.022727272727272728,
+    "beta": 1.329276097680122,
+    "scale": 1.329276097680122,
+    "achieved": 0.2000000000000745
+   },
+   "plan": {
+    "repeats": 5,
+    "perFamily": 3,
+    "alpha": 0.0125,
+    "confAlpha": 0.0125,
+    "minEffect": 0.05,
+    "draws": 2000,
+    "permutationDraws": 2000,
+    "privateShare": 0.5,
+    "tasks": 96,
+    "confTasks": 96,
+    "minHardTasks": 33,
+    "lowExposureMin": 48
+   },
+   "reps": 150,
+   "adopt": {
+    "p": 0.9066666666666666,
+    "mcse": 0.023751803050466473
+   },
+   "confirmed": {
+    "p": 0.9933333333333333,
+    "mcse": 0.006644407283433823
+   },
+   "adoptAndConfirmed": {
+    "p": 0.9,
+    "mcse": 0.02449489742783178
+   },
+   "holdoutReasons": {
+    "adopt": 136,
+    "family-regression": 6,
+    "family-support": 8
+   },
+   "confirmationReasons": {
+    "ok": 149,
+    "family-clustered P": 1
+   }
+  },
+  {
+   "scenario": {
+    "model": "template",
+    "effect": 0.2,
+    "v": 0,
+    "q": 0.022727272727272728,
+    "beta": 1.2565951571850746,
+    "scale": 1.2565951571850746,
+    "achieved": 0.20000000000054116
+   },
+   "plan": {
+    "repeats": 5,
+    "perFamily": 3,
+    "alpha": 0.0125,
+    "confAlpha": 0.0125,
+    "minEffect": 0.05,
+    "draws": 2000,
+    "permutationDraws": 2000,
+    "privateShare": 0.5,
+    "tasks": 96,
+    "confTasks": 96,
+    "minHardTasks": 33,
+    "lowExposureMin": 48
+   },
+   "reps": 150,
+   "adopt": {
+    "p": 0.82,
+    "mcse": 0.03136877428271625
+   },
+   "confirmed": {
+    "p": 0.9933333333333333,
+    "mcse": 0.006644407283433823
+   },
+   "adoptAndConfirmed": {
+    "p": 0.8133333333333334,
+    "mcse": 0.031814275854530276
+   },
+   "holdoutReasons": {
+    "adopt": 123,
+    "family-support": 15,
+    "family-regression": 8,
+    "failed:family-clustered P": 1,
+    "task-support": 3
+   },
+   "confirmationReasons": {
+    "ok": 149,
+    "family-clustered P": 1
+   }
+  },
+  {
+   "scenario": {
+    "model": "logit",
+    "sigmaFamily": 0,
+    "sigmaTask": 0,
+    "effect": 0,
+    "v": 0,
+    "q": 0.022727272727272728,
+    "note": "sharp null",
+    "beta": 0,
+    "scale": 0,
+    "achieved": 0
+   },
+   "plan": {
+    "repeats": 5,
+    "perFamily": 3,
+    "alpha": 0.0125,
+    "confAlpha": 0.0125,
+    "minEffect": 0.05,
+    "draws": 2000,
+    "permutationDraws": 2000,
+    "privateShare": 0.5,
+    "tasks": 96,
+    "confTasks": 96,
+    "minHardTasks": 33,
+    "lowExposureMin": 48
+   },
+   "reps": 150,
+   "adopt": {
+    "p": 0,
+    "mcse": 0
+   },
+   "confirmed": {
+    "p": 0,
+    "mcse": 0
+   },
+   "adoptAndConfirmed": {
+    "p": 0,
+    "mcse": 0
+   },
+   "holdoutReasons": {
+    "task-support": 114,
+    "family-regression": 36
+   },
+   "confirmationReasons": {
+    "randomization test": 149,
+    "family-clustered P": 1
+   }
+  },
+  {
+   "scenario": {
+    "model": "logit",
+    "sigmaFamily": 1,
+    "sigmaTask": 1,
+    "effect": 0.15,
+    "v": 0,
+    "q": 0.022727272727272728,
+    "note": "larger heterogeneity",
+    "beta": 0.8629292415025702,
+    "scale": 0.8629292415025702,
+    "achieved": 0.1499999999999395
+   },
+   "plan": {
+    "repeats": 5,
+    "perFamily": 3,
+    "alpha": 0.0125,
+    "confAlpha": 0.0125,
+    "minEffect": 0.05,
+    "draws": 2000,
+    "permutationDraws": 2000,
+    "privateShare": 0.5,
+    "tasks": 96,
+    "confTasks": 96,
+    "minHardTasks": 33,
+    "lowExposureMin": 48
+   },
+   "reps": 150,
+   "adopt": {
+    "p": 0.4533333333333333,
+    "mcse": 0.04064662529839529
+   },
+   "confirmed": {
+    "p": 0.7666666666666667,
+    "mcse": 0.03453393392871123
+   },
+   "adoptAndConfirmed": {
+    "p": 0.38666666666666666,
+    "mcse": 0.03976225643794674
+   },
+   "holdoutReasons": {
+    "task-support": 14,
+    "family-regression": 40,
+    "adopt": 68,
+    "family-support": 24,
+    "failed:family-clustered P": 4
+   },
+   "confirmationReasons": {
+    "ok": 115,
+    "randomization test": 2,
+    "family-clustered P": 33
+   }
+  },
+  {
+   "scenario": {
+    "model": "logit",
+    "sigmaFamily": 0.5,
+    "sigmaTask": 0.75,
+    "effect": 0,
+    "v": 0,
+    "q": 0.022727272727272728,
+    "beta": -0.17585246080489014,
+    "scale": -0.17585246080489014,
+    "achieved": 1.84135024373793e-13
+   },
+   "plan": {
+    "repeats": 3,
+    "perFamily": 3,
+    "alpha": 0.0125,
+    "confAlpha": 0.0125,
+    "minEffect": 0.05,
+    "draws": 2000,
+    "permutationDraws": 2000,
+    "privateShare": 0.5,
+    "tasks": 144,
+    "confTasks": 144,
+    "minHardTasks": 48,
+    "lowExposureMin": 72
+   },
+   "reps": 150,
+   "adopt": {
+    "p": 0,
+    "mcse": 0
+   },
+   "confirmed": {
+    "p": 0,
+    "mcse": 0
+   },
+   "adoptAndConfirmed": {
+    "p": 0,
+    "mcse": 0
+   },
+   "holdoutReasons": {
+    "family-regression": 122,
+    "task-support": 27,
+    "family-support": 1
+   },
+   "confirmationReasons": {
+    "randomization test": 146,
+    "family-clustered P": 4
+   }
+  },
+  {
+   "scenario": {
+    "model": "logit",
+    "sigmaFamily": 0.5,
+    "sigmaTask": 0.75,
+    "effect": 0.1,
+    "v": 0,
+    "q": 0.022727272727272728,
+    "beta": 0.6567543439196015,
+    "scale": 0.6567543439196015,
+    "achieved": 0.09999999999950394
+   },
+   "plan": {
+    "repeats": 3,
+    "perFamily": 3,
+    "alpha": 0.0125,
+    "confAlpha": 0.0125,
+    "minEffect": 0.05,
+    "draws": 2000,
+    "permutationDraws": 2000,
+    "privateShare": 0.5,
+    "tasks": 144,
+    "confTasks": 144,
+    "minHardTasks": 48,
+    "lowExposureMin": 72
+   },
+   "reps": 150,
+   "adopt": {
+    "p": 0.24,
+    "mcse": 0.03487119154832539
+   },
+   "confirmed": {
+    "p": 0.38666666666666666,
+    "mcse": 0.03976225643794674
+   },
+   "adoptAndConfirmed": {
+    "p": 0.08666666666666667,
+    "mcse": 0.022971802360801027
+   },
+   "holdoutReasons": {
+    "family-regression": 55,
+    "task-support": 32,
+    "failed:family-clustered P": 6,
+    "family-support": 21,
+    "adopt": 36
+   },
+   "confirmationReasons": {
+    "randomization test": 17,
+    "family-clustered P": 75,
+    "ok": 58
+   }
+  },
+  {
+   "scenario": {
+    "model": "template",
+    "effect": 0.1,
+    "v": 0,
+    "q": 0.022727272727272728,
+    "beta": 0.6265121948854357,
+    "scale": 0.6265121948854357,
+    "achieved": 0.10000000000018056
+   },
+   "plan": {
+    "repeats": 3,
+    "perFamily": 3,
+    "alpha": 0.0125,
+    "confAlpha": 0.0125,
+    "minEffect": 0.05,
+    "draws": 2000,
+    "permutationDraws": 2000,
+    "privateShare": 0.5,
+    "tasks": 144,
+    "confTasks": 144,
+    "minHardTasks": 48,
+    "lowExposureMin": 72
+   },
+   "reps": 150,
+   "adopt": {
+    "p": 0.12666666666666668,
+    "mcse": 0.027156610272298005
+   },
+   "confirmed": {
+    "p": 0.44666666666666666,
+    "mcse": 0.04059191672862596
+   },
+   "adoptAndConfirmed": {
+    "p": 0.02666666666666667,
+    "mcse": 0.013154354299509993
+   },
+   "holdoutReasons": {
+    "adopt": 19,
+    "family-support": 24,
+    "task-support": 37,
+    "family-regression": 64,
+    "failed:family-clustered P": 6
+   },
+   "confirmationReasons": {
+    "family-clustered P": 78,
+    "ok": 67,
+    "randomization test": 5
+   }
+  },
+  {
+   "scenario": {
+    "model": "logit",
+    "sigmaFamily": 0.5,
+    "sigmaTask": 0.75,
+    "effect": 0.15,
+    "v": 0,
+    "q": 0.022727272727272728,
+    "beta": 1.0148041749889671,
+    "scale": 1.0148041749889671,
+    "achieved": 0.15000000000034197
+   },
+   "plan": {
+    "repeats": 3,
+    "perFamily": 3,
+    "alpha": 0.0125,
+    "confAlpha": 0.0125,
+    "minEffect": 0.05,
+    "draws": 2000,
+    "permutationDraws": 2000,
+    "privateShare": 0.5,
+    "tasks": 144,
+    "confTasks": 144,
+    "minHardTasks": 48,
+    "lowExposureMin": 72
+   },
+   "reps": 150,
+   "adopt": {
+    "p": 0.6066666666666667,
+    "mcse": 0.03988501992997891
+   },
+   "confirmed": {
+    "p": 0.94,
+    "mcse": 0.019390719429665325
+   },
+   "adoptAndConfirmed": {
+    "p": 0.5733333333333334,
+    "mcse": 0.040383348236801946
+   },
+   "holdoutReasons": {
+    "adopt": 91,
+    "family-support": 18,
+    "task-support": 3,
+    "family-regression": 37,
+    "failed:family-clustered P": 1
+   },
+   "confirmationReasons": {
+    "ok": 141,
+    "family-clustered P": 9
+   }
+  },
+  {
+   "scenario": {
+    "model": "template",
+    "effect": 0.15,
+    "v": 0,
+    "q": 0.022727272727272728,
+    "beta": 0.9362269155135436,
+    "scale": 0.9362269155135436,
+    "achieved": 0.14999999999991617
+   },
+   "plan": {
+    "repeats": 3,
+    "perFamily": 3,
+    "alpha": 0.0125,
+    "confAlpha": 0.0125,
+    "minEffect": 0.05,
+    "draws": 2000,
+    "permutationDraws": 2000,
+    "privateShare": 0.5,
+    "tasks": 144,
+    "confTasks": 144,
+    "minHardTasks": 48,
+    "lowExposureMin": 72
+   },
+   "reps": 150,
+   "adopt": {
+    "p": 0.49333333333333335,
+    "mcse": 0.04082120001139568
+   },
+   "confirmed": {
+    "p": 0.9066666666666666,
+    "mcse": 0.023751803050466473
+   },
+   "adoptAndConfirmed": {
+    "p": 0.44666666666666666,
+    "mcse": 0.04059191672862596
+   },
+   "holdoutReasons": {
+    "family-regression": 37,
+    "task-support": 25,
+    "adopt": 74,
+    "family-support": 13,
+    "failed:family-clustered P": 1
+   },
+   "confirmationReasons": {
+    "ok": 136,
+    "family-clustered P": 14
+   }
+  },
+  {
+   "scenario": {
+    "model": "logit",
+    "sigmaFamily": 0.5,
+    "sigmaTask": 0.75,
+    "effect": 0.2,
+    "v": 0,
+    "q": 0.022727272727272728,
+    "beta": 1.3363778440361784,
+    "scale": 1.3363778440361784,
+    "achieved": 0.19999999999941978
+   },
+   "plan": {
+    "repeats": 3,
+    "perFamily": 3,
+    "alpha": 0.0125,
+    "confAlpha": 0.0125,
+    "minEffect": 0.05,
+    "draws": 2000,
+    "permutationDraws": 2000,
+    "privateShare": 0.5,
+    "tasks": 144,
+    "confTasks": 144,
+    "minHardTasks": 48,
+    "lowExposureMin": 72
+   },
+   "reps": 150,
+   "adopt": {
+    "p": 0.8333333333333334,
+    "mcse": 0.030429030972509225
+   },
+   "confirmed": {
+    "p": 0.9866666666666667,
+    "mcse": 0.009365025558091315
+   },
+   "adoptAndConfirmed": {
+    "p": 0.82,
+    "mcse": 0.03136877428271625
+   },
+   "holdoutReasons": {
+    "adopt": 125,
+    "family-regression": 21,
+    "family-support": 2,
+    "task-support": 2
+   },
+   "confirmationReasons": {
+    "ok": 148,
+    "family-clustered P": 2
+   }
+  },
+  {
+   "scenario": {
+    "model": "template",
+    "effect": 0.2,
+    "v": 0,
+    "q": 0.022727272727272728,
+    "beta": 1.2741720460508077,
+    "scale": 1.2741720460508077,
+    "achieved": 0.200000000000203
+   },
+   "plan": {
+    "repeats": 3,
+    "perFamily": 3,
+    "alpha": 0.0125,
+    "confAlpha": 0.0125,
+    "minEffect": 0.05,
+    "draws": 2000,
+    "permutationDraws": 2000,
+    "privateShare": 0.5,
+    "tasks": 144,
+    "confTasks": 144,
+    "minHardTasks": 48,
+    "lowExposureMin": 72
+   },
+   "reps": 150,
+   "adopt": {
+    "p": 0.74,
+    "mcse": 0.03581433604950211
+   },
+   "confirmed": {
+    "p": 1,
+    "mcse": 0
+   },
+   "adoptAndConfirmed": {
+    "p": 0.74,
+    "mcse": 0.03581433604950211
+   },
+   "holdoutReasons": {
+    "adopt": 111,
+    "family-regression": 30,
+    "task-support": 2,
+    "family-support": 7
+   },
+   "confirmationReasons": {
+    "ok": 150
+   }
+  },
+  {
+   "scenario": {
+    "model": "logit",
+    "sigmaFamily": 0,
+    "sigmaTask": 0,
+    "effect": 0,
+    "v": 0,
+    "q": 0.022727272727272728,
+    "note": "sharp null",
+    "beta": 0,
+    "scale": 0,
+    "achieved": 0
+   },
+   "plan": {
+    "repeats": 3,
+    "perFamily": 3,
+    "alpha": 0.0125,
+    "confAlpha": 0.0125,
+    "minEffect": 0.05,
+    "draws": 2000,
+    "permutationDraws": 2000,
+    "privateShare": 0.5,
+    "tasks": 144,
+    "confTasks": 144,
+    "minHardTasks": 48,
+    "lowExposureMin": 72
+   },
+   "reps": 150,
+   "adopt": {
+    "p": 0,
+    "mcse": 0
+   },
+   "confirmed": {
+    "p": 0,
+    "mcse": 0
+   },
+   "adoptAndConfirmed": {
+    "p": 0,
+    "mcse": 0
+   },
+   "holdoutReasons": {
+    "family-regression": 102,
+    "task-support": 48
+   },
+   "confirmationReasons": {
+    "randomization test": 150
+   }
+  },
+  {
+   "scenario": {
+    "model": "logit",
+    "sigmaFamily": 1,
+    "sigmaTask": 1,
+    "effect": 0.15,
+    "v": 0,
+    "q": 0.022727272727272728,
+    "note": "larger heterogeneity",
+    "beta": 0.8594528718640504,
+    "scale": 0.8594528718640504,
+    "achieved": 0.14999999999963337
+   },
+   "plan": {
+    "repeats": 3,
+    "perFamily": 3,
+    "alpha": 0.0125,
+    "confAlpha": 0.0125,
+    "minEffect": 0.05,
+    "draws": 2000,
+    "permutationDraws": 2000,
+    "privateShare": 0.5,
+    "tasks": 144,
+    "confTasks": 144,
+    "minHardTasks": 48,
+    "lowExposureMin": 72
+   },
+   "reps": 150,
+   "adopt": {
+    "p": 0.36666666666666664,
+    "mcse": 0.039346513799168384
+   },
+   "confirmed": {
+    "p": 0.8533333333333334,
+    "mcse": 0.028885469883150078
+   },
+   "adoptAndConfirmed": {
+    "p": 0.32,
+    "mcse": 0.03808761828556186
+   },
+   "holdoutReasons": {
+    "family-regression": 76,
+    "adopt": 55,
+    "failed:family-clustered P": 2,
+    "family-support": 10,
+    "task-support": 7
+   },
+   "confirmationReasons": {
+    "ok": 128,
+    "family-clustered P": 22
+   }
+  },
+  {
+   "scenario": {
+    "model": "logit",
+    "sigmaFamily": 0.5,
+    "sigmaTask": 0.75,
+    "effect": 0,
+    "v": 0,
+    "q": 0.022727272727272728,
+    "beta": -0.17585246080489014,
+    "scale": -0.17585246080489014,
+    "achieved": 1.84135024373793e-13
+   },
+   "plan": {
+    "repeats": 5,
+    "perFamily": 3,
+    "alpha": 0.0125,
+    "confAlpha": 0.0125,
+    "minEffect": 0.05,
+    "draws": 2000,
+    "permutationDraws": 2000,
+    "privateShare": 0.5,
+    "tasks": 144,
+    "confTasks": 144,
+    "minHardTasks": 48,
+    "lowExposureMin": 72
+   },
+   "reps": 150,
+   "adopt": {
+    "p": 0,
+    "mcse": 0
+   },
+   "confirmed": {
+    "p": 0,
+    "mcse": 0
+   },
+   "adoptAndConfirmed": {
+    "p": 0,
+    "mcse": 0
+   },
+   "holdoutReasons": {
+    "task-support": 46,
+    "family-regression": 103,
+    "family-support": 1
+   },
+   "confirmationReasons": {
+    "randomization test": 146,
+    "family-clustered P": 4
+   }
+  },
+  {
+   "scenario": {
+    "model": "logit",
+    "sigmaFamily": 0.5,
+    "sigmaTask": 0.75,
+    "effect": 0.1,
+    "v": 0,
+    "q": 0.022727272727272728,
+    "beta": 0.6567543439196015,
+    "scale": 0.6567543439196015,
+    "achieved": 0.09999999999950394
+   },
+   "plan": {
+    "repeats": 5,
+    "perFamily": 3,
+    "alpha": 0.0125,
+    "confAlpha": 0.0125,
+    "minEffect": 0.05,
+    "draws": 2000,
+    "permutationDraws": 2000,
+    "privateShare": 0.5,
+    "tasks": 144,
+    "confTasks": 144,
+    "minHardTasks": 48,
+    "lowExposureMin": 72
+   },
+   "reps": 150,
+   "adopt": {
+    "p": 0.44,
+    "mcse": 0.04052982440952177
+   },
+   "confirmed": {
+    "p": 0.66,
+    "mcse": 0.038678159211627434
+   },
+   "adoptAndConfirmed": {
+    "p": 0.26,
+    "mcse": 0.03581433604950211
+   },
+   "holdoutReasons": {
+    "family-support": 28,
+    "adopt": 66,
+    "family-regression": 34,
+    "task-support": 15,
+    "failed:family-clustered P": 7
+   },
+   "confirmationReasons": {
+    "ok": 99,
+    "family-clustered P": 50,
+    "randomization test": 1
+   }
+  },
+  {
+   "scenario": {
+    "model": "template",
+    "effect": 0.1,
+    "v": 0,
+    "q": 0.022727272727272728,
+    "beta": 0.6265121948854357,
+    "scale": 0.6265121948854357,
+    "achieved": 0.10000000000018056
+   },
+   "plan": {
+    "repeats": 5,
+    "perFamily": 3,
+    "alpha": 0.0125,
+    "confAlpha": 0.0125,
+    "minEffect": 0.05,
+    "draws": 2000,
+    "permutationDraws": 2000,
+    "privateShare": 0.5,
+    "tasks": 144,
+    "confTasks": 144,
+    "minHardTasks": 48,
+    "lowExposureMin": 72
+   },
+   "reps": 150,
+   "adopt": {
+    "p": 0.37333333333333335,
+    "mcse": 0.039493084251596554
+   },
+   "confirmed": {
+    "p": 0.68,
+    "mcse": 0.03808761828556186
+   },
+   "adoptAndConfirmed": {
+    "p": 0.26666666666666666,
+    "mcse": 0.036106837353937604
+   },
+   "holdoutReasons": {
+    "adopt": 56,
+    "task-support": 31,
+    "family-support": 33,
+    "family-regression": 25,
+    "failed:family-clustered P": 5
+   },
+   "confirmationReasons": {
+    "ok": 102,
+    "family-clustered P": 47,
+    "randomization test": 1
+   }
+  },
+  {
+   "scenario": {
+    "model": "logit",
+    "sigmaFamily": 0.5,
+    "sigmaTask": 0.75,
+    "effect": 0.15,
+    "v": 0,
+    "q": 0.022727272727272728,
+    "beta": 1.0148041749889671,
+    "scale": 1.0148041749889671,
+    "achieved": 0.15000000000034197
+   },
+   "plan": {
+    "repeats": 5,
+    "perFamily": 3,
+    "alpha": 0.0125,
+    "confAlpha": 0.0125,
+    "minEffect": 0.05,
+    "draws": 2000,
+    "permutationDraws": 2000,
+    "privateShare": 0.5,
+    "tasks": 144,
+    "confTasks": 144,
+    "minHardTasks": 48,
+    "lowExposureMin": 72
+   },
+   "reps": 150,
+   "adopt": {
+    "p": 0.8466666666666667,
+    "mcse": 0.029419066631718307
+   },
+   "confirmed": {
+    "p": 0.9933333333333333,
+    "mcse": 0.006644407283433823
+   },
+   "adoptAndConfirmed": {
+    "p": 0.84,
+    "mcse": 0.029933259094191533
+   },
+   "holdoutReasons": {
+    "adopt": 127,
+    "family-regression": 17,
+    "family-support": 5,
+    "failed:family-clustered P": 1
+   },
+   "confirmationReasons": {
+    "ok": 149,
+    "family-clustered P": 1
+   }
+  },
+  {
+   "scenario": {
+    "model": "template",
+    "effect": 0.15,
+    "v": 0,
+    "q": 0.022727272727272728,
+    "beta": 0.9362269155135436,
+    "scale": 0.9362269155135436,
+    "achieved": 0.14999999999991617
+   },
+   "plan": {
+    "repeats": 5,
+    "perFamily": 3,
+    "alpha": 0.0125,
+    "confAlpha": 0.0125,
+    "minEffect": 0.05,
+    "draws": 2000,
+    "permutationDraws": 2000,
+    "privateShare": 0.5,
+    "tasks": 144,
+    "confTasks": 144,
+    "minHardTasks": 48,
+    "lowExposureMin": 72
+   },
+   "reps": 150,
+   "adopt": {
+    "p": 0.8066666666666666,
+    "mcse": 0.03224443678688936
+   },
+   "confirmed": {
+    "p": 0.9933333333333333,
+    "mcse": 0.006644407283433823
+   },
+   "adoptAndConfirmed": {
+    "p": 0.8,
+    "mcse": 0.03265986323710904
+   },
+   "holdoutReasons": {
+    "adopt": 121,
+    "family-support": 6,
+    "family-regression": 19,
+    "task-support": 4
+   },
+   "confirmationReasons": {
+    "ok": 149,
+    "family-clustered P": 1
+   }
+  },
+  {
+   "scenario": {
+    "model": "logit",
+    "sigmaFamily": 0.5,
+    "sigmaTask": 0.75,
+    "effect": 0.2,
+    "v": 0,
+    "q": 0.022727272727272728,
+    "beta": 1.3363778440361784,
+    "scale": 1.3363778440361784,
+    "achieved": 0.19999999999941978
+   },
+   "plan": {
+    "repeats": 5,
+    "perFamily": 3,
+    "alpha": 0.0125,
+    "confAlpha": 0.0125,
+    "minEffect": 0.05,
+    "draws": 2000,
+    "permutationDraws": 2000,
+    "privateShare": 0.5,
+    "tasks": 144,
+    "confTasks": 144,
+    "minHardTasks": 48,
+    "lowExposureMin": 72
+   },
+   "reps": 150,
+   "adopt": {
+    "p": 0.96,
+    "mcse": 0.016000000000000007
+   },
+   "confirmed": {
+    "p": 1,
+    "mcse": 0
+   },
+   "adoptAndConfirmed": {
+    "p": 0.96,
+    "mcse": 0.016000000000000007
+   },
+   "holdoutReasons": {
+    "adopt": 144,
+    "family-regression": 6
+   },
+   "confirmationReasons": {
+    "ok": 150
+   }
+  },
+  {
+   "scenario": {
+    "model": "template",
+    "effect": 0.2,
+    "v": 0,
+    "q": 0.022727272727272728,
+    "beta": 1.2741720460508077,
+    "scale": 1.2741720460508077,
+    "achieved": 0.200000000000203
+   },
+   "plan": {
+    "repeats": 5,
+    "perFamily": 3,
+    "alpha": 0.0125,
+    "confAlpha": 0.0125,
+    "minEffect": 0.05,
+    "draws": 2000,
+    "permutationDraws": 2000,
+    "privateShare": 0.5,
+    "tasks": 144,
+    "confTasks": 144,
+    "minHardTasks": 48,
+    "lowExposureMin": 72
+   },
+   "reps": 150,
+   "adopt": {
+    "p": 0.9,
+    "mcse": 0.02449489742783178
+   },
+   "confirmed": {
+    "p": 1,
+    "mcse": 0
+   },
+   "adoptAndConfirmed": {
+    "p": 0.9,
+    "mcse": 0.02449489742783178
+   },
+   "holdoutReasons": {
+    "adopt": 135,
+    "family-support": 3,
+    "family-regression": 12
+   },
+   "confirmationReasons": {
+    "ok": 150
+   }
+  },
+  {
+   "scenario": {
+    "model": "logit",
+    "sigmaFamily": 0,
+    "sigmaTask": 0,
+    "effect": 0,
+    "v": 0,
+    "q": 0.022727272727272728,
+    "note": "sharp null",
+    "beta": 0,
+    "scale": 0,
+    "achieved": 0
+   },
+   "plan": {
+    "repeats": 5,
+    "perFamily": 3,
+    "alpha": 0.0125,
+    "confAlpha": 0.0125,
+    "minEffect": 0.05,
+    "draws": 2000,
+    "permutationDraws": 2000,
+    "privateShare": 0.5,
+    "tasks": 144,
+    "confTasks": 144,
+    "minHardTasks": 48,
+    "lowExposureMin": 72
+   },
+   "reps": 150,
+   "adopt": {
+    "p": 0,
+    "mcse": 0
+   },
+   "confirmed": {
+    "p": 0,
+    "mcse": 0
+   },
+   "adoptAndConfirmed": {
+    "p": 0,
+    "mcse": 0
+   },
+   "holdoutReasons": {
+    "task-support": 95,
+    "family-regression": 55
+   },
+   "confirmationReasons": {
+    "randomization test": 146,
+    "family-clustered P": 4
+   }
+  },
+  {
+   "scenario": {
+    "model": "logit",
+    "sigmaFamily": 1,
+    "sigmaTask": 1,
+    "effect": 0.15,
+    "v": 0,
+    "q": 0.022727272727272728,
+    "note": "larger heterogeneity",
+    "beta": 0.8594528718640504,
+    "scale": 0.8594528718640504,
+    "achieved": 0.14999999999963337
+   },
+   "plan": {
+    "repeats": 5,
+    "perFamily": 3,
+    "alpha": 0.0125,
+    "confAlpha": 0.0125,
+    "minEffect": 0.05,
+    "draws": 2000,
+    "permutationDraws": 2000,
+    "privateShare": 0.5,
+    "tasks": 144,
+    "confTasks": 144,
+    "minHardTasks": 48,
+    "lowExposureMin": 72
+   },
+   "reps": 150,
+   "adopt": {
+    "p": 0.58,
+    "mcse": 0.040298883359219766
+   },
+   "confirmed": {
+    "p": 0.9733333333333334,
+    "mcse": 0.013154354299509981
+   },
+   "adoptAndConfirmed": {
+    "p": 0.5733333333333334,
+    "mcse": 0.040383348236801946
+   },
+   "holdoutReasons": {
+    "adopt": 87,
+    "family-regression": 51,
+    "family-support": 11,
+    "task-support": 1
+   },
+   "confirmationReasons": {
+    "ok": 146,
+    "family-clustered P": 4
+   }
+  },
+  {
+   "scenario": {
+    "model": "logit",
+    "sigmaFamily": 0.5,
+    "sigmaTask": 0.75,
+    "effect": 0,
+    "v": 0,
+    "q": 0.022727272727272728,
+    "beta": -0.18190270448030788,
+    "scale": -0.18190270448030788,
+    "achieved": 1.564935072081881e-13
+   },
+   "plan": {
+    "repeats": 3,
+    "perFamily": 3,
+    "alpha": 0.0125,
+    "confAlpha": 0.0125,
+    "minEffect": 0.05,
+    "draws": 2000,
+    "permutationDraws": 2000,
+    "privateShare": 0.5,
+    "tasks": 192,
+    "confTasks": 192,
+    "minHardTasks": 63,
+    "lowExposureMin": 96
+   },
+   "reps": 150,
+   "adopt": {
+    "p": 0,
+    "mcse": 0
+   },
+   "confirmed": {
+    "p": 0.006666666666666667,
+    "mcse": 0.006644407283433801
+   },
+   "adoptAndConfirmed": {
+    "p": 0,
+    "mcse": 0
+   },
+   "holdoutReasons": {
+    "family-regression": 129,
+    "task-support": 21
+   },
+   "confirmationReasons": {
+    "randomization test": 148,
+    "ok": 1,
+    "family-clustered P": 1
+   }
+  },
+  {
+   "scenario": {
+    "model": "logit",
+    "sigmaFamily": 0.5,
+    "sigmaTask": 0.75,
+    "effect": 0.1,
+    "v": 0,
+    "q": 0.022727272727272728,
+    "beta": 0.6589837735118635,
+    "scale": 0.6589837735118635,
+    "achieved": 0.10000000000002854
+   },
+   "plan": {
+    "repeats": 3,
+    "perFamily": 3,
+    "alpha": 0.0125,
+    "confAlpha": 0.0125,
+    "minEffect": 0.05,
+    "draws": 2000,
+    "permutationDraws": 2000,
+    "privateShare": 0.5,
+    "tasks": 192,
+    "confTasks": 192,
+    "minHardTasks": 63,
+    "lowExposureMin": 96
+   },
+   "reps": 150,
+   "adopt": {
+    "p": 0.3,
+    "mcse": 0.03741657386773942
+   },
+   "confirmed": {
+    "p": 0.6066666666666667,
+    "mcse": 0.03988501992997891
+   },
+   "adoptAndConfirmed": {
+    "p": 0.2,
+    "mcse": 0.032659863237109045
+   },
+   "holdoutReasons": {
+    "family-support": 13,
+    "adopt": 45,
+    "family-regression": 76,
+    "task-support": 7,
+    "failed:family-clustered P": 9
+   },
+   "confirmationReasons": {
+    "ok": 91,
+    "family-clustered P": 56,
+    "randomization test": 3
+   }
+  },
+  {
+   "scenario": {
+    "model": "template",
+    "effect": 0.1,
+    "v": 0,
+    "q": 0.022727272727272728,
+    "beta": 0.6244681462740118,
+    "scale": 0.6244681462740118,
+    "achieved": 0.0999999999995727
+   },
+   "plan": {
+    "repeats": 3,
+    "perFamily": 3,
+    "alpha": 0.0125,
+    "confAlpha": 0.0125,
+    "minEffect": 0.05,
+    "draws": 2000,
+    "permutationDraws": 2000,
+    "privateShare": 0.5,
+    "tasks": 192,
+    "confTasks": 192,
+    "minHardTasks": 63,
+    "lowExposureMin": 96
+   },
+   "reps": 150,
+   "adopt": {
+    "p": 0.20666666666666667,
+    "mcse": 0.033061110644336145
+   },
+   "confirmed": {
+    "p": 0.5866666666666667,
+    "mcse": 0.04020687245475073
+   },
+   "adoptAndConfirmed": {
+    "p": 0.12,
+    "mcse": 0.0265329983228432
+   },
+   "holdoutReasons": {
+    "task-support": 24,
+    "family-regression": 80,
+    "family-support": 13,
+    "adopt": 31,
+    "failed:family-clustered P": 2
+   },
+   "confirmationReasons": {
+    "ok": 88,
+    "family-clustered P": 59,
+    "randomization test": 3
+   }
+  },
+  {
+   "scenario": {
+    "model": "logit",
+    "sigmaFamily": 0.5,
+    "sigmaTask": 0.75,
+    "effect": 0.15,
+    "v": 0,
+    "q": 0.022727272727272728,
+    "beta": 1.0116876560095989,
+    "scale": 1.0116876560095989,
+    "achieved": 0.15000000000027885
+   },
+   "plan": {
+    "repeats": 3,
+    "perFamily": 3,
+    "alpha": 0.0125,
+    "confAlpha": 0.0125,
+    "minEffect": 0.05,
+    "draws": 2000,
+    "permutationDraws": 2000,
+    "privateShare": 0.5,
+    "tasks": 192,
+    "confTasks": 192,
+    "minHardTasks": 63,
+    "lowExposureMin": 96
+   },
+   "reps": 150,
+   "adopt": {
+    "p": 0.5733333333333334,
+    "mcse": 0.040383348236801946
+   },
+   "confirmed": {
+    "p": 0.9733333333333334,
+    "mcse": 0.013154354299509981
+   },
+   "adoptAndConfirmed": {
+    "p": 0.5533333333333333,
+    "mcse": 0.04059191672862596
+   },
+   "holdoutReasons": {
+    "adopt": 86,
+    "family-regression": 58,
+    "family-support": 5,
+    "task-support": 1
+   },
+   "confirmationReasons": {
+    "ok": 146,
+    "family-clustered P": 4
+   }
+  },
+  {
+   "scenario": {
+    "model": "template",
+    "effect": 0.15,
+    "v": 0,
+    "q": 0.022727272727272728,
+    "beta": 0.9401542031300778,
+    "scale": 0.9401542031300778,
+    "achieved": 0.14999999999969746
+   },
+   "plan": {
+    "repeats": 3,
+    "perFamily": 3,
+    "alpha": 0.0125,
+    "confAlpha": 0.0125,
+    "minEffect": 0.05,
+    "draws": 2000,
+    "permutationDraws": 2000,
+    "privateShare": 0.5,
+    "tasks": 192,
+    "confTasks": 192,
+    "minHardTasks": 63,
+    "lowExposureMin": 96
+   },
+   "reps": 150,
+   "adopt": {
+    "p": 0.5333333333333333,
+    "mcse": 0.04073400617738524
+   },
+   "confirmed": {
+    "p": 0.9666666666666667,
+    "mcse": 0.014656562175858798
+   },
+   "adoptAndConfirmed": {
+    "p": 0.5066666666666667,
+    "mcse": 0.04082120001139568
+   },
+   "holdoutReasons": {
+    "family-regression": 51,
+    "family-support": 13,
+    "adopt": 80,
+    "task-support": 6
+   },
+   "confirmationReasons": {
+    "ok": 145,
+    "family-clustered P": 5
+   }
+  },
+  {
+   "scenario": {
+    "model": "logit",
+    "sigmaFamily": 0.5,
+    "sigmaTask": 0.75,
+    "effect": 0.2,
+    "v": 0,
+    "q": 0.022727272727272728,
+    "beta": 1.331645803151332,
+    "scale": 1.331645803151332,
+    "achieved": 0.19999999999997806
+   },
+   "plan": {
+    "repeats": 3,
+    "perFamily": 3,
+    "alpha": 0.0125,
+    "confAlpha": 0.0125,
+    "minEffect": 0.05,
+    "draws": 2000,
+    "permutationDraws": 2000,
+    "privateShare": 0.5,
+    "tasks": 192,
+    "confTasks": 192,
+    "minHardTasks": 63,
+    "lowExposureMin": 96
+   },
+   "reps": 150,
+   "adopt": {
+    "p": 0.8,
+    "mcse": 0.03265986323710904
+   },
+   "confirmed": {
+    "p": 1,
+    "mcse": 0
+   },
+   "adoptAndConfirmed": {
+    "p": 0.8,
+    "mcse": 0.03265986323710904
+   },
+   "holdoutReasons": {
+    "adopt": 120,
+    "family-regression": 30
+   },
+   "confirmationReasons": {
+    "ok": 150
+   }
+  },
+  {
+   "scenario": {
+    "model": "template",
+    "effect": 0.2,
+    "v": 0,
+    "q": 0.022727272727272728,
+    "beta": 1.2604573305907252,
+    "scale": 1.2604573305907252,
+    "achieved": 0.199999999999913
+   },
+   "plan": {
+    "repeats": 3,
+    "perFamily": 3,
+    "alpha": 0.0125,
+    "confAlpha": 0.0125,
+    "minEffect": 0.05,
+    "draws": 2000,
+    "permutationDraws": 2000,
+    "privateShare": 0.5,
+    "tasks": 192,
+    "confTasks": 192,
+    "minHardTasks": 63,
+    "lowExposureMin": 96
+   },
+   "reps": 150,
+   "adopt": {
+    "p": 0.72,
+    "mcse": 0.03666060555964672
+   },
+   "confirmed": {
+    "p": 1,
+    "mcse": 0
+   },
+   "adoptAndConfirmed": {
+    "p": 0.72,
+    "mcse": 0.03666060555964672
+   },
+   "holdoutReasons": {
+    "adopt": 108,
+    "task-support": 3,
+    "family-regression": 38,
+    "family-support": 1
+   },
+   "confirmationReasons": {
+    "ok": 150
+   }
+  },
+  {
+   "scenario": {
+    "model": "logit",
+    "sigmaFamily": 0,
+    "sigmaTask": 0,
+    "effect": 0,
+    "v": 0,
+    "q": 0.022727272727272728,
+    "note": "sharp null",
+    "beta": 0,
+    "scale": 0,
+    "achieved": 0
+   },
+   "plan": {
+    "repeats": 3,
+    "perFamily": 3,
+    "alpha": 0.0125,
+    "confAlpha": 0.0125,
+    "minEffect": 0.05,
+    "draws": 2000,
+    "permutationDraws": 2000,
+    "privateShare": 0.5,
+    "tasks": 192,
+    "confTasks": 192,
+    "minHardTasks": 63,
+    "lowExposureMin": 96
+   },
+   "reps": 150,
+   "adopt": {
+    "p": 0,
+    "mcse": 0
+   },
+   "confirmed": {
+    "p": 0,
+    "mcse": 0
+   },
+   "adoptAndConfirmed": {
+    "p": 0,
+    "mcse": 0
+   },
+   "holdoutReasons": {
+    "family-regression": 113,
+    "task-support": 37
+   },
+   "confirmationReasons": {
+    "randomization test": 148,
+    "family-clustered P": 2
+   }
+  },
+  {
+   "scenario": {
+    "model": "logit",
+    "sigmaFamily": 1,
+    "sigmaTask": 1,
+    "effect": 0.15,
+    "v": 0,
+    "q": 0.022727272727272728,
+    "note": "larger heterogeneity",
+    "beta": 0.8669239937626116,
+    "scale": 0.8669239937626116,
+    "achieved": 0.15000000000021158
+   },
+   "plan": {
+    "repeats": 3,
+    "perFamily": 3,
+    "alpha": 0.0125,
+    "confAlpha": 0.0125,
+    "minEffect": 0.05,
+    "draws": 2000,
+    "permutationDraws": 2000,
+    "privateShare": 0.5,
+    "tasks": 192,
+    "confTasks": 192,
+    "minHardTasks": 63,
+    "lowExposureMin": 96
+   },
+   "reps": 150,
+   "adopt": {
+    "p": 0.38666666666666666,
+    "mcse": 0.03976225643794674
+   },
+   "confirmed": {
+    "p": 0.9666666666666667,
+    "mcse": 0.014656562175858798
+   },
+   "adoptAndConfirmed": {
+    "p": 0.38,
+    "mcse": 0.0396316371938716
+   },
+   "holdoutReasons": {
+    "family-regression": 82,
+    "family-support": 8,
+    "adopt": 58,
+    "failed:family-clustered P": 2
+   },
+   "confirmationReasons": {
+    "ok": 145,
+    "family-clustered P": 5
+   }
+  },
+  {
+   "scenario": {
+    "model": "logit",
+    "sigmaFamily": 0.5,
+    "sigmaTask": 0.75,
+    "effect": 0,
+    "v": 0,
+    "q": 0.022727272727272728,
+    "beta": -0.18190270448030788,
+    "scale": -0.18190270448030788,
+    "achieved": 1.564935072081881e-13
+   },
+   "plan": {
+    "repeats": 5,
+    "perFamily": 3,
+    "alpha": 0.0125,
+    "confAlpha": 0.0125,
+    "minEffect": 0.05,
+    "draws": 2000,
+    "permutationDraws": 2000,
+    "privateShare": 0.5,
+    "tasks": 192,
+    "confTasks": 192,
+    "minHardTasks": 63,
+    "lowExposureMin": 96
+   },
+   "reps": 150,
+   "adopt": {
+    "p": 0,
+    "mcse": 0
+   },
+   "confirmed": {
+    "p": 0,
+    "mcse": 0
+   },
+   "adoptAndConfirmed": {
+    "p": 0,
+    "mcse": 0
+   },
+   "holdoutReasons": {
+    "task-support": 40,
+    "family-regression": 109,
+    "failed:family-clustered P": 1
+   },
+   "confirmationReasons": {
+    "randomization test": 145,
+    "family-clustered P": 5
+   }
+  },
+  {
+   "scenario": {
+    "model": "logit",
+    "sigmaFamily": 0.5,
+    "sigmaTask": 0.75,
+    "effect": 0.1,
+    "v": 0,
+    "q": 0.022727272727272728,
+    "beta": 0.6589837735118635,
+    "scale": 0.6589837735118635,
+    "achieved": 0.10000000000002854
+   },
+   "plan": {
+    "repeats": 5,
+    "perFamily": 3,
+    "alpha": 0.0125,
+    "confAlpha": 0.0125,
+    "minEffect": 0.05,
+    "draws": 2000,
+    "permutationDraws": 2000,
+    "privateShare": 0.5,
+    "tasks": 192,
+    "confTasks": 192,
+    "minHardTasks": 63,
+    "lowExposureMin": 96
+   },
+   "reps": 150,
+   "adopt": {
+    "p": 0.52,
+    "mcse": 0.040792156108742275
+   },
+   "confirmed": {
+    "p": 0.8466666666666667,
+    "mcse": 0.029419066631718307
+   },
+   "adoptAndConfirmed": {
+    "p": 0.44,
+    "mcse": 0.04052982440952177
+   },
+   "holdoutReasons": {
+    "adopt": 78,
+    "family-support": 15,
+    "family-regression": 49,
+    "task-support": 5,
+    "failed:family-clustered P": 3
+   },
+   "confirmationReasons": {
+    "ok": 127,
+    "family-clustered P": 23
+   }
+  },
+  {
+   "scenario": {
+    "model": "template",
+    "effect": 0.1,
+    "v": 0,
+    "q": 0.022727272727272728,
+    "beta": 0.6244681462740118,
+    "scale": 0.6244681462740118,
+    "achieved": 0.0999999999995727
+   },
+   "plan": {
+    "repeats": 5,
+    "perFamily": 3,
+    "alpha": 0.0125,
+    "confAlpha": 0.0125,
+    "minEffect": 0.05,
+    "draws": 2000,
+    "permutationDraws": 2000,
+    "privateShare": 0.5,
+    "tasks": 192,
+    "confTasks": 192,
+    "minHardTasks": 63,
+    "lowExposureMin": 96
+   },
+   "reps": 150,
+   "adopt": {
+    "p": 0.5933333333333334,
+    "mcse": 0.040107263588938506
+   },
+   "confirmed": {
+    "p": 0.84,
+    "mcse": 0.029933259094191533
+   },
+   "adoptAndConfirmed": {
+    "p": 0.5133333333333333,
+    "mcse": 0.04081031097016392
+   },
+   "holdoutReasons": {
+    "adopt": 89,
+    "family-regression": 23,
+    "family-support": 24,
+    "task-support": 14
+   },
+   "confirmationReasons": {
+    "ok": 126,
+    "family-clustered P": 24
+   }
+  },
+  {
+   "scenario": {
+    "model": "logit",
+    "sigmaFamily": 0.5,
+    "sigmaTask": 0.75,
+    "effect": 0.15,
+    "v": 0,
+    "q": 0.022727272727272728,
+    "beta": 1.0116876560095989,
+    "scale": 1.0116876560095989,
+    "achieved": 0.15000000000027885
+   },
+   "plan": {
+    "repeats": 5,
+    "perFamily": 3,
+    "alpha": 0.0125,
+    "confAlpha": 0.0125,
+    "minEffect": 0.05,
+    "draws": 2000,
+    "permutationDraws": 2000,
+    "privateShare": 0.5,
+    "tasks": 192,
+    "confTasks": 192,
+    "minHardTasks": 63,
+    "lowExposureMin": 96
+   },
+   "reps": 150,
+   "adopt": {
+    "p": 0.8333333333333334,
+    "mcse": 0.030429030972509225
+   },
+   "confirmed": {
+    "p": 0.9933333333333333,
+    "mcse": 0.006644407283433823
+   },
+   "adoptAndConfirmed": {
+    "p": 0.8266666666666667,
+    "mcse": 0.030907268712379928
+   },
+   "holdoutReasons": {
+    "family-regression": 23,
+    "adopt": 125,
+    "family-support": 2
+   },
+   "confirmationReasons": {
+    "ok": 149,
+    "family-clustered P": 1
+   }
+  },
+  {
+   "scenario": {
+    "model": "template",
+    "effect": 0.15,
+    "v": 0,
+    "q": 0.022727272727272728,
+    "beta": 0.9401542031300778,
+    "scale": 0.9401542031300778,
+    "achieved": 0.14999999999969746
+   },
+   "plan": {
+    "repeats": 5,
+    "perFamily": 3,
+    "alpha": 0.0125,
+    "confAlpha": 0.0125,
+    "minEffect": 0.05,
+    "draws": 2000,
+    "permutationDraws": 2000,
+    "privateShare": 0.5,
+    "tasks": 192,
+    "confTasks": 192,
+    "minHardTasks": 63,
+    "lowExposureMin": 96
+   },
+   "reps": 150,
+   "adopt": {
+    "p": 0.8266666666666667,
+    "mcse": 0.030907268712379928
+   },
+   "confirmed": {
+    "p": 1,
+    "mcse": 0
+   },
+   "adoptAndConfirmed": {
+    "p": 0.8266666666666667,
+    "mcse": 0.030907268712379928
+   },
+   "holdoutReasons": {
+    "adopt": 124,
+    "family-regression": 19,
+    "task-support": 2,
+    "family-support": 5
+   },
+   "confirmationReasons": {
+    "ok": 150
+   }
+  },
+  {
+   "scenario": {
+    "model": "logit",
+    "sigmaFamily": 0.5,
+    "sigmaTask": 0.75,
+    "effect": 0.2,
+    "v": 0,
+    "q": 0.022727272727272728,
+    "beta": 1.331645803151332,
+    "scale": 1.331645803151332,
+    "achieved": 0.19999999999997806
+   },
+   "plan": {
+    "repeats": 5,
+    "perFamily": 3,
+    "alpha": 0.0125,
+    "confAlpha": 0.0125,
+    "minEffect": 0.05,
+    "draws": 2000,
+    "permutationDraws": 2000,
+    "privateShare": 0.5,
+    "tasks": 192,
+    "confTasks": 192,
+    "minHardTasks": 63,
+    "lowExposureMin": 96
+   },
+   "reps": 150,
+   "adopt": {
+    "p": 0.96,
+    "mcse": 0.016000000000000007
+   },
+   "confirmed": {
+    "p": 1,
+    "mcse": 0
+   },
+   "adoptAndConfirmed": {
+    "p": 0.96,
+    "mcse": 0.016000000000000007
+   },
+   "holdoutReasons": {
+    "adopt": 144,
+    "family-regression": 6
+   },
+   "confirmationReasons": {
+    "ok": 150
+   }
+  },
+  {
+   "scenario": {
+    "model": "template",
+    "effect": 0.2,
+    "v": 0,
+    "q": 0.022727272727272728,
+    "beta": 1.2604573305907252,
+    "scale": 1.2604573305907252,
+    "achieved": 0.199999999999913
+   },
+   "plan": {
+    "repeats": 5,
+    "perFamily": 3,
+    "alpha": 0.0125,
+    "confAlpha": 0.0125,
+    "minEffect": 0.05,
+    "draws": 2000,
+    "permutationDraws": 2000,
+    "privateShare": 0.5,
+    "tasks": 192,
+    "confTasks": 192,
+    "minHardTasks": 63,
+    "lowExposureMin": 96
+   },
+   "reps": 150,
+   "adopt": {
+    "p": 0.9133333333333333,
+    "mcse": 0.022971802360801027
+   },
+   "confirmed": {
+    "p": 1,
+    "mcse": 0
+   },
+   "adoptAndConfirmed": {
+    "p": 0.9133333333333333,
+    "mcse": 0.022971802360801027
+   },
+   "holdoutReasons": {
+    "adopt": 137,
+    "family-regression": 13
+   },
+   "confirmationReasons": {
+    "ok": 150
+   }
+  },
+  {
+   "scenario": {
+    "model": "logit",
+    "sigmaFamily": 0,
+    "sigmaTask": 0,
+    "effect": 0,
+    "v": 0,
+    "q": 0.022727272727272728,
+    "note": "sharp null",
+    "beta": 0,
+    "scale": 0,
+    "achieved": 0
+   },
+   "plan": {
+    "repeats": 5,
+    "perFamily": 3,
+    "alpha": 0.0125,
+    "confAlpha": 0.0125,
+    "minEffect": 0.05,
+    "draws": 2000,
+    "permutationDraws": 2000,
+    "privateShare": 0.5,
+    "tasks": 192,
+    "confTasks": 192,
+    "minHardTasks": 63,
+    "lowExposureMin": 96
+   },
+   "reps": 150,
+   "adopt": {
+    "p": 0,
+    "mcse": 0
+   },
+   "confirmed": {
+    "p": 0,
+    "mcse": 0
+   },
+   "adoptAndConfirmed": {
+    "p": 0,
+    "mcse": 0
+   },
+   "holdoutReasons": {
+    "family-regression": 59,
+    "task-support": 91
+   },
+   "confirmationReasons": {
+    "randomization test": 150
+   }
+  },
+  {
+   "scenario": {
+    "model": "logit",
+    "sigmaFamily": 1,
+    "sigmaTask": 1,
+    "effect": 0.15,
+    "v": 0,
+    "q": 0.022727272727272728,
+    "note": "larger heterogeneity",
+    "beta": 0.8669239937626116,
+    "scale": 0.8669239937626116,
+    "achieved": 0.15000000000021158
+   },
+   "plan": {
+    "repeats": 5,
+    "perFamily": 3,
+    "alpha": 0.0125,
+    "confAlpha": 0.0125,
+    "minEffect": 0.05,
+    "draws": 2000,
+    "permutationDraws": 2000,
+    "privateShare": 0.5,
+    "tasks": 192,
+    "confTasks": 192,
+    "minHardTasks": 63,
+    "lowExposureMin": 96
+   },
+   "reps": 150,
+   "adopt": {
+    "p": 0.54,
+    "mcse": 0.04069397989875161
+   },
+   "confirmed": {
+    "p": 0.9866666666666667,
+    "mcse": 0.009365025558091315
+   },
+   "adoptAndConfirmed": {
+    "p": 0.54,
+    "mcse": 0.04069397989875161
+   },
+   "holdoutReasons": {
+    "adopt": 81,
+    "family-regression": 66,
+    "family-support": 2,
+    "task-support": 1
+   },
+   "confirmationReasons": {
+    "ok": 148,
+    "family-clustered P": 2
+   }
+  },
+  {
+   "scenario": {
+    "model": "logit",
+    "sigmaFamily": 0.5,
+    "sigmaTask": 0.75,
+    "effect": 0,
+    "v": 0,
+    "q": 0.022727272727272728,
+    "beta": -0.18486532264432753,
+    "scale": -0.18486532264432753,
+    "achieved": 1.113512177991622e-13
+   },
+   "plan": {
+    "repeats": 3,
+    "perFamily": 3,
+    "alpha": 0.0125,
+    "confAlpha": 0.0125,
+    "minEffect": 0.05,
+    "draws": 2000,
+    "permutationDraws": 2000,
+    "privateShare": 0.5,
+    "tasks": 288,
+    "confTasks": 288,
+    "minHardTasks": 96,
+    "lowExposureMin": 144
+   },
+   "reps": 150,
+   "adopt": {
+    "p": 0,
+    "mcse": 0
+   },
+   "confirmed": {
+    "p": 0,
+    "mcse": 0
+   },
+   "adoptAndConfirmed": {
+    "p": 0,
+    "mcse": 0
+   },
+   "holdoutReasons": {
+    "family-regression": 146,
+    "task-support": 4
+   },
+   "confirmationReasons": {
+    "randomization test": 149,
+    "family-clustered P": 1
+   }
+  },
+  {
+   "scenario": {
+    "model": "logit",
+    "sigmaFamily": 0.5,
+    "sigmaTask": 0.75,
+    "effect": 0.1,
+    "v": 0,
+    "q": 0.022727272727272728,
+    "beta": 0.6532360588062147,
+    "scale": 0.6532360588062147,
+    "achieved": 0.10000000000031853
+   },
+   "plan": {
+    "repeats": 3,
+    "perFamily": 3,
+    "alpha": 0.0125,
+    "confAlpha": 0.0125,
+    "minEffect": 0.05,
+    "draws": 2000,
+    "permutationDraws": 2000,
+    "privateShare": 0.5,
+    "tasks": 288,
+    "confTasks": 288,
+    "minHardTasks": 96,
+    "lowExposureMin": 144
+   },
+   "reps": 150,
+   "adopt": {
+    "p": 0.29333333333333333,
+    "mcse": 0.037174264295691525
+   },
+   "confirmed": {
+    "p": 0.8733333333333333,
+    "mcse": 0.027156610272298008
+   },
+   "adoptAndConfirmed": {
+    "p": 0.26,
+    "mcse": 0.03581433604950211
+   },
+   "holdoutReasons": {
+    "family-regression": 101,
+    "adopt": 44,
+    "failed:family-clustered P": 1,
+    "family-support": 4
+   },
+   "confirmationReasons": {
+    "ok": 131,
+    "family-clustered P": 19
+   }
+  },
+  {
+   "scenario": {
+    "model": "template",
+    "effect": 0.1,
+    "v": 0,
+    "q": 0.022727272727272728,
+    "beta": 0.6271471758045664,
+    "scale": 0.6271471758045664,
+    "achieved": 0.10000000000004135
+   },
+   "plan": {
+    "repeats": 3,
+    "perFamily": 3,
+    "alpha": 0.0125,
+    "confAlpha": 0.0125,
+    "minEffect": 0.05,
+    "draws": 2000,
+    "permutationDraws": 2000,
+    "privateShare": 0.5,
+    "tasks": 288,
+    "confTasks": 288,
+    "minHardTasks": 96,
+    "lowExposureMin": 144
+   },
+   "reps": 150,
+   "adopt": {
+    "p": 0.3,
+    "mcse": 0.03741657386773942
+   },
+   "confirmed": {
+    "p": 0.9,
+    "mcse": 0.02449489742783178
+   },
+   "adoptAndConfirmed": {
+    "p": 0.28,
+    "mcse": 0.03666060555964672
+   },
+   "holdoutReasons": {
+    "family-regression": 93,
+    "adopt": 45,
+    "family-support": 8,
+    "task-support": 4
+   },
+   "confirmationReasons": {
+    "family-clustered P": 15,
+    "ok": 135
+   }
+  },
+  {
+   "scenario": {
+    "model": "logit",
+    "sigmaFamily": 0.5,
+    "sigmaTask": 0.75,
+    "effect": 0.15,
+    "v": 0,
+    "q": 0.022727272727272728,
+    "beta": 1.0142793545637687,
+    "scale": 1.0142793545637687,
+    "achieved": 0.1499999999999044
+   },
+   "plan": {
+    "repeats": 3,
+    "perFamily": 3,
+    "alpha": 0.0125,
+    "confAlpha": 0.0125,
+    "minEffect": 0.05,
+    "draws": 2000,
+    "permutationDraws": 2000,
+    "privateShare": 0.5,
+    "tasks": 288,
+    "confTasks": 288,
+    "minHardTasks": 96,
+    "lowExposureMin": 144
+   },
+   "reps": 150,
+   "adopt": {
+    "p": 0.5933333333333334,
+    "mcse": 0.040107263588938506
+   },
+   "confirmed": {
+    "p": 1,
+    "mcse": 0
+   },
+   "adoptAndConfirmed": {
+    "p": 0.5933333333333334,
+    "mcse": 0.040107263588938506
+   },
+   "holdoutReasons": {
+    "family-regression": 61,
+    "adopt": 89
+   },
+   "confirmationReasons": {
+    "ok": 150
+   }
+  },
+  {
+   "scenario": {
+    "model": "template",
+    "effect": 0.15,
+    "v": 0,
+    "q": 0.022727272727272728,
+    "beta": 0.9343985210543906,
+    "scale": 0.9343985210543906,
+    "achieved": 0.1499999999995591
+   },
+   "plan": {
+    "repeats": 3,
+    "perFamily": 3,
+    "alpha": 0.0125,
+    "confAlpha": 0.0125,
+    "minEffect": 0.05,
+    "draws": 2000,
+    "permutationDraws": 2000,
+    "privateShare": 0.5,
+    "tasks": 288,
+    "confTasks": 288,
+    "minHardTasks": 96,
+    "lowExposureMin": 144
+   },
+   "reps": 150,
+   "adopt": {
+    "p": 0.4866666666666667,
+    "mcse": 0.04081031097016392
+   },
+   "confirmed": {
+    "p": 1,
+    "mcse": 0
+   },
+   "adoptAndConfirmed": {
+    "p": 0.4866666666666667,
+    "mcse": 0.04081031097016392
+   },
+   "holdoutReasons": {
+    "adopt": 73,
+    "family-regression": 75,
+    "family-support": 2
+   },
+   "confirmationReasons": {
+    "ok": 150
+   }
+  },
+  {
+   "scenario": {
+    "model": "logit",
+    "sigmaFamily": 0.5,
+    "sigmaTask": 0.75,
+    "effect": 0.2,
+    "v": 0,
+    "q": 0.022727272727272728,
+    "beta": 1.3281481427875406,
+    "scale": 1.3281481427875406,
+    "achieved": 0.20000000000029197
+   },
+   "plan": {
+    "repeats": 3,
+    "perFamily": 3,
+    "alpha": 0.0125,
+    "confAlpha": 0.0125,
+    "minEffect": 0.05,
+    "draws": 2000,
+    "permutationDraws": 2000,
+    "privateShare": 0.5,
+    "tasks": 288,
+    "confTasks": 288,
+    "minHardTasks": 96,
+    "lowExposureMin": 144
+   },
+   "reps": 150,
+   "adopt": {
+    "p": 0.72,
+    "mcse": 0.03666060555964672
+   },
+   "confirmed": {
+    "p": 1,
+    "mcse": 0
+   },
+   "adoptAndConfirmed": {
+    "p": 0.72,
+    "mcse": 0.03666060555964672
+   },
+   "holdoutReasons": {
+    "adopt": 108,
+    "family-regression": 42
+   },
+   "confirmationReasons": {
+    "ok": 150
+   }
+  },
+  {
+   "scenario": {
+    "model": "template",
+    "effect": 0.2,
+    "v": 0,
+    "q": 0.022727272727272728,
+    "beta": 1.2617266538254626,
+    "scale": 1.2617266538254626,
+    "achieved": 0.20000000000043588
+   },
+   "plan": {
+    "repeats": 3,
+    "perFamily": 3,
+    "alpha": 0.0125,
+    "confAlpha": 0.0125,
+    "minEffect": 0.05,
+    "draws": 2000,
+    "permutationDraws": 2000,
+    "privateShare": 0.5,
+    "tasks": 288,
+    "confTasks": 288,
+    "minHardTasks": 96,
+    "lowExposureMin": 144
+   },
+   "reps": 150,
+   "adopt": {
+    "p": 0.6,
+    "mcse": 0.04
+   },
+   "confirmed": {
+    "p": 1,
+    "mcse": 0
+   },
+   "adoptAndConfirmed": {
+    "p": 0.6,
+    "mcse": 0.04
+   },
+   "holdoutReasons": {
+    "adopt": 90,
+    "family-regression": 60
+   },
+   "confirmationReasons": {
+    "ok": 150
+   }
+  },
+  {
+   "scenario": {
+    "model": "logit",
+    "sigmaFamily": 0,
+    "sigmaTask": 0,
+    "effect": 0,
+    "v": 0,
+    "q": 0.022727272727272728,
+    "note": "sharp null",
+    "beta": 0,
+    "scale": 0,
+    "achieved": 0
+   },
+   "plan": {
+    "repeats": 3,
+    "perFamily": 3,
+    "alpha": 0.0125,
+    "confAlpha": 0.0125,
+    "minEffect": 0.05,
+    "draws": 2000,
+    "permutationDraws": 2000,
+    "privateShare": 0.5,
+    "tasks": 288,
+    "confTasks": 288,
+    "minHardTasks": 96,
+    "lowExposureMin": 144
+   },
+   "reps": 150,
+   "adopt": {
+    "p": 0,
+    "mcse": 0
+   },
+   "confirmed": {
+    "p": 0,
+    "mcse": 0
+   },
+   "adoptAndConfirmed": {
+    "p": 0,
+    "mcse": 0
+   },
+   "holdoutReasons": {
+    "family-regression": 131,
+    "task-support": 19
+   },
+   "confirmationReasons": {
+    "randomization test": 150
+   }
+  },
+  {
+   "scenario": {
+    "model": "logit",
+    "sigmaFamily": 1,
+    "sigmaTask": 1,
+    "effect": 0.15,
+    "v": 0,
+    "q": 0.022727272727272728,
+    "note": "larger heterogeneity",
+    "beta": 0.872886948473024,
+    "scale": 0.872886948473024,
+    "achieved": 0.15000000000024197
+   },
+   "plan": {
+    "repeats": 3,
+    "perFamily": 3,
+    "alpha": 0.0125,
+    "confAlpha": 0.0125,
+    "minEffect": 0.05,
+    "draws": 2000,
+    "permutationDraws": 2000,
+    "privateShare": 0.5,
+    "tasks": 288,
+    "confTasks": 288,
+    "minHardTasks": 96,
+    "lowExposureMin": 144
+   },
+   "reps": 150,
+   "adopt": {
+    "p": 0.24666666666666667,
+    "mcse": 0.035196801201456004
+   },
+   "confirmed": {
+    "p": 1,
+    "mcse": 0
+   },
+   "adoptAndConfirmed": {
+    "p": 0.24666666666666667,
+    "mcse": 0.035196801201456004
+   },
+   "holdoutReasons": {
+    "adopt": 37,
+    "family-regression": 112,
+    "family-support": 1
+   },
+   "confirmationReasons": {
+    "ok": 150
+   }
+  },
+  {
+   "scenario": {
+    "model": "logit",
+    "sigmaFamily": 0.5,
+    "sigmaTask": 0.75,
+    "effect": 0,
+    "v": 0,
+    "q": 0.022727272727272728,
+    "beta": -0.18486532264432753,
+    "scale": -0.18486532264432753,
+    "achieved": 1.113512177991622e-13
+   },
+   "plan": {
+    "repeats": 5,
+    "perFamily": 3,
+    "alpha": 0.0125,
+    "confAlpha": 0.0125,
+    "minEffect": 0.05,
+    "draws": 2000,
+    "permutationDraws": 2000,
+    "privateShare": 0.5,
+    "tasks": 288,
+    "confTasks": 288,
+    "minHardTasks": 96,
+    "lowExposureMin": 144
+   },
+   "reps": 150,
+   "adopt": {
+    "p": 0,
+    "mcse": 0
+   },
+   "confirmed": {
+    "p": 0,
+    "mcse": 0
+   },
+   "adoptAndConfirmed": {
+    "p": 0,
+    "mcse": 0
+   },
+   "holdoutReasons": {
+    "family-regression": 125,
+    "task-support": 25
+   },
+   "confirmationReasons": {
+    "randomization test": 146,
+    "family-clustered P": 4
+   }
+  },
+  {
+   "scenario": {
+    "model": "logit",
+    "sigmaFamily": 0.5,
+    "sigmaTask": 0.75,
+    "effect": 0.1,
+    "v": 0,
+    "q": 0.022727272727272728,
+    "beta": 0.6532360588062147,
+    "scale": 0.6532360588062147,
+    "achieved": 0.10000000000031853
+   },
+   "plan": {
+    "repeats": 5,
+    "perFamily": 3,
+    "alpha": 0.0125,
+    "confAlpha": 0.0125,
+    "minEffect": 0.05,
+    "draws": 2000,
+    "permutationDraws": 2000,
+    "privateShare": 0.5,
+    "tasks": 288,
+    "confTasks": 288,
+    "minHardTasks": 96,
+    "lowExposureMin": 144
+   },
+   "reps": 150,
+   "adopt": {
+    "p": 0.5866666666666667,
+    "mcse": 0.04020687245475073
+   },
+   "confirmed": {
+    "p": 0.9933333333333333,
+    "mcse": 0.006644407283433823
+   },
+   "adoptAndConfirmed": {
+    "p": 0.58,
+    "mcse": 0.040298883359219766
+   },
+   "holdoutReasons": {
+    "adopt": 88,
+    "family-regression": 54,
+    "family-support": 7,
+    "task-support": 1
+   },
+   "confirmationReasons": {
+    "ok": 149,
+    "family-clustered P": 1
+   }
+  },
+  {
+   "scenario": {
+    "model": "template",
+    "effect": 0.1,
+    "v": 0,
+    "q": 0.022727272727272728,
+    "beta": 0.6271471758045664,
+    "scale": 0.6271471758045664,
+    "achieved": 0.10000000000004135
+   },
+   "plan": {
+    "repeats": 5,
+    "perFamily": 3,
+    "alpha": 0.0125,
+    "confAlpha": 0.0125,
+    "minEffect": 0.05,
+    "draws": 2000,
+    "permutationDraws": 2000,
+    "privateShare": 0.5,
+    "tasks": 288,
+    "confTasks": 288,
+    "minHardTasks": 96,
+    "lowExposureMin": 144
+   },
+   "reps": 150,
+   "adopt": {
+    "p": 0.6066666666666667,
+    "mcse": 0.03988501992997891
+   },
+   "confirmed": {
+    "p": 0.9866666666666667,
+    "mcse": 0.009365025558091315
+   },
+   "adoptAndConfirmed": {
+    "p": 0.6,
+    "mcse": 0.04
+   },
+   "holdoutReasons": {
+    "family-regression": 47,
+    "adopt": 91,
+    "task-support": 4,
+    "family-support": 8
+   },
+   "confirmationReasons": {
+    "ok": 148,
+    "family-clustered P": 2
+   }
+  },
+  {
+   "scenario": {
+    "model": "logit",
+    "sigmaFamily": 0.5,
+    "sigmaTask": 0.75,
+    "effect": 0.15,
+    "v": 0,
+    "q": 0.022727272727272728,
+    "beta": 1.0142793545637687,
+    "scale": 1.0142793545637687,
+    "achieved": 0.1499999999999044
+   },
+   "plan": {
+    "repeats": 5,
+    "perFamily": 3,
+    "alpha": 0.0125,
+    "confAlpha": 0.0125,
+    "minEffect": 0.05,
+    "draws": 2000,
+    "permutationDraws": 2000,
+    "privateShare": 0.5,
+    "tasks": 288,
+    "confTasks": 288,
+    "minHardTasks": 96,
+    "lowExposureMin": 144
+   },
+   "reps": 150,
+   "adopt": {
+    "p": 0.76,
+    "mcse": 0.03487119154832539
+   },
+   "confirmed": {
+    "p": 1,
+    "mcse": 0
+   },
+   "adoptAndConfirmed": {
+    "p": 0.76,
+    "mcse": 0.03487119154832539
+   },
+   "holdoutReasons": {
+    "adopt": 114,
+    "family-regression": 36
+   },
+   "confirmationReasons": {
+    "ok": 150
+   }
+  },
+  {
+   "scenario": {
+    "model": "template",
+    "effect": 0.15,
+    "v": 0,
+    "q": 0.022727272727272728,
+    "beta": 0.9343985210543906,
+    "scale": 0.9343985210543906,
+    "achieved": 0.1499999999995591
+   },
+   "plan": {
+    "repeats": 5,
+    "perFamily": 3,
+    "alpha": 0.0125,
+    "confAlpha": 0.0125,
+    "minEffect": 0.05,
+    "draws": 2000,
+    "permutationDraws": 2000,
+    "privateShare": 0.5,
+    "tasks": 288,
+    "confTasks": 288,
+    "minHardTasks": 96,
+    "lowExposureMin": 144
+   },
+   "reps": 150,
+   "adopt": {
+    "p": 0.7733333333333333,
+    "mcse": 0.034184683596496734
+   },
+   "confirmed": {
+    "p": 1,
+    "mcse": 0
+   },
+   "adoptAndConfirmed": {
+    "p": 0.7733333333333333,
+    "mcse": 0.034184683596496734
+   },
+   "holdoutReasons": {
+    "adopt": 116,
+    "family-regression": 34
+   },
+   "confirmationReasons": {
+    "ok": 150
+   }
+  },
+  {
+   "scenario": {
+    "model": "logit",
+    "sigmaFamily": 0.5,
+    "sigmaTask": 0.75,
+    "effect": 0.2,
+    "v": 0,
+    "q": 0.022727272727272728,
+    "beta": 1.3281481427875406,
+    "scale": 1.3281481427875406,
+    "achieved": 0.20000000000029197
+   },
+   "plan": {
+    "repeats": 5,
+    "perFamily": 3,
+    "alpha": 0.0125,
+    "confAlpha": 0.0125,
+    "minEffect": 0.05,
+    "draws": 2000,
+    "permutationDraws": 2000,
+    "privateShare": 0.5,
+    "tasks": 288,
+    "confTasks": 288,
+    "minHardTasks": 96,
+    "lowExposureMin": 144
+   },
+   "reps": 150,
+   "adopt": {
+    "p": 0.9466666666666667,
+    "mcse": 0.018346459947155818
+   },
+   "confirmed": {
+    "p": 1,
+    "mcse": 0
+   },
+   "adoptAndConfirmed": {
+    "p": 0.9466666666666667,
+    "mcse": 0.018346459947155818
+   },
+   "holdoutReasons": {
+    "adopt": 142,
+    "family-regression": 8
+   },
+   "confirmationReasons": {
+    "ok": 150
+   }
+  },
+  {
+   "scenario": {
+    "model": "template",
+    "effect": 0.2,
+    "v": 0,
+    "q": 0.022727272727272728,
+    "beta": 1.2617266538254626,
+    "scale": 1.2617266538254626,
+    "achieved": 0.20000000000043588
+   },
+   "plan": {
+    "repeats": 5,
+    "perFamily": 3,
+    "alpha": 0.0125,
+    "confAlpha": 0.0125,
+    "minEffect": 0.05,
+    "draws": 2000,
+    "permutationDraws": 2000,
+    "privateShare": 0.5,
+    "tasks": 288,
+    "confTasks": 288,
+    "minHardTasks": 96,
+    "lowExposureMin": 144
+   },
+   "reps": 150,
+   "adopt": {
+    "p": 0.7866666666666666,
+    "mcse": 0.03344868928395872
+   },
+   "confirmed": {
+    "p": 1,
+    "mcse": 0
+   },
+   "adoptAndConfirmed": {
+    "p": 0.7866666666666666,
+    "mcse": 0.03344868928395872
+   },
+   "holdoutReasons": {
+    "adopt": 118,
+    "family-regression": 32
+   },
+   "confirmationReasons": {
+    "ok": 150
+   }
+  },
+  {
+   "scenario": {
+    "model": "logit",
+    "sigmaFamily": 0,
+    "sigmaTask": 0,
+    "effect": 0,
+    "v": 0,
+    "q": 0.022727272727272728,
+    "note": "sharp null",
+    "beta": 0,
+    "scale": 0,
+    "achieved": 0
+   },
+   "plan": {
+    "repeats": 5,
+    "perFamily": 3,
+    "alpha": 0.0125,
+    "confAlpha": 0.0125,
+    "minEffect": 0.05,
+    "draws": 2000,
+    "permutationDraws": 2000,
+    "privateShare": 0.5,
+    "tasks": 288,
+    "confTasks": 288,
+    "minHardTasks": 96,
+    "lowExposureMin": 144
+   },
+   "reps": 150,
+   "adopt": {
+    "p": 0,
+    "mcse": 0
+   },
+   "confirmed": {
+    "p": 0,
+    "mcse": 0
+   },
+   "adoptAndConfirmed": {
+    "p": 0,
+    "mcse": 0
+   },
+   "holdoutReasons": {
+    "family-regression": 92,
+    "task-support": 58
+   },
+   "confirmationReasons": {
+    "randomization test": 148,
+    "family-clustered P": 2
+   }
+  },
+  {
+   "scenario": {
+    "model": "logit",
+    "sigmaFamily": 1,
+    "sigmaTask": 1,
+    "effect": 0.15,
+    "v": 0,
+    "q": 0.022727272727272728,
+    "note": "larger heterogeneity",
+    "beta": 0.872886948473024,
+    "scale": 0.872886948473024,
+    "achieved": 0.15000000000024197
+   },
+   "plan": {
+    "repeats": 5,
+    "perFamily": 3,
+    "alpha": 0.0125,
+    "confAlpha": 0.0125,
+    "minEffect": 0.05,
+    "draws": 2000,
+    "permutationDraws": 2000,
+    "privateShare": 0.5,
+    "tasks": 288,
+    "confTasks": 288,
+    "minHardTasks": 96,
+    "lowExposureMin": 144
+   },
+   "reps": 150,
+   "adopt": {
+    "p": 0.43333333333333335,
+    "mcse": 0.04046031434674028
+   },
+   "confirmed": {
+    "p": 1,
+    "mcse": 0
+   },
+   "adoptAndConfirmed": {
+    "p": 0.43333333333333335,
+    "mcse": 0.04046031434674028
+   },
+   "holdoutReasons": {
+    "adopt": 65,
+    "family-regression": 85
+   },
+   "confirmationReasons": {
+    "ok": 150
+   }
+  }
+ ]
+}

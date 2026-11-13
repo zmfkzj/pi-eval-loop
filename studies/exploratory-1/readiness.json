@@ -1,0 +1,107 @@
+{
+ "schema": "pi-eval-loop/exploratory-readiness@1",
+ "study": "exploratory-1",
+ "separateFrom": "studies/confirmatory-1/readiness-v3.json (unchanged)",
+ "at": "2026-11-07T09:01:28Z",
+ "route": "screen (development) -> fresh lineage-filtered batch -> ONE exploration-only holdout pass; never adoption",
+ "status": "completed: the single holdout pass ran; batch b20261107T080727Z-91019bdd is used (1 use) and can never be run again",
+ "candidate": {
+  "id": "c1",
+  "runtimeDigest": "4aa6f6bbd75433332c8bab917aaa121bd70b5472750b058e9955b83397fe96c9",
+  "diffSha256": "e073b0620bc8c429de4695521851794eb501aa7150f4419ededa88ace73935af",
+  "commit": "none (digest-identified archive)"
+ },
+ "screen": {
+  "report": "/home/arthur/Code/agent_workflow/runs/eval-loop-confirmatory-1/explore/screen-2/screen-report.json",
+  "sha256": "c116387f668ebbb501678b006751700f78e138d99397417dffbb40a1f5b11851",
+  "accepted": true,
+  "units": 20,
+  "violations": 0,
+  "success": 18,
+  "requests": 460,
+  "voidRun": {
+   "state": "/home/arthur/Code/agent_workflow/runs/eval-loop-confirmatory-1/explore/screen-aborted-controller-error",
+   "attempts": 45,
+   "why": "runner.mjs dirname import missing"
+  }
+ },
+ "holdout": {
+  "plan": "/home/arthur/Code/agent_workflow/runs/eval-loop-confirmatory-1/explore/holdout-plan.json",
+  "planSha256": "3ab7c75885ee2b47d4f72a470c1e361a216d83687a44a275bbcc8708af9d3b71",
+  "final": "/home/arthur/Code/agent_workflow/runs/eval-loop-confirmatory-1/explore/holdout/final.json",
+  "finalSha256": "ebe41882cc6d07c78bb3bef94621d93bbd9692d961b32a32509959037cf55a03",
+  "verdict": "KEEP_STABLE",
+  "adopt": false,
+  "evidenceClass": "exploratory",
+  "support": 0.9625,
+  "familySupport": 0.9456,
+  "delta": {
+   "mean": 0.39025487758313376,
+   "lo95": 0.003267002285613829,
+   "hi95": 0.7713508463359146,
+   "probPositive": 0.9763,
+   "probNegative": 0.0237
+  },
+  "arms": {
+   "stable": {
+    "units": 18,
+    "success": 8,
+    "hiddenPass": 14,
+    "integrityViolations": 8,
+    "strictViolations": 8,
+    "requests": 335
+   },
+   "c1": {
+    "units": 18,
+    "success": 15,
+    "hiddenPass": 15,
+    "integrityViolations": 0,
+    "strictViolations": 0,
+    "requests": 364
+   }
+  },
+  "execution": {
+   "scheduleDigest": "7fec4c0cea84d679d8f9fb3021cedc5cf12d8010408f350cdb970c729ba91d88",
+   "planned": 36,
+   "dispatched": 36,
+   "followsPlan": true,
+   "inversions": 0
+  },
+  "incomplete": 0,
+  "analysisIncident": {
+   "evidence": "/home/arthur/Code/agent_workflow/runs/eval-loop-confirmatory-1/explore/holdout-analysis-crash-1.err",
+   "what": "after all 36 units the analysis threw (Evaluator.samples compared the {digest,facts} environment object by identity); fixed in explore.mjs (envKey) and resumed from the recorded units: no unit rerun, no model call (ledger 1803 before and after)"
+  }
+ },
+ "budget": {
+  "ledger": "/home/arthur/Code/agent_workflow/runs/eval-loop-confirmatory-1/budget/target-model-requests.jsonl",
+  "cap": 4500,
+  "attempts": 1803,
+  "remaining": 2697,
+  "open": 0,
+  "thisRound": {
+   "holdout": 699
+  }
+ },
+ "notConfirmatory": [
+  "6 tasks/4 families/3 owners/1 source-hard: no power for a confirmatory or generalized claim",
+  "c1's advantage is mostly integrity: stable lost 8 of 18 units to existing-test modifications while hidden tests passed in 14/18 (c1 15/18)",
+  "family-clustered support 0.9456 < 0.95"
+ ],
+ "recurringRoute": {
+  "status": "implemented in /home/arthur/Code/pi-eval-loop (uncommitted) and agent_workflow (uncommitted); not deployed; schedule and supplyRefresh disabled",
+  "cli": "bin/eval-loop-explore.mjs",
+  "config": "agent_workflow/runs/eval-loop-confirmatory-1/explore/exploration-recurring.json",
+  "awConfig": "agent_workflow/recurring/eval-loop-exploration.json",
+  "preflightAt20261107": {
+   "code": "supply-empty",
+   "budgetRemaining": 2697,
+   "minRemaining": 2500
+  },
+  "rollout": "agent_workflow docs/\uc6b4\uc601-\uac00\uc774\ub4dc.md \u00a78-9b",
+  "requiredEvidence": "validation.private.json (passed validation) enforced by the route regardless of POLICY; legacy restaged cases permanently unusable here",
+  "crashRecovery": "recoverPool; test/supply-crash.test.mjs",
+  "runtimePath": "verified offline by test/explore-runtime.test.mjs (pinned binary, bwrap, TLS stand-in); realBackend/pi harness path not exercised offline",
+  "schedule": "aw-eval-loop-exploration, mutually exclusive with aw-eval-loop"
+ }
+}

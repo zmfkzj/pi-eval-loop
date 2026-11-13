@@ -1,321 +1,290 @@
-// Unattended-operation regressions on the simulated backend (no model, no sandbox): BLOCKED states resume at the phase they
-// interrupted (decided cycles are never re-run), HALTED states are terminal for every entry point, holdout-use records are never
-// re-associated, the supervised step (driveOnce) reports idle/cycle_done/blocked/halted, and the public summary is allowlisted.
+// Autonomous lifecycle end to end (2026-11-07): exploration -> registered confirmation -> gate-driven adoption (release pointer)
+// -> smoke -> independent post-adoption confirmation, through runExploreCycle / the CLI with a simulated target model, the real
+// budget ledger, pool, lineage, seal, reservation, one-use ledgers, series alpha ledger and the release history.
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
+import { spawnSync } from "node:child_process";
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
-import { edit, makeHoldout, makeLoop, makeTasks, makeUmbrella, HOLDOUT, TRAIN_DEV, rmSync, tempDir, writeBoundState } from "./helpers.mjs";
-import { HaltedError } from "../src/loop.mjs";
-import { driveOnce } from "../src/cli.mjs";
-import { inspectAblation, inspectState, stateSummary, statusSummary } from "../src/contract.mjs";
-import { runAblation } from "../src/ablation.mjs";
-import { Ledger } from "../src/util.mjs";
+import { fileURLToPath } from "node:url";
+import { rmSync, tempDir } from "./helpers.mjs";
+import { caseDigest, poolState, registryOf } from "../src/supply.mjs";
+import { holdoutLedger, sealOf } from "../src/datasets.mjs";
+import { RequestBudget } from "../src/request-budget.mjs";
+import { simulatedBackend } from "../src/evaluator.mjs";
+import { runtimeDigest } from "../src/exploration.mjs";
+import { Releases, floorProblems, testProtocol } from "../src/lifecycle.mjs";
+import { explorePreflight, exploreStatus, refreshExploration, runExploreCycle } from "../src/explore-cycle.mjs";
+import { Ledger, sha256 } from "../src/util.mjs";
+import { exploreProtocol } from "../src/exploration.mjs";
+import { merge } from "../src/protocol.mjs";
 
-const GOOD = { hypothesis: "re-read requirements before finishing", targetFailureClass: "requirements-generalization", edit: edit("good") };
-
-/**
- * A loop whose prerequisites can be switched off and on (a transient outage), over shared fixtures.
- * @param {string} root @param {any} [fx] @param {{ entries?: any[], stateName?: string, stopBefore?: string }} [options]
- */
-function flaky(root, fx, { entries = [GOOD], stateName = "state", stopBefore } = {}) {
-  const gate = { ok: true };
-  const { loop, fx: fixtures } = makeLoop({ root, entries, fixtures: fx, stateName, prerequisites: async () => [{ name: "credentials", ok: gate.ok, detail: gate.ok ? "set" : "absent" }] });
-  if (stopBefore) loop.stopBefore = stopBefore;
-  return { loop, fx: fixtures, gate };
+const LIFECYCLE = fileURLToPath(new URL("../src/lifecycle.mjs", import.meta.url));
+const SRC = { dataset: "Exercism TS", label: "difficulty 9", value: 9, url: "https://example.org/x", tier: "hard" };
+function tree(dir, text) { mkdirSync(join(dir, "src"), { recursive: true }); writeFileSync(join(dir, "src", "x.ts"), text); writeFileSync(join(dir, "package.json"), "{}"); return dir; }
+function dataset(dir, specs) { for (const [id, family] of specs) { mkdirSync(join(dir, id, "repo"), { recursive: true }); writeFileSync(join(dir, id, "repo", "index.js"), `export const id = "${id}";\n`); writeFileSync(join(dir, id, "task.json"), JSON.stringify({ id, family, tier: "easy", instruction: `Solve ${id}`, provenance: "external" })); } writeFileSync(join(dir, "SEAL.json"), JSON.stringify(sealOf(dir))); return dir; }
+function stage(pool, id, family, hard) {
+  const d = join(pool, "cases", id);
+  for (const p of ["repo", "hidden", "reference"]) mkdirSync(join(d, p), { recursive: true });
+  writeFileSync(join(d, "repo", "index.js"), `export const id = "${id}";\n`); writeFileSync(join(d, "hidden", "h.test.js"), "// h\n"); writeFileSync(join(d, "reference", "index.js"), "// r\n");
+  writeFileSync(join(d, "task.json"), JSON.stringify({ id, family, tier: hard ? "hard" : "easy", instruction: `Solve ${id}`, provenance: "external", ...(hard ? { difficultyBasis: "source", difficultySource: SRC } : {}) }));
+  writeFileSync(join(d, "validation.private.json"), JSON.stringify({ ok: true, code: "valid" }));
+  registryOf(pool).append({ type: "case", caseId: id, status: "eligible", family, tier: hard ? "hard" : "easy", difficultyBasis: hard ? "source" : "declared", contentDigest: caseDigest(d) });
 }
-const uses = (fx) => new Ledger(join(fx.holdout.dir, "USES.jsonl")).records().length;
-const results = (loop) => new Ledger(join(loop.stateDir, "runs.jsonl")).records().filter(r => r.type === "result");
-const phasesSince = (loop, from) => loop.events.records().slice(from).filter(e => e.type === "phase").map(e => e.phase);
-const stateFile = (loop) => JSON.parse(readFileSync(join(loop.stateDir, "state.json"), "utf8"));
+const stageN = (pool, tag, n) => { for (let i = 1; i <= n; i++) stage(pool, `${tag}${i}`, `gh:${tag}${i}/r`, i === 1); };
 
-/** Two failing resumes (fresh processes) keep the original resume phase; then the prerequisite returns. */
-async function blockTwice(root, fx, expectedPhase) {
-  for (let i = 0; i < 2; i++) {
-    const { loop, gate } = flaky(root, fx);
-    gate.ok = false;
-    const r = await driveOnce(loop);
-    assert.equal(r.kind, "blocked");
-    const s = stateFile(loop);
-    assert.equal(s.phase, "blocked");
-    assert.equal(s.blocked.resumePhase, expectedPhase, `attempt ${i + 1}: resume phase kept`);
-    assert.equal(s.blocked.retryable, true);
-  }
+/** A world: arms, screen (with measured runs), lineage, pool, registered confirmatory protocol + readiness, release dir. */
+function world(root, { ready = "fulfilled", limit = 4500, alphaTotal = 0.2, confirmationRequired = true, apu = 6, minRemaining = 120 } = {}) {
+  const cand = tree(join(root, "cand"), "export const c = 1;\n"), stable = tree(join(root, "stable"), "export const s = 1;\n");
+  const report = join(root, "screen-report.json"); writeFileSync(report, JSON.stringify({ accepted: true }));
+  const runs = join(root, "screen-runs.jsonl"); writeFileSync(runs, `${JSON.stringify({ type: "result", record: { model_requests: 5 } })}\n`);
+  const reg = join(root, "old-registry.jsonl"); new Ledger(reg).append({ type: "case", caseId: "x-old-1", family: "gh:old/repo", status: "eligible" });
+  const pool = join(root, "pool"); mkdirSync(pool, { recursive: true }); mkdirSync(join(root, "orche"));
+  writeFileSync(join(pool, "POLICY.json"), JSON.stringify({ schema: "pi-eval-loop/pool-policy@1", autoSeal: false }));
+  const rationale = join(root, "rationale.md"); writeFileSync(rationale, "power simulation (fixture)\n");
+  const protocol = { holdout: { repeats: 3, minTasks: 8, minFamilies: 8, acceptedProvenance: ["external", "private-reviewed"], hardBasis: ["source"], execution: "interleaved", maxOwnerShare: 0.5, priorFamilyReuse: "forbid", privateReview: "cross-provider" }, adoption: { requireFamilyLevel: true },
+    analysisPlan: { mode: "confirmatory", registeredAt: "2026-11-07T00:00:00Z", rationale: { document: rationale, sha256: sha256(readFileSync(rationale)) }, minEffect: 0.05, alpha: 0.05, minTasks: 8, minFamilies: 8, minHardTasks: 1, permutationDraws: 2000,
+      series: { id: "test-series", ledger: join(root, "series", "ledger.jsonl"), alphaTotal }, lowExposure: { required: false, minTasks: null, provenance: ["private-reviewed"] }, confirmation: { required: confirmationRequired, pool, alpha: 0.05, minTasks: 8, minFamilies: 8 } } };
+  const protoFile = join(root, "protocol.json"); writeFileSync(protoFile, JSON.stringify(protocol));
+  const readiness = join(root, "readiness.json"); writeFileSync(readiness, JSON.stringify({ protocolSha256: sha256(readFileSync(protoFile)), conditions: [{ id: "analysis-plan", status: ready, reasons: ready === "fulfilled" ? [] : ["power not established"] }] }));
+  const cfg = { schema: "pi-eval-loop/exploration@1", mode: "autonomous", seriesSeed: "lc", candidate: { dir: cand, identity: { commit: "cand@1", runtimeDigest: runtimeDigest(cand) } }, stable: { dir: stable, commit: "stable@1", runtimeDigest: runtimeDigest(stable) },
+    screen: { report, reportSha256: sha256(readFileSync(report)), runs, tasks: [{ id: "d1", dataset: dataset(join(root, "screen-tasks"), [["d1", "gh:dev/x"]]) }] }, pool, lineage: { registries: [reg], datasets: [dataset(join(root, "old-holdout"), [["o1", "gh:old/ds"]])] },
+    budget: { ledger: join(root, "budget", "ledger.jsonl"), limit, scope: "lc", minRemaining }, runtime: { simulated: true }, simulation: { enabled: true, p: { stable: 0.05, c1: 0.95 } }, orcheDir: join(root, "orche"), parallelism: 2,
+    batchRule: { seed: "lc", maxTasks: 6, maxPerFamily: 1, maxPerOwner: 3, maxOwnerShare: 0.5, preferFreshFamilies: true }, supply: { collector: "none" },
+    confirmation: { protocol: protoFile, protocolSha256: sha256(readFileSync(protoFile)), readiness, attemptsPerUnit: apu, smokeAttempts: 10, deploy: { dir: join(root, "deploy") } } };
+  const file = join(root, "lifecycle.json"); writeFileSync(file, JSON.stringify(cfg));
+  const W = { p: { stable: 0.05, c1: 0.95 }, smokeFail: false };
+  const backend = simulatedBackend({ seed: "lc", skill: (h, t, o) => ({ p: W.p[h.id] ?? 0.5, crash: W.smokeFail && o.split === "smoke" }) });
+  const deps = { backend, orcheDir: cfg.orcheDir };
+  const ledger = () => new RequestBudget({ path: cfg.budget.ledger, limit, scope: "lc" }).status();
+  return { cfg, file, pool, W, deps, ledger, releases: new Releases(cfg.confirmation.deploy.dir) };
 }
+const refresh = async (w) => refreshExploration(w.file, { deps: { orcheDir: w.cfg.orcheDir } });
+const uses = (pool) => [...poolState(pool).batches.values()].reduce((n, b) => n + (existsSync(join(pool, "batches", b.batch, "USES.jsonl")) ? holdoutLedger(join(pool, "batches", b.batch)).records().length : 0), 0);
 
-test("BLOCKED on a finished cycle: two failing resumes keep resumePhase done, recovery is idle (no rerun, final/selection/holdout use unchanged)", async () => {
+test("lifecycle: supported exploration -> registered confirmation (waits for supply) -> ADOPT -> release -> smoke -> CONFIRMED; acceptance/ADOPT/deployed/CONFIRMED stay distinct; next cycle sees the candidate deployed", { timeout: 300_000 }, async () => {
   const root = tempDir();
   try {
-    const first = flaky(root);
-    assert.equal((await driveOnce(first.loop)).kind, "cycle_done");
-    const before = stateFile(first.loop);
-    assert.equal(before.final.verdict, "ADOPT");
-    const runs = results(first.loop).length, used = uses(first.fx), events = first.loop.events.records().length;
-    await blockTwice(root, first.fx, "done");
-    const { loop } = flaky(root, first.fx);
-    const r = await driveOnce(loop);
-    assert.equal(r.kind, "idle", JSON.stringify(r));
-    const after = stateFile(loop);
-    assert.equal(after.phase, "done");
-    assert.equal(after.blocked, undefined);
-    assert.deepEqual(after.final, before.final);
-    assert.deepEqual(after.selection, before.selection);
-    assert.deepEqual(after.holdoutUse, before.holdoutUse);
-    assert.equal(after.cycleFingerprint, before.cycleFingerprint);
-    assert.equal(results(loop).length, runs, "no unit evaluated");
-    assert.equal(uses(first.fx), used, "holdout not consumed again");
-    assert.deepEqual(phasesSince(loop, events), ["blocked", "blocked"], "no earlier phase repeated");
+    const w = world(root);
+    stageN(w.pool, "e", 6);
+    assert.equal((await refresh(w)).code, 0);
+    const state = join(root, "c-1");
+    let o = await runExploreCycle(w.file, state, { deps: w.deps });
+    assert.equal(o.outcome, "blocked", JSON.stringify(o.status?.blocked));
+    assert.equal(o.status.lifecycle.stage, "confirm-wait"); assert.equal(o.status.exploration.code, "confirmation-supply-empty"); assert.equal(o.status.blocked.retryable, true);
+    assert.equal(o.status.lifecycle.explorationVerdict, "EXPLORATORY_SUPPORTED");
+    assert.equal(o.status.acceptance.stage, "candidate-accepted-exploratory"); assert.equal(o.status.acceptance.productionAdopted, false);
+    const regSha = JSON.parse(readFileSync(join(state, "explore.json"), "utf8")).registrationSha256;
+    assert.ok(existsSync(join(state, "registration.json")) && regSha, "registration frozen before any confirmatory outcome");
+    assert.equal(w.releases.current().runtimeDigest, w.cfg.stable.runtimeDigest, "nothing deployed yet");
+    // Confirmatory supply arrives: two 8-task batches (holdout + separate post-adoption confirmation).
+    stageN(w.pool, "k", 8); assert.equal((await refresh(w)).out.sealed[0]?.purpose, "confirmatory");
+    // A second confirmatory batch is not sealed while an unused one is still available (supply is not consumed ahead of need).
+    stageN(w.pool, "m", 8); assert.equal((await refresh(w)).out.sealed.length, 0);
+    o = await runExploreCycle(w.file, state, { requireState: true, deps: w.deps });
+    assert.equal(o.status.lifecycle.stage, "postconfirm-wait", JSON.stringify(o.status.lifecycle));
+    assert.equal(o.status.acceptance.stage, "adopted-unconfirmed");
+    assert.equal((await refresh(w)).out.sealed[0]?.purpose, "confirmatory", "the post-adoption confirmation batch is sealed once the first is used");
+    o = await runExploreCycle(w.file, state, { requireState: true, deps: w.deps });
+    assert.equal(o.outcome, "cycle_done", JSON.stringify(o.status?.blocked ?? o));
+    const st = o.status;
+    assert.equal(st.lifecycle.outcome, "confirmed"); assert.equal(st.lifecycle.confirmVerdict, "ADOPT"); assert.equal(st.lifecycle.confirmation, "CONFIRMED");
+    assert.equal(st.final.adopt, true); assert.equal(st.final.explorationOnly, false); assert.equal(st.final.evidence.class, "confirmatory"); assert.equal(st.final.evidence.confirmatoryClaim, true);
+    assert.equal(st.acceptance.stage, "adopted-confirmed"); assert.equal(st.acceptance.productionAdopted, true); assert.equal(st.acceptance.confirmed, true);
+    assert.equal(w.releases.current().runtimeDigest, w.cfg.candidate.identity.runtimeDigest, "the release pointer moved to the candidate");
+    assert.equal(uses(w.pool), 3, "exploration, confirmatory holdout and confirmation each used once");
+    const series = new Ledger(join(root, "series", "ledger.jsonl")).records().filter(r => r.type === "spend");
+    assert.deepEqual(series.map(r => r.purpose).sort(), ["confirmation", "holdout"], "alpha spent once per confirmatory test");
+    // Retry: idle, nothing dispatched.
+    const before = w.ledger().charged;
+    o = await runExploreCycle(w.file, state, { requireState: true, deps: w.deps });
+    assert.equal(o.outcome, "idle"); assert.equal(w.ledger().charged, before);
+    // Next cycle: the candidate is now the deployed release -> no exploration (stop, model-free).
+    const pf = await explorePreflight(w.file, join(root, "c-2"), { orcheDir: w.cfg.orcheDir });
+    assert.equal(pf.code, "candidate-deployed");
   } finally { rmSync(root, { recursive: true, force: true }); }
 });
 
-test("BLOCKED at post-adopt: recovery runs only the post-adoption smoke check; selection, verdict and holdout use are kept", async () => {
+test("lifecycle: unsupported exploration is never promoted (no registration, no adoption)", { timeout: 300_000 }, async () => {
   const root = tempDir();
   try {
-    const first = flaky(root, undefined, { stopBefore: "post-adopt" });
-    await first.loop.runCycle();
-    const before = stateFile(first.loop);
-    assert.equal(before.phase, "post-adopt");
-    const runs = results(first.loop).length, events = first.loop.events.records().length;
-    await blockTwice(root, first.fx, "post-adopt");
-    const { loop } = flaky(root, first.fx);
-    assert.equal((await driveOnce(loop)).kind, "cycle_done");
-    const after = stateFile(loop);
-    assert.deepEqual(after.selection, before.selection);
-    assert.equal(after.final.verdict, before.final.verdict);
-    assert.equal(after.final.candidate, before.final.candidate);
-    assert.deepEqual(after.holdoutUse, before.holdoutUse);
-    assert.equal(uses(first.fx), 1);
-    const added = results(loop).slice(runs);
-    assert.ok(added.length >= 1 && added.every(r => r.record?.split === "post-adopt" || r.split === "post-adopt"), JSON.stringify(added.map(r => r.record?.split ?? r.split)));
-    assert.deepEqual(phasesSince(loop, events), ["blocked", "blocked", "done"]);
+    const w = world(root);
+    w.W.p = { stable: 0.5, c1: 0.5 };
+    stageN(w.pool, "e", 6); await refresh(w);
+    let o = await runExploreCycle(w.file, join(root, "neg"), { deps: w.deps });
+    assert.equal(o.outcome, "cycle_done"); assert.equal(o.status.lifecycle.outcome, "explored-negative");
+    assert.equal(existsSync(join(root, "neg", "registration.json")), false);
+    assert.equal(w.releases.current().runtimeDigest, w.cfg.stable.runtimeDigest);
   } finally { rmSync(root, { recursive: true, force: true }); }
 });
 
-test("BLOCKED at adopt and at holdout: recovery continues at that phase; the holdout is used exactly once", async () => {
-  for (const phase of ["adopt", "holdout"]) {
+test("lifecycle: confirmatory gate rejection (candidate worse on the confirmatory holdout) ends unadopted", { timeout: 300_000 }, async () => {
+  const root = tempDir();
+  try {
+    const w = world(root);
+    stageN(w.pool, "e", 6); await refresh(w);
+    const state = join(root, "c");
+    let o = await runExploreCycle(w.file, state, { deps: w.deps });
+    assert.equal(o.status.lifecycle.stage, "confirm-wait");
+    stageN(w.pool, "k", 8); await refresh(w);
+    w.W.p = { stable: 0.9, c1: 0.1 };
+    o = await runExploreCycle(w.file, state, { requireState: true, deps: w.deps });
+    assert.equal(o.status.lifecycle.outcome, "confirm-negative", JSON.stringify(o.status.lifecycle));
+    assert.equal(o.status.final.adopt, false); assert.equal(o.status.acceptance.productionAdopted, false);
+    assert.equal(w.releases.current().runtimeDigest, w.cfg.stable.runtimeDigest, "never deployed");
+  } finally { rmSync(root, { recursive: true, force: true }); }
+});
+
+for (const [name, setup, expectConfirmation] of [
+  ["smoke failure", (W) => { W.smokeFail = true; }, null],
+  ["post-adoption confirmation NOT_CONFIRMED", (W) => { W.flipAfterAdopt = { stable: 0.9, c1: 0.1 }; }, "NOT_CONFIRMED"],
+  ["post-adoption confirmation INCONCLUSIVE (tied arms)", (W) => { W.flipAfterAdopt = { stable: 0.6, c1: 0.6 }; }, "NOT_CONFIRMED|INCONCLUSIVE"],
+]) {
+  test(`lifecycle: ${name} rolls the release back and stops`, { timeout: 300_000 }, async () => {
     const root = tempDir();
     try {
-      const first = flaky(root, undefined, { stopBefore: phase });
-      await first.loop.runCycle();
-      const before = stateFile(first.loop);
-      assert.equal(before.phase, phase);
-      const events = first.loop.events.records().length;
-      await blockTwice(root, first.fx, phase);
-      const { loop } = flaky(root, first.fx);
-      assert.equal((await driveOnce(loop)).kind, "cycle_done");
-      const after = stateFile(loop);
-      assert.deepEqual(after.selection, before.selection, `${phase}: selection frozen`);
-      assert.equal(after.final.verdict, "ADOPT");
-      assert.equal(uses(first.fx), 1, `${phase}: one holdout use`);
-      const expected = phase === "adopt" ? ["blocked", "blocked", "post-adopt", "done"] : ["blocked", "blocked", "adopt", "post-adopt", "done"];
-      assert.deepEqual(phasesSince(loop, events), expected);
+      const w = world(root);
+      stageN(w.pool, "e", 6); await refresh(w);
+      const state = join(root, "c");
+      let o = await runExploreCycle(w.file, state, { deps: w.deps });
+      stageN(w.pool, "k", 8); await refresh(w);
+      setup(w.W);
+      if (w.W.flipAfterAdopt) {
+        // Run until the post-confirmation waits for its batch, then change the arms' behaviour and supply the batch.
+        o = await runExploreCycle(w.file, state, { requireState: true, deps: w.deps });
+        assert.equal(o.status.lifecycle.stage, "postconfirm-wait", JSON.stringify(o.status.lifecycle));
+        assert.equal(o.status.acceptance.stage, "adopted-unconfirmed"); assert.equal(o.status.acceptance.confirmed, false);
+        assert.equal(w.releases.current().runtimeDigest, w.cfg.candidate.identity.runtimeDigest);
+        w.W.p = w.W.flipAfterAdopt;
+        stageN(w.pool, "m", 8); await refresh(w);
+      }
+      o = await runExploreCycle(w.file, state, { requireState: true, deps: w.deps });
+      assert.equal(o.status.lifecycle.outcome, "rolled-back", JSON.stringify(o.status.lifecycle));
+      assert.equal(o.status.lifecycle.rolledBack, true); assert.equal(o.status.final.adopt, false); assert.equal(o.status.final.rolledBack, true);
+      if (expectConfirmation) assert.match(o.status.lifecycle.confirmation, new RegExp(expectConfirmation));
+      assert.equal(o.status.acceptance.stage, "rolled-back"); assert.equal(o.status.acceptance.productionAdopted, false);
+      assert.equal(w.releases.current().runtimeDigest, w.cfg.stable.runtimeDigest, "the previous release is deployed again");
+      const h = w.releases.history.records().map(r => r.type);
+      assert.deepEqual(h, ["init", "adopt", "rollback"]);
     } finally { rmSync(root, { recursive: true, force: true }); }
-  }
-});
+  });
+}
 
-test("BLOCKED during search: recovery resumes the search (no baseline phase again)", async () => {
+test("lifecycle readiness: provisional plan, an unbound readiness record, a weakening protocol and an unaffordable confirmation never start an exploration (no attempt, no batch)", { timeout: 120_000 }, async () => {
   const root = tempDir();
   try {
-    const first = flaky(root, undefined, { stopBefore: "search" });
-    await first.loop.runCycle();
-    assert.equal(stateFile(first.loop).phase, "search");
-    const events = first.loop.events.records().length;
-    await blockTwice(root, first.fx, "search");
-    const { loop } = flaky(root, first.fx);
-    assert.equal((await driveOnce(loop)).kind, "cycle_done");
-    const phases = phasesSince(loop, events);
-    assert.equal(phases.includes("baselines"), false, phases.join(","));
-    assert.equal(phases[2], "select");
+    const w = world(root, { ready: "provisional" });
+    stageN(w.pool, "e", 6); await refresh(w);
+    let pf = await explorePreflight(w.file, join(root, "x"), { orcheDir: w.cfg.orcheDir });
+    assert.equal(pf.code, "confirmation-plan-not-ready"); assert.match(pf.reasons.join(" "), /provisional/);
+    const o = await runExploreCycle(w.file, join(root, "x"), { deps: w.deps });
+    assert.equal(o.status.exploration.code, "confirmation-plan-not-ready"); assert.equal(o.status.blocked.retryable, true);
+    assert.equal(w.ledger().charged, 0); assert.equal(poolState(w.pool).records.filter(r => r.type === "reserve").length, 0);
+    // Readiness record not bound to this protocol.
+    writeFileSync(w.cfg.confirmation.readiness, JSON.stringify({ conditions: [{ id: "analysis-plan", status: "fulfilled" }] }));
+    pf = await explorePreflight(w.file, join(root, "x2"), { orcheDir: w.cfg.orcheDir });
+    assert.equal(pf.code, "confirmation-plan-not-ready"); assert.match(pf.reasons.join(" "), /not bound to this protocol/);
+    // A tight ledger: the registered confirmation cannot be afforded after the exploration.
+    const root2 = tempDir();
+    const t = world(root2, { limit: 600 });
+    pf = await explorePreflight(t.file, join(root2, "x"), { orcheDir: t.cfg.orcheDir });
+    assert.equal(pf.code, "confirmation-infeasible"); assert.match(pf.reasons.join(" "), /never raised/);
+    rmSync(root2, { recursive: true, force: true });
+    // Floors: a registered protocol cannot weaken the original gates; confirmation minima never fall below the holdout floors.
+    const weak = merge(exploreProtocol(), { holdout: { minTasks: 3, repeats: 1 }, adoption: { support: 0.5, requireChecks: false } });
+    assert.ok(floorProblems(weak).length >= 4);
+    const part = testProtocol({ holdout: { minTasks: 8, minFamilies: 8 }, adoption: {}, analysisPlan: { alpha: 0.05, minTasks: 8, minFamilies: 8, confirmation: { alpha: 0.05, minTasks: 2, minFamilies: 1 } } }, "confirmation");
+    assert.ok(part.analysisPlan.minTasks >= 6 && part.holdout.minFamilies >= 4);
+    // attemptsPerUnit below the measured per-unit maximum is a config error.
+    const root3 = tempDir();
+    const a = world(root3, { apu: 2 });
+    pf = await explorePreflight(a.file, join(root3, "x"), { orcheDir: a.cfg.orcheDir });
+    assert.equal(pf.code, "config-invalid"); assert.match(pf.reasons.join(" "), /below the measured per-unit maximum/);
+    rmSync(root3, { recursive: true, force: true });
   } finally { rmSync(root, { recursive: true, force: true }); }
 });
 
-test("an older blocked state without a resume phase after a decision fails closed (never restarts at prepare)", async () => {
+test("lifecycle restart: a crash inside the confirmatory pass resumes with one use and one alpha spend; stale candidate after promotion is refused", { timeout: 300_000 }, async () => {
   const root = tempDir();
   try {
-    const first = flaky(root);
-    await first.loop.runCycle();
-    const s = stateFile(first.loop);
-    writeFileSync(join(first.loop.stateDir, "state.json"), JSON.stringify({ ...s, phase: "blocked", blocked: { reason: "missing prerequisites" } }));
-    const runs = results(first.loop).length;
-    const { loop } = flaky(root, first.fx);
-    assert.equal((await driveOnce(loop)).kind, "blocked");
-    const after = stateFile(loop);
-    assert.equal(after.phase, "blocked");
-    assert.match(after.blocked.reason, /without a recorded resume phase/);
-    assert.equal(after.blocked.retryable, false);
-    assert.deepEqual(after.final, s.final);
-    assert.equal(results(loop).length, runs);
+    const w = world(root, { confirmationRequired: false });
+    stageN(w.pool, "e", 6); await refresh(w);
+    const state = join(root, "c");
+    await runExploreCycle(w.file, state, { deps: w.deps });
+    stageN(w.pool, "k", 8); await refresh(w);
+    // SIGKILL right after the confirmatory batch use was recorded (child process, config-simulated target model).
+    const child = spawnSync(process.execPath, ["--input-type=module", "-e", `import { runExploreCycle } from ${JSON.stringify(fileURLToPath(new URL("../src/explore-cycle.mjs", import.meta.url)))}; await runExploreCycle(${JSON.stringify(w.file)}, ${JSON.stringify(state)}, { requireState: true, deps: { orcheDir: ${JSON.stringify(w.cfg.orcheDir)} } });`], { encoding: "utf8", env: { ...process.env, EVAL_LOOP_FAULT: "holdout:after-use" } });
+    assert.equal(child.signal, "SIGKILL", child.stderr.slice(0, 400));
+    const o = await runExploreCycle(w.file, state, { requireState: true, deps: w.deps });
+    assert.equal(o.status.lifecycle.outcome, "adopted", JSON.stringify(o.status.lifecycle ?? o));
+    assert.equal(o.status.final.evidence.confirmation, "not-registered"); assert.equal(o.status.acceptance.stage, "adopted-unconfirmed");
+    assert.equal(uses(w.pool), 2);
+    assert.equal(new Ledger(join(root, "series", "ledger.jsonl")).records().filter(r => r.type === "spend").length, 1);
+    // Stale candidate: a second world whose candidate tree changes after promotion.
+    const root2 = tempDir();
+    const v = world(root2);
+    stageN(v.pool, "e", 6); await refreshExploration(v.file, { deps: { orcheDir: v.cfg.orcheDir } });
+    const s2 = join(root2, "c");
+    const first = await runExploreCycle(v.file, s2, { deps: v.deps });
+    assert.equal(first.status.lifecycle.stage, "confirm-wait");
+    writeFileSync(join(v.cfg.candidate.dir, "src", "x.ts"), "export const c = 2;\n");
+    const second = await runExploreCycle(v.file, s2, { requireState: true, deps: v.deps });
+    assert.equal(second.status.exploration.code, "prerequisite-failed");
+    rmSync(root2, { recursive: true, force: true });
   } finally { rmSync(root, { recursive: true, force: true }); }
 });
 
-test("a holdout-use record of another selection is never reused: HALTED, no holdout unit, no new use", async () => {
+for (const [fault, op] of [["release:after-store", "adopt"], ["release:after-record", "adopt"], ["release:after-record", "rollback"]]) {
+  test(`release pointer: SIGKILL at ${fault} during ${op} recovers to one consistent deployed release`, () => {
+    const root = tempDir();
+    try {
+      const a = tree(join(root, "a"), "a\n"), b = tree(join(root, "b"), "b\n");
+      const R = new Releases(join(root, "deploy"));
+      R.init({ dir: a, runtimeDigest: runtimeDigest(a), commit: "a" });
+      if (op === "rollback") R.adopt({ key: "k", expect: runtimeDigest(a), candidate: { dir: b, runtimeDigest: runtimeDigest(b), commit: "b" }, evidence: {} });
+      const script = op === "adopt" ? `new R.Releases(${JSON.stringify(join(root, "deploy"))}).adopt({ key: "k", expect: ${JSON.stringify(runtimeDigest(a))}, candidate: { dir: ${JSON.stringify(b)}, runtimeDigest: ${JSON.stringify(runtimeDigest(b))}, commit: "b" }, evidence: {} });` : `new R.Releases(${JSON.stringify(join(root, "deploy"))}).rollback({ key: "k", reason: "t" });`;
+      const r = spawnSync(process.execPath, ["--input-type=module", "-e", `import * as R from ${JSON.stringify(LIFECYCLE)};\n${script}`], { encoding: "utf8", env: { ...process.env, EVAL_LOOP_FAULT: fault } });
+      assert.equal(r.signal, "SIGKILL", r.stderr.slice(0, 300));
+      const R2 = new Releases(join(root, "deploy"));
+      const cur = R2.current({ repair: true });
+      const ptr = JSON.parse(readFileSync(join(root, "deploy", "current.json"), "utf8"));
+      assert.equal(ptr.release, cur.release, "pointer repaired from the history");
+      const want = op === "adopt" ? (fault === "release:after-store" ? runtimeDigest(a) : runtimeDigest(b)) : runtimeDigest(a);
+      assert.equal(cur.runtimeDigest, want);
+      // A retry converges (idempotent) and leaves exactly one adopt (and at most one rollback) record.
+      if (op === "adopt") R2.adopt({ key: "k", expect: runtimeDigest(a), candidate: { dir: b, runtimeDigest: runtimeDigest(b), commit: "b" }, evidence: {} });
+      else R2.rollback({ key: "k", reason: "t" });
+      const types = R2.history.records().map(x => x.type);
+      assert.equal(types.filter(x => x === "adopt").length, 1);
+      assert.ok(types.filter(x => x === "rollback").length <= 1);
+      assert.equal(R2.current().runtimeDigest, op === "adopt" ? runtimeDigest(b) : runtimeDigest(a));
+    } finally { rmSync(root, { recursive: true, force: true }); }
+  });
+}
+
+void exploreStatus; void sealOf;
+
+test("lifecycle ledger exhaustion: headroom for the selected confirmatory batch (+ post-confirmation + smoke) is checked before reserving or consuming it", { timeout: 300_000 }, async () => {
   const root = tempDir();
   try {
-    const first = flaky(root, undefined, { stopBefore: "holdout" });
-    await first.loop.runCycle();
-    const s = stateFile(first.loop);
-    writeFileSync(join(first.loop.stateDir, "state.json"), JSON.stringify({ ...s, holdoutUse: { type: "use", seq: 0, stateDir: first.loop.stateDir, protocolDigest: "other", selected: "c999", commit: "deadbeef", frozenDigest: "x" } }));
-    const { loop } = flaky(root, first.fx);
-    assert.equal((await driveOnce(loop)).kind, "halted");
-    assert.match(stateFile(loop).halted, /holdout integrity/);
-    assert.equal(uses(first.fx), 0);
-    assert.equal(results(loop).filter(r => (r.record?.split ?? r.split) === "holdout").length, 0);
-  } finally { rmSync(root, { recursive: true, force: true }); }
-});
-
-test("trust-boundary breach: HALTED is durable; resume, prepare, selection, adoption, next cycle and verification all refuse", async () => {
-  const root = tempDir();
-  try {
-    const fx = { ...makeUmbrella(root), tasks: makeTasks(root, TRAIN_DEV), holdout: makeHoldout(root, HOLDOUT) };
-    let proposals = 0;
-    const BREACH = { hypothesis: "edit the target checkout", targetFailureClass: "requirements-generalization", edit: () => { proposals++; writeFileSync(join(fx.orche, "breach.txt"), "x\n"); } };
-    const { loop } = flaky(root, fx, { entries: [BREACH, GOOD] });
-    assert.equal((await driveOnce(loop)).kind, "halted");
-    const s = stateFile(loop);
-    assert.match(s.halted, /trust boundary breach: orcheStatus/);
-    assert.ok(s.haltedAt);
-    assert.equal(s.phase, "search");
-    assert.equal(s.searchStop, undefined, "a halt is not recorded as an interruption or stop reason");
-    assert.equal(proposals, 1);
-    const runs = results(loop).length;
-    const again = flaky(root, fx, { entries: [GOOD] }).loop;
-    assert.equal((await driveOnce(again)).kind, "halted");
-    assert.equal((await again.runCycle()).phase, "search");
-    await assert.rejects(() => again.prepare(), HaltedError);
-    assert.throws(() => again.select(), HaltedError);
-    await assert.rejects(() => again.holdout(), HaltedError);
-    assert.throws(() => again.adopt(), HaltedError);
-    assert.throws(() => again.nextCycle(), HaltedError);
-    await assert.rejects(() => again.verifyStable({ tasks: [] }), HaltedError);
-    assert.equal(results(again).length, runs, "nothing evaluated after the halt");
-    assert.equal(uses(fx), 0);
-    assert.equal(statusSummary(again.stateDir).condition, "halted");
-  } finally { rmSync(root, { recursive: true, force: true }); }
-});
-
-test("ablation: a breach in one trajectory halts all three; a rerun stops before any work", async () => {
-  const root = tempDir();
-  try {
-    const fx = { ...makeUmbrella(root), tasks: makeTasks(root, TRAIN_DEV), holdout: makeHoldout(root, HOLDOUT) };
-    const BREACH = { hypothesis: "edit the target checkout", targetFailureClass: "requirements-generalization", edit: () => writeFileSync(join(fx.orche, "breach.txt"), "x\n") };
-    let built = 0;
-    const loopFactory = async ({ stateDir, strategy }) => {
-      built++;
-      const name = stateDir.split("/").at(-1);
-      return makeLoop({ root, fixtures: fx, stateName: join("abc", name), strategy, entries: name === "B" ? [BREACH] : name === "C" ? [GOOD, GOOD] : [] }).loop;
-    };
-    const r = await runAblation({ stateDir: join(root, "abc"), loopFactory });
-    assert.equal(r.outcome, "halted", JSON.stringify(r));
-    for (const arm of ["A", "B", "C"]) assert.ok(JSON.parse(readFileSync(join(root, "abc", arm, "state.json"), "utf8")).halted, `${arm} halted`);
-    assert.equal(uses(fx), 0);
-    built = 0;
-    const again = await runAblation({ stateDir: join(root, "abc"), loopFactory });
-    assert.equal(again.outcome, "halted");
-    assert.equal(built, 0, "no trajectory is even constructed");
-    assert.equal(inspectAblation(join(root, "abc")).halted.arm, "A");
-  } finally { rmSync(root, { recursive: true, force: true }); }
-});
-
-test("ablation never re-seeds a trajectory whose records exist without state.json", async () => {
-  const root = tempDir();
-  try {
-    const dir = join(root, "abc");
-    mkdirSync(join(dir, "A"), { recursive: true });
-    writeFileSync(join(dir, "A", "state.json"), JSON.stringify({ phase: "search", cycle: 1, counters: {} }));
-    mkdirSync(join(dir, "B"), { recursive: true });
-    writeFileSync(join(dir, "B", "runs.jsonl"), "{}\n");
-    let built = 0;
-    const r = await runAblation({ stateDir: dir, loopFactory: async () => { built++; throw new Error("must not build"); } });
-    assert.equal(r.outcome, "state_error");
-    assert.equal(built, 0);
-    assert.equal(readFileSync(join(dir, "B", "runs.jsonl"), "utf8"), "{}\n");
-  } finally { rmSync(root, { recursive: true, force: true }); }
-});
-
-test("state health: fresh, present, missing (records without state.json), corrupt JSON and invalid structure", () => {
-  const root = tempDir();
-  try {
-    assert.equal(inspectState(join(root, "none")).health, "fresh");
-    mkdirSync(join(root, "empty", "worktrees"), { recursive: true });
-    writeFileSync(join(root, "empty", ".lock"), "{}");
-    assert.equal(inspectState(join(root, "empty")).health, "fresh", "lock files and empty directories are not records");
-    mkdirSync(join(root, "lost"));
-    writeFileSync(join(root, "lost", "events.jsonl"), "{}\n");
-    assert.equal(inspectState(join(root, "lost")).health, "missing");
-    mkdirSync(join(root, "bad"));
-    writeFileSync(join(root, "bad", "state.json"), "{ not json");
-    assert.equal(inspectState(join(root, "bad")).health, "corrupt");
-    const C = { candidates: 0, noProgress: 0, consecutiveInfra: 0 };
-    for (const broken of [[], { phase: "weird", cycle: 1, counters: C }, { phase: "search", cycle: 0, counters: C }, { phase: "search", cycle: 1, counters: {} }, { phase: "blocked", cycle: 1, counters: C },
-      { phase: "holdout", cycle: 1, counters: C, selection: {} }, { phase: "holdout", cycle: 1, counters: C, selection: { selected: "", commit: "abc", frozenDigest: "f" } }, { phase: "holdout", cycle: 1, counters: C, selection: { selected: "c1", frozenDigest: "f" } },
-      { phase: "blocked", cycle: 1, counters: C, blocked: { reason: "x", resumePhase: "holdout" }, selection: {} },
-      { phase: "adopt", cycle: 1, counters: C, selection: { selected: "c1", commit: "abc", frozenDigest: "f" }, final: { adopt: false, candidate: "c1" } }]) {
-      writeFileSync(join(root, "bad", "state.json"), JSON.stringify(broken));
-      assert.equal(inspectState(join(root, "bad")).health, "corrupt", JSON.stringify(broken));
-    }
-    writeBoundState(join(root, "bad"), { phase: "holdout", cycle: 1, counters: C, selection: { selected: null, frozenDigest: "f" } });
-    assert.equal(inspectState(join(root, "bad")).health, "present", "an A/B/C joint holdout pass may have no selected candidate");
-  } finally { rmSync(root, { recursive: true, force: true }); }
-});
-
-test("public summary: allowlisted fields only; historical interruptions never decide the condition", () => {
-  const state = {
-    phase: "blocked", cycle: 3, strategy: "pareto", counters: { candidates: 4, noProgress: 2 },
-    blocked: { reason: "split validation failed", retryable: false, resumePhase: "search", problems: ["SECRET-PROBLEM task text"], missing: [{ name: "credentials", detail: "SECRET-DETAIL /home/x" }] },
-    final: { verdict: "KEEP_STABLE", candidate: "c004", reasons: ["SECRET-REASON holdout family"] },
-    searchStop: "watchdog", interrupted: { at: "2026-01-01T00:00:00Z", signal: "SIGTERM" }, selection: { selected: "c004", considered: ["SECRET-CANDIDATES"] },
-  };
-  const s = stateSummary(state);
-  const text = JSON.stringify(s);
-  for (const secret of ["SECRET-PROBLEM", "SECRET-DETAIL", "SECRET-REASON", "SECRET-CANDIDATES"]) assert.equal(text.includes(secret), false, secret);
-  assert.equal(s.condition, "blocked");
-  assert.deepEqual(s.blocked, { reason: "split validation failed", retryable: false, missing: ["credentials"], problemCount: 1 });
-  assert.equal(s.resumePhase, "search");
-  assert.deepEqual(s.lastInterruption, { at: "2026-01-01T00:00:00Z", signal: "SIGTERM" });
-  assert.equal(s.final.reasonCount, 1);
-  assert.equal(stateSummary({ ...state, phase: "search", blocked: undefined }).condition, "in_progress");
-  assert.equal(stateSummary({ ...state, phase: "search", blocked: undefined }).searchStop, null, "a search-phase stop reason is stale");
-  assert.equal(stateSummary({ ...state, phase: "done", cycleFingerprint: "f" }).condition, "cycle_complete");
-});
-
-test("an older `interrupted` field is migrated to lastInterruption history when a loop loads the state", async () => {
-  const root = tempDir();
-  try {
-    const { loop, fx } = makeLoop({ root, entries: [] });
-    await loop.prepare();
-    const s = stateFile(loop);
-    writeFileSync(join(loop.stateDir, "state.json"), JSON.stringify({ ...s, interrupted: { at: "t", signal: "SIGINT" } }));
-    const again = makeLoop({ root, entries: [], fixtures: fx }).loop;
-    assert.equal(again.state.interrupted, undefined);
-    assert.deepEqual(again.state.lastInterruption, { at: "t", signal: "SIGINT" });
-  } finally { rmSync(root, { recursive: true, force: true }); }
-});
-
-test("a holdout phase without a frozen selection halts before any holdout use (defense in depth behind the state validation)", async () => {
-  const root = tempDir();
-  try {
-    const first = flaky(root, undefined, { stopBefore: "holdout" });
-    await first.loop.runCycle();
-    const s = stateFile(first.loop);
-    writeFileSync(join(first.loop.stateDir, "state.json"), JSON.stringify({ ...s, selection: {} }));
-    const { loop } = flaky(root, first.fx);
-    assert.equal((await driveOnce(loop)).kind, "halted");
-    assert.match(stateFile(loop).halted, /without a frozen selection/);
-    assert.equal(uses(first.fx), 0);
-  } finally { rmSync(root, { recursive: true, force: true }); }
-});
-
-test("a selection that differs from the one frozen before holdout access halts before any holdout use", async () => {
-  const root = tempDir();
-  try {
-    const first = flaky(root, undefined, { stopBefore: "holdout" });
-    await first.loop.runCycle();
-    const s = stateFile(first.loop);
-    assert.ok(s.selection.selected);
-    writeFileSync(join(first.loop.stateDir, "state.json"), JSON.stringify({ ...s, selection: { ...s.selection, commit: "0".repeat(40) } }));
-    const { loop } = flaky(root, first.fx);
-    assert.equal((await driveOnce(loop)).kind, "halted");
-    assert.match(stateFile(loop).halted, /differs from the one frozen/);
-    assert.equal(uses(first.fx), 0);
+    const w = world(root);
+    stageN(w.pool, "e", 6); await refresh(w);
+    const state = join(root, "c");
+    let o = await runExploreCycle(w.file, state, { deps: w.deps });
+    assert.equal(o.status.lifecycle.stage, "confirm-wait");
+    stageN(w.pool, "k", 8); assert.equal((await refresh(w)).out.sealed.length, 1);
+    // Another use of the same cumulative ledger leaves less than this pass needs (8 tasks x 3 repeats x 2 arms x 6 + post + smoke).
+    const b = new RequestBudget({ path: w.cfg.budget.ledger, limit: 4500, scope: "lc" });
+    const left = b.status().remaining;
+    const t = await b.reserve(left - 300, { test: "other use" }); await b.settle(t, left - 300, { test: "other use" });
+    const charged = w.ledger().charged, usesBefore = uses(w.pool);
+    o = await runExploreCycle(w.file, state, { requireState: true, deps: w.deps });
+    assert.equal(o.status.exploration.code, "confirmation-infeasible", JSON.stringify(o.status.blocked));
+    assert.equal(o.status.blocked.retryable, false);
+    assert.match(o.status.blocked.reason, /never raised/);
+    assert.equal(w.ledger().charged, charged, "no attempt");
+    assert.equal(uses(w.pool), usesBefore, "the confirmatory batch was not consumed");
+    assert.equal(poolState(w.pool).records.filter(r => r.type === "reserve").length, 1, "only the exploration batch was ever reserved");
+    assert.equal(w.releases.current().runtimeDigest, w.cfg.stable.runtimeDigest);
   } finally { rmSync(root, { recursive: true, force: true }); }
 });

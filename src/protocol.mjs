@@ -5,6 +5,7 @@ import { existsSync, readFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { atomicWriteJson, digestOf, readJson, sha256, walkFiles } from "./util.mjs";
+import { planShapeProblems } from "./design.mjs";
 
 export const PACKAGE_DIR = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 /** The umbrella checkout (orche, cliproxyapi). EVAL_LOOP_UMBRELLA lets a frozen copy of this package evaluate the live umbrella. */
@@ -16,7 +17,13 @@ export const DEFAULT_PROTOCOL = Object.freeze({
   // protocol-3 (same gates, thresholds and decision rules): gate-blocking failure classes are targeted first, harness checks run
   // before screening, a candidate's remaining units are not dispatched once a critical problem decides its rejection, and a
   // recorded outcome is reused only for an identical unit key that now includes the environment digest (see `efficiency`).
-  version: "pi-eval-loop/protocol-3",
+  // protocol-4 (2026-11-06; every protocol-3 gate, threshold and decision rule is kept and stays necessary): the holdout pass runs
+  // its arms in a randomized, interleaved schedule frozen before the first run (holdout.execution); adoption additionally needs
+  // the family-clustered support (adoption.requireFamilyLevel); holdout eligibility is re-checked at preflight AND at the moment
+  // of use for account concentration (holdout.maxOwnerShare) and, when forbidden, reuse of families of earlier holdouts; every
+  // decision carries an evidence label from the pre-registered analysis plan (analysisPlan; src/design.mjs, docs/design.md
+  // "Prospective analysis plan").
+  version: "pi-eval-loop/protocol-4",
   seed: "pi-eval-loop-2026-11-04",
   // The harness being optimized: pi-orche in this mode. Every compared harness runs on this ONE agent route (model and effort).
   target: { harness: "orche", mode: "single" },
@@ -36,9 +43,28 @@ export const DEFAULT_PROTOCOL = Object.freeze({
   // "source" (a difficulty annotation of the upstream dataset). "size-proxy" (a tier inferred from the size of the upstream fix by
   // the supply, src/supply.mjs) is never accepted: patch size does not establish difficulty. A task whose hard tier has no
   // accepted basis is not hard for the holdout (stratum, coverage, gate).
-  holdout: { repeats: 3, maxUses: 1, minTasks: 6, minFamilies: 4, requireIndependent: true, acceptedProvenance: ["external"], hardBasis: ["declared", "curator", "source"] },
+  // execution: "interleaved" (protocol-4) = blocks (task, repeat) with one unit per arm, block order and arm order inside a block
+  // drawn from the seed and the frozen selection, one shared queue; "sequential" = protocol-3 arm-by-arm time blocks.
+  // maxOwnerShare: no account (owner part of a gh:owner/repo family) may hold more than this share of the holdout tasks;
+  // priorFamilyReuse "forbid": no family of an earlier used/reserved holdout of the pool or package datasets may reappear.
+  // privateReview (2026-11-06): "human" = a low-exposure (private-reviewed) task needs at least one human reviewer to be eligible;
+  // "ai-allowed" = AI-agent-only review is accepted (an explicit operator decision, visible in the lock; still labelled).
+  // "cross-provider" (2026-11-07, operator decision "no human review"): verified non-human evidence instead of a human reviewer -
+  // blind tests by a non-author, non-target provider under filesystem-enforced isolation, an adversarial review by a third
+  // provider with mutants run against the official tests, adjudication of every accepted mutant (datasets.crossProviderProblems).
+  holdout: { repeats: 3, maxUses: 1, minTasks: 6, minFamilies: 4, requireIndependent: true, acceptedProvenance: ["external"], hardBasis: ["declared", "curator", "source"], execution: "interleaved", maxOwnerShare: 0.5, priorFamilyReuse: "allow", privateReview: "human" },
   gate: { eps: { overall: 0.03, hard: 0.05, consistency: 0.05 }, minGain: { overall: 0, hard: 0, consistency: 0 } },
-  adoption: { support: 0.95, level: "task", eps: { hard: 0.02, consistency: 0.02 }, minGain: { overall: 0 }, familyRegression: 0.15, familyRegressionSupport: 0.80, requireHardStratum: true, requireChecks: true },
+  adoption: { support: 0.95, level: "task", eps: { hard: 0.02, consistency: 0.02 }, minGain: { overall: 0 }, familyRegression: 0.15, familyRegressionSupport: 0.80, requireHardStratum: true, requireChecks: true, requireFamilyLevel: true },
+  // Pre-registered analysis plan (src/design.mjs). mode "exploratory" (default): the adoption gate above decides as before and
+  // every result is labelled exploratory (no confirmatory or generalized-improvement claim). mode "confirmatory": the same gate
+  // AND the confirmatory checks; every null below must then be filled by the operator with a written rationale (nothing here is
+  // a recommended sample size, effect size or error budget), else the experiment is BLOCKED before the search.
+  analysisPlan: {
+    mode: "exploratory", registeredAt: null, rationale: null, minEffect: null, alpha: null, minTasks: null, minFamilies: null, minHardTasks: null, permutationDraws: 20_000,
+    series: { id: null, ledger: null, alphaTotal: null },
+    lowExposure: { required: null, minTasks: null, provenance: ["private-reviewed"] },
+    confirmation: { required: null, pool: null, alpha: null, minTasks: null, minFamilies: null },
+  },
   baselines: { pure: true, stable: true, targetMode: true, multiAttempt: { k: 3 } },
   // Search stop: 10 consecutive candidates without meaningful progress (the user's default). Safety stops only: a failure class is
   // exhausted after as many failed targeted proposals as the no-progress patience (10; identical patches/hypotheses are refused
@@ -91,9 +117,11 @@ export function validateProtocol(p) {
   }
   if (!Array.isArray(p.holdout.hardBasis) || p.holdout.hardBasis.some(b => typeof b !== "string")) problems.push("holdout.hardBasis must be a list of difficulty bases");
   else if (p.holdout.hardBasis.includes("size-proxy")) problems.push("holdout.hardBasis must not accept size-proxy: patch size does not establish task difficulty");
+  if (!["human", "cross-provider", "ai-allowed"].includes(p.holdout.privateReview)) problems.push("holdout.privateReview must be human|cross-provider|ai-allowed");
   const e = p.efficiency ?? {};
   if (typeof e.stopOnCritical !== "boolean" || typeof e.gateBlockingFirst !== "boolean") problems.push("efficiency.stopOnCritical and efficiency.gateBlockingFirst must be booleans");
-  if (!Array.isArray(e.precheck) || !e.precheck.includes("typecheck") || e.precheck.some(x => !["typecheck", "test"].includes(x))) problems.push("efficiency.precheck must list typecheck and optionally test");
+  if (!Array.isArray(e.precheck) || !e.precheck.includes("typecheck") || e.precheck.some(x => !(["typecheck", "test"].includes(x)))) problems.push("efficiency.precheck must list typecheck and optionally test");
+  problems.push(...planShapeProblems(p));
   return problems;
 }
 

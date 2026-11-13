@@ -74,8 +74,22 @@ test("screening near the threshold extends, then is INCONCLUSIVE (kept, never de
 test("adoption gate is fail-closed: omission, dependence, failing checks, route doubt, small or hard-less holdouts never adopt", () => {
   const tasks = Array.from({ length: 8 }, (_, i) => t(`h${i}`, [0, 0, 0], [1, 1, 1], { hard: i % 2 === 0, family: `f${i}` }));
   const cmp = compare(tasks, { draws: 3000, seed: "a", level: "task", event: "adoption", eps: P.adoption.eps, minGain: P.adoption.minGain, lossThreshold: 0, familyLossThreshold: P.adoption.familyRegression });
-  const ok = { holdoutIndependent: true, critical: [], checksPassed: true, routeOk: true, incomplete: [], infraRate: 0 };
-  assert.equal(adoptionDecision(cmp, P, ok).verdict, "ADOPT");
+  const familyCmp = compare(tasks, { draws: 3000, seed: "a", level: "family", event: "adoption", eps: P.adoption.eps, minGain: P.adoption.minGain, lossThreshold: 0, familyLossThreshold: P.adoption.familyRegression });
+  const ok = { holdoutIndependent: true, critical: [], checksPassed: true, routeOk: true, incomplete: [], infraRate: 0, familyCmp };
+  // protocol-4 exploratory (default) plan: every gate passed -> a candidate accepted as a measurement, never ADOPT.
+  assert.equal(adoptionDecision(cmp, P, ok).verdict, "EXPLORATORY_SUPPORTED");
+  assert.equal(adoptionDecision(cmp, P, ok).adopt, false); assert.equal(adoptionDecision(cmp, P, ok).candidateAccepted, true);
+  // A confirmatory plan with passing confirmatory checks adopts; without them it blocks (missing) or never adopts.
+  const C = merge(structuredClone(P), { analysisPlan: { mode: "confirmatory" } });
+  const passing = { ok: true, inconclusive: [], failed: [], passed: ["randomization test passed"], results: {} };
+  assert.equal(adoptionDecision(cmp, C, { ...ok, confirmatory: passing }).verdict, "ADOPT");
+  assert.equal(adoptionDecision(cmp, C, ok).verdict, "BLOCKED");
+  // protocol-4: the family-clustered check is ANDed on (missing -> BLOCKED, unsupported -> KEEP_STABLE); off = protocol-3 rule.
+  assert.equal(adoptionDecision(cmp, P, { ...ok, familyCmp: undefined }).verdict, "BLOCKED");
+  assert.equal(adoptionDecision(cmp, P, { ...ok, familyCmp: { ...familyCmp, support: 0.9 } }).verdict, "KEEP_STABLE");
+  assert.equal(adoptionDecision(cmp, merge(structuredClone(C), { adoption: { requireFamilyLevel: false } }), { ...ok, familyCmp: undefined, confirmatory: passing }).verdict, "ADOPT");
+  // Original gates still win over passing confirmatory checks.
+  for (const bad of [{ incomplete: ["u1"] }, { critical: ["x"] }, { checksPassed: false }, { routeOk: false }, { holdoutIndependent: false }]) assert.equal(adoptionDecision(cmp, C, { ...ok, confirmatory: passing, ...bad }).verdict, "BLOCKED", JSON.stringify(bad));
   assert.equal(adoptionDecision(cmp, P, { ...ok, incomplete: ["u1"] }).verdict, "BLOCKED", "a missing unit (selective omission) blocks");
   assert.equal(adoptionDecision(cmp, P, { ...ok, holdoutIndependent: false, holdoutWhy: "implementer-authored" }).verdict, "BLOCKED");
   assert.equal(adoptionDecision(cmp, P, { ...ok, checksPassed: false }).verdict, "BLOCKED");

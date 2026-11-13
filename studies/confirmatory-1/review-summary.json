@@ -1,0 +1,2569 @@
+{
+ "schema": "pi-eval-loop/confirmatory-1-review-summary@1",
+ "generatedAt": "2026-11-07T02:13:08.460Z",
+ "note": "reviewer/adjudicator calls of non-target models through the local gateway; list prices from the gateway catalog (0 = catalog has no price, not free of charge); NOT target-model calibration requests",
+ "totals": {
+  "sessions": 70,
+  "failedSessions": 19,
+  "forwarded": 1293,
+  "completed": 1250,
+  "inputTokens": 50888225,
+  "outputTokens": 2669813,
+  "listPriceUSD": 26.04,
+  "byModel": {
+   "cliproxyapi/gemini-3-flash": {
+    "sessions": 24,
+    "forwarded": 699,
+    "inputTokens": 21662916,
+    "outputTokens": 491294,
+    "listPriceUSD": 0
+   },
+   "cliproxyapi/gemini-3.8-flash-high": {
+    "sessions": 18,
+    "forwarded": 185,
+    "inputTokens": 7201261,
+    "outputTokens": 318550,
+    "listPriceUSD": 0
+   },
+   "cliproxyapi/grok-4.7": {
+    "sessions": 28,
+    "forwarded": 409,
+    "inputTokens": 22024048,
+    "outputTokens": 1859969,
+    "listPriceUSD": 26.037158000000005
+   }
+  }
+ },
+ "tasks": {
+  "cf1-kx-keyconf-merge3": {
+   "classes": [
+    "ok"
+   ],
+   "mutants": [
+    {
+     "name": "no-prefer-validation",
+     "hiddenAccepts": false,
+     "blindRejects": null
+    },
+    {
+     "name": "no-section-deletion",
+     "hiddenAccepts": false,
+     "blindRejects": null
+    },
+    {
+     "name": "undefined-for-null-conflicts",
+     "hiddenAccepts": false,
+     "blindRejects": null
+    }
+   ],
+   "sessions": [
+    {
+     "session": "adversarial-gemini-3-flash-2026-11-06T234746271Z",
+     "role": "adversarial",
+     "route": "cliproxyapi/gemini-3-flash",
+     "provider": "google",
+     "responseModels": [
+      "gemini-3-flash"
+     ],
+     "startedAt": "2026-11-06T23:47:46.357Z",
+     "forwarded": 31,
+     "completed": 31,
+     "providerErrors": 0,
+     "tokens": {
+      "input": 818294,
+      "cached": 696016,
+      "output": 24859
+     },
+     "listPriceUSD": 0,
+     "probe": {
+      "withheld": 8,
+      "visible": 0,
+      "unchecked": 0
+     },
+     "complete": true,
+     "verdict": "accept",
+     "mutants": 3,
+     "acceptedByHidden": 0,
+     "referencePassesHidden": true
+    },
+    {
+     "session": "adversarial-gemini-3.8-flash-high-2026-11-06T234012035Z",
+     "role": "adversarial",
+     "route": "cliproxyapi/gemini-3.8-flash-high",
+     "provider": "google",
+     "responseModels": [
+      "gemini-3.8-flash-high"
+     ],
+     "startedAt": "2026-11-06T23:40:12.102Z",
+     "forwarded": 1,
+     "completed": 0,
+     "providerErrors": 1,
+     "tokens": {
+      "input": 0,
+      "cached": 0,
+      "output": 0
+     },
+     "listPriceUSD": 0,
+     "probe": {
+      "withheld": 8,
+      "visible": 0,
+      "unchecked": 0
+     },
+     "complete": false,
+     "verdict": null,
+     "mutants": 0,
+     "acceptedByHidden": 0,
+     "referencePassesHidden": true
+    },
+    {
+     "session": "blind-tests-grok-4.7-2026-11-07T001022277Z",
+     "role": "blind-tests",
+     "route": "cliproxyapi/grok-4.7",
+     "provider": "xai",
+     "responseModels": [
+      "grok-4.7-build"
+     ],
+     "startedAt": "2026-11-07T00:10:22.336Z",
+     "forwarded": 16,
+     "completed": 14,
+     "providerErrors": 0,
+     "tokens": {
+      "input": 759027,
+      "cached": 624000,
+      "output": 85552
+     },
+     "listPriceUSD": 1.095366,
+     "probe": {
+      "withheld": 8,
+      "visible": 0,
+      "unchecked": 0
+     },
+     "complete": true,
+     "verdict": null,
+     "blindTests": 2,
+     "referencePasses": true,
+     "discriminates": true
+    }
+   ]
+  },
+  "cf1-kx-keyconf-quoted-values": {
+   "classes": [
+    "reference-vs-blind"
+   ],
+   "mutants": [
+    {
+     "name": "always-blank-line",
+     "hiddenAccepts": false,
+     "blindRejects": null
+    },
+    {
+     "name": "new-section-at-top",
+     "hiddenAccepts": false,
+     "blindRejects": null
+    },
+    {
+     "name": "no-cr-write",
+     "hiddenAccepts": false,
+     "blindRejects": null
+    }
+   ],
+   "sessions": [
+    {
+     "session": "adjudicate-blind-gemini-3-flash-2026-11-07T013949734Z",
+     "role": "adjudicate",
+     "route": "cliproxyapi/gemini-3-flash",
+     "provider": "google",
+     "responseModels": [
+      "gemini-3-flash"
+     ],
+     "startedAt": "2026-11-07T01:39:49.846Z",
+     "forwarded": 27,
+     "completed": 27,
+     "providerErrors": 0,
+     "tokens": {
+      "input": 649013,
+      "cached": 539357,
+      "output": 11943
+     },
+     "listPriceUSD": 0,
+     "probe": {
+      "withheld": 8,
+      "visible": 0,
+      "unchecked": 0
+     },
+     "complete": true,
+     "verdict": "accept",
+     "scope": "blind",
+     "remedy": "none",
+     "violations": 0,
+     "notViolations": 0
+    },
+    {
+     "session": "adversarial-gemini-3-flash-2026-11-06T234746288Z",
+     "role": "adversarial",
+     "route": "cliproxyapi/gemini-3-flash",
+     "provider": "google",
+     "responseModels": [
+      "gemini-3-flash"
+     ],
+     "startedAt": "2026-11-06T23:47:46.364Z",
+     "forwarded": 80,
+     "completed": 80,
+     "providerErrors": 0,
+     "tokens": {
+      "input": 3485851,
+      "cached": 3181683,
+      "output": 38529
+     },
+     "listPriceUSD": 0,
+     "probe": {
+      "withheld": 8,
+      "visible": 0,
+      "unchecked": 0
+     },
+     "complete": true,
+     "verdict": null,
+     "mutants": 8,
+     "acceptedByHidden": 0,
+     "referencePassesHidden": true
+    },
+    {
+     "session": "adversarial-gemini-3-flash-2026-11-07T012825695Z",
+     "role": "adversarial",
+     "route": "cliproxyapi/gemini-3-flash",
+     "provider": "google",
+     "responseModels": [
+      "gemini-3-flash"
+     ],
+     "startedAt": "2026-11-07T01:28:25.814Z",
+     "forwarded": 24,
+     "completed": 24,
+     "providerErrors": 0,
+     "tokens": {
+      "input": 488373,
+      "cached": 374450,
+      "output": 21889
+     },
+     "listPriceUSD": 0,
+     "probe": {
+      "withheld": 8,
+      "visible": 0,
+      "unchecked": 0
+     },
+     "complete": true,
+     "verdict": "accept",
+     "mutants": 3,
+     "acceptedByHidden": 0,
+     "referencePassesHidden": true
+    },
+    {
+     "session": "adversarial-gemini-3.8-flash-high-2026-11-06T234017621Z",
+     "role": "adversarial",
+     "route": "cliproxyapi/gemini-3.8-flash-high",
+     "provider": "google",
+     "responseModels": [
+      "gemini-3.8-flash-high"
+     ],
+     "startedAt": "2026-11-06T23:40:17.681Z",
+     "forwarded": 1,
+     "completed": 0,
+     "providerErrors": 1,
+     "tokens": {
+      "input": 0,
+      "cached": 0,
+      "output": 0
+     },
+     "listPriceUSD": 0,
+     "probe": {
+      "withheld": 8,
+      "visible": 0,
+      "unchecked": 0
+     },
+     "complete": false,
+     "verdict": null,
+     "mutants": 0,
+     "acceptedByHidden": 0,
+     "referencePassesHidden": true
+    },
+    {
+     "session": "blind-tests-grok-4.7-2026-11-07T010053701Z",
+     "role": "blind-tests",
+     "route": "cliproxyapi/grok-4.7",
+     "provider": "xai",
+     "responseModels": [
+      "grok-4.7-build"
+     ],
+     "startedAt": "2026-11-07T01:00:53.770Z",
+     "forwarded": 20,
+     "completed": 17,
+     "providerErrors": 0,
+     "tokens": {
+      "input": 1209739,
+      "cached": 1152128,
+      "output": 85016
+     },
+     "listPriceUSD": 1.201382,
+     "probe": {
+      "withheld": 8,
+      "visible": 0,
+      "unchecked": 0
+     },
+     "complete": true,
+     "verdict": null,
+     "blindTests": 1,
+     "referencePasses": false,
+     "discriminates": true
+    }
+   ]
+  },
+  "cf1-kx-meterlog-daily-usage": {
+   "classes": [
+    "ok"
+   ],
+   "mutants": [
+    {
+     "name": "estimated-overwrite",
+     "hiddenAccepts": false,
+     "blindRejects": null
+    },
+    {
+     "name": "filter-before-allocate",
+     "hiddenAccepts": false,
+     "blindRejects": null
+    },
+    {
+     "name": "sort-meter-only",
+     "hiddenAccepts": false,
+     "blindRejects": null
+    }
+   ],
+   "sessions": [
+    {
+     "session": "adversarial-gemini-3-flash-2026-11-06T234746296Z",
+     "role": "adversarial",
+     "route": "cliproxyapi/gemini-3-flash",
+     "provider": "google",
+     "responseModels": [
+      "gemini-3-flash"
+     ],
+     "startedAt": "2026-11-06T23:47:46.377Z",
+     "forwarded": 33,
+     "completed": 33,
+     "providerErrors": 0,
+     "tokens": {
+      "input": 904649,
+      "cached": 777757,
+      "output": 21882
+     },
+     "listPriceUSD": 0,
+     "probe": {
+      "withheld": 8,
+      "visible": 0,
+      "unchecked": 0
+     },
+     "complete": true,
+     "verdict": "accept",
+     "mutants": 3,
+     "acceptedByHidden": 0,
+     "referencePassesHidden": true
+    },
+    {
+     "session": "adversarial-gemini-3.8-flash-high-2026-11-06T234012266Z",
+     "role": "adversarial",
+     "route": "cliproxyapi/gemini-3.8-flash-high",
+     "provider": "google",
+     "responseModels": [
+      "gemini-3.8-flash-high"
+     ],
+     "startedAt": "2026-11-06T23:40:12.330Z",
+     "forwarded": 1,
+     "completed": 0,
+     "providerErrors": 1,
+     "tokens": {
+      "input": 0,
+      "cached": 0,
+      "output": 0
+     },
+     "listPriceUSD": 0,
+     "probe": {
+      "withheld": 8,
+      "visible": 0,
+      "unchecked": 0
+     },
+     "complete": false,
+     "verdict": null,
+     "mutants": 0,
+     "acceptedByHidden": 0,
+     "referencePassesHidden": true
+    },
+    {
+     "session": "blind-tests-grok-4.7-2026-11-07T002029957Z",
+     "role": "blind-tests",
+     "route": "cliproxyapi/grok-4.7",
+     "provider": "xai",
+     "responseModels": [
+      "grok-4.7-build"
+     ],
+     "startedAt": "2026-11-07T00:20:30.020Z",
+     "forwarded": 17,
+     "completed": 16,
+     "providerErrors": 0,
+     "tokens": {
+      "input": 944120,
+      "cached": 823296,
+      "output": 85212
+     },
+     "listPriceUSD": 1.164568,
+     "probe": {
+      "withheld": 8,
+      "visible": 0,
+      "unchecked": 0
+     },
+     "complete": true,
+     "verdict": null,
+     "blindTests": 1,
+     "referencePasses": true,
+     "discriminates": true
+    }
+   ]
+  },
+  "cf1-kx-meterlog-stream-chunks": {
+   "classes": [
+    "ok"
+   ],
+   "mutants": [
+    {
+     "name": "naive-bom",
+     "hiddenAccepts": false,
+     "blindRejects": null
+    },
+    {
+     "name": "no-trailing-r-hold",
+     "hiddenAccepts": false,
+     "blindRejects": null
+    },
+    {
+     "name": "trailing-empty-line",
+     "hiddenAccepts": false,
+     "blindRejects": null
+    }
+   ],
+   "sessions": [
+    {
+     "session": "adversarial-gemini-3-flash-2026-11-06T234915163Z",
+     "role": "adversarial",
+     "route": "cliproxyapi/gemini-3-flash",
+     "provider": "google",
+     "responseModels": [
+      "gemini-3-flash"
+     ],
+     "startedAt": "2026-11-06T23:49:15.228Z",
+     "forwarded": 23,
+     "completed": 23,
+     "providerErrors": 0,
+     "tokens": {
+      "input": 424636,
+      "cached": 328110,
+      "output": 12708
+     },
+     "listPriceUSD": 0,
+     "probe": {
+      "withheld": 8,
+      "visible": 0,
+      "unchecked": 0
+     },
+     "complete": true,
+     "verdict": "accept",
+     "mutants": 3,
+     "acceptedByHidden": 0,
+     "referencePassesHidden": true
+    },
+    {
+     "session": "adversarial-gemini-3.8-flash-high-2026-11-06T234013660Z",
+     "role": "adversarial",
+     "route": "cliproxyapi/gemini-3.8-flash-high",
+     "provider": "google",
+     "responseModels": [
+      "gemini-3.8-flash-high"
+     ],
+     "startedAt": "2026-11-06T23:40:13.731Z",
+     "forwarded": 1,
+     "completed": 0,
+     "providerErrors": 1,
+     "tokens": {
+      "input": 0,
+      "cached": 0,
+      "output": 0
+     },
+     "listPriceUSD": 0,
+     "probe": {
+      "withheld": 8,
+      "visible": 0,
+      "unchecked": 0
+     },
+     "complete": false,
+     "verdict": null,
+     "mutants": 0,
+     "acceptedByHidden": 0,
+     "referencePassesHidden": true
+    },
+    {
+     "session": "blind-tests-grok-4.7-2026-11-07T002932261Z",
+     "role": "blind-tests",
+     "route": "cliproxyapi/grok-4.7",
+     "provider": "xai",
+     "responseModels": [
+      "grok-4.7-build"
+     ],
+     "startedAt": "2026-11-07T00:29:32.320Z",
+     "forwarded": 27,
+     "completed": 27,
+     "providerErrors": 0,
+     "tokens": {
+      "input": 1979667,
+      "cached": 1870336,
+      "output": 91483
+     },
+     "listPriceUSD": 1.702728,
+     "probe": {
+      "withheld": 8,
+      "visible": 0,
+      "unchecked": 0
+     },
+     "complete": true,
+     "verdict": null,
+     "blindTests": 2,
+     "referencePasses": true,
+     "discriminates": true
+    }
+   ]
+  },
+  "cf1-kx-shelfquery-glob-literal": {
+   "classes": [
+    "ok"
+   ],
+   "mutants": [
+    {
+     "name": "dot-question",
+     "hiddenAccepts": false,
+     "blindRejects": null
+    },
+    {
+     "name": "dot-star-newline",
+     "hiddenAccepts": false,
+     "blindRejects": null
+    },
+    {
+     "name": "no-trailing-backslash",
+     "hiddenAccepts": false,
+     "blindRejects": null
+    }
+   ],
+   "sessions": [
+    {
+     "session": "adversarial-gemini-3-flash-2026-11-06T234922091Z",
+     "role": "adversarial",
+     "route": "cliproxyapi/gemini-3-flash",
+     "provider": "google",
+     "responseModels": [
+      "gemini-3-flash"
+     ],
+     "startedAt": "2026-11-06T23:49:22.156Z",
+     "forwarded": 22,
+     "completed": 22,
+     "providerErrors": 0,
+     "tokens": {
+      "input": 410499,
+      "cached": 314133,
+      "output": 14395
+     },
+     "listPriceUSD": 0,
+     "probe": {
+      "withheld": 8,
+      "visible": 0,
+      "unchecked": 0
+     },
+     "complete": true,
+     "verdict": "accept",
+     "mutants": 3,
+     "acceptedByHidden": 0,
+     "referencePassesHidden": true
+    },
+    {
+     "session": "adversarial-gemini-3.8-flash-high-2026-11-06T233039851Z",
+     "role": "adversarial",
+     "route": "cliproxyapi/gemini-3.8-flash-high",
+     "provider": "google",
+     "responseModels": [
+      "gemini-3.8-flash-high"
+     ],
+     "startedAt": "2026-11-06T23:30:39.939Z",
+     "forwarded": 70,
+     "completed": 68,
+     "providerErrors": 1,
+     "tokens": {
+      "input": 2945695,
+      "cached": 2570538,
+      "output": 57575
+     },
+     "listPriceUSD": 0,
+     "probe": {
+      "withheld": 8,
+      "visible": 0,
+      "unchecked": 0
+     },
+     "complete": false,
+     "verdict": null,
+     "mutants": 3,
+     "acceptedByHidden": 1,
+     "referencePassesHidden": true
+    },
+    {
+     "session": "blind-tests-grok-4.7-2026-11-06T233039850Z",
+     "role": "blind-tests",
+     "route": "cliproxyapi/grok-4.7",
+     "provider": "xai",
+     "responseModels": [
+      "grok-4.7-build"
+     ],
+     "startedAt": "2026-11-06T23:30:39.941Z",
+     "forwarded": 19,
+     "completed": 19,
+     "providerErrors": 0,
+     "tokens": {
+      "input": 1193354,
+      "cached": 1081472,
+      "output": 88652
+     },
+     "listPriceUSD": 1.296412,
+     "probe": {
+      "withheld": 8,
+      "visible": 0,
+      "unchecked": 0
+     },
+     "complete": true,
+     "verdict": null,
+     "blindTests": 2,
+     "referencePasses": true,
+     "discriminates": true
+    }
+   ]
+  },
+  "cf1-kx-shelfquery-not-in": {
+   "classes": [
+    "ok"
+   ],
+   "mutants": [
+    {
+     "name": "format-not-missing-parens",
+     "hiddenAccepts": false,
+     "blindRejects": null
+    },
+    {
+     "name": "in-loose-equality",
+     "hiddenAccepts": false,
+     "blindRejects": null
+    },
+    {
+     "name": "not-binds-looser",
+     "hiddenAccepts": false,
+     "blindRejects": null
+    }
+   ],
+   "sessions": [
+    {
+     "session": "adversarial-gemini-3-flash-2026-11-06T235016117Z",
+     "role": "adversarial",
+     "route": "cliproxyapi/gemini-3-flash",
+     "provider": "google",
+     "responseModels": [
+      "gemini-3-flash"
+     ],
+     "startedAt": "2026-11-06T23:50:16.174Z",
+     "forwarded": 25,
+     "completed": 25,
+     "providerErrors": 0,
+     "tokens": {
+      "input": 562230,
+      "cached": 456691,
+      "output": 15024
+     },
+     "listPriceUSD": 0,
+     "probe": {
+      "withheld": 8,
+      "visible": 0,
+      "unchecked": 0
+     },
+     "complete": true,
+     "verdict": "accept",
+     "mutants": 3,
+     "acceptedByHidden": 0,
+     "referencePassesHidden": true
+    },
+    {
+     "session": "adversarial-gemini-3.8-flash-high-2026-11-06T233039867Z",
+     "role": "adversarial",
+     "route": "cliproxyapi/gemini-3.8-flash-high",
+     "provider": "google",
+     "responseModels": [
+      "gemini-3.8-flash-high"
+     ],
+     "startedAt": "2026-11-06T23:30:39.954Z",
+     "forwarded": 37,
+     "completed": 36,
+     "providerErrors": 1,
+     "tokens": {
+      "input": 1095322,
+      "cached": 813928,
+      "output": 85687
+     },
+     "listPriceUSD": 0,
+     "probe": {
+      "withheld": 8,
+      "visible": 0,
+      "unchecked": 0
+     },
+     "complete": false,
+     "verdict": null,
+     "mutants": 0,
+     "acceptedByHidden": 0,
+     "referencePassesHidden": true
+    },
+    {
+     "session": "blind-tests-grok-4.7-2026-11-06T233039866Z",
+     "role": "blind-tests",
+     "route": "cliproxyapi/grok-4.7",
+     "provider": "xai",
+     "responseModels": [
+      "grok-4.7-build"
+     ],
+     "startedAt": "2026-11-06T23:30:39.944Z",
+     "forwarded": 17,
+     "completed": 17,
+     "providerErrors": 0,
+     "tokens": {
+      "input": 969802,
+      "cached": 878208,
+      "output": 69981
+     },
+     "listPriceUSD": 1.042178,
+     "probe": {
+      "withheld": 8,
+      "visible": 0,
+      "unchecked": 0
+     },
+     "complete": true,
+     "verdict": null,
+     "blindTests": 2,
+     "referencePasses": true,
+     "discriminates": true
+    }
+   ]
+  },
+  "cf1-mv-gatekeeper-halfopen": {
+   "classes": [
+    "ok"
+   ],
+   "mutants": [
+    {
+     "name": "stale-pending",
+     "hiddenAccepts": false,
+     "blindRejects": null
+    },
+    {
+     "name": "trial-consecutive-failures",
+     "hiddenAccepts": false,
+     "blindRejects": null
+    },
+    {
+     "name": "unbounded-half-open",
+     "hiddenAccepts": false,
+     "blindRejects": null
+    }
+   ],
+   "sessions": [
+    {
+     "session": "adversarial-gemini-3-flash-2026-11-06T235119386Z",
+     "role": "adversarial",
+     "route": "cliproxyapi/gemini-3-flash",
+     "provider": "google",
+     "responseModels": [
+      "gemini-3-flash"
+     ],
+     "startedAt": "2026-11-06T23:51:19.454Z",
+     "forwarded": 35,
+     "completed": 35,
+     "providerErrors": 0,
+     "tokens": {
+      "input": 1465739,
+      "cached": 1271688,
+      "output": 26383
+     },
+     "listPriceUSD": 0,
+     "probe": {
+      "withheld": 8,
+      "visible": 0,
+      "unchecked": 0
+     },
+     "complete": true,
+     "verdict": "accept",
+     "mutants": 3,
+     "acceptedByHidden": 0,
+     "referencePassesHidden": true
+    },
+    {
+     "session": "adversarial-gemini-3.8-flash-high-2026-11-06T234013886Z",
+     "role": "adversarial",
+     "route": "cliproxyapi/gemini-3.8-flash-high",
+     "provider": "google",
+     "responseModels": [
+      "gemini-3.8-flash-high"
+     ],
+     "startedAt": "2026-11-06T23:40:13.990Z",
+     "forwarded": 1,
+     "completed": 0,
+     "providerErrors": 1,
+     "tokens": {
+      "input": 0,
+      "cached": 0,
+      "output": 0
+     },
+     "listPriceUSD": 0,
+     "probe": {
+      "withheld": 8,
+      "visible": 0,
+      "unchecked": 0
+     },
+     "complete": false,
+     "verdict": null,
+     "mutants": 0,
+     "acceptedByHidden": 0,
+     "referencePassesHidden": true
+    },
+    {
+     "session": "blind-tests-grok-4.7-2026-11-07T011430926Z",
+     "role": "blind-tests",
+     "route": "cliproxyapi/grok-4.7",
+     "provider": "xai",
+     "responseModels": [
+      "grok-4.7-build"
+     ],
+     "startedAt": "2026-11-07T01:14:31.013Z",
+     "forwarded": 11,
+     "completed": 10,
+     "providerErrors": 0,
+     "tokens": {
+      "input": 494504,
+      "cached": 341248,
+      "output": 106128
+     },
+     "listPriceUSD": 1.113904,
+     "probe": {
+      "withheld": 8,
+      "visible": 0,
+      "unchecked": 0
+     },
+     "complete": true,
+     "verdict": null,
+     "blindTests": 1,
+     "referencePasses": true,
+     "discriminates": true
+    }
+   ]
+  },
+  "cf1-mv-gatekeeper-refill": {
+   "classes": [
+    "reviewer-finding",
+    "test-gap"
+   ],
+   "mutants": [
+    {
+     "name": "no-constructor-validation",
+     "hiddenAccepts": true,
+     "blindRejects": false
+    },
+    {
+     "name": "no-early-return-when-full",
+     "hiddenAccepts": true,
+     "blindRejects": false
+    },
+    {
+     "name": "no-validation-msUntil",
+     "hiddenAccepts": true,
+     "blindRejects": false
+    }
+   ],
+   "sessions": [
+    {
+     "session": "adjudicate-adversarial-grok-4.7-2026-11-07T014924805Z",
+     "role": "adjudicate",
+     "route": "cliproxyapi/grok-4.7",
+     "provider": "xai",
+     "responseModels": [
+      "grok-4.7-build"
+     ],
+     "startedAt": "2026-11-07T01:49:24.915Z",
+     "forwarded": 12,
+     "completed": 12,
+     "providerErrors": 0,
+     "tokens": {
+      "input": 265645,
+      "cached": 195712,
+      "output": 15190
+     },
+     "listPriceUSD": 0.328862,
+     "probe": {
+      "withheld": 8,
+      "visible": 0,
+      "unchecked": 0
+     },
+     "complete": true,
+     "verdict": "accept",
+     "scope": "adversarial",
+     "remedy": "none",
+     "violations": 0,
+     "notViolations": 3
+    },
+    {
+     "session": "adversarial-gemini-3-flash-2026-11-06T235119417Z",
+     "role": "adversarial",
+     "route": "cliproxyapi/gemini-3-flash",
+     "provider": "google",
+     "responseModels": [
+      "gemini-3-flash"
+     ],
+     "startedAt": "2026-11-06T23:51:19.476Z",
+     "forwarded": 30,
+     "completed": 30,
+     "providerErrors": 0,
+     "tokens": {
+      "input": 693555,
+      "cached": 575430,
+      "output": 14645
+     },
+     "listPriceUSD": 0,
+     "probe": {
+      "withheld": 8,
+      "visible": 0,
+      "unchecked": 0
+     },
+     "complete": true,
+     "verdict": "revise",
+     "mutants": 3,
+     "acceptedByHidden": 3,
+     "referencePassesHidden": true
+    },
+    {
+     "session": "adversarial-gemini-3.8-flash-high-2026-11-06T234015948Z",
+     "role": "adversarial",
+     "route": "cliproxyapi/gemini-3.8-flash-high",
+     "provider": "google",
+     "responseModels": [
+      "gemini-3.8-flash-high"
+     ],
+     "startedAt": "2026-11-06T23:40:16.020Z",
+     "forwarded": 1,
+     "completed": 0,
+     "providerErrors": 1,
+     "tokens": {
+      "input": 0,
+      "cached": 0,
+      "output": 0
+     },
+     "listPriceUSD": 0,
+     "probe": {
+      "withheld": 8,
+      "visible": 0,
+      "unchecked": 0
+     },
+     "complete": false,
+     "verdict": null,
+     "mutants": 0,
+     "acceptedByHidden": 0,
+     "referencePassesHidden": true
+    },
+    {
+     "session": "blind-tests-grok-4.7-2026-11-07T012147587Z",
+     "role": "blind-tests",
+     "route": "cliproxyapi/grok-4.7",
+     "provider": "xai",
+     "responseModels": [
+      "grok-4.7-build"
+     ],
+     "startedAt": "2026-11-07T01:21:47.668Z",
+     "forwarded": 12,
+     "completed": 12,
+     "providerErrors": 0,
+     "tokens": {
+      "input": 695363,
+      "cached": 564736,
+      "output": 81110
+     },
+     "listPriceUSD": 1.030282,
+     "probe": {
+      "withheld": 8,
+      "visible": 0,
+      "unchecked": 0
+     },
+     "complete": true,
+     "verdict": null,
+     "blindTests": 1,
+     "referencePasses": true,
+     "discriminates": true
+    }
+   ]
+  },
+  "cf1-mv-jobqueue-cancel": {
+   "classes": [
+    "ok"
+   ],
+   "mutants": [
+    {
+     "name": "cancel-running-allowed",
+     "hiddenAccepts": false,
+     "blindRejects": null
+    },
+    {
+     "name": "loose-reason-validation",
+     "hiddenAccepts": false,
+     "blindRejects": null
+    },
+    {
+     "name": "missing-cancel-reason",
+     "hiddenAccepts": false,
+     "blindRejects": null
+    }
+   ],
+   "sessions": [
+    {
+     "session": "adversarial-gemini-3-flash-2026-11-06T235157623Z",
+     "role": "adversarial",
+     "route": "cliproxyapi/gemini-3-flash",
+     "provider": "google",
+     "responseModels": [
+      "gemini-3-flash"
+     ],
+     "startedAt": "2026-11-06T23:51:57.684Z",
+     "forwarded": 29,
+     "completed": 29,
+     "providerErrors": 0,
+     "tokens": {
+      "input": 533872,
+      "cached": 425502,
+      "output": 16135
+     },
+     "listPriceUSD": 0,
+     "probe": {
+      "withheld": 8,
+      "visible": 0,
+      "unchecked": 0
+     },
+     "complete": true,
+     "verdict": "accept",
+     "mutants": 3,
+     "acceptedByHidden": 0,
+     "referencePassesHidden": true
+    },
+    {
+     "session": "adversarial-gemini-3.8-flash-high-2026-11-06T233039875Z",
+     "role": "adversarial",
+     "route": "cliproxyapi/gemini-3.8-flash-high",
+     "provider": "google",
+     "responseModels": [
+      "gemini-3.8-flash-high"
+     ],
+     "startedAt": "2026-11-06T23:30:39.959Z",
+     "forwarded": 27,
+     "completed": 26,
+     "providerErrors": 1,
+     "tokens": {
+      "input": 767076,
+      "cached": 542404,
+      "output": 69185
+     },
+     "listPriceUSD": 0,
+     "probe": {
+      "withheld": 8,
+      "visible": 0,
+      "unchecked": 0
+     },
+     "complete": false,
+     "verdict": null,
+     "mutants": 1,
+     "acceptedByHidden": 0,
+     "referencePassesHidden": true
+    },
+    {
+     "session": "blind-tests-grok-4.7-2026-11-06T233039871Z",
+     "role": "blind-tests",
+     "route": "cliproxyapi/grok-4.7",
+     "provider": "xai",
+     "responseModels": [
+      "grok-4.7-build",
+      "grok-4.7"
+     ],
+     "startedAt": "2026-11-06T23:30:39.952Z",
+     "forwarded": 5,
+     "completed": 4,
+     "providerErrors": 1,
+     "tokens": {
+      "input": 42755,
+      "cached": 15232,
+      "output": 60259
+     },
+     "listPriceUSD": 0.424216,
+     "probe": {
+      "withheld": 8,
+      "visible": 0,
+      "unchecked": 0
+     },
+     "complete": false,
+     "verdict": null,
+     "blindTests": 1,
+     "referencePasses": false,
+     "discriminates": true
+    },
+    {
+     "session": "blind-tests-grok-4.7-2026-11-07T003759195Z",
+     "role": "blind-tests",
+     "route": "cliproxyapi/grok-4.7",
+     "provider": "xai",
+     "responseModels": [
+      "grok-4.7-build"
+     ],
+     "startedAt": "2026-11-07T00:37:59.269Z",
+     "forwarded": 8,
+     "completed": 7,
+     "providerErrors": 0,
+     "tokens": {
+      "input": 237819,
+      "cached": 203776,
+      "output": 55796
+     },
+     "listPriceUSD": 0.50475,
+     "probe": {
+      "withheld": 8,
+      "visible": 0,
+      "unchecked": 0
+     },
+     "complete": true,
+     "verdict": null,
+     "blindTests": 1,
+     "referencePasses": true,
+     "discriminates": true
+    },
+    {
+     "session": "blind-tests-grok-4.7-2026-11-07T010053682Z",
+     "role": "blind-tests",
+     "route": "cliproxyapi/grok-4.7",
+     "provider": "xai",
+     "responseModels": [
+      "grok-4.7-build"
+     ],
+     "startedAt": "2026-11-07T01:00:53.767Z",
+     "forwarded": 11,
+     "completed": 10,
+     "providerErrors": 0,
+     "tokens": {
+      "input": 404727,
+      "cached": 343680,
+      "output": 53278
+     },
+     "listPriceUSD": 0.613602,
+     "probe": {
+      "withheld": 8,
+      "visible": 0,
+      "unchecked": 0
+     },
+     "complete": true,
+     "verdict": null,
+     "blindTests": 1,
+     "referencePasses": true,
+     "discriminates": true
+    }
+   ]
+  },
+  "cf1-mv-jobqueue-dependencies": {
+   "classes": [
+    "test-gap"
+   ],
+   "mutants": [
+    {
+     "name": "dependsOn-last-occurrence",
+     "hiddenAccepts": true,
+     "blindRejects": true
+    },
+    {
+     "name": "reset-readyat",
+     "hiddenAccepts": false,
+     "blindRejects": null
+    },
+    {
+     "name": "retry-releases",
+     "hiddenAccepts": true,
+     "blindRejects": false
+    }
+   ],
+   "sessions": [
+    {
+     "session": "adjudicate-adversarial-grok-4.7-2026-11-07T003826051Z",
+     "role": "adjudicate",
+     "route": "cliproxyapi/grok-4.7",
+     "provider": "xai",
+     "responseModels": [
+      "grok-4.7-build"
+     ],
+     "startedAt": "2026-11-07T00:38:26.129Z",
+     "forwarded": 14,
+     "completed": 13,
+     "providerErrors": 0,
+     "tokens": {
+      "input": 305053,
+      "cached": 245760,
+      "output": 13827
+     },
+     "listPriceUSD": 0.324428,
+     "probe": {
+      "withheld": 8,
+      "visible": 0,
+      "unchecked": 0
+     },
+     "complete": true,
+     "verdict": "revise",
+     "scope": "adversarial",
+     "remedy": "tests",
+     "violations": 1,
+     "notViolations": 1
+    },
+    {
+     "session": "adversarial-gemini-3-flash-2026-11-06T235229205Z",
+     "role": "adversarial",
+     "route": "cliproxyapi/gemini-3-flash",
+     "provider": "google",
+     "responseModels": [
+      "gemini-3-flash"
+     ],
+     "startedAt": "2026-11-06T23:52:29.265Z",
+     "forwarded": 31,
+     "completed": 31,
+     "providerErrors": 0,
+     "tokens": {
+      "input": 1399857,
+      "cached": 1251480,
+      "output": 23570
+     },
+     "listPriceUSD": 0,
+     "probe": {
+      "withheld": 8,
+      "visible": 0,
+      "unchecked": 0
+     },
+     "complete": true,
+     "verdict": "revise",
+     "mutants": 3,
+     "acceptedByHidden": 2,
+     "referencePassesHidden": true
+    },
+    {
+     "session": "adversarial-gemini-3.8-flash-high-2026-11-06T234005513Z",
+     "role": "adversarial",
+     "route": "cliproxyapi/gemini-3.8-flash-high",
+     "provider": "google",
+     "responseModels": [
+      "gemini-3.8-flash-high"
+     ],
+     "startedAt": "2026-11-06T23:40:05.580Z",
+     "forwarded": 1,
+     "completed": 0,
+     "providerErrors": 1,
+     "tokens": {
+      "input": 0,
+      "cached": 0,
+      "output": 0
+     },
+     "listPriceUSD": 0,
+     "probe": {
+      "withheld": 8,
+      "visible": 0,
+      "unchecked": 0
+     },
+     "complete": false,
+     "verdict": null,
+     "mutants": 0,
+     "acceptedByHidden": 0,
+     "referencePassesHidden": true
+    },
+    {
+     "session": "blind-tests-grok-4.7-2026-11-06T234452201Z",
+     "role": "blind-tests",
+     "route": "cliproxyapi/grok-4.7",
+     "provider": "xai",
+     "responseModels": [
+      "grok-4.7-build"
+     ],
+     "startedAt": "2026-11-06T23:44:52.260Z",
+     "forwarded": 10,
+     "completed": 7,
+     "providerErrors": 0,
+     "tokens": {
+      "input": 445574,
+      "cached": 364672,
+      "output": 99097
+     },
+     "listPriceUSD": 0.938722,
+     "probe": {
+      "withheld": 8,
+      "visible": 0,
+      "unchecked": 0
+     },
+     "complete": true,
+     "verdict": null,
+     "blindTests": 1,
+     "referencePasses": true,
+     "discriminates": true
+    }
+   ]
+  },
+  "cf1-mv-jobqueue-dependencies-v2": {
+   "classes": null,
+   "mutants": null,
+   "sessions": [
+    {
+     "session": "adversarial-gemini-3-flash-2026-11-07T015003884Z",
+     "role": "adversarial",
+     "route": "cliproxyapi/gemini-3-flash",
+     "provider": "google",
+     "responseModels": [
+      "gemini-3-flash"
+     ],
+     "startedAt": "2026-11-07T01:50:04.004Z",
+     "forwarded": 24,
+     "completed": 24,
+     "providerErrors": 0,
+     "tokens": {
+      "input": 764910,
+      "cached": 644258,
+      "output": 24376
+     },
+     "listPriceUSD": 0,
+     "probe": {
+      "withheld": 8,
+      "visible": 0,
+      "unchecked": 0
+     },
+     "complete": true,
+     "verdict": "accept",
+     "mutants": 3,
+     "acceptedByHidden": 0,
+     "referencePassesHidden": true
+    }
+   ]
+  },
+  "cf1-mv-toolshed-catchup": {
+   "classes": [
+    "ok"
+   ],
+   "mutants": [
+    {
+     "name": "inclusive-readall",
+     "hiddenAccepts": false,
+     "blindRejects": null
+    },
+    {
+     "name": "no-buffering",
+     "hiddenAccepts": false,
+     "blindRejects": null
+    },
+    {
+     "name": "no-start-guard",
+     "hiddenAccepts": false,
+     "blindRejects": null
+    }
+   ],
+   "sessions": [
+    {
+     "session": "adversarial-gemini-3-flash-2026-11-06T235302938Z",
+     "role": "adversarial",
+     "route": "cliproxyapi/gemini-3-flash",
+     "provider": "google",
+     "responseModels": [
+      "gemini-3-flash"
+     ],
+     "startedAt": "2026-11-06T23:53:03.005Z",
+     "forwarded": 22,
+     "completed": 22,
+     "providerErrors": 0,
+     "tokens": {
+      "input": 385633,
+      "cached": 297937,
+      "output": 9774
+     },
+     "listPriceUSD": 0,
+     "probe": {
+      "withheld": 8,
+      "visible": 0,
+      "unchecked": 0
+     },
+     "complete": true,
+     "verdict": "accept",
+     "mutants": 3,
+     "acceptedByHidden": 0,
+     "referencePassesHidden": true
+    },
+    {
+     "session": "adversarial-gemini-3.8-flash-high-2026-11-06T234007201Z",
+     "role": "adversarial",
+     "route": "cliproxyapi/gemini-3.8-flash-high",
+     "provider": "google",
+     "responseModels": [
+      "gemini-3.8-flash-high"
+     ],
+     "startedAt": "2026-11-06T23:40:07.261Z",
+     "forwarded": 1,
+     "completed": 0,
+     "providerErrors": 1,
+     "tokens": {
+      "input": 0,
+      "cached": 0,
+      "output": 0
+     },
+     "listPriceUSD": 0,
+     "probe": {
+      "withheld": 8,
+      "visible": 0,
+      "unchecked": 0
+     },
+     "complete": false,
+     "verdict": null,
+     "mutants": 0,
+     "acceptedByHidden": 0,
+     "referencePassesHidden": true
+    },
+    {
+     "session": "blind-tests-grok-4.7-2026-11-06T234554248Z",
+     "role": "blind-tests",
+     "route": "cliproxyapi/grok-4.7",
+     "provider": "xai",
+     "responseModels": [
+      "grok-4.7"
+     ],
+     "startedAt": "2026-11-06T23:45:54.373Z",
+     "forwarded": 1,
+     "completed": 0,
+     "providerErrors": 1,
+     "tokens": {
+      "input": 0,
+      "cached": 0,
+      "output": 0
+     },
+     "listPriceUSD": 0,
+     "probe": {
+      "withheld": 8,
+      "visible": 0,
+      "unchecked": 0
+     },
+     "complete": false,
+     "verdict": null,
+     "blindTests": 0,
+     "referencePasses": null,
+     "discriminates": null
+    },
+    {
+     "session": "blind-tests-grok-4.7-2026-11-07T010053696Z",
+     "role": "blind-tests",
+     "route": "cliproxyapi/grok-4.7",
+     "provider": "xai",
+     "responseModels": [
+      "grok-4.7-build"
+     ],
+     "startedAt": "2026-11-07T01:00:53.771Z",
+     "forwarded": 16,
+     "completed": 15,
+     "providerErrors": 0,
+     "tokens": {
+      "input": 1256945,
+      "cached": 1147648,
+      "output": 97495
+     },
+     "listPriceUSD": 1.377388,
+     "probe": {
+      "withheld": 8,
+      "visible": 0,
+      "unchecked": 0
+     },
+     "complete": true,
+     "verdict": null,
+     "blindTests": 2,
+     "referencePasses": true,
+     "discriminates": true
+    }
+   ]
+  },
+  "cf1-mv-toolshed-optimistic-concurrency": {
+   "classes": [
+    "ok"
+   ],
+   "mutants": [
+    {
+     "name": "infinite-retry",
+     "hiddenAccepts": false,
+     "blindRejects": null
+    },
+    {
+     "name": "no-retry",
+     "hiddenAccepts": false,
+     "blindRejects": null
+    },
+    {
+     "name": "no-typecheck-expected-version",
+     "hiddenAccepts": false,
+     "blindRejects": null
+    }
+   ],
+   "sessions": [
+    {
+     "session": "adversarial-gemini-3-flash-2026-11-06T235304501Z",
+     "role": "adversarial",
+     "route": "cliproxyapi/gemini-3-flash",
+     "provider": "google",
+     "responseModels": [
+      "gemini-3-flash"
+     ],
+     "startedAt": "2026-11-06T23:53:04.570Z",
+     "forwarded": 29,
+     "completed": 29,
+     "providerErrors": 0,
+     "tokens": {
+      "input": 612599,
+      "cached": 493751,
+      "output": 16223
+     },
+     "listPriceUSD": 0,
+     "probe": {
+      "withheld": 8,
+      "visible": 0,
+      "unchecked": 0
+     },
+     "complete": true,
+     "verdict": "accept",
+     "mutants": 3,
+     "acceptedByHidden": 0,
+     "referencePassesHidden": true
+    },
+    {
+     "session": "adversarial-gemini-3.8-flash-high-2026-11-06T234008781Z",
+     "role": "adversarial",
+     "route": "cliproxyapi/gemini-3.8-flash-high",
+     "provider": "google",
+     "responseModels": [
+      "gemini-3.8-flash-high"
+     ],
+     "startedAt": "2026-11-06T23:40:08.852Z",
+     "forwarded": 1,
+     "completed": 0,
+     "providerErrors": 1,
+     "tokens": {
+      "input": 0,
+      "cached": 0,
+      "output": 0
+     },
+     "listPriceUSD": 0,
+     "probe": {
+      "withheld": 8,
+      "visible": 0,
+      "unchecked": 0
+     },
+     "complete": false,
+     "verdict": null,
+     "mutants": 0,
+     "acceptedByHidden": 0,
+     "referencePassesHidden": true
+    },
+    {
+     "session": "blind-tests-grok-4.7-2026-11-06T234556508Z",
+     "role": "blind-tests",
+     "route": "cliproxyapi/grok-4.7",
+     "provider": "xai",
+     "responseModels": [
+      "grok-4.7-build"
+     ],
+     "startedAt": "2026-11-06T23:45:56.577Z",
+     "forwarded": 24,
+     "completed": 24,
+     "providerErrors": 0,
+     "tokens": {
+      "input": 2143342,
+      "cached": 2020992,
+      "output": 102176
+     },
+     "listPriceUSD": 1.868252,
+     "probe": {
+      "withheld": 8,
+      "visible": 0,
+      "unchecked": 0
+     },
+     "complete": true,
+     "verdict": null,
+     "blindTests": 1,
+     "referencePasses": true,
+     "discriminates": true
+    }
+   ]
+  },
+  "cf1-rt-beanpoints-returns": {
+   "classes": [
+    "reviewer-finding",
+    "test-gap"
+   ],
+   "mutants": [
+    {
+     "name": "clawback-fifo",
+     "hiddenAccepts": true,
+     "blindRejects": false
+    },
+    {
+     "name": "empty-ledger-debt-no-validate",
+     "hiddenAccepts": true,
+     "blindRejects": true
+    },
+    {
+     "name": "expiry-strict-inequality",
+     "hiddenAccepts": true,
+     "blindRejects": true
+    }
+   ],
+   "sessions": [
+    {
+     "session": "adjudicate-adversarial-grok-4.7-2026-11-07T003826075Z",
+     "role": "adjudicate",
+     "route": "cliproxyapi/grok-4.7",
+     "provider": "xai",
+     "responseModels": [
+      "grok-4.7-build"
+     ],
+     "startedAt": "2026-11-07T00:38:26.141Z",
+     "forwarded": 11,
+     "completed": 9,
+     "providerErrors": 0,
+     "tokens": {
+      "input": 283227,
+      "cached": 242816,
+      "output": 20520
+     },
+     "listPriceUSD": 0.32535,
+     "probe": {
+      "withheld": 8,
+      "visible": 0,
+      "unchecked": 0
+     },
+     "complete": true,
+     "verdict": "revise",
+     "scope": "adversarial",
+     "remedy": "tests",
+     "violations": 2,
+     "notViolations": 1
+    },
+    {
+     "session": "adversarial-gemini-3.8-flash-high-2026-11-06T231831973Z",
+     "role": "adversarial",
+     "route": "cliproxyapi/gemini-3.8-flash-high",
+     "provider": "google",
+     "responseModels": [
+      "gemini-3.8-flash-high"
+     ],
+     "startedAt": "2026-11-06T23:18:32.044Z",
+     "forwarded": 37,
+     "completed": 37,
+     "providerErrors": 0,
+     "tokens": {
+      "input": 2393168,
+      "cached": 2107395,
+      "output": 106103
+     },
+     "listPriceUSD": 0,
+     "probe": {
+      "withheld": 8,
+      "visible": 0,
+      "unchecked": 0
+     },
+     "complete": true,
+     "verdict": "revise",
+     "mutants": 3,
+     "acceptedByHidden": 3,
+     "referencePassesHidden": true
+    },
+    {
+     "session": "blind-tests-grok-4.7-2026-11-06T225853961Z",
+     "role": "blind-tests",
+     "route": "cliproxyapi/grok-4.7",
+     "provider": "xai",
+     "responseModels": [
+      "grok-4.7-build"
+     ],
+     "startedAt": "2026-11-06T22:58:54.038Z",
+     "forwarded": 16,
+     "completed": 16,
+     "providerErrors": 0,
+     "tokens": {
+      "input": 1038635,
+      "cached": 935808,
+      "output": 78799
+     },
+     "listPriceUSD": 1.146352,
+     "probe": {
+      "withheld": 8,
+      "visible": 0,
+      "unchecked": 0
+     },
+     "complete": true,
+     "verdict": null,
+     "blindTests": 1,
+     "referencePasses": true,
+     "discriminates": true
+    }
+   ]
+  },
+  "cf1-rt-beanpoints-returns-v2": {
+   "classes": null,
+   "mutants": null,
+   "sessions": [
+    {
+     "session": "adversarial-gemini-3-flash-2026-11-07T015003911Z",
+     "role": "adversarial",
+     "route": "cliproxyapi/gemini-3-flash",
+     "provider": "google",
+     "responseModels": [
+      "gemini-3-flash"
+     ],
+     "startedAt": "2026-11-07T01:50:04.010Z",
+     "forwarded": 27,
+     "completed": 27,
+     "providerErrors": 0,
+     "tokens": {
+      "input": 1270862,
+      "cached": 1134349,
+      "output": 31643
+     },
+     "listPriceUSD": 0,
+     "probe": {
+      "withheld": 8,
+      "visible": 0,
+      "unchecked": 0
+     },
+     "complete": true,
+     "verdict": "accept",
+     "mutants": 3,
+     "acceptedByHidden": 0,
+     "referencePassesHidden": true
+    }
+   ]
+  },
+  "cf1-rt-beanpoints-statement": {
+   "classes": [
+    "test-gap"
+   ],
+   "mutants": [
+    {
+     "name": "derived-expired",
+     "hiddenAccepts": true,
+     "blindRejects": false
+    },
+    {
+     "name": "initial-beans-expiring",
+     "hiddenAccepts": false,
+     "blindRejects": null
+    },
+    {
+     "name": "manual-month-iteration",
+     "hiddenAccepts": true,
+     "blindRejects": false
+    }
+   ],
+   "sessions": [
+    {
+     "session": "adjudicate-adversarial-grok-4.7-2026-11-07T004137570Z",
+     "role": "adjudicate",
+     "route": "cliproxyapi/grok-4.7",
+     "provider": "xai",
+     "responseModels": [
+      "grok-4.7-build"
+     ],
+     "startedAt": "2026-11-07T00:41:37.634Z",
+     "forwarded": 12,
+     "completed": 11,
+     "providerErrors": 0,
+     "tokens": {
+      "input": 297008,
+      "cached": 229632,
+      "output": 25832
+     },
+     "listPriceUSD": 0.40456,
+     "probe": {
+      "withheld": 8,
+      "visible": 0,
+      "unchecked": 0
+     },
+     "complete": true,
+     "verdict": "revise",
+     "scope": "adversarial",
+     "remedy": "tests",
+     "violations": 2,
+     "notViolations": 1
+    },
+    {
+     "session": "adversarial-gemini-3-flash-2026-11-06T235347040Z",
+     "role": "adversarial",
+     "route": "cliproxyapi/gemini-3-flash",
+     "provider": "google",
+     "responseModels": [
+      "gemini-3-flash"
+     ],
+     "startedAt": "2026-11-06T23:53:47.107Z",
+     "forwarded": 30,
+     "completed": 29,
+     "providerErrors": 0,
+     "tokens": {
+      "input": 870548,
+      "cached": 746936,
+      "output": 21032
+     },
+     "listPriceUSD": 0,
+     "probe": {
+      "withheld": 8,
+      "visible": 0,
+      "unchecked": 0
+     },
+     "complete": true,
+     "verdict": "accept",
+     "mutants": 3,
+     "acceptedByHidden": 2,
+     "referencePassesHidden": true
+    },
+    {
+     "session": "adversarial-gemini-3.8-flash-high-2026-11-06T234008958Z",
+     "role": "adversarial",
+     "route": "cliproxyapi/gemini-3.8-flash-high",
+     "provider": "google",
+     "responseModels": [
+      "gemini-3.8-flash-high"
+     ],
+     "startedAt": "2026-11-06T23:40:09.019Z",
+     "forwarded": 1,
+     "completed": 0,
+     "providerErrors": 1,
+     "tokens": {
+      "input": 0,
+      "cached": 0,
+      "output": 0
+     },
+     "listPriceUSD": 0,
+     "probe": {
+      "withheld": 8,
+      "visible": 0,
+      "unchecked": 0
+     },
+     "complete": false,
+     "verdict": null,
+     "mutants": 0,
+     "acceptedByHidden": 0,
+     "referencePassesHidden": true
+    },
+    {
+     "session": "blind-tests-grok-4.7-2026-11-06T234958476Z",
+     "role": "blind-tests",
+     "route": "cliproxyapi/grok-4.7",
+     "provider": "xai",
+     "responseModels": [
+      "grok-4.7-build"
+     ],
+     "startedAt": "2026-11-06T23:49:58.539Z",
+     "forwarded": 18,
+     "completed": 16,
+     "providerErrors": 0,
+     "tokens": {
+      "input": 866954,
+      "cached": 779520,
+      "output": 60104
+     },
+     "listPriceUSD": 0.925252,
+     "probe": {
+      "withheld": 8,
+      "visible": 0,
+      "unchecked": 0
+     },
+     "complete": true,
+     "verdict": null,
+     "blindTests": 1,
+     "referencePasses": true,
+     "discriminates": true
+    }
+   ]
+  },
+  "cf1-rt-beanpoints-statement-v2": {
+   "classes": null,
+   "mutants": null,
+   "sessions": [
+    {
+     "session": "adversarial-gemini-3-flash-2026-11-07T015148843Z",
+     "role": "adversarial",
+     "route": "cliproxyapi/gemini-3-flash",
+     "provider": "google",
+     "responseModels": [
+      "gemini-3-flash"
+     ],
+     "startedAt": "2026-11-07T01:51:48.933Z",
+     "forwarded": 27,
+     "completed": 27,
+     "providerErrors": 0,
+     "tokens": {
+      "input": 975324,
+      "cached": 851441,
+      "output": 25086
+     },
+     "listPriceUSD": 0,
+     "probe": {
+      "withheld": 8,
+      "visible": 0,
+      "unchecked": 0
+     },
+     "complete": true,
+     "verdict": "accept",
+     "mutants": 3,
+     "acceptedByHidden": 0,
+     "referencePassesHidden": true
+    }
+   ]
+  },
+  "cf1-rt-lockerbill-minor-units": {
+   "classes": [
+    "ok"
+   ],
+   "mutants": [
+    {
+     "name": "no-integer-check-formatMinor",
+     "hiddenAccepts": false,
+     "blindRejects": null
+    },
+    {
+     "name": "round-extra-decimals",
+     "hiddenAccepts": false,
+     "blindRejects": null
+    },
+    {
+     "name": "truncate-extra-decimals",
+     "hiddenAccepts": false,
+     "blindRejects": null
+    }
+   ],
+   "sessions": [
+    {
+     "session": "adversarial-gemini-3-flash-2026-11-06T235405046Z",
+     "role": "adversarial",
+     "route": "cliproxyapi/gemini-3-flash",
+     "provider": "google",
+     "responseModels": [
+      "gemini-3-flash"
+     ],
+     "startedAt": "2026-11-06T23:54:05.108Z",
+     "forwarded": 23,
+     "completed": 23,
+     "providerErrors": 0,
+     "tokens": {
+      "input": 469275,
+      "cached": 372948,
+      "output": 17430
+     },
+     "listPriceUSD": 0,
+     "probe": {
+      "withheld": 8,
+      "visible": 0,
+      "unchecked": 0
+     },
+     "complete": true,
+     "verdict": "accept",
+     "mutants": 3,
+     "acceptedByHidden": 0,
+     "referencePassesHidden": true
+    },
+    {
+     "session": "adversarial-gemini-3.8-flash-high-2026-11-06T234010417Z",
+     "role": "adversarial",
+     "route": "cliproxyapi/gemini-3.8-flash-high",
+     "provider": "google",
+     "responseModels": [
+      "gemini-3.8-flash-high"
+     ],
+     "startedAt": "2026-11-06T23:40:10.487Z",
+     "forwarded": 1,
+     "completed": 0,
+     "providerErrors": 1,
+     "tokens": {
+      "input": 0,
+      "cached": 0,
+      "output": 0
+     },
+     "listPriceUSD": 0,
+     "probe": {
+      "withheld": 8,
+      "visible": 0,
+      "unchecked": 0
+     },
+     "complete": false,
+     "verdict": null,
+     "mutants": 0,
+     "acceptedByHidden": 0,
+     "referencePassesHidden": true
+    },
+    {
+     "session": "blind-tests-grok-4.7-2026-11-07T000350905Z",
+     "role": "blind-tests",
+     "route": "cliproxyapi/grok-4.7",
+     "provider": "xai",
+     "responseModels": [
+      "grok-4.7-build"
+     ],
+     "startedAt": "2026-11-07T00:03:50.965Z",
+     "forwarded": 19,
+     "completed": 18,
+     "providerErrors": 0,
+     "tokens": {
+      "input": 933934,
+      "cached": 753408,
+      "output": 61500
+     },
+     "listPriceUSD": 1.106756,
+     "probe": {
+      "withheld": 8,
+      "visible": 0,
+      "unchecked": 0
+     },
+     "complete": true,
+     "verdict": null,
+     "blindTests": 2,
+     "referencePasses": true,
+     "discriminates": true
+    }
+   ]
+  },
+  "cf1-rt-lockerbill-plan-proration": {
+   "classes": [
+    "test-gap"
+   ],
+   "mutants": [
+    {
+     "name": "extra-properties-on-lines",
+     "hiddenAccepts": true,
+     "blindRejects": false
+    },
+    {
+     "name": "null-prorated-description",
+     "hiddenAccepts": true,
+     "blindRejects": true
+    },
+    {
+     "name": "omitting-description",
+     "hiddenAccepts": true,
+     "blindRejects": true
+    }
+   ],
+   "sessions": [
+    {
+     "session": "adjudicate-adversarial-grok-4.7-2026-11-07T004354231Z",
+     "role": "adjudicate",
+     "route": "cliproxyapi/grok-4.7",
+     "provider": "xai",
+     "responseModels": [
+      "grok-4.7-build"
+     ],
+     "startedAt": "2026-11-07T00:43:54.299Z",
+     "forwarded": 11,
+     "completed": 11,
+     "providerErrors": 0,
+     "tokens": {
+      "input": 352422,
+      "cached": 288384,
+      "output": 21570
+     },
+     "listPriceUSD": 0.401688,
+     "probe": {
+      "withheld": 8,
+      "visible": 0,
+      "unchecked": 0
+     },
+     "complete": true,
+     "verdict": "revise",
+     "scope": "adversarial",
+     "remedy": "tests",
+     "violations": 2,
+     "notViolations": 1
+    },
+    {
+     "session": "adversarial-gemini-3-flash-2026-11-06T235506062Z",
+     "role": "adversarial",
+     "route": "cliproxyapi/gemini-3-flash",
+     "provider": "google",
+     "responseModels": [
+      "gemini-3-flash"
+     ],
+     "startedAt": "2026-11-06T23:55:06.122Z",
+     "forwarded": 29,
+     "completed": 29,
+     "providerErrors": 0,
+     "tokens": {
+      "input": 1426770,
+      "cached": 1261171,
+      "output": 35871
+     },
+     "listPriceUSD": 0,
+     "probe": {
+      "withheld": 8,
+      "visible": 0,
+      "unchecked": 0
+     },
+     "complete": true,
+     "verdict": "accept",
+     "mutants": 3,
+     "acceptedByHidden": 3,
+     "referencePassesHidden": true
+    },
+    {
+     "session": "adversarial-gemini-3.8-flash-high-2026-11-06T234010620Z",
+     "role": "adversarial",
+     "route": "cliproxyapi/gemini-3.8-flash-high",
+     "provider": "google",
+     "responseModels": [
+      "gemini-3.8-flash-high"
+     ],
+     "startedAt": "2026-11-06T23:40:10.682Z",
+     "forwarded": 1,
+     "completed": 0,
+     "providerErrors": 1,
+     "tokens": {
+      "input": 0,
+      "cached": 0,
+      "output": 0
+     },
+     "listPriceUSD": 0,
+     "probe": {
+      "withheld": 8,
+      "visible": 0,
+      "unchecked": 0
+     },
+     "complete": false,
+     "verdict": null,
+     "mutants": 0,
+     "acceptedByHidden": 0,
+     "referencePassesHidden": true
+    },
+    {
+     "session": "blind-tests-grok-4.7-2026-11-07T000819532Z",
+     "role": "blind-tests",
+     "route": "cliproxyapi/grok-4.7",
+     "provider": "xai",
+     "responseModels": [
+      "grok-4.7-build"
+     ],
+     "startedAt": "2026-11-07T00:08:19.591Z",
+     "forwarded": 17,
+     "completed": 17,
+     "providerErrors": 0,
+     "tokens": {
+      "input": 1233269,
+      "cached": 1114496,
+      "output": 99230
+     },
+     "listPriceUSD": 1.390174,
+     "probe": {
+      "withheld": 8,
+      "visible": 0,
+      "unchecked": 0
+     },
+     "complete": true,
+     "verdict": null,
+     "blindTests": 1,
+     "referencePasses": true,
+     "discriminates": true
+    }
+   ]
+  },
+  "cf1-rt-lockerbill-plan-proration-v2": {
+   "classes": [
+    "test-gap"
+   ],
+   "mutants": [
+    {
+     "name": "math-round-base",
+     "hiddenAccepts": true,
+     "blindRejects": false
+    },
+    {
+     "name": "omit-line-extra-fields",
+     "hiddenAccepts": false,
+     "blindRejects": null
+    },
+    {
+     "name": "prorate-tiers",
+     "hiddenAccepts": false,
+     "blindRejects": null
+    },
+    {
+     "name": "skip-history-validation",
+     "hiddenAccepts": false,
+     "blindRejects": null
+    },
+    {
+     "name": "skip-no-billable-day-check",
+     "hiddenAccepts": false,
+     "blindRejects": null
+    }
+   ],
+   "sessions": [
+    {
+     "session": "adjudicate-adversarial-grok-4.7-2026-11-07T020049970Z",
+     "role": "adjudicate",
+     "route": "cliproxyapi/grok-4.7",
+     "provider": "xai",
+     "responseModels": [
+      "grok-4.7-build"
+     ],
+     "startedAt": "2026-11-07T02:00:50.092Z",
+     "forwarded": 20,
+     "completed": 18,
+     "providerErrors": 0,
+     "tokens": {
+      "input": 657582,
+      "cached": 571520,
+      "output": 29086
+     },
+     "listPriceUSD": 0.6324,
+     "probe": {
+      "withheld": 8,
+      "visible": 0,
+      "unchecked": 0
+     },
+     "complete": true,
+     "verdict": "revise",
+     "scope": "adversarial",
+     "remedy": "tests",
+     "violations": 1,
+     "notViolations": 0
+    },
+    {
+     "session": "adversarial-gemini-3-flash-2026-11-07T015207111Z",
+     "role": "adversarial",
+     "route": "cliproxyapi/gemini-3-flash",
+     "provider": "google",
+     "responseModels": [
+      "gemini-3-flash"
+     ],
+     "startedAt": "2026-11-07T01:52:07.213Z",
+     "forwarded": 24,
+     "completed": 24,
+     "providerErrors": 0,
+     "tokens": {
+      "input": 877844,
+      "cached": 753890,
+      "output": 17390
+     },
+     "listPriceUSD": 0,
+     "probe": {
+      "withheld": 8,
+      "visible": 0,
+      "unchecked": 0
+     },
+     "complete": true,
+     "verdict": "accept",
+     "mutants": 5,
+     "acceptedByHidden": 1,
+     "referencePassesHidden": true
+    },
+    {
+     "session": "blind-tests-grok-4.7-2026-11-07T000819532Z",
+     "role": "blind-tests",
+     "route": "cliproxyapi/grok-4.7",
+     "provider": "xai",
+     "responseModels": [
+      "grok-4.7-build"
+     ],
+     "startedAt": "2026-11-07T00:08:19.591Z",
+     "forwarded": 17,
+     "completed": 17,
+     "providerErrors": 0,
+     "tokens": {
+      "input": 1233269,
+      "cached": 1114496,
+      "output": 99230
+     },
+     "listPriceUSD": 1.390174,
+     "probe": {
+      "withheld": 8,
+      "visible": 0,
+      "unchecked": 0
+     },
+     "complete": true,
+     "verdict": null,
+     "blindTests": 1,
+     "referencePasses": true,
+     "discriminates": true
+    }
+   ]
+  },
+  "cf1-rt-lockerbill-plan-proration-v3": {
+   "classes": null,
+   "mutants": null,
+   "sessions": [
+    {
+     "session": "adversarial-gemini-3-flash-2026-11-07T020939840Z",
+     "role": "adversarial",
+     "route": "cliproxyapi/gemini-3-flash",
+     "provider": "google",
+     "responseModels": [
+      "gemini-3-flash"
+     ],
+     "startedAt": "2026-11-07T02:09:39.918Z",
+     "forwarded": 32,
+     "completed": 32,
+     "providerErrors": 0,
+     "tokens": {
+      "input": 1150829,
+      "cached": 1029220,
+      "output": 17298
+     },
+     "listPriceUSD": 0,
+     "probe": {
+      "withheld": 8,
+      "visible": 0,
+      "unchecked": 0
+     },
+     "complete": true,
+     "verdict": "accept",
+     "mutants": 3,
+     "acceptedByHidden": 0,
+     "referencePassesHidden": true
+    }
+   ]
+  },
+  "cf1-rt-pallets-multiline-alloc": {
+   "classes": [
+    "ok"
+   ],
+   "mutants": [
+    {
+     "name": "commit-no-sum",
+     "hiddenAccepts": false,
+     "blindRejects": null
+    },
+    {
+     "name": "no-shortfalls-prop",
+     "hiddenAccepts": false,
+     "blindRejects": null
+    },
+    {
+     "name": "no-used-tracking",
+     "hiddenAccepts": false,
+     "blindRejects": null
+    }
+   ],
+   "sessions": [
+    {
+     "session": "adversarial-gemini-3-flash-2026-11-06T235508331Z",
+     "role": "adversarial",
+     "route": "cliproxyapi/gemini-3-flash",
+     "provider": "google",
+     "responseModels": [
+      "gemini-3-flash"
+     ],
+     "startedAt": "2026-11-06T23:55:08.389Z",
+     "forwarded": 20,
+     "completed": 20,
+     "providerErrors": 0,
+     "tokens": {
+      "input": 354267,
+      "cached": 269592,
+      "output": 11829
+     },
+     "listPriceUSD": 0,
+     "probe": {
+      "withheld": 8,
+      "visible": 0,
+      "unchecked": 0
+     },
+     "complete": true,
+     "verdict": "accept",
+     "mutants": 3,
+     "acceptedByHidden": 0,
+     "referencePassesHidden": true
+    },
+    {
+     "session": "adversarial-gemini-3.8-flash-high-2026-11-06T234016013Z",
+     "role": "adversarial",
+     "route": "cliproxyapi/gemini-3.8-flash-high",
+     "provider": "google",
+     "responseModels": [
+      "gemini-3.8-flash-high"
+     ],
+     "startedAt": "2026-11-06T23:40:16.083Z",
+     "forwarded": 1,
+     "completed": 0,
+     "providerErrors": 1,
+     "tokens": {
+      "input": 0,
+      "cached": 0,
+      "output": 0
+     },
+     "listPriceUSD": 0,
+     "probe": {
+      "withheld": 8,
+      "visible": 0,
+      "unchecked": 0
+     },
+     "complete": false,
+     "verdict": null,
+     "mutants": 0,
+     "acceptedByHidden": 0,
+     "referencePassesHidden": true
+    },
+    {
+     "session": "blind-tests-grok-4.7-2026-11-07T012159349Z",
+     "role": "blind-tests",
+     "route": "cliproxyapi/grok-4.7",
+     "provider": "xai",
+     "responseModels": [
+      "grok-4.7-build"
+     ],
+     "startedAt": "2026-11-07T01:21:59.436Z",
+     "forwarded": 10,
+     "completed": 10,
+     "providerErrors": 0,
+     "tokens": {
+      "input": 497726,
+      "cached": 379904,
+      "output": 76330
+     },
+     "listPriceUSD": 0.883576,
+     "probe": {
+      "withheld": 8,
+      "visible": 0,
+      "unchecked": 0
+     },
+     "complete": true,
+     "verdict": null,
+     "blindTests": 2,
+     "referencePasses": true,
+     "discriminates": true
+    }
+   ]
+  },
+  "cf1-rt-pallets-reservation-holds": {
+   "classes": [
+    "ok"
+   ],
+   "mutants": [
+    {
+     "name": "available-no-max-zero",
+     "hiddenAccepts": false,
+     "blindRejects": null
+    },
+    {
+     "name": "cancel-returns-object",
+     "hiddenAccepts": false,
+     "blindRejects": null
+    },
+    {
+     "name": "confirm-no-clone",
+     "hiddenAccepts": false,
+     "blindRejects": null
+    }
+   ],
+   "sessions": [
+    {
+     "session": "adversarial-gemini-3-flash-2026-11-06T235556443Z",
+     "role": "adversarial",
+     "route": "cliproxyapi/gemini-3-flash",
+     "provider": "google",
+     "responseModels": [
+      "gemini-3-flash"
+     ],
+     "startedAt": "2026-11-06T23:55:56.510Z",
+     "forwarded": 22,
+     "completed": 22,
+     "providerErrors": 0,
+     "tokens": {
+      "input": 667487,
+      "cached": 554991,
+      "output": 21380
+     },
+     "listPriceUSD": 0,
+     "probe": {
+      "withheld": 8,
+      "visible": 0,
+      "unchecked": 0
+     },
+     "complete": true,
+     "verdict": "accept",
+     "mutants": 3,
+     "acceptedByHidden": 0,
+     "referencePassesHidden": true
+    },
+    {
+     "session": "adversarial-gemini-3.8-flash-high-2026-11-06T234017601Z",
+     "role": "adversarial",
+     "route": "cliproxyapi/gemini-3.8-flash-high",
+     "provider": "google",
+     "responseModels": [
+      "gemini-3.8-flash-high"
+     ],
+     "startedAt": "2026-11-06T23:40:17.662Z",
+     "forwarded": 1,
+     "completed": 0,
+     "providerErrors": 1,
+     "tokens": {
+      "input": 0,
+      "cached": 0,
+      "output": 0
+     },
+     "listPriceUSD": 0,
+     "probe": {
+      "withheld": 8,
+      "visible": 0,
+      "unchecked": 0
+     },
+     "complete": false,
+     "verdict": null,
+     "mutants": 0,
+     "acceptedByHidden": 0,
+     "referencePassesHidden": true
+    },
+    {
+     "session": "blind-tests-grok-4.7-2026-11-07T013910181Z",
+     "role": "blind-tests",
+     "route": "cliproxyapi/grok-4.7",
+     "provider": "xai",
+     "responseModels": [
+      "grok-4.7-build"
+     ],
+     "startedAt": "2026-11-07T01:39:10.270Z",
+     "forwarded": 18,
+     "completed": 18,
+     "providerErrors": 0,
+     "tokens": {
+      "input": 1282586,
+      "cached": 1164288,
+      "output": 97516
+     },
+     "listPriceUSD": 1.403836,
+     "probe": {
+      "withheld": 8,
+      "visible": 0,
+      "unchecked": 0
+     },
+     "complete": true,
+     "verdict": null,
+     "blindTests": 2,
+     "referencePasses": true,
+     "discriminates": true
+    }
+   ]
+  }
+ }
+}
