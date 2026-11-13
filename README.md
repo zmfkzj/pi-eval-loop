@@ -185,7 +185,7 @@ This is intentional: continue in a new state directory, and never rewrite a reco
 | Operational limits | Cost and time are not optimization targets; safety limits only: 200 candidates/cycle backstop, 72 h hang watchdog, 10 failed proposals per failure class since the last progress (cannot fire before the 10-candidate patience with the defaults), infra stops, 120 requests / 30 min per proposer session, 4 files / 200 diff lines per patch, 20 min / 150 requests per task unit (exact list: `docs/results-explore-real-2.md`) |
 | Exploration quality | Not demonstrated: the 20 explore-real-2 proposals were variants of one hypothesis, and none targeted the integrity class that rejected them all (protocol-3 targets it first; whether that yields better candidates is not measured) |
 | Diagnostics | No package typecheck script; `node pi-eval-loop/scripts/checkjs-compare.mjs <base> <out>` compares tsc checkJs output (record: `records/explore-real-2/checks/checkjs/`) |
-| Packaging | Git submodule `pi-eval-loop/` of the umbrella (`zmfkzj/pi-eval-loop`, branch `main`). Its history continues the umbrella-directory commits it was converted from (`Imported-From:` trailers). The pinned commit must be pushed before fresh clones can initialize it |
+| Packaging | Git submodule `pi-eval-loop/` of the umbrella (`zmfkzj/pi-eval-loop`, branch `main`). Its history continues the umbrella-directory commits it was converted from (`Imported-From:` trailers). The pinned commit must be pushed before fresh clones can initialize it. The engine agent_workflow runs as the pinned release `pi-eval-loop-rel-161605a95463-b7de5f94a8e9` (manifest sha256 `b7de5f94a8e9…`) was imported unchanged as commit `bc8db0d` (parent 161605a) and merged into canonical `main`; canonical is the source of later releases (wrapper-facing contract: `test/wrapper-contract.test.mjs`) |
 
 ## Protocol-4 (2026-11-06; local, not deployed)
 
@@ -260,7 +260,7 @@ A budget refusal in the middle of a pass pauses the pass. It stays blocked with 
 - a foreign `EVAL_LOOP_UPSTREAM` or agent dir;
 - an expired token (any mode).
 
-It auto-starts the runtime when configured, and stops it when no other cycle uses it. It settles reservations left open by dead cycles at the attempt floor (`RequestBudget.reconcileDead`).
+It auto-starts the runtime when configured, and stops it when no other cycle uses it. It settles reservations left open by dead cycles at the attempt floor (`RequestBudget.reconcileDead`). A dead owner's `meta.route: "proposal"` reservation (agent_workflow's proposer, which shares the ledger) is settled at its full worst case instead, never lowered.
 
 `test/explore-runtime.test.mjs` runs the pinned binary in bwrap against a TLS stand-in and checks that the provider never receives more requests than the gate admitted against the fixture ledger, across:
 - expired credentials, a misbound ledger and a shared-gateway upstream;
