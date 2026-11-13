@@ -29,6 +29,7 @@ import { batchEvidenceProblems, DEFAULT_SUPPLY, firstEligibleBatch, mergeSupply,
 import { acquireLock, atomicWriteJson, digestOf, ensureDir, inspectLock, LockBusyError, readJson, sha256 } from "./util.mjs";
 import { BUDGET_POLICY, legacyBudgetFields, screeningConfigProblems, screeningCycle, screeningExclusionTasks, screeningPreflight, screeningStatus } from "./screening.mjs";
 import { currentStable, effectiveConfig, evalReleases, internalConfigProblems, internalEnabled } from "./internal-promotion.mjs";
+import { holdoutPoolOf, internalAcceptanceEnabled, internalBatchProblems, internalNextBatch, internalPriorFamilies, internalRetire, internalSeal } from "./internal-acceptance.mjs";
 
 export const EXPLORATION_SCHEMA = "pi-eval-loop/exploration@1";
 export const CYCLE_SCHEMA = "pi-eval-loop/explore-cycle@1";
@@ -217,6 +218,8 @@ export async function defaultRuntimeCheck(cfg) {
 
 /** Retire every live, never-reserved holdout batch whose tasks are now forbidden by lineage (evidence document; batch kept). */
 export function retireContaminated(cfg, { now = new Date() } = {}) {
+  // internal-acceptance@1: the internal pool is re-checked against actual exposure (never by name-only lineage).
+  if (internalAcceptanceEnabled(cfg)) return internalRetire(cfg, { now });
   const st = poolState(cfg.pool);
   const out = [];
   for (const b of st.batches.values()) {
@@ -239,6 +242,12 @@ export function retireContaminated(cfg, { now = new Date() } = {}) {
 /** The batch a new cycle would use (read-only): the pool's first eligible batch, if it passes the lineage re-check. */
 export function nextBatch(cfg, { orcheDir, protocol = null } = {}) {
   if (!orcheDir) throw new Error("nextBatch: orcheDir (the exposure corpus) is required");
+  if (internalAcceptanceEnabled(cfg) && !protocol) {
+    const pick = internalNextBatch(cfg, { orcheDir });
+    if (pick.none) return pick;
+    const ev = batchEvidenceProblems(holdoutPoolOf(cfg), pick.batch, requiredEvidence(cfg));
+    return ev.length ? { none: [`${pick.batch}: evidence re-check failed (a refresh retires it): ${ev[0]}`] } : pick;
+  }
   // An exploration never takes a batch sealed for a confirmatory test (larger than the exploration batch rule).
   const excludeSeals = protocol ? [] : [...poolState(cfg.pool).batches.values()].filter(b => b.tasks.length > (cfg.batchRule?.maxTasks ?? BATCH_RULE.maxTasks)).map(b => b.sealDigest);
   const pick = firstEligibleBatch(cfg.pool, protocol ?? exploreProtocol(cfg.route), { orcheDir, excludeSeals });
@@ -375,16 +384,25 @@ export async function runExploreCycle(cfgFile, stateDir, { requireState = false,
       // Before the batch is consumed (also after a restart): its preserved evidence must still verify, else the selection is
       // dropped (nothing reserved or used) and the next selection retires the batch.
       const consumed = existsSync(join(plan.holdout.batch, "USES.jsonl")) && readFileSync(join(plan.holdout.batch, "USES.jsonl"), "utf8").includes(JSON.stringify(join(stateDir, sub)));
+      const hpool = plan.policy ? plan.holdout.pool : cfg.pool;
+      if (plan.policy && (!internalAcceptanceEnabled(cfg) || resolve(hpool) !== resolve(holdoutPoolOf(cfg)))) return { out: block("prerequisite-failed", `frozen plan policy ${plan.policy} does not match the current config (a frozen plan is never reinterpreted)`, false, back) };
       if (!consumed) {
-        const ev = batchEvidenceProblems(cfg.pool, basename(plan.holdout.batch), requiredEvidence(cfg));
+        const ev = batchEvidenceProblems(hpool, basename(plan.holdout.batch), requiredEvidence(cfg));
         if (ev.length) { s = { ...s, batch: undefined }; return { out: block("supply-error", `selected batch failed its evidence re-check before use (not consumed): ${ev[0]}`, true, dropTo) }; }
+        // internal-acceptance@1: actual exposure and audit evidence re-checked immediately before consumption.
+        if (plan.policy) {
+          let ip; try { ip = internalBatchProblems(cfg, basename(plan.holdout.batch)); } catch (error) { ip = [`internal re-check: ${String(error.message).slice(0, 200)}`]; }
+          if (ip.length) { s = { ...s, batch: undefined }; return { out: block("supply-error", `selected internal batch failed its exposure re-check before use (not consumed): ${ip[0]}`, true, dropTo) }; }
+        }
       }
       const run = await setupRun(plan);
       if (run.out) return run;
-      const priorFamilies = new Set(forbiddenSet({ pool: cfg.pool, screenPlan: cfg.screen, sources: cfg.lineage, excludeBatch: basename(plan.holdout.batch) }).keys());
+      let priorFamilies;
+      try { priorFamilies = plan.policy ? internalPriorFamilies(cfg, basename(plan.holdout.batch)) : new Set(forbiddenSet({ pool: cfg.pool, screenPlan: cfg.screen, sources: cfg.lineage, excludeBatch: basename(plan.holdout.batch) }).keys()); }
+      catch (error) { return { out: block("supply-error", `exclusion sources (not consumed): ${String(error.message).slice(0, 200)}`, true, dropTo) }; }
       s = { ...s, phase: back.replace(/-selected$|^selected$/, (m) => m === "selected" ? "running" : "-running"), runningSince: s.runningSince ?? new Date().toISOString() }; save(stateDir, s);
       let r;
-      try { r = await runHoldout({ plan, state: join(stateDir, sub), backend: run.backend, budget: ready.budget, bound: run.bound, parallelism: cfg.parallelism, priorFamilies, orcheDir, poolDir: cfg.pool, validate: run.validate, checks: run.checks, envDigest: run.envDigest, log: deps.log ?? (() => {}), requireValidation: !run.backend.simulated }); }
+      try { r = await runHoldout({ plan, state: join(stateDir, sub), backend: run.backend, budget: ready.budget, bound: run.bound, parallelism: cfg.parallelism, priorFamilies, orcheDir, poolDir: hpool, validate: run.validate, checks: run.checks, envDigest: run.envDigest, log: deps.log ?? (() => {}), requireValidation: !run.backend.simulated }); }
       catch (error) {
         // Another cycle or a refresh holds the pool lock while this one reserves its batch: nothing was reserved or used.
         if (error instanceof LockBusyError) return { out: block("supply-wait", `pool busy while reserving the batch (not reserved, not consumed): ${String(error.message).slice(0, 200)}`, true, back) };
@@ -642,6 +660,33 @@ async function liveDeps(cfg, stateDir, plan) {
  * sealing), then lineage selection + seal (src/lineage.mjs) up to maxBatches. Serialized by the pool's refresh lock.
  * deps: { collect (async ({pool, cfg, maxCasesPerRepo}) => summary), orcheDir, now }.
  */
+/** refresh of the internal pool (internal-acceptance@1): recover, retire on the exposure re-check, seal up to maxBatches. */
+async function refreshInternal(cfg, base, { maxBatches, deps }) {
+  const pool = holdoutPoolOf(cfg);
+  if (!existsSync(join(pool, "registry.jsonl"))) return { code: 2, out: { ...base, policy: "internal-acceptance@1", available: { ok: false, why: ["internal pool is empty (no audited intake yet)"] }, sealed: [], retired: [] } };
+  let lock; try { lock = acquireLock(join(ensureDir(pool, 0o700), ".refresh.lock")); } catch (error) { if (error instanceof LockBusyError) return { code: 3, out: { ...base, busy: "another refresh holds the internal pool's refresh lock" } }; throw error; }
+  const now = deps.now ?? new Date();
+  try {
+    const recovered = recoverPool(pool);
+    const retired = retireContaminated(cfg, { now });
+    const orcheDir = await orcheOf(cfg, deps);
+    const sealed = [];
+    let pick = nextBatch(cfg, { orcheDir });
+    if (pick.none) {
+      for (let i = 0; i < maxBatches; i++) {
+        const r = internalSeal(cfg, { now: new Date(now.getTime() + i) });
+        if (!r.batch) { sealed.push({ blocked: r.blocked, excluded: r.excluded ?? null, rule: r.rule ?? null }); break; }
+        sealed.push({ batch: r.batch, coverage: r.coverage, rule: r.rule, excluded: r.excluded });
+      }
+      pick = nextBatch(cfg, { orcheDir });
+    }
+    const ok = !pick.none;
+    return { code: ok ? 0 : 2, out: { ...base, policy: "internal-acceptance@1", available: ok ? { ok: true, batch: pick.batch } : { ok: false, why: pick.none.slice(0, 5) }, sealed: sealed.filter(x => x.batch), blocked: sealed.find(x => x.blocked) ?? null, retired, recovered } };
+  } catch (error) {
+    return { code: 1, out: { ...base, error: String(error?.message ?? error).slice(0, 400) } };
+  } finally { lock.release(); }
+}
+
 export async function refreshExploration(cfgFile, { maxCasesPerRepo = 2, maxBatches = 1, deps = {} } = {}) {
   const base = { schema: REFRESH_SCHEMA, mode: "exploration-only" };
   // (mode is set from the config below once it loads)
@@ -649,6 +694,8 @@ export async function refreshExploration(cfgFile, { maxCasesPerRepo = 2, maxBatc
   base.mode = cfg.mode;
   // Internal track: every epoch's exposed development tasks are exclusion sources of new batches.
   if (internalEnabled(cfg)) { try { cfg = await effectiveConfig(cfg, currentStable(cfg)); } catch (error) { return { code: 1, out: { ...base, error: `internal track: ${String(error.message).slice(0, 300)}` } }; } }
+  // internal-acceptance@1: the internal pool is fed only by audited intake; refresh re-checks, retires and seals there (no collector).
+  if (internalAcceptanceEnabled(cfg)) return refreshInternal(cfg, base, { maxBatches, deps });
   const policy = poolPolicy(cfg.pool);
   if (policy.autoSeal !== false) return { code: 1, out: { ...base, error: `pool ${cfg.pool} needs POLICY.json {autoSeal: false} (collectors must never seal an exploration pool)` } };
   let lock; try { lock = acquireLock(join(ensureDir(cfg.pool, 0o700), ".refresh.lock")); } catch (error) { if (error instanceof LockBusyError) return { code: 3, out: { ...base, busy: "another refresh holds the pool's refresh lock" } }; throw error; }

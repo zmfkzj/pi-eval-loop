@@ -29,6 +29,7 @@ import { Releases } from "./lifecycle.mjs";
 import { exploreProtocol } from "./exploration.mjs";
 import { routeKey } from "./protocol.mjs";
 import { fault, Ledger } from "./util.mjs";
+import { acceptanceConfigProblems } from "./internal-acceptance.mjs";
 // screening.mjs imports this module; passNeed is resolved lazily at call time (circular import, no top-level use).
 import * as screening from "./screening.mjs";
 const passNeed = (...a) => screening.passNeed(...a);
@@ -63,6 +64,7 @@ export function internalConfigProblems(c) {
   if (i.assessment?.enabled === true && !(typeof i.assessment.maxHours === "number" && i.assessment.maxHours > 0)) p.push("screening.internal.assessment.maxHours (positive number: a promotion not assessed by then is rolled back) required");
   if (i.select !== undefined && !SELECT.includes(i.select)) p.push(`screening.internal.select must be one of ${SELECT.join(", ")}`);
   if (i.policy !== "operational-unvalidated") p.push("screening.internal.policy must be \"operational-unvalidated\" (acknowledges that the promotion rule is an operational policy, not a validated statistical guarantee)");
+  p.push(...acceptanceConfigProblems(c));
   if (typeof i.dir === "string" && typeof c.screening?.registry === "string" && c.screening.registry.startsWith(`${i.dir}/`)) p.push("screening.registry must lie outside screening.internal.dir (the track keeps one registry per epoch there)");
   return p;
 }

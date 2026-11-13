@@ -449,8 +449,19 @@ Labels are `development` and `internal-acceptance`, and the decision rules are o
 (`policy: "operational-unvalidated"`). It never produces ADOPT, a confirmatory claim or a service deployment. confirmatory-1,
 the autonomous lifecycle and plain screening are unchanged.
 
-CLI additions: `internal-status --protocol CFG`, `internal-rollback --protocol CFG --release-key KEY --reason TEXT`.
-Tests (simulated only): `test/internal-promotion.test.mjs`.
+**Batch policy `internal-acceptance@1`** (approved 2026-11-14; opt-in `screening.internal.acceptance`; docs/internal-promotion.md
+sections 10-11):
+- **Pool:** a separate internal pool, fed only by audited intake from untouched origin pools.
+- **Exclusion:** name-only cross-pool exclusion is replaced by an actual-exposure decision (dispatched tasks and their families,
+  consumed or calibration material, dev tasks, live reservations, content mentions, duplicates; unknown sources fail closed),
+  re-checked at intake, seal, offer and consumption.
+- **Not required** (not counted as satisfied): hard and private-review quotas.
+- **Kept:** sealing, validation, provenance, one use, protected results, at least 4 families, owner share <= 0.5.
+- **Unchanged:** research and exploration protocols.
+
+CLI additions: `internal-status --protocol CFG`, `internal-rollback --protocol CFG --release-key KEY --reason TEXT`,
+`internal-audit --protocol CFG --origin-pool POOL --ids-file F`, `internal-intake --protocol CFG --origin-pool POOL --audit A --ids-file F`.
+Tests (simulated only): `test/internal-promotion.test.mjs`, `test/internal-acceptance.test.mjs`.
 
 
 ## Layout

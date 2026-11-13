@@ -61,6 +61,31 @@ export function exploreProtocol(route) {
   return p;
 }
 
+/**
+ * internal-acceptance@1 (2026-11-14, user-approved; docs/internal-promotion.md section 10): the protocol of an INTERNAL acceptance
+ * pass of the opt-in internal promotion track. It starts from exploreProtocol(route) and changes only research-specific quotas,
+ * explicitly and in this namespace (exploreProtocol, DEFAULT_PROTOCOL and every research protocol are unchanged):
+ *   - no hard stratum (adoption.requireHardStratum false, holdout.hardBasis []): NOT REQUIRED, never "passed";
+ *   - low-exposure tasks need a recorded review (privateReview "ai-allowed"), no cross-provider/human review quota;
+ * Retained: sealed batch, accepted provenance (external, private-reviewed; never implementer-authored), one use, independence
+ * (exposure scan, prior-family reuse forbidden), >= 6 tasks, >= 4 families, owner share <= 0.5, 3 repeats, interleaving, strict
+ * test immutability, transcripts, integrity, exploratory analysis plan (never ADOPT). Batch eligibility of the internal pool is
+ * additionally re-checked against actual exposure (src/internal-acceptance.mjs). Sizes are unvalidated operational defaults.
+ */
+export const INTERNAL_ACCEPTANCE_POLICY = "internal-acceptance@1";
+export const INTERNAL_WAIVED = Object.freeze(["hard stratum (calibrated/source hard quota)", "research size 144+144 tasks / 48+48 families", "power and integrity-survival thresholds", "private cross-provider/human review and low-exposure (72) quota", "name-only cross-pool exclusion (replaced by the actual-exposure audit)"]);
+export function internalAcceptanceProtocol(route) {
+  const p = merge(exploreProtocol(route), { holdout: { hardBasis: [], privateReview: "ai-allowed" }, adoption: { requireHardStratum: false } });
+  p.policy = { id: INTERNAL_ACCEPTANCE_POLICY, waived: [...INTERNAL_WAIVED], sizes: "operational defaults (6+ tasks, 4+ families, 3 repeats, owner share <= 0.5): unvalidated" };
+  return p;
+}
+/** The base protocol of a frozen holdout plan: exploration by default, internal-acceptance@1 only when the plan names it. */
+export function planProtocol(plan) {
+  if (plan.policy === undefined) return exploreProtocol(plan.route);
+  if (plan.policy === INTERNAL_ACCEPTANCE_POLICY) return internalAcceptanceProtocol(plan.route);
+  throw new Error(`holdout: unknown plan policy ${JSON.stringify(plan.policy)} (a frozen plan is never reinterpreted)`);
+}
+
 /** An environment digest by value: environmentDigest() returns {digest, facts}; older callers pass the digest string. */
 export const envKey = (e) => (e && typeof e === "object" ? e.digest ?? JSON.stringify(e) : e ?? null);
 
@@ -202,7 +227,9 @@ export async function runHoldout({ plan, state, backend, budget, bound, validate
     // decision) or "confirmation" (independent post-adoption confirmation: previous release vs adopted). Without it: exploratory.
     const conf = plan.analysis?.mode === "confirmatory" ? plan.analysis : null;
     if (conf && !["holdout", "confirmation"].includes(conf.purpose)) throw new Error("holdout: analysis.purpose must be holdout|confirmation");
-    const p = merge(merge(exploreProtocol(plan.route), conf ? conf.protocol : {}), { parallelism });
+    if (conf && plan.policy !== undefined) throw new Error("holdout: a confirmatory plan never carries an internal policy");
+    const p = merge(merge(planProtocol(plan), conf ? conf.protocol : {}), { parallelism });
+    if (plan.policy) p.policy = planProtocol(plan).policy;
     p.integrity = { strictTestFiles: true }; p.capture = { transcripts: true };
     const finish = (final) => { const f = { ...final, purpose: conf?.purpose ?? "exploration", planDigest: digest, evidence: final.evidence ?? evidenceLabel(p, { adopt: false }), at: new Date().toISOString() }; atomicWriteJson(join(state, "final.json"), f); return f; };
     const batch = plan.holdout.batch;

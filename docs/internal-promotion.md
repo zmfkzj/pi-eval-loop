@@ -144,9 +144,11 @@ Every charge goes to the ONE configured ledger; there is no new allowance and no
 
 ## 6. Supply (why it is the binding constraint)
 
-**The internal track does not relax batch eligibility.** Acceptance uses the exploration rules: accepted provenance, a hard task
-with an annotated `source` basis, at least 6 tasks and 4 families, owner share <= 0.5, no family of an earlier
-holdout/calibration/development set, one use.
+**Batch eligibility of the internal track.** Without `screening.internal.acceptance`, acceptance uses the exploration rules
+unchanged: accepted provenance, a hard task with an annotated `source` basis, at least 6 tasks and 4 families, owner share
+<= 0.5, no family of an earlier holdout/calibration/development set, one use. With `screening.internal.acceptance.policy:
+"internal-acceptance@1"` (approved 2026-11-14), the separate policy of section 10 applies on a separate internal pool fed only by
+audited intake (section 11).
 
 **Pool state as of 2026-11-13 13:0xZ** (`eval-loop-confirmatory-1/pool`, registry unchanged since 2026-11-07, 0 `refresh`
 records in that pool):
@@ -227,13 +229,14 @@ flow and accounting only. They are not evidence about Terra.
    cannot run.
 6. Any real-service deployment of an evaluation-stable release stays a separate, explicit step.
 
-## 10. Proposed internal acceptance batch policy (PROPOSAL, NOT APPLIED)
+## 10. Internal acceptance batch policy `internal-acceptance@1` (APPROVED 2026-11-14, IMPLEMENTED; opt-in)
 
-Status: a recommendation for the user, written 2026-11-13. Nothing below is implemented. Applying it needs explicit user
-approval, a new named engine policy (for example `internal-acceptance@1`) with tests, and a new internal pool. The research
-regime is not changed by it: confirmatory-1, Terra v4, readiness and `cross-pool-overlap` stay as they are.
+Status: proposed 2026-11-13, approved by the user 2026-11-14 ("제안 수용"), implemented as the named, versioned policy
+`internal-acceptance@1` (`src/exploration.mjs` `internalAcceptanceProtocol`, `src/internal-acceptance.mjs`), opt-in through
+`screening.internal.acceptance` with a separate internal pool. Operations: section 11. The research regime is not changed by it:
+confirmatory-1, Terra v4, readiness and `cross-pool-overlap` stay as they are, and exploration defaults are unchanged.
 
-**Today.** Internal acceptance uses the exploration holdout rules unchanged (`src/exploration.mjs` `exploreProtocol`):
+**Without the opt-in** (and before 2026-11-14), internal acceptance uses the exploration holdout rules unchanged (`src/exploration.mjs` `exploreProtocol`):
 - at least 6 tasks and 4 families, from accepted provenance;
 - `hardBasis ["source"]` with at least one hard task;
 - owner share <= 0.5;
@@ -308,3 +311,110 @@ Consumer evidence (read only, 2026-11-14 ~00:10 KST, `eval-loop-terra-1/supply-i
 - Evidence that tasks in the 569 were shown to a loop session.
 - A much smaller verified supply than reported.
 - Measured A/A noise so large that a 6-8 task batch cannot separate arms (then larger batches or no promotion).
+
+## 11. Operating `internal-acceptance@1` (implemented 2026-11-14)
+
+### Configuration (opt-in; the values are the consumer's)
+
+```json
+"screening": { "internal": { "...": "section 4 fields",
+  "acceptance": {
+    "policy": "internal-acceptance@1",
+    "pool": "/abs/run/internal-pool",
+    "sources": {
+      "runRoots":     ["/abs/every/dir/holding/runs.jsonl/of/this/loop"],
+      "pools":        ["/abs/research/pool/the/material/comes/from", "/abs/exploration/pool"],
+      "datasets":     ["/abs/dev-or-calibration/datasets"],
+      "contentRoots": ["/abs/review/adjudication/analysis/outputs"]
+    },
+    "coverage": { "document": "/abs/coverage.json", "sha256": "<sha256 of that file>" }
+  } } }
+```
+
+- **Separate pool.** `pool` must differ from the exploration pool, and it is never listed under `sources.pools`; it is always a
+  source.
+- **What runs where.** Dev and regression screening keep using the exploration pool and lineage, unchanged. Only acceptance
+  batches come from the internal pool.
+- **Frozen plans.** Plans frozen before the opt-in keep their pool and protocol. A plan carrying `policy` is refused under a
+  config without the matching section; a changed config is refused anyway (state bound to its config).
+
+### Attributable documents (the engine checks presence, identity, hashes and consistency, not truth)
+
+- **`pi-eval-loop/internal-source-coverage@1`**
+  - Fields: `{ auditor: {name, kind: "human"|"agent"}, at, statement, sources: <exactly the configured sources> }`.
+  - Its sha256 is in the config. A changed file, or sources that differ from the config, is `source-coverage-stale` and refuses
+    everything until re-attested.
+- **`pi-eval-loop/internal-exposure-audit@1`**
+  - Fields: `{ auditor, at, origin: {pool}, selection: {candidateBlind: true, document, sha256}, tasks: {<id>: {contentExposure:
+    "none", modelSessions: "none", analystSessions: "none", contentDigest?}} }`.
+  - A missing entry or "unknown" gives `audit-incomplete`.
+  - Any other value gives `audit-exposed`.
+  - A mechanical finding that contradicts "none" gives `audit-conflict`.
+  - A changed audit file after intake gives `audit-drift`: the batch is not offered, and refresh retires it with an evidence
+    document.
+
+### Mechanically verified (fail closed with distinct codes)
+
+| Code | Meaning |
+|---|---|
+| `exposed-task` | Dispatched or measured in any `runs.jsonl` under `runRoots`, or in the run ledger of a used batch's own pass |
+| `exposed-family` | Another task of the same family was exposed (every family member counts) |
+| `exposed-task` (whole batch) | Every task of a used batch whose pass ledger is unreadable |
+| `exposed-task` (calibration) | Calibration batches are measured |
+| `exposed-task` (datasets) | Configured datasets, and every epoch's dev and regression tasks |
+| `exposed-task` (internal) | The internal pool's own used or reserved batches. These stay excluded forever; rollback never erases them |
+| `live-reservation` | Reserved, unused batch; its exposure can still change |
+| `content-exposed` | The task id appears in any file or path under `contentRoots` |
+| `exercism-equivalent` | The same Exercism problem was exposed |
+| `duplicate-content` | A hidden/reference file equals exposed material |
+| `duplicate-import` | Same content digest, or a hidden/reference file of something already imported |
+| `origin-*` | Origin provenance: hash chain, case record, content digest of the copied bytes, origin status eligible or withdrawn only, a passing origin validation |
+| `grader-invalid` | The fresh validation of the copy failed |
+| `exposure-unknown` | `source-missing` / `source-unreadable` / `source-tampered`, a malformed run ledger, or `family-unresolved` (an exposed id whose family no source defines). Blocks every decision |
+
+**Registration is not exposure; dispatch 0 alone is not clearance.**
+- A withdrawn or registered case whose task and family have no dispatched unit, no consumption and no content mention can be
+  imported only with its attributable audit entry and a candidate-blind selection document.
+- These checks run at intake, at sealing, when a batch is offered, and again immediately before the batch is consumed.
+- Consumption itself keeps the existing one-use reservation and `USES` machinery.
+
+**Limits the engine cannot remove.**
+- Exposure outside the configured sources is invisible. That is why the coverage statement is attributable.
+- Content checks are by name (paraphrased leakage is not detected).
+- Pretraining exposure of public material is unknown.
+- Mechanically clear does not mean cleared.
+
+### Commands
+
+```sh
+# 1. read-only worksheet: origin record/digest + every mechanical finding per task (never a clearance)
+eval-loop-explore internal-audit  --protocol CFG --origin-pool POOL --ids-file IDS.txt
+# 2. audited intake: copy into the internal pool (origin only read), fresh grader validation (host sandbox)
+eval-loop-explore internal-intake --protocol CFG --origin-pool POOL --audit AUDIT.json --ids-file IDS.txt
+# 3. seal / re-check / retire on the internal pool (no collector)
+eval-loop-explore refresh --protocol CFG
+# 4. state: policy, notRequired vs retained rules, cases by status:code, sealable tasks/families/owners, exposure counts, blockers
+eval-loop-explore internal-status --protocol CFG        # .acceptance
+eval-loop-explore --preflight --state DIR --protocol CFG
+```
+
+### Auditing the existing withdrawn inventory (consumer; NOT done, NOTHING cleared)
+
+The 533 withdrawn tasks are not eligible automatically.
+
+1. **Coverage statement.** List every runner-ledger root of this loop (ctrl-confirm-3/4 passes, calibration, Terra screening,
+   exploratory runs), every pool, the dev and calibration datasets, and every review/adjudication/analysis output directory.
+   Record its sha256 in a NEW config.
+2. **Worksheet.** Run `internal-audit` over the candidate ids. Every `exposure-unknown` blocker must be fixed by adding sources,
+   never by removing them.
+3. **Audit entries.** For each mechanically clear id, an attributable auditor writes the entry, stating "none" only when they
+   can establish it. Also reference the original selection document of ctrl-confirm-3/4 with its sha256.
+   - Still excluded:
+     - the 36 calibration/review tasks;
+     - the 27 tasks with grading defects;
+     - the 9 tasks measured x3;
+     - the 103 dispatched tasks and their families.
+   - The engine refuses them mechanically wherever the sources show it.
+4. **Intake and seal.** Run `internal-intake`, then `refresh`.
+   - Activation stays a separate, explicit consumer step.
+   - Research pools and records are not touched.

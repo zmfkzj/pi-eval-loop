@@ -42,6 +42,8 @@ import { loadLocal, verifySeal } from "./datasets.mjs";
 import { poolState } from "./supply.mjs";
 import { exercismProblem, readRegistry } from "./lineage.mjs";
 import { acquireLock, atomicWriteJson, digestOf, ensureDir, fault, Ledger, LockBusyError, readJson, sha256 } from "./util.mjs";
+import { holdoutPoolOf, internalAcceptanceEnabled } from "./internal-acceptance.mjs";
+import { INTERNAL_ACCEPTANCE_POLICY } from "./exploration.mjs";
 import { abandonAssessment, acceptanceDecision, noProgress, recordAcceptance, acceptanceRepeats, assessmentPlan, candidateDemand, finishAssessment, INTERNAL_EVIDENCE, ASSESSMENT_EVIDENCE, internalEnabled, internalPaths, pendingAssessment, promote, reconcile, rollback as internalRollback } from "./internal-promotion.mjs";
 
 export const ROUTE = "screening";
@@ -149,7 +151,9 @@ export function candidateView(records, cfg) {
   const hist = cfg.screening.history ?? [];
   const byPkey = new Map(list.filter(c => c.pkey).map(c => [c.pkey, c]));
   // A holdout exposure: a pre-route history entry, a holdout result, or a holdout claim whose batch records this cycle's use.
-  const consumed = (r) => { try { const f = join(cfg.pool, "batches", r.batch ?? "", "USES.jsonl"); return existsSync(f) && readFileSync(f, "utf8").includes(JSON.stringify(join(r.stateDir, r.sub ?? "holdout"))); } catch { return true; } };
+  // Both the exploration pool and (internal-acceptance@1) the internal pool: a claim is consumed wherever its batch recorded the use.
+  const pools = [cfg.pool, cfg.screening?.internal?.acceptance?.pool].filter(Boolean);
+  const consumed = (r) => { try { return pools.some(pool => { const f = join(pool, "batches", r.batch ?? "", "USES.jsonl"); return existsSync(f) && readFileSync(f, "utf8").includes(JSON.stringify(join(r.stateDir, r.sub ?? "holdout"))); }); } catch { return true; } };
   const exposureOf = (c) => {
     const h = hist.find(x => (x.runtimeDigest && x.runtimeDigest === c.key) || (x.archivePkey && x.archivePkey === c.pkey));
     if (h) return { at: h.at, note: h.note, source: "history" };
@@ -637,7 +641,7 @@ export async function screeningCycle(ctx) {
       const view = candidateView(records, cfg);
       let supply = { ok: false, why: "holdout disabled" };
       if (sc.holdout.enabled && view.some(c => c.status === "qualified")) {
-        try { helpers.recoverPool(cfg.pool); helpers.retireContaminated(cfg); const pick = helpers.nextBatch(cfg, { orcheDir: ctx.orcheDir }); supply = pick.none ? { ok: false, why: pick.none.slice(0, 2).join("; ") } : { ok: true, pick }; }
+        try { if (existsSync(join(holdoutPoolOf(cfg), "registry.jsonl"))) helpers.recoverPool(holdoutPoolOf(cfg)); helpers.retireContaminated(cfg); const pick = helpers.nextBatch(cfg, { orcheDir: ctx.orcheDir }); supply = pick.none ? { ok: false, why: pick.none.slice(0, 2).join("; ") } : { ok: true, pick }; }
         catch (error) { supply = { ok: false, why: `supply check: ${String(error.message).slice(0, 200)}` }; }
       }
       const ledgerRecs = budget.verified();
@@ -684,7 +688,8 @@ export async function screeningCycle(ctx) {
         const pick = supply.pick;
         const seal = verifySeal(pick.dir);
         if (!seal.ok) return block("supply-error", `batch seal: ${seal.why}`, true, "init");
-        const plan = { ...(cfg.route !== undefined ? { route: cfg.route } : {}), seed, stable, candidate, screen: { report: dev.report, reportSha256: dev.reportSha256, runs: dev.runs, tasks: cfg.screen.tasks }, holdout: { batch: pick.dir, seal: seal.seal.digest, pool: cfg.pool, minRemaining: needs.holdout } };
+        // internal-acceptance@1: the plan names the policy (bound into the frozen plan digest; runHoldout never reinterprets it).
+        const plan = { ...(cfg.route !== undefined ? { route: cfg.route } : {}), ...(internalAcceptanceEnabled(cfg) ? { policy: INTERNAL_ACCEPTANCE_POLICY } : {}), seed, stable, candidate, screen: { report: dev.report, reportSha256: dev.reportSha256, runs: dev.runs, tasks: cfg.screen.tasks }, holdout: { batch: pick.dir, seal: seal.seal.digest, pool: holdoutPoolOf(cfg), minRemaining: needs.holdout } };
         // A selection dropped before consumption (pool would not hand out the batch) re-plans into a NEW sub-directory: a frozen
         // plan is never changed in place, and an unconsumed claim is not an exposure.
         const n = records.filter(r => r.type === "claim" && r.stage === "holdout" && r.stateDir === stateDir).length;

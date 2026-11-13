@@ -1061,7 +1061,7 @@ export function batchedFamilies(st) {
  * whose tasks may be run to calibrate difficulty rules; a calibration batch is never eligible as a holdout, and no holdout batch
  * is ever used for calibration). Returns { batch, dir, coverage } or { blocked: why }.
  */
-export function sealBatch({ pool, cfg, minima, now = new Date(), purpose = "holdout", exclude = null, requireEvidence = [] }) {
+export function sealBatch({ pool, cfg, minima, now = new Date(), purpose = "holdout", exclude = null, requireEvidence = [], policy = undefined }) {
   if (!["holdout", "calibration"].includes(purpose)) throw new Error(`sealBatch: unknown purpose ${purpose}`);
   pool = poolPath(pool);
   const lock = acquireLock(join(pool, ".pool.lock"));
@@ -1088,13 +1088,14 @@ export function sealBatch({ pool, cfg, minima, now = new Date(), purpose = "hold
       const t = readJson(join(src, "task.json"));
       provenance.push({ id, family: t.family, tier: t.tier, difficultyBasis: t.difficultyBasis ?? "size-proxy", ...(t.difficultySource ? { difficultySource: t.difficultySource } : {}), provenance: t.provenance, upstream: t.upstream });
     }
-    atomicWriteJson(join(tmp, "PROVENANCE.json"), { schema: SUPPLY_SCHEMA, batch, purpose, createdAt: now.toISOString(), selection: { rule: `sha256(seed:id) order${cfg.batch.preferFreshFamilies ? " (families of no earlier batch first)" : ""}, first hard case first, maxPerFamily, maxPerOwner, maxOwnerShare of the sealed size, maxTasks`, seed: cfg.batch.seed, maxTasks: cfg.batch.maxTasks, maxPerFamily: cfg.batch.maxPerFamily, maxPerOwner: cfg.batch.maxPerOwner, maxOwnerShare: cfg.batch.maxOwnerShare ?? null, preferFreshFamilies: !!cfg.batch.preferFreshFamilies, candidateBlind: true }, configDigest: digestOf(cfg), coverage: sel.coverage, tasks: provenance, limitations: [...new Set([...LIMITATIONS, ...(provenance.some(p => p.provenance === "private-reviewed") ? [PRIVATE_LIMITATION] : []), ...provenance.flatMap(p => p.upstream?.limitations ?? [])])] });
+    // policy (optional, internal-acceptance@1 only): the eligibility policy the batch was selected under (absent = unchanged).
+    atomicWriteJson(join(tmp, "PROVENANCE.json"), { schema: SUPPLY_SCHEMA, batch, purpose, ...(policy ? { policy } : {}), createdAt: now.toISOString(), selection: { rule: `sha256(seed:id) order${cfg.batch.preferFreshFamilies ? " (families of no earlier batch first)" : ""}, first hard case first, maxPerFamily, maxPerOwner, maxOwnerShare of the sealed size, maxTasks`, seed: cfg.batch.seed, maxTasks: cfg.batch.maxTasks, maxPerFamily: cfg.batch.maxPerFamily, maxPerOwner: cfg.batch.maxPerOwner, maxOwnerShare: cfg.batch.maxOwnerShare ?? null, preferFreshFamilies: !!cfg.batch.preferFreshFamilies, candidateBlind: true }, configDigest: digestOf(cfg), coverage: sel.coverage, tasks: provenance, limitations: [...new Set([...LIMITATIONS, ...(provenance.some(p => p.provenance === "private-reviewed") ? [PRIVATE_LIMITATION] : []), ...provenance.flatMap(p => p.upstream?.limitations ?? [])])] });
     const seal = sealOf(tmp);
     if (seal.symlinks.length) throw new Error(`symlinks in batch: ${seal.symlinks.join(", ")}`);
     atomicWriteJson(join(tmp, "SEAL.json"), { ...seal, schema: SUPPLY_SCHEMA, batch, sealedAt: now.toISOString() });
     renameSync(tmp, dir);
     fault("seal:after-batch-rename");
-    registryOf(pool).append({ type: "batch", batch, dir: relative(pool, dir), tasks: sel.ids, sealDigest: seal.digest, coverage: sel.coverage, ...(purpose !== "holdout" ? { purpose } : {}) });
+    registryOf(pool).append({ type: "batch", batch, dir: relative(pool, dir), tasks: sel.ids, sealDigest: seal.digest, coverage: sel.coverage, ...(purpose !== "holdout" ? { purpose } : {}), ...(policy ? { policy } : {}) });
     fault("seal:after-batch-record");
     // Evidence lifecycle (2026-11-07): the staged case directory is MOVED, byte for byte, to <pool>/evidence/<batch>/<id> (never
     // deleted: its validation.private.json and other private records were lost this way before), and the sha256 of every file the
