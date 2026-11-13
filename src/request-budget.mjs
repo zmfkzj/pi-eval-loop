@@ -22,6 +22,8 @@ import { randomBytes } from "node:crypto";
 import { Ledger, LockBusyError, acquireLock, atomicWriteJson, sha256, sleep } from "./util.mjs";
 
 export const BUDGET_SCHEMA = "pi-eval-loop/request-budget@1";
+/** Reservation routes (meta.route) that reconcileDead settles at their full amount: an abandoned one keeps its worst case. */
+export const RETAINED_ROUTES = Object.freeze(["proposal"]);
 
 export class BudgetError extends Error {
   /** @param {string} message @param {string} code */
@@ -195,6 +197,10 @@ export class RequestBudget {
    * reservations open; they would hold budget forever and make every later "no foreign open reservation" check wait). The owner
    * must be a pid that no longer exists on this host (a reused pid counts as alive: conservative, the reservation stays). Each is
    * settled at 0, which settle() raises to the attempt floor, so charged never falls below the actual attempts.
+   * A reservation of a RETAINED_ROUTES route (meta.route) is settled at its FULL amount instead: its requests pass a route proxy,
+   * not the attempt gate, so the floor cannot see them; an abandoned one keeps its worst case (agent_workflow's proposal
+   * contract) and stops blocking the "no open reservation" check.
+   * @param {any} [detail]
    * @returns {Promise<{ id: string, pid: number, used: number }[]>}
    */
   async reconcileDead(detail = {}) {
@@ -204,7 +210,8 @@ export class RequestBudget {
       if (!Number.isInteger(r.pid) || r.pid === process.pid) continue;
       let alive = true; try { process.kill(r.pid, 0); } catch (error) { alive = error?.code === "EPERM"; }
       if (alive) continue;
-      const s = await this.settle({ id: r.id }, 0, { ...detail, reconciled: `owner pid ${r.pid} is not running` }).catch(() => null);
+      const retained = RETAINED_ROUTES.includes(r.meta?.route);
+      const s = await this.settle({ id: r.id }, retained ? r.amount : 0, { ...detail, reconciled: `owner pid ${r.pid} is not running`, ...(retained ? { retained: "worst case" } : {}) }).catch(() => null);
       if (s) out.push({ id: r.id, pid: r.pid, used: s.used });
     }
     return out;
