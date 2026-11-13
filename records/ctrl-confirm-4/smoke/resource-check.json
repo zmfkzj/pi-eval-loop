@@ -1,0 +1,92 @@
+{
+ "state": "pi-eval-loop/state/ctrl-confirm-4-smoke",
+ "tasks": "exposed suite a6-typo-message, c4-malformed-lines (never holdout)",
+ "units": 6,
+ "terminal": [
+  "completed",
+  "completed",
+  "completed",
+  "completed",
+  "completed",
+  "completed"
+ ],
+ "settlements": [
+  {
+   "source": "wire",
+   "usage": {
+    "requests": 5,
+    "input": 7586,
+    "cached": 5248,
+    "cacheWrite": 0,
+    "output": 185,
+    "costUsd": 0.00037878000000000006
+   }
+  },
+  {
+   "source": "wire",
+   "usage": {
+    "requests": 9,
+    "input": 32268,
+    "cached": 22016,
+    "cacheWrite": 0,
+    "output": 687,
+    "costUsd": 0.00158886
+   }
+  },
+  {
+   "source": "wire",
+   "usage": {
+    "requests": 11,
+    "input": 70965,
+    "cached": 50688,
+    "cacheWrite": 0,
+    "output": 1507,
+    "costUsd": 0.00328808
+   }
+  },
+  {
+   "source": "wire",
+   "usage": {
+    "requests": 15,
+    "input": 95669,
+    "cached": 77824,
+    "cacheWrite": 0,
+    "output": 1757,
+    "costUsd": 0.00344124
+   }
+  },
+  {
+   "source": "wire",
+   "usage": {
+    "requests": 13,
+    "input": 107161,
+    "cached": 86272,
+    "cacheWrite": 0,
+    "output": 2579,
+    "costUsd": 0.00424112
+   }
+  },
+  {
+   "source": "wire",
+   "usage": {
+    "requests": 19,
+    "input": 176426,
+    "cached": 141440,
+    "cacheWrite": 0,
+    "output": 3129,
+    "costUsd": 0.0064775
+   }
+  }
+ ],
+ "recordVsWireEqual": true,
+ "ledgerTypes": [
+  "active-end",
+  "active-start",
+  "campaign-start",
+  "heartbeat",
+  "reserve",
+  "session-end",
+  "session-start",
+  "settle"
+ ]
+}

@@ -1,0 +1,146 @@
+{
+ "old": "ctrl-confirm-4-smoke2",
+ "new": "ctrl-confirm-4-smoke4",
+ "pairs": 6,
+ "identicalFirstRequests": 0,
+ "rows": [
+  {
+   "arm": "OC",
+   "task": "a6-typo-message",
+   "old": {
+    "firstGet": "/v1/models?client_version=pi",
+    "path": "/backend-api/codex/responses",
+    "model": "gpt-6-luna",
+    "effort": "medium",
+    "bytes": 12373,
+    "sessionLen": 44,
+    "posts": 11
+   },
+   "new": {
+    "firstGet": "/v1/models?client_version=pi",
+    "path": "/backend-api/codex/responses",
+    "model": "gpt-6-luna",
+    "effort": "medium",
+    "bytes": 12418,
+    "sessionLen": 44,
+    "posts": 10
+   },
+   "sameFirstRequest": false
+  },
+  {
+   "arm": "OC",
+   "task": "c4-malformed-lines",
+   "old": {
+    "firstGet": "/v1/models?client_version=pi",
+    "path": "/backend-api/codex/responses",
+    "model": "gpt-6-luna",
+    "effort": "medium",
+    "bytes": 12492,
+    "sessionLen": 47,
+    "posts": 17
+   },
+   "new": {
+    "firstGet": "/v1/models?client_version=pi",
+    "path": "/backend-api/codex/responses",
+    "model": "gpt-6-luna",
+    "effort": "medium",
+    "bytes": 12539,
+    "sessionLen": 47,
+    "posts": 17
+   },
+   "sameFirstRequest": false
+  },
+  {
+   "arm": "OCR",
+   "task": "a6-typo-message",
+   "old": {
+    "firstGet": "/v1/models?client_version=pi",
+    "path": "/backend-api/codex/responses",
+    "model": "gpt-6-luna",
+    "effort": "medium",
+    "bytes": 12370,
+    "sessionLen": 45,
+    "posts": 10
+   },
+   "new": {
+    "firstGet": "/v1/models?client_version=pi",
+    "path": "/backend-api/codex/responses",
+    "model": "gpt-6-luna",
+    "effort": "medium",
+    "bytes": 12418,
+    "sessionLen": 45,
+    "posts": 10
+   },
+   "sameFirstRequest": false
+  },
+  {
+   "arm": "OCR",
+   "task": "c4-malformed-lines",
+   "old": {
+    "firstGet": "/v1/models?client_version=pi",
+    "path": "/backend-api/codex/responses",
+    "model": "gpt-6-luna",
+    "effort": "medium",
+    "bytes": 12493,
+    "sessionLen": 48,
+    "posts": 20
+   },
+   "new": {
+    "firstGet": "/v1/models?client_version=pi",
+    "path": "/backend-api/codex/responses",
+    "model": "gpt-6-luna",
+    "effort": "medium",
+    "bytes": 12543,
+    "sessionLen": 48,
+    "posts": 14
+   },
+   "sameFirstRequest": false
+  },
+  {
+   "arm": "PCR",
+   "task": "a6-typo-message",
+   "old": {
+    "firstGet": "/v1/models?client_version=pi",
+    "path": "/backend-api/codex/responses",
+    "model": "gpt-6-luna",
+    "effort": "medium",
+    "bytes": 2980,
+    "sessionLen": 45,
+    "posts": 5
+   },
+   "new": {
+    "firstGet": "/v1/models?client_version=pi",
+    "path": "/backend-api/codex/responses",
+    "model": "gpt-6-luna",
+    "effort": "medium",
+    "bytes": 3032,
+    "sessionLen": 45,
+    "posts": 5
+   },
+   "sameFirstRequest": false
+  },
+  {
+   "arm": "PCR",
+   "task": "c4-malformed-lines",
+   "old": {
+    "firstGet": "/v1/models?client_version=pi",
+    "path": "/backend-api/codex/responses",
+    "model": "gpt-6-luna",
+    "effort": "medium",
+    "bytes": 3125,
+    "sessionLen": 48,
+    "posts": 8
+   },
+   "new": {
+    "firstGet": "/v1/models?client_version=pi",
+    "path": "/backend-api/codex/responses",
+    "model": "gpt-6-luna",
+    "effort": "medium",
+    "bytes": 3175,
+    "sessionLen": 48,
+    "posts": 8
+   },
+   "sameFirstRequest": false
+  }
+ ]
+}

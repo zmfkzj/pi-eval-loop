@@ -1,0 +1,107 @@
+{
+ "at": "2026-11-08T02:31:00.051Z",
+ "preregDigest": "faee9851411aef2312d459c8063854d9293b1a837ac0e652435ced6976c28695",
+ "infrastructureReady": true,
+ "launchAllowed": true,
+ "checks": {
+  "identity": {
+   "integrityContract": true,
+   "testIntegrityRule": true,
+   "ocrPatch": true
+  },
+  "batches": [
+   {
+    "dir": "/home/arthur/Code/oh-my-pi-extensions/results/ctrl-confirm-3-holdout/ctrl-confirm-3-holdout-4206b2e38c1d",
+    "sealOk": true,
+    "sealDigest": "b9e9a05559c9c242c112098079f3691827907ea5e6e87ffa77229906681df10b",
+    "uses": 0
+   },
+   {
+    "dir": "/home/arthur/Code/oh-my-pi-extensions/results/ctrl-confirm-4-holdout/ctrl-confirm-4-holdout-9678d4a6a0da",
+    "sealOk": true,
+    "sealDigest": "a698916e3be90c1dbbf60e17b9784ad8b3c2b65212ffeb06486175be40a7bfa4",
+    "uses": 0
+   }
+  ],
+  "prerequisites": [
+   {
+    "name": "bwrap",
+    "ok": true
+   },
+   {
+    "name": "bwrap-namespaces",
+    "ok": true
+   },
+   {
+    "name": "pi-cli",
+    "ok": true
+   },
+   {
+    "name": "provider",
+    "ok": true
+   },
+   {
+    "name": "orche",
+    "ok": true
+   },
+   {
+    "name": "git",
+    "ok": true
+   },
+   {
+    "name": "credentials",
+    "ok": true
+   },
+   {
+    "name": "model-catalog",
+    "ok": true
+   },
+   {
+    "name": "upstream",
+    "ok": true
+   }
+  ],
+  "environmentDigest": "f5ce141053523d5762388ddb6f4c826c8470ea7156015a8e2045359bd7ff22a9",
+  "harness": [
+   {
+    "arm": "OC",
+    "treeDigest": "6bfbe380e9782c21c65554d181631130ae4a2ea21ff00df6ef283b829f1e6195"
+   },
+   {
+    "arm": "OCR",
+    "treeDigest": "503ae17237e202cb501f05d50ddeaadbcf8e17f58d5486c9d09102eb53190f16"
+   }
+  ],
+  "files": {
+   "evaluator": 34,
+   "experiment": 14,
+   "digest": "a45b62e21a120592c036d9abb84e75bbb0a654e208dc3c384075b9af2d2ea772"
+  },
+  "planAtN800": {
+   "tasks": 800,
+   "units": 7200,
+   "requests": 167690,
+   "input": 2650428344,
+   "cached": 2367392206,
+   "cacheWrite": 0,
+   "output": 24637841,
+   "activeHours": 40.7,
+   "costUsdCached": 64.3,
+   "costUsdNoCache": 277.36,
+   "costUsdAllCacheWrite": 71.37
+  },
+  "budget": {
+   "maxRequestsTotal": 210000,
+   "maxActiveHours": 52,
+   "maxCampaignWallHours": 120,
+   "maxInputTokens": 3400000000,
+   "maxOutputTokens": 32000000,
+   "maxCostUsdApiEquivalent": 300,
+   "maxConsecutiveInfra": 5,
+   "maxInfraRate": 0.1,
+   "note": "finite ceilings approved in scope by the user on 2026-11-07 (expanded from ctrl-confirm-3: 45 000 requests, 16 active h, 30 h wall). Sized for N <= ~830 tasks x 3 arms x 3 repeats with margin 1.2 on ctrl-confirm-2 measured rates. Active hours = time with >= 1 attempt in flight (pauses excluded); wall = elapsed since the first launch incl. pauses, fixed once. The cost ceiling is API-EQUIVALENT (official list price, not the proxy's actual billing). Never a provider/model substitution or a credit purchase."
+  },
+  "launchRefusal": null,
+  "usesUnchanged": true
+ }
+}

@@ -1,0 +1,1 @@
+2026-11-07T20:32:57Z collector 11 died 19:37:09Z (EACCES removing a validation scratch dir created by a repository test, src/supply.mjs:386); restarted before the cutoff per COLLECTION.md; interrupted repository recorded, not re-processed
