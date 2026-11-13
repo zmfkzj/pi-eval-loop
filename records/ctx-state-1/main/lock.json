@@ -1,0 +1,228 @@
+{
+  "experiment": "ctx-state-1",
+  "stage": "main",
+  "smoke": false,
+  "preregDigest": "8b2d0fb55ec913a50e6b9dda5a716b10d670d8b678c5d156c021d2c37f795486",
+  "envDigest": "ad9321d6141fa0f227eb1a6ca5cba9ebdf90427e1cffdca8259a81c1f182a770",
+  "queueDigest": "fdbbb6537ccf2fb6b5a1efc1abc04e08610caa7fda34d0f4b1d2108b160c0c42",
+  "files": {
+    "pi-eval-loop/src/ablation.mjs": "9ef9aaa20a507283baa86f0fa342867cbdae02af28ecec8068e607dd7725e2c9",
+    "pi-eval-loop/src/analysis.mjs": "d79f1987fbe987ca8d8bbfe041059eafc50ee29e6294692e7dc5f090e4bffc65",
+    "pi-eval-loop/src/app.mjs": "b4dc838f74b4df512f8b311652b083d7221d494be468056db1adc115f1f6aeb6",
+    "pi-eval-loop/src/archive.mjs": "5011acbb8d78f20e525db0700bb76e3e349e989a4efe531ff02eec55a4194b58",
+    "pi-eval-loop/src/checks.mjs": "5e818cfb7934890fa4bdb297dc74ff6b5cd0f03ed9366a164a18927e3f754de5",
+    "pi-eval-loop/src/cli.mjs": "204dda8579ca4239ea3118ed375a1c1690e79c6e553af72e7790f417efdd0abe",
+    "pi-eval-loop/src/contract.mjs": "8d814d70577d66234c5296cd3a6c63f7ea91d66797e9700aee813e087182ed3d",
+    "pi-eval-loop/src/datasets.mjs": "bc36793ebb9b1241fdb3465a885356c01ef812f88ed2661b30574279bf9fb780",
+    "pi-eval-loop/src/deploy.mjs": "3254278b2ed206c72b8c634ff5fb60ed1b7c6e0b07ee8b837144682c6811a966",
+    "pi-eval-loop/src/evaluator.mjs": "58f1e8d3ef78d8f70665b63a74f803683e02a0733ea8e04c62345afc06e7fd99",
+    "pi-eval-loop/src/faux-upstream.mjs": "7e98f2587472a936054fb2631c147dfa326de6eb34f026d16be64b5452731cad",
+    "pi-eval-loop/src/gate.mjs": "ace1c43e2e6e31cdc936b45d3bb5998d31d2bd4e3ab000764e1117e985b4d8c5",
+    "pi-eval-loop/src/grader.mjs": "ee2e91e1119c18f59503d2388171b9b68482e6d7ac6c3603631a017fee6cc615",
+    "pi-eval-loop/src/integrity.mjs": "1340b9fcd3b58a2c728d29cb5d4e775b4b6c0ce6864c25af4fc86e8e4d5d9cb6",
+    "pi-eval-loop/src/loop.mjs": "0db95ca0401d899b6bc547a5f58b15835b71167e7d735dd5df76b5e0b1bcf3d5",
+    "pi-eval-loop/src/metrics.mjs": "beb60e6c00c9d3402a4057bc32729a37cb6f7d7eb54194b020db82bf0b708ec8",
+    "pi-eval-loop/src/proposer.mjs": "ce781b5a39dcda59c8a99a3caece8274568a682ffa9a37e418b01b8001121cd8",
+    "pi-eval-loop/src/protocol.mjs": "9318470a1267b64eb5910ce7118d114a6cd62e03c2f3a37bdc480b3b526e0439",
+    "pi-eval-loop/src/report.mjs": "5af79cfdbbf223ce4ef8929e3b320e3958f086a285039cd01bc605cb581ec7e4",
+    "pi-eval-loop/src/rng.mjs": "7cb24904a94176a514cb29c82149bab5bfd0717db2ad9a103b4fec78e9e7b500",
+    "pi-eval-loop/src/runner.mjs": "44ec714644dd8136f98bd91bc41e7851d2eabc6f00f87a6fa098fbc398a61970",
+    "pi-eval-loop/src/sandbox.mjs": "053174801d5c2ea7c01cfe8ed3a77debc3a1def4bd5cc4ba7c5d78ff0123c1e3",
+    "pi-eval-loop/src/selftest.mjs": "7fd97c27099557d23719d7231a49dee173d5a92e209fec8a22ee8712cb7908b1",
+    "pi-eval-loop/src/stats.mjs": "a423cdfb7b542380d922f2bb15ac3d2e9ac365db0053a3386aacd6b5ffec469c",
+    "pi-eval-loop/src/supply-cli.mjs": "b0b2745afbef48b652bd0c71ced8bd33ec2276ea17abc7c74219d13694498a2e",
+    "pi-eval-loop/src/supply-exercism.mjs": "c3423f964df574f44852535ac670dd3272de46fdb7a22c9d5ec556b64932890d",
+    "pi-eval-loop/src/supply.mjs": "d862ac1d631f01502201eae835354d3405d846eb2f5f51251d1e28a2ee578cfe",
+    "pi-eval-loop/src/telemetry.mjs": "092b3cc159ead0886878c7bef00405f8ced46fef35db501d2fe7aec42a26cb8e",
+    "pi-eval-loop/src/util.mjs": "ad13afc4ad29399a29284d522f4af59e886345deefd0e658252aa5d8f7f194da",
+    "pi-eval-loop/src/worktree.mjs": "8318216d433cd73928378980aad56da70d9648095539ec5afd5c4cb336178199",
+    "orche/experiments/witness-replay/proxy.mjs": "67f839177a9961efe1354208e79fab8506316260f4ee51af27cf96dd99746ef5",
+    "orche/experiments/witness-replay/bridge.mjs": "85dc52cf5a467c1db776d68f4f20cfc2497ae22006c02232a56ec7c82fc28ab2",
+    "orche/experiments/witness-replay/sandbox.ts": "89fb3b861abf0507be3d3a429905b8305e818fc9b5aaf55c11159a5b9ede0871",
+    "orche/experiments/ultra-ab/protocol.ts": "c080e3efc4d0bfdbfe6f236902e6c6c94944d58da9664b8846ebcb0353ca53f6",
+    "pi-eval-loop/experiments/ctx-state-1/PREREGISTRATION.md": "2ccb0dc89cf609fbfd2345c78c2af894230925fbbef6bed4f9c4fcfa8c3cefe5",
+    "pi-eval-loop/experiments/ctx-state-1/fidelity.mjs": "5c13124ead605d7cd7f7e9d191fa507262f15055cdf33bb6c75b893af6339107",
+    "pi-eval-loop/experiments/ctx-state-1/lib.mjs": "29ede092e9a82aa9fb96e21dab7237635e178363938593b0af919af3aae3ee4f",
+    "pi-eval-loop/experiments/ctx-state-1/prereg-baseline.json": "ed983d36210f40d8d74fa5eed24ccd1417ed6878afabce29e8e76e7921b4074a",
+    "pi-eval-loop/experiments/ctx-state-1/prereg-main.json": "70a6b5b9f0d9698012e40a9c23dee8a22336cf96ad1d8774c7363c8bd47ea627",
+    "pi-eval-loop/experiments/ctx-state-1/prereg-pilot-s1.json": "7c6570b4f0eae1a7ffcc5b0d34b5ec9be58229736c156e95c9f199833d32dc4f",
+    "pi-eval-loop/experiments/ctx-state-1/prereg-pilot.json": "ec08ab322ffa46940d5a8bdd3c718f4a3028eb5edb84e78e51e40c1be3c5ab5b",
+    "pi-eval-loop/experiments/ctx-state-1/run.mjs": "519e1d9907ca9952e430961334893718b8f0d2c01a7ee6bb8e7caae311c45629",
+    "pi-eval-loop/experiments/ctx-state-1/tasks/s1-amended-billing/hidden/test/acceptance.test.mjs": "e341e67af2e0711721e966431dc7191460526744e5476e4ce83797994c39c1aa",
+    "pi-eval-loop/experiments/ctx-state-1/tasks/s1-amended-billing/reference/.batch/issued": "1abccc9fa86eece8ca8db3aeef5c0c63465903ebdd1a76f96f3a8ca2d0254a82",
+    "pi-eval-loop/experiments/ctx-state-1/tasks/s1-amended-billing/reference/src/fx/index.mjs": "b483c4771430da358d85fdff626dd7e7af4cba55e20d73df2b2752ec78ec9770",
+    "pi-eval-loop/experiments/ctx-state-1/tasks/s1-amended-billing/reference/src/invoice/index.mjs": "7fcb6298a7e1f4068932a400fc57b7e7240e7bf4f31d31891a83df5ac20266ea",
+    "pi-eval-loop/experiments/ctx-state-1/tasks/s1-amended-billing/reference/src/ledger/index.mjs": "9bd83175997a2e1834e032f7fb5b7bfa97cb19d094d446640878144ff947e7e1",
+    "pi-eval-loop/experiments/ctx-state-1/tasks/s1-amended-billing/reference/src/meta.mjs": "2b78f629164edb016326dac87ae4581e2c00ab55e894db88dc7241528661caee",
+    "pi-eval-loop/experiments/ctx-state-1/tasks/s1-amended-billing/reference/src/money.mjs": "3f441d3f43ab486f15b0a6cab8e7f46d1f2809e265fe61c414ca53918abe09e4",
+    "pi-eval-loop/experiments/ctx-state-1/tasks/s1-amended-billing/reference/src/split/index.mjs": "2b82bbb6b70fd6eedf1fbbec1f17b54033c6a8504641aac69b058771944e9c3a",
+    "pi-eval-loop/experiments/ctx-state-1/tasks/s1-amended-billing/repo/package.json": "c658d08ce79b1d58d11b3401e4ea2111f108e0e174df0632058f5b6fd94471f0",
+    "pi-eval-loop/experiments/ctx-state-1/tasks/s1-amended-billing/repo/scripts/issue-batch.mjs": "27acade59bdc6d2f61ced05e7964164d535015dffa7a9d364d38226c849f5e7e",
+    "pi-eval-loop/experiments/ctx-state-1/tasks/s1-amended-billing/repo/src/fx/index.mjs": "28d8de672dbe241fa204185bf1c1d7c8a54db14eee318b941b85c417ad47452a",
+    "pi-eval-loop/experiments/ctx-state-1/tasks/s1-amended-billing/repo/src/invoice/index.mjs": "28d8de672dbe241fa204185bf1c1d7c8a54db14eee318b941b85c417ad47452a",
+    "pi-eval-loop/experiments/ctx-state-1/tasks/s1-amended-billing/repo/src/ledger/index.mjs": "28d8de672dbe241fa204185bf1c1d7c8a54db14eee318b941b85c417ad47452a",
+    "pi-eval-loop/experiments/ctx-state-1/tasks/s1-amended-billing/repo/src/meta.mjs": "5640b72119d4ea62507f6a9c431c66385b5cb54b522256d2390db12ffba6388f",
+    "pi-eval-loop/experiments/ctx-state-1/tasks/s1-amended-billing/repo/src/money.mjs": "e38e705d9a022d83bbe5629f01aa70264f80033db4f016f3a869101e5b61ce57",
+    "pi-eval-loop/experiments/ctx-state-1/tasks/s1-amended-billing/repo/src/split/index.mjs": "28d8de672dbe241fa204185bf1c1d7c8a54db14eee318b941b85c417ad47452a",
+    "pi-eval-loop/experiments/ctx-state-1/tasks/s1-amended-billing/repo/test/smoke.test.mjs": "0e6fc47e2f721820ad7939a02ab6be69042bd322d6bcbd8d32829b7a26a2c6c4",
+    "pi-eval-loop/experiments/ctx-state-1/tasks/s1-amended-billing/task.json": "32994d557c77109ab7a5dd67a914c82bdbec1bf8623fbe103d0f6d19f97ce96f"
+  },
+  "harness": {
+    "M0": {
+      "identity": "559bf27cae4cedd7b0bd6f209b4ecfd5bee55262:single+cfg:2859596f9c6126e4",
+      "tree": "a7bfa637c505940c819cc96bfcfe2f8785816efea5e0d23f39b28d838860e123",
+      "orcheConfig": {
+        "single": {
+          "ledger": false,
+          "spawn": true,
+          "advisor": false,
+          "maxSubWorkers": 8
+        },
+        "thinkingPolicy": "fixed"
+      }
+    },
+    "M1": {
+      "identity": "559bf27cae4cedd7b0bd6f209b4ecfd5bee55262:single+cfg:e539ef24a2d28c0f",
+      "tree": "a7bfa637c505940c819cc96bfcfe2f8785816efea5e0d23f39b28d838860e123",
+      "orcheConfig": {
+        "single": {
+          "ledger": true,
+          "spawn": true,
+          "advisor": false,
+          "maxSubWorkers": 8
+        },
+        "thinkingPolicy": {
+          "mode": "fixed",
+          "checkpoints": true,
+          "evidence": "strict"
+        }
+      }
+    },
+    "M2": {
+      "identity": "559bf27cae4cedd7b0bd6f209b4ecfd5bee55262:single+cfg:ed3242588af4b394",
+      "tree": "a7bfa637c505940c819cc96bfcfe2f8785816efea5e0d23f39b28d838860e123",
+      "orcheConfig": {
+        "single": {
+          "ledger": true,
+          "spawn": true,
+          "advisor": false,
+          "maxSubWorkers": 8
+        },
+        "thinkingPolicy": {
+          "mode": "fixed",
+          "checkpoints": true,
+          "evidence": "strict"
+        },
+        "workerCompaction": {
+          "policy": "absolute",
+          "triggerTokens": 24000,
+          "keepRecentTokens": 6000,
+          "essentials": "basic",
+          "subWorkers": false
+        }
+      }
+    },
+    "M3": {
+      "identity": "559bf27cae4cedd7b0bd6f209b4ecfd5bee55262:single+cfg:0d2671d03022f0b5",
+      "tree": "a7bfa637c505940c819cc96bfcfe2f8785816efea5e0d23f39b28d838860e123",
+      "orcheConfig": {
+        "single": {
+          "ledger": true,
+          "spawn": true,
+          "advisor": false,
+          "maxSubWorkers": 8
+        },
+        "thinkingPolicy": {
+          "mode": "fixed",
+          "checkpoints": true,
+          "evidence": "strict"
+        },
+        "workerCompaction": {
+          "policy": "absolute",
+          "triggerTokens": 24000,
+          "keepRecentTokens": 6000,
+          "essentials": "extended",
+          "subWorkers": false
+        }
+      }
+    },
+    "M4": {
+      "identity": "559bf27cae4cedd7b0bd6f209b4ecfd5bee55262:single+cfg:a17c88662e6c49aa",
+      "tree": "a7bfa637c505940c819cc96bfcfe2f8785816efea5e0d23f39b28d838860e123",
+      "orcheConfig": {
+        "single": {
+          "ledger": true,
+          "spawn": true,
+          "advisor": false,
+          "maxSubWorkers": 8
+        },
+        "thinkingPolicy": {
+          "mode": "fixed",
+          "checkpoints": true,
+          "evidence": "strict"
+        },
+        "workerCompaction": {
+          "policy": "absolute",
+          "triggerTokens": 24000,
+          "keepRecentTokens": 6000,
+          "essentials": "extended",
+          "subWorkers": true
+        }
+      }
+    }
+  },
+  "tasks": {
+    "d1-transactional-outbox": "898cd696f0c9aebe6ebf35248a98f965fb2927328df8556a7c3485cc4278db4d",
+    "d5-streaming-ingest-ko": "31d6ce9331e329d50065054e1f4cd24d02c60bb7c2f0b906ce4a1caf6df69b45",
+    "d7-config-reload": "4d0c0a0c87517eb23466838f65e5375d11160f5602e4062065a394e684282e23",
+    "p1-ticket-batch": "12e9f5919ed365333fa7f2ccb42dce4968722fb4a19a7d99eeb8e985284d066e",
+    "p2-handler-migration": "625bd2d7c94e45f42fa6ae70b98c4e0d04fe14fbf89420a3bb9d967842a817f6",
+    "p3-library-features-ko": "64099bf7f8f8c53ec6cf146b2dd4e3ad86f0067434e10e9696d0207ff54d33b3",
+    "s1-amended-billing": "a9ab271d3f0ab5fa82e9568fca267cfaf5a0fde986ba2664957234996796810c"
+  },
+  "grading": {
+    "d1-transactional-outbox": {
+      "expected": {
+        "hiddenTests": 8
+      },
+      "baselineFailing": []
+    },
+    "d5-streaming-ingest-ko": {
+      "expected": {
+        "hiddenTests": 8
+      },
+      "baselineFailing": []
+    },
+    "d7-config-reload": {
+      "expected": {
+        "hiddenTests": 9
+      },
+      "baselineFailing": []
+    },
+    "p1-ticket-batch": {
+      "expected": {
+        "hiddenTests": 27
+      },
+      "baselineFailing": []
+    },
+    "p2-handler-migration": {
+      "expected": {
+        "hiddenTests": 32
+      },
+      "baselineFailing": []
+    },
+    "p3-library-features-ko": {
+      "expected": {
+        "hiddenTests": 23
+      },
+      "baselineFailing": []
+    },
+    "s1-amended-billing": {
+      "expected": {
+        "hiddenTests": 14
+      },
+      "baselineFailing": []
+    }
+  },
+  "lockedAt": "2026-11-07T14:06:02.654Z"
+}

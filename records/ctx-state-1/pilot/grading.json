@@ -1,0 +1,28 @@
+{
+  "p1-ticket-batch": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 27
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 27
+    }
+  },
+  "p3-library-features-ko": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 23
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 23
+    }
+  }
+}

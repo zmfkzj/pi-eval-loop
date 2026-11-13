@@ -1,0 +1,270 @@
+[
+  {
+    "arm": "PT24",
+    "task": "p1-ticket-batch",
+    "terminal": "completed",
+    "success": true,
+    "configured": {
+      "ledger": true,
+      "thinkingPolicy": {
+        "mode": "fixed",
+        "checkpoints": true,
+        "evidence": "strict"
+      },
+      "workerCompaction": {
+        "policy": "absolute",
+        "triggerTokens": 24000,
+        "keepRecentTokens": 6000,
+        "essentials": "extended",
+        "subWorkers": true
+      },
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 6,
+      "ledgerKinds": [
+        "create",
+        "handoff",
+        "plan",
+        "result"
+      ],
+      "taskPlans": 3,
+      "checkpointsInLastPlan": 2,
+      "checkpointsCitingRefs": 2,
+      "refsTagged": 32,
+      "workerSessions": 5,
+      "compactions": 4,
+      "compactionPolicies": [
+        "absolute"
+      ],
+      "earlyCompactions": 4,
+      "references": [
+        "valid",
+        "valid",
+        "valid",
+        "valid"
+      ],
+      "essentialsSections": [
+        "request",
+        "plan",
+        "ledger",
+        "work-log",
+        "reference"
+      ],
+      "cancelled": [],
+      "failed": 0,
+      "subWorkerCompactions": 1,
+      "piCompactionEntries": 5,
+      "summaryRequests": 6,
+      "maxInputObserved": 23864,
+      "transcriptReads": 0
+    }
+  },
+  {
+    "arm": "PT24",
+    "task": "p3-library-features-ko",
+    "terminal": "completed",
+    "success": true,
+    "configured": {
+      "ledger": true,
+      "thinkingPolicy": {
+        "mode": "fixed",
+        "checkpoints": true,
+        "evidence": "strict"
+      },
+      "workerCompaction": {
+        "policy": "absolute",
+        "triggerTokens": 24000,
+        "keepRecentTokens": 6000,
+        "essentials": "extended",
+        "subWorkers": true
+      },
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 8,
+      "ledgerKinds": [
+        "create",
+        "handoff",
+        "plan",
+        "result"
+      ],
+      "taskPlans": 5,
+      "checkpointsInLastPlan": 4,
+      "checkpointsCitingRefs": 4,
+      "refsTagged": 35,
+      "workerSessions": 3,
+      "compactions": 4,
+      "compactionPolicies": [
+        "absolute"
+      ],
+      "earlyCompactions": 4,
+      "references": [
+        "valid",
+        "valid",
+        "valid",
+        "valid"
+      ],
+      "essentialsSections": [
+        "request",
+        "plan",
+        "ledger",
+        "work-log",
+        "reference"
+      ],
+      "cancelled": [],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 4,
+      "summaryRequests": 5,
+      "maxInputObserved": 28665,
+      "transcriptReads": 0
+    }
+  },
+  {
+    "arm": "PT32",
+    "task": "p1-ticket-batch",
+    "terminal": "completed",
+    "success": true,
+    "configured": {
+      "ledger": true,
+      "thinkingPolicy": {
+        "mode": "fixed",
+        "checkpoints": true,
+        "evidence": "strict"
+      },
+      "workerCompaction": {
+        "policy": "absolute",
+        "triggerTokens": 32000,
+        "keepRecentTokens": 8000,
+        "essentials": "extended",
+        "subWorkers": true
+      },
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 8,
+      "ledgerKinds": [
+        "create",
+        "handoff",
+        "plan",
+        "result"
+      ],
+      "taskPlans": 5,
+      "checkpointsInLastPlan": 4,
+      "checkpointsCitingRefs": 4,
+      "refsTagged": 40,
+      "workerSessions": 3,
+      "compactions": 2,
+      "compactionPolicies": [
+        "absolute"
+      ],
+      "earlyCompactions": 2,
+      "references": [
+        "valid",
+        "valid"
+      ],
+      "essentialsSections": [
+        "request",
+        "plan",
+        "ledger",
+        "work-log",
+        "reference"
+      ],
+      "cancelled": [],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 2,
+      "summaryRequests": 3,
+      "maxInputObserved": 32959,
+      "transcriptReads": 0
+    }
+  },
+  {
+    "arm": "PT32",
+    "task": "p3-library-features-ko",
+    "terminal": "completed",
+    "success": true,
+    "configured": {
+      "ledger": true,
+      "thinkingPolicy": {
+        "mode": "fixed",
+        "checkpoints": true,
+        "evidence": "strict"
+      },
+      "workerCompaction": {
+        "policy": "absolute",
+        "triggerTokens": 32000,
+        "keepRecentTokens": 8000,
+        "essentials": "extended",
+        "subWorkers": true
+      },
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 8,
+      "ledgerKinds": [
+        "create",
+        "handoff",
+        "plan",
+        "result"
+      ],
+      "taskPlans": 5,
+      "checkpointsInLastPlan": 4,
+      "checkpointsCitingRefs": 4,
+      "refsTagged": 32,
+      "workerSessions": 3,
+      "compactions": 2,
+      "compactionPolicies": [
+        "absolute"
+      ],
+      "earlyCompactions": 2,
+      "references": [
+        "valid",
+        "valid"
+      ],
+      "essentialsSections": [
+        "request",
+        "plan",
+        "ledger",
+        "work-log",
+        "reference"
+      ],
+      "cancelled": [],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 2,
+      "summaryRequests": 3,
+      "maxInputObserved": 32026,
+      "transcriptReads": 0
+    }
+  }
+]

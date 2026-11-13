@@ -1,0 +1,527 @@
+[
+ {
+  "arm": "M0",
+  "task": "d5-streaming-ingest-ko",
+  "repeat": 0
+ },
+ {
+  "arm": "M2",
+  "task": "d5-streaming-ingest-ko",
+  "repeat": 0
+ },
+ {
+  "arm": "M3",
+  "task": "d5-streaming-ingest-ko",
+  "repeat": 0
+ },
+ {
+  "arm": "M4",
+  "task": "d5-streaming-ingest-ko",
+  "repeat": 0
+ },
+ {
+  "arm": "M1",
+  "task": "d5-streaming-ingest-ko",
+  "repeat": 0
+ },
+ {
+  "arm": "M0",
+  "task": "p2-handler-migration",
+  "repeat": 1
+ },
+ {
+  "arm": "M2",
+  "task": "p2-handler-migration",
+  "repeat": 1
+ },
+ {
+  "arm": "M1",
+  "task": "p2-handler-migration",
+  "repeat": 1
+ },
+ {
+  "arm": "M3",
+  "task": "p2-handler-migration",
+  "repeat": 1
+ },
+ {
+  "arm": "M4",
+  "task": "p2-handler-migration",
+  "repeat": 1
+ },
+ {
+  "arm": "M3",
+  "task": "s1-amended-billing",
+  "repeat": 0
+ },
+ {
+  "arm": "M2",
+  "task": "s1-amended-billing",
+  "repeat": 0
+ },
+ {
+  "arm": "M4",
+  "task": "s1-amended-billing",
+  "repeat": 0
+ },
+ {
+  "arm": "M1",
+  "task": "s1-amended-billing",
+  "repeat": 0
+ },
+ {
+  "arm": "M0",
+  "task": "s1-amended-billing",
+  "repeat": 0
+ },
+ {
+  "arm": "M0",
+  "task": "d5-streaming-ingest-ko",
+  "repeat": 2
+ },
+ {
+  "arm": "M2",
+  "task": "d5-streaming-ingest-ko",
+  "repeat": 2
+ },
+ {
+  "arm": "M3",
+  "task": "d5-streaming-ingest-ko",
+  "repeat": 2
+ },
+ {
+  "arm": "M1",
+  "task": "d5-streaming-ingest-ko",
+  "repeat": 2
+ },
+ {
+  "arm": "M4",
+  "task": "d5-streaming-ingest-ko",
+  "repeat": 2
+ },
+ {
+  "arm": "M0",
+  "task": "d7-config-reload",
+  "repeat": 2
+ },
+ {
+  "arm": "M1",
+  "task": "d7-config-reload",
+  "repeat": 2
+ },
+ {
+  "arm": "M2",
+  "task": "d7-config-reload",
+  "repeat": 2
+ },
+ {
+  "arm": "M3",
+  "task": "d7-config-reload",
+  "repeat": 2
+ },
+ {
+  "arm": "M4",
+  "task": "d7-config-reload",
+  "repeat": 2
+ },
+ {
+  "arm": "M2",
+  "task": "d1-transactional-outbox",
+  "repeat": 0
+ },
+ {
+  "arm": "M4",
+  "task": "d1-transactional-outbox",
+  "repeat": 0
+ },
+ {
+  "arm": "M3",
+  "task": "d1-transactional-outbox",
+  "repeat": 0
+ },
+ {
+  "arm": "M1",
+  "task": "d1-transactional-outbox",
+  "repeat": 0
+ },
+ {
+  "arm": "M0",
+  "task": "d1-transactional-outbox",
+  "repeat": 0
+ },
+ {
+  "arm": "M0",
+  "task": "p2-handler-migration",
+  "repeat": 2
+ },
+ {
+  "arm": "M4",
+  "task": "p2-handler-migration",
+  "repeat": 2
+ },
+ {
+  "arm": "M2",
+  "task": "p2-handler-migration",
+  "repeat": 2
+ },
+ {
+  "arm": "M1",
+  "task": "p2-handler-migration",
+  "repeat": 2
+ },
+ {
+  "arm": "M3",
+  "task": "p2-handler-migration",
+  "repeat": 2
+ },
+ {
+  "arm": "M2",
+  "task": "d1-transactional-outbox",
+  "repeat": 1
+ },
+ {
+  "arm": "M0",
+  "task": "d1-transactional-outbox",
+  "repeat": 1
+ },
+ {
+  "arm": "M4",
+  "task": "d1-transactional-outbox",
+  "repeat": 1
+ },
+ {
+  "arm": "M1",
+  "task": "d1-transactional-outbox",
+  "repeat": 1
+ },
+ {
+  "arm": "M3",
+  "task": "d1-transactional-outbox",
+  "repeat": 1
+ },
+ {
+  "arm": "M3",
+  "task": "p1-ticket-batch",
+  "repeat": 2
+ },
+ {
+  "arm": "M0",
+  "task": "p1-ticket-batch",
+  "repeat": 2
+ },
+ {
+  "arm": "M4",
+  "task": "p1-ticket-batch",
+  "repeat": 2
+ },
+ {
+  "arm": "M2",
+  "task": "p1-ticket-batch",
+  "repeat": 2
+ },
+ {
+  "arm": "M1",
+  "task": "p1-ticket-batch",
+  "repeat": 2
+ },
+ {
+  "arm": "M1",
+  "task": "p1-ticket-batch",
+  "repeat": 1
+ },
+ {
+  "arm": "M3",
+  "task": "p1-ticket-batch",
+  "repeat": 1
+ },
+ {
+  "arm": "M4",
+  "task": "p1-ticket-batch",
+  "repeat": 1
+ },
+ {
+  "arm": "M0",
+  "task": "p1-ticket-batch",
+  "repeat": 1
+ },
+ {
+  "arm": "M2",
+  "task": "p1-ticket-batch",
+  "repeat": 1
+ },
+ {
+  "arm": "M0",
+  "task": "p2-handler-migration",
+  "repeat": 0
+ },
+ {
+  "arm": "M3",
+  "task": "p2-handler-migration",
+  "repeat": 0
+ },
+ {
+  "arm": "M4",
+  "task": "p2-handler-migration",
+  "repeat": 0
+ },
+ {
+  "arm": "M1",
+  "task": "p2-handler-migration",
+  "repeat": 0
+ },
+ {
+  "arm": "M2",
+  "task": "p2-handler-migration",
+  "repeat": 0
+ },
+ {
+  "arm": "M0",
+  "task": "d7-config-reload",
+  "repeat": 0
+ },
+ {
+  "arm": "M3",
+  "task": "d7-config-reload",
+  "repeat": 0
+ },
+ {
+  "arm": "M1",
+  "task": "d7-config-reload",
+  "repeat": 0
+ },
+ {
+  "arm": "M2",
+  "task": "d7-config-reload",
+  "repeat": 0
+ },
+ {
+  "arm": "M4",
+  "task": "d7-config-reload",
+  "repeat": 0
+ },
+ {
+  "arm": "M2",
+  "task": "p3-library-features-ko",
+  "repeat": 2
+ },
+ {
+  "arm": "M4",
+  "task": "p3-library-features-ko",
+  "repeat": 2
+ },
+ {
+  "arm": "M0",
+  "task": "p3-library-features-ko",
+  "repeat": 2
+ },
+ {
+  "arm": "M3",
+  "task": "p3-library-features-ko",
+  "repeat": 2
+ },
+ {
+  "arm": "M1",
+  "task": "p3-library-features-ko",
+  "repeat": 2
+ },
+ {
+  "arm": "M3",
+  "task": "d5-streaming-ingest-ko",
+  "repeat": 1
+ },
+ {
+  "arm": "M1",
+  "task": "d5-streaming-ingest-ko",
+  "repeat": 1
+ },
+ {
+  "arm": "M0",
+  "task": "d5-streaming-ingest-ko",
+  "repeat": 1
+ },
+ {
+  "arm": "M2",
+  "task": "d5-streaming-ingest-ko",
+  "repeat": 1
+ },
+ {
+  "arm": "M4",
+  "task": "d5-streaming-ingest-ko",
+  "repeat": 1
+ },
+ {
+  "arm": "M2",
+  "task": "p3-library-features-ko",
+  "repeat": 0
+ },
+ {
+  "arm": "M1",
+  "task": "p3-library-features-ko",
+  "repeat": 0
+ },
+ {
+  "arm": "M3",
+  "task": "p3-library-features-ko",
+  "repeat": 0
+ },
+ {
+  "arm": "M0",
+  "task": "p3-library-features-ko",
+  "repeat": 0
+ },
+ {
+  "arm": "M4",
+  "task": "p3-library-features-ko",
+  "repeat": 0
+ },
+ {
+  "arm": "M0",
+  "task": "s1-amended-billing",
+  "repeat": 1
+ },
+ {
+  "arm": "M4",
+  "task": "s1-amended-billing",
+  "repeat": 1
+ },
+ {
+  "arm": "M2",
+  "task": "s1-amended-billing",
+  "repeat": 1
+ },
+ {
+  "arm": "M3",
+  "task": "s1-amended-billing",
+  "repeat": 1
+ },
+ {
+  "arm": "M1",
+  "task": "s1-amended-billing",
+  "repeat": 1
+ },
+ {
+  "arm": "M0",
+  "task": "d7-config-reload",
+  "repeat": 1
+ },
+ {
+  "arm": "M1",
+  "task": "d7-config-reload",
+  "repeat": 1
+ },
+ {
+  "arm": "M3",
+  "task": "d7-config-reload",
+  "repeat": 1
+ },
+ {
+  "arm": "M4",
+  "task": "d7-config-reload",
+  "repeat": 1
+ },
+ {
+  "arm": "M2",
+  "task": "d7-config-reload",
+  "repeat": 1
+ },
+ {
+  "arm": "M4",
+  "task": "p3-library-features-ko",
+  "repeat": 1
+ },
+ {
+  "arm": "M1",
+  "task": "p3-library-features-ko",
+  "repeat": 1
+ },
+ {
+  "arm": "M2",
+  "task": "p3-library-features-ko",
+  "repeat": 1
+ },
+ {
+  "arm": "M0",
+  "task": "p3-library-features-ko",
+  "repeat": 1
+ },
+ {
+  "arm": "M3",
+  "task": "p3-library-features-ko",
+  "repeat": 1
+ },
+ {
+  "arm": "M1",
+  "task": "s1-amended-billing",
+  "repeat": 2
+ },
+ {
+  "arm": "M4",
+  "task": "s1-amended-billing",
+  "repeat": 2
+ },
+ {
+  "arm": "M2",
+  "task": "s1-amended-billing",
+  "repeat": 2
+ },
+ {
+  "arm": "M3",
+  "task": "s1-amended-billing",
+  "repeat": 2
+ },
+ {
+  "arm": "M0",
+  "task": "s1-amended-billing",
+  "repeat": 2
+ },
+ {
+  "arm": "M3",
+  "task": "p1-ticket-batch",
+  "repeat": 0
+ },
+ {
+  "arm": "M1",
+  "task": "p1-ticket-batch",
+  "repeat": 0
+ },
+ {
+  "arm": "M4",
+  "task": "p1-ticket-batch",
+  "repeat": 0
+ },
+ {
+  "arm": "M0",
+  "task": "p1-ticket-batch",
+  "repeat": 0
+ },
+ {
+  "arm": "M2",
+  "task": "p1-ticket-batch",
+  "repeat": 0
+ },
+ {
+  "arm": "M1",
+  "task": "d1-transactional-outbox",
+  "repeat": 2
+ },
+ {
+  "arm": "M2",
+  "task": "d1-transactional-outbox",
+  "repeat": 2
+ },
+ {
+  "arm": "M4",
+  "task": "d1-transactional-outbox",
+  "repeat": 2
+ },
+ {
+  "arm": "M0",
+  "task": "d1-transactional-outbox",
+  "repeat": 2
+ },
+ {
+  "arm": "M3",
+  "task": "d1-transactional-outbox",
+  "repeat": 2
+ }
+]

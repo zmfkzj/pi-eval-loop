@@ -1,0 +1,7424 @@
+[
+  {
+    "arm": "M0",
+    "task": "d1-transactional-outbox",
+    "repeat": 1,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": null,
+    "configured": {
+      "ledger": false,
+      "thinkingPolicy": "fixed",
+      "workerCompaction": null,
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 0,
+      "ledgerKinds": [],
+      "taskPlans": 6,
+      "checkpointsInLastPlan": 5,
+      "checkpointsCitingRefs": 0,
+      "refsTagged": 1,
+      "workerSessions": 1,
+      "compactions": 0,
+      "compactionPolicies": [],
+      "earlyCompactions": 0,
+      "references": [],
+      "essentialsSections": [],
+      "cancelled": [],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 0,
+      "summaryRequests": 0,
+      "maxInputObserved": 31704,
+      "transcriptReads": 0,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [],
+      "spawns": 0
+    }
+  },
+  {
+    "arm": "M0",
+    "task": "d1-transactional-outbox",
+    "repeat": 2,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": null,
+    "configured": {
+      "ledger": false,
+      "thinkingPolicy": "fixed",
+      "workerCompaction": null,
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 0,
+      "ledgerKinds": [],
+      "taskPlans": 6,
+      "checkpointsInLastPlan": 5,
+      "checkpointsCitingRefs": 0,
+      "refsTagged": 1,
+      "workerSessions": 1,
+      "compactions": 0,
+      "compactionPolicies": [],
+      "earlyCompactions": 0,
+      "references": [],
+      "essentialsSections": [],
+      "cancelled": [],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 0,
+      "summaryRequests": 0,
+      "maxInputObserved": 25999,
+      "transcriptReads": 3,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [],
+      "spawns": 0
+    }
+  },
+  {
+    "arm": "M0",
+    "task": "d5-streaming-ingest-ko",
+    "repeat": 0,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": null,
+    "configured": {
+      "ledger": false,
+      "thinkingPolicy": "fixed",
+      "workerCompaction": null,
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 0,
+      "ledgerKinds": [],
+      "taskPlans": 5,
+      "checkpointsInLastPlan": 4,
+      "checkpointsCitingRefs": 0,
+      "refsTagged": 1,
+      "workerSessions": 1,
+      "compactions": 0,
+      "compactionPolicies": [],
+      "earlyCompactions": 0,
+      "references": [],
+      "essentialsSections": [],
+      "cancelled": [],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 0,
+      "summaryRequests": 0,
+      "maxInputObserved": 31240,
+      "transcriptReads": 0,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [],
+      "spawns": 0
+    }
+  },
+  {
+    "arm": "M0",
+    "task": "d5-streaming-ingest-ko",
+    "repeat": 1,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": null,
+    "configured": {
+      "ledger": false,
+      "thinkingPolicy": "fixed",
+      "workerCompaction": null,
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 0,
+      "ledgerKinds": [],
+      "taskPlans": 6,
+      "checkpointsInLastPlan": 5,
+      "checkpointsCitingRefs": 0,
+      "refsTagged": 1,
+      "workerSessions": 1,
+      "compactions": 0,
+      "compactionPolicies": [],
+      "earlyCompactions": 0,
+      "references": [],
+      "essentialsSections": [],
+      "cancelled": [],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 0,
+      "summaryRequests": 0,
+      "maxInputObserved": 27145,
+      "transcriptReads": 0,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [],
+      "spawns": 0
+    }
+  },
+  {
+    "arm": "M0",
+    "task": "d5-streaming-ingest-ko",
+    "repeat": 2,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": null,
+    "configured": {
+      "ledger": false,
+      "thinkingPolicy": "fixed",
+      "workerCompaction": null,
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 0,
+      "ledgerKinds": [],
+      "taskPlans": 5,
+      "checkpointsInLastPlan": 4,
+      "checkpointsCitingRefs": 0,
+      "refsTagged": 1,
+      "workerSessions": 1,
+      "compactions": 0,
+      "compactionPolicies": [],
+      "earlyCompactions": 0,
+      "references": [],
+      "essentialsSections": [],
+      "cancelled": [],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 0,
+      "summaryRequests": 0,
+      "maxInputObserved": 24972,
+      "transcriptReads": 0,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [],
+      "spawns": 0
+    }
+  },
+  {
+    "arm": "M0",
+    "task": "d7-config-reload",
+    "repeat": 0,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": null,
+    "configured": {
+      "ledger": false,
+      "thinkingPolicy": "fixed",
+      "workerCompaction": null,
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 0,
+      "ledgerKinds": [],
+      "taskPlans": 5,
+      "checkpointsInLastPlan": 4,
+      "checkpointsCitingRefs": 0,
+      "refsTagged": 1,
+      "workerSessions": 1,
+      "compactions": 0,
+      "compactionPolicies": [],
+      "earlyCompactions": 0,
+      "references": [],
+      "essentialsSections": [],
+      "cancelled": [],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 0,
+      "summaryRequests": 0,
+      "maxInputObserved": 24313,
+      "transcriptReads": 0,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [],
+      "spawns": 0
+    }
+  },
+  {
+    "arm": "M0",
+    "task": "d7-config-reload",
+    "repeat": 1,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": null,
+    "configured": {
+      "ledger": false,
+      "thinkingPolicy": "fixed",
+      "workerCompaction": null,
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 0,
+      "ledgerKinds": [],
+      "taskPlans": 5,
+      "checkpointsInLastPlan": 4,
+      "checkpointsCitingRefs": 0,
+      "refsTagged": 1,
+      "workerSessions": 1,
+      "compactions": 0,
+      "compactionPolicies": [],
+      "earlyCompactions": 0,
+      "references": [],
+      "essentialsSections": [],
+      "cancelled": [],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 0,
+      "summaryRequests": 0,
+      "maxInputObserved": 24216,
+      "transcriptReads": 0,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [],
+      "spawns": 0
+    }
+  },
+  {
+    "arm": "M0",
+    "task": "d7-config-reload",
+    "repeat": 2,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": null,
+    "configured": {
+      "ledger": false,
+      "thinkingPolicy": "fixed",
+      "workerCompaction": null,
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 0,
+      "ledgerKinds": [],
+      "taskPlans": 5,
+      "checkpointsInLastPlan": 4,
+      "checkpointsCitingRefs": 0,
+      "refsTagged": 1,
+      "workerSessions": 1,
+      "compactions": 0,
+      "compactionPolicies": [],
+      "earlyCompactions": 0,
+      "references": [],
+      "essentialsSections": [],
+      "cancelled": [],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 0,
+      "summaryRequests": 0,
+      "maxInputObserved": 26924,
+      "transcriptReads": 0,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [],
+      "spawns": 0
+    }
+  },
+  {
+    "arm": "M0",
+    "task": "p1-ticket-batch",
+    "repeat": 0,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": null,
+    "configured": {
+      "ledger": false,
+      "thinkingPolicy": "fixed",
+      "workerCompaction": null,
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 0,
+      "ledgerKinds": [],
+      "taskPlans": 4,
+      "checkpointsInLastPlan": 3,
+      "checkpointsCitingRefs": 0,
+      "refsTagged": 1,
+      "workerSessions": 5,
+      "compactions": 0,
+      "compactionPolicies": [],
+      "earlyCompactions": 0,
+      "references": [],
+      "essentialsSections": [],
+      "cancelled": [],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 0,
+      "summaryRequests": 0,
+      "maxInputObserved": 45855,
+      "transcriptReads": 0,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [],
+      "spawns": 4
+    }
+  },
+  {
+    "arm": "M0",
+    "task": "p1-ticket-batch",
+    "repeat": 1,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": null,
+    "configured": {
+      "ledger": false,
+      "thinkingPolicy": "fixed",
+      "workerCompaction": null,
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 0,
+      "ledgerKinds": [],
+      "taskPlans": 3,
+      "checkpointsInLastPlan": 2,
+      "checkpointsCitingRefs": 0,
+      "refsTagged": 1,
+      "workerSessions": 5,
+      "compactions": 0,
+      "compactionPolicies": [],
+      "earlyCompactions": 0,
+      "references": [],
+      "essentialsSections": [],
+      "cancelled": [],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 0,
+      "summaryRequests": 0,
+      "maxInputObserved": 39633,
+      "transcriptReads": 0,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [],
+      "spawns": 4
+    }
+  },
+  {
+    "arm": "M0",
+    "task": "p1-ticket-batch",
+    "repeat": 2,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": null,
+    "configured": {
+      "ledger": false,
+      "thinkingPolicy": "fixed",
+      "workerCompaction": null,
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 0,
+      "ledgerKinds": [],
+      "taskPlans": 5,
+      "checkpointsInLastPlan": 4,
+      "checkpointsCitingRefs": 0,
+      "refsTagged": 1,
+      "workerSessions": 3,
+      "compactions": 0,
+      "compactionPolicies": [],
+      "earlyCompactions": 0,
+      "references": [],
+      "essentialsSections": [],
+      "cancelled": [],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 0,
+      "summaryRequests": 0,
+      "maxInputObserved": 38635,
+      "transcriptReads": 0,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [],
+      "spawns": 2
+    }
+  },
+  {
+    "arm": "M0",
+    "task": "p2-handler-migration",
+    "repeat": 0,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": null,
+    "configured": {
+      "ledger": false,
+      "thinkingPolicy": "fixed",
+      "workerCompaction": null,
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 0,
+      "ledgerKinds": [],
+      "taskPlans": 4,
+      "checkpointsInLastPlan": 3,
+      "checkpointsCitingRefs": 0,
+      "refsTagged": 1,
+      "workerSessions": 7,
+      "compactions": 0,
+      "compactionPolicies": [],
+      "earlyCompactions": 0,
+      "references": [],
+      "essentialsSections": [],
+      "cancelled": [],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 0,
+      "summaryRequests": 0,
+      "maxInputObserved": 53020,
+      "transcriptReads": 0,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [],
+      "spawns": 6
+    }
+  },
+  {
+    "arm": "M0",
+    "task": "p2-handler-migration",
+    "repeat": 1,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": null,
+    "configured": {
+      "ledger": false,
+      "thinkingPolicy": "fixed",
+      "workerCompaction": null,
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 0,
+      "ledgerKinds": [],
+      "taskPlans": 4,
+      "checkpointsInLastPlan": 3,
+      "checkpointsCitingRefs": 0,
+      "refsTagged": 1,
+      "workerSessions": 7,
+      "compactions": 0,
+      "compactionPolicies": [],
+      "earlyCompactions": 0,
+      "references": [],
+      "essentialsSections": [],
+      "cancelled": [],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 0,
+      "summaryRequests": 0,
+      "maxInputObserved": 53547,
+      "transcriptReads": 0,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [],
+      "spawns": 6
+    }
+  },
+  {
+    "arm": "M0",
+    "task": "p3-library-features-ko",
+    "repeat": 0,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": null,
+    "configured": {
+      "ledger": false,
+      "thinkingPolicy": "fixed",
+      "workerCompaction": null,
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 0,
+      "ledgerKinds": [],
+      "taskPlans": 4,
+      "checkpointsInLastPlan": 3,
+      "checkpointsCitingRefs": 0,
+      "refsTagged": 1,
+      "workerSessions": 3,
+      "compactions": 0,
+      "compactionPolicies": [],
+      "earlyCompactions": 0,
+      "references": [],
+      "essentialsSections": [],
+      "cancelled": [],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 0,
+      "summaryRequests": 0,
+      "maxInputObserved": 27460,
+      "transcriptReads": 0,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [],
+      "spawns": 2
+    }
+  },
+  {
+    "arm": "M0",
+    "task": "p3-library-features-ko",
+    "repeat": 1,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": null,
+    "configured": {
+      "ledger": false,
+      "thinkingPolicy": "fixed",
+      "workerCompaction": null,
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 0,
+      "ledgerKinds": [],
+      "taskPlans": 5,
+      "checkpointsInLastPlan": 4,
+      "checkpointsCitingRefs": 0,
+      "refsTagged": 1,
+      "workerSessions": 3,
+      "compactions": 0,
+      "compactionPolicies": [],
+      "earlyCompactions": 0,
+      "references": [],
+      "essentialsSections": [],
+      "cancelled": [],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 0,
+      "summaryRequests": 0,
+      "maxInputObserved": 27541,
+      "transcriptReads": 0,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [],
+      "spawns": 2
+    }
+  },
+  {
+    "arm": "M0",
+    "task": "p3-library-features-ko",
+    "repeat": 2,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": null,
+    "configured": {
+      "ledger": false,
+      "thinkingPolicy": "fixed",
+      "workerCompaction": null,
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 0,
+      "ledgerKinds": [],
+      "taskPlans": 5,
+      "checkpointsInLastPlan": 4,
+      "checkpointsCitingRefs": 0,
+      "refsTagged": 1,
+      "workerSessions": 3,
+      "compactions": 0,
+      "compactionPolicies": [],
+      "earlyCompactions": 0,
+      "references": [],
+      "essentialsSections": [],
+      "cancelled": [],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 0,
+      "summaryRequests": 0,
+      "maxInputObserved": 30411,
+      "transcriptReads": 0,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [],
+      "spawns": 2
+    }
+  },
+  {
+    "arm": "M0",
+    "task": "s1-amended-billing",
+    "repeat": 0,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": [
+      {
+        "turn": 1,
+        "status": "completed",
+        "requests": 29,
+        "wallMs": 378212,
+        "resumed": false
+      },
+      {
+        "turn": 2,
+        "status": "completed",
+        "requests": 20,
+        "wallMs": 279740,
+        "resumed": true
+      },
+      {
+        "turn": 3,
+        "status": "completed",
+        "requests": 16,
+        "wallMs": 183828,
+        "resumed": true
+      }
+    ],
+    "configured": {
+      "ledger": false,
+      "thinkingPolicy": "fixed",
+      "workerCompaction": null,
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 0,
+      "ledgerKinds": [],
+      "taskPlans": 16,
+      "checkpointsInLastPlan": 3,
+      "checkpointsCitingRefs": 0,
+      "refsTagged": 3,
+      "workerSessions": 3,
+      "compactions": 0,
+      "compactionPolicies": [],
+      "earlyCompactions": 0,
+      "references": [],
+      "essentialsSections": [],
+      "cancelled": [],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 0,
+      "summaryRequests": 0,
+      "maxInputObserved": 31601,
+      "transcriptReads": 1,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 1
+        },
+        {
+          "orcheTaskCalls": 1
+        },
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [
+        {
+          "tool": "read",
+          "ok": true,
+          "batchIdInResult": false
+        }
+      ],
+      "spawns": 0
+    }
+  },
+  {
+    "arm": "M0",
+    "task": "s1-amended-billing",
+    "repeat": 1,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": [
+      {
+        "turn": 1,
+        "status": "completed",
+        "requests": 29,
+        "wallMs": 339955,
+        "resumed": false
+      },
+      {
+        "turn": 2,
+        "status": "completed",
+        "requests": 23,
+        "wallMs": 303526,
+        "resumed": true
+      },
+      {
+        "turn": 3,
+        "status": "completed",
+        "requests": 15,
+        "wallMs": 122600,
+        "resumed": true
+      }
+    ],
+    "configured": {
+      "ledger": false,
+      "thinkingPolicy": "fixed",
+      "workerCompaction": null,
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 0,
+      "ledgerKinds": [],
+      "taskPlans": 16,
+      "checkpointsInLastPlan": 3,
+      "checkpointsCitingRefs": 0,
+      "refsTagged": 3,
+      "workerSessions": 3,
+      "compactions": 0,
+      "compactionPolicies": [],
+      "earlyCompactions": 0,
+      "references": [],
+      "essentialsSections": [],
+      "cancelled": [],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 0,
+      "summaryRequests": 0,
+      "maxInputObserved": 36964,
+      "transcriptReads": 4,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 1
+        },
+        {
+          "orcheTaskCalls": 1
+        },
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [
+        {
+          "tool": "read",
+          "ok": true,
+          "batchIdInResult": false
+        },
+        {
+          "tool": "bash",
+          "ok": true,
+          "batchIdInResult": false
+        }
+      ],
+      "spawns": 0
+    }
+  },
+  {
+    "arm": "M0",
+    "task": "s1-amended-billing",
+    "repeat": 2,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": [
+      {
+        "turn": 1,
+        "status": "completed",
+        "requests": 31,
+        "wallMs": 345228,
+        "resumed": false
+      },
+      {
+        "turn": 2,
+        "status": "completed",
+        "requests": 22,
+        "wallMs": 258440,
+        "resumed": true
+      },
+      {
+        "turn": 3,
+        "status": "completed",
+        "requests": 17,
+        "wallMs": 135295,
+        "resumed": true
+      }
+    ],
+    "configured": {
+      "ledger": false,
+      "thinkingPolicy": "fixed",
+      "workerCompaction": null,
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 0,
+      "ledgerKinds": [],
+      "taskPlans": 16,
+      "checkpointsInLastPlan": 3,
+      "checkpointsCitingRefs": 0,
+      "refsTagged": 3,
+      "workerSessions": 3,
+      "compactions": 0,
+      "compactionPolicies": [],
+      "earlyCompactions": 0,
+      "references": [],
+      "essentialsSections": [],
+      "cancelled": [],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 0,
+      "summaryRequests": 0,
+      "maxInputObserved": 33869,
+      "transcriptReads": 3,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 1
+        },
+        {
+          "orcheTaskCalls": 1
+        },
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [
+        {
+          "tool": "read",
+          "ok": true,
+          "batchIdInResult": false
+        }
+      ],
+      "spawns": 0
+    }
+  },
+  {
+    "arm": "M1",
+    "task": "d1-transactional-outbox",
+    "repeat": 1,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": null,
+    "configured": {
+      "ledger": true,
+      "thinkingPolicy": {
+        "mode": "fixed",
+        "checkpoints": true,
+        "evidence": "strict"
+      },
+      "workerCompaction": null,
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 9,
+      "ledgerKinds": [
+        "create",
+        "handoff",
+        "plan",
+        "result"
+      ],
+      "taskPlans": 6,
+      "checkpointsInLastPlan": 5,
+      "checkpointsCitingRefs": 5,
+      "refsTagged": 39,
+      "workerSessions": 1,
+      "compactions": 0,
+      "compactionPolicies": [],
+      "earlyCompactions": 0,
+      "references": [],
+      "essentialsSections": [],
+      "cancelled": [],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 0,
+      "summaryRequests": 0,
+      "maxInputObserved": 29089,
+      "transcriptReads": 0,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [],
+      "spawns": 0
+    }
+  },
+  {
+    "arm": "M1",
+    "task": "d1-transactional-outbox",
+    "repeat": 2,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": null,
+    "configured": {
+      "ledger": true,
+      "thinkingPolicy": {
+        "mode": "fixed",
+        "checkpoints": true,
+        "evidence": "strict"
+      },
+      "workerCompaction": null,
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 8,
+      "ledgerKinds": [
+        "create",
+        "handoff",
+        "plan",
+        "result"
+      ],
+      "taskPlans": 5,
+      "checkpointsInLastPlan": 4,
+      "checkpointsCitingRefs": 4,
+      "refsTagged": 37,
+      "workerSessions": 1,
+      "compactions": 0,
+      "compactionPolicies": [],
+      "earlyCompactions": 0,
+      "references": [],
+      "essentialsSections": [],
+      "cancelled": [],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 0,
+      "summaryRequests": 0,
+      "maxInputObserved": 26781,
+      "transcriptReads": 0,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [],
+      "spawns": 0
+    }
+  },
+  {
+    "arm": "M1",
+    "task": "d5-streaming-ingest-ko",
+    "repeat": 0,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": null,
+    "configured": {
+      "ledger": true,
+      "thinkingPolicy": {
+        "mode": "fixed",
+        "checkpoints": true,
+        "evidence": "strict"
+      },
+      "workerCompaction": null,
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 12,
+      "ledgerKinds": [
+        "create",
+        "handoff",
+        "plan",
+        "result"
+      ],
+      "taskPlans": 9,
+      "checkpointsInLastPlan": 5,
+      "checkpointsCitingRefs": 5,
+      "refsTagged": 41,
+      "workerSessions": 1,
+      "compactions": 0,
+      "compactionPolicies": [],
+      "earlyCompactions": 0,
+      "references": [],
+      "essentialsSections": [],
+      "cancelled": [],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 0,
+      "summaryRequests": 0,
+      "maxInputObserved": 31960,
+      "transcriptReads": 0,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [],
+      "spawns": 0
+    }
+  },
+  {
+    "arm": "M1",
+    "task": "d5-streaming-ingest-ko",
+    "repeat": 1,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": null,
+    "configured": {
+      "ledger": true,
+      "thinkingPolicy": {
+        "mode": "fixed",
+        "checkpoints": true,
+        "evidence": "strict"
+      },
+      "workerCompaction": null,
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 9,
+      "ledgerKinds": [
+        "create",
+        "handoff",
+        "plan",
+        "result"
+      ],
+      "taskPlans": 6,
+      "checkpointsInLastPlan": 5,
+      "checkpointsCitingRefs": 5,
+      "refsTagged": 47,
+      "workerSessions": 1,
+      "compactions": 0,
+      "compactionPolicies": [],
+      "earlyCompactions": 0,
+      "references": [],
+      "essentialsSections": [],
+      "cancelled": [],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 0,
+      "summaryRequests": 0,
+      "maxInputObserved": 33669,
+      "transcriptReads": 0,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [],
+      "spawns": 0
+    }
+  },
+  {
+    "arm": "M1",
+    "task": "d5-streaming-ingest-ko",
+    "repeat": 2,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": null,
+    "configured": {
+      "ledger": true,
+      "thinkingPolicy": {
+        "mode": "fixed",
+        "checkpoints": true,
+        "evidence": "strict"
+      },
+      "workerCompaction": null,
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 10,
+      "ledgerKinds": [
+        "create",
+        "handoff",
+        "plan",
+        "result"
+      ],
+      "taskPlans": 7,
+      "checkpointsInLastPlan": 4,
+      "checkpointsCitingRefs": 4,
+      "refsTagged": 51,
+      "workerSessions": 1,
+      "compactions": 0,
+      "compactionPolicies": [],
+      "earlyCompactions": 0,
+      "references": [],
+      "essentialsSections": [],
+      "cancelled": [],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 0,
+      "summaryRequests": 0,
+      "maxInputObserved": 38605,
+      "transcriptReads": 0,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [],
+      "spawns": 0
+    }
+  },
+  {
+    "arm": "M1",
+    "task": "d7-config-reload",
+    "repeat": 0,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": null,
+    "configured": {
+      "ledger": true,
+      "thinkingPolicy": {
+        "mode": "fixed",
+        "checkpoints": true,
+        "evidence": "strict"
+      },
+      "workerCompaction": null,
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 13,
+      "ledgerKinds": [
+        "create",
+        "handoff",
+        "plan",
+        "result"
+      ],
+      "taskPlans": 10,
+      "checkpointsInLastPlan": 4,
+      "checkpointsCitingRefs": 4,
+      "refsTagged": 50,
+      "workerSessions": 1,
+      "compactions": 0,
+      "compactionPolicies": [],
+      "earlyCompactions": 0,
+      "references": [],
+      "essentialsSections": [],
+      "cancelled": [],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 0,
+      "summaryRequests": 0,
+      "maxInputObserved": 38103,
+      "transcriptReads": 0,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [],
+      "spawns": 0
+    }
+  },
+  {
+    "arm": "M1",
+    "task": "d7-config-reload",
+    "repeat": 1,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": null,
+    "configured": {
+      "ledger": true,
+      "thinkingPolicy": {
+        "mode": "fixed",
+        "checkpoints": true,
+        "evidence": "strict"
+      },
+      "workerCompaction": null,
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 11,
+      "ledgerKinds": [
+        "create",
+        "handoff",
+        "plan",
+        "result"
+      ],
+      "taskPlans": 8,
+      "checkpointsInLastPlan": 4,
+      "checkpointsCitingRefs": 4,
+      "refsTagged": 40,
+      "workerSessions": 1,
+      "compactions": 0,
+      "compactionPolicies": [],
+      "earlyCompactions": 0,
+      "references": [],
+      "essentialsSections": [],
+      "cancelled": [],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 0,
+      "summaryRequests": 0,
+      "maxInputObserved": 29896,
+      "transcriptReads": 0,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [],
+      "spawns": 0
+    }
+  },
+  {
+    "arm": "M1",
+    "task": "d7-config-reload",
+    "repeat": 2,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": null,
+    "configured": {
+      "ledger": true,
+      "thinkingPolicy": {
+        "mode": "fixed",
+        "checkpoints": true,
+        "evidence": "strict"
+      },
+      "workerCompaction": null,
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 8,
+      "ledgerKinds": [
+        "create",
+        "handoff",
+        "plan",
+        "result"
+      ],
+      "taskPlans": 5,
+      "checkpointsInLastPlan": 4,
+      "checkpointsCitingRefs": 4,
+      "refsTagged": 37,
+      "workerSessions": 1,
+      "compactions": 0,
+      "compactionPolicies": [],
+      "earlyCompactions": 0,
+      "references": [],
+      "essentialsSections": [],
+      "cancelled": [],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 0,
+      "summaryRequests": 0,
+      "maxInputObserved": 26800,
+      "transcriptReads": 0,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [],
+      "spawns": 0
+    }
+  },
+  {
+    "arm": "M1",
+    "task": "p1-ticket-batch",
+    "repeat": 0,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": null,
+    "configured": {
+      "ledger": true,
+      "thinkingPolicy": {
+        "mode": "fixed",
+        "checkpoints": true,
+        "evidence": "strict"
+      },
+      "workerCompaction": null,
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 9,
+      "ledgerKinds": [
+        "create",
+        "handoff",
+        "plan",
+        "result"
+      ],
+      "taskPlans": 6,
+      "checkpointsInLastPlan": 5,
+      "checkpointsCitingRefs": 5,
+      "refsTagged": 38,
+      "workerSessions": 3,
+      "compactions": 0,
+      "compactionPolicies": [],
+      "earlyCompactions": 0,
+      "references": [],
+      "essentialsSections": [],
+      "cancelled": [],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 0,
+      "summaryRequests": 0,
+      "maxInputObserved": 47352,
+      "transcriptReads": 0,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [],
+      "spawns": 2
+    }
+  },
+  {
+    "arm": "M1",
+    "task": "p1-ticket-batch",
+    "repeat": 1,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": null,
+    "configured": {
+      "ledger": true,
+      "thinkingPolicy": {
+        "mode": "fixed",
+        "checkpoints": true,
+        "evidence": "strict"
+      },
+      "workerCompaction": null,
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 8,
+      "ledgerKinds": [
+        "create",
+        "handoff",
+        "plan",
+        "result"
+      ],
+      "taskPlans": 5,
+      "checkpointsInLastPlan": 4,
+      "checkpointsCitingRefs": 4,
+      "refsTagged": 46,
+      "workerSessions": 3,
+      "compactions": 0,
+      "compactionPolicies": [],
+      "earlyCompactions": 0,
+      "references": [],
+      "essentialsSections": [],
+      "cancelled": [],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 0,
+      "summaryRequests": 0,
+      "maxInputObserved": 46470,
+      "transcriptReads": 0,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [],
+      "spawns": 2
+    }
+  },
+  {
+    "arm": "M1",
+    "task": "p1-ticket-batch",
+    "repeat": 2,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": null,
+    "configured": {
+      "ledger": true,
+      "thinkingPolicy": {
+        "mode": "fixed",
+        "checkpoints": true,
+        "evidence": "strict"
+      },
+      "workerCompaction": null,
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 8,
+      "ledgerKinds": [
+        "create",
+        "handoff",
+        "plan",
+        "result"
+      ],
+      "taskPlans": 5,
+      "checkpointsInLastPlan": 4,
+      "checkpointsCitingRefs": 4,
+      "refsTagged": 37,
+      "workerSessions": 3,
+      "compactions": 0,
+      "compactionPolicies": [],
+      "earlyCompactions": 0,
+      "references": [],
+      "essentialsSections": [],
+      "cancelled": [],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 0,
+      "summaryRequests": 0,
+      "maxInputObserved": 43881,
+      "transcriptReads": 0,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [],
+      "spawns": 2
+    }
+  },
+  {
+    "arm": "M1",
+    "task": "p2-handler-migration",
+    "repeat": 0,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": null,
+    "configured": {
+      "ledger": true,
+      "thinkingPolicy": {
+        "mode": "fixed",
+        "checkpoints": true,
+        "evidence": "strict"
+      },
+      "workerCompaction": null,
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 9,
+      "ledgerKinds": [
+        "create",
+        "handoff",
+        "plan",
+        "result"
+      ],
+      "taskPlans": 6,
+      "checkpointsInLastPlan": 3,
+      "checkpointsCitingRefs": 3,
+      "refsTagged": 32,
+      "workerSessions": 7,
+      "compactions": 0,
+      "compactionPolicies": [],
+      "earlyCompactions": 0,
+      "references": [],
+      "essentialsSections": [],
+      "cancelled": [],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 0,
+      "summaryRequests": 0,
+      "maxInputObserved": 53078,
+      "transcriptReads": 0,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [],
+      "spawns": 6
+    }
+  },
+  {
+    "arm": "M1",
+    "task": "p2-handler-migration",
+    "repeat": 1,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": null,
+    "configured": {
+      "ledger": true,
+      "thinkingPolicy": {
+        "mode": "fixed",
+        "checkpoints": true,
+        "evidence": "strict"
+      },
+      "workerCompaction": null,
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 9,
+      "ledgerKinds": [
+        "create",
+        "handoff",
+        "plan",
+        "result"
+      ],
+      "taskPlans": 6,
+      "checkpointsInLastPlan": 3,
+      "checkpointsCitingRefs": 3,
+      "refsTagged": 35,
+      "workerSessions": 7,
+      "compactions": 0,
+      "compactionPolicies": [],
+      "earlyCompactions": 0,
+      "references": [],
+      "essentialsSections": [],
+      "cancelled": [],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 0,
+      "summaryRequests": 0,
+      "maxInputObserved": 55485,
+      "transcriptReads": 0,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [],
+      "spawns": 6
+    }
+  },
+  {
+    "arm": "M1",
+    "task": "p2-handler-migration",
+    "repeat": 2,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": null,
+    "configured": {
+      "ledger": true,
+      "thinkingPolicy": {
+        "mode": "fixed",
+        "checkpoints": true,
+        "evidence": "strict"
+      },
+      "workerCompaction": null,
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 9,
+      "ledgerKinds": [
+        "create",
+        "handoff",
+        "plan",
+        "result"
+      ],
+      "taskPlans": 6,
+      "checkpointsInLastPlan": 3,
+      "checkpointsCitingRefs": 3,
+      "refsTagged": 47,
+      "workerSessions": 7,
+      "compactions": 0,
+      "compactionPolicies": [],
+      "earlyCompactions": 0,
+      "references": [],
+      "essentialsSections": [],
+      "cancelled": [],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 0,
+      "summaryRequests": 0,
+      "maxInputObserved": 55396,
+      "transcriptReads": 0,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [],
+      "spawns": 6
+    }
+  },
+  {
+    "arm": "M1",
+    "task": "p3-library-features-ko",
+    "repeat": 0,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": null,
+    "configured": {
+      "ledger": true,
+      "thinkingPolicy": {
+        "mode": "fixed",
+        "checkpoints": true,
+        "evidence": "strict"
+      },
+      "workerCompaction": null,
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 9,
+      "ledgerKinds": [
+        "create",
+        "handoff",
+        "plan",
+        "result"
+      ],
+      "taskPlans": 6,
+      "checkpointsInLastPlan": 5,
+      "checkpointsCitingRefs": 5,
+      "refsTagged": 28,
+      "workerSessions": 1,
+      "compactions": 0,
+      "compactionPolicies": [],
+      "earlyCompactions": 0,
+      "references": [],
+      "essentialsSections": [],
+      "cancelled": [],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 0,
+      "summaryRequests": 0,
+      "maxInputObserved": 35870,
+      "transcriptReads": 0,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [],
+      "spawns": 0
+    }
+  },
+  {
+    "arm": "M1",
+    "task": "p3-library-features-ko",
+    "repeat": 1,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": null,
+    "configured": {
+      "ledger": true,
+      "thinkingPolicy": {
+        "mode": "fixed",
+        "checkpoints": true,
+        "evidence": "strict"
+      },
+      "workerCompaction": null,
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 7,
+      "ledgerKinds": [
+        "create",
+        "handoff",
+        "plan",
+        "result"
+      ],
+      "taskPlans": 4,
+      "checkpointsInLastPlan": 3,
+      "checkpointsCitingRefs": 3,
+      "refsTagged": 22,
+      "workerSessions": 4,
+      "compactions": 0,
+      "compactionPolicies": [],
+      "earlyCompactions": 0,
+      "references": [],
+      "essentialsSections": [],
+      "cancelled": [],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 0,
+      "summaryRequests": 0,
+      "maxInputObserved": 35706,
+      "transcriptReads": 0,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [],
+      "spawns": 3
+    }
+  },
+  {
+    "arm": "M1",
+    "task": "p3-library-features-ko",
+    "repeat": 2,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": null,
+    "configured": {
+      "ledger": true,
+      "thinkingPolicy": {
+        "mode": "fixed",
+        "checkpoints": true,
+        "evidence": "strict"
+      },
+      "workerCompaction": null,
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 8,
+      "ledgerKinds": [
+        "create",
+        "handoff",
+        "plan",
+        "result"
+      ],
+      "taskPlans": 5,
+      "checkpointsInLastPlan": 4,
+      "checkpointsCitingRefs": 4,
+      "refsTagged": 23,
+      "workerSessions": 3,
+      "compactions": 0,
+      "compactionPolicies": [],
+      "earlyCompactions": 0,
+      "references": [],
+      "essentialsSections": [],
+      "cancelled": [],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 0,
+      "summaryRequests": 0,
+      "maxInputObserved": 33573,
+      "transcriptReads": 0,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [],
+      "spawns": 2
+    }
+  },
+  {
+    "arm": "M1",
+    "task": "s1-amended-billing",
+    "repeat": 0,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": [
+      {
+        "turn": 1,
+        "status": "completed",
+        "requests": 29,
+        "wallMs": 361869,
+        "resumed": false
+      },
+      {
+        "turn": 2,
+        "status": "completed",
+        "requests": 24,
+        "wallMs": 387990,
+        "resumed": true
+      },
+      {
+        "turn": 3,
+        "status": "completed",
+        "requests": 21,
+        "wallMs": 261893,
+        "resumed": true
+      }
+    ],
+    "configured": {
+      "ledger": true,
+      "thinkingPolicy": {
+        "mode": "fixed",
+        "checkpoints": true,
+        "evidence": "strict"
+      },
+      "workerCompaction": null,
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 25,
+      "ledgerKinds": [
+        "create",
+        "handoff",
+        "plan",
+        "result"
+      ],
+      "taskPlans": 16,
+      "checkpointsInLastPlan": 3,
+      "checkpointsCitingRefs": 3,
+      "refsTagged": 100,
+      "workerSessions": 3,
+      "compactions": 0,
+      "compactionPolicies": [],
+      "earlyCompactions": 0,
+      "references": [],
+      "essentialsSections": [],
+      "cancelled": [],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 0,
+      "summaryRequests": 0,
+      "maxInputObserved": 39107,
+      "transcriptReads": 2,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 1
+        },
+        {
+          "orcheTaskCalls": 1
+        },
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [
+        {
+          "tool": "read",
+          "ok": true,
+          "batchIdInResult": false
+        },
+        {
+          "tool": "read",
+          "ok": true,
+          "batchIdInResult": false
+        }
+      ],
+      "spawns": 0
+    }
+  },
+  {
+    "arm": "M1",
+    "task": "s1-amended-billing",
+    "repeat": 1,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": [
+      {
+        "turn": 1,
+        "status": "completed",
+        "requests": 29,
+        "wallMs": 316901,
+        "resumed": false
+      },
+      {
+        "turn": 2,
+        "status": "completed",
+        "requests": 24,
+        "wallMs": 240356,
+        "resumed": true
+      },
+      {
+        "turn": 3,
+        "status": "completed",
+        "requests": 19,
+        "wallMs": 128517,
+        "resumed": true
+      }
+    ],
+    "configured": {
+      "ledger": true,
+      "thinkingPolicy": {
+        "mode": "fixed",
+        "checkpoints": true,
+        "evidence": "strict"
+      },
+      "workerCompaction": null,
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 23,
+      "ledgerKinds": [
+        "create",
+        "handoff",
+        "plan",
+        "result"
+      ],
+      "taskPlans": 16,
+      "checkpointsInLastPlan": 3,
+      "checkpointsCitingRefs": 3,
+      "refsTagged": 79,
+      "workerSessions": 3,
+      "compactions": 0,
+      "compactionPolicies": [],
+      "earlyCompactions": 0,
+      "references": [],
+      "essentialsSections": [],
+      "cancelled": [],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 0,
+      "summaryRequests": 0,
+      "maxInputObserved": 29117,
+      "transcriptReads": 2,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 1
+        },
+        {
+          "orcheTaskCalls": 1
+        },
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [],
+      "spawns": 0
+    }
+  },
+  {
+    "arm": "M1",
+    "task": "s1-amended-billing",
+    "repeat": 2,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": [
+      {
+        "turn": 1,
+        "status": "completed",
+        "requests": 33,
+        "wallMs": 338171,
+        "resumed": false
+      },
+      {
+        "turn": 2,
+        "status": "completed",
+        "requests": 37,
+        "wallMs": 392985,
+        "resumed": true
+      },
+      {
+        "turn": 3,
+        "status": "completed",
+        "requests": 20,
+        "wallMs": 164316,
+        "resumed": true
+      }
+    ],
+    "configured": {
+      "ledger": true,
+      "thinkingPolicy": {
+        "mode": "fixed",
+        "checkpoints": true,
+        "evidence": "strict"
+      },
+      "workerCompaction": null,
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 30,
+      "ledgerKinds": [
+        "create",
+        "handoff",
+        "plan",
+        "result"
+      ],
+      "taskPlans": 19,
+      "checkpointsInLastPlan": 3,
+      "checkpointsCitingRefs": 3,
+      "refsTagged": 111,
+      "workerSessions": 3,
+      "compactions": 0,
+      "compactionPolicies": [],
+      "earlyCompactions": 0,
+      "references": [],
+      "essentialsSections": [],
+      "cancelled": [],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 0,
+      "summaryRequests": 0,
+      "maxInputObserved": 35695,
+      "transcriptReads": 4,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 1
+        },
+        {
+          "orcheTaskCalls": 2
+        },
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [
+        {
+          "tool": "read",
+          "ok": true,
+          "batchIdInResult": false
+        },
+        {
+          "tool": "read",
+          "ok": true,
+          "batchIdInResult": false
+        }
+      ],
+      "spawns": 0
+    }
+  },
+  {
+    "arm": "M2",
+    "task": "d1-transactional-outbox",
+    "repeat": 0,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": null,
+    "configured": {
+      "ledger": true,
+      "thinkingPolicy": {
+        "mode": "fixed",
+        "checkpoints": true,
+        "evidence": "strict"
+      },
+      "workerCompaction": {
+        "policy": "absolute",
+        "triggerTokens": 24000,
+        "keepRecentTokens": 6000,
+        "essentials": "basic",
+        "subWorkers": false
+      },
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 8,
+      "ledgerKinds": [
+        "create",
+        "handoff",
+        "plan",
+        "result"
+      ],
+      "taskPlans": 5,
+      "checkpointsInLastPlan": 4,
+      "checkpointsCitingRefs": 4,
+      "refsTagged": 54,
+      "workerSessions": 1,
+      "compactions": 2,
+      "compactionPolicies": [
+        "absolute"
+      ],
+      "earlyCompactions": 2,
+      "references": [
+        null,
+        null
+      ],
+      "essentialsSections": [
+        "essentials"
+      ],
+      "cancelled": [],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 2,
+      "summaryRequests": 3,
+      "maxInputObserved": 24087,
+      "transcriptReads": 0,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [],
+      "spawns": 0
+    }
+  },
+  {
+    "arm": "M2",
+    "task": "d1-transactional-outbox",
+    "repeat": 1,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": null,
+    "configured": {
+      "ledger": true,
+      "thinkingPolicy": {
+        "mode": "fixed",
+        "checkpoints": true,
+        "evidence": "strict"
+      },
+      "workerCompaction": {
+        "policy": "absolute",
+        "triggerTokens": 24000,
+        "keepRecentTokens": 6000,
+        "essentials": "basic",
+        "subWorkers": false
+      },
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 10,
+      "ledgerKinds": [
+        "create",
+        "handoff",
+        "plan",
+        "result"
+      ],
+      "taskPlans": 7,
+      "checkpointsInLastPlan": 4,
+      "checkpointsCitingRefs": 4,
+      "refsTagged": 54,
+      "workerSessions": 1,
+      "compactions": 2,
+      "compactionPolicies": [
+        "absolute"
+      ],
+      "earlyCompactions": 2,
+      "references": [
+        null,
+        null
+      ],
+      "essentialsSections": [
+        "essentials"
+      ],
+      "cancelled": [],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 2,
+      "summaryRequests": 3,
+      "maxInputObserved": 23769,
+      "transcriptReads": 0,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [],
+      "spawns": 0
+    }
+  },
+  {
+    "arm": "M2",
+    "task": "d1-transactional-outbox",
+    "repeat": 2,
+    "terminal": "completed",
+    "success": false,
+    "hidden": false,
+    "failingHidden": [
+      "delivery failures retry and payload mutation is isolated",
+      "expired lease ownership fences late acknowledgements"
+    ],
+    "turns": null,
+    "configured": {
+      "ledger": true,
+      "thinkingPolicy": {
+        "mode": "fixed",
+        "checkpoints": true,
+        "evidence": "strict"
+      },
+      "workerCompaction": {
+        "policy": "absolute",
+        "triggerTokens": 24000,
+        "keepRecentTokens": 6000,
+        "essentials": "basic",
+        "subWorkers": false
+      },
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 8,
+      "ledgerKinds": [
+        "create",
+        "handoff",
+        "plan",
+        "result"
+      ],
+      "taskPlans": 5,
+      "checkpointsInLastPlan": 4,
+      "checkpointsCitingRefs": 4,
+      "refsTagged": 84,
+      "workerSessions": 1,
+      "compactions": 5,
+      "compactionPolicies": [
+        "absolute"
+      ],
+      "earlyCompactions": 5,
+      "references": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "essentialsSections": [
+        "essentials"
+      ],
+      "cancelled": [],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 5,
+      "summaryRequests": 9,
+      "maxInputObserved": 23982,
+      "transcriptReads": 0,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [],
+      "spawns": 0
+    }
+  },
+  {
+    "arm": "M2",
+    "task": "d5-streaming-ingest-ko",
+    "repeat": 0,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": null,
+    "configured": {
+      "ledger": true,
+      "thinkingPolicy": {
+        "mode": "fixed",
+        "checkpoints": true,
+        "evidence": "strict"
+      },
+      "workerCompaction": {
+        "policy": "absolute",
+        "triggerTokens": 24000,
+        "keepRecentTokens": 6000,
+        "essentials": "basic",
+        "subWorkers": false
+      },
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 8,
+      "ledgerKinds": [
+        "create",
+        "handoff",
+        "plan",
+        "result"
+      ],
+      "taskPlans": 5,
+      "checkpointsInLastPlan": 4,
+      "checkpointsCitingRefs": 4,
+      "refsTagged": 46,
+      "workerSessions": 1,
+      "compactions": 2,
+      "compactionPolicies": [
+        "absolute"
+      ],
+      "earlyCompactions": 2,
+      "references": [
+        null,
+        null
+      ],
+      "essentialsSections": [
+        "essentials"
+      ],
+      "cancelled": [],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 2,
+      "summaryRequests": 2,
+      "maxInputObserved": 23022,
+      "transcriptReads": 0,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [],
+      "spawns": 0
+    }
+  },
+  {
+    "arm": "M2",
+    "task": "d5-streaming-ingest-ko",
+    "repeat": 1,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": null,
+    "configured": {
+      "ledger": true,
+      "thinkingPolicy": {
+        "mode": "fixed",
+        "checkpoints": true,
+        "evidence": "strict"
+      },
+      "workerCompaction": {
+        "policy": "absolute",
+        "triggerTokens": 24000,
+        "keepRecentTokens": 6000,
+        "essentials": "basic",
+        "subWorkers": false
+      },
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 8,
+      "ledgerKinds": [
+        "create",
+        "handoff",
+        "plan",
+        "result"
+      ],
+      "taskPlans": 5,
+      "checkpointsInLastPlan": 4,
+      "checkpointsCitingRefs": 4,
+      "refsTagged": 40,
+      "workerSessions": 1,
+      "compactions": 2,
+      "compactionPolicies": [
+        "absolute"
+      ],
+      "earlyCompactions": 2,
+      "references": [
+        null,
+        null
+      ],
+      "essentialsSections": [
+        "essentials"
+      ],
+      "cancelled": [],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 2,
+      "summaryRequests": 2,
+      "maxInputObserved": 23829,
+      "transcriptReads": 0,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [],
+      "spawns": 0
+    }
+  },
+  {
+    "arm": "M2",
+    "task": "d5-streaming-ingest-ko",
+    "repeat": 2,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": null,
+    "configured": {
+      "ledger": true,
+      "thinkingPolicy": {
+        "mode": "fixed",
+        "checkpoints": true,
+        "evidence": "strict"
+      },
+      "workerCompaction": {
+        "policy": "absolute",
+        "triggerTokens": 24000,
+        "keepRecentTokens": 6000,
+        "essentials": "basic",
+        "subWorkers": false
+      },
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 10,
+      "ledgerKinds": [
+        "create",
+        "handoff",
+        "plan",
+        "result"
+      ],
+      "taskPlans": 7,
+      "checkpointsInLastPlan": 4,
+      "checkpointsCitingRefs": 4,
+      "refsTagged": 54,
+      "workerSessions": 1,
+      "compactions": 2,
+      "compactionPolicies": [
+        "absolute"
+      ],
+      "earlyCompactions": 2,
+      "references": [
+        null,
+        null
+      ],
+      "essentialsSections": [
+        "essentials"
+      ],
+      "cancelled": [],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 2,
+      "summaryRequests": 3,
+      "maxInputObserved": 23990,
+      "transcriptReads": 0,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [],
+      "spawns": 0
+    }
+  },
+  {
+    "arm": "M2",
+    "task": "d7-config-reload",
+    "repeat": 0,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": null,
+    "configured": {
+      "ledger": true,
+      "thinkingPolicy": {
+        "mode": "fixed",
+        "checkpoints": true,
+        "evidence": "strict"
+      },
+      "workerCompaction": {
+        "policy": "absolute",
+        "triggerTokens": 24000,
+        "keepRecentTokens": 6000,
+        "essentials": "basic",
+        "subWorkers": false
+      },
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 8,
+      "ledgerKinds": [
+        "create",
+        "handoff",
+        "plan",
+        "result"
+      ],
+      "taskPlans": 5,
+      "checkpointsInLastPlan": 4,
+      "checkpointsCitingRefs": 4,
+      "refsTagged": 35,
+      "workerSessions": 1,
+      "compactions": 1,
+      "compactionPolicies": [
+        "absolute"
+      ],
+      "earlyCompactions": 1,
+      "references": [
+        null
+      ],
+      "essentialsSections": [
+        "essentials"
+      ],
+      "cancelled": [],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 1,
+      "summaryRequests": 1,
+      "maxInputObserved": 23759,
+      "transcriptReads": 0,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [],
+      "spawns": 0
+    }
+  },
+  {
+    "arm": "M2",
+    "task": "d7-config-reload",
+    "repeat": 1,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": null,
+    "configured": {
+      "ledger": true,
+      "thinkingPolicy": {
+        "mode": "fixed",
+        "checkpoints": true,
+        "evidence": "strict"
+      },
+      "workerCompaction": {
+        "policy": "absolute",
+        "triggerTokens": 24000,
+        "keepRecentTokens": 6000,
+        "essentials": "basic",
+        "subWorkers": false
+      },
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 8,
+      "ledgerKinds": [
+        "create",
+        "handoff",
+        "plan",
+        "result"
+      ],
+      "taskPlans": 5,
+      "checkpointsInLastPlan": 4,
+      "checkpointsCitingRefs": 4,
+      "refsTagged": 36,
+      "workerSessions": 1,
+      "compactions": 1,
+      "compactionPolicies": [
+        "absolute"
+      ],
+      "earlyCompactions": 1,
+      "references": [
+        null
+      ],
+      "essentialsSections": [
+        "essentials"
+      ],
+      "cancelled": [],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 1,
+      "summaryRequests": 1,
+      "maxInputObserved": 21227,
+      "transcriptReads": 0,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [],
+      "spawns": 0
+    }
+  },
+  {
+    "arm": "M2",
+    "task": "d7-config-reload",
+    "repeat": 2,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": null,
+    "configured": {
+      "ledger": true,
+      "thinkingPolicy": {
+        "mode": "fixed",
+        "checkpoints": true,
+        "evidence": "strict"
+      },
+      "workerCompaction": {
+        "policy": "absolute",
+        "triggerTokens": 24000,
+        "keepRecentTokens": 6000,
+        "essentials": "basic",
+        "subWorkers": false
+      },
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 10,
+      "ledgerKinds": [
+        "create",
+        "handoff",
+        "plan",
+        "result"
+      ],
+      "taskPlans": 7,
+      "checkpointsInLastPlan": 4,
+      "checkpointsCitingRefs": 4,
+      "refsTagged": 47,
+      "workerSessions": 1,
+      "compactions": 1,
+      "compactionPolicies": [
+        "absolute"
+      ],
+      "earlyCompactions": 1,
+      "references": [
+        null
+      ],
+      "essentialsSections": [
+        "essentials"
+      ],
+      "cancelled": [],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 1,
+      "summaryRequests": 1,
+      "maxInputObserved": 23842,
+      "transcriptReads": 0,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [],
+      "spawns": 0
+    }
+  },
+  {
+    "arm": "M2",
+    "task": "p1-ticket-batch",
+    "repeat": 0,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": null,
+    "configured": {
+      "ledger": true,
+      "thinkingPolicy": {
+        "mode": "fixed",
+        "checkpoints": true,
+        "evidence": "strict"
+      },
+      "workerCompaction": {
+        "policy": "absolute",
+        "triggerTokens": 24000,
+        "keepRecentTokens": 6000,
+        "essentials": "basic",
+        "subWorkers": false
+      },
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 8,
+      "ledgerKinds": [
+        "create",
+        "handoff",
+        "plan",
+        "result"
+      ],
+      "taskPlans": 5,
+      "checkpointsInLastPlan": 4,
+      "checkpointsCitingRefs": 4,
+      "refsTagged": 48,
+      "workerSessions": 3,
+      "compactions": 5,
+      "compactionPolicies": [
+        "absolute"
+      ],
+      "earlyCompactions": 5,
+      "references": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "essentialsSections": [
+        "essentials"
+      ],
+      "cancelled": [],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 5,
+      "summaryRequests": 8,
+      "maxInputObserved": 30725,
+      "transcriptReads": 0,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [],
+      "spawns": 2
+    }
+  },
+  {
+    "arm": "M2",
+    "task": "p1-ticket-batch",
+    "repeat": 1,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": null,
+    "configured": {
+      "ledger": true,
+      "thinkingPolicy": {
+        "mode": "fixed",
+        "checkpoints": true,
+        "evidence": "strict"
+      },
+      "workerCompaction": {
+        "policy": "absolute",
+        "triggerTokens": 24000,
+        "keepRecentTokens": 6000,
+        "essentials": "basic",
+        "subWorkers": false
+      },
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 8,
+      "ledgerKinds": [
+        "create",
+        "handoff",
+        "plan",
+        "result"
+      ],
+      "taskPlans": 5,
+      "checkpointsInLastPlan": 4,
+      "checkpointsCitingRefs": 4,
+      "refsTagged": 57,
+      "workerSessions": 3,
+      "compactions": 7,
+      "compactionPolicies": [
+        "absolute"
+      ],
+      "earlyCompactions": 7,
+      "references": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "essentialsSections": [
+        "essentials"
+      ],
+      "cancelled": [],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 7,
+      "summaryRequests": 12,
+      "maxInputObserved": 32961,
+      "transcriptReads": 0,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [],
+      "spawns": 2
+    }
+  },
+  {
+    "arm": "M2",
+    "task": "p1-ticket-batch",
+    "repeat": 2,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": null,
+    "configured": {
+      "ledger": true,
+      "thinkingPolicy": {
+        "mode": "fixed",
+        "checkpoints": true,
+        "evidence": "strict"
+      },
+      "workerCompaction": {
+        "policy": "absolute",
+        "triggerTokens": 24000,
+        "keepRecentTokens": 6000,
+        "essentials": "basic",
+        "subWorkers": false
+      },
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 8,
+      "ledgerKinds": [
+        "create",
+        "handoff",
+        "plan",
+        "result"
+      ],
+      "taskPlans": 5,
+      "checkpointsInLastPlan": 4,
+      "checkpointsCitingRefs": 4,
+      "refsTagged": 49,
+      "workerSessions": 3,
+      "compactions": 4,
+      "compactionPolicies": [
+        "absolute"
+      ],
+      "earlyCompactions": 4,
+      "references": [
+        null,
+        null,
+        null,
+        null
+      ],
+      "essentialsSections": [
+        "essentials"
+      ],
+      "cancelled": [],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 4,
+      "summaryRequests": 6,
+      "maxInputObserved": 25734,
+      "transcriptReads": 0,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [],
+      "spawns": 2
+    }
+  },
+  {
+    "arm": "M2",
+    "task": "p2-handler-migration",
+    "repeat": 0,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": null,
+    "configured": {
+      "ledger": true,
+      "thinkingPolicy": {
+        "mode": "fixed",
+        "checkpoints": true,
+        "evidence": "strict"
+      },
+      "workerCompaction": {
+        "policy": "absolute",
+        "triggerTokens": 24000,
+        "keepRecentTokens": 6000,
+        "essentials": "basic",
+        "subWorkers": false
+      },
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 7,
+      "ledgerKinds": [
+        "create",
+        "handoff",
+        "plan",
+        "result"
+      ],
+      "taskPlans": 4,
+      "checkpointsInLastPlan": 3,
+      "checkpointsCitingRefs": 3,
+      "refsTagged": 51,
+      "workerSessions": 8,
+      "compactions": 3,
+      "compactionPolicies": [
+        "absolute"
+      ],
+      "earlyCompactions": 3,
+      "references": [
+        null,
+        null,
+        null
+      ],
+      "essentialsSections": [
+        "essentials"
+      ],
+      "cancelled": [],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 3,
+      "summaryRequests": 4,
+      "maxInputObserved": 43321,
+      "transcriptReads": 0,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [],
+      "spawns": 7
+    }
+  },
+  {
+    "arm": "M2",
+    "task": "p2-handler-migration",
+    "repeat": 1,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": null,
+    "configured": {
+      "ledger": true,
+      "thinkingPolicy": {
+        "mode": "fixed",
+        "checkpoints": true,
+        "evidence": "strict"
+      },
+      "workerCompaction": {
+        "policy": "absolute",
+        "triggerTokens": 24000,
+        "keepRecentTokens": 6000,
+        "essentials": "basic",
+        "subWorkers": false
+      },
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 7,
+      "ledgerKinds": [
+        "create",
+        "handoff",
+        "plan",
+        "result"
+      ],
+      "taskPlans": 4,
+      "checkpointsInLastPlan": 3,
+      "checkpointsCitingRefs": 3,
+      "refsTagged": 32,
+      "workerSessions": 7,
+      "compactions": 1,
+      "compactionPolicies": [
+        "absolute"
+      ],
+      "earlyCompactions": 1,
+      "references": [
+        null
+      ],
+      "essentialsSections": [
+        "essentials"
+      ],
+      "cancelled": [
+        "loop_guard"
+      ],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 1,
+      "summaryRequests": 1,
+      "maxInputObserved": 47930,
+      "transcriptReads": 0,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [],
+      "spawns": 6
+    }
+  },
+  {
+    "arm": "M2",
+    "task": "p2-handler-migration",
+    "repeat": 2,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": null,
+    "configured": {
+      "ledger": true,
+      "thinkingPolicy": {
+        "mode": "fixed",
+        "checkpoints": true,
+        "evidence": "strict"
+      },
+      "workerCompaction": {
+        "policy": "absolute",
+        "triggerTokens": 24000,
+        "keepRecentTokens": 6000,
+        "essentials": "basic",
+        "subWorkers": false
+      },
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 7,
+      "ledgerKinds": [
+        "create",
+        "handoff",
+        "plan",
+        "result"
+      ],
+      "taskPlans": 4,
+      "checkpointsInLastPlan": 3,
+      "checkpointsCitingRefs": 3,
+      "refsTagged": 36,
+      "workerSessions": 7,
+      "compactions": 1,
+      "compactionPolicies": [
+        "absolute"
+      ],
+      "earlyCompactions": 1,
+      "references": [
+        null
+      ],
+      "essentialsSections": [
+        "essentials"
+      ],
+      "cancelled": [
+        "loop_guard"
+      ],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 1,
+      "summaryRequests": 1,
+      "maxInputObserved": 45013,
+      "transcriptReads": 0,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [],
+      "spawns": 6
+    }
+  },
+  {
+    "arm": "M2",
+    "task": "p3-library-features-ko",
+    "repeat": 0,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": null,
+    "configured": {
+      "ledger": true,
+      "thinkingPolicy": {
+        "mode": "fixed",
+        "checkpoints": true,
+        "evidence": "strict"
+      },
+      "workerCompaction": {
+        "policy": "absolute",
+        "triggerTokens": 24000,
+        "keepRecentTokens": 6000,
+        "essentials": "basic",
+        "subWorkers": false
+      },
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 8,
+      "ledgerKinds": [
+        "create",
+        "handoff",
+        "plan",
+        "result"
+      ],
+      "taskPlans": 5,
+      "checkpointsInLastPlan": 4,
+      "checkpointsCitingRefs": 4,
+      "refsTagged": 47,
+      "workerSessions": 3,
+      "compactions": 4,
+      "compactionPolicies": [
+        "absolute"
+      ],
+      "earlyCompactions": 4,
+      "references": [
+        null,
+        null,
+        null,
+        null
+      ],
+      "essentialsSections": [
+        "essentials"
+      ],
+      "cancelled": [],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 4,
+      "summaryRequests": 5,
+      "maxInputObserved": 26898,
+      "transcriptReads": 0,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [],
+      "spawns": 2
+    }
+  },
+  {
+    "arm": "M2",
+    "task": "p3-library-features-ko",
+    "repeat": 1,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": null,
+    "configured": {
+      "ledger": true,
+      "thinkingPolicy": {
+        "mode": "fixed",
+        "checkpoints": true,
+        "evidence": "strict"
+      },
+      "workerCompaction": {
+        "policy": "absolute",
+        "triggerTokens": 24000,
+        "keepRecentTokens": 6000,
+        "essentials": "basic",
+        "subWorkers": false
+      },
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 8,
+      "ledgerKinds": [
+        "create",
+        "handoff",
+        "plan",
+        "result"
+      ],
+      "taskPlans": 5,
+      "checkpointsInLastPlan": 4,
+      "checkpointsCitingRefs": 4,
+      "refsTagged": 35,
+      "workerSessions": 1,
+      "compactions": 2,
+      "compactionPolicies": [
+        "absolute"
+      ],
+      "earlyCompactions": 2,
+      "references": [
+        null,
+        null
+      ],
+      "essentialsSections": [
+        "essentials"
+      ],
+      "cancelled": [],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 2,
+      "summaryRequests": 2,
+      "maxInputObserved": 23599,
+      "transcriptReads": 0,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [],
+      "spawns": 0
+    }
+  },
+  {
+    "arm": "M2",
+    "task": "p3-library-features-ko",
+    "repeat": 2,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": null,
+    "configured": {
+      "ledger": true,
+      "thinkingPolicy": {
+        "mode": "fixed",
+        "checkpoints": true,
+        "evidence": "strict"
+      },
+      "workerCompaction": {
+        "policy": "absolute",
+        "triggerTokens": 24000,
+        "keepRecentTokens": 6000,
+        "essentials": "basic",
+        "subWorkers": false
+      },
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 9,
+      "ledgerKinds": [
+        "create",
+        "handoff",
+        "plan",
+        "result"
+      ],
+      "taskPlans": 6,
+      "checkpointsInLastPlan": 5,
+      "checkpointsCitingRefs": 5,
+      "refsTagged": 37,
+      "workerSessions": 1,
+      "compactions": 3,
+      "compactionPolicies": [
+        "absolute"
+      ],
+      "earlyCompactions": 3,
+      "references": [
+        null,
+        null,
+        null
+      ],
+      "essentialsSections": [
+        "essentials"
+      ],
+      "cancelled": [],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 3,
+      "summaryRequests": 4,
+      "maxInputObserved": 23855,
+      "transcriptReads": 0,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [],
+      "spawns": 0
+    }
+  },
+  {
+    "arm": "M2",
+    "task": "s1-amended-billing",
+    "repeat": 0,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": [
+      {
+        "turn": 1,
+        "status": "completed",
+        "requests": 30,
+        "wallMs": 475735,
+        "resumed": false
+      },
+      {
+        "turn": 2,
+        "status": "completed",
+        "requests": 26,
+        "wallMs": 404543,
+        "resumed": true
+      },
+      {
+        "turn": 3,
+        "status": "completed",
+        "requests": 26,
+        "wallMs": 301058,
+        "resumed": true
+      }
+    ],
+    "configured": {
+      "ledger": true,
+      "thinkingPolicy": {
+        "mode": "fixed",
+        "checkpoints": true,
+        "evidence": "strict"
+      },
+      "workerCompaction": {
+        "policy": "absolute",
+        "triggerTokens": 24000,
+        "keepRecentTokens": 6000,
+        "essentials": "basic",
+        "subWorkers": false
+      },
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 25,
+      "ledgerKinds": [
+        "create",
+        "handoff",
+        "plan",
+        "result"
+      ],
+      "taskPlans": 16,
+      "checkpointsInLastPlan": 3,
+      "checkpointsCitingRefs": 3,
+      "refsTagged": 114,
+      "workerSessions": 3,
+      "compactions": 4,
+      "compactionPolicies": [
+        "absolute"
+      ],
+      "earlyCompactions": 4,
+      "references": [
+        null,
+        null,
+        null,
+        null
+      ],
+      "essentialsSections": [
+        "essentials"
+      ],
+      "cancelled": [],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 4,
+      "summaryRequests": 5,
+      "maxInputObserved": 24709,
+      "transcriptReads": 3,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 1
+        },
+        {
+          "orcheTaskCalls": 1
+        },
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [
+        {
+          "tool": "read",
+          "ok": true,
+          "batchIdInResult": false
+        }
+      ],
+      "spawns": 0
+    }
+  },
+  {
+    "arm": "M2",
+    "task": "s1-amended-billing",
+    "repeat": 1,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": [
+      {
+        "turn": 1,
+        "status": "completed",
+        "requests": 35,
+        "wallMs": 380368,
+        "resumed": false
+      },
+      {
+        "turn": 2,
+        "status": "completed",
+        "requests": 32,
+        "wallMs": 417201,
+        "resumed": true
+      },
+      {
+        "turn": 3,
+        "status": "completed",
+        "requests": 24,
+        "wallMs": 265154,
+        "resumed": true
+      }
+    ],
+    "configured": {
+      "ledger": true,
+      "thinkingPolicy": {
+        "mode": "fixed",
+        "checkpoints": true,
+        "evidence": "strict"
+      },
+      "workerCompaction": {
+        "policy": "absolute",
+        "triggerTokens": 24000,
+        "keepRecentTokens": 6000,
+        "essentials": "basic",
+        "subWorkers": false
+      },
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 25,
+      "ledgerKinds": [
+        "create",
+        "handoff",
+        "plan",
+        "result"
+      ],
+      "taskPlans": 16,
+      "checkpointsInLastPlan": 3,
+      "checkpointsCitingRefs": 3,
+      "refsTagged": 122,
+      "workerSessions": 3,
+      "compactions": 6,
+      "compactionPolicies": [
+        "absolute"
+      ],
+      "earlyCompactions": 6,
+      "references": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "essentialsSections": [
+        "essentials"
+      ],
+      "cancelled": [],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 6,
+      "summaryRequests": 9,
+      "maxInputObserved": 24076,
+      "transcriptReads": 3,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 1
+        },
+        {
+          "orcheTaskCalls": 1
+        },
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [
+        {
+          "tool": "read",
+          "ok": true,
+          "batchIdInResult": false
+        },
+        {
+          "tool": "read",
+          "ok": true,
+          "batchIdInResult": false
+        },
+        {
+          "tool": "grep",
+          "ok": false,
+          "batchIdInResult": false
+        }
+      ],
+      "spawns": 0
+    }
+  },
+  {
+    "arm": "M2",
+    "task": "s1-amended-billing",
+    "repeat": 2,
+    "terminal": "completed",
+    "success": false,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": [
+      {
+        "turn": 1,
+        "status": "completed",
+        "requests": 28,
+        "wallMs": 310939,
+        "resumed": false
+      },
+      {
+        "turn": 2,
+        "status": "completed",
+        "requests": 30,
+        "wallMs": 348913,
+        "resumed": true
+      },
+      {
+        "turn": 3,
+        "status": "completed",
+        "requests": 25,
+        "wallMs": 393843,
+        "resumed": true
+      }
+    ],
+    "configured": {
+      "ledger": true,
+      "thinkingPolicy": {
+        "mode": "fixed",
+        "checkpoints": true,
+        "evidence": "strict"
+      },
+      "workerCompaction": {
+        "policy": "absolute",
+        "triggerTokens": 24000,
+        "keepRecentTokens": 6000,
+        "essentials": "basic",
+        "subWorkers": false
+      },
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 25,
+      "ledgerKinds": [
+        "create",
+        "handoff",
+        "plan",
+        "result"
+      ],
+      "taskPlans": 16,
+      "checkpointsInLastPlan": 3,
+      "checkpointsCitingRefs": 3,
+      "refsTagged": 130,
+      "workerSessions": 3,
+      "compactions": 5,
+      "compactionPolicies": [
+        "absolute"
+      ],
+      "earlyCompactions": 5,
+      "references": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "essentialsSections": [
+        "essentials"
+      ],
+      "cancelled": [],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 5,
+      "summaryRequests": 8,
+      "maxInputObserved": 23929,
+      "transcriptReads": 2,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 1
+        },
+        {
+          "orcheTaskCalls": 1
+        },
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [
+        {
+          "tool": "read",
+          "ok": true,
+          "batchIdInResult": false
+        },
+        {
+          "tool": "read",
+          "ok": true,
+          "batchIdInResult": false
+        }
+      ],
+      "spawns": 0
+    }
+  },
+  {
+    "arm": "M3",
+    "task": "d1-transactional-outbox",
+    "repeat": 1,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": null,
+    "configured": {
+      "ledger": true,
+      "thinkingPolicy": {
+        "mode": "fixed",
+        "checkpoints": true,
+        "evidence": "strict"
+      },
+      "workerCompaction": {
+        "policy": "absolute",
+        "triggerTokens": 24000,
+        "keepRecentTokens": 6000,
+        "essentials": "extended",
+        "subWorkers": false
+      },
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 8,
+      "ledgerKinds": [
+        "create",
+        "handoff",
+        "plan",
+        "result"
+      ],
+      "taskPlans": 5,
+      "checkpointsInLastPlan": 4,
+      "checkpointsCitingRefs": 4,
+      "refsTagged": 58,
+      "workerSessions": 1,
+      "compactions": 2,
+      "compactionPolicies": [
+        "absolute"
+      ],
+      "earlyCompactions": 2,
+      "references": [
+        "valid",
+        "valid"
+      ],
+      "essentialsSections": [
+        "request",
+        "plan",
+        "ledger",
+        "work-log",
+        "reference"
+      ],
+      "cancelled": [],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 2,
+      "summaryRequests": 3,
+      "maxInputObserved": 24005,
+      "transcriptReads": 0,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [],
+      "spawns": 0
+    }
+  },
+  {
+    "arm": "M3",
+    "task": "d1-transactional-outbox",
+    "repeat": 2,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": null,
+    "configured": {
+      "ledger": true,
+      "thinkingPolicy": {
+        "mode": "fixed",
+        "checkpoints": true,
+        "evidence": "strict"
+      },
+      "workerCompaction": {
+        "policy": "absolute",
+        "triggerTokens": 24000,
+        "keepRecentTokens": 6000,
+        "essentials": "extended",
+        "subWorkers": false
+      },
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 10,
+      "ledgerKinds": [
+        "create",
+        "handoff",
+        "plan",
+        "result"
+      ],
+      "taskPlans": 7,
+      "checkpointsInLastPlan": 4,
+      "checkpointsCitingRefs": 4,
+      "refsTagged": 63,
+      "workerSessions": 1,
+      "compactions": 4,
+      "compactionPolicies": [
+        "absolute"
+      ],
+      "earlyCompactions": 4,
+      "references": [
+        "valid",
+        "valid",
+        "valid",
+        "valid"
+      ],
+      "essentialsSections": [
+        "request",
+        "plan",
+        "ledger",
+        "work-log",
+        "reference"
+      ],
+      "cancelled": [],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 4,
+      "summaryRequests": 4,
+      "maxInputObserved": 23966,
+      "transcriptReads": 0,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [],
+      "spawns": 0
+    }
+  },
+  {
+    "arm": "M3",
+    "task": "d5-streaming-ingest-ko",
+    "repeat": 0,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": null,
+    "configured": {
+      "ledger": true,
+      "thinkingPolicy": {
+        "mode": "fixed",
+        "checkpoints": true,
+        "evidence": "strict"
+      },
+      "workerCompaction": {
+        "policy": "absolute",
+        "triggerTokens": 24000,
+        "keepRecentTokens": 6000,
+        "essentials": "extended",
+        "subWorkers": false
+      },
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 8,
+      "ledgerKinds": [
+        "create",
+        "handoff",
+        "plan",
+        "result"
+      ],
+      "taskPlans": 5,
+      "checkpointsInLastPlan": 4,
+      "checkpointsCitingRefs": 4,
+      "refsTagged": 48,
+      "workerSessions": 1,
+      "compactions": 1,
+      "compactionPolicies": [
+        "absolute"
+      ],
+      "earlyCompactions": 1,
+      "references": [
+        "valid"
+      ],
+      "essentialsSections": [
+        "request",
+        "plan",
+        "ledger",
+        "work-log",
+        "reference"
+      ],
+      "cancelled": [],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 1,
+      "summaryRequests": 1,
+      "maxInputObserved": 23477,
+      "transcriptReads": 0,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [],
+      "spawns": 0
+    }
+  },
+  {
+    "arm": "M3",
+    "task": "d5-streaming-ingest-ko",
+    "repeat": 1,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": null,
+    "configured": {
+      "ledger": true,
+      "thinkingPolicy": {
+        "mode": "fixed",
+        "checkpoints": true,
+        "evidence": "strict"
+      },
+      "workerCompaction": {
+        "policy": "absolute",
+        "triggerTokens": 24000,
+        "keepRecentTokens": 6000,
+        "essentials": "extended",
+        "subWorkers": false
+      },
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 10,
+      "ledgerKinds": [
+        "create",
+        "handoff",
+        "plan",
+        "result"
+      ],
+      "taskPlans": 7,
+      "checkpointsInLastPlan": 4,
+      "checkpointsCitingRefs": 4,
+      "refsTagged": 49,
+      "workerSessions": 1,
+      "compactions": 2,
+      "compactionPolicies": [
+        "absolute"
+      ],
+      "earlyCompactions": 2,
+      "references": [
+        "valid",
+        "valid"
+      ],
+      "essentialsSections": [
+        "request",
+        "plan",
+        "ledger",
+        "work-log",
+        "reference"
+      ],
+      "cancelled": [],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 2,
+      "summaryRequests": 3,
+      "maxInputObserved": 25213,
+      "transcriptReads": 0,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [],
+      "spawns": 0
+    }
+  },
+  {
+    "arm": "M3",
+    "task": "d5-streaming-ingest-ko",
+    "repeat": 2,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": null,
+    "configured": {
+      "ledger": true,
+      "thinkingPolicy": {
+        "mode": "fixed",
+        "checkpoints": true,
+        "evidence": "strict"
+      },
+      "workerCompaction": {
+        "policy": "absolute",
+        "triggerTokens": 24000,
+        "keepRecentTokens": 6000,
+        "essentials": "extended",
+        "subWorkers": false
+      },
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 8,
+      "ledgerKinds": [
+        "create",
+        "handoff",
+        "plan",
+        "result"
+      ],
+      "taskPlans": 5,
+      "checkpointsInLastPlan": 4,
+      "checkpointsCitingRefs": 4,
+      "refsTagged": 64,
+      "workerSessions": 1,
+      "compactions": 3,
+      "compactionPolicies": [
+        "absolute"
+      ],
+      "earlyCompactions": 3,
+      "references": [
+        "valid",
+        "valid",
+        "valid"
+      ],
+      "essentialsSections": [
+        "request",
+        "plan",
+        "ledger",
+        "work-log",
+        "reference"
+      ],
+      "cancelled": [],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 3,
+      "summaryRequests": 4,
+      "maxInputObserved": 23384,
+      "transcriptReads": 0,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [],
+      "spawns": 0
+    }
+  },
+  {
+    "arm": "M3",
+    "task": "d7-config-reload",
+    "repeat": 0,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": null,
+    "configured": {
+      "ledger": true,
+      "thinkingPolicy": {
+        "mode": "fixed",
+        "checkpoints": true,
+        "evidence": "strict"
+      },
+      "workerCompaction": {
+        "policy": "absolute",
+        "triggerTokens": 24000,
+        "keepRecentTokens": 6000,
+        "essentials": "extended",
+        "subWorkers": false
+      },
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 8,
+      "ledgerKinds": [
+        "create",
+        "handoff",
+        "plan",
+        "result"
+      ],
+      "taskPlans": 5,
+      "checkpointsInLastPlan": 4,
+      "checkpointsCitingRefs": 4,
+      "refsTagged": 42,
+      "workerSessions": 1,
+      "compactions": 1,
+      "compactionPolicies": [
+        "absolute"
+      ],
+      "earlyCompactions": 1,
+      "references": [
+        "valid"
+      ],
+      "essentialsSections": [
+        "request",
+        "plan",
+        "ledger",
+        "work-log",
+        "reference"
+      ],
+      "cancelled": [],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 1,
+      "summaryRequests": 1,
+      "maxInputObserved": 20234,
+      "transcriptReads": 0,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [],
+      "spawns": 0
+    }
+  },
+  {
+    "arm": "M3",
+    "task": "d7-config-reload",
+    "repeat": 1,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": null,
+    "configured": {
+      "ledger": true,
+      "thinkingPolicy": {
+        "mode": "fixed",
+        "checkpoints": true,
+        "evidence": "strict"
+      },
+      "workerCompaction": {
+        "policy": "absolute",
+        "triggerTokens": 24000,
+        "keepRecentTokens": 6000,
+        "essentials": "extended",
+        "subWorkers": false
+      },
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 8,
+      "ledgerKinds": [
+        "create",
+        "handoff",
+        "plan",
+        "result"
+      ],
+      "taskPlans": 5,
+      "checkpointsInLastPlan": 4,
+      "checkpointsCitingRefs": 4,
+      "refsTagged": 52,
+      "workerSessions": 1,
+      "compactions": 3,
+      "compactionPolicies": [
+        "absolute"
+      ],
+      "earlyCompactions": 3,
+      "references": [
+        "valid",
+        "valid",
+        "valid"
+      ],
+      "essentialsSections": [
+        "request",
+        "plan",
+        "ledger",
+        "work-log",
+        "reference"
+      ],
+      "cancelled": [],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 3,
+      "summaryRequests": 4,
+      "maxInputObserved": 24727,
+      "transcriptReads": 0,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [],
+      "spawns": 0
+    }
+  },
+  {
+    "arm": "M3",
+    "task": "d7-config-reload",
+    "repeat": 2,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": null,
+    "configured": {
+      "ledger": true,
+      "thinkingPolicy": {
+        "mode": "fixed",
+        "checkpoints": true,
+        "evidence": "strict"
+      },
+      "workerCompaction": {
+        "policy": "absolute",
+        "triggerTokens": 24000,
+        "keepRecentTokens": 6000,
+        "essentials": "extended",
+        "subWorkers": false
+      },
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 8,
+      "ledgerKinds": [
+        "create",
+        "handoff",
+        "plan",
+        "result"
+      ],
+      "taskPlans": 5,
+      "checkpointsInLastPlan": 4,
+      "checkpointsCitingRefs": 4,
+      "refsTagged": 29,
+      "workerSessions": 1,
+      "compactions": 0,
+      "compactionPolicies": [],
+      "earlyCompactions": 0,
+      "references": [],
+      "essentialsSections": [],
+      "cancelled": [],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 0,
+      "summaryRequests": 0,
+      "maxInputObserved": 22669,
+      "transcriptReads": 0,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [],
+      "spawns": 0
+    }
+  },
+  {
+    "arm": "M3",
+    "task": "p1-ticket-batch",
+    "repeat": 0,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": null,
+    "configured": {
+      "ledger": true,
+      "thinkingPolicy": {
+        "mode": "fixed",
+        "checkpoints": true,
+        "evidence": "strict"
+      },
+      "workerCompaction": {
+        "policy": "absolute",
+        "triggerTokens": 24000,
+        "keepRecentTokens": 6000,
+        "essentials": "extended",
+        "subWorkers": false
+      },
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 11,
+      "ledgerKinds": [
+        "create",
+        "handoff",
+        "plan",
+        "result"
+      ],
+      "taskPlans": 6,
+      "checkpointsInLastPlan": 2,
+      "checkpointsCitingRefs": 2,
+      "refsTagged": 39,
+      "workerSessions": 5,
+      "compactions": 5,
+      "compactionPolicies": [
+        "absolute"
+      ],
+      "earlyCompactions": 5,
+      "references": [
+        "valid",
+        "valid",
+        "valid",
+        "valid",
+        "valid"
+      ],
+      "essentialsSections": [
+        "request",
+        "plan",
+        "ledger",
+        "work-log",
+        "reference"
+      ],
+      "cancelled": [],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 5,
+      "summaryRequests": 5,
+      "maxInputObserved": 28460,
+      "transcriptReads": 0,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 2
+        }
+      ],
+      "retrieval": [],
+      "spawns": 4
+    }
+  },
+  {
+    "arm": "M3",
+    "task": "p1-ticket-batch",
+    "repeat": 1,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": null,
+    "configured": {
+      "ledger": true,
+      "thinkingPolicy": {
+        "mode": "fixed",
+        "checkpoints": true,
+        "evidence": "strict"
+      },
+      "workerCompaction": {
+        "policy": "absolute",
+        "triggerTokens": 24000,
+        "keepRecentTokens": 6000,
+        "essentials": "extended",
+        "subWorkers": false
+      },
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 8,
+      "ledgerKinds": [
+        "create",
+        "handoff",
+        "plan",
+        "result"
+      ],
+      "taskPlans": 5,
+      "checkpointsInLastPlan": 4,
+      "checkpointsCitingRefs": 4,
+      "refsTagged": 41,
+      "workerSessions": 3,
+      "compactions": 4,
+      "compactionPolicies": [
+        "absolute"
+      ],
+      "earlyCompactions": 4,
+      "references": [
+        "valid",
+        "valid",
+        "valid",
+        "valid"
+      ],
+      "essentialsSections": [
+        "request",
+        "plan",
+        "ledger",
+        "work-log",
+        "reference"
+      ],
+      "cancelled": [],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 4,
+      "summaryRequests": 5,
+      "maxInputObserved": 24377,
+      "transcriptReads": 0,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [],
+      "spawns": 2
+    }
+  },
+  {
+    "arm": "M3",
+    "task": "p1-ticket-batch",
+    "repeat": 2,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": null,
+    "configured": {
+      "ledger": true,
+      "thinkingPolicy": {
+        "mode": "fixed",
+        "checkpoints": true,
+        "evidence": "strict"
+      },
+      "workerCompaction": {
+        "policy": "absolute",
+        "triggerTokens": 24000,
+        "keepRecentTokens": 6000,
+        "essentials": "extended",
+        "subWorkers": false
+      },
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 8,
+      "ledgerKinds": [
+        "create",
+        "handoff",
+        "plan",
+        "result"
+      ],
+      "taskPlans": 5,
+      "checkpointsInLastPlan": 4,
+      "checkpointsCitingRefs": 4,
+      "refsTagged": 57,
+      "workerSessions": 3,
+      "compactions": 6,
+      "compactionPolicies": [
+        "absolute"
+      ],
+      "earlyCompactions": 6,
+      "references": [
+        "valid",
+        "valid",
+        "valid",
+        "valid",
+        "valid",
+        "valid"
+      ],
+      "essentialsSections": [
+        "request",
+        "plan",
+        "ledger",
+        "work-log",
+        "reference"
+      ],
+      "cancelled": [],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 6,
+      "summaryRequests": 8,
+      "maxInputObserved": 31664,
+      "transcriptReads": 0,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [],
+      "spawns": 2
+    }
+  },
+  {
+    "arm": "M3",
+    "task": "p2-handler-migration",
+    "repeat": 0,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": null,
+    "configured": {
+      "ledger": true,
+      "thinkingPolicy": {
+        "mode": "fixed",
+        "checkpoints": true,
+        "evidence": "strict"
+      },
+      "workerCompaction": {
+        "policy": "absolute",
+        "triggerTokens": 24000,
+        "keepRecentTokens": 6000,
+        "essentials": "extended",
+        "subWorkers": false
+      },
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 12,
+      "ledgerKinds": [
+        "create",
+        "handoff",
+        "plan",
+        "result"
+      ],
+      "taskPlans": 7,
+      "checkpointsInLastPlan": 2,
+      "checkpointsCitingRefs": 2,
+      "refsTagged": 62,
+      "workerSessions": 7,
+      "compactions": 4,
+      "compactionPolicies": [
+        "absolute"
+      ],
+      "earlyCompactions": 4,
+      "references": [
+        "valid",
+        "valid",
+        "valid",
+        "valid"
+      ],
+      "essentialsSections": [
+        "request",
+        "plan",
+        "ledger",
+        "work-log",
+        "reference"
+      ],
+      "cancelled": [
+        "loop_guard"
+      ],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 4,
+      "summaryRequests": 6,
+      "maxInputObserved": 51107,
+      "transcriptReads": 0,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 2
+        }
+      ],
+      "retrieval": [],
+      "spawns": 6
+    }
+  },
+  {
+    "arm": "M3",
+    "task": "p2-handler-migration",
+    "repeat": 1,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": null,
+    "configured": {
+      "ledger": true,
+      "thinkingPolicy": {
+        "mode": "fixed",
+        "checkpoints": true,
+        "evidence": "strict"
+      },
+      "workerCompaction": {
+        "policy": "absolute",
+        "triggerTokens": 24000,
+        "keepRecentTokens": 6000,
+        "essentials": "extended",
+        "subWorkers": false
+      },
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 7,
+      "ledgerKinds": [
+        "create",
+        "handoff",
+        "plan",
+        "result"
+      ],
+      "taskPlans": 4,
+      "checkpointsInLastPlan": 3,
+      "checkpointsCitingRefs": 3,
+      "refsTagged": 59,
+      "workerSessions": 7,
+      "compactions": 6,
+      "compactionPolicies": [
+        "absolute"
+      ],
+      "earlyCompactions": 6,
+      "references": [
+        "valid",
+        "valid",
+        "valid",
+        "valid",
+        "valid",
+        "valid"
+      ],
+      "essentialsSections": [
+        "request",
+        "plan",
+        "ledger",
+        "work-log",
+        "reference"
+      ],
+      "cancelled": [],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 6,
+      "summaryRequests": 7,
+      "maxInputObserved": 23979,
+      "transcriptReads": 0,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [],
+      "spawns": 6
+    }
+  },
+  {
+    "arm": "M3",
+    "task": "p2-handler-migration",
+    "repeat": 2,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": null,
+    "configured": {
+      "ledger": true,
+      "thinkingPolicy": {
+        "mode": "fixed",
+        "checkpoints": true,
+        "evidence": "strict"
+      },
+      "workerCompaction": {
+        "policy": "absolute",
+        "triggerTokens": 24000,
+        "keepRecentTokens": 6000,
+        "essentials": "extended",
+        "subWorkers": false
+      },
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 7,
+      "ledgerKinds": [
+        "create",
+        "handoff",
+        "plan",
+        "result"
+      ],
+      "taskPlans": 4,
+      "checkpointsInLastPlan": 3,
+      "checkpointsCitingRefs": 3,
+      "refsTagged": 38,
+      "workerSessions": 7,
+      "compactions": 1,
+      "compactionPolicies": [
+        "absolute"
+      ],
+      "earlyCompactions": 1,
+      "references": [
+        "valid"
+      ],
+      "essentialsSections": [
+        "request",
+        "plan",
+        "ledger",
+        "work-log",
+        "reference"
+      ],
+      "cancelled": [
+        "loop_guard"
+      ],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 1,
+      "summaryRequests": 1,
+      "maxInputObserved": 46517,
+      "transcriptReads": 0,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [],
+      "spawns": 6
+    }
+  },
+  {
+    "arm": "M3",
+    "task": "p3-library-features-ko",
+    "repeat": 0,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": null,
+    "configured": {
+      "ledger": true,
+      "thinkingPolicy": {
+        "mode": "fixed",
+        "checkpoints": true,
+        "evidence": "strict"
+      },
+      "workerCompaction": {
+        "policy": "absolute",
+        "triggerTokens": 24000,
+        "keepRecentTokens": 6000,
+        "essentials": "extended",
+        "subWorkers": false
+      },
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 7,
+      "ledgerKinds": [
+        "create",
+        "handoff",
+        "plan",
+        "result"
+      ],
+      "taskPlans": 4,
+      "checkpointsInLastPlan": 3,
+      "checkpointsCitingRefs": 3,
+      "refsTagged": 30,
+      "workerSessions": 4,
+      "compactions": 1,
+      "compactionPolicies": [
+        "absolute"
+      ],
+      "earlyCompactions": 1,
+      "references": [
+        "valid"
+      ],
+      "essentialsSections": [
+        "request",
+        "plan",
+        "ledger",
+        "work-log",
+        "reference"
+      ],
+      "cancelled": [],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 1,
+      "summaryRequests": 1,
+      "maxInputObserved": 30058,
+      "transcriptReads": 0,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [],
+      "spawns": 3
+    }
+  },
+  {
+    "arm": "M3",
+    "task": "p3-library-features-ko",
+    "repeat": 1,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": null,
+    "configured": {
+      "ledger": true,
+      "thinkingPolicy": {
+        "mode": "fixed",
+        "checkpoints": true,
+        "evidence": "strict"
+      },
+      "workerCompaction": {
+        "policy": "absolute",
+        "triggerTokens": 24000,
+        "keepRecentTokens": 6000,
+        "essentials": "extended",
+        "subWorkers": false
+      },
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 7,
+      "ledgerKinds": [
+        "create",
+        "handoff",
+        "plan",
+        "result"
+      ],
+      "taskPlans": 4,
+      "checkpointsInLastPlan": 3,
+      "checkpointsCitingRefs": 3,
+      "refsTagged": 30,
+      "workerSessions": 4,
+      "compactions": 3,
+      "compactionPolicies": [
+        "absolute"
+      ],
+      "earlyCompactions": 3,
+      "references": [
+        "valid",
+        "valid",
+        "valid"
+      ],
+      "essentialsSections": [
+        "request",
+        "plan",
+        "ledger",
+        "work-log",
+        "reference"
+      ],
+      "cancelled": [],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 3,
+      "summaryRequests": 4,
+      "maxInputObserved": 27338,
+      "transcriptReads": 0,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [],
+      "spawns": 3
+    }
+  },
+  {
+    "arm": "M3",
+    "task": "p3-library-features-ko",
+    "repeat": 2,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": null,
+    "configured": {
+      "ledger": true,
+      "thinkingPolicy": {
+        "mode": "fixed",
+        "checkpoints": true,
+        "evidence": "strict"
+      },
+      "workerCompaction": {
+        "policy": "absolute",
+        "triggerTokens": 24000,
+        "keepRecentTokens": 6000,
+        "essentials": "extended",
+        "subWorkers": false
+      },
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 8,
+      "ledgerKinds": [
+        "create",
+        "handoff",
+        "plan",
+        "result"
+      ],
+      "taskPlans": 5,
+      "checkpointsInLastPlan": 4,
+      "checkpointsCitingRefs": 4,
+      "refsTagged": 32,
+      "workerSessions": 3,
+      "compactions": 2,
+      "compactionPolicies": [
+        "absolute"
+      ],
+      "earlyCompactions": 2,
+      "references": [
+        "valid",
+        "valid"
+      ],
+      "essentialsSections": [
+        "request",
+        "plan",
+        "ledger",
+        "work-log",
+        "reference"
+      ],
+      "cancelled": [],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 2,
+      "summaryRequests": 3,
+      "maxInputObserved": 26690,
+      "transcriptReads": 0,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [],
+      "spawns": 2
+    }
+  },
+  {
+    "arm": "M3",
+    "task": "s1-amended-billing",
+    "repeat": 0,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": [
+      {
+        "turn": 1,
+        "status": "completed",
+        "requests": 33,
+        "wallMs": 456808,
+        "resumed": false
+      },
+      {
+        "turn": 2,
+        "status": "completed",
+        "requests": 56,
+        "wallMs": 906479,
+        "resumed": true
+      },
+      {
+        "turn": 3,
+        "status": "completed",
+        "requests": 23,
+        "wallMs": 253546,
+        "resumed": true
+      }
+    ],
+    "configured": {
+      "ledger": true,
+      "thinkingPolicy": {
+        "mode": "fixed",
+        "checkpoints": true,
+        "evidence": "strict"
+      },
+      "workerCompaction": {
+        "policy": "absolute",
+        "triggerTokens": 24000,
+        "keepRecentTokens": 6000,
+        "essentials": "extended",
+        "subWorkers": false
+      },
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 36,
+      "ledgerKinds": [
+        "create",
+        "handoff",
+        "plan",
+        "result"
+      ],
+      "taskPlans": 23,
+      "checkpointsInLastPlan": 3,
+      "checkpointsCitingRefs": 3,
+      "refsTagged": 144,
+      "workerSessions": 4,
+      "compactions": 8,
+      "compactionPolicies": [
+        "absolute"
+      ],
+      "earlyCompactions": 8,
+      "references": [
+        "valid",
+        "valid",
+        "valid",
+        "valid",
+        "valid",
+        "valid",
+        "valid",
+        "valid"
+      ],
+      "essentialsSections": [
+        "request",
+        "plan",
+        "ledger",
+        "work-log",
+        "reference"
+      ],
+      "cancelled": [],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 8,
+      "summaryRequests": 10,
+      "maxInputObserved": 23876,
+      "transcriptReads": 3,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 1
+        },
+        {
+          "orcheTaskCalls": 3
+        },
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [
+        {
+          "tool": "read",
+          "ok": true,
+          "batchIdInResult": false
+        },
+        {
+          "tool": "grep",
+          "ok": false,
+          "batchIdInResult": false
+        },
+        {
+          "tool": "read",
+          "ok": true,
+          "batchIdInResult": false
+        }
+      ],
+      "spawns": 0
+    }
+  },
+  {
+    "arm": "M3",
+    "task": "s1-amended-billing",
+    "repeat": 1,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": [
+      {
+        "turn": 1,
+        "status": "completed",
+        "requests": 32,
+        "wallMs": 329285,
+        "resumed": false
+      },
+      {
+        "turn": 2,
+        "status": "completed",
+        "requests": 23,
+        "wallMs": 328908,
+        "resumed": true
+      },
+      {
+        "turn": 3,
+        "status": "completed",
+        "requests": 19,
+        "wallMs": 208437,
+        "resumed": true
+      }
+    ],
+    "configured": {
+      "ledger": true,
+      "thinkingPolicy": {
+        "mode": "fixed",
+        "checkpoints": true,
+        "evidence": "strict"
+      },
+      "workerCompaction": {
+        "policy": "absolute",
+        "triggerTokens": 24000,
+        "keepRecentTokens": 6000,
+        "essentials": "extended",
+        "subWorkers": false
+      },
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 25,
+      "ledgerKinds": [
+        "create",
+        "handoff",
+        "plan",
+        "result"
+      ],
+      "taskPlans": 16,
+      "checkpointsInLastPlan": 3,
+      "checkpointsCitingRefs": 3,
+      "refsTagged": 95,
+      "workerSessions": 3,
+      "compactions": 3,
+      "compactionPolicies": [
+        "absolute"
+      ],
+      "earlyCompactions": 3,
+      "references": [
+        "valid",
+        "valid",
+        "valid"
+      ],
+      "essentialsSections": [
+        "request",
+        "plan",
+        "ledger",
+        "work-log",
+        "reference"
+      ],
+      "cancelled": [],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 3,
+      "summaryRequests": 4,
+      "maxInputObserved": 24190,
+      "transcriptReads": 3,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 1
+        },
+        {
+          "orcheTaskCalls": 1
+        },
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [
+        {
+          "tool": "read",
+          "ok": true,
+          "batchIdInResult": false
+        }
+      ],
+      "spawns": 0
+    }
+  },
+  {
+    "arm": "M3",
+    "task": "s1-amended-billing",
+    "repeat": 2,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": [
+      {
+        "turn": 1,
+        "status": "completed",
+        "requests": 44,
+        "wallMs": 512766,
+        "resumed": false
+      },
+      {
+        "turn": 2,
+        "status": "completed",
+        "requests": 26,
+        "wallMs": 341301,
+        "resumed": true
+      },
+      {
+        "turn": 3,
+        "status": "completed",
+        "requests": 18,
+        "wallMs": 133011,
+        "resumed": true
+      }
+    ],
+    "configured": {
+      "ledger": true,
+      "thinkingPolicy": {
+        "mode": "fixed",
+        "checkpoints": true,
+        "evidence": "strict"
+      },
+      "workerCompaction": {
+        "policy": "absolute",
+        "triggerTokens": 24000,
+        "keepRecentTokens": 6000,
+        "essentials": "extended",
+        "subWorkers": false
+      },
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 27,
+      "ledgerKinds": [
+        "create",
+        "handoff",
+        "plan",
+        "result"
+      ],
+      "taskPlans": 18,
+      "checkpointsInLastPlan": 3,
+      "checkpointsCitingRefs": 3,
+      "refsTagged": 102,
+      "workerSessions": 3,
+      "compactions": 4,
+      "compactionPolicies": [
+        "absolute"
+      ],
+      "earlyCompactions": 4,
+      "references": [
+        "valid",
+        "valid",
+        "valid",
+        "valid"
+      ],
+      "essentialsSections": [
+        "request",
+        "plan",
+        "ledger",
+        "work-log",
+        "reference"
+      ],
+      "cancelled": [],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 4,
+      "summaryRequests": 6,
+      "maxInputObserved": 23721,
+      "transcriptReads": 0,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 1
+        },
+        {
+          "orcheTaskCalls": 1
+        },
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [],
+      "spawns": 0
+    }
+  },
+  {
+    "arm": "M4",
+    "task": "d1-transactional-outbox",
+    "repeat": 1,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": null,
+    "configured": {
+      "ledger": true,
+      "thinkingPolicy": {
+        "mode": "fixed",
+        "checkpoints": true,
+        "evidence": "strict"
+      },
+      "workerCompaction": {
+        "policy": "absolute",
+        "triggerTokens": 24000,
+        "keepRecentTokens": 6000,
+        "essentials": "extended",
+        "subWorkers": true
+      },
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 12,
+      "ledgerKinds": [
+        "create",
+        "handoff",
+        "plan",
+        "result"
+      ],
+      "taskPlans": 9,
+      "checkpointsInLastPlan": 5,
+      "checkpointsCitingRefs": 5,
+      "refsTagged": 63,
+      "workerSessions": 1,
+      "compactions": 3,
+      "compactionPolicies": [
+        "absolute"
+      ],
+      "earlyCompactions": 3,
+      "references": [
+        "valid",
+        "valid",
+        "valid"
+      ],
+      "essentialsSections": [
+        "request",
+        "plan",
+        "ledger",
+        "work-log",
+        "reference"
+      ],
+      "cancelled": [],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 3,
+      "summaryRequests": 5,
+      "maxInputObserved": 24925,
+      "transcriptReads": 0,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [],
+      "spawns": 0
+    }
+  },
+  {
+    "arm": "M4",
+    "task": "d1-transactional-outbox",
+    "repeat": 2,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": null,
+    "configured": {
+      "ledger": true,
+      "thinkingPolicy": {
+        "mode": "fixed",
+        "checkpoints": true,
+        "evidence": "strict"
+      },
+      "workerCompaction": {
+        "policy": "absolute",
+        "triggerTokens": 24000,
+        "keepRecentTokens": 6000,
+        "essentials": "extended",
+        "subWorkers": true
+      },
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 10,
+      "ledgerKinds": [
+        "create",
+        "handoff",
+        "plan",
+        "result"
+      ],
+      "taskPlans": 7,
+      "checkpointsInLastPlan": 4,
+      "checkpointsCitingRefs": 4,
+      "refsTagged": 58,
+      "workerSessions": 1,
+      "compactions": 3,
+      "compactionPolicies": [
+        "absolute"
+      ],
+      "earlyCompactions": 3,
+      "references": [
+        "valid",
+        "valid",
+        "valid"
+      ],
+      "essentialsSections": [
+        "request",
+        "plan",
+        "ledger",
+        "work-log",
+        "reference"
+      ],
+      "cancelled": [],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 3,
+      "summaryRequests": 5,
+      "maxInputObserved": 23533,
+      "transcriptReads": 0,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [],
+      "spawns": 0
+    }
+  },
+  {
+    "arm": "M4",
+    "task": "d5-streaming-ingest-ko",
+    "repeat": 0,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": null,
+    "configured": {
+      "ledger": true,
+      "thinkingPolicy": {
+        "mode": "fixed",
+        "checkpoints": true,
+        "evidence": "strict"
+      },
+      "workerCompaction": {
+        "policy": "absolute",
+        "triggerTokens": 24000,
+        "keepRecentTokens": 6000,
+        "essentials": "extended",
+        "subWorkers": true
+      },
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 11,
+      "ledgerKinds": [
+        "create",
+        "handoff",
+        "plan",
+        "result"
+      ],
+      "taskPlans": 8,
+      "checkpointsInLastPlan": 4,
+      "checkpointsCitingRefs": 4,
+      "refsTagged": 43,
+      "workerSessions": 1,
+      "compactions": 2,
+      "compactionPolicies": [
+        "absolute"
+      ],
+      "earlyCompactions": 2,
+      "references": [
+        "valid",
+        "valid"
+      ],
+      "essentialsSections": [
+        "request",
+        "plan",
+        "ledger",
+        "work-log",
+        "reference"
+      ],
+      "cancelled": [],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 2,
+      "summaryRequests": 2,
+      "maxInputObserved": 24028,
+      "transcriptReads": 0,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [],
+      "spawns": 0
+    }
+  },
+  {
+    "arm": "M4",
+    "task": "d5-streaming-ingest-ko",
+    "repeat": 1,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": null,
+    "configured": {
+      "ledger": true,
+      "thinkingPolicy": {
+        "mode": "fixed",
+        "checkpoints": true,
+        "evidence": "strict"
+      },
+      "workerCompaction": {
+        "policy": "absolute",
+        "triggerTokens": 24000,
+        "keepRecentTokens": 6000,
+        "essentials": "extended",
+        "subWorkers": true
+      },
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 8,
+      "ledgerKinds": [
+        "create",
+        "handoff",
+        "plan",
+        "result"
+      ],
+      "taskPlans": 5,
+      "checkpointsInLastPlan": 4,
+      "checkpointsCitingRefs": 4,
+      "refsTagged": 48,
+      "workerSessions": 1,
+      "compactions": 2,
+      "compactionPolicies": [
+        "absolute"
+      ],
+      "earlyCompactions": 2,
+      "references": [
+        "valid",
+        "valid"
+      ],
+      "essentialsSections": [
+        "request",
+        "plan",
+        "ledger",
+        "work-log",
+        "reference"
+      ],
+      "cancelled": [],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 2,
+      "summaryRequests": 3,
+      "maxInputObserved": 23971,
+      "transcriptReads": 0,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [],
+      "spawns": 0
+    }
+  },
+  {
+    "arm": "M4",
+    "task": "d5-streaming-ingest-ko",
+    "repeat": 2,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": null,
+    "configured": {
+      "ledger": true,
+      "thinkingPolicy": {
+        "mode": "fixed",
+        "checkpoints": true,
+        "evidence": "strict"
+      },
+      "workerCompaction": {
+        "policy": "absolute",
+        "triggerTokens": 24000,
+        "keepRecentTokens": 6000,
+        "essentials": "extended",
+        "subWorkers": true
+      },
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 8,
+      "ledgerKinds": [
+        "create",
+        "handoff",
+        "plan",
+        "result"
+      ],
+      "taskPlans": 5,
+      "checkpointsInLastPlan": 4,
+      "checkpointsCitingRefs": 4,
+      "refsTagged": 49,
+      "workerSessions": 1,
+      "compactions": 3,
+      "compactionPolicies": [
+        "absolute"
+      ],
+      "earlyCompactions": 3,
+      "references": [
+        "valid",
+        "valid",
+        "valid"
+      ],
+      "essentialsSections": [
+        "request",
+        "plan",
+        "ledger",
+        "work-log",
+        "reference"
+      ],
+      "cancelled": [],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 3,
+      "summaryRequests": 3,
+      "maxInputObserved": 23821,
+      "transcriptReads": 0,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [],
+      "spawns": 0
+    }
+  },
+  {
+    "arm": "M4",
+    "task": "d7-config-reload",
+    "repeat": 0,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": null,
+    "configured": {
+      "ledger": true,
+      "thinkingPolicy": {
+        "mode": "fixed",
+        "checkpoints": true,
+        "evidence": "strict"
+      },
+      "workerCompaction": {
+        "policy": "absolute",
+        "triggerTokens": 24000,
+        "keepRecentTokens": 6000,
+        "essentials": "extended",
+        "subWorkers": true
+      },
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 10,
+      "ledgerKinds": [
+        "create",
+        "handoff",
+        "plan",
+        "result"
+      ],
+      "taskPlans": 7,
+      "checkpointsInLastPlan": 4,
+      "checkpointsCitingRefs": 4,
+      "refsTagged": 41,
+      "workerSessions": 1,
+      "compactions": 2,
+      "compactionPolicies": [
+        "absolute"
+      ],
+      "earlyCompactions": 2,
+      "references": [
+        "valid",
+        "valid"
+      ],
+      "essentialsSections": [
+        "request",
+        "plan",
+        "ledger",
+        "work-log",
+        "reference"
+      ],
+      "cancelled": [],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 2,
+      "summaryRequests": 3,
+      "maxInputObserved": 23790,
+      "transcriptReads": 0,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [],
+      "spawns": 0
+    }
+  },
+  {
+    "arm": "M4",
+    "task": "d7-config-reload",
+    "repeat": 1,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": null,
+    "configured": {
+      "ledger": true,
+      "thinkingPolicy": {
+        "mode": "fixed",
+        "checkpoints": true,
+        "evidence": "strict"
+      },
+      "workerCompaction": {
+        "policy": "absolute",
+        "triggerTokens": 24000,
+        "keepRecentTokens": 6000,
+        "essentials": "extended",
+        "subWorkers": true
+      },
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 8,
+      "ledgerKinds": [
+        "create",
+        "handoff",
+        "plan",
+        "result"
+      ],
+      "taskPlans": 5,
+      "checkpointsInLastPlan": 4,
+      "checkpointsCitingRefs": 4,
+      "refsTagged": 47,
+      "workerSessions": 1,
+      "compactions": 3,
+      "compactionPolicies": [
+        "absolute"
+      ],
+      "earlyCompactions": 3,
+      "references": [
+        "valid",
+        "valid",
+        "valid"
+      ],
+      "essentialsSections": [
+        "request",
+        "plan",
+        "ledger",
+        "work-log",
+        "reference"
+      ],
+      "cancelled": [],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 3,
+      "summaryRequests": 5,
+      "maxInputObserved": 23598,
+      "transcriptReads": 0,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [],
+      "spawns": 0
+    }
+  },
+  {
+    "arm": "M4",
+    "task": "d7-config-reload",
+    "repeat": 2,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": null,
+    "configured": {
+      "ledger": true,
+      "thinkingPolicy": {
+        "mode": "fixed",
+        "checkpoints": true,
+        "evidence": "strict"
+      },
+      "workerCompaction": {
+        "policy": "absolute",
+        "triggerTokens": 24000,
+        "keepRecentTokens": 6000,
+        "essentials": "extended",
+        "subWorkers": true
+      },
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 10,
+      "ledgerKinds": [
+        "create",
+        "handoff",
+        "plan",
+        "result"
+      ],
+      "taskPlans": 7,
+      "checkpointsInLastPlan": 4,
+      "checkpointsCitingRefs": 4,
+      "refsTagged": 48,
+      "workerSessions": 1,
+      "compactions": 2,
+      "compactionPolicies": [
+        "absolute"
+      ],
+      "earlyCompactions": 2,
+      "references": [
+        "valid",
+        "valid"
+      ],
+      "essentialsSections": [
+        "request",
+        "plan",
+        "ledger",
+        "work-log",
+        "reference"
+      ],
+      "cancelled": [],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 2,
+      "summaryRequests": 3,
+      "maxInputObserved": 24311,
+      "transcriptReads": 0,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [],
+      "spawns": 0
+    }
+  },
+  {
+    "arm": "M4",
+    "task": "p1-ticket-batch",
+    "repeat": 0,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": null,
+    "configured": {
+      "ledger": true,
+      "thinkingPolicy": {
+        "mode": "fixed",
+        "checkpoints": true,
+        "evidence": "strict"
+      },
+      "workerCompaction": {
+        "policy": "absolute",
+        "triggerTokens": 24000,
+        "keepRecentTokens": 6000,
+        "essentials": "extended",
+        "subWorkers": true
+      },
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 6,
+      "ledgerKinds": [
+        "create",
+        "handoff",
+        "plan",
+        "result"
+      ],
+      "taskPlans": 3,
+      "checkpointsInLastPlan": 2,
+      "checkpointsCitingRefs": 2,
+      "refsTagged": 39,
+      "workerSessions": 5,
+      "compactions": 5,
+      "compactionPolicies": [
+        "absolute"
+      ],
+      "earlyCompactions": 5,
+      "references": [
+        "valid",
+        "valid",
+        "valid",
+        "valid",
+        "valid"
+      ],
+      "essentialsSections": [
+        "request",
+        "plan",
+        "ledger",
+        "work-log",
+        "reference"
+      ],
+      "cancelled": [],
+      "failed": 0,
+      "subWorkerCompactions": 1,
+      "piCompactionEntries": 6,
+      "summaryRequests": 7,
+      "maxInputObserved": 24200,
+      "transcriptReads": 0,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [],
+      "spawns": 4
+    }
+  },
+  {
+    "arm": "M4",
+    "task": "p1-ticket-batch",
+    "repeat": 1,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": null,
+    "configured": {
+      "ledger": true,
+      "thinkingPolicy": {
+        "mode": "fixed",
+        "checkpoints": true,
+        "evidence": "strict"
+      },
+      "workerCompaction": {
+        "policy": "absolute",
+        "triggerTokens": 24000,
+        "keepRecentTokens": 6000,
+        "essentials": "extended",
+        "subWorkers": true
+      },
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 7,
+      "ledgerKinds": [
+        "create",
+        "handoff",
+        "plan",
+        "result"
+      ],
+      "taskPlans": 4,
+      "checkpointsInLastPlan": 3,
+      "checkpointsCitingRefs": 3,
+      "refsTagged": 56,
+      "workerSessions": 3,
+      "compactions": 7,
+      "compactionPolicies": [
+        "absolute"
+      ],
+      "earlyCompactions": 7,
+      "references": [
+        "valid",
+        "valid",
+        "valid",
+        "valid",
+        "valid",
+        "valid",
+        "valid"
+      ],
+      "essentialsSections": [
+        "request",
+        "plan",
+        "ledger",
+        "work-log",
+        "reference"
+      ],
+      "cancelled": [],
+      "failed": 0,
+      "subWorkerCompactions": 1,
+      "piCompactionEntries": 8,
+      "summaryRequests": 14,
+      "maxInputObserved": 25297,
+      "transcriptReads": 0,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [],
+      "spawns": 2
+    }
+  },
+  {
+    "arm": "M4",
+    "task": "p1-ticket-batch",
+    "repeat": 2,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": null,
+    "configured": {
+      "ledger": true,
+      "thinkingPolicy": {
+        "mode": "fixed",
+        "checkpoints": true,
+        "evidence": "strict"
+      },
+      "workerCompaction": {
+        "policy": "absolute",
+        "triggerTokens": 24000,
+        "keepRecentTokens": 6000,
+        "essentials": "extended",
+        "subWorkers": true
+      },
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 8,
+      "ledgerKinds": [
+        "create",
+        "handoff",
+        "plan",
+        "result"
+      ],
+      "taskPlans": 5,
+      "checkpointsInLastPlan": 4,
+      "checkpointsCitingRefs": 4,
+      "refsTagged": 44,
+      "workerSessions": 3,
+      "compactions": 2,
+      "compactionPolicies": [
+        "absolute"
+      ],
+      "earlyCompactions": 2,
+      "references": [
+        "valid",
+        "valid"
+      ],
+      "essentialsSections": [
+        "request",
+        "plan",
+        "ledger",
+        "work-log",
+        "reference"
+      ],
+      "cancelled": [
+        "loop_guard"
+      ],
+      "failed": 0,
+      "subWorkerCompactions": 2,
+      "piCompactionEntries": 4,
+      "summaryRequests": 5,
+      "maxInputObserved": 39936,
+      "transcriptReads": 0,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [],
+      "spawns": 2
+    }
+  },
+  {
+    "arm": "M4",
+    "task": "p2-handler-migration",
+    "repeat": 0,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": null,
+    "configured": {
+      "ledger": true,
+      "thinkingPolicy": {
+        "mode": "fixed",
+        "checkpoints": true,
+        "evidence": "strict"
+      },
+      "workerCompaction": {
+        "policy": "absolute",
+        "triggerTokens": 24000,
+        "keepRecentTokens": 6000,
+        "essentials": "extended",
+        "subWorkers": true
+      },
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 7,
+      "ledgerKinds": [
+        "create",
+        "handoff",
+        "plan",
+        "result"
+      ],
+      "taskPlans": 4,
+      "checkpointsInLastPlan": 3,
+      "checkpointsCitingRefs": 3,
+      "refsTagged": 39,
+      "workerSessions": 7,
+      "compactions": 1,
+      "compactionPolicies": [
+        "absolute"
+      ],
+      "earlyCompactions": 1,
+      "references": [
+        "valid"
+      ],
+      "essentialsSections": [
+        "request",
+        "plan",
+        "ledger",
+        "work-log",
+        "reference"
+      ],
+      "cancelled": [
+        "loop_guard"
+      ],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 1,
+      "summaryRequests": 1,
+      "maxInputObserved": 45286,
+      "transcriptReads": 0,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [],
+      "spawns": 6
+    }
+  },
+  {
+    "arm": "M4",
+    "task": "p2-handler-migration",
+    "repeat": 1,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": null,
+    "configured": {
+      "ledger": true,
+      "thinkingPolicy": {
+        "mode": "fixed",
+        "checkpoints": true,
+        "evidence": "strict"
+      },
+      "workerCompaction": {
+        "policy": "absolute",
+        "triggerTokens": 24000,
+        "keepRecentTokens": 6000,
+        "essentials": "extended",
+        "subWorkers": true
+      },
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 7,
+      "ledgerKinds": [
+        "create",
+        "handoff",
+        "plan",
+        "result"
+      ],
+      "taskPlans": 4,
+      "checkpointsInLastPlan": 3,
+      "checkpointsCitingRefs": 3,
+      "refsTagged": 36,
+      "workerSessions": 8,
+      "compactions": 1,
+      "compactionPolicies": [
+        "absolute"
+      ],
+      "earlyCompactions": 1,
+      "references": [
+        "valid"
+      ],
+      "essentialsSections": [
+        "request",
+        "plan",
+        "ledger",
+        "work-log",
+        "reference"
+      ],
+      "cancelled": [
+        "loop_guard"
+      ],
+      "failed": 0,
+      "subWorkerCompactions": 1,
+      "piCompactionEntries": 2,
+      "summaryRequests": 2,
+      "maxInputObserved": 46368,
+      "transcriptReads": 0,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [],
+      "spawns": 7
+    }
+  },
+  {
+    "arm": "M4",
+    "task": "p2-handler-migration",
+    "repeat": 2,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": null,
+    "configured": {
+      "ledger": true,
+      "thinkingPolicy": {
+        "mode": "fixed",
+        "checkpoints": true,
+        "evidence": "strict"
+      },
+      "workerCompaction": {
+        "policy": "absolute",
+        "triggerTokens": 24000,
+        "keepRecentTokens": 6000,
+        "essentials": "extended",
+        "subWorkers": true
+      },
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 12,
+      "ledgerKinds": [
+        "create",
+        "handoff",
+        "plan",
+        "result"
+      ],
+      "taskPlans": 7,
+      "checkpointsInLastPlan": 3,
+      "checkpointsCitingRefs": 3,
+      "refsTagged": 52,
+      "workerSessions": 7,
+      "compactions": 5,
+      "compactionPolicies": [
+        "absolute"
+      ],
+      "earlyCompactions": 5,
+      "references": [
+        "valid",
+        "valid",
+        "valid",
+        "valid",
+        "valid"
+      ],
+      "essentialsSections": [
+        "request",
+        "plan",
+        "ledger",
+        "work-log",
+        "reference"
+      ],
+      "cancelled": [
+        "loop_guard"
+      ],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 5,
+      "summaryRequests": 6,
+      "maxInputObserved": 45709,
+      "transcriptReads": 2,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 2
+        }
+      ],
+      "retrieval": [
+        {
+          "tool": "grep",
+          "ok": false,
+          "batchIdInResult": false
+        },
+        {
+          "tool": "bash",
+          "ok": true,
+          "batchIdInResult": false
+        }
+      ],
+      "spawns": 6
+    }
+  },
+  {
+    "arm": "M4",
+    "task": "p3-library-features-ko",
+    "repeat": 0,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": null,
+    "configured": {
+      "ledger": true,
+      "thinkingPolicy": {
+        "mode": "fixed",
+        "checkpoints": true,
+        "evidence": "strict"
+      },
+      "workerCompaction": {
+        "policy": "absolute",
+        "triggerTokens": 24000,
+        "keepRecentTokens": 6000,
+        "essentials": "extended",
+        "subWorkers": true
+      },
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 8,
+      "ledgerKinds": [
+        "create",
+        "handoff",
+        "plan",
+        "result"
+      ],
+      "taskPlans": 5,
+      "checkpointsInLastPlan": 4,
+      "checkpointsCitingRefs": 4,
+      "refsTagged": 39,
+      "workerSessions": 3,
+      "compactions": 5,
+      "compactionPolicies": [
+        "absolute"
+      ],
+      "earlyCompactions": 5,
+      "references": [
+        "valid",
+        "valid",
+        "valid",
+        "valid",
+        "valid"
+      ],
+      "essentialsSections": [
+        "request",
+        "plan",
+        "ledger",
+        "work-log",
+        "reference"
+      ],
+      "cancelled": [],
+      "failed": 0,
+      "subWorkerCompactions": 3,
+      "piCompactionEntries": 8,
+      "summaryRequests": 9,
+      "maxInputObserved": 25158,
+      "transcriptReads": 0,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [],
+      "spawns": 2
+    }
+  },
+  {
+    "arm": "M4",
+    "task": "p3-library-features-ko",
+    "repeat": 1,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": null,
+    "configured": {
+      "ledger": true,
+      "thinkingPolicy": {
+        "mode": "fixed",
+        "checkpoints": true,
+        "evidence": "strict"
+      },
+      "workerCompaction": {
+        "policy": "absolute",
+        "triggerTokens": 24000,
+        "keepRecentTokens": 6000,
+        "essentials": "extended",
+        "subWorkers": true
+      },
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 7,
+      "ledgerKinds": [
+        "create",
+        "handoff",
+        "plan",
+        "result"
+      ],
+      "taskPlans": 4,
+      "checkpointsInLastPlan": 3,
+      "checkpointsCitingRefs": 3,
+      "refsTagged": 31,
+      "workerSessions": 3,
+      "compactions": 2,
+      "compactionPolicies": [
+        "absolute"
+      ],
+      "earlyCompactions": 2,
+      "references": [
+        "valid",
+        "valid"
+      ],
+      "essentialsSections": [
+        "request",
+        "plan",
+        "ledger",
+        "work-log",
+        "reference"
+      ],
+      "cancelled": [],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 2,
+      "summaryRequests": 3,
+      "maxInputObserved": 24964,
+      "transcriptReads": 0,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [],
+      "spawns": 2
+    }
+  },
+  {
+    "arm": "M4",
+    "task": "p3-library-features-ko",
+    "repeat": 2,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": null,
+    "configured": {
+      "ledger": true,
+      "thinkingPolicy": {
+        "mode": "fixed",
+        "checkpoints": true,
+        "evidence": "strict"
+      },
+      "workerCompaction": {
+        "policy": "absolute",
+        "triggerTokens": 24000,
+        "keepRecentTokens": 6000,
+        "essentials": "extended",
+        "subWorkers": true
+      },
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 8,
+      "ledgerKinds": [
+        "create",
+        "handoff",
+        "plan",
+        "result"
+      ],
+      "taskPlans": 5,
+      "checkpointsInLastPlan": 4,
+      "checkpointsCitingRefs": 4,
+      "refsTagged": 25,
+      "workerSessions": 3,
+      "compactions": 1,
+      "compactionPolicies": [
+        "absolute"
+      ],
+      "earlyCompactions": 1,
+      "references": [
+        "valid"
+      ],
+      "essentialsSections": [
+        "request",
+        "plan",
+        "ledger",
+        "work-log",
+        "reference"
+      ],
+      "cancelled": [],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 1,
+      "summaryRequests": 1,
+      "maxInputObserved": 26965,
+      "transcriptReads": 0,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [],
+      "spawns": 2
+    }
+  },
+  {
+    "arm": "M4",
+    "task": "s1-amended-billing",
+    "repeat": 0,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": [
+      {
+        "turn": 1,
+        "status": "completed",
+        "requests": 38,
+        "wallMs": 494860,
+        "resumed": false
+      },
+      {
+        "turn": 2,
+        "status": "completed",
+        "requests": 31,
+        "wallMs": 471316,
+        "resumed": true
+      },
+      {
+        "turn": 3,
+        "status": "completed",
+        "requests": 24,
+        "wallMs": 332602,
+        "resumed": true
+      }
+    ],
+    "configured": {
+      "ledger": true,
+      "thinkingPolicy": {
+        "mode": "fixed",
+        "checkpoints": true,
+        "evidence": "strict"
+      },
+      "workerCompaction": {
+        "policy": "absolute",
+        "triggerTokens": 24000,
+        "keepRecentTokens": 6000,
+        "essentials": "extended",
+        "subWorkers": true
+      },
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 27,
+      "ledgerKinds": [
+        "create",
+        "handoff",
+        "plan",
+        "result"
+      ],
+      "taskPlans": 16,
+      "checkpointsInLastPlan": 3,
+      "checkpointsCitingRefs": 3,
+      "refsTagged": 112,
+      "workerSessions": 3,
+      "compactions": 6,
+      "compactionPolicies": [
+        "absolute"
+      ],
+      "earlyCompactions": 6,
+      "references": [
+        "valid",
+        "valid",
+        "valid",
+        "valid",
+        "valid",
+        "valid"
+      ],
+      "essentialsSections": [
+        "request",
+        "plan",
+        "ledger",
+        "work-log",
+        "reference"
+      ],
+      "cancelled": [],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 6,
+      "summaryRequests": 9,
+      "maxInputObserved": 23405,
+      "transcriptReads": 5,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 2
+        },
+        {
+          "orcheTaskCalls": 1
+        },
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [
+        {
+          "tool": "read",
+          "ok": true,
+          "batchIdInResult": false
+        },
+        {
+          "tool": "grep",
+          "ok": false,
+          "batchIdInResult": false
+        },
+        {
+          "tool": "bash",
+          "ok": false,
+          "batchIdInResult": false
+        },
+        {
+          "tool": "read",
+          "ok": true,
+          "batchIdInResult": false
+        },
+        {
+          "tool": "read",
+          "ok": true,
+          "batchIdInResult": false
+        }
+      ],
+      "spawns": 0
+    }
+  },
+  {
+    "arm": "M4",
+    "task": "s1-amended-billing",
+    "repeat": 1,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": [
+      {
+        "turn": 1,
+        "status": "completed",
+        "requests": 34,
+        "wallMs": 361902,
+        "resumed": false
+      },
+      {
+        "turn": 2,
+        "status": "completed",
+        "requests": 46,
+        "wallMs": 570820,
+        "resumed": true
+      },
+      {
+        "turn": 3,
+        "status": "completed",
+        "requests": 23,
+        "wallMs": 190332,
+        "resumed": true
+      }
+    ],
+    "configured": {
+      "ledger": true,
+      "thinkingPolicy": {
+        "mode": "fixed",
+        "checkpoints": true,
+        "evidence": "strict"
+      },
+      "workerCompaction": {
+        "policy": "absolute",
+        "triggerTokens": 24000,
+        "keepRecentTokens": 6000,
+        "essentials": "extended",
+        "subWorkers": true
+      },
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 31,
+      "ledgerKinds": [
+        "create",
+        "handoff",
+        "plan",
+        "result"
+      ],
+      "taskPlans": 20,
+      "checkpointsInLastPlan": 3,
+      "checkpointsCitingRefs": 3,
+      "refsTagged": 119,
+      "workerSessions": 3,
+      "compactions": 6,
+      "compactionPolicies": [
+        "absolute"
+      ],
+      "earlyCompactions": 6,
+      "references": [
+        "valid",
+        "valid",
+        "valid",
+        "valid",
+        "valid",
+        "valid"
+      ],
+      "essentialsSections": [
+        "request",
+        "plan",
+        "ledger",
+        "work-log",
+        "reference"
+      ],
+      "cancelled": [],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 6,
+      "summaryRequests": 9,
+      "maxInputObserved": 24245,
+      "transcriptReads": 1,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 1
+        },
+        {
+          "orcheTaskCalls": 2
+        },
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [
+        {
+          "tool": "read",
+          "ok": true,
+          "batchIdInResult": false
+        }
+      ],
+      "spawns": 0
+    }
+  },
+  {
+    "arm": "M4",
+    "task": "s1-amended-billing",
+    "repeat": 2,
+    "terminal": "completed",
+    "success": true,
+    "hidden": true,
+    "failingHidden": [],
+    "turns": [
+      {
+        "turn": 1,
+        "status": "completed",
+        "requests": 29,
+        "wallMs": 327103,
+        "resumed": false
+      },
+      {
+        "turn": 2,
+        "status": "completed",
+        "requests": 25,
+        "wallMs": 260677,
+        "resumed": true
+      },
+      {
+        "turn": 3,
+        "status": "completed",
+        "requests": 23,
+        "wallMs": 173087,
+        "resumed": true
+      }
+    ],
+    "configured": {
+      "ledger": true,
+      "thinkingPolicy": {
+        "mode": "fixed",
+        "checkpoints": true,
+        "evidence": "strict"
+      },
+      "workerCompaction": {
+        "policy": "absolute",
+        "triggerTokens": 24000,
+        "keepRecentTokens": 6000,
+        "essentials": "extended",
+        "subWorkers": true
+      },
+      "extendedContext": true
+    },
+    "observed": {
+      "efforts": [
+        "high"
+      ],
+      "models": [
+        "gpt-6-astra"
+      ],
+      "thinkingChanges": 0,
+      "ledgerEvents": 23,
+      "ledgerKinds": [
+        "create",
+        "handoff",
+        "plan",
+        "result"
+      ],
+      "taskPlans": 16,
+      "checkpointsInLastPlan": 3,
+      "checkpointsCitingRefs": 3,
+      "refsTagged": 87,
+      "workerSessions": 3,
+      "compactions": 2,
+      "compactionPolicies": [
+        "absolute"
+      ],
+      "earlyCompactions": 2,
+      "references": [
+        "valid",
+        "valid"
+      ],
+      "essentialsSections": [
+        "request",
+        "plan",
+        "ledger",
+        "work-log",
+        "reference"
+      ],
+      "cancelled": [],
+      "failed": 0,
+      "subWorkerCompactions": 0,
+      "piCompactionEntries": 2,
+      "summaryRequests": 2,
+      "maxInputObserved": 23609,
+      "transcriptReads": 1,
+      "mainTurns": [
+        {
+          "orcheTaskCalls": 1
+        },
+        {
+          "orcheTaskCalls": 1
+        },
+        {
+          "orcheTaskCalls": 1
+        }
+      ],
+      "retrieval": [],
+      "spawns": 0
+    }
+  }
+]

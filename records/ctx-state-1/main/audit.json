@@ -1,0 +1,3282 @@
+[
+  {
+    "arm": "M0",
+    "task": "d1-transactional-outbox",
+    "repeat": 1,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 0,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 1,
+    "subWorkerSessions": 0,
+    "subWorkerCompactionEntries": 0
+  },
+  {
+    "arm": "M0",
+    "task": "d1-transactional-outbox",
+    "repeat": 2,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 0,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 1,
+    "subWorkerSessions": 0,
+    "subWorkerCompactionEntries": 0
+  },
+  {
+    "arm": "M0",
+    "task": "d5-streaming-ingest-ko",
+    "repeat": 0,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 0,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 1,
+    "subWorkerSessions": 0,
+    "subWorkerCompactionEntries": 0
+  },
+  {
+    "arm": "M0",
+    "task": "d5-streaming-ingest-ko",
+    "repeat": 1,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 0,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 1,
+    "subWorkerSessions": 0,
+    "subWorkerCompactionEntries": 0
+  },
+  {
+    "arm": "M0",
+    "task": "d5-streaming-ingest-ko",
+    "repeat": 2,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 0,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 1,
+    "subWorkerSessions": 0,
+    "subWorkerCompactionEntries": 0
+  },
+  {
+    "arm": "M0",
+    "task": "d7-config-reload",
+    "repeat": 0,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 0,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 1,
+    "subWorkerSessions": 0,
+    "subWorkerCompactionEntries": 0
+  },
+  {
+    "arm": "M0",
+    "task": "d7-config-reload",
+    "repeat": 1,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 0,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 1,
+    "subWorkerSessions": 0,
+    "subWorkerCompactionEntries": 0
+  },
+  {
+    "arm": "M0",
+    "task": "d7-config-reload",
+    "repeat": 2,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 0,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 1,
+    "subWorkerSessions": 0,
+    "subWorkerCompactionEntries": 0
+  },
+  {
+    "arm": "M0",
+    "task": "p1-ticket-batch",
+    "repeat": 0,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 0,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 5,
+    "subWorkerSessions": 4,
+    "subWorkerCompactionEntries": 0
+  },
+  {
+    "arm": "M0",
+    "task": "p1-ticket-batch",
+    "repeat": 1,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 0,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 5,
+    "subWorkerSessions": 4,
+    "subWorkerCompactionEntries": 0
+  },
+  {
+    "arm": "M0",
+    "task": "p1-ticket-batch",
+    "repeat": 2,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 0,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 3,
+    "subWorkerSessions": 2,
+    "subWorkerCompactionEntries": 0
+  },
+  {
+    "arm": "M0",
+    "task": "p2-handler-migration",
+    "repeat": 0,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 0,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 7,
+    "subWorkerSessions": 6,
+    "subWorkerCompactionEntries": 0
+  },
+  {
+    "arm": "M0",
+    "task": "p2-handler-migration",
+    "repeat": 1,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 0,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 7,
+    "subWorkerSessions": 6,
+    "subWorkerCompactionEntries": 0
+  },
+  {
+    "arm": "M0",
+    "task": "p3-library-features-ko",
+    "repeat": 0,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 0,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 3,
+    "subWorkerSessions": 2,
+    "subWorkerCompactionEntries": 0
+  },
+  {
+    "arm": "M0",
+    "task": "p3-library-features-ko",
+    "repeat": 1,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 0,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 3,
+    "subWorkerSessions": 2,
+    "subWorkerCompactionEntries": 0
+  },
+  {
+    "arm": "M0",
+    "task": "p3-library-features-ko",
+    "repeat": 2,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 0,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 3,
+    "subWorkerSessions": 2,
+    "subWorkerCompactionEntries": 0
+  },
+  {
+    "arm": "M0",
+    "task": "s1-amended-billing",
+    "repeat": 0,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      },
+      {
+        "worker": "W2",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": "W1",
+        "ledgerBriefing": false,
+        "readPreviousTranscript": false,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      },
+      {
+        "worker": "W3",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": "W2",
+        "ledgerBriefing": false,
+        "readPreviousTranscript": false,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 2,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 3,
+    "subWorkerSessions": 0,
+    "subWorkerCompactionEntries": 0
+  },
+  {
+    "arm": "M0",
+    "task": "s1-amended-billing",
+    "repeat": 1,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      },
+      {
+        "worker": "W2",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": "W1",
+        "ledgerBriefing": false,
+        "readPreviousTranscript": false,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      },
+      {
+        "worker": "W3",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": "W2",
+        "ledgerBriefing": false,
+        "readPreviousTranscript": false,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 2,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 3,
+    "subWorkerSessions": 0,
+    "subWorkerCompactionEntries": 0
+  },
+  {
+    "arm": "M0",
+    "task": "s1-amended-billing",
+    "repeat": 2,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      },
+      {
+        "worker": "W2",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": "W1",
+        "ledgerBriefing": false,
+        "readPreviousTranscript": false,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      },
+      {
+        "worker": "W3",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": "W2",
+        "ledgerBriefing": false,
+        "readPreviousTranscript": false,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 2,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 3,
+    "subWorkerSessions": 0,
+    "subWorkerCompactionEntries": 0
+  },
+  {
+    "arm": "M1",
+    "task": "d1-transactional-outbox",
+    "repeat": 1,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 0,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 1,
+    "subWorkerSessions": 0,
+    "subWorkerCompactionEntries": 0
+  },
+  {
+    "arm": "M1",
+    "task": "d1-transactional-outbox",
+    "repeat": 2,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 0,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 1,
+    "subWorkerSessions": 0,
+    "subWorkerCompactionEntries": 0
+  },
+  {
+    "arm": "M1",
+    "task": "d5-streaming-ingest-ko",
+    "repeat": 0,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 0,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 1,
+    "subWorkerSessions": 0,
+    "subWorkerCompactionEntries": 0
+  },
+  {
+    "arm": "M1",
+    "task": "d5-streaming-ingest-ko",
+    "repeat": 1,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 0,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 1,
+    "subWorkerSessions": 0,
+    "subWorkerCompactionEntries": 0
+  },
+  {
+    "arm": "M1",
+    "task": "d5-streaming-ingest-ko",
+    "repeat": 2,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 0,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 1,
+    "subWorkerSessions": 0,
+    "subWorkerCompactionEntries": 0
+  },
+  {
+    "arm": "M1",
+    "task": "d7-config-reload",
+    "repeat": 0,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 0,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 1,
+    "subWorkerSessions": 0,
+    "subWorkerCompactionEntries": 0
+  },
+  {
+    "arm": "M1",
+    "task": "d7-config-reload",
+    "repeat": 1,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 0,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 1,
+    "subWorkerSessions": 0,
+    "subWorkerCompactionEntries": 0
+  },
+  {
+    "arm": "M1",
+    "task": "d7-config-reload",
+    "repeat": 2,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 0,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 1,
+    "subWorkerSessions": 0,
+    "subWorkerCompactionEntries": 0
+  },
+  {
+    "arm": "M1",
+    "task": "p1-ticket-batch",
+    "repeat": 0,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 0,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 3,
+    "subWorkerSessions": 2,
+    "subWorkerCompactionEntries": 0
+  },
+  {
+    "arm": "M1",
+    "task": "p1-ticket-batch",
+    "repeat": 1,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 0,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 3,
+    "subWorkerSessions": 2,
+    "subWorkerCompactionEntries": 0
+  },
+  {
+    "arm": "M1",
+    "task": "p1-ticket-batch",
+    "repeat": 2,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 0,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 3,
+    "subWorkerSessions": 2,
+    "subWorkerCompactionEntries": 0
+  },
+  {
+    "arm": "M1",
+    "task": "p2-handler-migration",
+    "repeat": 0,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 0,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 7,
+    "subWorkerSessions": 6,
+    "subWorkerCompactionEntries": 0
+  },
+  {
+    "arm": "M1",
+    "task": "p2-handler-migration",
+    "repeat": 1,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 0,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 7,
+    "subWorkerSessions": 6,
+    "subWorkerCompactionEntries": 0
+  },
+  {
+    "arm": "M1",
+    "task": "p2-handler-migration",
+    "repeat": 2,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 0,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 7,
+    "subWorkerSessions": 6,
+    "subWorkerCompactionEntries": 0
+  },
+  {
+    "arm": "M1",
+    "task": "p3-library-features-ko",
+    "repeat": 0,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 0,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 1,
+    "subWorkerSessions": 0,
+    "subWorkerCompactionEntries": 0
+  },
+  {
+    "arm": "M1",
+    "task": "p3-library-features-ko",
+    "repeat": 1,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 0,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 4,
+    "subWorkerSessions": 3,
+    "subWorkerCompactionEntries": 0
+  },
+  {
+    "arm": "M1",
+    "task": "p3-library-features-ko",
+    "repeat": 2,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 0,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 3,
+    "subWorkerSessions": 2,
+    "subWorkerCompactionEntries": 0
+  },
+  {
+    "arm": "M1",
+    "task": "s1-amended-billing",
+    "repeat": 0,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      },
+      {
+        "worker": "W2",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": "W1",
+        "ledgerBriefing": false,
+        "readPreviousTranscript": false,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      },
+      {
+        "worker": "W3",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": "W2",
+        "ledgerBriefing": false,
+        "readPreviousTranscript": false,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 2,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 3,
+    "subWorkerSessions": 0,
+    "subWorkerCompactionEntries": 0
+  },
+  {
+    "arm": "M1",
+    "task": "s1-amended-billing",
+    "repeat": 1,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      },
+      {
+        "worker": "W2",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": true,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      },
+      {
+        "worker": "W3",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": true,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 0,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 3,
+    "subWorkerSessions": 0,
+    "subWorkerCompactionEntries": 0
+  },
+  {
+    "arm": "M1",
+    "task": "s1-amended-billing",
+    "repeat": 2,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      },
+      {
+        "worker": "W2",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": "W1",
+        "ledgerBriefing": false,
+        "readPreviousTranscript": false,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      },
+      {
+        "worker": "W2",
+        "status": "done",
+        "reusedWorker": true,
+        "handoverFrom": "W1",
+        "ledgerBriefing": false,
+        "readPreviousTranscript": false,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      },
+      {
+        "worker": "W3",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": "W2",
+        "ledgerBriefing": false,
+        "readPreviousTranscript": false,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 3,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 3,
+    "subWorkerSessions": 0,
+    "subWorkerCompactionEntries": 0
+  },
+  {
+    "arm": "M2",
+    "task": "d1-transactional-outbox",
+    "repeat": 0,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 0,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 1,
+    "subWorkerSessions": 0,
+    "subWorkerCompactionEntries": 0
+  },
+  {
+    "arm": "M2",
+    "task": "d1-transactional-outbox",
+    "repeat": 1,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 0,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 1,
+    "subWorkerSessions": 0,
+    "subWorkerCompactionEntries": 0
+  },
+  {
+    "arm": "M2",
+    "task": "d1-transactional-outbox",
+    "repeat": 2,
+    "terminal": "completed",
+    "success": false,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 0,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 1,
+    "subWorkerSessions": 0,
+    "subWorkerCompactionEntries": 0
+  },
+  {
+    "arm": "M2",
+    "task": "d5-streaming-ingest-ko",
+    "repeat": 0,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 0,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 1,
+    "subWorkerSessions": 0,
+    "subWorkerCompactionEntries": 0
+  },
+  {
+    "arm": "M2",
+    "task": "d5-streaming-ingest-ko",
+    "repeat": 1,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 0,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 1,
+    "subWorkerSessions": 0,
+    "subWorkerCompactionEntries": 0
+  },
+  {
+    "arm": "M2",
+    "task": "d5-streaming-ingest-ko",
+    "repeat": 2,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 0,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 1,
+    "subWorkerSessions": 0,
+    "subWorkerCompactionEntries": 0
+  },
+  {
+    "arm": "M2",
+    "task": "d7-config-reload",
+    "repeat": 0,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 0,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 1,
+    "subWorkerSessions": 0,
+    "subWorkerCompactionEntries": 0
+  },
+  {
+    "arm": "M2",
+    "task": "d7-config-reload",
+    "repeat": 1,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 0,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 1,
+    "subWorkerSessions": 0,
+    "subWorkerCompactionEntries": 0
+  },
+  {
+    "arm": "M2",
+    "task": "d7-config-reload",
+    "repeat": 2,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 0,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 1,
+    "subWorkerSessions": 0,
+    "subWorkerCompactionEntries": 0
+  },
+  {
+    "arm": "M2",
+    "task": "p1-ticket-batch",
+    "repeat": 0,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 0,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 3,
+    "subWorkerSessions": 2,
+    "subWorkerCompactionEntries": 0
+  },
+  {
+    "arm": "M2",
+    "task": "p1-ticket-batch",
+    "repeat": 1,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 0,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 3,
+    "subWorkerSessions": 2,
+    "subWorkerCompactionEntries": 0
+  },
+  {
+    "arm": "M2",
+    "task": "p1-ticket-batch",
+    "repeat": 2,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 0,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 3,
+    "subWorkerSessions": 2,
+    "subWorkerCompactionEntries": 0
+  },
+  {
+    "arm": "M2",
+    "task": "p2-handler-migration",
+    "repeat": 0,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 0,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 8,
+    "subWorkerSessions": 7,
+    "subWorkerCompactionEntries": 0
+  },
+  {
+    "arm": "M2",
+    "task": "p2-handler-migration",
+    "repeat": 1,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 0,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 7,
+    "subWorkerSessions": 6,
+    "subWorkerCompactionEntries": 0
+  },
+  {
+    "arm": "M2",
+    "task": "p2-handler-migration",
+    "repeat": 2,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 0,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 7,
+    "subWorkerSessions": 6,
+    "subWorkerCompactionEntries": 0
+  },
+  {
+    "arm": "M2",
+    "task": "p3-library-features-ko",
+    "repeat": 0,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 0,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 3,
+    "subWorkerSessions": 2,
+    "subWorkerCompactionEntries": 0
+  },
+  {
+    "arm": "M2",
+    "task": "p3-library-features-ko",
+    "repeat": 1,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 0,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 1,
+    "subWorkerSessions": 0,
+    "subWorkerCompactionEntries": 0
+  },
+  {
+    "arm": "M2",
+    "task": "p3-library-features-ko",
+    "repeat": 2,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 0,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 1,
+    "subWorkerSessions": 0,
+    "subWorkerCompactionEntries": 0
+  },
+  {
+    "arm": "M2",
+    "task": "s1-amended-billing",
+    "repeat": 0,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      },
+      {
+        "worker": "W2",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": "W1",
+        "ledgerBriefing": false,
+        "readPreviousTranscript": false,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      },
+      {
+        "worker": "W3",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": "W2",
+        "ledgerBriefing": false,
+        "readPreviousTranscript": false,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 2,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 3,
+    "subWorkerSessions": 0,
+    "subWorkerCompactionEntries": 0
+  },
+  {
+    "arm": "M2",
+    "task": "s1-amended-billing",
+    "repeat": 1,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      },
+      {
+        "worker": "W2",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": "W1",
+        "ledgerBriefing": false,
+        "readPreviousTranscript": false,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      },
+      {
+        "worker": "W3",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": "W2",
+        "ledgerBriefing": false,
+        "readPreviousTranscript": false,
+        "transcriptCalls": 1,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 2,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 1,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 1,
+    "batchIdRetrieved": false,
+    "workerSessions": 3,
+    "subWorkerSessions": 0,
+    "subWorkerCompactionEntries": 0
+  },
+  {
+    "arm": "M2",
+    "task": "s1-amended-billing",
+    "repeat": 2,
+    "terminal": "completed",
+    "success": false,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      },
+      {
+        "worker": "W2",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": "W1",
+        "ledgerBriefing": false,
+        "readPreviousTranscript": false,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      },
+      {
+        "worker": "W3",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": "W2",
+        "ledgerBriefing": false,
+        "readPreviousTranscript": false,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 2,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 3,
+    "subWorkerSessions": 0,
+    "subWorkerCompactionEntries": 0
+  },
+  {
+    "arm": "M3",
+    "task": "d1-transactional-outbox",
+    "repeat": 1,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 0,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 1,
+    "subWorkerSessions": 0,
+    "subWorkerCompactionEntries": 0
+  },
+  {
+    "arm": "M3",
+    "task": "d1-transactional-outbox",
+    "repeat": 2,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 0,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 1,
+    "subWorkerSessions": 0,
+    "subWorkerCompactionEntries": 0
+  },
+  {
+    "arm": "M3",
+    "task": "d5-streaming-ingest-ko",
+    "repeat": 0,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 0,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 1,
+    "subWorkerSessions": 0,
+    "subWorkerCompactionEntries": 0
+  },
+  {
+    "arm": "M3",
+    "task": "d5-streaming-ingest-ko",
+    "repeat": 1,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 0,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 1,
+    "subWorkerSessions": 0,
+    "subWorkerCompactionEntries": 0
+  },
+  {
+    "arm": "M3",
+    "task": "d5-streaming-ingest-ko",
+    "repeat": 2,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 0,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 1,
+    "subWorkerSessions": 0,
+    "subWorkerCompactionEntries": 0
+  },
+  {
+    "arm": "M3",
+    "task": "d7-config-reload",
+    "repeat": 0,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 0,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 1,
+    "subWorkerSessions": 0,
+    "subWorkerCompactionEntries": 0
+  },
+  {
+    "arm": "M3",
+    "task": "d7-config-reload",
+    "repeat": 1,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 0,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 1,
+    "subWorkerSessions": 0,
+    "subWorkerCompactionEntries": 0
+  },
+  {
+    "arm": "M3",
+    "task": "d7-config-reload",
+    "repeat": 2,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 0,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 1,
+    "subWorkerSessions": 0,
+    "subWorkerCompactionEntries": 0
+  },
+  {
+    "arm": "M3",
+    "task": "p1-ticket-batch",
+    "repeat": 0,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      },
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": true,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 0,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 5,
+    "subWorkerSessions": 4,
+    "subWorkerCompactionEntries": 0
+  },
+  {
+    "arm": "M3",
+    "task": "p1-ticket-batch",
+    "repeat": 1,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 0,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 3,
+    "subWorkerSessions": 2,
+    "subWorkerCompactionEntries": 0
+  },
+  {
+    "arm": "M3",
+    "task": "p1-ticket-batch",
+    "repeat": 2,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 0,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 3,
+    "subWorkerSessions": 2,
+    "subWorkerCompactionEntries": 0
+  },
+  {
+    "arm": "M3",
+    "task": "p2-handler-migration",
+    "repeat": 0,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      },
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": true,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 0,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 7,
+    "subWorkerSessions": 6,
+    "subWorkerCompactionEntries": 0
+  },
+  {
+    "arm": "M3",
+    "task": "p2-handler-migration",
+    "repeat": 1,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 0,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 7,
+    "subWorkerSessions": 6,
+    "subWorkerCompactionEntries": 0
+  },
+  {
+    "arm": "M3",
+    "task": "p2-handler-migration",
+    "repeat": 2,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 0,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 7,
+    "subWorkerSessions": 6,
+    "subWorkerCompactionEntries": 0
+  },
+  {
+    "arm": "M3",
+    "task": "p3-library-features-ko",
+    "repeat": 0,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 0,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 4,
+    "subWorkerSessions": 3,
+    "subWorkerCompactionEntries": 0
+  },
+  {
+    "arm": "M3",
+    "task": "p3-library-features-ko",
+    "repeat": 1,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 0,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 4,
+    "subWorkerSessions": 3,
+    "subWorkerCompactionEntries": 0
+  },
+  {
+    "arm": "M3",
+    "task": "p3-library-features-ko",
+    "repeat": 2,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 0,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 3,
+    "subWorkerSessions": 2,
+    "subWorkerCompactionEntries": 0
+  },
+  {
+    "arm": "M3",
+    "task": "s1-amended-billing",
+    "repeat": 0,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      },
+      {
+        "worker": "W2",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": "W1",
+        "ledgerBriefing": false,
+        "readPreviousTranscript": false,
+        "transcriptCalls": 1,
+        "verifiedReads": 0
+      },
+      {
+        "worker": "W2",
+        "status": "done",
+        "reusedWorker": true,
+        "handoverFrom": "W1",
+        "ledgerBriefing": false,
+        "readPreviousTranscript": false,
+        "transcriptCalls": 1,
+        "verifiedReads": 0
+      },
+      {
+        "worker": "W3",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": true,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      },
+      {
+        "worker": "W4",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": "W3",
+        "ledgerBriefing": false,
+        "readPreviousTranscript": false,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 3,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 1,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 1,
+    "batchIdRetrieved": false,
+    "workerSessions": 4,
+    "subWorkerSessions": 0,
+    "subWorkerCompactionEntries": 0
+  },
+  {
+    "arm": "M3",
+    "task": "s1-amended-billing",
+    "repeat": 1,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      },
+      {
+        "worker": "W2",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": "W1",
+        "ledgerBriefing": false,
+        "readPreviousTranscript": false,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      },
+      {
+        "worker": "W3",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": "W2",
+        "ledgerBriefing": false,
+        "readPreviousTranscript": false,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 2,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 3,
+    "subWorkerSessions": 0,
+    "subWorkerCompactionEntries": 0
+  },
+  {
+    "arm": "M3",
+    "task": "s1-amended-billing",
+    "repeat": 2,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      },
+      {
+        "worker": "W2",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": "W1",
+        "ledgerBriefing": false,
+        "readPreviousTranscript": false,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      },
+      {
+        "worker": "W3",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": "W2",
+        "ledgerBriefing": false,
+        "readPreviousTranscript": false,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 2,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 3,
+    "subWorkerSessions": 0,
+    "subWorkerCompactionEntries": 0
+  },
+  {
+    "arm": "M4",
+    "task": "d1-transactional-outbox",
+    "repeat": 1,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 0,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 1,
+    "subWorkerSessions": 0,
+    "subWorkerCompactionEntries": 0
+  },
+  {
+    "arm": "M4",
+    "task": "d1-transactional-outbox",
+    "repeat": 2,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 0,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 1,
+    "subWorkerSessions": 0,
+    "subWorkerCompactionEntries": 0
+  },
+  {
+    "arm": "M4",
+    "task": "d5-streaming-ingest-ko",
+    "repeat": 0,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 0,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 1,
+    "subWorkerSessions": 0,
+    "subWorkerCompactionEntries": 0
+  },
+  {
+    "arm": "M4",
+    "task": "d5-streaming-ingest-ko",
+    "repeat": 1,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 0,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 1,
+    "subWorkerSessions": 0,
+    "subWorkerCompactionEntries": 0
+  },
+  {
+    "arm": "M4",
+    "task": "d5-streaming-ingest-ko",
+    "repeat": 2,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 0,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 1,
+    "subWorkerSessions": 0,
+    "subWorkerCompactionEntries": 0
+  },
+  {
+    "arm": "M4",
+    "task": "d7-config-reload",
+    "repeat": 0,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 0,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 1,
+    "subWorkerSessions": 0,
+    "subWorkerCompactionEntries": 0
+  },
+  {
+    "arm": "M4",
+    "task": "d7-config-reload",
+    "repeat": 1,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 0,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 1,
+    "subWorkerSessions": 0,
+    "subWorkerCompactionEntries": 0
+  },
+  {
+    "arm": "M4",
+    "task": "d7-config-reload",
+    "repeat": 2,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 0,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 1,
+    "subWorkerSessions": 0,
+    "subWorkerCompactionEntries": 0
+  },
+  {
+    "arm": "M4",
+    "task": "p1-ticket-batch",
+    "repeat": 0,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 0,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 5,
+    "subWorkerSessions": 4,
+    "subWorkerCompactionEntries": 1
+  },
+  {
+    "arm": "M4",
+    "task": "p1-ticket-batch",
+    "repeat": 1,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 0,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 3,
+    "subWorkerSessions": 2,
+    "subWorkerCompactionEntries": 1
+  },
+  {
+    "arm": "M4",
+    "task": "p1-ticket-batch",
+    "repeat": 2,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 0,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 3,
+    "subWorkerSessions": 2,
+    "subWorkerCompactionEntries": 2
+  },
+  {
+    "arm": "M4",
+    "task": "p2-handler-migration",
+    "repeat": 0,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 0,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 7,
+    "subWorkerSessions": 6,
+    "subWorkerCompactionEntries": 0
+  },
+  {
+    "arm": "M4",
+    "task": "p2-handler-migration",
+    "repeat": 1,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 0,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 8,
+    "subWorkerSessions": 7,
+    "subWorkerCompactionEntries": 1
+  },
+  {
+    "arm": "M4",
+    "task": "p2-handler-migration",
+    "repeat": 2,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 2,
+        "verifiedReads": 0
+      },
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": true,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 2,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 0,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 2,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 2,
+    "batchIdRetrieved": false,
+    "workerSessions": 7,
+    "subWorkerSessions": 6,
+    "subWorkerCompactionEntries": 0
+  },
+  {
+    "arm": "M4",
+    "task": "p3-library-features-ko",
+    "repeat": 0,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 0,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 3,
+    "subWorkerSessions": 2,
+    "subWorkerCompactionEntries": 3
+  },
+  {
+    "arm": "M4",
+    "task": "p3-library-features-ko",
+    "repeat": 1,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 0,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 3,
+    "subWorkerSessions": 2,
+    "subWorkerCompactionEntries": 0
+  },
+  {
+    "arm": "M4",
+    "task": "p3-library-features-ko",
+    "repeat": 2,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 0,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 3,
+    "subWorkerSessions": 2,
+    "subWorkerCompactionEntries": 0
+  },
+  {
+    "arm": "M4",
+    "task": "s1-amended-billing",
+    "repeat": 0,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      },
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": true,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      },
+      {
+        "worker": "W2",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": "W1",
+        "ledgerBriefing": false,
+        "readPreviousTranscript": true,
+        "transcriptCalls": 4,
+        "verifiedReads": 2
+      },
+      {
+        "worker": "W3",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": "W2",
+        "ledgerBriefing": false,
+        "readPreviousTranscript": false,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 2,
+    "handoversWithVerifiedRead": 1,
+    "transcriptCalls": 4,
+    "verifiedReads": 2,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 2,
+    "batchIdRetrieved": false,
+    "workerSessions": 3,
+    "subWorkerSessions": 0,
+    "subWorkerCompactionEntries": 0
+  },
+  {
+    "arm": "M4",
+    "task": "s1-amended-billing",
+    "repeat": 1,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      },
+      {
+        "worker": "W2",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": "W1",
+        "ledgerBriefing": false,
+        "readPreviousTranscript": false,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      },
+      {
+        "worker": "W2",
+        "status": "done",
+        "reusedWorker": true,
+        "handoverFrom": "W1",
+        "ledgerBriefing": false,
+        "readPreviousTranscript": false,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      },
+      {
+        "worker": "W3",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": "W2",
+        "ledgerBriefing": false,
+        "readPreviousTranscript": false,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 3,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 3,
+    "subWorkerSessions": 0,
+    "subWorkerCompactionEntries": 0
+  },
+  {
+    "arm": "M4",
+    "task": "s1-amended-billing",
+    "repeat": 2,
+    "terminal": "completed",
+    "success": true,
+    "assignments": [
+      {
+        "worker": "W1",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": false,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      },
+      {
+        "worker": "W2",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": true,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      },
+      {
+        "worker": "W3",
+        "status": "done",
+        "reusedWorker": false,
+        "handoverFrom": null,
+        "ledgerBriefing": true,
+        "readPreviousTranscript": null,
+        "transcriptCalls": 0,
+        "verifiedReads": 0
+      }
+    ],
+    "handovers": 0,
+    "handoversWithVerifiedRead": 0,
+    "transcriptCalls": 0,
+    "verifiedReads": 0,
+    "verifiedReadsAfterOwnCompaction": 0,
+    "heuristicOnly": 0,
+    "batchIdRetrieved": false,
+    "workerSessions": 3,
+    "subWorkerSessions": 0,
+    "subWorkerCompactionEntries": 0
+  }
+]
