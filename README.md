@@ -430,6 +430,7 @@ agent_workflow `test/integration/evalLoopScreening.test.ts` drives it through Te
 | `datasets/holdout-v1/` | 7 sealed, implementer-authored holdout tasks (they cannot back an adoption under the default protocol) |
 | `protocols/` | Recorded protocol overrides of measured runs |
 | `records/` | Committed records of measured runs |
+| `experiments/ctrl-ablation/` | Preregistered controlled ablation of orche (separate driver, never adopts): `run.mjs`, `analyze.mjs`, `fidelity.mjs`, variant patches; results `docs/results-ctrl-ablation-1.md` |
 
 Tests: `npm test` in this directory (`EL_TEST_TMP` sets the temp root). Root `npm run test:compat` runs them too. The
 unattended contract is covered by `test/lifecycle.test.mjs`, `test/lock.test.mjs`, `test/cli-contract.test.mjs` and

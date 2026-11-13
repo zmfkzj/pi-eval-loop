@@ -1,0 +1,15 @@
+{
+  "h1-interval-merge": {
+    "ok": true,
+    "problems": [],
+    "expected": {
+      "hiddenTests": 5
+    },
+    "baselineFailing": [],
+    "referenceVisiblePass": true,
+    "originalHidden": {
+      "pass": false,
+      "failing": 4
+    }
+  }
+}

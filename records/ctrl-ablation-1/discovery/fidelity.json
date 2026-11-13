@@ -1,0 +1,72 @@
+{
+  "P3": {
+    "units": 81,
+    "ok": 81,
+    "failing": {},
+    "handoffs": 0,
+    "spawns": 0
+  },
+  "D1": {
+    "units": 81,
+    "ok": 81,
+    "failing": {},
+    "handoffs": 0,
+    "spawns": 0
+  },
+  "T1": {
+    "units": 81,
+    "ok": 81,
+    "failing": {},
+    "handoffs": 95,
+    "spawns": 7
+  },
+  "D2": {
+    "units": 81,
+    "ok": 81,
+    "failing": {},
+    "handoffs": 91,
+    "spawns": 4
+  },
+  "V2": {
+    "units": 81,
+    "ok": 81,
+    "failing": {},
+    "handoffs": 90,
+    "spawns": 102
+  },
+  "B0": {
+    "units": 81,
+    "ok": 81,
+    "failing": {},
+    "handoffs": 0,
+    "spawns": 0
+  },
+  "V1": {
+    "units": 81,
+    "ok": 81,
+    "failing": {},
+    "handoffs": 94,
+    "spawns": 6
+  },
+  "S": {
+    "units": 81,
+    "ok": 81,
+    "failing": {},
+    "handoffs": 89,
+    "spawns": 11
+  },
+  "P1": {
+    "units": 81,
+    "ok": 81,
+    "failing": {},
+    "handoffs": 89,
+    "spawns": 6
+  },
+  "P2": {
+    "units": 81,
+    "ok": 81,
+    "failing": {},
+    "handoffs": 89,
+    "spawns": 4
+  }
+}

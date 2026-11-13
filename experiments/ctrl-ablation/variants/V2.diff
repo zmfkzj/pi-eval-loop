@@ -1,0 +1,13 @@
+diff --git a/src/orchestrator/instructions.ts b/src/orchestrator/instructions.ts
+index 738a65f..4ea3852 100644
+--- a/src/orchestrator/instructions.ts
++++ b/src/orchestrator/instructions.ts
+@@ -15,7 +15,7 @@ import { formatSchemaErrors } from "../orchestration/schema-errors.js";
+ export const SPLIT_JUDGMENT = `Not splitting is the default: do the task yourself unless one of the three criteria below clearly holds. Every sub-worker starts cold and re-reads what it needs, and you still integrate and check its work. On this code base a multi-worker split measured about twice the cost of one worker for about 10% less wall time; splitting coupled work costs more and breaks more.
+ 1. Parallelism: split only when ALL hold: (a) two or more parts need none of each other's results (no part uses an interface, data or decision that another part creates); (b) the parts write disjoint files (no shared file, registry, schema, config or doc edited by two parts); (c) each part is substantial on its own, roughly ten minutes or more of reading, implementing and testing; (d) the context a worker must load is small compared with its part. Not parallelism: several small edits; a rename or another mechanical change across many files; one bug or feature that spans modules through shared contracts; parts that depend on an interface still to be designed; steps that must run in order; a question that one investigation answers.
+ 2. Isolation: split off a part only when it needs a different environment or tool set: game-asset or video production (specialists with their own tools and models), or a separate checkout or worktree whose state must not mix with this one. Wanting a clean context is not isolation; read selectively instead.
+-3. Independent verification: add a fresh verifier only when the user explicitly asks for an independent review or verification, or when a wrong result would be irreversible or costly (production data, money, security) and the project's own tests cannot establish correctness. Ordinary changes covered by tests are verified by you running the checks.
++3. Independent verification (always, for implement assignments): after your own checks pass and before report_result, call orche_spawn once with reason "verification" and ONE worker of role verify; give it the original request and acceptance criteria, not how you built it. Fix every reproduced issue it reports and run the checks again; at most 2 verification rounds, then report remaining findings in data.unresolved. Read-only answer assignments skip this step.
+ Units: one unit per independent part with the files or directories it owns; two units never own the same file.`;
+ 
+ /**

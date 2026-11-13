@@ -1,0 +1,107 @@
+{
+  "experiment": "ctrl-ablation-1",
+  "smoke": true,
+  "preregDigest": "c34abced94e527ecaf5038ddedf7586f692ee451debcdb3b5100621a8894a676",
+  "envDigest": "f5ce141053523d5762388ddb6f4c826c8470ea7156015a8e2045359bd7ff22a9",
+  "queueDigest": "f080dc2979a747c08180e07d343c10670ad431211458ecf1cfe4d39cdcf43b59",
+  "files": {
+    "pi-eval-loop/src/ablation.mjs": "9ef9aaa20a507283baa86f0fa342867cbdae02af28ecec8068e607dd7725e2c9",
+    "pi-eval-loop/src/analysis.mjs": "d79f1987fbe987ca8d8bbfe041059eafc50ee29e6294692e7dc5f090e4bffc65",
+    "pi-eval-loop/src/app.mjs": "b4dc838f74b4df512f8b311652b083d7221d494be468056db1adc115f1f6aeb6",
+    "pi-eval-loop/src/archive.mjs": "5011acbb8d78f20e525db0700bb76e3e349e989a4efe531ff02eec55a4194b58",
+    "pi-eval-loop/src/checks.mjs": "5e818cfb7934890fa4bdb297dc74ff6b5cd0f03ed9366a164a18927e3f754de5",
+    "pi-eval-loop/src/cli.mjs": "204dda8579ca4239ea3118ed375a1c1690e79c6e553af72e7790f417efdd0abe",
+    "pi-eval-loop/src/contract.mjs": "8d814d70577d66234c5296cd3a6c63f7ea91d66797e9700aee813e087182ed3d",
+    "pi-eval-loop/src/datasets.mjs": "31c15c11c8eaa48259c2f534bb68d82c081f65f39e952607a416598d4314be15",
+    "pi-eval-loop/src/deploy.mjs": "3254278b2ed206c72b8c634ff5fb60ed1b7c6e0b07ee8b837144682c6811a966",
+    "pi-eval-loop/src/evaluator.mjs": "58f1e8d3ef78d8f70665b63a74f803683e02a0733ea8e04c62345afc06e7fd99",
+    "pi-eval-loop/src/faux-upstream.mjs": "7e98f2587472a936054fb2631c147dfa326de6eb34f026d16be64b5452731cad",
+    "pi-eval-loop/src/gate.mjs": "ace1c43e2e6e31cdc936b45d3bb5998d31d2bd4e3ab000764e1117e985b4d8c5",
+    "pi-eval-loop/src/grader.mjs": "ee2e91e1119c18f59503d2388171b9b68482e6d7ac6c3603631a017fee6cc615",
+    "pi-eval-loop/src/integrity.mjs": "1340b9fcd3b58a2c728d29cb5d4e775b4b6c0ce6864c25af4fc86e8e4d5d9cb6",
+    "pi-eval-loop/src/loop.mjs": "0db95ca0401d899b6bc547a5f58b15835b71167e7d735dd5df76b5e0b1bcf3d5",
+    "pi-eval-loop/src/metrics.mjs": "beb60e6c00c9d3402a4057bc32729a37cb6f7d7eb54194b020db82bf0b708ec8",
+    "pi-eval-loop/src/proposer.mjs": "ce781b5a39dcda59c8a99a3caece8274568a682ffa9a37e418b01b8001121cd8",
+    "pi-eval-loop/src/protocol.mjs": "9318470a1267b64eb5910ce7118d114a6cd62e03c2f3a37bdc480b3b526e0439",
+    "pi-eval-loop/src/report.mjs": "5af79cfdbbf223ce4ef8929e3b320e3958f086a285039cd01bc605cb581ec7e4",
+    "pi-eval-loop/src/rng.mjs": "7cb24904a94176a514cb29c82149bab5bfd0717db2ad9a103b4fec78e9e7b500",
+    "pi-eval-loop/src/runner.mjs": "d413e41e8b20ad374d29ca94ae6efb7fdf536a7e5e611732792742625b1490a6",
+    "pi-eval-loop/src/sandbox.mjs": "053174801d5c2ea7c01cfe8ed3a77debc3a1def4bd5cc4ba7c5d78ff0123c1e3",
+    "pi-eval-loop/src/selftest.mjs": "7fd97c27099557d23719d7231a49dee173d5a92e209fec8a22ee8712cb7908b1",
+    "pi-eval-loop/src/stats.mjs": "a423cdfb7b542380d922f2bb15ac3d2e9ac365db0053a3386aacd6b5ffec469c",
+    "pi-eval-loop/src/supply-cli.mjs": "b0b2745afbef48b652bd0c71ced8bd33ec2276ea17abc7c74219d13694498a2e",
+    "pi-eval-loop/src/supply-exercism.mjs": "c3423f964df574f44852535ac670dd3272de46fdb7a22c9d5ec556b64932890d",
+    "pi-eval-loop/src/supply.mjs": "d862ac1d631f01502201eae835354d3405d846eb2f5f51251d1e28a2ee578cfe",
+    "pi-eval-loop/src/util.mjs": "ad13afc4ad29399a29284d522f4af59e886345deefd0e658252aa5d8f7f194da",
+    "pi-eval-loop/src/worktree.mjs": "8318216d433cd73928378980aad56da70d9648095539ec5afd5c4cb336178199",
+    "orche/experiments/witness-replay/proxy.mjs": "67f839177a9961efe1354208e79fab8506316260f4ee51af27cf96dd99746ef5",
+    "orche/experiments/witness-replay/bridge.mjs": "85dc52cf5a467c1db776d68f4f20cfc2497ae22006c02232a56ec7c82fc28ab2",
+    "orche/experiments/witness-replay/sandbox.ts": "89fb3b861abf0507be3d3a429905b8305e818fc9b5aaf55c11159a5b9ede0871",
+    "orche/experiments/ultra-ab/protocol.ts": "c080e3efc4d0bfdbfe6f236902e6c6c94944d58da9664b8846ebcb0353ca53f6",
+    "pi-eval-loop/experiments/ctrl-ablation/PREREGISTRATION.md": "121d30c57ad562524ad4ad096125e8d4f39f58bec95a665d9597d3b3a6e1af5a",
+    "pi-eval-loop/experiments/ctrl-ablation/fidelity.mjs": "a7c8a7e0b37a85480238be63d1cb735f0cbe19164532db4406126feb9ab9e0ce",
+    "pi-eval-loop/experiments/ctrl-ablation/lib.mjs": "ce71c1564f532ea81d6fa6cb0432dc895170b515a54b5674d23d4e5434f9c018",
+    "pi-eval-loop/experiments/ctrl-ablation/prereg.json": "c4ea1c309c6f4eed1523e2dd69f2dbf8feb24cea4c6da71bcc3dc7f389528f92",
+    "pi-eval-loop/experiments/ctrl-ablation/run.mjs": "354f4d91cfec6644166630f42d1c696860172d58ee3e81e1b1422c0eb9968278",
+    "pi-eval-loop/experiments/ctrl-ablation/variants/D2.diff": "2bf289d337fbdccdd36a29a4a21ef4c816b10432a4fa61efb7522ee9f53eeb28",
+    "pi-eval-loop/experiments/ctrl-ablation/variants/P1.diff": "1c36e2b7eeae1864ba1649966ba20d1fc464ca6ee95fcbdc824fb632599d4694",
+    "pi-eval-loop/experiments/ctrl-ablation/variants/P2.diff": "5afabcbf6be778141de2939ce03bbd329283dab73a7e96abe57f62be2b3a22c2",
+    "pi-eval-loop/experiments/ctrl-ablation/variants/T1.diff": "3ea8ba33e3f172d077deb54cc98f3c7ad61223f574512de6b518b9d3427d1a00",
+    "pi-eval-loop/experiments/ctrl-ablation/variants/V1.diff": "54c2b1c596032e843d63784301acbf8bdcfa0caa1dce71e2b11fb5acb6e3c7f7",
+    "pi-eval-loop/experiments/ctrl-ablation/variants/V2.diff": "068a66d780c5037ec16b1d60340855ca2bb702629a3345646a47c93910046d46"
+  },
+  "harness": {
+    "S": {
+      "identity": "e831a6b2bc19f0c707b55505db33a11b2c9d4d4a:single",
+      "tree": "6bfbe380e9782c21c65554d181631130ae4a2ea21ff00df6ef283b829f1e6195"
+    },
+    "B0": {
+      "identity": "pure",
+      "tree": null
+    },
+    "P1": {
+      "identity": "e831a6b2bc19f0c707b55505db33a11b2c9d4d4a:single+1c36e2b7eeae1864",
+      "tree": "503ae17237e202cb501f05d50ddeaadbcf8e17f58d5486c9d09102eb53190f16"
+    },
+    "P2": {
+      "identity": "e831a6b2bc19f0c707b55505db33a11b2c9d4d4a:single+5afabcbf6be77814",
+      "tree": "e059706ac21e42fa7dac4ec0e97843eb6e1125885c01252b7e66268c12efecd8"
+    },
+    "P3": {
+      "identity": "pure+fb8e0a93e3e33541",
+      "tree": null
+    },
+    "D1": {
+      "identity": "e831a6b2bc19f0c707b55505db33a11b2c9d4d4a:direct",
+      "tree": "6bfbe380e9782c21c65554d181631130ae4a2ea21ff00df6ef283b829f1e6195"
+    },
+    "D2": {
+      "identity": "e831a6b2bc19f0c707b55505db33a11b2c9d4d4a:single+2bf289d337fbdccd",
+      "tree": "71902453a82cea36da639efb596b1154c9b7e6b0a8c400c1090e8bdb1e0a069e"
+    },
+    "T1": {
+      "identity": "e831a6b2bc19f0c707b55505db33a11b2c9d4d4a:single+3ea8ba33e3f172d0",
+      "tree": "c2279fc525e9221369a8d886f88a62cd069204a4bfb44bf8dc1f343b9e6097e3"
+    },
+    "V1": {
+      "identity": "e831a6b2bc19f0c707b55505db33a11b2c9d4d4a:single+54c2b1c596032e84",
+      "tree": "253c4e38a639d22b60dc2d22ac7f4d280bdc9aea291bab956860f6a551b4dcca"
+    },
+    "V2": {
+      "identity": "e831a6b2bc19f0c707b55505db33a11b2c9d4d4a:single+068a66d780c5037e",
+      "tree": "a264bbf98f9010a862c4a68f3063e8c7bf742b111455fa0287c366d4ae73a242"
+    }
+  },
+  "tasks": {
+    "h1-interval-merge": "882757b968cda3fed51639b85bd2cee2edf157274bb2b6e015a33d4d86e5db47"
+  },
+  "grading": {
+    "h1-interval-merge": {
+      "expected": {
+        "hiddenTests": 5
+      },
+      "baselineFailing": []
+    }
+  },
+  "lockedAt": "2026-11-06T02:06:56.626Z"
+}

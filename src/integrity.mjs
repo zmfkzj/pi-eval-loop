@@ -51,11 +51,10 @@ export function workspaceIntegrity(initial, final, finalFiles = []) {
 const parse = (text) => { try { return text === undefined ? undefined : JSON.parse(text); } catch { return undefined; } };
 
 /**
- * Strict existing-test immutability (opt-in, protocol.integrity.strictTestFiles; ported 2026-11-07 from the umbrella's 77ef728):
- * every test file of the ORIGINAL repository (ultra-ab's isTestFile or a name Node's runner collects by default) must be
- * byte-identical in the final workspace. Unlike workspaceIntegrity's line rules, an append-only edit or a reformat of an existing
- * test file is also a violation. Returns the violations and the sha256 of every original test file before and after (null =
- * deleted).
+ * Strict existing-test immutability (opt-in, protocol.integrity.strictTestFiles): every test file of the ORIGINAL repository
+ * (ultra-ab's isTestFile or a name Node's runner collects by default) must be byte-identical in the final workspace. Unlike
+ * workspaceIntegrity's line rules, an append-only edit or a reformat of an existing test file is also a violation. Returns the
+ * violations and the sha256 of every original test file before and after (null = deleted).
  */
 export function strictTestIntegrity(initial, final) {
   const violations = [], hashes = {};

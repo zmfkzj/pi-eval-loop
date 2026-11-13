@@ -1,0 +1,36 @@
+diff --git a/src/pi/session-factory.ts b/src/pi/session-factory.ts
+index db4fa34..3170380 100644
+--- a/src/pi/session-factory.ts
++++ b/src/pi/session-factory.ts
+@@ -307,7 +307,7 @@ export async function createSession(
+     thinkingLevel: options.route.thinking ?? "off",
+     // Allow a later hand-over upgrade, but do not register task_plan for run workers.
+     tools: options.tools ? [...new Set([...options.tools, "task_plan"])] : undefined,
+-    customTools: [...createOrcheTools({ cwd: options.cwd, bashHeartbeat: { ...options.bashHeartbeat }, astRewriteFileGuard: options.writeFileGuard ?? (options.toolGuard ? () => "Blocked: directory ast_rewrite requires a per-file write guard in guarded sessions" : undefined) }), ...(options.customTools ?? [])],
++    customTools: [...createOrcheTools({ cwd: options.cwd, bashHeartbeat: { ...options.bashHeartbeat }, astRewriteFileGuard: options.writeFileGuard ?? (options.toolGuard ? () => "Blocked: directory ast_rewrite requires a per-file write guard in guarded sessions" : undefined) }).filter(tool => tool.name !== "read" && tool.name !== "edit"), ...(options.customTools ?? [])],
+     resourceLoader: loader,
+     sessionManager,
+     settingsManager: SettingsManager.inMemory({
+diff --git a/src/tools/index.ts b/src/tools/index.ts
+index bda8101..e8461c9 100644
+--- a/src/tools/index.ts
++++ b/src/tools/index.ts
+@@ -8,16 +8,11 @@ import { createFindTool } from "./find.js";
+ import { createReadTool } from "./read.js";
+ 
+ /** Full editing worker set: search + read + edit + ast + diagnostics + bash + write. */
++// ctrl-ablation-1 T1: the pure-Pi default tool set (Pi built-in read/edit/write; bash keeps orche's heartbeat wrapper).
+ export const WORKER_TOOL_NAMES: readonly string[] = [
+   "read",
+-  "grep",
+-  "find",
+-  "ls",
+-  "edit",
+-  "ast_search",
+-  "ast_rewrite",
+-  "diagnostics",
+   "bash",
++  "edit",
+   "write",
+ ];
+ 

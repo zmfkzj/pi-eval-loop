@@ -1,0 +1,1001 @@
+{
+  "all": {
+    "posthoc": true,
+    "tasks": "all",
+    "units": 810,
+    "rows": {
+      "S": {
+        "units": 81,
+        "legacyFail": 13,
+        "detectorFail": 13,
+        "strictFail": 52,
+        "strictOnly": 39,
+        "legacyOnly": 0,
+        "both": 13,
+        "leaks": 0,
+        "functional": 65,
+        "functionalFailAmongIntegrityFail": 5,
+        "functionalFailAmongStrictOnly": 3,
+        "legacyValid": 54,
+        "strictValid": 18,
+        "legacy": {
+          "all": 15,
+          "mixed": 6,
+          "none": 6,
+          "I": 0.07407407407407407,
+          "tasks": 27
+        },
+        "strict": {
+          "all": 4,
+          "mixed": 5,
+          "none": 18,
+          "I": 0.06172839506172839,
+          "tasks": 27
+        },
+        "functionalTasks": {
+          "all": 19,
+          "none": 3
+        }
+      },
+      "B0": {
+        "units": 81,
+        "legacyFail": 4,
+        "detectorFail": 4,
+        "strictFail": 22,
+        "strictOnly": 18,
+        "legacyOnly": 0,
+        "both": 4,
+        "leaks": 0,
+        "functional": 66,
+        "functionalFailAmongIntegrityFail": 0,
+        "functionalFailAmongStrictOnly": 0,
+        "legacyValid": 62,
+        "strictValid": 44,
+        "legacy": {
+          "all": 17,
+          "mixed": 7,
+          "none": 3,
+          "I": 0.08641975308641975,
+          "tasks": 27
+        },
+        "strict": {
+          "all": 11,
+          "mixed": 7,
+          "none": 9,
+          "I": 0.08641975308641975,
+          "tasks": 27
+        },
+        "functionalTasks": {
+          "all": 19,
+          "none": 3
+        }
+      },
+      "P1": {
+        "units": 81,
+        "legacyFail": 0,
+        "detectorFail": 0,
+        "strictFail": 4,
+        "strictOnly": 4,
+        "legacyOnly": 0,
+        "both": 0,
+        "leaks": 0,
+        "functional": 66,
+        "functionalFailAmongIntegrityFail": 1,
+        "functionalFailAmongStrictOnly": 1,
+        "legacyValid": 66,
+        "strictValid": 63,
+        "legacy": {
+          "all": 20,
+          "mixed": 4,
+          "none": 3,
+          "I": 0.04938271604938271,
+          "tasks": 27
+        },
+        "strict": {
+          "all": 17,
+          "mixed": 7,
+          "none": 3,
+          "I": 0.08641975308641975,
+          "tasks": 27
+        },
+        "functionalTasks": {
+          "all": 20,
+          "none": 3
+        }
+      },
+      "P2": {
+        "units": 81,
+        "legacyFail": 9,
+        "detectorFail": 9,
+        "strictFail": 49,
+        "strictOnly": 40,
+        "legacyOnly": 0,
+        "both": 9,
+        "leaks": 0,
+        "functional": 67,
+        "functionalFailAmongIntegrityFail": 4,
+        "functionalFailAmongStrictOnly": 2,
+        "legacyValid": 60,
+        "strictValid": 22,
+        "legacy": {
+          "all": 17,
+          "mixed": 5,
+          "none": 5,
+          "I": 0.06172839506172839,
+          "tasks": 27
+        },
+        "strict": {
+          "all": 4,
+          "mixed": 6,
+          "none": 17,
+          "I": 0.07407407407407407,
+          "tasks": 27
+        },
+        "functionalTasks": {
+          "all": 20,
+          "none": 3
+        }
+      },
+      "P3": {
+        "units": 81,
+        "legacyFail": 0,
+        "detectorFail": 0,
+        "strictFail": 0,
+        "strictOnly": 0,
+        "legacyOnly": 0,
+        "both": 0,
+        "leaks": 0,
+        "functional": 69,
+        "functionalFailAmongIntegrityFail": 0,
+        "functionalFailAmongStrictOnly": 0,
+        "legacyValid": 69,
+        "strictValid": 69,
+        "legacy": {
+          "all": 22,
+          "mixed": 2,
+          "none": 3,
+          "I": 0.024691358024691357,
+          "tasks": 27
+        },
+        "strict": {
+          "all": 22,
+          "mixed": 2,
+          "none": 3,
+          "I": 0.024691358024691357,
+          "tasks": 27
+        },
+        "functionalTasks": {
+          "all": 22,
+          "none": 3
+        }
+      },
+      "D1": {
+        "units": 81,
+        "legacyFail": 7,
+        "detectorFail": 7,
+        "strictFail": 21,
+        "strictOnly": 14,
+        "legacyOnly": 0,
+        "both": 7,
+        "leaks": 0,
+        "functional": 68,
+        "functionalFailAmongIntegrityFail": 3,
+        "functionalFailAmongStrictOnly": 2,
+        "legacyValid": 62,
+        "strictValid": 50,
+        "legacy": {
+          "all": 17,
+          "mixed": 7,
+          "none": 3,
+          "I": 0.08641975308641975,
+          "tasks": 27
+        },
+        "strict": {
+          "all": 13,
+          "mixed": 7,
+          "none": 7,
+          "I": 0.08641975308641975,
+          "tasks": 27
+        },
+        "functionalTasks": {
+          "all": 20,
+          "none": 2
+        }
+      },
+      "D2": {
+        "units": 81,
+        "legacyFail": 9,
+        "detectorFail": 9,
+        "strictFail": 48,
+        "strictOnly": 39,
+        "legacyOnly": 0,
+        "both": 9,
+        "leaks": 0,
+        "functional": 70,
+        "functionalFailAmongIntegrityFail": 3,
+        "functionalFailAmongStrictOnly": 3,
+        "legacyValid": 61,
+        "strictValid": 25,
+        "legacy": {
+          "all": 17,
+          "mixed": 8,
+          "none": 2,
+          "I": 0.09876543209876543,
+          "tasks": 27
+        },
+        "strict": {
+          "all": 5,
+          "mixed": 8,
+          "none": 14,
+          "I": 0.09876543209876543,
+          "tasks": 27
+        },
+        "functionalTasks": {
+          "all": 22,
+          "none": 2
+        }
+      },
+      "T1": {
+        "units": 81,
+        "legacyFail": 17,
+        "detectorFail": 17,
+        "strictFail": 52,
+        "strictOnly": 35,
+        "legacyOnly": 0,
+        "both": 17,
+        "leaks": 0,
+        "functional": 67,
+        "functionalFailAmongIntegrityFail": 5,
+        "functionalFailAmongStrictOnly": 2,
+        "legacyValid": 53,
+        "strictValid": 20,
+        "legacy": {
+          "all": 14,
+          "mixed": 7,
+          "none": 6,
+          "I": 0.08641975308641975,
+          "tasks": 27
+        },
+        "strict": {
+          "all": 5,
+          "mixed": 3,
+          "none": 19,
+          "I": 0.037037037037037035,
+          "tasks": 27
+        },
+        "functionalTasks": {
+          "all": 19,
+          "none": 2
+        }
+      },
+      "V1": {
+        "units": 81,
+        "legacyFail": 13,
+        "detectorFail": 13,
+        "strictFail": 53,
+        "strictOnly": 40,
+        "legacyOnly": 0,
+        "both": 13,
+        "leaks": 0,
+        "functional": 70,
+        "functionalFailAmongIntegrityFail": 2,
+        "functionalFailAmongStrictOnly": 2,
+        "legacyValid": 57,
+        "strictValid": 19,
+        "legacy": {
+          "all": 15,
+          "mixed": 9,
+          "none": 3,
+          "I": 0.1111111111111111,
+          "tasks": 27
+        },
+        "strict": {
+          "all": 2,
+          "mixed": 9,
+          "none": 16,
+          "I": 0.1111111111111111,
+          "tasks": 27
+        },
+        "functionalTasks": {
+          "all": 20,
+          "none": 1
+        }
+      },
+      "V2": {
+        "units": 81,
+        "legacyFail": 13,
+        "detectorFail": 13,
+        "strictFail": 51,
+        "strictOnly": 38,
+        "legacyOnly": 0,
+        "both": 13,
+        "leaks": 0,
+        "functional": 66,
+        "functionalFailAmongIntegrityFail": 3,
+        "functionalFailAmongStrictOnly": 2,
+        "legacyValid": 54,
+        "strictValid": 18,
+        "legacy": {
+          "all": 14,
+          "mixed": 8,
+          "none": 5,
+          "I": 0.09876543209876543,
+          "tasks": 27
+        },
+        "strict": {
+          "all": 3,
+          "mixed": 6,
+          "none": 18,
+          "I": 0.07407407407407407,
+          "tasks": 27
+        },
+        "functionalTasks": {
+          "all": 21,
+          "none": 3
+        }
+      }
+    },
+    "contrasts": {
+      "B0-S": {
+        "legacy": {
+          "tasks": 27,
+          "dRate": 0.09876543209876543,
+          "dRateCI": [
+            -0.024691358024691364,
+            0.23456790123456792
+          ],
+          "dI": 0.012345679012345678,
+          "dICI": [
+            -0.04938271604938271,
+            0.07407407407407407
+          ],
+          "p": 0.22788860556972151,
+          "better": 7,
+          "worse": 3
+        },
+        "functional": {
+          "tasks": 27,
+          "dRate": 0.012345679012345678,
+          "dRateCI": [
+            -0.04938271604938272,
+            0.1111111111111111
+          ],
+          "dI": 0,
+          "dICI": [
+            -0.037037037037037035,
+            0.037037037037037035
+          ],
+          "p": 1,
+          "better": 1,
+          "worse": 2
+        },
+        "legacyAllShareDiff": 0.07407407407407407,
+        "strictAllShareDiff": 0.25925925925925924
+      },
+      "P1-S": {
+        "legacy": {
+          "tasks": 27,
+          "dRate": 0.14814814814814817,
+          "dRateCI": [
+            0.024691358024691357,
+            0.2962962962962963
+          ],
+          "dI": -0.024691358024691357,
+          "dICI": [
+            -0.09876543209876543,
+            0.04938271604938271
+          ],
+          "p": 0.06294685265736713,
+          "better": 8,
+          "worse": 3
+        },
+        "functional": {
+          "tasks": 27,
+          "dRate": 0.012345679012345682,
+          "dRateCI": [
+            -0.061728395061728406,
+            0.09876543209876544
+          ],
+          "dI": -0.012345679012345675,
+          "dICI": [
+            -0.07407407407407407,
+            0.04938271604938271
+          ],
+          "p": 1,
+          "better": 4,
+          "worse": 4
+        },
+        "legacyAllShareDiff": 0.18518518518518512,
+        "strictAllShareDiff": 0.4814814814814815
+      },
+      "P2-S": {
+        "legacy": {
+          "tasks": 27,
+          "dRate": 0.07407407407407407,
+          "dRateCI": [
+            -0.024691358024691353,
+            0.17283950617283952
+          ],
+          "dI": -0.012345679012345678,
+          "dICI": [
+            -0.07407407407407407,
+            0.04938271604938271
+          ],
+          "p": 0.24908754562271887,
+          "better": 7,
+          "worse": 2
+        },
+        "functional": {
+          "tasks": 27,
+          "dRate": 0.02469135802469136,
+          "dRateCI": [
+            -0.037037037037037035,
+            0.08641975308641976
+          ],
+          "dI": -0.012345679012345678,
+          "dICI": [
+            -0.06172839506172839,
+            0.037037037037037035
+          ],
+          "p": 0.6899655017249138,
+          "better": 4,
+          "worse": 2
+        },
+        "legacyAllShareDiff": 0.07407407407407407,
+        "strictAllShareDiff": 0
+      },
+      "P3-S": {
+        "legacy": {
+          "tasks": 27,
+          "dRate": 0.18518518518518523,
+          "dRateCI": [
+            0.061728395061728406,
+            0.3209876543209877
+          ],
+          "dI": -0.04938271604938271,
+          "dICI": [
+            -0.1111111111111111,
+            0
+          ],
+          "p": 0.014649267536623168,
+          "better": 9,
+          "worse": 1
+        },
+        "functional": {
+          "tasks": 27,
+          "dRate": 0.04938271604938273,
+          "dRateCI": [
+            -0.012345679012345677,
+            0.12345679012345681
+          ],
+          "dI": -0.037037037037037035,
+          "dICI": [
+            -0.08641975308641975,
+            0.012345679012345678
+          ],
+          "p": 0.3114344282785861,
+          "better": 4,
+          "worse": 1
+        },
+        "legacyAllShareDiff": 0.2592592592592592,
+        "strictAllShareDiff": 0.6666666666666666
+      },
+      "D1-S": {
+        "legacy": {
+          "tasks": 27,
+          "dRate": 0.09876543209876543,
+          "dRateCI": [
+            0.012345679012345664,
+            0.19753086419753085
+          ],
+          "dI": 0.012345679012345682,
+          "dICI": [
+            -0.06172839506172839,
+            0.08641975308641975
+          ],
+          "p": 0.09744512774361282,
+          "better": 9,
+          "worse": 3
+        },
+        "functional": {
+          "tasks": 27,
+          "dRate": 0.037037037037037035,
+          "dRateCI": [
+            -0.037037037037037035,
+            0.1234567901234568
+          ],
+          "dI": 4.11193712824132e-18,
+          "dICI": [
+            -0.07407407407407407,
+            0.07407407407407407
+          ],
+          "p": 0.5610719464026799,
+          "better": 5,
+          "worse": 3
+        },
+        "legacyAllShareDiff": 0.07407407407407407,
+        "strictAllShareDiff": 0.3333333333333333
+      },
+      "D2-S": {
+        "legacy": {
+          "tasks": 27,
+          "dRate": 0.08641975308641976,
+          "dRateCI": [
+            0.012345679012345682,
+            0.16049382716049385
+          ],
+          "dI": 0.024691358024691357,
+          "dICI": [
+            -0.037037037037037035,
+            0.08641975308641975
+          ],
+          "p": 0.063946802659867,
+          "better": 7,
+          "worse": 1
+        },
+        "functional": {
+          "tasks": 27,
+          "dRate": 0.0617283950617284,
+          "dRateCI": [
+            -2.05596856412066e-18,
+            0.1358024691358025
+          ],
+          "dI": -0.02469135802469136,
+          "dICI": [
+            -0.08641975308641975,
+            0.037037037037037035
+          ],
+          "p": 0.19224038798060097,
+          "better": 5,
+          "worse": 1
+        },
+        "legacyAllShareDiff": 0.07407407407407407,
+        "strictAllShareDiff": 0.037037037037037035
+      },
+      "T1-S": {
+        "legacy": {
+          "tasks": 27,
+          "dRate": -0.012345679012345685,
+          "dRateCI": [
+            -0.1234567901234568,
+            0.09876543209876544
+          ],
+          "dI": 0.012345679012345682,
+          "dICI": [
+            -0.06172839506172839,
+            0.08641975308641975
+          ],
+          "p": 1,
+          "better": 4,
+          "worse": 5
+        },
+        "functional": {
+          "tasks": 27,
+          "dRate": 0.024691358024691357,
+          "dRateCI": [
+            -0.037037037037037056,
+            0.09876543209876543
+          ],
+          "dI": 0.012345679012345682,
+          "dICI": [
+            -0.04938271604938271,
+            0.07407407407407407
+          ],
+          "p": 0.728163591820409,
+          "better": 5,
+          "worse": 3
+        },
+        "legacyAllShareDiff": -0.03703703703703709,
+        "strictAllShareDiff": 0.037037037037037035
+      },
+      "V1-S": {
+        "legacy": {
+          "tasks": 27,
+          "dRate": 0.037037037037037035,
+          "dRateCI": [
+            -0.06172839506172839,
+            0.12345679012345681
+          ],
+          "dI": 0.037037037037037035,
+          "dICI": [
+            -0.024691358024691357,
+            0.09876543209876543
+          ],
+          "p": 0.6175691215439228,
+          "better": 6,
+          "worse": 3
+        },
+        "functional": {
+          "tasks": 27,
+          "dRate": 0.06172839506172839,
+          "dRateCI": [
+            -0.012345679012345682,
+            0.13580246913580252
+          ],
+          "dI": 0.012345679012345682,
+          "dICI": [
+            -0.04938271604938271,
+            0.07407407407407407
+          ],
+          "p": 0.23058847057647117,
+          "better": 6,
+          "worse": 2
+        },
+        "legacyAllShareDiff": 0,
+        "strictAllShareDiff": -0.07407407407407407
+      },
+      "V2-S": {
+        "legacy": {
+          "tasks": 27,
+          "dRate": -4.11193712824132e-18,
+          "dRateCI": [
+            -0.08641975308641975,
+            0.08641975308641975
+          ],
+          "dI": 0.02469135802469136,
+          "dICI": [
+            -0.037037037037037035,
+            0.08641975308641975
+          ],
+          "p": 1,
+          "better": 3,
+          "worse": 3
+        },
+        "functional": {
+          "tasks": 27,
+          "dRate": 0.012345679012345678,
+          "dRateCI": [
+            -0.08641975308641976,
+            0.11111111111111113
+          ],
+          "dI": -0.024691358024691353,
+          "dICI": [
+            -0.08641975308641975,
+            0.04938271604938271
+          ],
+          "p": 1,
+          "better": 5,
+          "worse": 3
+        },
+        "legacyAllShareDiff": -0.03703703703703709,
+        "strictAllShareDiff": -0.037037037037037035
+      }
+    },
+    "primaryMismatches": []
+  },
+  "dev16": {
+    "units": 480,
+    "rows": {
+      "S": {
+        "units": 48,
+        "legacyFail": 7,
+        "detectorFail": 7,
+        "strictFail": 32,
+        "strictOnly": 25,
+        "legacyOnly": 0,
+        "both": 7,
+        "leaks": 0,
+        "functional": 42,
+        "functionalFailAmongIntegrityFail": 4,
+        "functionalFailAmongStrictOnly": 3,
+        "legacyValid": 36,
+        "strictValid": 14,
+        "legacy": {
+          "all": 10,
+          "mixed": 4,
+          "none": 2,
+          "I": 0.08333333333333333,
+          "tasks": 16
+        },
+        "strict": {
+          "all": 3,
+          "mixed": 4,
+          "none": 9,
+          "I": 0.08333333333333333,
+          "tasks": 16
+        },
+        "functionalTasks": {
+          "all": 12,
+          "none": 1
+        }
+      },
+      "B0": {
+        "units": 48,
+        "legacyFail": 2,
+        "detectorFail": 2,
+        "strictFail": 16,
+        "strictOnly": 14,
+        "legacyOnly": 0,
+        "both": 2,
+        "leaks": 0,
+        "functional": 44,
+        "functionalFailAmongIntegrityFail": 0,
+        "functionalFailAmongStrictOnly": 0,
+        "legacyValid": 42,
+        "strictValid": 28,
+        "legacy": {
+          "all": 11,
+          "mixed": 5,
+          "none": 0,
+          "I": 0.10416666666666666,
+          "tasks": 16
+        },
+        "strict": {
+          "all": 6,
+          "mixed": 6,
+          "none": 4,
+          "I": 0.12499999999999999,
+          "tasks": 16
+        },
+        "functionalTasks": {
+          "all": 12,
+          "none": 0
+        }
+      },
+      "P1": {
+        "units": 48,
+        "legacyFail": 0,
+        "detectorFail": 0,
+        "strictFail": 2,
+        "strictOnly": 2,
+        "legacyOnly": 0,
+        "both": 0,
+        "leaks": 0,
+        "functional": 43,
+        "functionalFailAmongIntegrityFail": 1,
+        "functionalFailAmongStrictOnly": 1,
+        "legacyValid": 43,
+        "strictValid": 42,
+        "legacy": {
+          "all": 13,
+          "mixed": 3,
+          "none": 0,
+          "I": 0.0625,
+          "tasks": 16
+        },
+        "strict": {
+          "all": 12,
+          "mixed": 4,
+          "none": 0,
+          "I": 0.08333333333333333,
+          "tasks": 16
+        },
+        "functionalTasks": {
+          "all": 13,
+          "none": 0
+        }
+      },
+      "P2": {
+        "units": 48,
+        "legacyFail": 5,
+        "detectorFail": 5,
+        "strictFail": 29,
+        "strictOnly": 24,
+        "legacyOnly": 0,
+        "both": 5,
+        "leaks": 0,
+        "functional": 44,
+        "functionalFailAmongIntegrityFail": 3,
+        "functionalFailAmongStrictOnly": 2,
+        "legacyValid": 40,
+        "strictValid": 18,
+        "legacy": {
+          "all": 11,
+          "mixed": 4,
+          "none": 1,
+          "I": 0.08333333333333333,
+          "tasks": 16
+        },
+        "strict": {
+          "all": 4,
+          "mixed": 3,
+          "none": 9,
+          "I": 0.0625,
+          "tasks": 16
+        },
+        "functionalTasks": {
+          "all": 13,
+          "none": 0
+        }
+      },
+      "P3": {
+        "units": 48,
+        "legacyFail": 0,
+        "detectorFail": 0,
+        "strictFail": 0,
+        "strictOnly": 0,
+        "legacyOnly": 0,
+        "both": 0,
+        "leaks": 0,
+        "functional": 45,
+        "functionalFailAmongIntegrityFail": 0,
+        "functionalFailAmongStrictOnly": 0,
+        "legacyValid": 45,
+        "strictValid": 45,
+        "legacy": {
+          "all": 14,
+          "mixed": 2,
+          "none": 0,
+          "I": 0.041666666666666664,
+          "tasks": 16
+        },
+        "strict": {
+          "all": 14,
+          "mixed": 2,
+          "none": 0,
+          "I": 0.041666666666666664,
+          "tasks": 16
+        },
+        "functionalTasks": {
+          "all": 14,
+          "none": 0
+        }
+      },
+      "D1": {
+        "units": 48,
+        "legacyFail": 2,
+        "detectorFail": 2,
+        "strictFail": 12,
+        "strictOnly": 10,
+        "legacyOnly": 0,
+        "both": 2,
+        "leaks": 0,
+        "functional": 44,
+        "functionalFailAmongIntegrityFail": 2,
+        "functionalFailAmongStrictOnly": 2,
+        "legacyValid": 42,
+        "strictValid": 34,
+        "legacy": {
+          "all": 11,
+          "mixed": 5,
+          "none": 0,
+          "I": 0.10416666666666666,
+          "tasks": 16
+        },
+        "strict": {
+          "all": 9,
+          "mixed": 4,
+          "none": 3,
+          "I": 0.08333333333333333,
+          "tasks": 16
+        },
+        "functionalTasks": {
+          "all": 13,
+          "none": 0
+        }
+      },
+      "D2": {
+        "units": 48,
+        "legacyFail": 5,
+        "detectorFail": 5,
+        "strictFail": 29,
+        "strictOnly": 24,
+        "legacyOnly": 0,
+        "both": 5,
+        "leaks": 0,
+        "functional": 44,
+        "functionalFailAmongIntegrityFail": 3,
+        "functionalFailAmongStrictOnly": 3,
+        "legacyValid": 39,
+        "strictValid": 18,
+        "legacy": {
+          "all": 11,
+          "mixed": 4,
+          "none": 1,
+          "I": 0.08333333333333333,
+          "tasks": 16
+        },
+        "strict": {
+          "all": 4,
+          "mixed": 4,
+          "none": 8,
+          "I": 0.08333333333333333,
+          "tasks": 16
+        },
+        "functionalTasks": {
+          "all": 14,
+          "none": 1
+        }
+      },
+      "T1": {
+        "units": 48,
+        "legacyFail": 9,
+        "detectorFail": 9,
+        "strictFail": 31,
+        "strictOnly": 22,
+        "legacyOnly": 0,
+        "both": 9,
+        "leaks": 0,
+        "functional": 44,
+        "functionalFailAmongIntegrityFail": 3,
+        "functionalFailAmongStrictOnly": 2,
+        "legacyValid": 36,
+        "strictValid": 16,
+        "legacy": {
+          "all": 9,
+          "mixed": 5,
+          "none": 2,
+          "I": 0.10416666666666666,
+          "tasks": 16
+        },
+        "strict": {
+          "all": 4,
+          "mixed": 2,
+          "none": 10,
+          "I": 0.041666666666666664,
+          "tasks": 16
+        },
+        "functionalTasks": {
+          "all": 13,
+          "none": 0
+        }
+      },
+      "V1": {
+        "units": 48,
+        "legacyFail": 8,
+        "detectorFail": 8,
+        "strictFail": 32,
+        "strictOnly": 24,
+        "legacyOnly": 0,
+        "both": 8,
+        "leaks": 0,
+        "functional": 43,
+        "functionalFailAmongIntegrityFail": 2,
+        "functionalFailAmongStrictOnly": 2,
+        "legacyValid": 35,
+        "strictValid": 13,
+        "legacy": {
+          "all": 9,
+          "mixed": 6,
+          "none": 1,
+          "I": 0.12499999999999999,
+          "tasks": 16
+        },
+        "strict": {
+          "all": 2,
+          "mixed": 5,
+          "none": 9,
+          "I": 0.10416666666666666,
+          "tasks": 16
+        },
+        "functionalTasks": {
+          "all": 12,
+          "none": 0
+        }
+      },
+      "V2": {
+        "units": 48,
+        "legacyFail": 7,
+        "detectorFail": 7,
+        "strictFail": 31,
+        "strictOnly": 24,
+        "legacyOnly": 0,
+        "both": 7,
+        "leaks": 0,
+        "functional": 42,
+        "functionalFailAmongIntegrityFail": 3,
+        "functionalFailAmongStrictOnly": 2,
+        "legacyValid": 36,
+        "strictValid": 14,
+        "legacy": {
+          "all": 10,
+          "mixed": 5,
+          "none": 1,
+          "I": 0.10416666666666666,
+          "tasks": 16
+        },
+        "strict": {
+          "all": 3,
+          "mixed": 4,
+          "none": 9,
+          "I": 0.08333333333333333,
+          "tasks": 16
+        },
+        "functionalTasks": {
+          "all": 13,
+          "none": 0
+        }
+      }
+    }
+  }
+}

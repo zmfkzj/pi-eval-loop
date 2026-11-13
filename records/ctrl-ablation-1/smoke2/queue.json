@@ -1,0 +1,52 @@
+[
+ {
+  "arm": "P3",
+  "task": "h1-interval-merge",
+  "repeat": 0
+ },
+ {
+  "arm": "P1",
+  "task": "h1-interval-merge",
+  "repeat": 0
+ },
+ {
+  "arm": "T1",
+  "task": "h1-interval-merge",
+  "repeat": 0
+ },
+ {
+  "arm": "S",
+  "task": "h1-interval-merge",
+  "repeat": 0
+ },
+ {
+  "arm": "P2",
+  "task": "h1-interval-merge",
+  "repeat": 0
+ },
+ {
+  "arm": "D2",
+  "task": "h1-interval-merge",
+  "repeat": 0
+ },
+ {
+  "arm": "B0",
+  "task": "h1-interval-merge",
+  "repeat": 0
+ },
+ {
+  "arm": "D1",
+  "task": "h1-interval-merge",
+  "repeat": 0
+ },
+ {
+  "arm": "V1",
+  "task": "h1-interval-merge",
+  "repeat": 0
+ },
+ {
+  "arm": "V2",
+  "task": "h1-interval-merge",
+  "repeat": 0
+ }
+]
