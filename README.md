@@ -431,12 +431,34 @@ It also refuses after the stage's persisted deadline (`dev.maxHours`, `holdout.m
 
 agent_workflow `test/integration/evalLoopScreening.test.ts` drives it through Temporal.
 
+## Internal promotion track (2026-11-13; opt-in `screening.internal`, not activated)
+
+An operational loop on top of the screening route for ongoing internal improvement (full contract: `docs/internal-promotion.md`).
+It reuses smoke/dev and the holdout stage unchanged, then:
+- waits model-free while `maxWaitingQualified` candidates wait for a fresh batch (preflight `candidateDemand.wanted` false);
+- spends ONE fresh exploration-eligible batch per promotion decision on the best-dev-net candidate, only when the configured
+  per-unit estimate fits the stage cap;
+- promotes it by CAS on an internal **evaluation-stable** pointer (`Releases`, digest + history record; a moved pointer is
+  `STALE_BASELINE`);
+- assesses the promoted harness against the previous stable on the regression tasks in the next cycle, and rolls back
+  (exact CAS) on a critical problem, a worse net, incomplete pairs, an expired deadline or an unaffordable assessment.
+
+Each evaluation stable has its own epoch registry. Exposure is global and durable across epochs and rollbacks.
+
+Labels are `development` and `internal-acceptance`, and the decision rules are operational and unvalidated
+(`policy: "operational-unvalidated"`). It never produces ADOPT, a confirmatory claim or a service deployment. confirmatory-1,
+the autonomous lifecycle and plain screening are unchanged.
+
+CLI additions: `internal-status --protocol CFG`, `internal-rollback --protocol CFG --release-key KEY --reason TEXT`.
+Tests (simulated only): `test/internal-promotion.test.mjs`.
+
 
 ## Layout
 
 | Path | Contents |
 |---|---|
 | `bin/eval-loop.mjs` | CLI entry |
+| `src/internal-promotion.mjs` | Opt-in internal promotion track: epochs, evaluation-stable promotion/assessment/rollback, internal-status |
 | `src/cli.mjs` | CLI modes, preflight, supervised step, lock, signal/exit cleanup |
 | `src/contract.mjs` | Outcome/exit-code table, state health, public status summary |
 | `extension/index.js` | Pi command |

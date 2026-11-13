@@ -68,7 +68,12 @@ export function budgetTotals(records) {
   const attempts = records.filter(r => r.type === "attempt").length;
   if (attempts > gatedCharged) problems.push(`outbound attempts ${attempts} exceed the charged total ${gatedCharged} of gate-covered reservations${gatedCharged !== charged ? ` (off-gate charges ${charged - gatedCharged} never cover attempts)` : ""} (an attempt left without a covering reservation)`);
   const limit = init?.limit ?? null;
-  return { limit, charged, settledUsed, openReservations: open, openAmount, reservations: res.size, attempts, gatedCharged, gatedOpenReservations: gatedOpen, gatedOpenAmount, offGateCharged: charged - gatedCharged, remaining: limit === null ? null : limit - charged, problems };
+  // Accounting unit of the off-gate charges (2026-11-13, admission.mjs offGateAdmission): "upstream-attempt-bound" (forwarded x the
+  // gateway's retry bound) or "proxy-forwarded" / unlabeled (gateway-internal retries unmetered). Only when every off-gate charge
+  // is attempt-bound does the charged total bound upstream attempts of every role (still under offGateAdmission's stated assumption).
+  const offGateUnits = { upstreamAttemptBound: 0, proxyForwarded: 0 };
+  for (const x of res.values()) if (offGate(x)) offGateUnits[x.meta?.unit === "upstream-attempt-bound" ? "upstreamAttemptBound" : "proxyForwarded"] += x.settled ? Math.max(x.used ?? x.amount, 0) : x.amount;
+  return { limit, charged, offGateUnits, upstreamAttemptsBounded: offGateUnits.proxyForwarded === 0, settledUsed, openReservations: open, openAmount, reservations: res.size, attempts, gatedCharged, gatedOpenReservations: gatedOpen, gatedOpenAmount, offGateCharged: charged - gatedCharged, remaining: limit === null ? null : limit - charged, problems };
 }
 
 /**

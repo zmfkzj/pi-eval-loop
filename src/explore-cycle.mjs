@@ -28,6 +28,7 @@ import { RequestBudget, gatewayPressureMeter } from "./request-budget.mjs";
 import { batchEvidenceProblems, DEFAULT_SUPPLY, firstEligibleBatch, mergeSupply, poolPolicy, poolState, recoverPool, registryOf, retireBatch } from "./supply.mjs";
 import { acquireLock, atomicWriteJson, digestOf, ensureDir, inspectLock, LockBusyError, readJson, sha256 } from "./util.mjs";
 import { screeningConfigProblems, screeningCycle, screeningExclusionTasks, screeningPreflight, screeningStatus } from "./screening.mjs";
+import { currentStable, effectiveConfig, evalReleases, internalConfigProblems, internalEnabled } from "./internal-promotion.mjs";
 
 export const EXPLORATION_SCHEMA = "pi-eval-loop/exploration@1";
 export const CYCLE_SCHEMA = "pi-eval-loop/explore-cycle@1";
@@ -70,7 +71,7 @@ export function loadExploration(file) {
   // mode screening (src/screening.mjs): candidates come from the bounded source and the development tasks are the screening
   // tasks; no fixed candidate, no pre-accepted screen report, no whole-pass minRemaining (the route caps size every stage).
   const scr = c.mode === "screening";
-  if (scr) { if (c.candidate !== undefined || c.screen !== undefined || c.confirmation !== undefined) p.push("mode screening takes its candidates from screening.candidates and its development tasks from screening.dev (no candidate, screen or confirmation section)"); p.push(...screeningConfigProblems(c)); }
+  if (scr) { if (c.candidate !== undefined || c.screen !== undefined || c.confirmation !== undefined) p.push("mode screening takes its candidates from screening.candidates and its development tasks from screening.dev (no candidate, screen or confirmation section)"); p.push(...screeningConfigProblems(c)); p.push(...internalConfigProblems(c)); }
   else {
     abs(c.candidate?.dir, "candidate.dir"); abs(c.screen?.report, "screen.report");
     if (!/^[0-9a-f]{64}$/.test(c.candidate?.identity?.runtimeDigest ?? "")) p.push("candidate.identity.runtimeDigest (frozen sha256) required");
@@ -142,6 +143,7 @@ export function exploreStatus(dir) {
     cycleComplete: s.phase === "done", searchStop: null, counters: { candidates: 1, noProgress: 0 }, final,
     acceptance: acceptanceOf(s, final),
     exploration: { mode: s.mode === "autonomous" || s.mode === "screening" ? s.mode : "exploration-only", outcome: s.outcome ?? null, code: s.blocked?.code ?? null, batch: s.batch ? basename(s.batch) : null, ...(s.mode === "screening" ? screeningStatus(s) : {}) },
+    ...(s.internal ? { internal: { epoch: s.internal.epoch ? s.internal.epoch.slice(0, 16) : null, acceptance: s.internal.acceptance ? { verdict: s.internal.acceptance.verdict, decision: s.internal.acceptance.decision, batch: s.internal.acceptance.batch } : null, decision: s.internal.decision ?? null, releaseKey: s.internal.releaseKey ?? null, rolledBack: !!s.internal.rollback, serviceDeployment: "none", researchAdopt: false } } : {}),
     ...(s.mode === "autonomous" ? { lifecycle: { stage: s.phase === "blocked" ? s.resumePhase ?? null : s.phase, outcome: s.lifecycleOutcome ?? null, code: s.blocked?.code ?? null, explorationVerdict: s.exploration?.verdict ?? null, confirmVerdict: s.confirm?.verdict ?? null, deployed: s.adoption && !s.rolledBack ? s.adoption.release : null, rolledBack: s.rolledBack === true, confirmation: s.confirmation?.verdict ?? null } } : {}),
     ...(s.adoption ? { adoptedAt: s.adoption.at } : {}),
     doneAt: s.doneAt ?? null, updatedAt: s.updatedAt ?? null, lastInterruption: null };
@@ -149,6 +151,11 @@ export function exploreStatus(dir) {
 
 function acceptanceOf(s, final) {
   if (!final) return null;
+  if (s.internal?.decision) {
+    const d = s.internal.decision;
+    const stage = d === "PROMOTED" ? "internal-promoted" : /^ROLLBACK/.test(d) ? "internal-rolled-back" : d === "KEEP" ? "internal-promotion-kept" : d === "STALE_BASELINE" ? "internal-stale-baseline" : "internal-not-promoted";
+    return { stage, candidateAccepted: d === "PROMOTED", productionAdopted: false, internalPromoted: d === "PROMOTED", confirmed: false, confirmation: null, evidenceClass: final.evidence?.class ?? "internal-acceptance", legacy: false };
+  }
   const deployed = !!s.adoption && !s.rolledBack, confirmed = s.confirmation?.verdict === "CONFIRMED";
   const stage = s.rolledBack ? "rolled-back" : deployed ? (confirmed ? "adopted-confirmed" : "adopted-unconfirmed") : final.verdict === "EXPLORATORY_SUPPORTED" ? "candidate-accepted-exploratory" : "not-accepted";
   return { stage, candidateAccepted: final.verdict === "EXPLORATORY_SUPPORTED" || final.verdict === "ADOPT", productionAdopted: deployed, confirmed, confirmation: s.confirmation?.verdict ?? null, evidenceClass: final.evidence?.class ?? "exploratory", legacy: false };
@@ -252,6 +259,7 @@ export async function explorePreflight(cfgFile, stateDir, deps = {}) {
   const r = { schema: PREFLIGHT_SCHEMA, stateDir: resolve(stateDir), mode: "exploration-only", ok: false, code: null, reasons: [] };
   let cfg; try { cfg = loadExploration(cfgFile); } catch (error) { return { ...r, code: "config-invalid", reasons: [String(error.message).slice(0, 500)] }; }
   r.mode = cfg.mode;
+  if (internalEnabled(cfg)) { try { cfg = await effectiveConfig(cfg, currentStable(cfg)); } catch (error) { return { ...r, code: "prerequisite-failed", reasons: [`internal track: ${String(error.message).slice(0, 300)}`] }; } }
   const { problems, remaining, budget } = await readiness(cfg, deps);
   r.budget = { remaining, minRemaining: cfg.budget.minRemaining ?? null, limit: cfg.budget.limit, ...(screening(cfg) ? { caps: cfg.screening.caps } : {}) };
   if (problems.length) return { ...r, code: problems[0].code, reasons: problems.map(p => p.why) };
@@ -297,6 +305,18 @@ export async function runExploreCycle(cfgFile, stateDir, { requireState = false,
     if (s.phase === "blocked" && !s.blocked.retryable && !["budget-exhausted", "confirmation-infeasible", "candidate-deployed"].includes(s.blocked.code)) return outcome("blocked", stateDir, { note: "blocked (not retryable)" });
     if (!s.mode) { s = { ...s, mode: cfg.mode }; save(stateDir, s); }
     if (autonomous(cfg)) { try { releasesOf(cfg).init(cfg.stable); } catch (error) { return outcome("state_error", stateDir, { health: "corrupt", detail: `release history: ${String(error.message).slice(0, 200)}` }); } }
+    // Internal track: the evaluation-stable history is seeded once; a cycle that has not frozen anything yet follows the current
+    // evaluation stable, a cycle that has keeps the stable (and epoch registry) it froze.
+    if (internalEnabled(cfg)) {
+      try {
+        evalReleases(cfg).init(cfg.stable);
+        const fresh = s.phase === "init" || (s.phase === "blocked" && (s.resumePhase ?? "init") === "init");
+        const stable = fresh || !s.internal?.stable ? currentStable(cfg) : s.internal.stable;
+        if (!fresh && !s.internal?.stable) return outcome("state_error", stateDir, { health: "corrupt", detail: "internal track: cycle state has no frozen evaluation stable" });
+        cfg = await effectiveConfig(cfg, stable);
+        if (s.internal?.stable?.runtimeDigest !== stable.runtimeDigest || s.internal?.stable?.releaseSeq !== stable.releaseSeq) { s = { ...s, internal: { ...(s.internal ?? {}), epoch: stable.runtimeDigest, stable } }; save(stateDir, s); }
+      } catch (error) { return outcome("state_error", stateDir, { health: "corrupt", detail: `internal track: ${String(error.message).slice(0, 200)}` }); }
+    }
     const block = (code, reason, retryable, back = s.batch ? "selected" : "init") => { s = { ...s, phase: "blocked", resumePhase: back, outcome: code, blocked: { code, reason: String(reason).slice(0, 300), retryable } }; save(stateDir, s); return outcome("blocked", stateDir, { initialized: initialized || undefined }); };
     // Reservations left open by a cycle that was killed (dead owner pid) are settled at the attempt floor first.
     try { await budgetOf(cfg).reconcileDead({ by: "explore-cycle" }); } catch { /* readiness reports an unusable ledger */ }
@@ -627,6 +647,8 @@ export async function refreshExploration(cfgFile, { maxCasesPerRepo = 2, maxBatc
   // (mode is set from the config below once it loads)
   let cfg; try { cfg = loadExploration(cfgFile); } catch (error) { return { code: 64, out: { ...base, error: String(error.message).slice(0, 400) } }; }
   base.mode = cfg.mode;
+  // Internal track: every epoch's exposed development tasks are exclusion sources of new batches.
+  if (internalEnabled(cfg)) { try { cfg = await effectiveConfig(cfg, currentStable(cfg)); } catch (error) { return { code: 1, out: { ...base, error: `internal track: ${String(error.message).slice(0, 300)}` } }; } }
   const policy = poolPolicy(cfg.pool);
   if (policy.autoSeal !== false) return { code: 1, out: { ...base, error: `pool ${cfg.pool} needs POLICY.json {autoSeal: false} (collectors must never seal an exploration pool)` } };
   let lock; try { lock = acquireLock(join(ensureDir(cfg.pool, 0o700), ".refresh.lock")); } catch (error) { if (error instanceof LockBusyError) return { code: 3, out: { ...base, busy: "another refresh holds the pool's refresh lock" } }; throw error; }

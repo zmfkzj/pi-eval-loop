@@ -47,3 +47,40 @@ export function attemptAdmission(budget, bound, { subCap } = {}) {
 export function pressureVerdict({ failures, tolerance = 0 }) {
   return failures > tolerance ? { action: "halt", why: `the gateway shows ${failures} rate-limit/overload failure(s) of the target model: calibration load could push a peer experiment into failures` } : { action: "none" };
 }
+
+/**
+ * OFF-GATE admission (2026-11-13; proposer and reviewer sessions, request-budget.mjs RETAINED_ROUTES). Their requests pass a route
+ * proxy to a gateway, never the isolated runtime's outbound attempt gate, so the ledger cannot see upstream attempts directly.
+ *   - With `bound` (() => { perRequest } from gatewayAttemptBound over the gateway's config and auth directory): the reservation is
+ *     maxRequests x K and the settlement forwarded x max(K, K') (K' re-read at settlement); a bound that grew or became unreadable
+ *     during the session charges the FULL reservation. Unit "upstream-attempt-bound": an upper bound on upstream attempts under the
+ *     assumption that the gateway kept the configuration read at reservation and settlement (a mid-session hot reload between
+ *     those reads is not observable here; gatewayIsolationProblems names the setups where it cannot happen).
+ *   - Without `bound`: unit "proxy-forwarded" (requests the route proxy forwarded; gateway-internal retries are NOT counted and
+ *     upstream attempts are unverifiable). `requireBound` refuses such a session (strict-total mode: fail closed).
+ * A missing forwarded count or a failed session settles at the full reservation; a dead owner's reservation is settled at its
+ * full amount by RequestBudget.reconcileDead. Off-gate charges count toward the one limit and never fund outbound attempts.
+ * @param {any} budget @param {{ route: "proposal" | "review", bound?: (() => { perRequest: number }) | null, requireBound?: boolean }} options
+ */
+export function offGateAdmission(budget, { route, bound = null, requireBound = false }) {
+  if (!["proposal", "review"].includes(route)) throw new Error(`off-gate admission: route ${route} is not an off-gate route`);
+  return {
+    unit: bound ? "upstream-attempt-bound" : "proxy-forwarded",
+    async reserve(maxRequests, meta = {}) {
+      if (!(Number.isInteger(maxRequests) && maxRequests > 0)) throw new Error(`off-gate admission: maxRequests ${maxRequests} is not a positive integer`);
+      if (!bound && requireBound) { budget.refusal = `off-gate ${route}: no gateway attempt bound (strict total refuses proxy-forwarded accounting: upstream retries would be unmetered)`; return null; }
+      let K = 1;
+      if (bound) { try { K = bound().perRequest; } catch (error) { budget.refusal = `off-gate ${route}: gateway attempt bound unreadable (fail closed): ${String(error?.message ?? error).slice(0, 200)}`; return null; } }
+      const t = await budget.reserve(maxRequests * K, { ...meta, route, unit: bound ? "upstream-attempt-bound" : "proxy-forwarded", perRequestAttempts: bound ? K : null, forwardCap: maxRequests });
+      return t && { ...t, K };
+    },
+    async settle(ticket, forwarded, detail = {}) {
+      if (!Number.isInteger(forwarded) || forwarded < 0) return budget.settle(ticket, ticket.amount, { ...detail, unit: "full reservation (forwarded count missing)" });
+      if (!bound) return budget.settle(ticket, Math.min(ticket.amount, forwarded), { ...detail, unit: "proxy-forwarded", forwardedCounted: forwarded });
+      let K2; try { K2 = bound().perRequest; } catch { K2 = null; }
+      if (K2 === null || K2 > ticket.K) return budget.settle(ticket, ticket.amount, { ...detail, unit: "upstream-attempt-bound", forwardedCounted: forwarded, boundChanged: K2 === null ? "unreadable at settlement" : `${ticket.K} -> ${K2}` });
+      return budget.settle(ticket, Math.min(ticket.amount, forwarded * ticket.K), { ...detail, unit: "upstream-attempt-bound", perRequestAttempts: ticket.K, forwardedCounted: forwarded });
+    },
+    get refusal() { return budget.refusal; },
+  };
+}

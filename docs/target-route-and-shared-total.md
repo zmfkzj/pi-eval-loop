@@ -75,9 +75,16 @@ Rules (`src/request-budget.mjs`):
   (read from the shared `remaining`, so proposals and reviews already reduce them).
 - An open reservation of any role still blocks a holdout batch from being consumed (unchanged, conservative).
 
-Limits of the accounting (unchanged, documented): proposal and review requests are counted by the route proxy (`forwarded`),
-not by an outbound gate, so gateway-internal retries of those calls are not visible to the ledger; the worst case is reserved
-up front and an abandoned reservation keeps it.
+Limits of the accounting: proposal and review requests are counted by the route proxy (`forwarded`), not by an outbound gate,
+so gateway-internal retries of those calls are not visible to the ledger; the worst case is reserved up front and an abandoned
+reservation keeps it. Since 2026-11-13 (`src/admission.mjs` `offGateAdmission`) an off-gate session can instead be charged in
+**upstream-attempt-bound** units (forwarded x the gateway's `gatewayAttemptBound`, re-read at settlement; a bound that grew or
+became unreadable charges the full reservation). That is a bound only under the assumption that the gateway kept the read
+configuration during the session (`gatewayIsolationProblems` lists the setups where it cannot change); with a shared,
+hot-reloadable gateway it is not a proof. `budgetTotals` reports `offGateUnits` {upstreamAttemptBound, proxyForwarded} and
+`upstreamAttemptsBounded` (false while any off-gate charge is proxy-forwarded). `review.mjs --gateway-config CFG` uses the
+bound; `--require-attempt-bound` refuses a session without it (strict total). The agent_workflow proposer still charges
+`proxy-forwarded` until the consumer adopts `offGateAdmission` (consumer-owned; see docs/internal-promotion.md section 7).
 
 ## 3. Consumer configuration (agent_workflow; the consumer owns its files)
 

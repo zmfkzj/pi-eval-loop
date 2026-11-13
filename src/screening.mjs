@@ -39,6 +39,7 @@ import { loadLocal, verifySeal } from "./datasets.mjs";
 import { poolState } from "./supply.mjs";
 import { exercismProblem, readRegistry } from "./lineage.mjs";
 import { acquireLock, atomicWriteJson, digestOf, ensureDir, fault, Ledger, LockBusyError, readJson, sha256 } from "./util.mjs";
+import { abandonAssessment, acceptanceDecision, noProgress, recordAcceptance, acceptanceRepeats, assessmentPlan, candidateDemand, finishAssessment, INTERNAL_EVIDENCE, ASSESSMENT_EVIDENCE, internalEnabled, internalPaths, pendingAssessment, promote, reconcile, rollback as internalRollback, stageFit } from "./internal-promotion.mjs";
 
 export const ROUTE = "screening";
 export const REGISTRY_SCHEMA = "pi-eval-loop/screening-registry@1";
@@ -187,18 +188,18 @@ export function archiveCandidates(source, stableCommit) {
   const list = [];
   for (const [name, c] of all) {
     if (!include.has(c.status)) continue;
-    const chain = []; let cur = c, guard = 0, problem = null;
+    const chain = []; let cur = c, guard = 0, problem = null, foreignBase = false;
     while (cur && guard++ < 20) {
       const patch = join(dir, cur.id ?? "", "patch.diff");
       if (!existsSync(patch)) { problem = `${cur.id}: patch.diff missing`; break; }
       chain.unshift({ id: cur.id, patch, base: cur.base });
       if (cur.base === stableCommit) break;
-      if (!cur.parent || cur.parent === "stable") { problem = `${cur.id}: base ${String(cur.base).slice(0, 12)} is not the stable commit ${String(stableCommit).slice(0, 12)}`; break; }
+      if (!cur.parent || cur.parent === "stable") { problem = `${cur.id}: base ${String(cur.base).slice(0, 12)} is not the stable commit ${String(stableCommit).slice(0, 12)}`; foreignBase = true; break; }
       cur = all.get(cur.parent) ?? null;
       if (!cur) problem = `${c.id}: parent ${c.parent} not in the archive`;
     }
     const patches = chain.map(x => readFileSync(x.patch, "utf8"));
-    list.push({ id: `${basename(dir.replace(/\/candidates\/?$/, ""))}/${name}`, source: dir, archiveId: name, status: c.status, createdAt: c.createdAt ?? null, chain: chain.map(x => x.id), parents: chain.slice(0, -1).map((_, i) => patchKey(patches.slice(0, i + 1).join("\n"))), patches, pkey: patchKey(patches.join("\n")), problem, hypothesis: String(c.hypothesis?.text ?? "").slice(0, 300) });
+    list.push({ id: `${basename(dir.replace(/\/candidates\/?$/, ""))}/${name}`, source: dir, archiveId: name, status: c.status, createdAt: c.createdAt ?? null, chain: chain.map(x => x.id), parents: chain.slice(0, -1).map((_, i) => patchKey(patches.slice(0, i + 1).join("\n"))), patches, pkey: patchKey(patches.join("\n")), problem, foreignBase, hypothesis: String(c.hypothesis?.text ?? "").slice(0, 300) });
   }
   return { list, problems: [] };
 }
@@ -239,6 +240,8 @@ export function syncCandidates(cfg, { log = () => {} } = {}) {
       if (count >= sc.candidates.maxCandidates) return { added, capped: true };
       const sourceId = e.id;
       if (seenSource.has(sourceId)) continue;
+      // Internal track: an archive entry based on another evaluation stable belongs to that stable's epoch (not registered here).
+      if (internalEnabled(cfg) && e.foreignBase) continue;
       if (e.tree) {
         const key = e.tree.identity.runtimeDigest;
         let actual = null; try { actual = runtimeDigest(e.tree.dir); } catch { /* unreadable */ }
@@ -545,17 +548,21 @@ export function staticSmoke(cand, stable) {
  * Holdout first for a qualified candidate when affordable and supplied; dev of the next pending candidate in registration order
  * only while it leaves the cap headroom a waiting qualified candidate needs; otherwise a model-free wait or a stop.
  */
-export function planAction(view, { caps, ledgerRemaining, records, supply, holdoutEnabled, devSupply = { ok: true } }) {
+export function planAction(view, { caps, ledgerRemaining, records, supply, holdoutEnabled, devSupply = { ok: true }, internal = null }) {
   const free = (stage, key) => stageHeadroom(records, caps, stage, key, ledgerRemaining);
   const routeLeft = Math.min(ledgerRemaining, caps.cumulative - routeUsage(records).route);
-  const qualified = view.filter(c => c.status === "qualified" && !c.taintedBy);
-  const holdoutNeeds = caps.holdout;
-  let reserveFor = 0, why = [];
+  let qualified = view.filter(c => c.status === "qualified" && !c.taintedBy);
+  // Internal track (opt-in): the best development net first (ties: registration order); the acceptance needs the route headroom
+  // of its own stage AND of the assessment that must follow a promotion; at most maxWaitingQualified candidates wait.
+  if (internal?.select === "best-dev-net") qualified = qualified.map((c, i) => ({ c, i })).sort((a, b) => ((b.c.results.dev?.net ?? 0) - (a.c.results.dev?.net ?? 0)) || (a.i - b.i)).map(x => x.c);
+  const holdoutNeeds = caps.holdout, follow = internal?.assessmentReserve ?? 0;
+  let reserveFor = 0, why = [], waiting = 0;
   if (holdoutEnabled) for (const c of qualified) {
-    if (free("holdout", c.key) < holdoutNeeds) { why.push(`${c.id}: holdout needs ${holdoutNeeds} attempts of cap headroom, ${free("holdout", c.key)} left`); continue; }
-    if (!supply.ok) { why.push(`${c.id}: qualified, waiting for a fresh unused holdout batch (${supply.why})`); reserveFor = Math.max(reserveFor, holdoutNeeds); continue; }
+    if (free("holdout", c.key) < holdoutNeeds || routeLeft < holdoutNeeds + follow) { why.push(`${c.id}: holdout needs ${holdoutNeeds} attempts of cap headroom${follow ? ` plus ${follow} for the assessment after a promotion` : ""}, ${Math.min(free("holdout", c.key), routeLeft)} left`); continue; }
+    if (!supply.ok) { why.push(`${c.id}: qualified, waiting for a fresh unused holdout batch (${supply.why})`); reserveFor = Math.max(reserveFor, holdoutNeeds + follow); waiting++; continue; }
     return { kind: "holdout", candidate: c };
   }
+  if (internal && waiting >= internal.maxWaitingQualified) return { wait: "supply-empty", why: [`${waiting} qualified candidate(s) wait for a fresh acceptance batch: no further paid development screening (internal.maxWaitingQualified ${internal.maxWaitingQualified})`, ...why].join(" | ") };
   const pending = view.filter(c => c.status === "pending");
   // No eligible development set: pending candidates wait (model-free) instead of being screened on ineligible tasks.
   if (pending.length && !devSupply.ok) {
@@ -574,9 +581,11 @@ const summarize = (view) => Object.entries(view.reduce((m, c) => ({ ...m, [c.sta
 
 // ------------------------------------------------------------------------------------------------------------------ simulation
 /** Offline backend of a screening cycle: per-candidate skill (simulation.byCandidate[id]: {p, violate, infra}). */
-export function screeningSimBackend(cfg, cand) {
+export function screeningSimBackend(cfg, cand, stage = null) {
   const sim = cfg.simulation ?? {};
-  const own = sim.byCandidate?.[cand.id] ?? {};
+  // simulation.byStage.<stage>.<candidate id> (simulated only): a stage-specific skill, e.g. a promoted harness that regresses in
+  // the internal assessment.
+  const own = (stage && sim.byStage?.[stage]?.[cand.id]) ?? sim.byCandidate?.[cand.id] ?? {};
   return simulatedBackend({ seed: `${sim.seed ?? "sim"}:${cand.key.slice(0, 8)}`, skill: (h) => h.id === "stable" ? { p: sim.p?.stable ?? 0.5 } : { p: own.p ?? sim.p?.c1 ?? 0.5, violation: own.violate === true, infra: own.infra === true } });
 }
 
@@ -588,11 +597,17 @@ export function screeningSimBackend(cfg, cand) {
 export async function screeningCycle(ctx) {
   const { cfg, stateDir, deps, ready, helpers } = ctx;
   const sc = cfg.screening;
-  let series;
-  try { series = acquireLock(`${sc.registry}.lock`); } catch (error) { if (error instanceof LockBusyError) return helpers.outcome("busy", stateDir, { lock: { state: "live", series: true } }); throw error; }
+  const internal = internalEnabled(cfg) ? sc.internal : null;
+  let series, track = null;
+  // Internal track: one lock over every epoch (each epoch registry has its own series lock below).
+  if (internal) { try { ensureDir(internalPaths(cfg).dir, 0o700); track = acquireLock(internalPaths(cfg).lock); } catch (error) { if (error instanceof LockBusyError) return helpers.outcome("busy", stateDir, { lock: { state: "live", series: true } }); throw error; } }
+  try { series = acquireLock(`${sc.registry}.lock`); } catch (error) { track?.release(); if (error instanceof LockBusyError) return helpers.outcome("busy", stateDir, { lock: { state: "live", series: true } }); throw error; }
   try {
+    if (internal) reconcile(cfg);
     let s = ctx.s;
     const set = (v) => { ctx.s = v; s = v; helpers.save(stateDir, v); };
+    // Final of an internal-track action (promotion decision, assessment, rollback): never ADOPT, never a research claim.
+    const finishInternal = (verdict, outcomeName, extra = {}) => { set({ ...s, outcome: outcomeName, internal: { ...(s.internal ?? {}), ...(extra.internal ?? {}) } }); return ctx.done(null, { verdict, candidate: s.screening?.candidate ?? null, adopt: false, explorationOnly: true, stage: s.screening?.stage ?? null, serviceDeployment: "none", ...extra }); };
     const block = (code, reason, retryable, back) => { const o = ctx.block(code, reason, retryable, back); s = ctx.s; return o; };
     const budget = ready.budget;
     if (s.phase === "blocked") set({ ...s, phase: s.resumePhase ?? "init", blocked: undefined });
@@ -610,13 +625,40 @@ export async function screeningCycle(ctx) {
       }
       const ledgerRecs = budget.verified();
       const devSet = devEligibility(cfg);
-      const act = planAction(view, { caps: sc.caps, ledgerRemaining: budget.status().remaining, records: ledgerRecs, supply, holdoutEnabled: sc.holdout.enabled, devSupply: devSet });
+      const seed = `${cfg.seriesSeed ?? "screening"}:${basename(stateDir)}`;
+      // Internal track: an outstanding post-promotion assessment (or its decided rollback) comes before anything else.
+      if (internal) {
+        const due = pendingAssessment(cfg);
+        if (due?.pendingRollback) { const r = internalRollback(cfg, { releaseKey: due.releaseKey, reason: due.pendingRollback.why, by: "assessment" }); set({ ...s, screening: { stage: "assessment", candidate: due.candidate.id, key: due.to.release } }); return finishInternal("ROLLBACK", "completed", { internal: { decision: due.pendingRollback.verdict, rollback: r, releaseKey: due.releaseKey }, evidence: ASSESSMENT_EVIDENCE }); }
+        if (due) {
+          const left = stageHeadroom(ledgerRecs, sc.caps, "dev", `assess:${due.to.release}`, budget.status().remaining);
+          const fit = stageFit({ tasks: devSet.eligible.length, repeats: sc.dev.repeats, attemptsPerUnit: internal.attemptsPerUnit.dev, cap: sc.caps.dev });
+          const overdue = due.assessBy && Date.now() > Date.parse(due.assessBy);
+          const cannot = overdue ? `assessment deadline ${due.assessBy} passed` : !devSet.ok ? `regression tasks unusable: ${devSet.why}` : !fit.ok ? `assessment cannot fit its cap: ${fit.why}` : left < sc.caps.dev ? `assessment needs ${sc.caps.dev} attempts of headroom, ${left} left` : null;
+          if (cannot) { const r = abandonAssessment(cfg, due, `${cannot}: an unassessed promotion is rolled back (fail closed)`); set({ ...s, screening: { stage: "assessment", candidate: due.candidate.id, key: due.to.release } }); return finishInternal("ROLLBACK_UNASSESSED", "completed", { internal: { decision: r.verdict, why: r.why, rollback: r.result, releaseKey: due.releaseKey }, evidence: ASSESSMENT_EVIDENCE }); }
+          const devTasks = devSet.eligible.map(t => ({ id: t.id, dataset: t.dataset }));
+          const plan = assessmentPlan(cfg, due, { devTasks, taskDigests: Object.fromEntries(devTasks.map(t => [t.id, dirDigest(join(t.dataset, t.id))])), seed: `${seed}:assessment` });
+          plan.deadline = due.assessBy;
+          atomicWriteJson(join(stateDir, "assessment-plan.json"), plan);
+          set({ ...s, phase: "internal-assessing", screening: { stage: "assessment", candidate: due.candidate.id, key: due.to.release, releaseKey: due.releaseKey, planSha256: sha256(readFileSync(join(stateDir, "assessment-plan.json"))), deadline: due.assessBy } });
+        }
+      }
+      if (s.phase === "init") {
+      const act = planAction(view, { caps: sc.caps, ledgerRemaining: budget.status().remaining, records: ledgerRecs, supply, holdoutEnabled: sc.holdout.enabled, devSupply: devSet,
+        internal: internal ? { select: internal.select ?? "best-dev-net", maxWaitingQualified: internal.maxWaitingQualified, assessmentReserve: internal.assessment.enabled ? sc.caps.dev : 0 } : null });
       if (act.wait) return block(act.wait, act.why, true, "init");
       if (act.stop) return block(act.stop, act.why, false, "init");
       const c = act.candidate;
       const candidate = { id: c.id, key: c.key, dir: c.dir, identity: { id: c.id, kind: "orche", commit: c.commit, runtimeDigest: c.key } };
-      const stable = { dir: cfg.stable.dir, commit: cfg.stable.commit, runtimeDigest: cfg.stable.runtimeDigest };
-      const seed = `${cfg.seriesSeed ?? "screening"}:${basename(stateDir)}`;
+      const stable = { dir: cfg.stable.dir, commit: cfg.stable.commit, runtimeDigest: cfg.stable.runtimeDigest, ...(internal ? { releaseSeq: cfg.stable.releaseSeq ?? null } : {}) };
+      if (internal) {
+        // The configured per-unit estimate must let the stage cap cover the whole pass (both arms) before anything is claimed.
+        const fit = act.kind === "dev" ? stageFit({ tasks: devSet.eligible.length, repeats: sc.dev.repeats, attemptsPerUnit: internal.attemptsPerUnit.dev, cap: sc.caps.dev })
+          : stageFit({ tasks: supply.pick?.coverage?.tasks ?? 0, repeats: acceptanceRepeats(cfg), attemptsPerUnit: internal.attemptsPerUnit.acceptance, cap: sc.caps.holdout });
+        if (!fit.ok) return block("prerequisite-failed", `internal ${act.kind === "dev" ? "dev" : "acceptance"} stage: ${fit.why} (nothing claimed, no batch consumed; caps or the estimate are a human decision)`, false, "init");
+        const stuck = act.kind === "holdout" ? noProgress(cfg) : null;
+        if (stuck) return block("no-progress", stuck, false, "init");
+      }
       if (act.kind === "dev") {
         const devTasks = devSet.eligible.map(t => ({ id: t.id, dataset: t.dataset }));
         const plan = { schema: "pi-eval-loop/screening-plan@1", stage: "dev", ...(cfg.route !== undefined ? { route: cfg.route } : {}), seed, stable, candidate, dev: { tasks: devTasks, repeats: sc.dev.repeats, promote: sc.dev.promote, taskDigests: Object.fromEntries(devTasks.map(t => [t.id, dirDigest(join(t.dataset, t.id))])), eligibility: { rule: "sealed calibration|development dataset, never reserved/used, no historical holdout id/family/Exercism problem, not excluded", rejected: devSet.rejected } }, caps: sc.caps, deadlineHours: sc.dev.maxHours };
@@ -637,6 +679,7 @@ export async function screeningCycle(ctx) {
         atomicWriteJson(join(stateDir, planFile), plan);
         registryOf(cfg).append({ type: "claim", key: c.key, stage: "holdout", stateDir, sub, batch: basename(pick.dir) });
         set({ ...s, phase: "holdout-selected", batch: pick.dir, screening: { stage: "holdout", candidate: c.id, key: c.key, sub, planFile, planSha256: sha256(readFileSync(join(stateDir, planFile))), deadline: new Date(Date.now() + sc.holdout.maxHours * 3_600_000).toISOString() } });
+      }
       }
     }
     const scs = s.screening;
@@ -721,12 +764,59 @@ export async function screeningCycle(ctx) {
       const r = x.r;
       const c1 = r.arms?.c1 ?? {};
       const out = !r.holdoutEvaluated || r.verdict === "BLOCKED" ? "consumed-blocked" : (c1.integrityViolations || c1.strictViolations) ? "integrity-stop" : r.incomplete ? "incomplete" : "completed";
-      record("holdout", r.verdict, { report: join(stateDir, sc2.sub, "final.json"), reportSha256: sha256(readFileSync(join(stateDir, sc2.sub, "final.json"))), outcome: out, batch: r.holdout ? basename(r.holdout.batch) : null });
+      const finalSha256 = sha256(readFileSync(join(stateDir, sc2.sub, "final.json")));
+      // protected: the result of a fresh batch; its task-level details must never feed a proposer (consumer contract).
+      record("holdout", r.verdict, { report: join(stateDir, sc2.sub, "final.json"), reportSha256: finalSha256, outcome: out, batch: r.holdout ? basename(r.holdout.batch) : null, ...(internal ? { protected: true } : {}) });
       set({ ...s, exploration: { verdict: r.verdict, outcome: out } });
-      return finish(r.verdict, out, { evidence: r.evidence, reasons: r.reasons ?? [], arms: r.arms, holdout: r.holdout ? { batch: basename(r.holdout.batch), tasks: r.holdout.tasks, families: r.holdout.families, support: r.holdout.support, familySupport: r.holdout.familySupport } : null, incomplete: r.incomplete ?? 0, budget: r.budget });
+      if (!internal) return finish(r.verdict, out, { evidence: r.evidence, reasons: r.reasons ?? [], arms: r.arms, holdout: r.holdout ? { batch: basename(r.holdout.batch), tasks: r.holdout.tasks, families: r.holdout.families, support: r.holdout.support, familySupport: r.holdout.familySupport } : null, incomplete: r.incomplete ?? 0, budget: r.budget });
+      const d = acceptanceDecision(r, out);
+      const acceptance = { verdict: r.verdict, outcome: out, finalSha256, batch: r.holdout ? basename(r.holdout.batch) : null, decision: d.promote ? "PROMOTE" : "NOT_PROMOTED", why: d.why };
+      recordAcceptance(cfg, { stateDir, candidate: { id: sc2.candidate, key: sc2.key }, verdict: r.verdict, decision: acceptance.decision, batch: acceptance.batch, outcome: out });
+      const summary = { arms: r.arms, holdout: r.holdout ? { batch: basename(r.holdout.batch), tasks: r.holdout.tasks, families: r.holdout.families, support: r.holdout.support } : null, incomplete: r.incomplete ?? 0, budget: r.budget, acceptanceVerdict: r.verdict };
+      if (!d.promote) return finishInternal("INTERNAL_NOT_PROMOTED", out, { internal: { acceptance }, evidence: INTERNAL_EVIDENCE, reasons: [d.why, ...(r.reasons ?? [])], ...summary });
+      set({ ...s, phase: "internal-promoting", internal: { ...(s.internal ?? {}), acceptance, summary } });
+    }
+    // ---------------------------------------------------------------- internal: promotion of the evaluation stable (CAS)
+    if (internal && s.phase === "internal-promoting") {
+      const sc2 = s.screening;
+      const plan = readJson(join(stateDir, sc2.planFile), null);
+      if (!plan || sha256(readFileSync(join(stateDir, sc2.planFile))) !== sc2.planSha256) return helpers.outcome("state_error", stateDir, { health: "corrupt", detail: `frozen ${sc2.planFile} missing or changed` });
+      const acc = s.internal.acceptance;
+      const pr = promote(cfg, { stateDir, plan, evidence: { finalSha256: acc.finalSha256, batch: acc.batch, verdict: acc.verdict, decision: "PROMOTED" } });
+      if (pr.stale) return finishInternal("STALE_BASELINE", "completed", { internal: { decision: "STALE_BASELINE", why: pr.why }, evidence: INTERNAL_EVIDENCE, reasons: [pr.why], ...s.internal.summary });
+      return finishInternal("INTERNAL_PROMOTED", "completed", { internal: { decision: "PROMOTED", from: pr.previous.release, to: pr.record.to.release, releaseKey: stateDir, assessBy: pr.record.assessBy ?? null }, evidence: INTERNAL_EVIDENCE, reasons: [acc.why], ...s.internal.summary });
+    }
+    // ---------------------------------------------------------------- internal: post-promotion assessment (+ rollback)
+    if (internal && s.phase === "internal-assessing") {
+      const sc2 = s.screening;
+      const f = join(stateDir, "assessment-plan.json");
+      const plan = readJson(f, null);
+      if (!plan || sha256(readFileSync(f)) !== sc2.planSha256) return helpers.outcome("state_error", stateDir, { health: "corrupt", detail: "frozen assessment-plan.json missing or changed" });
+      const due = pendingAssessment(cfg);
+      if (!due || due.releaseKey !== sc2.releaseKey) return finishInternal("ASSESSMENT_SKIPPED", "completed", { internal: { decision: "SKIPPED", why: "the promotion is no longer the evaluation stable (same history record) or was already assessed" }, evidence: ASSESSMENT_EVIDENCE });
+      if (due.pendingRollback) { const r = internalRollback(cfg, { releaseKey: due.releaseKey, reason: due.pendingRollback.why, by: "assessment" }); return finishInternal("ROLLBACK", "completed", { internal: { decision: due.pendingRollback.verdict, rollback: r, releaseKey: due.releaseKey }, evidence: ASSESSMENT_EVIDENCE }); }
+      const devDir = join(stateDir, "assessment");
+      let report = readJson(join(devDir, "dev-report.json"), null);
+      if (!report && due.assessBy && Date.now() > Date.parse(due.assessBy)) { const r = abandonAssessment(cfg, due, `assessment deadline ${due.assessBy} passed before a complete pass: an unassessed promotion is rolled back (fail closed)`); return finishInternal("ROLLBACK_UNASSESSED", "completed", { internal: { decision: r.verdict, why: r.why, rollback: r.result, releaseKey: due.releaseKey }, evidence: ASSESSMENT_EVIDENCE }); }
+      if (!report) {
+        if (runtimeDigest(plan.candidate.dir) !== plan.candidate.identity.runtimeDigest || runtimeDigest(plan.stable.dir) !== plan.stable.runtimeDigest) return block("prerequisite-failed", "an assessment arm's release differs from its frozen identity (immutable input drift)", false, "internal-assessing");
+        const recheck = devEligibility(cfg, plan.dev.tasks);
+        if (recheck.rejected.length) return block("prerequisite-failed", `regression task(s) no longer eligible: ${recheck.rejected.slice(0, 2).map(r => `${r.id}: ${r.why.slice(0, 200)}`).join(" | ")}`, false, "internal-assessing");
+        if (!cfg.simulated && (() => { const st = budget.status(); return st.attempts < st.gatedCharged - st.gatedOpenAmount; })()) return block("prerequisite-failed", "the ledger's settled gate-covered charges exceed its outbound attempts: fail closed", false, "internal-assessing");
+        const run = await ctx.setupRun({ stable: plan.stable, candidate: plan.candidate });
+        if (run.out) return run.out;
+        if (cfg.simulated && !deps.backend) run.backend = screeningSimBackend(cfg, { id: plan.candidate.id, key: plan.candidate.identity.runtimeDigest }, "assessment");
+        const capped = new CappedBudget(budget, { caps: sc.caps, stage: "dev", key: `assess:${plan.candidate.identity.runtimeDigest}`, stageId: `${stateDir}:assessment`, cycle: stateDir, deadline: plan.deadline ?? null });
+        const r = await runDev({ plan, state: devDir, backend: run.backend, budget: capped, bound: run.bound, validate: run.validate, envDigest: run.envDigest, parallelism: cfg.parallelism, log: deps.log ?? (() => {}) });
+        if (r.blocked) return block("prerequisite-failed", r.blocked, false, "internal-assessing");
+        if (r.paused) { const runtime = /isolated runtime/.test(r.paused); return block(runtime ? "runtime-wait" : "budget-exhausted", r.paused, runtime, "internal-assessing"); }
+        report = r;
+      }
+      const d = finishAssessment(cfg, { rec: due, report, reportSha256: sha256(readFileSync(join(devDir, "dev-report.json"))), runs: join(devDir, "runs.jsonl") });
+      return finishInternal(d.verdict, "completed", { internal: { decision: d.verdict, why: d.why, rollback: d.result ?? null, releaseKey: due.releaseKey }, evidence: ASSESSMENT_EVIDENCE, reasons: [d.why], arms: report.totals, dev: { net: report.net, planned: report.planned, measured: report.measured } });
     }
     return helpers.outcome("state_error", stateDir, { health: "corrupt", detail: `phase ${s.phase} is not part of the screening route` });
-  } finally { series.release(); }
+  } finally { series.release(); track?.release(); }
 }
 
 /** preflight@1 of a screening series (model-free, creates nothing): could a new cycle act now? */
@@ -745,8 +835,18 @@ export async function screeningPreflight(cfg, base, { budget, remaining, orcheDi
   let supply = { ok: false, why: "holdout disabled" };
   if (cfg.screening.holdout.enabled && view.some(c => c.status === "qualified")) { try { const pick = nextBatch(cfg, { orcheDir }); supply = pick.none ? { ok: false, why: pick.none.slice(0, 2).join("; ") } : { ok: true, pick }; } catch (error) { supply = { ok: false, why: String(error.message).slice(0, 200) }; } }
   const devSet = devEligibility(cfg);
-  const act = planAction([...view, ...placeholder], { caps: cfg.screening.caps, ledgerRemaining: remaining, records: budget.verified(), supply, holdoutEnabled: cfg.screening.holdout.enabled, devSupply: devSet });
+  const internal = internalEnabled(cfg) ? cfg.screening.internal : null;
+  const act = planAction([...view, ...placeholder], { caps: cfg.screening.caps, ledgerRemaining: remaining, records: budget.verified(), supply, holdoutEnabled: cfg.screening.holdout.enabled, devSupply: devSet,
+    internal: internal ? { select: internal.select ?? "best-dev-net", maxWaitingQualified: internal.maxWaitingQualified, assessmentReserve: internal.assessment.enabled ? cfg.screening.caps.dev : 0 } : null });
   const facts = { devTasks: { eligible: devSet.eligible.length, rejected: devSet.rejected.length }, candidates: view.length, unregistered: unseen, statuses: summarize(view), routeCharged: routeUsage(budget.verified()).route, cumulativeCap: cfg.screening.caps.cumulative };
+  if (internal) {
+    // Consumer contract: candidateDemand.wanted false = do not start a paid proposal now (candidates already wait or budget stops).
+    const waiting = view.filter(c => c.status === "qualified" && !c.taintedBy).length;
+    let due = null; try { due = pendingAssessment(cfg); } catch (error) { return { ...base, code: "prerequisite-failed", reasons: [`internal registry: ${String(error.message).slice(0, 250)}`], screening: facts }; }
+    facts.internal = { epoch: cfg.stable.runtimeDigest.slice(0, 16), evaluationStable: { runtimeDigest: cfg.stable.runtimeDigest, commit: cfg.stable.commit, releaseSeq: cfg.stable.releaseSeq ?? null }, pendingAssessment: due ? { releaseKey: due.releaseKey, candidate: due.candidate.id, assessBy: due.assessBy ?? null, rollbackDecided: !!due.pendingRollback } : null, waitingQualified: waiting,
+      candidateDemand: candidateDemand({ pending: view.filter(c => c.status === "pending").length + placeholder.length, waiting, maxWaitingQualified: internal.maxWaitingQualified, budgetStop: !!act.stop }), serviceDeployment: "none" };
+    if (due) return { ...base, ok: true, code: "ok", screening: { ...facts, next: "assessment", candidate: due.candidate.id } };
+  }
   if (act.wait) return { ...base, code: act.wait, reasons: [act.why], screening: facts };
   if (act.stop) return { ...base, code: act.stop, reasons: [act.why], screening: facts };
   return { ...base, ok: true, code: "ok", screening: { ...facts, next: act.kind, candidate: act.candidate.id }, ...(act.kind === "holdout" ? { holdout: { batch: supply.pick.batch, source: "pool" } } : {}) };

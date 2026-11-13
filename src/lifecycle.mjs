@@ -174,13 +174,16 @@ export class Releases {
     });
   }
   /** Adopt `candidate` if the deployed release is still `expect` (idempotent per key; the stored copy is verified first). */
-  adopt({ key, expect, candidate, evidence }) {
+  adopt({ key, expect, expectSeq, candidate, evidence }) {
     return this.#locked(() => {
       const recs = this.history.records();
       const done = recs.find(r => r.type === "adopt" && r.key === key);
       if (done) { this.#check(done); return { resumed: true, record: done, previous: done.previous }; }
       const cur = this.current();
       if (!cur || cur.release !== expect) throw new Error(`release pointer moved (expected ${expect}, found ${cur?.release ?? "none"}): adoption refused`);
+      // expectSeq (optional): the history record the caller measured against. Equal bytes reached again through other records
+      // (A -> B -> A) are not the same pointer state: refused like a moved pointer.
+      if (expectSeq !== undefined && expectSeq !== null && cur.seq !== expectSeq) throw new Error(`release pointer moved (expected history record ${expectSeq}, found ${cur.seq}): adoption refused`);
       this.#store(candidate.dir, candidate.runtimeDigest); fault("release:after-store");
       const rec = this.history.append({ type: "adopt", key, release: candidate.runtimeDigest, runtimeDigest: candidate.runtimeDigest, commit: candidate.commit, previous: { release: cur.release, runtimeDigest: cur.runtimeDigest, commit: cur.commit ?? null }, evidence });
       fault("release:after-record");
@@ -188,7 +191,7 @@ export class Releases {
     });
   }
   /** Roll back the adoption `key` (only while it is the deployed release; idempotent). */
-  rollback({ key, reason }) {
+  rollback({ key, reason, exact = false }) {
     return this.#locked(() => {
       const recs = this.history.records();
       const done = recs.find(r => r.type === "rollback" && r.key === key);
@@ -197,6 +200,8 @@ export class Releases {
       if (!ad) return { none: "nothing adopted under this key" };
       const cur = this.current();
       if (cur.release !== ad.release) throw new Error(`release ${ad.release} is no longer deployed (now ${cur.release}): rollback refused`);
+      // exact (optional): only the adoption record itself may be rolled back, not a later record that reached the same bytes.
+      if (exact && cur.seq !== ad.seq) throw new Error(`release ${ad.release} is deployed by history record ${cur.seq}, not by the adoption ${ad.seq}: rollback refused`);
       this.#check({ ...ad.previous, type: "rollback" });
       const rec = this.history.append({ type: "rollback", key, release: ad.previous.release, runtimeDigest: ad.previous.runtimeDigest, commit: ad.previous.commit, from: ad.release, reason: String(reason).slice(0, 300) });
       fault("release:after-record");
