@@ -1,0 +1,847 @@
+{
+ "shrink": false,
+ "calibration": {
+  "source": "records/ctrl-confirm-2/confirmation/analysis.json perTask (legacy-valid) + sealed ctrl-confirm-2 holdout families (exposed, historical; planning only)",
+  "tasks": 93,
+  "families": 54,
+  "arms": {
+   "OC": {
+    "rate": 0.26164874551971323,
+    "priorStrength": 0
+   },
+   "OCR": {
+    "rate": 0.3010752688172043,
+    "priorStrength": 0
+   },
+   "PC": {
+    "rate": 0.2831541218637993,
+    "priorStrength": 0
+   },
+   "PCR": {
+    "rate": 0.26881720430107525,
+    "priorStrength": 0
+   }
+  }
+ },
+ "method": "see file header",
+ "rows": [
+  {
+   "scenario": "scale:1",
+   "tasks": 93,
+   "repeats": 3,
+   "sims": 4000,
+   "population": {
+    "E1": 0.03942652329749104,
+    "E2": 0.04500199123855038
+   },
+   "H1confirmed": {
+    "p": 0.145,
+    "mcse": 0.00556720306796869
+   },
+   "E1pass": {
+    "p": 0.2925,
+    "mcse": 0.007192769807243937
+   },
+   "E2pass": {
+    "p": 0.198,
+    "mcse": 0.006300714245226489
+   },
+   "harmIndicated": {
+    "p": 0,
+    "mcse": 0
+   },
+   "H2confirmed": {
+    "p": 0.02025,
+    "mcse": 0.002227102237213191
+   }
+  },
+  {
+   "scenario": "scale:1",
+   "tasks": 200,
+   "repeats": 3,
+   "sims": 4000,
+   "population": {
+    "E1": 0.03942652329749104,
+    "E2": 0.04500199123855038
+   },
+   "H1confirmed": {
+    "p": 0.52325,
+    "mcse": 0.007897142481619539
+   },
+   "E1pass": {
+    "p": 0.66325,
+    "mcse": 0.007472439988049419
+   },
+   "E2pass": {
+    "p": 0.60825,
+    "mcse": 0.007718191781434302
+   },
+   "harmIndicated": {
+    "p": 0,
+    "mcse": 0
+   },
+   "H2confirmed": {
+    "p": 0.14375,
+    "mcse": 0.005547205095811763
+   }
+  },
+  {
+   "scenario": "scale:1",
+   "tasks": 300,
+   "repeats": 3,
+   "sims": 4000,
+   "population": {
+    "E1": 0.03942652329749104,
+    "E2": 0.04500199123855038
+   },
+   "H1confirmed": {
+    "p": 0.7845,
+    "mcse": 0.006501148936918766
+   },
+   "E1pass": {
+    "p": 0.864,
+    "mcse": 0.005419963099505383
+   },
+   "E2pass": {
+    "p": 0.8375,
+    "mcse": 0.005832961297660049
+   },
+   "harmIndicated": {
+    "p": 0,
+    "mcse": 0
+   },
+   "H2confirmed": {
+    "p": 0.31325,
+    "mcse": 0.007333560484171381
+   }
+  },
+  {
+   "scenario": "scale:1",
+   "tasks": 400,
+   "repeats": 3,
+   "sims": 4000,
+   "population": {
+    "E1": 0.03942652329749104,
+    "E2": 0.04500199123855038
+   },
+   "H1confirmed": {
+    "p": 0.91175,
+    "mcse": 0.004485028915737334
+   },
+   "E1pass": {
+    "p": 0.95175,
+    "mcse": 0.0033882863478460618
+   },
+   "E2pass": {
+    "p": 0.9375,
+    "mcse": 0.0038273277230987156
+   },
+   "harmIndicated": {
+    "p": 0,
+    "mcse": 0
+   },
+   "H2confirmed": {
+    "p": 0.47775,
+    "mcse": 0.007897862645994801
+   }
+  },
+  {
+   "scenario": "scale:1",
+   "tasks": 600,
+   "repeats": 3,
+   "sims": 4000,
+   "population": {
+    "E1": 0.03942652329749104,
+    "E2": 0.04500199123855038
+   },
+   "H1confirmed": {
+    "p": 0.98675,
+    "mcse": 0.0018079295824229428
+   },
+   "E1pass": {
+    "p": 0.995,
+    "mcse": 0.0011152354011597736
+   },
+   "E2pass": {
+    "p": 0.99025,
+    "mcse": 0.0015536197652578987
+   },
+   "harmIndicated": {
+    "p": 0,
+    "mcse": 0
+   },
+   "H2confirmed": {
+    "p": 0.71875,
+    "mcse": 0.007108945728798328
+   }
+  },
+  {
+   "scenario": "scale:1",
+   "tasks": 800,
+   "repeats": 3,
+   "sims": 4000,
+   "population": {
+    "E1": 0.03942652329749104,
+    "E2": 0.04500199123855038
+   },
+   "H1confirmed": {
+    "p": 0.998,
+    "mcse": 0.0007063993204979748
+   },
+   "E1pass": {
+    "p": 0.99925,
+    "mcse": 0.00043285029167138965
+   },
+   "E2pass": {
+    "p": 0.99825,
+    "mcse": 0.0006608588162383908
+   },
+   "harmIndicated": {
+    "p": 0,
+    "mcse": 0
+   },
+   "H2confirmed": {
+    "p": 0.8565,
+    "mcse": 0.0055431883875618005
+   }
+  },
+  {
+   "scenario": "scale:1",
+   "tasks": 1200,
+   "repeats": 3,
+   "sims": 4000,
+   "population": {
+    "E1": 0.03942652329749104,
+    "E2": 0.04500199123855038
+   },
+   "H1confirmed": {
+    "p": 1,
+    "mcse": 0
+   },
+   "E1pass": {
+    "p": 1,
+    "mcse": 0
+   },
+   "E2pass": {
+    "p": 1,
+    "mcse": 0
+   },
+   "harmIndicated": {
+    "p": 0,
+    "mcse": 0
+   },
+   "H2confirmed": {
+    "p": 0.9715,
+    "mcse": 0.0026309575253127887
+   }
+  },
+  {
+   "scenario": "scale:1",
+   "tasks": 1600,
+   "repeats": 3,
+   "sims": 4000,
+   "population": {
+    "E1": 0.03942652329749104,
+    "E2": 0.04500199123855038
+   },
+   "H1confirmed": {
+    "p": 1,
+    "mcse": 0
+   },
+   "E1pass": {
+    "p": 1,
+    "mcse": 0
+   },
+   "E2pass": {
+    "p": 1,
+    "mcse": 0
+   },
+   "harmIndicated": {
+    "p": 0,
+    "mcse": 0
+   },
+   "H2confirmed": {
+    "p": 0.99325,
+    "mcse": 0.0012946464285665056
+   }
+  },
+  {
+   "scenario": "scale:0.5",
+   "tasks": 93,
+   "repeats": 3,
+   "sims": 4000,
+   "population": {
+    "E1": 0.01971326164874552,
+    "E2": 0.0023397052966945384
+   },
+   "H1confirmed": {
+    "p": 0.00125,
+    "mcse": 0.0005586674995021637
+   },
+   "E1pass": {
+    "p": 0.118,
+    "mcse": 0.00510088227662627
+   },
+   "E2pass": {
+    "p": 0.00325,
+    "mcse": 0.0008999218716088636
+   },
+   "harmIndicated": {
+    "p": 0.00275,
+    "mcse": 0.0008280153229258501
+   },
+   "H2confirmed": {
+    "p": 0,
+    "mcse": 0
+   }
+  },
+  {
+   "scenario": "scale:0.5",
+   "tasks": 200,
+   "repeats": 3,
+   "sims": 4000,
+   "population": {
+    "E1": 0.01971326164874552,
+    "E2": 0.0023397052966945384
+   },
+   "H1confirmed": {
+    "p": 0.01375,
+    "mcse": 0.0018412589103654054
+   },
+   "E1pass": {
+    "p": 0.288,
+    "mcse": 0.007159888267284623
+   },
+   "E2pass": {
+    "p": 0.016,
+    "mcse": 0.001983935482821959
+   },
+   "harmIndicated": {
+    "p": 0.0095,
+    "mcse": 0.0015337657904647632
+   },
+   "H2confirmed": {
+    "p": 0.0005,
+    "mcse": 0.000353464991194319
+   }
+  },
+  {
+   "scenario": "scale:0.5",
+   "tasks": 300,
+   "repeats": 3,
+   "sims": 4000,
+   "population": {
+    "E1": 0.01971326164874552,
+    "E2": 0.0023397052966945384
+   },
+   "H1confirmed": {
+    "p": 0.02125,
+    "mcse": 0.002280265198392503
+   },
+   "E1pass": {
+    "p": 0.4475,
+    "mcse": 0.007861993226911354
+   },
+   "E2pass": {
+    "p": 0.02225,
+    "mcse": 0.0023321094260347216
+   },
+   "harmIndicated": {
+    "p": 0.0085,
+    "mcse": 0.0014515293658758682
+   },
+   "H2confirmed": {
+    "p": 0.00025,
+    "mcse": 0.0002499687480466308
+   }
+  },
+  {
+   "scenario": "scale:0.5",
+   "tasks": 400,
+   "repeats": 3,
+   "sims": 4000,
+   "population": {
+    "E1": 0.01971326164874552,
+    "E2": 0.0023397052966945384
+   },
+   "H1confirmed": {
+    "p": 0.0175,
+    "mcse": 0.0020732673488964223
+   },
+   "E1pass": {
+    "p": 0.566,
+    "mcse": 0.007836517083500808
+   },
+   "E2pass": {
+    "p": 0.01825,
+    "mcse": 0.0021164201792177283
+   },
+   "harmIndicated": {
+    "p": 0.00725,
+    "mcse": 0.0013414020184120792
+   },
+   "H2confirmed": {
+    "p": 0.0005,
+    "mcse": 0.000353464991194319
+   }
+  },
+  {
+   "scenario": "scale:0.5",
+   "tasks": 600,
+   "repeats": 3,
+   "sims": 4000,
+   "population": {
+    "E1": 0.01971326164874552,
+    "E2": 0.0023397052966945384
+   },
+   "H1confirmed": {
+    "p": 0.0265,
+    "mcse": 0.0025395742753461653
+   },
+   "E1pass": {
+    "p": 0.76925,
+    "mcse": 0.006661539564920409
+   },
+   "E2pass": {
+    "p": 0.0265,
+    "mcse": 0.0025395742753461653
+   },
+   "harmIndicated": {
+    "p": 0.0075,
+    "mcse": 0.0013641618305758301
+   },
+   "H2confirmed": {
+    "p": 0.00075,
+    "mcse": 0.00043285029167138147
+   }
+  },
+  {
+   "scenario": "scale:0.5",
+   "tasks": 800,
+   "repeats": 3,
+   "sims": 4000,
+   "population": {
+    "E1": 0.01971326164874552,
+    "E2": 0.0023397052966945384
+   },
+   "H1confirmed": {
+    "p": 0.0355,
+    "mcse": 0.002925737086615952
+   },
+   "E1pass": {
+    "p": 0.88625,
+    "mcse": 0.005020232502085935
+   },
+   "E2pass": {
+    "p": 0.0355,
+    "mcse": 0.002925737086615952
+   },
+   "harmIndicated": {
+    "p": 0.01025,
+    "mcse": 0.0015925559252346526
+   },
+   "H2confirmed": {
+    "p": 0,
+    "mcse": 0
+   }
+  },
+  {
+   "scenario": "scale:0.5",
+   "tasks": 1200,
+   "repeats": 3,
+   "sims": 4000,
+   "population": {
+    "E1": 0.01971326164874552,
+    "E2": 0.0023397052966945384
+   },
+   "H1confirmed": {
+    "p": 0.03825,
+    "mcse": 0.0030326118075019097
+   },
+   "E1pass": {
+    "p": 0.973,
+    "mcse": 0.002562762181709416
+   },
+   "E2pass": {
+    "p": 0.03825,
+    "mcse": 0.0030326118075019097
+   },
+   "harmIndicated": {
+    "p": 0.011,
+    "mcse": 0.0016491664561226074
+   },
+   "H2confirmed": {
+    "p": 0.00025,
+    "mcse": 0.0002499687480466308
+   }
+  },
+  {
+   "scenario": "scale:0.5",
+   "tasks": 1600,
+   "repeats": 3,
+   "sims": 4000,
+   "population": {
+    "E1": 0.01971326164874552,
+    "E2": 0.0023397052966945384
+   },
+   "H1confirmed": {
+    "p": 0.0525,
+    "mcse": 0.0035264624625820137
+   },
+   "E1pass": {
+    "p": 0.995,
+    "mcse": 0.0011152354011597736
+   },
+   "E2pass": {
+    "p": 0.0525,
+    "mcse": 0.0035264624625820137
+   },
+   "harmIndicated": {
+    "p": 0.00825,
+    "mcse": 0.001430204312327438
+   },
+   "H2confirmed": {
+    "p": 0,
+    "mcse": 0
+   }
+  },
+  {
+   "scenario": "scale:0",
+   "tasks": 93,
+   "repeats": 3,
+   "sims": 4000,
+   "population": {
+    "E1": 0,
+    "E2": 0
+   },
+   "H1confirmed": {
+    "p": 0.001,
+    "mcse": 0.0004997499374687304
+   },
+   "E1pass": {
+    "p": 0.00925,
+    "mcse": 0.0015136410984774428
+   },
+   "E2pass": {
+    "p": 0.002,
+    "mcse": 0.0007063993204979744
+   },
+   "harmIndicated": {
+    "p": 0.01025,
+    "mcse": 0.0015925559252346526
+   },
+   "H2confirmed": {
+    "p": 0,
+    "mcse": 0
+   }
+  },
+  {
+   "scenario": "scale:0",
+   "tasks": 200,
+   "repeats": 3,
+   "sims": 4000,
+   "population": {
+    "E1": 0,
+    "E2": 0
+   },
+   "H1confirmed": {
+    "p": 0.0015,
+    "mcse": 0.0006119129840099816
+   },
+   "E1pass": {
+    "p": 0.018,
+    "mcse": 0.002102141764962582
+   },
+   "E2pass": {
+    "p": 0.0075,
+    "mcse": 0.0013641618305758301
+   },
+   "harmIndicated": {
+    "p": 0.02075,
+    "mcse": 0.0022538543375737485
+   },
+   "H2confirmed": {
+    "p": 0,
+    "mcse": 0
+   }
+  },
+  {
+   "scenario": "scale:0",
+   "tasks": 300,
+   "repeats": 3,
+   "sims": 4000,
+   "population": {
+    "E1": 0,
+    "E2": 0
+   },
+   "H1confirmed": {
+    "p": 0.00275,
+    "mcse": 0.0008280153229258501
+   },
+   "E1pass": {
+    "p": 0.01775,
+    "mcse": 0.0020877582175625603
+   },
+   "E2pass": {
+    "p": 0.0115,
+    "mcse": 0.001685804703991539
+   },
+   "harmIndicated": {
+    "p": 0.0225,
+    "mcse": 0.002344874730129522
+   },
+   "H2confirmed": {
+    "p": 0,
+    "mcse": 0
+   }
+  },
+  {
+   "scenario": "scale:0",
+   "tasks": 400,
+   "repeats": 3,
+   "sims": 4000,
+   "population": {
+    "E1": 0,
+    "E2": 0
+   },
+   "H1confirmed": {
+    "p": 0.006,
+    "mcse": 0.001221065108829173
+   },
+   "E1pass": {
+    "p": 0.02175,
+    "mcse": 0.002306346542694744
+   },
+   "E2pass": {
+    "p": 0.0155,
+    "mcse": 0.0019531864990317747
+   },
+   "harmIndicated": {
+    "p": 0.02575,
+    "mcse": 0.0025043431024921485
+   },
+   "H2confirmed": {
+    "p": 0,
+    "mcse": 0
+   }
+  },
+  {
+   "scenario": "scale:0",
+   "tasks": 600,
+   "repeats": 3,
+   "sims": 4000,
+   "population": {
+    "E1": 0,
+    "E2": 0
+   },
+   "H1confirmed": {
+    "p": 0.00425,
+    "mcse": 0.0010285836742822629
+   },
+   "E1pass": {
+    "p": 0.018,
+    "mcse": 0.002102141764962582
+   },
+   "E2pass": {
+    "p": 0.01325,
+    "mcse": 0.0018079295824229436
+   },
+   "harmIndicated": {
+    "p": 0.02975,
+    "mcse": 0.002686304966864336
+   },
+   "H2confirmed": {
+    "p": 0,
+    "mcse": 0
+   }
+  },
+  {
+   "scenario": "scale:0",
+   "tasks": 800,
+   "repeats": 3,
+   "sims": 4000,
+   "population": {
+    "E1": 0,
+    "E2": 0
+   },
+   "H1confirmed": {
+    "p": 0.005,
+    "mcse": 0.0011152354011597732
+   },
+   "E1pass": {
+    "p": 0.02125,
+    "mcse": 0.002280265198392503
+   },
+   "E2pass": {
+    "p": 0.01725,
+    "mcse": 0.0020586668926759373
+   },
+   "harmIndicated": {
+    "p": 0.03025,
+    "mcse": 0.0027080868477580254
+   },
+   "H2confirmed": {
+    "p": 0,
+    "mcse": 0
+   }
+  },
+  {
+   "scenario": "scale:0",
+   "tasks": 1200,
+   "repeats": 3,
+   "sims": 4000,
+   "population": {
+    "E1": 0,
+    "E2": 0
+   },
+   "H1confirmed": {
+    "p": 0.00575,
+    "mcse": 0.0011955059075554582
+   },
+   "E1pass": {
+    "p": 0.0215,
+    "mcse": 0.0022933463541297025
+   },
+   "E2pass": {
+    "p": 0.01625,
+    "mcse": 0.0019991209005460375
+   },
+   "harmIndicated": {
+    "p": 0.034,
+    "mcse": 0.0028654842522687156
+   },
+   "H2confirmed": {
+    "p": 0,
+    "mcse": 0
+   }
+  },
+  {
+   "scenario": "scale:0",
+   "tasks": 1600,
+   "repeats": 3,
+   "sims": 4000,
+   "population": {
+    "E1": 0,
+    "E2": 0
+   },
+   "H1confirmed": {
+    "p": 0.00575,
+    "mcse": 0.0011955059075554582
+   },
+   "E1pass": {
+    "p": 0.0225,
+    "mcse": 0.002344874730129522
+   },
+   "E2pass": {
+    "p": 0.01875,
+    "mcse": 0.002144669992096686
+   },
+   "harmIndicated": {
+    "p": 0.03275,
+    "mcse": 0.002814135635501601
+   },
+   "H2confirmed": {
+    "p": 0,
+    "mcse": 0
+   }
+  }
+ ],
+ "costs": {
+  "93": {
+   "OC+OCR": {
+    "units": 558,
+    "requests": 16797,
+    "activeHours": 4.1
+   },
+   "OC+OCR+PCR": {
+    "units": 837,
+    "requests": 19494,
+    "activeHours": 4.7
+   }
+  },
+  "200": {
+   "OC+OCR": {
+    "units": 1200,
+    "requests": 36123,
+    "activeHours": 8.8
+   },
+   "OC+OCR+PCR": {
+    "units": 1800,
+    "requests": 41923,
+    "activeHours": 10.2
+   }
+  },
+  "300": {
+   "OC+OCR": {
+    "units": 1800,
+    "requests": 54184,
+    "activeHours": 13.2
+   },
+   "OC+OCR+PCR": {
+    "units": 2700,
+    "requests": 62884,
+    "activeHours": 15.2
+   }
+  },
+  "400": {
+   "OC+OCR": {
+    "units": 2400,
+    "requests": 72245,
+    "activeHours": 17.6
+   },
+   "OC+OCR+PCR": {
+    "units": 3600,
+    "requests": 83845,
+    "activeHours": 20.3
+   }
+  },
+  "600": {
+   "OC+OCR": {
+    "units": 3600,
+    "requests": 108368,
+    "activeHours": 26.5
+   },
+   "OC+OCR+PCR": {
+    "units": 5400,
+    "requests": 125768,
+    "activeHours": 30.5
+   }
+  },
+  "800": {
+   "OC+OCR": {
+    "units": 4800,
+    "requests": 144490,
+    "activeHours": 35.3
+   },
+   "OC+OCR+PCR": {
+    "units": 7200,
+    "requests": 167690,
+    "activeHours": 40.6
+   }
+  },
+  "1200": {
+   "OC+OCR": {
+    "units": 7200,
+    "requests": 216735,
+    "activeHours": 52.9
+   },
+   "OC+OCR+PCR": {
+    "units": 10800,
+    "requests": 251535,
+    "activeHours": 61
+   }
+  },
+  "1600": {
+   "OC+OCR": {
+    "units": 9600,
+    "requests": 288981,
+    "activeHours": 70.5
+   },
+   "OC+OCR+PCR": {
+    "units": 14400,
+    "requests": 335381,
+    "activeHours": 81.3
+   }
+  }
+ }
+}

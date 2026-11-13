@@ -1,0 +1,43 @@
+{
+  "at": "2026-11-07T17:59:58.680Z",
+  "powerFile": "records/ctrl-confirm-3/plan/power.json",
+  "eligibilityFile": "../results/ctrl-confirm-3-holdout/ctrl-confirm-3-holdout-4206b2e38c1d.ELIGIBILITY.json",
+  "launch": false,
+  "checks": {
+    "a_powerReachable": {
+      "pass": true,
+      "scenario": "latent:0.039",
+      "nRequired": 800
+    },
+    "b_supply": {
+      "pass": false,
+      "sealedTasks": 159
+    },
+    "c_requests": {
+      "pass": false,
+      "planned": 167690,
+      "ceiling": 45000
+    },
+    "d_activeHours": {
+      "pass": false,
+      "planned": 40.6,
+      "ceiling": 16
+    }
+  },
+  "reference": {
+    "costAtSealed": {
+      "units": 1431,
+      "requests": 33328,
+      "activeHours": 8.1
+    },
+    "powerAtLargestSimulatedNWithinSupply": {
+      "tasks": 93,
+      "H1": {
+        "latent:0.06": 0.20775,
+        "latent:0.039": 0.07725,
+        "latent:0.02": 0.01475,
+        "latent:0": 0.00225
+      }
+    }
+  }
+}
