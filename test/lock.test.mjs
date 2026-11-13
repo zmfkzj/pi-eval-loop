@@ -127,8 +127,9 @@ test("guard-serialized recovery: a recoverer that judged a record stale never re
     busy(() => acquireLock(path), "stale-guard");
     assert.equal(readFileSync(`${path}.reclaim`, "utf8"), leftover);
     assert.equal(readFileSync(path, "utf8"), stale);
-    // (5) Regression (2026-11-06, seen under a loaded parallel suite as "busy:stale-guard"): a live recoverer's guard that is
-    // released between our failed guard link and our read of it is NOT a stale guard; the acquisition starts over and recovers.
+    // (5) Regression (seen 2026-11-08 under a loaded parallel suite as "busy:stale-guard" in the competing-acquisition test): a live
+    // recoverer's guard that is released between our failed guard link and our read of it is NOT a stale guard; the acquisition
+    // starts over and recovers. (Same fix as the agent_workflow clone, 2026-11-06.)
     writeFileSync(`${path}.reclaim`, JSON.stringify({ pid: process.pid, host: hostname(), bootId: bootId(), pidNs: pidNamespace(), startTime: processStart(process.pid), token: "live-guard" }));
     let removed = 0;
     const won = acquireLock(path, { afterGuardBusy: () => { removed++; unlinkSync(`${path}.reclaim`); } });

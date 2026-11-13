@@ -145,8 +145,9 @@ export function inspectGuard(path) {
  * guard left by a recoverer that died within its few synchronous steps is "stale-guard" (never removed automatically, since
  * removing it could break the guard's exclusivity; an operator removes it after checking that no controller runs).
  * @param {string} path
- * @param {{ beforeReclaim?: () => void, afterGuardBusy?: () => void }} [hooks] test hooks: after a record was judged stale, before the
- *   guard is taken; after the guard was found taken, before it is read (a guard removed in between is a released guard: retry)
+ * @param {{ beforeReclaim?: () => void, afterGuardBusy?: () => void }} [hooks] test hooks: after a record was judged stale, before
+ *   the guard is taken; after the guard link failed (EEXIST), before the guard is read (a guard removed in between is a released
+ *   guard: retry)
  */
 export function acquireLock(path, { beforeReclaim, afterGuardBusy } = {}) {
   ensureDir(dirname(path));
