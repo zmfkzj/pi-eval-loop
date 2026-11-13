@@ -32,6 +32,14 @@ test("A/B/C: shared baseline, separate B (greedy) and C (pareto) trajectories wi
     assert.equal(saved.adoption.verdict, "ADOPT");
     assert.equal(sh(fixtures.orche, ["rev-parse", "refs/heads/eval-loop/stable"]), saved.arms.C.commit);
     assert.ok(existsSync(join(root, "abc/ablation.md")));
+    // protocol-4: the joint holdout pass ran every arm (A's stable, B's and C's finals) in ONE frozen interleaved schedule.
+    const A = JSON.parse(readFileSync(join(root, "abc/A/state.json"), "utf8"));
+    assert.deepEqual(A.holdoutSchedule.arms, ["B-c001", "C-c001", "stable"]);
+    assert.equal(A.final.execution.mode, "interleaved"); assert.equal(A.final.execution.followsPlan, true);
+    assert.equal(A.final.execution.planned, HOLDOUT.length * 3 * 3);
+    const schedule = JSON.parse(readFileSync(join(root, "abc/A/holdout-schedule.json"), "utf8"));
+    assert.equal(schedule.digest, A.holdoutSchedule.digest);
+    assert.equal(A.final.evidence.class, "confirmatory");
     // Resuming the finished ablation does not consume the holdout again.
     await runAblation({ stateDir: join(root, "abc"), loopFactory });
     assert.equal(new Ledger(join(fixtures.holdout.dir, "USES.jsonl")).records().length, 1);

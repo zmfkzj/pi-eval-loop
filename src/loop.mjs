@@ -13,15 +13,16 @@ import { Archive, patchKey, pointDesc, pointGt, selectParent } from "./archive.m
 import { analyze } from "./analysis.mjs";
 import { Deployer } from "./deploy.mjs";
 import { Evaluator } from "./evaluator.mjs";
-import { adoptionCompare, adoptionDecision, criticalProblems, developmentCompare, developmentDecision, screeningCompare, screeningDecision, taskLevelPromotion } from "./gate.mjs";
+import { adoptionCompare, adoptionDecision, criticalProblems, developmentCompare, developmentDecision, familyAdoptionCompare, screeningCompare, screeningDecision, taskLevelPromotion } from "./gate.mjs";
 import { changedProtected, patchIntegrity, protectedSnapshot } from "./integrity.mjs";
 import { finalAttempts, missingUnits, pairsOf, summarize } from "./metrics.mjs";
-import { bindingOf, evaluatorFiles, fileDigests, lockProtocol, PACKAGE_DIR, StateIntegrityError, UMBRELLA } from "./protocol.mjs";
+import { bindingOf, evaluatorFiles, fileDigests, lockProtocol, PACKAGE_DIR, readLock, StateIntegrityError, UMBRELLA } from "./protocol.mjs";
 import { inspectState, POOL_EMPTY, POOL_UNUSABLE } from "./contract.mjs";
 import { createRng } from "./rng.mjs";
 import { describeArm } from "./stats.mjs";
 import { holdoutHard, holdoutLedger, holdoutStatus, loadLocal, loadSuite, screeningBatch, splitByFamily, taskDigest, validateSplits, verifySeal } from "./datasets.mjs";
-import { assignmentFor, reserveBatch } from "./supply.mjs";
+import { assignmentFor, planPreflight, priorHoldoutFamilies, reserveBatch } from "./supply.mjs";
+import { confirmatoryChecks, evidenceLabel, executionOrder, interleavedSchedule, planCompleteness, planPath, scheduleProblems, spendAlpha } from "./design.mjs";
 import { atomicWriteJson, digestOf, ensureDir, Ledger, LockBusyError, readJson, sha256 } from "./util.mjs";
 import { changes, commit as commitWorktree, createWorktree, head, snapshotWorktree } from "./worktree.mjs";
 import { writeEvidence } from "./proposer.mjs";
@@ -60,7 +61,7 @@ function legacyResumePhase(state) {
  * @property {(worktree: string, which?: string[], logDir?: string) => Promise<any>} [checks] harness checks of a candidate worktree
  * @property {() => Promise<Array<{ name: string, ok: boolean, detail?: string }>>} [prerequisites] environment prerequisites
  * @property {{ tasks: any[], holdoutDir?: string, holdoutTasks?: any[] }} [datasets] injected datasets (tests; without holdoutTasks the holdout comes from the protocol path)
- * @property {(dir: string) => any} [validateGrader] grader validation hook
+ * @property {(task: any) => any} [validateGrader] grader validation hook (one task)
  * @property {string} [umbrella] umbrella repository root
  * @property {string} [orche] orche repository (target harness)
  * @property {(line: string) => void} [log] progress log
@@ -173,6 +174,17 @@ export class Loop {
     }
     // A missing lock may be created only by a fresh initialization or a provably pre-lock state (crash or block before the lock).
     const createLock = disk.health === "fresh" || disk.protocol?.status === "unlocked";
+    // An experiment locked under another protocol VERSION (e.g. a protocol-3 record read by protocol-4 code) is never resumed and
+    // never rewritten: refused read-only (the in-memory state says blocked; nothing is saved, bound, reserved or reported).
+    if (disk.health === "present" && !createLock) {
+      const locked = readLock(this.stateDir);
+      const version = locked.present ? locked.lock.protocol?.version ?? null : null;
+      if (locked.present && version !== p.version) {
+        this.readOnlyRefusal = true;
+        this._state = { ...structuredClone(disk.state), phase: "blocked", blocked: { reason: `protocol version ${version ?? "unknown"} of this experiment differs from ${p.version}: a recorded experiment is never resumed or rewritten under another protocol version (read-only refusal; start a new experiment in a new state directory)`, retryable: false, resumePhase: disk.state.phase === "blocked" ? disk.state.blocked?.resumePhase : disk.state.phase, readOnly: true } };
+        return false;
+      }
+    }
     // The state file exists from the first step on: records without state.json always mean a lost state (see contract.mjs).
     if (disk.health === "fresh") {
       if (this.state.protocolLock) throw new StateIntegrityError("state.json vanished while this loop was bound to a protocol lock", { health: "missing", integrity: "protocol_lock_missing" });
@@ -270,19 +282,38 @@ export class Loop {
     const reasons = [];
     if (!this.holdoutDir) reasons.push(`holdout dataset not found: ${p.datasets.holdout}`);
     else {
-      const status = holdoutStatus(tasks, this.holdoutDir, p, { orcheDir: this.orche, ledgerPath: this.holdoutLedgerPath });
+      const status = holdoutStatus(tasks, this.holdoutDir, p, { orcheDir: this.orche, ledgerPath: this.holdoutLedgerPath, priorFamilies: this.priorFamilies() });
       if (!status.independent) reasons.push(status.why);
     }
     const coverage = { tasks: tasks.length, families: new Set(tasks.map(t => t.family)).size, hard: tasks.filter(t => t.hard).length, hardUnverified: tasks.filter(t => t.hardUnverified).length };
     if (coverage.tasks < p.holdout.minTasks) reasons.push(`holdout too small after grader validation: ${coverage.tasks} tasks (need ${p.holdout.minTasks})`);
     if (coverage.families < p.holdout.minFamilies) reasons.push(`holdout too narrow: ${coverage.families} families (need ${p.holdout.minFamilies})`);
     if (p.adoption.requireHardStratum && coverage.hard === 0) reasons.push(`holdout has no hard stratum (hard tasks with an accepted difficulty basis ${JSON.stringify(p.holdout.hardBasis)}: 0${coverage.hardUnverified ? `; ${coverage.hardUnverified} hard by an unaccepted basis such as size-proxy` : ""})`);
+    // protocol-4: a confirmatory plan that is incomplete, below its own pre-registered coverage, or not covered by the series
+    // error budget stops here, before anything is spent (an exploratory plan never blocks).
+    reasons.push(...planPreflight(p, this.stateDir));
+    const plan = p.analysisPlan;
+    if (plan?.mode === "confirmatory" && !reasons.length) {
+      if (coverage.tasks < plan.minTasks) reasons.push(`holdout below the pre-registered analysis plan: ${coverage.tasks} tasks (plan ${plan.minTasks})`);
+      if (coverage.families < plan.minFamilies) reasons.push(`holdout below the pre-registered analysis plan: ${coverage.families} families (plan ${plan.minFamilies})`);
+      if (plan.minHardTasks && coverage.hard < plan.minHardTasks) reasons.push(`holdout below the pre-registered analysis plan: ${coverage.hard} accepted hard tasks (plan ${plan.minHardTasks})`);
+      if (plan.lowExposure?.required) { const low = tasks.filter(t => plan.lowExposure.provenance.includes(t.provenance)).length; if (low < plan.lowExposure.minTasks) reasons.push(`holdout below the pre-registered analysis plan: ${low} low-exposure task(s) (plan ${plan.lowExposure.minTasks}); supply reviewed private tasks (eval-loop-supply intake-private)`); }
+    }
     if (!reasons.length) {
       if (!this.state.holdoutPreflight) { this.state.holdoutPreflight = { ok: true, at: new Date().toISOString(), coverage }; this.save(); }
       return undefined;
     }
     this.event("holdout-preflight-failed", { reasons, coverage });
+    // An incomplete confirmatory plan or an exhausted series budget is not a supply shortage: more batches would not help, the
+    // operator's pre-registered inputs are missing (machine consumers must not wait for supply or repair code for it).
+    if (reasons.some(r => /^confirmatory analysis plan/.test(r))) return { reason: "holdout preflight: confirmatory analysis plan incomplete or its series error budget exhausted (external input required, see docs/design.md \"Required external inputs\"); nothing was searched", preflight: { reasons, coverage, holdout: p.datasets.holdout }, retryable: false, externalInput: "analysis-plan" };
     return { reason: "holdout preflight: no independent, unused holdout with the required coverage for this experiment; nothing was searched. Supply a new batch (eval-loop-supply) and start a new experiment in a new state directory", preflight: { reasons, coverage, holdout: p.datasets.holdout }, retryable: false };
+  }
+
+  /** Families of earlier holdouts (pool batches used/reserved/calibration, package datasets used), this holdout excluded; only when the protocol forbids reuse. */
+  priorFamilies() {
+    if (this.protocol.holdout.priorFamilyReuse !== "forbid") return undefined;
+    return priorHoldoutFamilies({ pool: this.state.holdoutBatch?.pool, exclude: this.holdoutDir });
   }
 
   /** Resolve datasets.holdoutPool to this state's batch (reserving one when the state may still create its lock). */
@@ -712,7 +743,7 @@ export class Loop {
         if (mine) { this.state.holdoutUse = use = mine; this.state.holdoutIndependentAtStart = { independent: mine.independentBefore, why: mine.why, recovered: true }; this.save(); this.event("holdout-use-recovered", { seq: mine.seq }); }
       }
     }
-    const status = use ? this.state.holdoutIndependentAtStart : this.holdoutDir ? holdoutStatus(this.split.holdout.map(id => this.tasksById[id]), this.holdoutDir, p, { orcheDir: this.orche, ledgerPath: this.holdoutLedgerPath }) : { independent: false, why: "no holdout dataset" };
+    const status = use ? this.state.holdoutIndependentAtStart : this.holdoutDir ? holdoutStatus(this.split.holdout.map(id => this.tasksById[id]), this.holdoutDir, p, { orcheDir: this.orche, ledgerPath: this.holdoutLedgerPath, priorFamilies: this.priorFamilies() }) : { independent: false, why: "no holdout dataset" };
     if (!use && p.holdout.requireIndependent && !status.independent) {
       // Re-checked at the moment of use (the preflight ran before the search): a holdout that is no longer independent is neither
       // consumed nor run; deployment is BLOCKED and recorded as such.
@@ -726,6 +757,18 @@ export class Loop {
       this.halt("holdout integrity: the recorded holdout use does not match the frozen selection/protocol of this cycle", { use: use.seq });
       return;
     }
+    // protocol-4 confirmatory plan: complete at the moment of use, and its alpha spent from the shared series budget BEFORE the
+    // holdout is consumed and run (idempotent on resume: the same frozen binding gets its record back; never refunded). A refusal
+    // before the use leaves the holdout unconsumed and unrun.
+    if (p.analysisPlan?.mode === "confirmatory" && sel.selected) {
+      const stop = (why) => { const final = { candidate: sel.selected, verdict: "BLOCKED", adopt: false, holdoutEvaluated: false, reasons: [`${why} (${use ? "holdout already consumed" : "holdout not consumed, not run"})`], evidence: evidenceLabel(p) }; this.event("adoption-decision", final); this.setPhase("done", { final }); };
+      const missing = planCompleteness(p, { base: PACKAGE_DIR });
+      if (missing.length) { stop(`confirmatory analysis plan incomplete at the time of use: ${missing.join("; ")}`); return; }
+      const plan = p.analysisPlan;
+      const spend = spendAlpha(planPath(plan.series.ledger, PACKAGE_DIR), { series: plan.series.id, alphaTotal: plan.series.alphaTotal, alpha: plan.alpha, stateDir: resolve(this.stateDir), purpose: "holdout", bind: { protocolDigest: this.protocolDigest, frozenDigest: sel.frozenDigest, holdoutSeal: this.holdoutDir ? verifySeal(this.holdoutDir).seal?.digest ?? null : null } });
+      if (spend.refused) { stop(`series error budget: ${spend.refused}`); return; }
+      if (!this.state.seriesSpend?.holdout) { this.state.seriesSpend = { ...this.state.seriesSpend, holdout: { series: plan.series.id, seq: spend.record.seq, alpha: spend.record.alpha, bindDigest: spend.record.bindDigest, recovered: spend.recovered } }; this.save(); this.event("series-spend", this.state.seriesSpend.holdout); }
+    }
     if (!use) {
       this.state.holdoutIndependentAtStart = status;
       if (ledger) this.state.holdoutUse = ledger.append({ type: "use", stateDir: this.stateDir, protocolDigest: this.protocolDigest, selected: sel.selected, commit: sel.commit, frozenDigest: sel.frozenDigest, independentBefore: status.independent, why: status.why });
@@ -737,17 +780,46 @@ export class Loop {
     const arms = [...new Set(["stable", ...(sel.extraArms ?? []), ...(sel.selected ? [sel.selected] : [])])];
     let cmp, incomplete = [], records = [];
     const passKeys = new Set();
+    let familyCmp, confirmatory, execution, pairs;
+    const harnessOf = Object.fromEntries(arms.map(id => [id, this.harness(id)]));
     if (this.split.holdout.length) {
       const units = this.units("holdout", p.holdout.repeats);
-      for (const id of arms) await this.evaluator.evaluate(this.harness(id), units, `holdout:${id}`);
+      if (p.holdout.execution === "interleaved") {
+        // protocol-4: one randomized, interleaved queue over every arm, frozen (digest in the state, plan in holdout-schedule.json)
+        // before the first dispatch and bound to the frozen selection, protocol, environment and holdout seal; a resumed pass
+        // re-derives it, refuses a different one, and continues in the same order (recorded units are reused, never re-drawn).
+        const schedule = interleavedSchedule({ arms, tasks: this.split.holdout, repeats: p.holdout.repeats, split: "holdout", seed: `${p.seed}:holdout:${sel.frozenDigest}`, bind: { frozenDigest: sel.frozenDigest, protocolDigest: this.protocolDigest, environment: this.envDigest ?? null, holdoutSeal: this.holdoutDir ? verifySeal(this.holdoutDir).seal?.digest ?? null : null, arms: arms.map(id => ({ id, commit: harnessOf[id].commit ?? null })) } });
+        const stored = this.state.holdoutSchedule;
+        if (stored) {
+          const problems = scheduleProblems(readJson(join(this.stateDir, "holdout-schedule.json"), null) ?? { digest: stored.digest }, schedule);
+          if (stored.digest !== schedule.digest || problems.length) { this.halt("holdout integrity: the frozen interleaved schedule differs from the one recorded before the first run", { problems }); return; }
+        } else {
+          atomicWriteJson(join(this.stateDir, "holdout-schedule.json"), schedule);
+          this.state.holdoutSchedule = { digest: schedule.digest, units: schedule.units.length, blocks: schedule.units.length / arms.length, arms: schedule.arms, at: new Date().toISOString() };
+          this.save();
+          this.event("holdout-schedule", this.state.holdoutSchedule);
+        }
+        await this.evaluator.evaluateScheduled(schedule.units.map(u => ({ harness: harnessOf[u.arm], unit: u })), "holdout:interleaved");
+        const order = executionOrder(this.evaluator.ledger.records(), schedule, (u) => this.evaluator.keyOf(harnessOf[u.arm], u.task, u.split, u.repeat));
+        execution = { mode: "interleaved", scheduleDigest: schedule.digest, planned: order.planned, dispatched: order.dispatched, followsPlan: order.followsPlan, inversions: order.inversions, retries: order.retries.length };
+      } else {
+        for (const id of arms) await this.evaluator.evaluate(harnessOf[id], units, `holdout:${id}`);
+        execution = { mode: "sequential", note: "arms ran in time blocks (protocol-3 order): time and arm are confounded" };
+      }
       records = this.records();
-      for (const id of arms) for (const u of units) passKeys.add(this.evaluator.keyOf(this.harness(id), u.task, u.split, u.repeat));
+      for (const id of arms) for (const u of units) passKeys.add(this.evaluator.keyOf(harnessOf[id], u.task, u.split, u.repeat));
       incomplete = missingUnits(records, [...passKeys]);
       // The comparison uses exactly the units of this pass (this identity), never holdout records of another identity.
-      if (sel.selected) cmp = adoptionCompare(pairsOf(this.samples().filter(r => passKeys.has(r.unit_key)), { a: "stable", b: sel.selected, split: "holdout", tasks: this.split.holdout, meta: this.tasksById }), p, `${p.seed}:holdout:${sel.selected}`);
+      if (sel.selected) {
+        pairs = pairsOf(this.samples().filter(r => passKeys.has(r.unit_key)), { a: "stable", b: sel.selected, split: "holdout", tasks: this.split.holdout, meta: this.tasksById }).map(t => ({ ...t, provenance: this.tasksById[t.task]?.provenance }));
+        cmp = adoptionCompare(pairs, p, `${p.seed}:holdout:${sel.selected}`);
+        if (p.adoption.requireFamilyLevel) familyCmp = familyAdoptionCompare(pairs, p, `${p.seed}:holdout-family:${sel.selected}`);
+        const plan = p.analysisPlan;
+        if (plan?.mode === "confirmatory" && !incomplete.length) confirmatory = confirmatoryChecks(pairs, { alpha: plan.alpha, minEffect: plan.minEffect, minTasks: plan.minTasks, minFamilies: plan.minFamilies, minHardTasks: plan.minHardTasks, lowExposure: plan.lowExposure, draws: p.bootstrap.draws, permutationDraws: plan.permutationDraws, seed: `${p.seed}:holdout-confirmatory:${sel.selected}` });
+      }
     }
     if (!sel.selected) {
-      const final = { candidate: null, verdict: "KEEP_STABLE", adopt: false, reasons: ["no candidate selected on development; holdout measured for the listed arms only"], arms, incomplete: incomplete.length, independence: independent };
+      const final = { candidate: null, verdict: "KEEP_STABLE", adopt: false, reasons: ["no candidate selected on development; holdout measured for the listed arms only"], arms, incomplete: incomplete.length, independence: independent, execution, evidence: evidenceLabel(p) };
       this.event("adoption-decision", final);
       this.setPhase("done", { final });
       return;
@@ -764,10 +836,12 @@ export class Loop {
       checks = { ...compareChecks(stableChecks, candChecks), results: candChecks.results, stable: stableChecks.results };
     }
     const infraRate = holdRecs.length ? holdRecs.filter(r => ["infra_error", "model_unavailable"].includes(r.terminal_status)).length / holdRecs.length : 0;
-    const decision = adoptionDecision(cmp, p, { holdoutIndependent: independent.independent, holdoutWhy: independent.why, critical, checksPassed: checks.pass, checksDetail: checks.problems?.join("; ") || "ok", routeOk, routeDetail: `${envs.size} environment digest(s)`, incomplete, infraRate });
-    const final = { candidate: sel.selected, verdict: decision.verdict, adopt: decision.adopt, reasons: decision.reasons, holdout: cmp ? { support: cmp.support, delta: cmp.delta, familyDelta: cmp.familyDelta, tasks: cmp.tasks, families: cmp.families, hardTasks: cmp.hardTasks, point: cmp.point } : null, independence: independent, checks };
+    const decision = adoptionDecision(cmp, p, { holdoutIndependent: independent.independent, holdoutWhy: independent.why, critical, checksPassed: checks.pass, checksDetail: checks.problems?.join("; ") || "ok", routeOk, routeDetail: `${envs.size} environment digest(s)`, incomplete, infraRate, familyCmp, confirmatory });
+    const final = { candidate: sel.selected, verdict: decision.verdict, adopt: decision.adopt, candidateAccepted: decision.candidateAccepted === true, reasons: decision.reasons, holdout: cmp ? { support: cmp.support, delta: cmp.delta, familyDelta: cmp.familyDelta, tasks: cmp.tasks, families: cmp.families, hardTasks: cmp.hardTasks, point: cmp.point, ...(familyCmp ? { familySupport: familyCmp.support } : {}) } : null, independence: independent, checks, execution,
+      ...(confirmatory ? { confirmatory: { ok: confirmatory.ok, passed: confirmatory.passed, failed: confirmatory.failed, inconclusive: confirmatory.inconclusive, randomization: confirmatory.results.randomization, familyPositive: confirmatory.results.familyPositive?.support ?? null, point: confirmatory.results.point, leaveOneFamilyOut: confirmatory.results.leaveOneFamilyOut, lowExposure: confirmatory.results.lowExposure ?? null } } : {}),
+      evidence: evidenceLabel(p, { adopt: decision.adopt, confirmatory }) };
     this.event("adoption-decision", final);
-    this.archive.decide(sel.selected, decision.adopt ? "selected" : decision.verdict === "BLOCKED" ? "holdout_blocked" : "holdout_kept_stable", decision.reasons.join("; "));
+    this.archive.decide(sel.selected, decision.adopt ? "selected" : decision.verdict === "BLOCKED" ? "holdout_blocked" : decision.verdict === "EXPLORATORY_SUPPORTED" ? "holdout_exploratory_supported" : "holdout_kept_stable", decision.reasons.join("; "));
     this.setPhase(decision.adopt ? "adopt" : "done", { final });
   }
 
@@ -775,6 +849,9 @@ export class Loop {
     this.assertNotHalted("adoption");
     const sel = this.state.selection, final = this.state.final;
     if (!final?.adopt || final.candidate !== sel?.selected) { this.halt("state integrity: adoption requested without an ADOPT decision for the frozen selection"); return; }
+    // protocol-4: the deployer is only ever reached by a decision that earned a confirmatory claim under a confirmatory plan (also on
+    // resume: a state edited or carried over cannot turn an exploratory measurement into a production adoption).
+    if (this.protocol.analysisPlan?.mode !== "confirmatory" || final.verdict !== "ADOPT" || final.evidence?.class !== "confirmatory" || final.evidence?.confirmatoryClaim !== true || final.confirmatory?.ok !== true) { this.halt("state integrity: adoption requested without confirmatory evidence (protocol-4 adopts only under a complete confirmatory plan whose checks passed)"); return; }
     const result = this.deployer.adopt({ commit: sel.commit, candidateId: sel.selected, evaluation: { holdout: final.holdout, reportPath: join(this.stateDir, "report.md"), protocolDigest: this.protocolDigest }, configFiles: [join(this.stateDir, "protocol.lock.json")] });
     this.fault?.("loop:after-deploy");
     if (this.archive.get(sel.selected).status !== "adopted") this.archive.decide(sel.selected, "adopted", `adopted on local refs ${this.protocol.deploy.branch} (mode ${this.protocol.deploy.mode})`);
@@ -797,12 +874,15 @@ export class Loop {
   }
 
   /**
-   * Independent regression check of the current stable against the snapshot before the latest adoption, on a sealed task set
-   * the selection never saw; a supported regression rolls back automatically.
+   * Regression check of the current stable against the snapshot before the latest adoption on a caller-supplied sealed task set;
+   * a supported regression rolls back automatically. The absence of a supported regression is NOT a confirmation of the
+   * adoption. Under a confirmatory analysis plan this path is refused: the independent confirmation is `confirmAdoption`
+   * (a separate, unused, sealed batch reserved from a pool, never caller-chosen tasks).
    * @param {{ tasks: any[], split?: string, repeats?: number }} options repeats defaults to the protocol's holdout repeats
    */
   async verifyStable({ tasks, split = "verify", repeats }) {
     this.assertNotHalted("stable verification");
+    if (this.protocol.analysisPlan?.mode === "confirmatory") return { verdict: "BLOCKED", reason: "confirmatory analysis plan: caller-chosen verification tasks are not independent evidence; run --confirm-adoption (separate sealed batch from analysisPlan.confirmation.pool)" };
     const prev = this.deployer.previousStable();
     if (!prev) return { verdict: "NOTHING_TO_VERIFY" };
     const current = this.deployer.current();
@@ -816,10 +896,113 @@ export class Loop {
     const pairs = pairsOf(this.samples(), { a: "previous-stable", b: adoptedId, split, tasks: tasks.map(t => t.id), meta: this.tasksById });
     const cmp = adoptionCompare(pairs.map(t => ({ ...t, a: t.b, b: t.a })), this.protocol, `${this.protocol.seed}:verify:${adoptedId}`); // previous vs adopted: support = previous better
     const regression = cmp.support >= this.protocol.adoption.support;
-    const result = { verdict: regression ? "REGRESSION_ROLLED_BACK" : "NO_SUPPORTED_REGRESSION", support: cmp.support, delta: cmp.delta };
+    const result = { verdict: regression ? "REGRESSION_ROLLED_BACK" : "NO_SUPPORTED_REGRESSION", support: cmp.support, delta: cmp.delta, evidence: "exploratory regression check: the absence of a supported regression is not a confirmation of the adoption" };
     if (regression) { const rb = this.deployer.rollback({ reason: `independent verification: previous stable better with support ${cmp.support}` }); this.archive.decide(adoptedId, "rolled_back", "independent post-adoption regression"); result.rollback = rb.problems; }
     this.event("verify-stable", result);
     return result;
+  }
+
+  /**
+   * Independent post-adoption confirmation (protocol-4, confirmatory plans; R6 of the 2026-11-06 remedies): the adoption of this
+   * state's cycle is re-measured against the exact previous stable commit on a SEPARATE sealed, unused, eligible batch reserved
+   * from analysisPlan.confirmation.pool under the purpose-bound identity "<state>#confirmation" (never the experiment's own
+   * holdout: another reservation identity, its seal excluded, its families prior when reuse is forbidden). Order: grader
+   * validation -> independence and coverage at the moment of use -> series alpha spent -> use recorded -> randomized interleaved
+   * schedule frozen -> runs -> confirmatory checks at confirmation.alpha. Verdicts: CONFIRMED, NOT_CONFIRMED, INCONCLUSIVE,
+   * BLOCKED (dormant: prerequisites missing, nothing consumed), NOTHING_TO_CONFIRM. A decided confirmation is never re-run.
+   * A supported regression (previous better at adoption.support) rolls back like verifyStable when this adoption is still the
+   * latest one. The existing post-adoption smoke check and manual rollback are unchanged.
+   */
+  async confirmAdoption() {
+    this.assertNotHalted("adoption confirmation");
+    const p = this.protocol, plan = p.analysisPlan ?? {}, conf = plan.confirmation ?? {};
+    const sel = this.state.selection, final = this.state.final;
+    const done = this.state.confirmation;
+    if (done?.verdict && done.verdict !== "IN_PROGRESS" && done.verdict !== "BLOCKED") return done;
+    const record = (result) => {
+      this.state.confirmation = { ...(this.state.confirmation ?? {}), ...result, at: new Date().toISOString() };
+      this.save();
+      this.event("adoption-confirmation", { verdict: result.verdict, reasons: result.reasons });
+      return this.state.confirmation;
+    };
+    if (!final?.adopt || !this.state.adoption || typeof sel?.selected !== "string") return { verdict: "NOTHING_TO_CONFIRM", reasons: ["no adoption in this state's cycle"] };
+    if (final.rolledBack) return { verdict: "NOTHING_TO_CONFIRM", reasons: ["the adoption was rolled back"] };
+    const missing = [];
+    if (plan.mode !== "confirmatory") missing.push("analysisPlan.mode is not confirmatory: an independent confirmation needs a pre-registered confirmatory plan");
+    else missing.push(...planCompleteness(p, { base: PACKAGE_DIR }));
+    if (!conf.pool || !(conf.alpha > 0) || !(conf.minTasks >= 1) || !(conf.minFamilies >= 1)) missing.push("analysisPlan.confirmation {pool, alpha, minTasks, minFamilies} required");
+    if (missing.length && !this.state.confirmation?.use) return record({ verdict: "BLOCKED", dormant: true, reasons: missing });
+    const previousCommit = this.state.stable?.commit, adoptedCommit = sel.commit;
+    const bind = { stateDir: resolve(this.stateDir), protocolDigest: this.protocolDigest, frozenDigest: sel.frozenDigest, previous: previousCommit, adopted: adoptedCommit };
+    const pool = resolve(PACKAGE_DIR, conf.pool);
+    const confProtocol = structuredClone(p);
+    confProtocol.holdout.minTasks = Math.max(p.holdout.minTasks, conf.minTasks); confProtocol.holdout.minFamilies = Math.max(p.holdout.minFamilies, conf.minFamilies);
+    const ownSeal = readJson(join(this.stateDir, "datasets.json"), {}).holdoutSeal ?? null;
+    let a;
+    try { a = assignmentFor(pool, this.stateDir, "confirmation") ?? reserveBatch(pool, this.stateDir, confProtocol, { orcheDir: this.orche, purpose: "confirmation", excludeSeals: ownSeal ? [ownSeal] : [] }); }
+    catch (error) { return record({ verdict: "BLOCKED", dormant: true, reasons: [`confirmation pool unusable: ${String(error.message).slice(0, 300)}`] }); }
+    if (a.none) return record({ verdict: "BLOCKED", dormant: true, reasons: ["no separate sealed, unused, eligible batch for the confirmation", ...a.none.slice(0, 5)] });
+    const seal = verifySeal(a.dir);
+    if (!seal.ok || (a.sealDigest && seal.seal?.digest !== a.sealDigest) || seal.seal?.digest === ownSeal || resolve(a.dir) === resolve(this.holdoutDir ?? "/nonexistent")) return record({ verdict: "BLOCKED", reasons: ["confirmation batch is not a distinct intact seal"] });
+    if (!this.state.confirmation?.batch) record({ verdict: "IN_PROGRESS", batch: a.batch, pool, sealDigest: seal.seal.digest, reasons: [] });
+    // Grader validation of the confirmation tasks (model-free; failing tasks are excluded by this rule only).
+    const tasks = loadLocal(a.dir).map(t => (t.hard && !holdoutHard(t, p) ? { ...t, hard: false, hardUnverified: true } : t));
+    const gradingPath = join(this.stateDir, "grading.json");
+    const grading = readJson(gradingPath, {});
+    for (const t of tasks) { if (grading[t.id]) continue; grading[t.id] = this.validateGrader ? await this.validateGrader(t) : { ok: true, expected: {}, baselineFailing: [] }; atomicWriteJson(gradingPath, grading); }
+    Object.assign(this.grading, grading);
+    const valid = tasks.filter(t => grading[t.id].ok);
+    for (const t of valid) this.tasksById[t.id] ??= t;
+    const ledger = holdoutLedger(a.dir);
+    let use = this.state.confirmation?.use;
+    if (!use && ledger.verify().length === 0) use = ledger.records().find(r => r.type === "use" && r.purpose === "confirmation" && r.stateDir === this.stateDir && r.bindDigest === digestOf(bind));
+    if (!use) {
+      const status = holdoutStatus(valid, a.dir, confProtocol, { orcheDir: this.orche, priorFamilies: confProtocol.holdout.priorFamilyReuse === "forbid" ? priorHoldoutFamilies({ pool, exclude: a.dir }) : undefined });
+      const families = new Set(valid.map(t => t.family)).size;
+      const why = [...(status.independent ? [] : [status.why]), ...(valid.length < conf.minTasks ? [`${valid.length} valid tasks < ${conf.minTasks}`] : []), ...(families < conf.minFamilies ? [`${families} families < ${conf.minFamilies}`] : [])];
+      if (why.length) return record({ verdict: "BLOCKED", reasons: [`confirmation batch not usable at the time of use (not consumed, not run): ${why.join("; ")}`] });
+      const spend = spendAlpha(planPath(plan.series.ledger, PACKAGE_DIR), { series: plan.series.id, alphaTotal: plan.series.alphaTotal, alpha: conf.alpha, stateDir: resolve(this.stateDir), purpose: "confirmation", bind });
+      if (spend.refused) return record({ verdict: "BLOCKED", reasons: [`series error budget (not consumed, not run): ${spend.refused}`] });
+      use = ledger.append({ type: "use", purpose: "confirmation", stateDir: this.stateDir, protocolDigest: this.protocolDigest, frozenDigest: sel.frozenDigest, bindDigest: digestOf(bind), independentBefore: true, why: status.why });
+      record({ verdict: "IN_PROGRESS", use, spend: { seq: spend.record.seq, alpha: conf.alpha, recovered: spend.recovered } });
+    }
+    const previous = { id: "previous-stable", kind: "orche", commit: previousCommit, mode: p.target.mode, dir: this.worktreeFor("previous-stable", previousCommit) };
+    const adopted = this.harness(sel.selected);
+    if (adopted.commit !== adoptedCommit) { this.halt("state integrity: the adopted harness differs from the frozen selection"); return this.state.confirmation; }
+    const harnessOf = { "previous-stable": previous, [sel.selected]: adopted };
+    const ids = valid.map(t => t.id).sort();
+    const schedule = interleavedSchedule({ arms: Object.keys(harnessOf), tasks: ids, repeats: p.holdout.repeats, split: "confirm", seed: `${p.seed}:confirm:${digestOf(bind)}`, bind: { ...bind, seal: seal.seal.digest } });
+    const stored = this.state.confirmation?.schedule;
+    if (stored && stored.digest !== schedule.digest) { this.halt("confirmation integrity: the frozen schedule differs from the one recorded before the first run"); return this.state.confirmation; }
+    if (!stored) { atomicWriteJson(join(this.stateDir, "confirmation-schedule.json"), schedule); record({ verdict: "IN_PROGRESS", schedule: { digest: schedule.digest, units: schedule.units.length } }); }
+    await this.evaluator.evaluateScheduled(schedule.units.map(u => ({ harness: harnessOf[u.arm], unit: u })), "confirm:interleaved");
+    const keyOf = (u) => this.evaluator.keyOf(harnessOf[u.arm], u.task, u.split, u.repeat);
+    const passKeys = new Set(schedule.units.map(keyOf));
+    const records = this.records().filter(r => passKeys.has(r.unit_key));
+    const incomplete = missingUnits(records, [...passKeys]);
+    const order = executionOrder(this.evaluator.ledger.records(), schedule, keyOf);
+    const pairs = pairsOf(this.samples().filter(r => passKeys.has(r.unit_key)), { a: "previous-stable", b: sel.selected, split: "confirm", tasks: ids, meta: this.tasksById }).map(t => ({ ...t, provenance: this.tasksById[t.task]?.provenance }));
+    const critical = criticalProblems(records, sel.selected, { reference: "previous-stable" });
+    const reasons = [];
+    let verdict, checks;
+    if (incomplete.length) { verdict = "INCONCLUSIVE"; reasons.push(`incomplete confirmation: ${incomplete.length} unit(s) missing`); }
+    else if (missing.length) { verdict = "BLOCKED"; reasons.push(...missing); }
+    else {
+      checks = confirmatoryChecks(pairs, { alpha: conf.alpha, minEffect: plan.minEffect, minTasks: conf.minTasks, minFamilies: conf.minFamilies, lowExposure: plan.lowExposure, draws: p.bootstrap.draws, permutationDraws: plan.permutationDraws, seed: `${p.seed}:confirm-checks:${sel.selected}` });
+      reasons.push(...checks.passed, ...checks.failed, ...checks.inconclusive);
+      if (critical.length) { verdict = "NOT_CONFIRMED"; reasons.push(`critical: ${critical.slice(0, 3).join("; ")}`); }
+      else verdict = checks.ok ? "CONFIRMED" : checks.inconclusive.length ? "INCONCLUSIVE" : "NOT_CONFIRMED";
+    }
+    const back = adoptionCompare(pairs.map(t => ({ ...t, a: t.b, b: t.a })), p, `${p.seed}:confirm-regression:${sel.selected}`);
+    /** @type {any} */
+    const result = { verdict, reasons, execution: { scheduleDigest: schedule.digest, planned: order.planned, dispatched: order.dispatched, followsPlan: order.followsPlan, retries: order.retries.length }, regressionSupport: back.support, ...(checks ? { checks: { ok: checks.ok, randomization: checks.results.randomization, familyPositive: checks.results.familyPositive?.support ?? null, point: checks.results.point } } : {}) };
+    if (back.support >= p.adoption.support) {
+      const latest = this.deployer.history.records().filter(r => r.type === "pre-adopt").at(-1);
+      const current = this.deployer.current();
+      if (latest?.commit === adoptedCommit && current.orche.effective === adoptedCommit) { const rb = this.deployer.rollback({ reason: `independent confirmation: previous stable better with support ${back.support}` }); this.archive.decide(sel.selected, "rolled_back", "independent confirmation found a supported regression"); result.rollback = rb.problems; }
+      else result.rollback = ["not rolled back: this adoption is no longer the current stable"];
+    }
+    return record(result);
   }
 
   /** Inputs whose change justifies a new cycle (new tasks, harness code, environment). */
@@ -831,7 +1014,7 @@ export class Loop {
   nextCycle() {
     this.assertNotHalted("a new cycle");
     const prev = this.state;
-    const history = [...(prev.history ?? []), { cycle: prev.cycle, final: prev.final, selection: prev.selection, searchStop: prev.searchStop, doneAt: prev.doneAt, fingerprint: prev.cycleFingerprint }];
+    const history = [...(prev.history ?? []), { cycle: prev.cycle, final: prev.final, selection: prev.selection, searchStop: prev.searchStop, doneAt: prev.doneAt, fingerprint: prev.cycleFingerprint, ...(prev.confirmation ? { confirmation: prev.confirmation } : {}) }];
     // The binding carries over: every cycle of a state directory runs under the one lock it was bound to.
     this._state = { phase: "prepare", cycle: prev.cycle + 1, strategy: this.strategy, counters: { candidates: 0, noProgress: 0, consecutiveInfra: 0 }, startedAt: new Date().toISOString(), history, protocolLock: prev.protocolLock };
     this.save();

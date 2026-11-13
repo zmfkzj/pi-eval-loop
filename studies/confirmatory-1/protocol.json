@@ -1,0 +1,15 @@
+{
+  "notes": "confirmatory-1 (PROVISIONAL, registered 2026-11-06): protocol-4 confirmatory plan for an isolated private pool. Rationale and power: studies/confirmatory-1/RATIONALE.md. Preparation only: running an experiment, reserving or using a batch, adopting or confirming under this protocol are separate human decisions. The pool is not referenced by any live/scheduled protocol.",
+  "holdout": { "repeats": 5, "minTasks": 144, "minFamilies": 48, "acceptedProvenance": ["external", "private-reviewed"], "hardBasis": ["calibrated"], "execution": "interleaved", "maxOwnerShare": 0.5, "priorFamilyReuse": "forbid", "privateReview": "human" },
+  "adoption": { "requireFamilyLevel": true },
+  "analysisPlan": {
+    "mode": "confirmatory",
+    "registeredAt": "2026-11-06T13:20:00Z",
+    "rationale": { "document": "studies/confirmatory-1/RATIONALE.md", "sha256": "e09e9b6ecd190104e11826f8faa6fe278c2d4f313492cdbe12c0cd14c7d98c60" },
+    "minEffect": 0.05, "alpha": 0.0125, "minTasks": 144, "minFamilies": 48, "minHardTasks": 48, "permutationDraws": 20000,
+    "series": { "id": "orche-confirmatory-series-1", "ledger": "/home/arthur/Code/agent_workflow/runs/eval-loop-confirmatory-1/series/ledger.jsonl", "alphaTotal": 0.05 },
+    "lowExposure": { "required": true, "minTasks": 72, "provenance": ["private-reviewed"] },
+    "confirmation": { "required": true, "pool": "/home/arthur/Code/agent_workflow/runs/eval-loop-confirmatory-1/pool", "alpha": 0.0125, "minTasks": 144, "minFamilies": 48 }
+  },
+  "datasets": { "holdout": null, "holdoutPool": "/home/arthur/Code/agent_workflow/runs/eval-loop-confirmatory-1/pool" }
+}

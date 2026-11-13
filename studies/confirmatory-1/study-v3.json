@@ -1,0 +1,54 @@
+{
+  "schema": "pi-eval-loop/study@1",
+  "id": "confirmatory-1",
+  "protocol": "protocol-v3.json",
+  "plan": {
+    "targetEffect": 0.15,
+    "requiredPower": 0.8,
+    "power": [
+      "power3-main.json"
+    ],
+    "candidateIntegrity": null,
+    "note": "v3 (DESIGN-v3.md): target 15 pp unchanged; power from power3-main.json (measured private calibration baseline); required scenarios logit sf0.5, logit sf1 and the public OCR-OC template; adequacy = simulated adopt-and-confirm x integrity survival (n+1)/(n+1+K), an assumption-laden estimate; candidateIntegrity comes from a pre-holdout strict-integrity screen of the candidate (none yet)",
+    "requiredScenarios": [
+      "logit:sf0.5",
+      "logit:sf1",
+      "template"
+    ]
+  },
+  "calibration": {
+    "approval": "approval-2026-11-07.json",
+    "rule": {
+      "feature": "declared-tier",
+      "hardMaxRate": 0.5,
+      "minTasksPerLevel": 3,
+      "censoring": "infra-integrity-excluded@2",
+      "minValidUnitsPerTask": 2,
+      "registered": "2026-11-07 after the first measurement; accepted as a restriction only (recalibrate-v2.mjs postHocAddition)"
+    },
+    "partition": "families ordered by sha256('confirmatory-1:partition:' + family); calibration takes families in that order until it holds >= 3 accepted tasks of each declared tier; the rest are holdout candidates (candidate- and outcome-blind)",
+    "budget": {
+      "ledger": "/home/arthur/Code/agent_workflow/runs/eval-loop-confirmatory-1/budget/target-model-requests.jsonl",
+      "limit": 4500,
+      "unit": "actual provider attempts admitted by the isolated runtime outbound gate (isolated-runtime.mjs)",
+      "requiresIsolatedGateway": true
+    },
+    "exclusions": [
+      "/home/arthur/Code/agent_workflow/runs/eval-loop-confirmatory-1/calibration/exclusions-v1.json",
+      "/home/arthur/Code/agent_workflow/runs/eval-loop-confirmatory-1/calibration/exclusions-v2-corrected.json"
+    ],
+    "reports": [
+      "/home/arthur/Code/agent_workflow/runs/eval-loop-confirmatory-1/calibration/state-b1/calibration-report.derived-v2.json",
+      "/home/arthur/Code/agent_workflow/runs/eval-loop-confirmatory-1/calibration/state-b2/calibration-report.derived-v2.json"
+    ],
+    "rawReports": [
+      "/home/arthur/Code/agent_workflow/runs/eval-loop-confirmatory-1/calibration/state-b1/calibration-report.json",
+      "/home/arthur/Code/agent_workflow/runs/eval-loop-confirmatory-1/calibration/state-b2/calibration-report.json"
+    ],
+    "plan": "/home/arthur/Code/agent_workflow/runs/eval-loop-confirmatory-1/calibration/plan-v2.json"
+  },
+  "privateStorage": "/home/arthur/Code/agent_workflow/runs/eval-loop-confirmatory-1",
+  "overlapPools": [
+    "/home/arthur/Code/agent_workflow/runs/eval-loop-supply"
+  ]
+}

@@ -5,7 +5,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
-import { edit, HOLDOUT, makeHoldout, makeLoop, rmSync, sh, tempDir, testProtocol } from "./helpers.mjs";
+import { adoptableProtocol, edit, HOLDOUT, makeHoldout, makeLoop, rmSync, sh, tempDir, testProtocol } from "./helpers.mjs";
 import { Ledger } from "../src/util.mjs";
 import { gitlinks } from "../src/deploy.mjs";
 import { buildReport } from "../src/report.mjs";
@@ -139,7 +139,7 @@ test("a crash mid-evaluation resumes: dispatched-but-unrecorded units are reconc
     let calls = 0, crashAt = 25;
     const sim = simulatedBackend({ skill: (h) => skillOf(h), seed: "test" });
     const crashing = { simulated: true, run: async (input) => { if (++calls === crashAt) { const e = new Error("controller killed"); e.fatal = true; throw e; } return sim.run(input); } };
-    const { loop, fx } = makeLoop({ root, entries: [ENTRIES[0]], backend: crashing, protocol: testProtocol({ parallelism: 1 }) });
+    const { loop, fx } = makeLoop({ root, entries: [ENTRIES[0]], backend: crashing, protocol: adoptableProtocol({ parallelism: 1 }) });
     // Emulate a hard kill: the first evaluation throws out of the controller before the result is written.
     const original = loop.evaluate;
     const evalRunOne = loop.constructor.prototype;
@@ -153,7 +153,7 @@ test("a crash mid-evaluation resumes: dispatched-but-unrecorded units are reconc
       await loop.baselines();
     });
     const before = loop.evaluator.ledger.records().filter(r => r.type === "result").length;
-    const resumed = makeLoop({ root, entries: [ENTRIES[0]], fixtures: fx, protocol: testProtocol({ parallelism: 1 }) }).loop;
+    const resumed = makeLoop({ root, entries: [ENTRIES[0]], fixtures: fx, protocol: adoptableProtocol({ parallelism: 1 }) }).loop;
     const state = await resumed.runCycle();
     assert.equal(state.phase, "done");
     const records = resumed.evaluator.ledger.records();

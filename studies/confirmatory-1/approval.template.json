@@ -1,0 +1,7 @@
+{
+  "maxRequests": 4500,
+  "approvedBy": null,
+  "approvedAt": null,
+  "scope": { "batchSeal": "715eb3dbef4d51d2314fe7171571befa59bb24fc271cedf165552d8753d490ad", "purpose": "difficulty calibration of the stable harness (30 units = 10 tasks x 3 repeats); no holdout, no adoption" },
+  "note": "Fill approvedBy/approvedAt to approve; the runner refuses without them and never exceeds maxRequests."
+}

@@ -4,14 +4,14 @@
 // outside the sandbox and the sandboxed grader.
 import { cpSync, existsSync, readFileSync, readdirSync, rmSync, writeFileSync, copyFileSync, mkdtempSync } from "node:fs";
 import { tmpdir } from "node:os";
-import { join } from "node:path";
+import { dirname, join } from "node:path";
 import { execFileSync } from "node:child_process";
 import { ensureDir, textMap, treeDigest, walkFiles, sha256, redact } from "./util.mjs";
 import { BRIDGE, BRIDGE_PORT, LAUNCH, MOUNTS, PLACEHOLDER_KEY, completedModelCalls, harnessBinds, runSandboxed, startModelPath, wireEntries } from "./sandbox.mjs";
 import { gradeWorkspace } from "./grader.mjs";
 import { stageWorkspace } from "./datasets.mjs";
 import { makeRecord } from "./metrics.mjs";
-import { workspaceIntegrity, leakScan, sessionToolCalls } from "./integrity.mjs";
+import { workspaceIntegrity, leakScan, sessionToolCalls, strictTestIntegrity } from "./integrity.mjs";
 import { classifyFailure } from "./analysis.mjs";
 
 export const BOX = "/tmp/box";
@@ -77,7 +77,7 @@ export function agentBinds({ env, box, launch, socket, harness }) {
 }
 
 /** One Pi invocation in the sandbox; returns observations and leaves the workspace in place. */
-async function piAttempt({ harness, task, route, unit, env, box, evidence, sessionId, signalPids, control }) {
+async function piAttempt({ harness, task, route, unit, env, box, evidence, sessionId, signalPids, control, capture = false }) {
   const ws = join(box, "ws"), agent = join(box, "agent"), sessions = join(box, "sessions"), home = join(box, "home"), tmp = join(box, "tmp");
   rmSync(box, { recursive: true, force: true });
   for (const dir of [agent, sessions, home, tmp]) ensureDir(dir);
@@ -122,9 +122,18 @@ async function piAttempt({ harness, task, route, unit, env, box, evidence, sessi
   const stderr = existsSync(stderrPath) ? readFileSync(stderrPath, "utf8") : "";
   const events = lastAssistant(eventsText);
   const terminal = terminalOf({ run, events, wire, totals, gateRefusals: model.gateRefusals(), stderr });
-  const sessionText = readdirSync(sessions, { recursive: true }).filter(f => String(f).endsWith(".jsonl")).map(f => readFileSync(join(sessions, String(f)), "utf8")).join("\n");
+  // capture (protocol.capture.transcripts): every transcript of the attempt, the main session AND orche's sub-sessions and run
+  // records (`<agent dir>/orche/records/**`), is kept and leak-scanned; without it only the main session is scanned.
+  const transcripts = transcriptFiles(box, capture);
+  const sessionText = transcripts.filter(f => f.endsWith(".jsonl")).map(f => readFileSync(join(box, f), "utf8")).join("\n");
   rmSync(launch, { force: true });
-  return { ws, run, wallMs: Date.now() - started, totals, wire, completed: completedModelCalls(wire), events, terminal, sessionText, gateRefusals: model.gateRefusals(), stderrTail: stderr.slice(-2000) };
+  return { ws, box, transcripts, run, wallMs: Date.now() - started, totals, wire, completed: completedModelCalls(wire), events, terminal, sessionText, gateRefusals: model.gateRefusals(), stderrTail: stderr.slice(-2000) };
+}
+
+/** Transcript files of one attempt relative to its box: the main session directory and, with `all`, orche's records. */
+export function transcriptFiles(box, all) {
+  const roots = all ? ["sessions", "agent/orche/records"] : ["sessions"];
+  return roots.flatMap(root => existsSync(join(box, root)) ? readdirSync(join(box, root), { recursive: true }).map(f => `${root}/${String(f)}`).filter(f => /\.(jsonl|json)$/.test(f) && (all || f.endsWith(".jsonl"))) : []);
 }
 
 /**
@@ -143,7 +152,7 @@ export async function runUnit({ harness, task, repeat, split, context, protocol,
   for (let i = 0; i < attempts; i++) {
     const box = join(scratch, `box-${i}`);
     const sessionId = `el-${runId}-${i}`.replace(/[^A-Za-z0-9._-]/g, "-");
-    const tried = await piAttempt({ harness: harness.kind === "multi" ? { kind: "pure" } : harness, task, route, unit, env, box, evidence, sessionId, signalPids, control: i === 0 ? controlDir : join(controlDir, `try${i}`) });
+    const tried = await piAttempt({ harness: harness.kind === "multi" ? { kind: "pure" } : harness, task, route, unit, env, box, evidence, sessionId, signalPids, control: i === 0 ? controlDir : join(controlDir, `try${i}`), capture: protocol.capture?.transcripts === true });
     tries.push(tried);
     if (harness.kind !== "multi") { chosen = tried; break; }
     // Independent-attempt baseline: the first attempt whose VISIBLE tests pass is submitted (hidden tests are never consulted).
@@ -156,7 +165,19 @@ export async function runUnit({ harness, task, repeat, split, context, protocol,
   }
   chosen ??= tries.at(-1);
   const sumOf = (fn) => tries.reduce((s, t) => s + fn(t), 0);
-  const integrity = workspaceIntegrity(textMap(task.repo), textMap(chosen.ws), walkFiles(chosen.ws));
+  const initialFiles = textMap(task.repo), finalFiles = textMap(chosen.ws);
+  const integrity = workspaceIntegrity(initialFiles, finalFiles, walkFiles(chosen.ws));
+  if (protocol.integrity?.strictTestFiles) {
+    const strict = strictTestIntegrity(initialFiles, finalFiles);
+    integrity.legacyViolations = [...integrity.violations];
+    integrity.strictTestViolations = strict.violations;
+    integrity.violations = [...new Set([...integrity.violations, ...strict.violations])];
+    writeFileSync(join(evidence, "tests.json"), JSON.stringify(strict.hashes, null, 2));
+  }
+  if (protocol.capture?.transcripts) {
+    // Every attempt's transcripts (main session, orche workers/sub-workers/advisors, orche run records), secrets redacted.
+    tries.forEach((t, i) => { for (const f of t.transcripts) { const to = join(evidence, "transcripts", `try${i}`, f); ensureDir(dirname(to)); writeFileSync(to, redact(readFileSync(join(t.box, f), "utf8"), [env.keyOverride].filter(Boolean))); } });
+  }
   const leaks = leakScan(chosen.sessionText, chosen.events);
   integrity.leakHits = leaks;
   let grade = { hiddenPass: false };

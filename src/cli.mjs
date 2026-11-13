@@ -10,10 +10,10 @@ import { HaltedError } from "./loop.mjs";
 import { StateIntegrityError } from "./protocol.mjs";
 import { acquireLock, LockBusyError, readJson, sleep } from "./util.mjs";
 
-export const RUN_MODES = ["once", "resume", "daemon", "rollback", "verify-stable", "ablation"];
+export const RUN_MODES = ["once", "resume", "daemon", "rollback", "verify-stable", "confirm-adoption", "ablation"];
 export const READ_MODES = ["status", "report", "doctor", "selftest", "preflight"];
 export const USAGE = [
-  "usage: eval-loop --once|--resume|--daemon [--max-cycles N]|--rollback [--reason R]|--verify-stable --tasks DIR|--ablation",
+  "usage: eval-loop --once|--resume|--daemon [--max-cycles N]|--rollback [--reason R]|--verify-stable --tasks DIR|--confirm-adoption|--ablation",
   "                 [--state DIR] [--protocol FILE] [--strategy pareto|greedy] [--require-state]",
   "       eval-loop --status [--summary]|--report|--doctor|--selftest [--state DIR]",
   "       eval-loop --preflight [--state DIR] [--protocol FILE]   (model-free holdout eligibility; exit 0 ok, 2 blocked)",
@@ -21,7 +21,7 @@ export const USAGE = [
 
 const OPTIONS = /** @type {const} */ ({
   once: { type: "boolean" }, resume: { type: "boolean" }, daemon: { type: "boolean" }, report: { type: "boolean" }, status: { type: "boolean" }, summary: { type: "boolean" },
-  doctor: { type: "boolean" }, rollback: { type: "boolean" }, reason: { type: "string" }, "verify-stable": { type: "boolean" }, tasks: { type: "string" }, selftest: { type: "boolean" },
+  doctor: { type: "boolean" }, rollback: { type: "boolean" }, reason: { type: "string" }, "verify-stable": { type: "boolean" }, "confirm-adoption": { type: "boolean" }, tasks: { type: "string" }, selftest: { type: "boolean" },
   ablation: { type: "boolean" }, state: { type: "string" }, protocol: { type: "string" }, strategy: { type: "string" }, "max-cycles": { type: "string" },
   "require-state": { type: "boolean" }, preflight: { type: "boolean" }, help: { type: "boolean", short: "h" },
 });
@@ -44,7 +44,7 @@ export function preflight(stateDir, { mode, requireState = false }) {
   if (parent) return { stop: outcomeRecord("usage", { stateDir, detail: `${stateDir} is a trajectory of the ablation ${parent}: run --ablation --state ${parent}` }) };
   const info = /** @type {any} */ (mode === "ablation" ? inspectAblation(stateDir) : inspectState(stateDir));
   if (info.health === "missing" || info.health === "corrupt") return { stop: outcomeRecord("state_error", { stateDir, health: info.health, detail: info.detail, ...(info.integrity ? { integrity: info.integrity } : {}) }) };
-  if (info.health === "fresh" && (requireState || mode === "verify-stable")) return { stop: outcomeRecord("state_error", { stateDir, health: "fresh", detail: requireState ? "no loop state and --require-state: refusing to initialize a new loop" : "--verify-stable needs an existing loop state" }) };
+  if (info.health === "fresh" && (requireState || mode === "verify-stable" || mode === "confirm-adoption")) return { stop: outcomeRecord("state_error", { stateDir, health: "fresh", detail: requireState ? "no loop state and --require-state: refusing to initialize a new loop" : `--${mode} needs an existing loop state` }) };
   const halted = mode === "ablation" ? info.halted?.reason : info.state?.halted;
   if (halted) return { stop: outcomeRecord("halted", { stateDir, state: info.state, detail: mode === "ablation" ? `trajectory ${info.halted.arm} is halted` : undefined }) };
   return { info };
@@ -148,7 +148,7 @@ export async function main(argv) {
   if (values.selftest) { const { selftest } = await import("./selftest.mjs"); const r = await selftest({ log: line => process.stderr.write(`[selftest] ${line}\n`) }); print(r.summary); return r.ok ? 0 : 1; }
 
   // ---- lock-taking modes
-  const mode = values.rollback ? "rollback" : values["verify-stable"] ? "verify-stable" : values.ablation ? "ablation" : values.daemon ? "daemon" : values.once ? "once" : "resume";
+  const mode = values.rollback ? "rollback" : values["verify-stable"] ? "verify-stable" : values["confirm-adoption"] ? "confirm-adoption" : values.ablation ? "ablation" : values.daemon ? "daemon" : values.once ? "once" : "resume";
   const usage = (detail) => { process.stderr.write(`${detail}\n${USAGE}\n`); emit(outcomeRecord("usage", { stateDir, detail })); return EXIT.usage; };
   const strategy = values.strategy ?? "pareto";
   if (strategy !== "pareto" && strategy !== "greedy") return usage(`--strategy must be pareto or greedy (got ${strategy})`);
@@ -178,7 +178,7 @@ export async function main(argv) {
     const { stopProxies } = await import("./sandbox.mjs");
     const { writeReport } = await import("./report.mjs");
     stopProxiesFn = () => stopProxies();
-    reportFn = () => { if (loop) writeReport(mode === "ablation" ? join(stateDir, "A") : stateDir); };
+    reportFn = () => { if (loop && !loop.readOnlyRefusal) writeReport(mode === "ablation" ? join(stateDir, "A") : stateDir); };
     const owned = preflight(stateDir, { mode, requireState });
     if (owned.stop) { emit(owned.stop); return owned.stop.exitCode; }
     const fresh = owned.info?.health === "fresh";
@@ -201,6 +201,18 @@ export async function main(argv) {
       emit(outcomeRecord("ok", { stateDir, state: loop.state, mode, verdict: result.verdict }));
       return 0;
     }
+    if (mode === "confirm-adoption") {
+      // Independent post-adoption confirmation on a separate sealed batch (src/loop.mjs confirmAdoption). BLOCKED = dormant
+      // (prerequisites missing; nothing consumed) -> exit 2; a decided verdict -> ok.
+      loop = realLoop({ stateDir, protocolPath: values.protocol, pids });
+      if (!(await loop.prepare())) { emit(outcomeRecord("blocked", { stateDir, state: loop.state, mode })); return EXIT.blocked; }
+      const result = await loop.confirmAdoption();
+      print(result);
+      if (loop.state.halted) { emit(outcomeRecord("halted", { stateDir, state: loop.state, mode })); return EXIT.halted; }
+      const kind = result.verdict === "BLOCKED" ? "blocked" : result.verdict === "IN_PROGRESS" ? "incomplete" : "ok";
+      emit(outcomeRecord(kind, { stateDir, state: loop.state, mode, verdict: result.verdict }));
+      return EXIT[kind];
+    }
     if (mode === "ablation") {
       const { runAblation } = await import("./ablation.mjs");
       const r = await runAblation({ stateDir, protocolPath: values.protocol, pids });
@@ -215,7 +227,7 @@ export async function main(argv) {
     for (let cycle = 0; cycle < maxCycles; cycle++) {
       const result = await driveOnce(loop);
       if (result.kind === "idle" && mode === "daemon") { await sleep(loop.protocol.watchdog.daemonPollMs); cycle--; continue; }
-      if (result.kind !== "idle") { try { writeReport(stateDir); } catch (error) { process.stderr.write(`[eval-loop] report: ${error.message}\n`); } }
+      if (result.kind !== "idle" && !loop.readOnlyRefusal) { try { writeReport(stateDir); } catch (error) { process.stderr.write(`[eval-loop] report: ${error.message}\n`); } }
       emit(outcomeRecord(result.kind, { stateDir, state: loop.state, mode, note: result.note, initialized: fresh && cycle === 0 ? true : undefined }));
       if (mode !== "daemon" || result.kind !== "cycle_done") return EXIT[result.kind];
     }

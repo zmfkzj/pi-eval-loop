@@ -1,0 +1,7031 @@
+{
+ "schema": "pi-eval-loop/confirmatory-1-evidence@1",
+ "generatedAt": "2026-11-07T01:09:02.089Z",
+ "sources": {
+  "pilot": {
+   "path": "/home/arthur/Code/oh-my-pi-extensions/pi-eval-loop/records/ctrl-ablation-1/discovery/runs.jsonl",
+   "sha256": "fa847b1642cd1732a902663db1beef5f72b23c5e40f63e98a74b4f85097635df",
+   "snapshotUnits": 486,
+   "arms": {
+    "S": {
+     "tasks": {
+      "t:e29f56a1dd8b": {
+       "family": "f:c4ca0312bfe2",
+       "hard": false,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "integrity",
+        "integrity",
+        "integrity"
+       ]
+      },
+      "t:02e1c8ded08d": {
+       "family": "f:99047530b1c6",
+       "hard": true,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "integrity",
+        "integrity",
+        "integrity"
+       ]
+      },
+      "t:0552d14ed317": {
+       "family": "f:c4ca0312bfe2",
+       "hard": false,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "integrity",
+        "integrity",
+        "integrity"
+       ]
+      },
+      "t:2f4b8aa9da70": {
+       "family": "f:d3ec1e9b7e80",
+       "hard": true,
+       "outcomes": [
+        1,
+        0,
+        0
+       ],
+       "classes": [
+        "success",
+        "integrity",
+        "integrity"
+       ]
+      },
+      "t:6377da045f17": {
+       "family": "f:c33e8c73ff59",
+       "hard": false,
+       "outcomes": [
+        1,
+        1,
+        1
+       ],
+       "classes": [
+        "success",
+        "success",
+        "success"
+       ]
+      },
+      "t:7345585d9102": {
+       "family": "f:7431d529d40b",
+       "hard": true,
+       "outcomes": [
+        0,
+        1,
+        0
+       ],
+       "classes": [
+        "failure",
+        "success",
+        "integrity"
+       ]
+      },
+      "t:3e9c439b6183": {
+       "family": "f:c4ca0312bfe2",
+       "hard": false,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "integrity",
+        "integrity",
+        "integrity"
+       ]
+      },
+      "t:2da4e595d296": {
+       "family": "f:50088264c890",
+       "hard": true,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "integrity",
+        "integrity",
+        "integrity"
+       ]
+      },
+      "t:df64d7772f70": {
+       "family": "f:bbe6f694561c",
+       "hard": true,
+       "outcomes": [
+        1,
+        1,
+        1
+       ],
+       "classes": [
+        "success",
+        "success",
+        "success"
+       ]
+      },
+      "t:87e074b75729": {
+       "family": "f:4acba2a11ab0",
+       "hard": false,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "integrity",
+        "integrity",
+        "integrity"
+       ]
+      },
+      "t:8deaea0af3b5": {
+       "family": "f:c33e8c73ff59",
+       "hard": false,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "integrity",
+        "integrity",
+        "integrity"
+       ]
+      },
+      "t:a653adecdec5": {
+       "family": "f:9426a6f18620",
+       "hard": true,
+       "outcomes": [
+        0,
+        1,
+        0
+       ],
+       "classes": [
+        "failure",
+        "success",
+        "failure"
+       ]
+      },
+      "t:3d8e84ec17ef": {
+       "family": "f:9426a6f18620",
+       "hard": true,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "failure",
+        "failure"
+       ]
+      },
+      "t:547661936d92": {
+       "family": "f:1645ced1ddd2",
+       "hard": false,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "integrity",
+        "integrity",
+        "integrity"
+       ]
+      },
+      "t:74450cfed5cc": {
+       "family": "f:4acba2a11ab0",
+       "hard": false,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "integrity",
+        "integrity",
+        "integrity"
+       ]
+      },
+      "t:5be4f3425e5f": {
+       "family": "f:c33e8c73ff59",
+       "hard": false,
+       "outcomes": [
+        1,
+        1,
+        1
+       ],
+       "classes": [
+        "success",
+        "success",
+        "success"
+       ]
+      },
+      "t:6737d6fce2b5": {
+       "family": "f:4acba2a11ab0",
+       "hard": false,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "integrity",
+        "integrity",
+        "integrity"
+       ]
+      },
+      "t:57e717b7fb08": {
+       "family": "f:c4ca0312bfe2",
+       "hard": false,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "integrity",
+        "integrity",
+        "integrity"
+       ]
+      },
+      "t:da335aed1e1b": {
+       "family": "f:4acba2a11ab0",
+       "hard": false,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "integrity",
+        "integrity",
+        "integrity"
+       ]
+      },
+      "t:5b546ebcf338": {
+       "family": "f:1a331ec8c7c2",
+       "hard": true,
+       "outcomes": [
+        1,
+        1,
+        0
+       ],
+       "classes": [
+        "success",
+        "success",
+        "failure"
+       ]
+      },
+      "t:5429281d8856": {
+       "family": "f:c33e8c73ff59",
+       "hard": false,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "integrity",
+        "integrity",
+        "integrity"
+       ]
+      },
+      "t:9356ecd4865e": {
+       "family": "f:9426a6f18620",
+       "hard": true,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "failure",
+        "failure"
+       ]
+      },
+      "t:3c0d36c28308": {
+       "family": "f:4acba2a11ab0",
+       "hard": false,
+       "outcomes": [
+        1,
+        1,
+        1
+       ],
+       "classes": [
+        "success",
+        "success",
+        "success"
+       ]
+      },
+      "t:54ac2c13047a": {
+       "family": "f:c9e7756aa11c",
+       "hard": true,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "integrity",
+        "integrity"
+       ]
+      },
+      "t:bb8087947a3c": {
+       "family": "f:c4ca0312bfe2",
+       "hard": false,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "integrity",
+        "integrity",
+        "integrity"
+       ]
+      },
+      "t:53e8071f7523": {
+       "family": "f:55e9eb2d7a05",
+       "hard": true,
+       "outcomes": [
+        0,
+        1,
+        0
+       ],
+       "classes": [
+        "integrity",
+        "success",
+        "integrity"
+       ]
+      },
+      "t:853d3fef85a3": {
+       "family": "f:c33e8c73ff59",
+       "hard": false,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "integrity",
+        "integrity",
+        "integrity"
+       ]
+      }
+     },
+     "units": 81,
+     "success": 18,
+     "classes": {
+      "integrity": 52,
+      "success": 18,
+      "failure": 11
+     },
+     "integrityRuns": 52,
+     "requestsPerUnit": 24.123456790123456
+    },
+    "B0": {
+     "tasks": {
+      "t:e29f56a1dd8b": {
+       "family": "f:c4ca0312bfe2",
+       "hard": false,
+       "outcomes": [
+        1,
+        1,
+        1
+       ],
+       "classes": [
+        "success",
+        "success",
+        "success"
+       ]
+      },
+      "t:02e1c8ded08d": {
+       "family": "f:99047530b1c6",
+       "hard": true,
+       "outcomes": [
+        0,
+        1,
+        1
+       ],
+       "classes": [
+        "failure",
+        "success",
+        "success"
+       ]
+      },
+      "t:0552d14ed317": {
+       "family": "f:c4ca0312bfe2",
+       "hard": false,
+       "outcomes": [
+        0,
+        1,
+        0
+       ],
+       "classes": [
+        "integrity",
+        "success",
+        "integrity"
+       ]
+      },
+      "t:2f4b8aa9da70": {
+       "family": "f:d3ec1e9b7e80",
+       "hard": true,
+       "outcomes": [
+        1,
+        1,
+        0
+       ],
+       "classes": [
+        "success",
+        "success",
+        "integrity"
+       ]
+      },
+      "t:6377da045f17": {
+       "family": "f:c33e8c73ff59",
+       "hard": false,
+       "outcomes": [
+        1,
+        1,
+        1
+       ],
+       "classes": [
+        "success",
+        "success",
+        "success"
+       ]
+      },
+      "t:7345585d9102": {
+       "family": "f:7431d529d40b",
+       "hard": true,
+       "outcomes": [
+        0,
+        1,
+        1
+       ],
+       "classes": [
+        "failure",
+        "success",
+        "success"
+       ]
+      },
+      "t:3e9c439b6183": {
+       "family": "f:c4ca0312bfe2",
+       "hard": false,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "integrity",
+        "integrity",
+        "integrity"
+       ]
+      },
+      "t:2da4e595d296": {
+       "family": "f:50088264c890",
+       "hard": true,
+       "outcomes": [
+        1,
+        1,
+        1
+       ],
+       "classes": [
+        "success",
+        "success",
+        "success"
+       ]
+      },
+      "t:df64d7772f70": {
+       "family": "f:bbe6f694561c",
+       "hard": true,
+       "outcomes": [
+        1,
+        1,
+        1
+       ],
+       "classes": [
+        "success",
+        "success",
+        "success"
+       ]
+      },
+      "t:87e074b75729": {
+       "family": "f:4acba2a11ab0",
+       "hard": false,
+       "outcomes": [
+        1,
+        1,
+        1
+       ],
+       "classes": [
+        "success",
+        "success",
+        "success"
+       ]
+      },
+      "t:8deaea0af3b5": {
+       "family": "f:c33e8c73ff59",
+       "hard": false,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "integrity",
+        "integrity",
+        "integrity"
+       ]
+      },
+      "t:3d8e84ec17ef": {
+       "family": "f:9426a6f18620",
+       "hard": true,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "failure",
+        "failure"
+       ]
+      },
+      "t:a653adecdec5": {
+       "family": "f:9426a6f18620",
+       "hard": true,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "failure",
+        "failure"
+       ]
+      },
+      "t:547661936d92": {
+       "family": "f:1645ced1ddd2",
+       "hard": false,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "integrity",
+        "integrity",
+        "integrity"
+       ]
+      },
+      "t:74450cfed5cc": {
+       "family": "f:4acba2a11ab0",
+       "hard": false,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "integrity",
+        "integrity",
+        "integrity"
+       ]
+      },
+      "t:5be4f3425e5f": {
+       "family": "f:c33e8c73ff59",
+       "hard": false,
+       "outcomes": [
+        1,
+        1,
+        1
+       ],
+       "classes": [
+        "success",
+        "success",
+        "success"
+       ]
+      },
+      "t:6737d6fce2b5": {
+       "family": "f:4acba2a11ab0",
+       "hard": false,
+       "outcomes": [
+        1,
+        1,
+        1
+       ],
+       "classes": [
+        "success",
+        "success",
+        "success"
+       ]
+      },
+      "t:57e717b7fb08": {
+       "family": "f:c4ca0312bfe2",
+       "hard": false,
+       "outcomes": [
+        1,
+        1,
+        1
+       ],
+       "classes": [
+        "success",
+        "success",
+        "success"
+       ]
+      },
+      "t:da335aed1e1b": {
+       "family": "f:4acba2a11ab0",
+       "hard": false,
+       "outcomes": [
+        1,
+        1,
+        1
+       ],
+       "classes": [
+        "success",
+        "success",
+        "success"
+       ]
+      },
+      "t:5b546ebcf338": {
+       "family": "f:1a331ec8c7c2",
+       "hard": true,
+       "outcomes": [
+        1,
+        1,
+        0
+       ],
+       "classes": [
+        "success",
+        "success",
+        "failure"
+       ]
+      },
+      "t:5429281d8856": {
+       "family": "f:c33e8c73ff59",
+       "hard": false,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "integrity",
+        "integrity",
+        "integrity"
+       ]
+      },
+      "t:9356ecd4865e": {
+       "family": "f:9426a6f18620",
+       "hard": true,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "failure",
+        "failure"
+       ]
+      },
+      "t:3c0d36c28308": {
+       "family": "f:4acba2a11ab0",
+       "hard": false,
+       "outcomes": [
+        1,
+        1,
+        1
+       ],
+       "classes": [
+        "success",
+        "success",
+        "success"
+       ]
+      },
+      "t:54ac2c13047a": {
+       "family": "f:c9e7756aa11c",
+       "hard": true,
+       "outcomes": [
+        0,
+        0,
+        1
+       ],
+       "classes": [
+        "failure",
+        "failure",
+        "success"
+       ]
+      },
+      "t:bb8087947a3c": {
+       "family": "f:c4ca0312bfe2",
+       "hard": false,
+       "outcomes": [
+        1,
+        1,
+        1
+       ],
+       "classes": [
+        "success",
+        "success",
+        "success"
+       ]
+      },
+      "t:53e8071f7523": {
+       "family": "f:55e9eb2d7a05",
+       "hard": true,
+       "outcomes": [
+        0,
+        0,
+        1
+       ],
+       "classes": [
+        "failure",
+        "integrity",
+        "success"
+       ]
+      },
+      "t:853d3fef85a3": {
+       "family": "f:c33e8c73ff59",
+       "hard": false,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "integrity",
+        "integrity",
+        "integrity"
+       ]
+      }
+     },
+     "units": 81,
+     "success": 44,
+     "classes": {
+      "success": 44,
+      "failure": 15,
+      "integrity": 22
+     },
+     "integrityRuns": 22,
+     "requestsPerUnit": 9.246913580246913
+    },
+    "P1": {
+     "tasks": {
+      "t:e29f56a1dd8b": {
+       "family": "f:c4ca0312bfe2",
+       "hard": false,
+       "outcomes": [
+        1,
+        1,
+        1
+       ],
+       "classes": [
+        "success",
+        "success",
+        "success"
+       ]
+      },
+      "t:02e1c8ded08d": {
+       "family": "f:99047530b1c6",
+       "hard": true,
+       "outcomes": [
+        1,
+        1,
+        0
+       ],
+       "classes": [
+        "success",
+        "success",
+        "failure"
+       ]
+      },
+      "t:0552d14ed317": {
+       "family": "f:c4ca0312bfe2",
+       "hard": false,
+       "outcomes": [
+        1,
+        1,
+        1
+       ],
+       "classes": [
+        "success",
+        "success",
+        "success"
+       ]
+      },
+      "t:2f4b8aa9da70": {
+       "family": "f:d3ec1e9b7e80",
+       "hard": true,
+       "outcomes": [
+        1,
+        1,
+        1
+       ],
+       "classes": [
+        "success",
+        "success",
+        "success"
+       ]
+      },
+      "t:6377da045f17": {
+       "family": "f:c33e8c73ff59",
+       "hard": false,
+       "outcomes": [
+        1,
+        1,
+        1
+       ],
+       "classes": [
+        "success",
+        "success",
+        "success"
+       ]
+      },
+      "t:7345585d9102": {
+       "family": "f:7431d529d40b",
+       "hard": true,
+       "outcomes": [
+        1,
+        1,
+        1
+       ],
+       "classes": [
+        "success",
+        "success",
+        "success"
+       ]
+      },
+      "t:3e9c439b6183": {
+       "family": "f:c4ca0312bfe2",
+       "hard": false,
+       "outcomes": [
+        1,
+        1,
+        1
+       ],
+       "classes": [
+        "success",
+        "success",
+        "success"
+       ]
+      },
+      "t:2da4e595d296": {
+       "family": "f:50088264c890",
+       "hard": true,
+       "outcomes": [
+        1,
+        1,
+        1
+       ],
+       "classes": [
+        "success",
+        "success",
+        "success"
+       ]
+      },
+      "t:87e074b75729": {
+       "family": "f:4acba2a11ab0",
+       "hard": false,
+       "outcomes": [
+        1,
+        1,
+        0
+       ],
+       "classes": [
+        "success",
+        "success",
+        "integrity"
+       ]
+      },
+      "t:df64d7772f70": {
+       "family": "f:bbe6f694561c",
+       "hard": true,
+       "outcomes": [
+        1,
+        1,
+        1
+       ],
+       "classes": [
+        "success",
+        "success",
+        "success"
+       ]
+      },
+      "t:8deaea0af3b5": {
+       "family": "f:c33e8c73ff59",
+       "hard": false,
+       "outcomes": [
+        1,
+        1,
+        1
+       ],
+       "classes": [
+        "success",
+        "success",
+        "success"
+       ]
+      },
+      "t:3d8e84ec17ef": {
+       "family": "f:9426a6f18620",
+       "hard": true,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "failure",
+        "failure"
+       ]
+      },
+      "t:a653adecdec5": {
+       "family": "f:9426a6f18620",
+       "hard": true,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "failure",
+        "failure"
+       ]
+      },
+      "t:547661936d92": {
+       "family": "f:1645ced1ddd2",
+       "hard": false,
+       "outcomes": [
+        1,
+        1,
+        1
+       ],
+       "classes": [
+        "success",
+        "success",
+        "success"
+       ]
+      },
+      "t:74450cfed5cc": {
+       "family": "f:4acba2a11ab0",
+       "hard": false,
+       "outcomes": [
+        1,
+        0,
+        1
+       ],
+       "classes": [
+        "success",
+        "failure",
+        "success"
+       ]
+      },
+      "t:5be4f3425e5f": {
+       "family": "f:c33e8c73ff59",
+       "hard": false,
+       "outcomes": [
+        1,
+        1,
+        1
+       ],
+       "classes": [
+        "success",
+        "success",
+        "success"
+       ]
+      },
+      "t:6737d6fce2b5": {
+       "family": "f:4acba2a11ab0",
+       "hard": false,
+       "outcomes": [
+        1,
+        0,
+        1
+       ],
+       "classes": [
+        "success",
+        "integrity",
+        "success"
+       ]
+      },
+      "t:57e717b7fb08": {
+       "family": "f:c4ca0312bfe2",
+       "hard": false,
+       "outcomes": [
+        1,
+        1,
+        1
+       ],
+       "classes": [
+        "success",
+        "success",
+        "success"
+       ]
+      },
+      "t:da335aed1e1b": {
+       "family": "f:4acba2a11ab0",
+       "hard": false,
+       "outcomes": [
+        1,
+        1,
+        1
+       ],
+       "classes": [
+        "success",
+        "success",
+        "success"
+       ]
+      },
+      "t:5b546ebcf338": {
+       "family": "f:1a331ec8c7c2",
+       "hard": true,
+       "outcomes": [
+        0,
+        0,
+        1
+       ],
+       "classes": [
+        "failure",
+        "failure",
+        "success"
+       ]
+      },
+      "t:5429281d8856": {
+       "family": "f:c33e8c73ff59",
+       "hard": false,
+       "outcomes": [
+        0,
+        1,
+        1
+       ],
+       "classes": [
+        "integrity",
+        "success",
+        "success"
+       ]
+      },
+      "t:9356ecd4865e": {
+       "family": "f:9426a6f18620",
+       "hard": true,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "failure",
+        "failure"
+       ]
+      },
+      "t:3c0d36c28308": {
+       "family": "f:4acba2a11ab0",
+       "hard": false,
+       "outcomes": [
+        1,
+        1,
+        1
+       ],
+       "classes": [
+        "success",
+        "success",
+        "success"
+       ]
+      },
+      "t:54ac2c13047a": {
+       "family": "f:c9e7756aa11c",
+       "hard": true,
+       "outcomes": [
+        1,
+        1,
+        1
+       ],
+       "classes": [
+        "success",
+        "success",
+        "success"
+       ]
+      },
+      "t:bb8087947a3c": {
+       "family": "f:c4ca0312bfe2",
+       "hard": false,
+       "outcomes": [
+        1,
+        1,
+        1
+       ],
+       "classes": [
+        "success",
+        "success",
+        "success"
+       ]
+      },
+      "t:53e8071f7523": {
+       "family": "f:55e9eb2d7a05",
+       "hard": true,
+       "outcomes": [
+        1,
+        1,
+        1
+       ],
+       "classes": [
+        "success",
+        "success",
+        "success"
+       ]
+      },
+      "t:853d3fef85a3": {
+       "family": "f:c33e8c73ff59",
+       "hard": false,
+       "outcomes": [
+        0,
+        1,
+        0
+       ],
+       "classes": [
+        "failure",
+        "success",
+        "integrity"
+       ]
+      }
+     },
+     "units": 81,
+     "success": 63,
+     "classes": {
+      "success": 63,
+      "integrity": 4,
+      "failure": 14
+     },
+     "integrityRuns": 4,
+     "requestsPerUnit": 23.037037037037038
+    },
+    "P3": {
+     "tasks": {
+      "t:e29f56a1dd8b": {
+       "family": "f:c4ca0312bfe2",
+       "hard": false,
+       "outcomes": [
+        1,
+        1,
+        1
+       ],
+       "classes": [
+        "success",
+        "success",
+        "success"
+       ]
+      },
+      "t:02e1c8ded08d": {
+       "family": "f:99047530b1c6",
+       "hard": true,
+       "outcomes": [
+        1,
+        1,
+        1
+       ],
+       "classes": [
+        "success",
+        "success",
+        "success"
+       ]
+      },
+      "t:0552d14ed317": {
+       "family": "f:c4ca0312bfe2",
+       "hard": false,
+       "outcomes": [
+        1,
+        1,
+        1
+       ],
+       "classes": [
+        "success",
+        "success",
+        "success"
+       ]
+      },
+      "t:2f4b8aa9da70": {
+       "family": "f:d3ec1e9b7e80",
+       "hard": true,
+       "outcomes": [
+        1,
+        1,
+        1
+       ],
+       "classes": [
+        "success",
+        "success",
+        "success"
+       ]
+      },
+      "t:6377da045f17": {
+       "family": "f:c33e8c73ff59",
+       "hard": false,
+       "outcomes": [
+        1,
+        1,
+        1
+       ],
+       "classes": [
+        "success",
+        "success",
+        "success"
+       ]
+      },
+      "t:7345585d9102": {
+       "family": "f:7431d529d40b",
+       "hard": true,
+       "outcomes": [
+        1,
+        1,
+        0
+       ],
+       "classes": [
+        "success",
+        "success",
+        "failure"
+       ]
+      },
+      "t:3e9c439b6183": {
+       "family": "f:c4ca0312bfe2",
+       "hard": false,
+       "outcomes": [
+        1,
+        1,
+        1
+       ],
+       "classes": [
+        "success",
+        "success",
+        "success"
+       ]
+      },
+      "t:2da4e595d296": {
+       "family": "f:50088264c890",
+       "hard": true,
+       "outcomes": [
+        1,
+        1,
+        1
+       ],
+       "classes": [
+        "success",
+        "success",
+        "success"
+       ]
+      },
+      "t:df64d7772f70": {
+       "family": "f:bbe6f694561c",
+       "hard": true,
+       "outcomes": [
+        1,
+        1,
+        1
+       ],
+       "classes": [
+        "success",
+        "success",
+        "success"
+       ]
+      },
+      "t:87e074b75729": {
+       "family": "f:4acba2a11ab0",
+       "hard": false,
+       "outcomes": [
+        1,
+        1,
+        1
+       ],
+       "classes": [
+        "success",
+        "success",
+        "success"
+       ]
+      },
+      "t:8deaea0af3b5": {
+       "family": "f:c33e8c73ff59",
+       "hard": false,
+       "outcomes": [
+        1,
+        1,
+        1
+       ],
+       "classes": [
+        "success",
+        "success",
+        "success"
+       ]
+      },
+      "t:3d8e84ec17ef": {
+       "family": "f:9426a6f18620",
+       "hard": true,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "failure",
+        "failure"
+       ]
+      },
+      "t:a653adecdec5": {
+       "family": "f:9426a6f18620",
+       "hard": true,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "failure",
+        "failure"
+       ]
+      },
+      "t:547661936d92": {
+       "family": "f:1645ced1ddd2",
+       "hard": false,
+       "outcomes": [
+        1,
+        1,
+        1
+       ],
+       "classes": [
+        "success",
+        "success",
+        "success"
+       ]
+      },
+      "t:74450cfed5cc": {
+       "family": "f:4acba2a11ab0",
+       "hard": false,
+       "outcomes": [
+        1,
+        1,
+        1
+       ],
+       "classes": [
+        "success",
+        "success",
+        "success"
+       ]
+      },
+      "t:5be4f3425e5f": {
+       "family": "f:c33e8c73ff59",
+       "hard": false,
+       "outcomes": [
+        1,
+        1,
+        1
+       ],
+       "classes": [
+        "success",
+        "success",
+        "success"
+       ]
+      },
+      "t:6737d6fce2b5": {
+       "family": "f:4acba2a11ab0",
+       "hard": false,
+       "outcomes": [
+        1,
+        1,
+        1
+       ],
+       "classes": [
+        "success",
+        "success",
+        "success"
+       ]
+      },
+      "t:57e717b7fb08": {
+       "family": "f:c4ca0312bfe2",
+       "hard": false,
+       "outcomes": [
+        1,
+        1,
+        1
+       ],
+       "classes": [
+        "success",
+        "success",
+        "success"
+       ]
+      },
+      "t:da335aed1e1b": {
+       "family": "f:4acba2a11ab0",
+       "hard": false,
+       "outcomes": [
+        1,
+        1,
+        1
+       ],
+       "classes": [
+        "success",
+        "success",
+        "success"
+       ]
+      },
+      "t:5b546ebcf338": {
+       "family": "f:1a331ec8c7c2",
+       "hard": true,
+       "outcomes": [
+        1,
+        1,
+        1
+       ],
+       "classes": [
+        "success",
+        "success",
+        "success"
+       ]
+      },
+      "t:5429281d8856": {
+       "family": "f:c33e8c73ff59",
+       "hard": false,
+       "outcomes": [
+        1,
+        1,
+        1
+       ],
+       "classes": [
+        "success",
+        "success",
+        "success"
+       ]
+      },
+      "t:9356ecd4865e": {
+       "family": "f:9426a6f18620",
+       "hard": true,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "failure",
+        "failure"
+       ]
+      },
+      "t:3c0d36c28308": {
+       "family": "f:4acba2a11ab0",
+       "hard": false,
+       "outcomes": [
+        1,
+        1,
+        1
+       ],
+       "classes": [
+        "success",
+        "success",
+        "success"
+       ]
+      },
+      "t:54ac2c13047a": {
+       "family": "f:c9e7756aa11c",
+       "hard": true,
+       "outcomes": [
+        1,
+        1,
+        1
+       ],
+       "classes": [
+        "success",
+        "success",
+        "success"
+       ]
+      },
+      "t:bb8087947a3c": {
+       "family": "f:c4ca0312bfe2",
+       "hard": false,
+       "outcomes": [
+        1,
+        1,
+        1
+       ],
+       "classes": [
+        "success",
+        "success",
+        "success"
+       ]
+      },
+      "t:53e8071f7523": {
+       "family": "f:55e9eb2d7a05",
+       "hard": true,
+       "outcomes": [
+        1,
+        1,
+        1
+       ],
+       "classes": [
+        "success",
+        "success",
+        "success"
+       ]
+      },
+      "t:853d3fef85a3": {
+       "family": "f:c33e8c73ff59",
+       "hard": false,
+       "outcomes": [
+        0,
+        0,
+        1
+       ],
+       "classes": [
+        "failure",
+        "failure",
+        "success"
+       ]
+      }
+     },
+     "units": 81,
+     "success": 69,
+     "classes": {
+      "success": 69,
+      "failure": 12
+     },
+     "integrityRuns": 0,
+     "requestsPerUnit": 8.925925925925926
+    },
+    "D1": {
+     "tasks": {
+      "t:e29f56a1dd8b": {
+       "family": "f:c4ca0312bfe2",
+       "hard": false,
+       "outcomes": [
+        1,
+        1,
+        1
+       ],
+       "classes": [
+        "success",
+        "success",
+        "success"
+       ]
+      },
+      "t:02e1c8ded08d": {
+       "family": "f:99047530b1c6",
+       "hard": true,
+       "outcomes": [
+        1,
+        1,
+        0
+       ],
+       "classes": [
+        "success",
+        "success",
+        "integrity"
+       ]
+      },
+      "t:0552d14ed317": {
+       "family": "f:c4ca0312bfe2",
+       "hard": false,
+       "outcomes": [
+        1,
+        1,
+        1
+       ],
+       "classes": [
+        "success",
+        "success",
+        "success"
+       ]
+      },
+      "t:2f4b8aa9da70": {
+       "family": "f:d3ec1e9b7e80",
+       "hard": true,
+       "outcomes": [
+        1,
+        1,
+        1
+       ],
+       "classes": [
+        "success",
+        "success",
+        "success"
+       ]
+      },
+      "t:6377da045f17": {
+       "family": "f:c33e8c73ff59",
+       "hard": false,
+       "outcomes": [
+        1,
+        1,
+        1
+       ],
+       "classes": [
+        "success",
+        "success",
+        "success"
+       ]
+      },
+      "t:7345585d9102": {
+       "family": "f:7431d529d40b",
+       "hard": true,
+       "outcomes": [
+        1,
+        0,
+        1
+       ],
+       "classes": [
+        "success",
+        "failure",
+        "success"
+       ]
+      },
+      "t:3e9c439b6183": {
+       "family": "f:c4ca0312bfe2",
+       "hard": false,
+       "outcomes": [
+        1,
+        0,
+        0
+       ],
+       "classes": [
+        "success",
+        "integrity",
+        "integrity"
+       ]
+      },
+      "t:2da4e595d296": {
+       "family": "f:50088264c890",
+       "hard": true,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "integrity",
+        "integrity",
+        "integrity"
+       ]
+      },
+      "t:df64d7772f70": {
+       "family": "f:bbe6f694561c",
+       "hard": true,
+       "outcomes": [
+        1,
+        1,
+        1
+       ],
+       "classes": [
+        "success",
+        "success",
+        "success"
+       ]
+      },
+      "t:87e074b75729": {
+       "family": "f:4acba2a11ab0",
+       "hard": false,
+       "outcomes": [
+        1,
+        1,
+        1
+       ],
+       "classes": [
+        "success",
+        "success",
+        "success"
+       ]
+      },
+      "t:8deaea0af3b5": {
+       "family": "f:c33e8c73ff59",
+       "hard": false,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "integrity",
+        "integrity",
+        "integrity"
+       ]
+      },
+      "t:3d8e84ec17ef": {
+       "family": "f:9426a6f18620",
+       "hard": true,
+       "outcomes": [
+        0,
+        0,
+        1
+       ],
+       "classes": [
+        "failure",
+        "failure",
+        "success"
+       ]
+      },
+      "t:a653adecdec5": {
+       "family": "f:9426a6f18620",
+       "hard": true,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "failure",
+        "failure"
+       ]
+      },
+      "t:547661936d92": {
+       "family": "f:1645ced1ddd2",
+       "hard": false,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "integrity",
+        "integrity",
+        "integrity"
+       ]
+      },
+      "t:74450cfed5cc": {
+       "family": "f:4acba2a11ab0",
+       "hard": false,
+       "outcomes": [
+        1,
+        1,
+        0
+       ],
+       "classes": [
+        "success",
+        "success",
+        "integrity"
+       ]
+      },
+      "t:5be4f3425e5f": {
+       "family": "f:c33e8c73ff59",
+       "hard": false,
+       "outcomes": [
+        1,
+        1,
+        1
+       ],
+       "classes": [
+        "success",
+        "success",
+        "success"
+       ]
+      },
+      "t:6737d6fce2b5": {
+       "family": "f:4acba2a11ab0",
+       "hard": false,
+       "outcomes": [
+        1,
+        1,
+        1
+       ],
+       "classes": [
+        "success",
+        "success",
+        "success"
+       ]
+      },
+      "t:57e717b7fb08": {
+       "family": "f:c4ca0312bfe2",
+       "hard": false,
+       "outcomes": [
+        1,
+        1,
+        1
+       ],
+       "classes": [
+        "success",
+        "success",
+        "success"
+       ]
+      },
+      "t:da335aed1e1b": {
+       "family": "f:4acba2a11ab0",
+       "hard": false,
+       "outcomes": [
+        1,
+        1,
+        1
+       ],
+       "classes": [
+        "success",
+        "success",
+        "success"
+       ]
+      },
+      "t:5b546ebcf338": {
+       "family": "f:1a331ec8c7c2",
+       "hard": true,
+       "outcomes": [
+        1,
+        1,
+        1
+       ],
+       "classes": [
+        "success",
+        "success",
+        "success"
+       ]
+      },
+      "t:5429281d8856": {
+       "family": "f:c33e8c73ff59",
+       "hard": false,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "integrity",
+        "integrity",
+        "integrity"
+       ]
+      },
+      "t:9356ecd4865e": {
+       "family": "f:9426a6f18620",
+       "hard": true,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "failure",
+        "failure"
+       ]
+      },
+      "t:3c0d36c28308": {
+       "family": "f:4acba2a11ab0",
+       "hard": false,
+       "outcomes": [
+        1,
+        1,
+        1
+       ],
+       "classes": [
+        "success",
+        "success",
+        "success"
+       ]
+      },
+      "t:54ac2c13047a": {
+       "family": "f:c9e7756aa11c",
+       "hard": true,
+       "outcomes": [
+        0,
+        1,
+        0
+       ],
+       "classes": [
+        "integrity",
+        "success",
+        "integrity"
+       ]
+      },
+      "t:bb8087947a3c": {
+       "family": "f:c4ca0312bfe2",
+       "hard": false,
+       "outcomes": [
+        1,
+        1,
+        0
+       ],
+       "classes": [
+        "success",
+        "success",
+        "failure"
+       ]
+      },
+      "t:53e8071f7523": {
+       "family": "f:55e9eb2d7a05",
+       "hard": true,
+       "outcomes": [
+        1,
+        1,
+        1
+       ],
+       "classes": [
+        "success",
+        "success",
+        "success"
+       ]
+      },
+      "t:853d3fef85a3": {
+       "family": "f:c33e8c73ff59",
+       "hard": false,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "integrity",
+        "integrity",
+        "integrity"
+       ]
+      }
+     },
+     "units": 81,
+     "success": 50,
+     "classes": {
+      "success": 50,
+      "failure": 10,
+      "integrity": 21
+     },
+     "integrityRuns": 21,
+     "requestsPerUnit": 10.382716049382717
+    },
+    "D2": {
+     "tasks": {
+      "t:e29f56a1dd8b": {
+       "family": "f:c4ca0312bfe2",
+       "hard": false,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "integrity",
+        "integrity",
+        "integrity"
+       ]
+      },
+      "t:02e1c8ded08d": {
+       "family": "f:99047530b1c6",
+       "hard": true,
+       "outcomes": [
+        1,
+        1,
+        0
+       ],
+       "classes": [
+        "success",
+        "success",
+        "failure"
+       ]
+      },
+      "t:0552d14ed317": {
+       "family": "f:c4ca0312bfe2",
+       "hard": false,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "integrity",
+        "integrity",
+        "integrity"
+       ]
+      },
+      "t:2f4b8aa9da70": {
+       "family": "f:d3ec1e9b7e80",
+       "hard": true,
+       "outcomes": [
+        0,
+        1,
+        0
+       ],
+       "classes": [
+        "integrity",
+        "success",
+        "integrity"
+       ]
+      },
+      "t:6377da045f17": {
+       "family": "f:c33e8c73ff59",
+       "hard": false,
+       "outcomes": [
+        1,
+        1,
+        1
+       ],
+       "classes": [
+        "success",
+        "success",
+        "success"
+       ]
+      },
+      "t:7345585d9102": {
+       "family": "f:7431d529d40b",
+       "hard": true,
+       "outcomes": [
+        1,
+        1,
+        0
+       ],
+       "classes": [
+        "success",
+        "success",
+        "integrity"
+       ]
+      },
+      "t:3e9c439b6183": {
+       "family": "f:c4ca0312bfe2",
+       "hard": false,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "integrity",
+        "integrity",
+        "integrity"
+       ]
+      },
+      "t:2da4e595d296": {
+       "family": "f:50088264c890",
+       "hard": true,
+       "outcomes": [
+        1,
+        0,
+        0
+       ],
+       "classes": [
+        "success",
+        "integrity",
+        "integrity"
+       ]
+      },
+      "t:df64d7772f70": {
+       "family": "f:bbe6f694561c",
+       "hard": true,
+       "outcomes": [
+        1,
+        1,
+        1
+       ],
+       "classes": [
+        "success",
+        "success",
+        "success"
+       ]
+      },
+      "t:87e074b75729": {
+       "family": "f:4acba2a11ab0",
+       "hard": false,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "integrity",
+        "integrity",
+        "integrity"
+       ]
+      },
+      "t:8deaea0af3b5": {
+       "family": "f:c33e8c73ff59",
+       "hard": false,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "integrity",
+        "integrity",
+        "integrity"
+       ]
+      },
+      "t:3d8e84ec17ef": {
+       "family": "f:9426a6f18620",
+       "hard": true,
+       "outcomes": [
+        0,
+        0,
+        1
+       ],
+       "classes": [
+        "failure",
+        "failure",
+        "success"
+       ]
+      },
+      "t:a653adecdec5": {
+       "family": "f:9426a6f18620",
+       "hard": true,
+       "outcomes": [
+        0,
+        1,
+        0
+       ],
+       "classes": [
+        "failure",
+        "success",
+        "failure"
+       ]
+      },
+      "t:547661936d92": {
+       "family": "f:1645ced1ddd2",
+       "hard": false,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "integrity",
+        "integrity",
+        "integrity"
+       ]
+      },
+      "t:74450cfed5cc": {
+       "family": "f:4acba2a11ab0",
+       "hard": false,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "integrity",
+        "integrity",
+        "integrity"
+       ]
+      },
+      "t:5be4f3425e5f": {
+       "family": "f:c33e8c73ff59",
+       "hard": false,
+       "outcomes": [
+        1,
+        1,
+        1
+       ],
+       "classes": [
+        "success",
+        "success",
+        "success"
+       ]
+      },
+      "t:6737d6fce2b5": {
+       "family": "f:4acba2a11ab0",
+       "hard": false,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "integrity",
+        "integrity",
+        "integrity"
+       ]
+      },
+      "t:57e717b7fb08": {
+       "family": "f:c4ca0312bfe2",
+       "hard": false,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "integrity",
+        "integrity",
+        "integrity"
+       ]
+      },
+      "t:da335aed1e1b": {
+       "family": "f:4acba2a11ab0",
+       "hard": false,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "integrity",
+        "integrity",
+        "integrity"
+       ]
+      },
+      "t:5b546ebcf338": {
+       "family": "f:1a331ec8c7c2",
+       "hard": true,
+       "outcomes": [
+        1,
+        1,
+        1
+       ],
+       "classes": [
+        "success",
+        "success",
+        "success"
+       ]
+      },
+      "t:5429281d8856": {
+       "family": "f:c33e8c73ff59",
+       "hard": false,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "integrity",
+        "integrity",
+        "integrity"
+       ]
+      },
+      "t:9356ecd4865e": {
+       "family": "f:9426a6f18620",
+       "hard": true,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "failure",
+        "failure"
+       ]
+      },
+      "t:3c0d36c28308": {
+       "family": "f:4acba2a11ab0",
+       "hard": false,
+       "outcomes": [
+        1,
+        1,
+        1
+       ],
+       "classes": [
+        "success",
+        "success",
+        "success"
+       ]
+      },
+      "t:54ac2c13047a": {
+       "family": "f:c9e7756aa11c",
+       "hard": true,
+       "outcomes": [
+        0,
+        1,
+        0
+       ],
+       "classes": [
+        "integrity",
+        "success",
+        "integrity"
+       ]
+      },
+      "t:bb8087947a3c": {
+       "family": "f:c4ca0312bfe2",
+       "hard": false,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "integrity",
+        "integrity",
+        "integrity"
+       ]
+      },
+      "t:53e8071f7523": {
+       "family": "f:55e9eb2d7a05",
+       "hard": true,
+       "outcomes": [
+        1,
+        0,
+        0
+       ],
+       "classes": [
+        "success",
+        "integrity",
+        "integrity"
+       ]
+      },
+      "t:853d3fef85a3": {
+       "family": "f:c33e8c73ff59",
+       "hard": false,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "integrity",
+        "integrity",
+        "integrity"
+       ]
+      }
+     },
+     "units": 81,
+     "success": 25,
+     "classes": {
+      "integrity": 48,
+      "success": 25,
+      "failure": 8
+     },
+     "integrityRuns": 48,
+     "requestsPerUnit": 22.37037037037037
+    }
+   }
+  },
+  "c2": {
+   "path": "/home/arthur/Code/oh-my-pi-extensions/pi-eval-loop/state/ctrl-confirm-2/runs.jsonl",
+   "sha256": "49527268f955d579f93a5a147c9b82859c95843283a34a26e5c3036d10959d91",
+   "snapshotUnits": 706,
+   "arms": {
+    "OC": {
+     "tasks": {
+      "t:48d8e105703a": {
+       "family": "f:39ac63b3b206",
+       "hard": false,
+       "outcomes": [
+        0,
+        null,
+        0
+       ],
+       "classes": [
+        "integrity",
+        null,
+        "integrity"
+       ]
+      },
+      "t:6581afddb92a": {
+       "family": "f:8198a500aa0b",
+       "hard": false,
+       "outcomes": [
+        0,
+        null,
+        0
+       ],
+       "classes": [
+        "integrity",
+        null,
+        "integrity"
+       ]
+      },
+      "t:048d93764179": {
+       "family": "f:367349273d88",
+       "hard": true,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "failure",
+        "failure"
+       ]
+      },
+      "t:76af7ad1ded7": {
+       "family": "f:b835337ded52",
+       "hard": false,
+       "outcomes": [
+        0,
+        null,
+        0
+       ],
+       "classes": [
+        "integrity",
+        null,
+        "integrity"
+       ]
+      },
+      "t:23c5938d32d8": {
+       "family": "f:975924316429",
+       "hard": false,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "integrity",
+        "integrity",
+        "integrity"
+       ]
+      },
+      "t:63242bbd8461": {
+       "family": "f:afbe2a2c600f",
+       "hard": false,
+       "outcomes": [
+        null,
+        null,
+        0
+       ],
+       "classes": [
+        null,
+        null,
+        "failure"
+       ]
+      },
+      "t:9683328267cf": {
+       "family": "f:35deb50aea88",
+       "hard": true,
+       "outcomes": [
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "failure"
+       ]
+      },
+      "t:4c6c485add7a": {
+       "family": "f:227b3596a9d7",
+       "hard": true,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "failure",
+        "failure"
+       ]
+      },
+      "t:23dbcb45e687": {
+       "family": "f:b0260eedae93",
+       "hard": true,
+       "outcomes": [
+        null,
+        0,
+        0
+       ],
+       "classes": [
+        null,
+        "integrity",
+        "failure"
+       ]
+      },
+      "t:c03c82e8053b": {
+       "family": "f:b0260eedae93",
+       "hard": true,
+       "outcomes": [
+        1,
+        0
+       ],
+       "classes": [
+        "success",
+        "integrity"
+       ]
+      },
+      "t:111287ad1810": {
+       "family": "f:08376235b611",
+       "hard": false,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "integrity",
+        "integrity",
+        "integrity"
+       ]
+      },
+      "t:a1d3555d8b1c": {
+       "family": "f:a0c5901addac",
+       "hard": false,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "integrity",
+        "integrity",
+        "integrity"
+       ]
+      },
+      "t:0ff390133dc6": {
+       "family": "f:df0f69f6044e",
+       "hard": false,
+       "outcomes": [
+        null,
+        0,
+        0
+       ],
+       "classes": [
+        null,
+        "integrity",
+        "integrity"
+       ]
+      },
+      "t:f8658aa2cad6": {
+       "family": "f:faf2a0a9e32e",
+       "hard": true,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "infrastructure",
+        "integrity",
+        "integrity"
+       ]
+      },
+      "t:c512c27f2a8e": {
+       "family": "f:6a99425426eb",
+       "hard": true,
+       "outcomes": [
+        null,
+        null,
+        0
+       ],
+       "classes": [
+        null,
+        null,
+        "failure"
+       ]
+      },
+      "t:68e5c44f6ce4": {
+       "family": "f:811653ff8194",
+       "hard": true,
+       "outcomes": [
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "failure"
+       ]
+      },
+      "t:4192bae97091": {
+       "family": "f:a0c5901addac",
+       "hard": false,
+       "outcomes": [
+        null,
+        0,
+        1
+       ],
+       "classes": [
+        null,
+        "failure",
+        "success"
+       ]
+      },
+      "t:d5c95c8ac92d": {
+       "family": "f:2c12ad95c54e",
+       "hard": true,
+       "outcomes": [
+        0,
+        null,
+        0
+       ],
+       "classes": [
+        "failure",
+        null,
+        "integrity"
+       ]
+      },
+      "t:1a8ff636aa16": {
+       "family": "f:faf2a0a9e32e",
+       "hard": true,
+       "outcomes": [
+        null,
+        0,
+        0
+       ],
+       "classes": [
+        null,
+        "integrity",
+        "integrity"
+       ]
+      },
+      "t:5a250a009723": {
+       "family": "f:fb867bc1a65d",
+       "hard": false,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "integrity",
+        "integrity",
+        "integrity"
+       ]
+      },
+      "t:be3cadb5538a": {
+       "family": "f:9bfe3e1a5d66",
+       "hard": true,
+       "outcomes": [
+        0,
+        null,
+        0
+       ],
+       "classes": [
+        "failure",
+        null,
+        "failure"
+       ]
+      },
+      "t:0d087f932efc": {
+       "family": "f:4d3b1c0d62d3",
+       "hard": false,
+       "outcomes": [
+        0
+       ],
+       "classes": [
+        "integrity"
+       ]
+      },
+      "t:22765b18192c": {
+       "family": "f:b0260eedae93",
+       "hard": true,
+       "outcomes": [
+        null,
+        0
+       ],
+       "classes": [
+        null,
+        "failure"
+       ]
+      },
+      "t:8baf8dac9c69": {
+       "family": "f:f3af0c8cf155",
+       "hard": false,
+       "outcomes": [
+        0,
+        0
+       ],
+       "classes": [
+        "integrity",
+        "integrity"
+       ]
+      },
+      "t:a1e60c19aaf8": {
+       "family": "f:afbe2a2c600f",
+       "hard": false,
+       "outcomes": [
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "failure"
+       ]
+      },
+      "t:bb1a0781cc10": {
+       "family": "f:1e67c2b8665d",
+       "hard": false,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "failure",
+        "failure"
+       ]
+      },
+      "t:f1c46fd6e2c8": {
+       "family": "f:4f3903b34c70",
+       "hard": true,
+       "outcomes": [
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "failure"
+       ]
+      },
+      "t:81f4f0a65dc5": {
+       "family": "f:ad94ee420098",
+       "hard": false,
+       "outcomes": [
+        1
+       ],
+       "classes": [
+        "success"
+       ]
+      },
+      "t:1f803e6cd9f5": {
+       "family": "f:027012f04ba1",
+       "hard": false,
+       "outcomes": [
+        0,
+        1,
+        1
+       ],
+       "classes": [
+        "infrastructure",
+        "success",
+        "success"
+       ]
+      },
+      "t:cf079674d057": {
+       "family": "f:4e1846b1969a",
+       "hard": true,
+       "outcomes": [
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "failure"
+       ]
+      },
+      "t:506ede138617": {
+       "family": "f:ea9c7974d6d1",
+       "hard": false,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "integrity",
+        "integrity",
+        "integrity"
+       ]
+      },
+      "t:6e7fe95a1dec": {
+       "family": "f:08376235b611",
+       "hard": true,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "integrity",
+        "integrity",
+        "integrity"
+       ]
+      },
+      "t:f6e21faf8ca3": {
+       "family": "f:93c6a83a62a1",
+       "hard": false,
+       "outcomes": [
+        null,
+        1,
+        1
+       ],
+       "classes": [
+        null,
+        "success",
+        "success"
+       ]
+      },
+      "t:38e83abc8071": {
+       "family": "f:227b3596a9d7",
+       "hard": true,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "integrity",
+        "integrity"
+       ]
+      },
+      "t:a240934547c0": {
+       "family": "f:ef0725aede80",
+       "hard": false,
+       "outcomes": [
+        null,
+        0,
+        0
+       ],
+       "classes": [
+        null,
+        "failure",
+        "integrity"
+       ]
+      },
+      "t:cc064bb90413": {
+       "family": "f:ea9c7974d6d1",
+       "hard": true,
+       "outcomes": [
+        null,
+        0,
+        0
+       ],
+       "classes": [
+        null,
+        "failure",
+        "failure"
+       ]
+      },
+      "t:7e7e21eac38f": {
+       "family": "f:df0f69f6044e",
+       "hard": true,
+       "outcomes": [
+        0,
+        null,
+        0
+       ],
+       "classes": [
+        "failure",
+        null,
+        "infrastructure"
+       ]
+      },
+      "t:08850aa84e73": {
+       "family": "f:84cfc36eba85",
+       "hard": true,
+       "outcomes": [
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "infrastructure"
+       ]
+      },
+      "t:bbdbd50aee25": {
+       "family": "f:3193edd6dfdc",
+       "hard": false,
+       "outcomes": [
+        null,
+        0,
+        0
+       ],
+       "classes": [
+        null,
+        "failure",
+        "failure"
+       ]
+      },
+      "t:b155802da653": {
+       "family": "f:2d699b66d71c",
+       "hard": false,
+       "outcomes": [
+        null,
+        0
+       ],
+       "classes": [
+        null,
+        "integrity"
+       ]
+      },
+      "t:f265759c608c": {
+       "family": "f:dcdef61af7bb",
+       "hard": false,
+       "outcomes": [
+        0
+       ],
+       "classes": [
+        "failure"
+       ]
+      },
+      "t:b4c1a24e6781": {
+       "family": "f:2c12ad95c54e",
+       "hard": false,
+       "outcomes": [
+        0,
+        1
+       ],
+       "classes": [
+        "integrity",
+        "success"
+       ]
+      },
+      "t:f9dd6d14b2e8": {
+       "family": "f:b72e0dd8b4f8",
+       "hard": false,
+       "outcomes": [
+        null,
+        0,
+        0
+       ],
+       "classes": [
+        null,
+        "integrity",
+        "integrity"
+       ]
+      },
+      "t:a1ab129e34d2": {
+       "family": "f:1ddd527c200d",
+       "hard": true,
+       "outcomes": [
+        0,
+        null,
+        0
+       ],
+       "classes": [
+        "failure",
+        null,
+        "failure"
+       ]
+      },
+      "t:680d2f238fec": {
+       "family": "f:227b3596a9d7",
+       "hard": true,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "failure",
+        "failure"
+       ]
+      },
+      "t:d3ea8dffdc10": {
+       "family": "f:08376235b611",
+       "hard": false,
+       "outcomes": [
+        null,
+        0,
+        0
+       ],
+       "classes": [
+        null,
+        "integrity",
+        "integrity"
+       ]
+      },
+      "t:c53757391853": {
+       "family": "f:6f9c6df2a12c",
+       "hard": false,
+       "outcomes": [
+        null,
+        null,
+        0
+       ],
+       "classes": [
+        null,
+        null,
+        "failure"
+       ]
+      },
+      "t:45d44d6c3bb5": {
+       "family": "f:07a2fcb9fcb1",
+       "hard": false,
+       "outcomes": [
+        0,
+        0
+       ],
+       "classes": [
+        "integrity",
+        "integrity"
+       ]
+      },
+      "t:d78d8673682b": {
+       "family": "f:fefb35fec2c0",
+       "hard": false,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "failure",
+        "failure"
+       ]
+      },
+      "t:b0e7ea4492d4": {
+       "family": "f:1e67c2b8665d",
+       "hard": true,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "failure",
+        "integrity"
+       ]
+      },
+      "t:d5a22f2940fb": {
+       "family": "f:89ac7d1bf8ea",
+       "hard": false,
+       "outcomes": [
+        0,
+        null,
+        1
+       ],
+       "classes": [
+        "integrity",
+        null,
+        "success"
+       ]
+      },
+      "t:6559f6445ced": {
+       "family": "f:1e67c2b8665d",
+       "hard": false,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "integrity",
+        "integrity",
+        "failure"
+       ]
+      },
+      "t:98cafae07f83": {
+       "family": "f:9bfe3e1a5d66",
+       "hard": true,
+       "outcomes": [
+        null,
+        0,
+        0
+       ],
+       "classes": [
+        null,
+        "failure",
+        "integrity"
+       ]
+      },
+      "t:2a8ed719c4c8": {
+       "family": "f:4ff55cd53faf",
+       "hard": false,
+       "outcomes": [
+        0,
+        0
+       ],
+       "classes": [
+        "integrity",
+        "integrity"
+       ]
+      },
+      "t:813c6fff9784": {
+       "family": "f:29d69f5b6a68",
+       "hard": false,
+       "outcomes": [
+        null,
+        0
+       ],
+       "classes": [
+        null,
+        "integrity"
+       ]
+      },
+      "t:c5826b6248a7": {
+       "family": "f:fb867bc1a65d",
+       "hard": false,
+       "outcomes": [
+        1,
+        0
+       ],
+       "classes": [
+        "success",
+        "integrity"
+       ]
+      },
+      "t:ca65978914ce": {
+       "family": "f:4f3903b34c70",
+       "hard": true,
+       "outcomes": [
+        null,
+        0,
+        0
+       ],
+       "classes": [
+        null,
+        "integrity",
+        "failure"
+       ]
+      },
+      "t:62ce4394445c": {
+       "family": "f:df0f69f6044e",
+       "hard": false,
+       "outcomes": [
+        0,
+        0
+       ],
+       "classes": [
+        "integrity",
+        "integrity"
+       ]
+      },
+      "t:6d05f496cf96": {
+       "family": "f:a0c5901addac",
+       "hard": false,
+       "outcomes": [
+        null,
+        1,
+        1
+       ],
+       "classes": [
+        null,
+        "success",
+        "success"
+       ]
+      },
+      "t:b6ff8c2503c2": {
+       "family": "f:fefb35fec2c0",
+       "hard": true,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "failure",
+        "failure"
+       ]
+      },
+      "t:44e1cb60ceaa": {
+       "family": "f:811653ff8194",
+       "hard": true,
+       "outcomes": [
+        null,
+        0,
+        0
+       ],
+       "classes": [
+        null,
+        "failure",
+        "failure"
+       ]
+      },
+      "t:39ef7104a766": {
+       "family": "f:8108a0284b69",
+       "hard": false,
+       "outcomes": [
+        null,
+        0,
+        0
+       ],
+       "classes": [
+        null,
+        "integrity",
+        "integrity"
+       ]
+      },
+      "t:3be30976b7a6": {
+       "family": "f:29d69f5b6a68",
+       "hard": false,
+       "outcomes": [
+        1,
+        null,
+        1
+       ],
+       "classes": [
+        "success",
+        null,
+        "success"
+       ]
+      },
+      "t:797d0877e584": {
+       "family": "f:addfaa8446f2",
+       "hard": true,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "integrity",
+        "failure"
+       ]
+      },
+      "t:b542f04d337c": {
+       "family": "f:027012f04ba1",
+       "hard": false,
+       "outcomes": [
+        null,
+        0,
+        0
+       ],
+       "classes": [
+        null,
+        "failure",
+        "failure"
+       ]
+      },
+      "t:5f6425aabd27": {
+       "family": "f:a251ba22bd47",
+       "hard": true,
+       "outcomes": [
+        null,
+        0,
+        0
+       ],
+       "classes": [
+        null,
+        "integrity",
+        "integrity"
+       ]
+      },
+      "t:8df707d6f349": {
+       "family": "f:4f3903b34c70",
+       "hard": false,
+       "outcomes": [
+        null,
+        0
+       ],
+       "classes": [
+        null,
+        "integrity"
+       ]
+      },
+      "t:d093d6c5761b": {
+       "family": "f:c95cea280c03",
+       "hard": false,
+       "outcomes": [
+        null,
+        0,
+        0
+       ],
+       "classes": [
+        null,
+        "integrity",
+        "integrity"
+       ]
+      },
+      "t:5c6a95a1de0e": {
+       "family": "f:eb5c0456ce70",
+       "hard": false,
+       "outcomes": [
+        0,
+        null,
+        0
+       ],
+       "classes": [
+        "integrity",
+        null,
+        "integrity"
+       ]
+      },
+      "t:88711845c74d": {
+       "family": "f:367349273d88",
+       "hard": true,
+       "outcomes": [
+        0,
+        0
+       ],
+       "classes": [
+        "integrity",
+        "integrity"
+       ]
+      },
+      "t:f0c29437cd34": {
+       "family": "f:dcdef61af7bb",
+       "hard": false,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "integrity",
+        "integrity"
+       ]
+      },
+      "t:fc8454e88df2": {
+       "family": "f:4cb6e959a3fc",
+       "hard": false,
+       "outcomes": [
+        null,
+        1
+       ],
+       "classes": [
+        null,
+        "success"
+       ]
+      },
+      "t:ad43b1c31e7e": {
+       "family": "f:2c12ad95c54e",
+       "hard": false,
+       "outcomes": [
+        0,
+        null,
+        0
+       ],
+       "classes": [
+        "integrity",
+        null,
+        "integrity"
+       ]
+      },
+      "t:01af098ba071": {
+       "family": "f:29d69f5b6a68",
+       "hard": false,
+       "outcomes": [
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "integrity"
+       ]
+      },
+      "t:8e600c113945": {
+       "family": "f:faf2a0a9e32e",
+       "hard": true,
+       "outcomes": [
+        0
+       ],
+       "classes": [
+        "integrity"
+       ]
+      },
+      "t:429cd6f1c202": {
+       "family": "f:e6d37236d0f9",
+       "hard": true,
+       "outcomes": [
+        null,
+        1
+       ],
+       "classes": [
+        null,
+        "success"
+       ]
+      },
+      "t:4b9cf3f718fb": {
+       "family": "f:20e5e953ee28",
+       "hard": true,
+       "outcomes": [
+        0,
+        null,
+        0
+       ],
+       "classes": [
+        "integrity",
+        null,
+        "integrity"
+       ]
+      },
+      "t:f0ad872980bd": {
+       "family": "f:2d699b66d71c",
+       "hard": true,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "failure",
+        "failure"
+       ]
+      },
+      "t:021c7aa26191": {
+       "family": "f:ddd3610f98fe",
+       "hard": false,
+       "outcomes": [
+        0,
+        null,
+        0
+       ],
+       "classes": [
+        "integrity",
+        null,
+        "integrity"
+       ]
+      },
+      "t:60c6434da4fa": {
+       "family": "f:ad94ee420098",
+       "hard": false,
+       "outcomes": [
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "failure"
+       ]
+      },
+      "t:75e89214f078": {
+       "family": "f:5c628d4c458a",
+       "hard": false,
+       "outcomes": [
+        0,
+        null,
+        0
+       ],
+       "classes": [
+        "failure",
+        null,
+        "failure"
+       ]
+      },
+      "t:0f4675f45a25": {
+       "family": "f:625b08cbdfc2",
+       "hard": false,
+       "outcomes": [
+        null,
+        0
+       ],
+       "classes": [
+        null,
+        "integrity"
+       ]
+      },
+      "t:540c1ad8a12c": {
+       "family": "f:ddd3610f98fe",
+       "hard": false,
+       "outcomes": [
+        0,
+        null,
+        0
+       ],
+       "classes": [
+        "integrity",
+        null,
+        "integrity"
+       ]
+      },
+      "t:7a4fdc97258c": {
+       "family": "f:811653ff8194",
+       "hard": true,
+       "outcomes": [
+        null,
+        0
+       ],
+       "classes": [
+        null,
+        "failure"
+       ]
+      },
+      "t:422765382be9": {
+       "family": "f:9bfe3e1a5d66",
+       "hard": true,
+       "outcomes": [
+        null,
+        null,
+        0
+       ],
+       "classes": [
+        null,
+        null,
+        "failure"
+       ]
+      },
+      "t:740bcf025b93": {
+       "family": "f:ef0725aede80",
+       "hard": true,
+       "outcomes": [
+        null,
+        0
+       ],
+       "classes": [
+        null,
+        "failure"
+       ]
+      },
+      "t:5f8cde49d6e2": {
+       "family": "f:dcdef61af7bb",
+       "hard": false,
+       "outcomes": [
+        0
+       ],
+       "classes": [
+        "integrity"
+       ]
+      }
+     },
+     "units": 176,
+     "success": 16,
+     "classes": {
+      "integrity": 85,
+      "failure": 71,
+      "success": 16,
+      "infrastructure": 4
+     },
+     "integrityRuns": 85,
+     "requestsPerUnit": 31.625
+    },
+    "OCR": {
+     "tasks": {
+      "t:48d8e105703a": {
+       "family": "f:39ac63b3b206",
+       "hard": false,
+       "outcomes": [
+        1,
+        null,
+        0
+       ],
+       "classes": [
+        "success",
+        null,
+        "integrity"
+       ]
+      },
+      "t:6581afddb92a": {
+       "family": "f:8198a500aa0b",
+       "hard": false,
+       "outcomes": [
+        0,
+        null,
+        0
+       ],
+       "classes": [
+        "failure",
+        null,
+        "failure"
+       ]
+      },
+      "t:048d93764179": {
+       "family": "f:367349273d88",
+       "hard": true,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "failure",
+        "failure"
+       ]
+      },
+      "t:23c5938d32d8": {
+       "family": "f:975924316429",
+       "hard": false,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "failure",
+        "failure"
+       ]
+      },
+      "t:76af7ad1ded7": {
+       "family": "f:b835337ded52",
+       "hard": false,
+       "outcomes": [
+        1,
+        null,
+        1
+       ],
+       "classes": [
+        "success",
+        null,
+        "success"
+       ]
+      },
+      "t:63242bbd8461": {
+       "family": "f:afbe2a2c600f",
+       "hard": false,
+       "outcomes": [
+        null,
+        null,
+        0
+       ],
+       "classes": [
+        null,
+        null,
+        "failure"
+       ]
+      },
+      "t:4c6c485add7a": {
+       "family": "f:227b3596a9d7",
+       "hard": true,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "failure",
+        "failure"
+       ]
+      },
+      "t:9683328267cf": {
+       "family": "f:35deb50aea88",
+       "hard": true,
+       "outcomes": [
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "failure"
+       ]
+      },
+      "t:23dbcb45e687": {
+       "family": "f:b0260eedae93",
+       "hard": true,
+       "outcomes": [
+        null,
+        1,
+        1
+       ],
+       "classes": [
+        null,
+        "success",
+        "success"
+       ]
+      },
+      "t:c03c82e8053b": {
+       "family": "f:b0260eedae93",
+       "hard": true,
+       "outcomes": [
+        1,
+        0
+       ],
+       "classes": [
+        "success",
+        "integrity"
+       ]
+      },
+      "t:111287ad1810": {
+       "family": "f:08376235b611",
+       "hard": false,
+       "outcomes": [
+        1,
+        0,
+        0
+       ],
+       "classes": [
+        "success",
+        "integrity",
+        "integrity"
+       ]
+      },
+      "t:a1d3555d8b1c": {
+       "family": "f:a0c5901addac",
+       "hard": false,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "integrity",
+        "integrity",
+        "integrity"
+       ]
+      },
+      "t:d5c95c8ac92d": {
+       "family": "f:2c12ad95c54e",
+       "hard": true,
+       "outcomes": [
+        0,
+        null,
+        0
+       ],
+       "classes": [
+        "failure",
+        null,
+        "integrity"
+       ]
+      },
+      "t:0ff390133dc6": {
+       "family": "f:df0f69f6044e",
+       "hard": false,
+       "outcomes": [
+        null,
+        0,
+        0
+       ],
+       "classes": [
+        null,
+        "failure",
+        "failure"
+       ]
+      },
+      "t:f8658aa2cad6": {
+       "family": "f:faf2a0a9e32e",
+       "hard": true,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "infrastructure",
+        "failure",
+        "failure"
+       ]
+      },
+      "t:68e5c44f6ce4": {
+       "family": "f:811653ff8194",
+       "hard": true,
+       "outcomes": [
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "failure"
+       ]
+      },
+      "t:c512c27f2a8e": {
+       "family": "f:6a99425426eb",
+       "hard": true,
+       "outcomes": [
+        null,
+        null,
+        0
+       ],
+       "classes": [
+        null,
+        null,
+        "failure"
+       ]
+      },
+      "t:4192bae97091": {
+       "family": "f:a0c5901addac",
+       "hard": false,
+       "outcomes": [
+        null,
+        1,
+        1
+       ],
+       "classes": [
+        null,
+        "success",
+        "success"
+       ]
+      },
+      "t:5a250a009723": {
+       "family": "f:fb867bc1a65d",
+       "hard": false,
+       "outcomes": [
+        0,
+        0,
+        1
+       ],
+       "classes": [
+        "integrity",
+        "integrity",
+        "success"
+       ]
+      },
+      "t:1a8ff636aa16": {
+       "family": "f:faf2a0a9e32e",
+       "hard": true,
+       "outcomes": [
+        null,
+        0,
+        0
+       ],
+       "classes": [
+        null,
+        "failure",
+        "failure"
+       ]
+      },
+      "t:22765b18192c": {
+       "family": "f:b0260eedae93",
+       "hard": true,
+       "outcomes": [
+        null,
+        1
+       ],
+       "classes": [
+        null,
+        "success"
+       ]
+      },
+      "t:be3cadb5538a": {
+       "family": "f:9bfe3e1a5d66",
+       "hard": true,
+       "outcomes": [
+        0,
+        null,
+        0
+       ],
+       "classes": [
+        "failure",
+        null,
+        "failure"
+       ]
+      },
+      "t:8baf8dac9c69": {
+       "family": "f:f3af0c8cf155",
+       "hard": false,
+       "outcomes": [
+        0,
+        0
+       ],
+       "classes": [
+        "integrity",
+        "failure"
+       ]
+      },
+      "t:0d087f932efc": {
+       "family": "f:4d3b1c0d62d3",
+       "hard": false,
+       "outcomes": [
+        0
+       ],
+       "classes": [
+        "failure"
+       ]
+      },
+      "t:bb1a0781cc10": {
+       "family": "f:1e67c2b8665d",
+       "hard": false,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "failure",
+        "failure"
+       ]
+      },
+      "t:a1e60c19aaf8": {
+       "family": "f:afbe2a2c600f",
+       "hard": false,
+       "outcomes": [
+        1,
+        1
+       ],
+       "classes": [
+        "success",
+        "success"
+       ]
+      },
+      "t:f1c46fd6e2c8": {
+       "family": "f:4f3903b34c70",
+       "hard": true,
+       "outcomes": [
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "failure"
+       ]
+      },
+      "t:1f803e6cd9f5": {
+       "family": "f:027012f04ba1",
+       "hard": false,
+       "outcomes": [
+        0,
+        1,
+        1
+       ],
+       "classes": [
+        "infrastructure",
+        "success",
+        "success"
+       ]
+      },
+      "t:81f4f0a65dc5": {
+       "family": "f:ad94ee420098",
+       "hard": false,
+       "outcomes": [
+        1
+       ],
+       "classes": [
+        "success"
+       ]
+      },
+      "t:cf079674d057": {
+       "family": "f:4e1846b1969a",
+       "hard": true,
+       "outcomes": [
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "failure"
+       ]
+      },
+      "t:506ede138617": {
+       "family": "f:ea9c7974d6d1",
+       "hard": false,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "integrity",
+        "integrity",
+        "integrity"
+       ]
+      },
+      "t:38e83abc8071": {
+       "family": "f:227b3596a9d7",
+       "hard": true,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "failure",
+        "failure"
+       ]
+      },
+      "t:6e7fe95a1dec": {
+       "family": "f:08376235b611",
+       "hard": true,
+       "outcomes": [
+        0,
+        1,
+        1
+       ],
+       "classes": [
+        "failure",
+        "success",
+        "success"
+       ]
+      },
+      "t:f6e21faf8ca3": {
+       "family": "f:93c6a83a62a1",
+       "hard": false,
+       "outcomes": [
+        null,
+        1,
+        1
+       ],
+       "classes": [
+        null,
+        "success",
+        "success"
+       ]
+      },
+      "t:a240934547c0": {
+       "family": "f:ef0725aede80",
+       "hard": false,
+       "outcomes": [
+        null,
+        0,
+        0
+       ],
+       "classes": [
+        null,
+        "failure",
+        "failure"
+       ]
+      },
+      "t:cc064bb90413": {
+       "family": "f:ea9c7974d6d1",
+       "hard": true,
+       "outcomes": [
+        null,
+        0,
+        0
+       ],
+       "classes": [
+        null,
+        "failure",
+        "failure"
+       ]
+      },
+      "t:7e7e21eac38f": {
+       "family": "f:df0f69f6044e",
+       "hard": true,
+       "outcomes": [
+        0,
+        null,
+        0
+       ],
+       "classes": [
+        "failure",
+        null,
+        "failure"
+       ]
+      },
+      "t:08850aa84e73": {
+       "family": "f:84cfc36eba85",
+       "hard": true,
+       "outcomes": [
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "infrastructure"
+       ]
+      },
+      "t:bbdbd50aee25": {
+       "family": "f:3193edd6dfdc",
+       "hard": false,
+       "outcomes": [
+        null,
+        0,
+        0
+       ],
+       "classes": [
+        null,
+        "failure",
+        "infrastructure"
+       ]
+      },
+      "t:f265759c608c": {
+       "family": "f:dcdef61af7bb",
+       "hard": false,
+       "outcomes": [
+        0
+       ],
+       "classes": [
+        "failure"
+       ]
+      },
+      "t:b4c1a24e6781": {
+       "family": "f:2c12ad95c54e",
+       "hard": false,
+       "outcomes": [
+        1,
+        1
+       ],
+       "classes": [
+        "success",
+        "success"
+       ]
+      },
+      "t:b155802da653": {
+       "family": "f:2d699b66d71c",
+       "hard": false,
+       "outcomes": [
+        null,
+        0
+       ],
+       "classes": [
+        null,
+        "integrity"
+       ]
+      },
+      "t:f9dd6d14b2e8": {
+       "family": "f:b72e0dd8b4f8",
+       "hard": false,
+       "outcomes": [
+        null,
+        0,
+        0
+       ],
+       "classes": [
+        null,
+        "failure",
+        "failure"
+       ]
+      },
+      "t:a1ab129e34d2": {
+       "family": "f:1ddd527c200d",
+       "hard": true,
+       "outcomes": [
+        0,
+        null,
+        0
+       ],
+       "classes": [
+        "failure",
+        null,
+        "integrity"
+       ]
+      },
+      "t:d3ea8dffdc10": {
+       "family": "f:08376235b611",
+       "hard": false,
+       "outcomes": [
+        null,
+        1,
+        1
+       ],
+       "classes": [
+        null,
+        "success",
+        "success"
+       ]
+      },
+      "t:680d2f238fec": {
+       "family": "f:227b3596a9d7",
+       "hard": true,
+       "outcomes": [
+        0,
+        1,
+        1
+       ],
+       "classes": [
+        "failure",
+        "success",
+        "success"
+       ]
+      },
+      "t:c53757391853": {
+       "family": "f:6f9c6df2a12c",
+       "hard": false,
+       "outcomes": [
+        null,
+        null,
+        0
+       ],
+       "classes": [
+        null,
+        null,
+        "failure"
+       ]
+      },
+      "t:45d44d6c3bb5": {
+       "family": "f:07a2fcb9fcb1",
+       "hard": false,
+       "outcomes": [
+        0,
+        1
+       ],
+       "classes": [
+        "integrity",
+        "success"
+       ]
+      },
+      "t:b0e7ea4492d4": {
+       "family": "f:1e67c2b8665d",
+       "hard": true,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "failure",
+        "failure"
+       ]
+      },
+      "t:d78d8673682b": {
+       "family": "f:fefb35fec2c0",
+       "hard": false,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "failure",
+        "failure"
+       ]
+      },
+      "t:d5a22f2940fb": {
+       "family": "f:89ac7d1bf8ea",
+       "hard": false,
+       "outcomes": [
+        1,
+        null,
+        1
+       ],
+       "classes": [
+        "success",
+        null,
+        "success"
+       ]
+      },
+      "t:6559f6445ced": {
+       "family": "f:1e67c2b8665d",
+       "hard": false,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "integrity",
+        "failure"
+       ]
+      },
+      "t:98cafae07f83": {
+       "family": "f:9bfe3e1a5d66",
+       "hard": true,
+       "outcomes": [
+        null,
+        0,
+        0
+       ],
+       "classes": [
+        null,
+        "failure",
+        "failure"
+       ]
+      },
+      "t:2a8ed719c4c8": {
+       "family": "f:4ff55cd53faf",
+       "hard": false,
+       "outcomes": [
+        0,
+        1
+       ],
+       "classes": [
+        "integrity",
+        "success"
+       ]
+      },
+      "t:813c6fff9784": {
+       "family": "f:29d69f5b6a68",
+       "hard": false,
+       "outcomes": [
+        null,
+        1
+       ],
+       "classes": [
+        null,
+        "success"
+       ]
+      },
+      "t:c5826b6248a7": {
+       "family": "f:fb867bc1a65d",
+       "hard": false,
+       "outcomes": [
+        1,
+        0
+       ],
+       "classes": [
+        "success",
+        "failure"
+       ]
+      },
+      "t:62ce4394445c": {
+       "family": "f:df0f69f6044e",
+       "hard": false,
+       "outcomes": [
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "failure"
+       ]
+      },
+      "t:ca65978914ce": {
+       "family": "f:4f3903b34c70",
+       "hard": true,
+       "outcomes": [
+        null,
+        0,
+        0
+       ],
+       "classes": [
+        null,
+        "failure",
+        "failure"
+       ]
+      },
+      "t:44e1cb60ceaa": {
+       "family": "f:811653ff8194",
+       "hard": true,
+       "outcomes": [
+        null,
+        0,
+        0
+       ],
+       "classes": [
+        null,
+        "failure",
+        "failure"
+       ]
+      },
+      "t:b6ff8c2503c2": {
+       "family": "f:fefb35fec2c0",
+       "hard": true,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "failure",
+        "failure"
+       ]
+      },
+      "t:39ef7104a766": {
+       "family": "f:8108a0284b69",
+       "hard": false,
+       "outcomes": [
+        null,
+        0,
+        1
+       ],
+       "classes": [
+        null,
+        "integrity",
+        "success"
+       ]
+      },
+      "t:3be30976b7a6": {
+       "family": "f:29d69f5b6a68",
+       "hard": false,
+       "outcomes": [
+        1,
+        null,
+        1
+       ],
+       "classes": [
+        "success",
+        null,
+        "success"
+       ]
+      },
+      "t:6d05f496cf96": {
+       "family": "f:a0c5901addac",
+       "hard": false,
+       "outcomes": [
+        null,
+        0,
+        1
+       ],
+       "classes": [
+        null,
+        "integrity",
+        "success"
+       ]
+      },
+      "t:b542f04d337c": {
+       "family": "f:027012f04ba1",
+       "hard": false,
+       "outcomes": [
+        null,
+        0,
+        0
+       ],
+       "classes": [
+        null,
+        "failure",
+        "failure"
+       ]
+      },
+      "t:797d0877e584": {
+       "family": "f:addfaa8446f2",
+       "hard": true,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "failure",
+        "failure"
+       ]
+      },
+      "t:5f6425aabd27": {
+       "family": "f:a251ba22bd47",
+       "hard": true,
+       "outcomes": [
+        null,
+        0,
+        0
+       ],
+       "classes": [
+        null,
+        "failure",
+        "failure"
+       ]
+      },
+      "t:8df707d6f349": {
+       "family": "f:4f3903b34c70",
+       "hard": false,
+       "outcomes": [
+        null,
+        1
+       ],
+       "classes": [
+        null,
+        "success"
+       ]
+      },
+      "t:d093d6c5761b": {
+       "family": "f:c95cea280c03",
+       "hard": false,
+       "outcomes": [
+        null,
+        1,
+        0
+       ],
+       "classes": [
+        null,
+        "success",
+        "integrity"
+       ]
+      },
+      "t:88711845c74d": {
+       "family": "f:367349273d88",
+       "hard": true,
+       "outcomes": [
+        0,
+        0
+       ],
+       "classes": [
+        "integrity",
+        "failure"
+       ]
+      },
+      "t:5c6a95a1de0e": {
+       "family": "f:eb5c0456ce70",
+       "hard": false,
+       "outcomes": [
+        1,
+        null,
+        1
+       ],
+       "classes": [
+        "success",
+        null,
+        "success"
+       ]
+      },
+      "t:f0c29437cd34": {
+       "family": "f:dcdef61af7bb",
+       "hard": false,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "failure",
+        "failure"
+       ]
+      },
+      "t:ad43b1c31e7e": {
+       "family": "f:2c12ad95c54e",
+       "hard": false,
+       "outcomes": [
+        0,
+        null,
+        0
+       ],
+       "classes": [
+        "failure",
+        null,
+        "failure"
+       ]
+      },
+      "t:fc8454e88df2": {
+       "family": "f:4cb6e959a3fc",
+       "hard": false,
+       "outcomes": [
+        null,
+        1
+       ],
+       "classes": [
+        null,
+        "success"
+       ]
+      },
+      "t:01af098ba071": {
+       "family": "f:29d69f5b6a68",
+       "hard": false,
+       "outcomes": [
+        0,
+        1
+       ],
+       "classes": [
+        "failure",
+        "success"
+       ]
+      },
+      "t:8e600c113945": {
+       "family": "f:faf2a0a9e32e",
+       "hard": true,
+       "outcomes": [
+        0
+       ],
+       "classes": [
+        "failure"
+       ]
+      },
+      "t:4b9cf3f718fb": {
+       "family": "f:20e5e953ee28",
+       "hard": true,
+       "outcomes": [
+        0,
+        null,
+        0
+       ],
+       "classes": [
+        "integrity",
+        null,
+        "failure"
+       ]
+      },
+      "t:429cd6f1c202": {
+       "family": "f:e6d37236d0f9",
+       "hard": true,
+       "outcomes": [
+        null,
+        1
+       ],
+       "classes": [
+        null,
+        "success"
+       ]
+      },
+      "t:f0ad872980bd": {
+       "family": "f:2d699b66d71c",
+       "hard": true,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "integrity",
+        "failure"
+       ]
+      },
+      "t:021c7aa26191": {
+       "family": "f:ddd3610f98fe",
+       "hard": false,
+       "outcomes": [
+        0,
+        null,
+        0
+       ],
+       "classes": [
+        "failure",
+        null,
+        "failure"
+       ]
+      },
+      "t:75e89214f078": {
+       "family": "f:5c628d4c458a",
+       "hard": false,
+       "outcomes": [
+        0,
+        null,
+        0
+       ],
+       "classes": [
+        "failure",
+        null,
+        "failure"
+       ]
+      },
+      "t:60c6434da4fa": {
+       "family": "f:ad94ee420098",
+       "hard": false,
+       "outcomes": [
+        0,
+        0
+       ],
+       "classes": [
+        "integrity",
+        "integrity"
+       ]
+      },
+      "t:0f4675f45a25": {
+       "family": "f:625b08cbdfc2",
+       "hard": false,
+       "outcomes": [
+        null,
+        0
+       ],
+       "classes": [
+        null,
+        "failure"
+       ]
+      },
+      "t:540c1ad8a12c": {
+       "family": "f:ddd3610f98fe",
+       "hard": false,
+       "outcomes": [
+        0,
+        null,
+        0
+       ],
+       "classes": [
+        "failure",
+        null,
+        "failure"
+       ]
+      },
+      "t:422765382be9": {
+       "family": "f:9bfe3e1a5d66",
+       "hard": true,
+       "outcomes": [
+        null,
+        null,
+        0
+       ],
+       "classes": [
+        null,
+        null,
+        "failure"
+       ]
+      },
+      "t:7a4fdc97258c": {
+       "family": "f:811653ff8194",
+       "hard": true,
+       "outcomes": [
+        null,
+        0
+       ],
+       "classes": [
+        null,
+        "failure"
+       ]
+      },
+      "t:740bcf025b93": {
+       "family": "f:ef0725aede80",
+       "hard": true,
+       "outcomes": [
+        null,
+        0
+       ],
+       "classes": [
+        null,
+        "failure"
+       ]
+      },
+      "t:489b6151d4f2": {
+       "family": "f:9359dafe75c6",
+       "hard": true,
+       "outcomes": [
+        null,
+        null,
+        0
+       ],
+       "classes": [
+        null,
+        null,
+        "failure"
+       ]
+      }
+     },
+     "units": 176,
+     "success": 43,
+     "classes": {
+      "success": 43,
+      "failure": 102,
+      "integrity": 27,
+      "infrastructure": 4
+     },
+     "integrityRuns": 27,
+     "requestsPerUnit": 30.232954545454547
+    },
+    "PC": {
+     "tasks": {
+      "t:48d8e105703a": {
+       "family": "f:39ac63b3b206",
+       "hard": false,
+       "outcomes": [
+        1,
+        null,
+        1
+       ],
+       "classes": [
+        "success",
+        null,
+        "success"
+       ]
+      },
+      "t:6581afddb92a": {
+       "family": "f:8198a500aa0b",
+       "hard": false,
+       "outcomes": [
+        0,
+        null,
+        0
+       ],
+       "classes": [
+        "failure",
+        null,
+        "failure"
+       ]
+      },
+      "t:048d93764179": {
+       "family": "f:367349273d88",
+       "hard": true,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "failure",
+        "failure"
+       ]
+      },
+      "t:23c5938d32d8": {
+       "family": "f:975924316429",
+       "hard": false,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "failure",
+        "failure"
+       ]
+      },
+      "t:76af7ad1ded7": {
+       "family": "f:b835337ded52",
+       "hard": false,
+       "outcomes": [
+        1,
+        null,
+        1
+       ],
+       "classes": [
+        "success",
+        null,
+        "success"
+       ]
+      },
+      "t:4c6c485add7a": {
+       "family": "f:227b3596a9d7",
+       "hard": true,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "failure",
+        "failure"
+       ]
+      },
+      "t:63242bbd8461": {
+       "family": "f:afbe2a2c600f",
+       "hard": false,
+       "outcomes": [
+        null,
+        null,
+        0
+       ],
+       "classes": [
+        null,
+        null,
+        "failure"
+       ]
+      },
+      "t:23dbcb45e687": {
+       "family": "f:b0260eedae93",
+       "hard": true,
+       "outcomes": [
+        null,
+        0,
+        1
+       ],
+       "classes": [
+        null,
+        "failure",
+        "success"
+       ]
+      },
+      "t:9683328267cf": {
+       "family": "f:35deb50aea88",
+       "hard": true,
+       "outcomes": [
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "failure"
+       ]
+      },
+      "t:c03c82e8053b": {
+       "family": "f:b0260eedae93",
+       "hard": true,
+       "outcomes": [
+        1,
+        0
+       ],
+       "classes": [
+        "success",
+        "failure"
+       ]
+      },
+      "t:d5c95c8ac92d": {
+       "family": "f:2c12ad95c54e",
+       "hard": true,
+       "outcomes": [
+        0,
+        null,
+        0
+       ],
+       "classes": [
+        "integrity",
+        null,
+        "failure"
+       ]
+      },
+      "t:f8658aa2cad6": {
+       "family": "f:faf2a0a9e32e",
+       "hard": true,
+       "outcomes": [
+        0,
+        0,
+        1
+       ],
+       "classes": [
+        "failure",
+        "failure",
+        "success"
+       ]
+      },
+      "t:a1d3555d8b1c": {
+       "family": "f:a0c5901addac",
+       "hard": false,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "failure",
+        "failure"
+       ]
+      },
+      "t:111287ad1810": {
+       "family": "f:08376235b611",
+       "hard": false,
+       "outcomes": [
+        1,
+        1,
+        1
+       ],
+       "classes": [
+        "success",
+        "success",
+        "success"
+       ]
+      },
+      "t:0ff390133dc6": {
+       "family": "f:df0f69f6044e",
+       "hard": false,
+       "outcomes": [
+        null,
+        0,
+        0
+       ],
+       "classes": [
+        null,
+        "failure",
+        "failure"
+       ]
+      },
+      "t:c512c27f2a8e": {
+       "family": "f:6a99425426eb",
+       "hard": true,
+       "outcomes": [
+        null,
+        null,
+        0
+       ],
+       "classes": [
+        null,
+        null,
+        "failure"
+       ]
+      },
+      "t:68e5c44f6ce4": {
+       "family": "f:811653ff8194",
+       "hard": true,
+       "outcomes": [
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "failure"
+       ]
+      },
+      "t:4192bae97091": {
+       "family": "f:a0c5901addac",
+       "hard": false,
+       "outcomes": [
+        null,
+        1,
+        1
+       ],
+       "classes": [
+        null,
+        "success",
+        "success"
+       ]
+      },
+      "t:1a8ff636aa16": {
+       "family": "f:faf2a0a9e32e",
+       "hard": true,
+       "outcomes": [
+        null,
+        0,
+        0
+       ],
+       "classes": [
+        null,
+        "failure",
+        "failure"
+       ]
+      },
+      "t:5a250a009723": {
+       "family": "f:fb867bc1a65d",
+       "hard": false,
+       "outcomes": [
+        1,
+        1,
+        1
+       ],
+       "classes": [
+        "success",
+        "success",
+        "success"
+       ]
+      },
+      "t:22765b18192c": {
+       "family": "f:b0260eedae93",
+       "hard": true,
+       "outcomes": [
+        null,
+        1
+       ],
+       "classes": [
+        null,
+        "success"
+       ]
+      },
+      "t:be3cadb5538a": {
+       "family": "f:9bfe3e1a5d66",
+       "hard": true,
+       "outcomes": [
+        0,
+        null,
+        0
+       ],
+       "classes": [
+        "failure",
+        null,
+        "failure"
+       ]
+      },
+      "t:0d087f932efc": {
+       "family": "f:4d3b1c0d62d3",
+       "hard": false,
+       "outcomes": [
+        0
+       ],
+       "classes": [
+        "failure"
+       ]
+      },
+      "t:8baf8dac9c69": {
+       "family": "f:f3af0c8cf155",
+       "hard": false,
+       "outcomes": [
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "failure"
+       ]
+      },
+      "t:bb1a0781cc10": {
+       "family": "f:1e67c2b8665d",
+       "hard": false,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "failure",
+        "failure"
+       ]
+      },
+      "t:a1e60c19aaf8": {
+       "family": "f:afbe2a2c600f",
+       "hard": false,
+       "outcomes": [
+        1,
+        0
+       ],
+       "classes": [
+        "success",
+        "failure"
+       ]
+      },
+      "t:f1c46fd6e2c8": {
+       "family": "f:4f3903b34c70",
+       "hard": true,
+       "outcomes": [
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "failure"
+       ]
+      },
+      "t:1f803e6cd9f5": {
+       "family": "f:027012f04ba1",
+       "hard": false,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "failure",
+        "failure"
+       ]
+      },
+      "t:81f4f0a65dc5": {
+       "family": "f:ad94ee420098",
+       "hard": false,
+       "outcomes": [
+        0
+       ],
+       "classes": [
+        "failure"
+       ]
+      },
+      "t:cf079674d057": {
+       "family": "f:4e1846b1969a",
+       "hard": true,
+       "outcomes": [
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "failure"
+       ]
+      },
+      "t:38e83abc8071": {
+       "family": "f:227b3596a9d7",
+       "hard": true,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "failure",
+        "failure"
+       ]
+      },
+      "t:506ede138617": {
+       "family": "f:ea9c7974d6d1",
+       "hard": false,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "integrity",
+        "integrity",
+        "integrity"
+       ]
+      },
+      "t:6e7fe95a1dec": {
+       "family": "f:08376235b611",
+       "hard": true,
+       "outcomes": [
+        1,
+        0,
+        1
+       ],
+       "classes": [
+        "success",
+        "failure",
+        "success"
+       ]
+      },
+      "t:f6e21faf8ca3": {
+       "family": "f:93c6a83a62a1",
+       "hard": false,
+       "outcomes": [
+        null,
+        1,
+        1
+       ],
+       "classes": [
+        null,
+        "success",
+        "success"
+       ]
+      },
+      "t:a240934547c0": {
+       "family": "f:ef0725aede80",
+       "hard": false,
+       "outcomes": [
+        null,
+        0,
+        0
+       ],
+       "classes": [
+        null,
+        "integrity",
+        "integrity"
+       ]
+      },
+      "t:cc064bb90413": {
+       "family": "f:ea9c7974d6d1",
+       "hard": true,
+       "outcomes": [
+        null,
+        0,
+        0
+       ],
+       "classes": [
+        null,
+        "failure",
+        "failure"
+       ]
+      },
+      "t:7e7e21eac38f": {
+       "family": "f:df0f69f6044e",
+       "hard": true,
+       "outcomes": [
+        0,
+        null,
+        0
+       ],
+       "classes": [
+        "failure",
+        null,
+        "failure"
+       ]
+      },
+      "t:08850aa84e73": {
+       "family": "f:84cfc36eba85",
+       "hard": true,
+       "outcomes": [
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "failure"
+       ]
+      },
+      "t:bbdbd50aee25": {
+       "family": "f:3193edd6dfdc",
+       "hard": false,
+       "outcomes": [
+        null,
+        0,
+        0
+       ],
+       "classes": [
+        null,
+        "failure",
+        "failure"
+       ]
+      },
+      "t:b155802da653": {
+       "family": "f:2d699b66d71c",
+       "hard": false,
+       "outcomes": [
+        null,
+        0
+       ],
+       "classes": [
+        null,
+        "failure"
+       ]
+      },
+      "t:f265759c608c": {
+       "family": "f:dcdef61af7bb",
+       "hard": false,
+       "outcomes": [
+        0
+       ],
+       "classes": [
+        "failure"
+       ]
+      },
+      "t:b4c1a24e6781": {
+       "family": "f:2c12ad95c54e",
+       "hard": false,
+       "outcomes": [
+        1,
+        1
+       ],
+       "classes": [
+        "success",
+        "success"
+       ]
+      },
+      "t:f9dd6d14b2e8": {
+       "family": "f:b72e0dd8b4f8",
+       "hard": false,
+       "outcomes": [
+        null,
+        0,
+        0
+       ],
+       "classes": [
+        null,
+        "failure",
+        "failure"
+       ]
+      },
+      "t:a1ab129e34d2": {
+       "family": "f:1ddd527c200d",
+       "hard": true,
+       "outcomes": [
+        0,
+        null,
+        0
+       ],
+       "classes": [
+        "failure",
+        null,
+        "failure"
+       ]
+      },
+      "t:d3ea8dffdc10": {
+       "family": "f:08376235b611",
+       "hard": false,
+       "outcomes": [
+        null,
+        1,
+        1
+       ],
+       "classes": [
+        null,
+        "success",
+        "success"
+       ]
+      },
+      "t:680d2f238fec": {
+       "family": "f:227b3596a9d7",
+       "hard": true,
+       "outcomes": [
+        1,
+        1,
+        1
+       ],
+       "classes": [
+        "success",
+        "success",
+        "success"
+       ]
+      },
+      "t:c53757391853": {
+       "family": "f:6f9c6df2a12c",
+       "hard": false,
+       "outcomes": [
+        null,
+        null,
+        0
+       ],
+       "classes": [
+        null,
+        null,
+        "failure"
+       ]
+      },
+      "t:45d44d6c3bb5": {
+       "family": "f:07a2fcb9fcb1",
+       "hard": false,
+       "outcomes": [
+        0,
+        0
+       ],
+       "classes": [
+        "integrity",
+        "integrity"
+       ]
+      },
+      "t:b0e7ea4492d4": {
+       "family": "f:1e67c2b8665d",
+       "hard": true,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "failure",
+        "failure"
+       ]
+      },
+      "t:d78d8673682b": {
+       "family": "f:fefb35fec2c0",
+       "hard": false,
+       "outcomes": [
+        0,
+        1,
+        0
+       ],
+       "classes": [
+        "failure",
+        "success",
+        "failure"
+       ]
+      },
+      "t:d5a22f2940fb": {
+       "family": "f:89ac7d1bf8ea",
+       "hard": false,
+       "outcomes": [
+        0,
+        null,
+        1
+       ],
+       "classes": [
+        "integrity",
+        null,
+        "success"
+       ]
+      },
+      "t:6559f6445ced": {
+       "family": "f:1e67c2b8665d",
+       "hard": false,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "infrastructure",
+        "failure",
+        "failure"
+       ]
+      },
+      "t:98cafae07f83": {
+       "family": "f:9bfe3e1a5d66",
+       "hard": true,
+       "outcomes": [
+        null,
+        0,
+        0
+       ],
+       "classes": [
+        null,
+        "failure",
+        "failure"
+       ]
+      },
+      "t:2a8ed719c4c8": {
+       "family": "f:4ff55cd53faf",
+       "hard": false,
+       "outcomes": [
+        0,
+        1
+       ],
+       "classes": [
+        "integrity",
+        "success"
+       ]
+      },
+      "t:813c6fff9784": {
+       "family": "f:29d69f5b6a68",
+       "hard": false,
+       "outcomes": [
+        null,
+        1
+       ],
+       "classes": [
+        null,
+        "success"
+       ]
+      },
+      "t:c5826b6248a7": {
+       "family": "f:fb867bc1a65d",
+       "hard": false,
+       "outcomes": [
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "failure"
+       ]
+      },
+      "t:62ce4394445c": {
+       "family": "f:df0f69f6044e",
+       "hard": false,
+       "outcomes": [
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "failure"
+       ]
+      },
+      "t:ca65978914ce": {
+       "family": "f:4f3903b34c70",
+       "hard": true,
+       "outcomes": [
+        null,
+        0,
+        0
+       ],
+       "classes": [
+        null,
+        "failure",
+        "failure"
+       ]
+      },
+      "t:b6ff8c2503c2": {
+       "family": "f:fefb35fec2c0",
+       "hard": true,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "failure",
+        "failure"
+       ]
+      },
+      "t:44e1cb60ceaa": {
+       "family": "f:811653ff8194",
+       "hard": true,
+       "outcomes": [
+        null,
+        0,
+        0
+       ],
+       "classes": [
+        null,
+        "failure",
+        "failure"
+       ]
+      },
+      "t:6d05f496cf96": {
+       "family": "f:a0c5901addac",
+       "hard": false,
+       "outcomes": [
+        null,
+        0,
+        1
+       ],
+       "classes": [
+        null,
+        "infrastructure",
+        "success"
+       ]
+      },
+      "t:39ef7104a766": {
+       "family": "f:8108a0284b69",
+       "hard": false,
+       "outcomes": [
+        null,
+        1,
+        0
+       ],
+       "classes": [
+        null,
+        "success",
+        "integrity"
+       ]
+      },
+      "t:3be30976b7a6": {
+       "family": "f:29d69f5b6a68",
+       "hard": false,
+       "outcomes": [
+        1,
+        null,
+        1
+       ],
+       "classes": [
+        "success",
+        null,
+        "success"
+       ]
+      },
+      "t:b542f04d337c": {
+       "family": "f:027012f04ba1",
+       "hard": false,
+       "outcomes": [
+        null,
+        0,
+        0
+       ],
+       "classes": [
+        null,
+        "failure",
+        "failure"
+       ]
+      },
+      "t:797d0877e584": {
+       "family": "f:addfaa8446f2",
+       "hard": true,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "failure",
+        "failure"
+       ]
+      },
+      "t:5f6425aabd27": {
+       "family": "f:a251ba22bd47",
+       "hard": true,
+       "outcomes": [
+        null,
+        0,
+        1
+       ],
+       "classes": [
+        null,
+        "failure",
+        "success"
+       ]
+      },
+      "t:8df707d6f349": {
+       "family": "f:4f3903b34c70",
+       "hard": false,
+       "outcomes": [
+        null,
+        0
+       ],
+       "classes": [
+        null,
+        "integrity"
+       ]
+      },
+      "t:d093d6c5761b": {
+       "family": "f:c95cea280c03",
+       "hard": false,
+       "outcomes": [
+        null,
+        0,
+        1
+       ],
+       "classes": [
+        null,
+        "failure",
+        "success"
+       ]
+      },
+      "t:88711845c74d": {
+       "family": "f:367349273d88",
+       "hard": true,
+       "outcomes": [
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "failure"
+       ]
+      },
+      "t:5c6a95a1de0e": {
+       "family": "f:eb5c0456ce70",
+       "hard": false,
+       "outcomes": [
+        0,
+        null,
+        0
+       ],
+       "classes": [
+        "integrity",
+        null,
+        "integrity"
+       ]
+      },
+      "t:f0c29437cd34": {
+       "family": "f:dcdef61af7bb",
+       "hard": false,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "failure",
+        "failure"
+       ]
+      },
+      "t:ad43b1c31e7e": {
+       "family": "f:2c12ad95c54e",
+       "hard": false,
+       "outcomes": [
+        0,
+        null,
+        0
+       ],
+       "classes": [
+        "failure",
+        null,
+        "failure"
+       ]
+      },
+      "t:fc8454e88df2": {
+       "family": "f:4cb6e959a3fc",
+       "hard": false,
+       "outcomes": [
+        null,
+        1
+       ],
+       "classes": [
+        null,
+        "success"
+       ]
+      },
+      "t:8e600c113945": {
+       "family": "f:faf2a0a9e32e",
+       "hard": true,
+       "outcomes": [
+        0
+       ],
+       "classes": [
+        "failure"
+       ]
+      },
+      "t:01af098ba071": {
+       "family": "f:29d69f5b6a68",
+       "hard": false,
+       "outcomes": [
+        1,
+        1
+       ],
+       "classes": [
+        "success",
+        "success"
+       ]
+      },
+      "t:4b9cf3f718fb": {
+       "family": "f:20e5e953ee28",
+       "hard": true,
+       "outcomes": [
+        0,
+        null,
+        0
+       ],
+       "classes": [
+        "integrity",
+        null,
+        "failure"
+       ]
+      },
+      "t:429cd6f1c202": {
+       "family": "f:e6d37236d0f9",
+       "hard": true,
+       "outcomes": [
+        null,
+        1
+       ],
+       "classes": [
+        null,
+        "success"
+       ]
+      },
+      "t:f0ad872980bd": {
+       "family": "f:2d699b66d71c",
+       "hard": true,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "failure",
+        "failure"
+       ]
+      },
+      "t:75e89214f078": {
+       "family": "f:5c628d4c458a",
+       "hard": false,
+       "outcomes": [
+        0,
+        null,
+        0
+       ],
+       "classes": [
+        "failure",
+        null,
+        "failure"
+       ]
+      },
+      "t:021c7aa26191": {
+       "family": "f:ddd3610f98fe",
+       "hard": false,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "failure",
+        "failure"
+       ]
+      },
+      "t:60c6434da4fa": {
+       "family": "f:ad94ee420098",
+       "hard": false,
+       "outcomes": [
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "failure"
+       ]
+      },
+      "t:0f4675f45a25": {
+       "family": "f:625b08cbdfc2",
+       "hard": false,
+       "outcomes": [
+        null,
+        0
+       ],
+       "classes": [
+        null,
+        "failure"
+       ]
+      },
+      "t:540c1ad8a12c": {
+       "family": "f:ddd3610f98fe",
+       "hard": false,
+       "outcomes": [
+        0,
+        null,
+        0
+       ],
+       "classes": [
+        "failure",
+        null,
+        "failure"
+       ]
+      },
+      "t:422765382be9": {
+       "family": "f:9bfe3e1a5d66",
+       "hard": true,
+       "outcomes": [
+        null,
+        null,
+        0
+       ],
+       "classes": [
+        null,
+        null,
+        "failure"
+       ]
+      },
+      "t:7a4fdc97258c": {
+       "family": "f:811653ff8194",
+       "hard": true,
+       "outcomes": [
+        null,
+        0
+       ],
+       "classes": [
+        null,
+        "failure"
+       ]
+      },
+      "t:740bcf025b93": {
+       "family": "f:ef0725aede80",
+       "hard": true,
+       "outcomes": [
+        null,
+        0
+       ],
+       "classes": [
+        null,
+        "failure"
+       ]
+      },
+      "t:5f8cde49d6e2": {
+       "family": "f:dcdef61af7bb",
+       "hard": false,
+       "outcomes": [
+        0
+       ],
+       "classes": [
+        "failure"
+       ]
+      },
+      "t:489b6151d4f2": {
+       "family": "f:9359dafe75c6",
+       "hard": true,
+       "outcomes": [
+        null,
+        null,
+        0
+       ],
+       "classes": [
+        null,
+        null,
+        "failure"
+       ]
+      }
+     },
+     "units": 178,
+     "success": 42,
+     "classes": {
+      "success": 42,
+      "failure": 119,
+      "integrity": 15,
+      "infrastructure": 2
+     },
+     "integrityRuns": 15,
+     "requestsPerUnit": 9.98876404494382
+    },
+    "PCR": {
+     "tasks": {
+      "t:48d8e105703a": {
+       "family": "f:39ac63b3b206",
+       "hard": false,
+       "outcomes": [
+        1,
+        null,
+        0
+       ],
+       "classes": [
+        "success",
+        null,
+        "integrity"
+       ]
+      },
+      "t:6581afddb92a": {
+       "family": "f:8198a500aa0b",
+       "hard": false,
+       "outcomes": [
+        0,
+        null,
+        0
+       ],
+       "classes": [
+        "failure",
+        null,
+        "failure"
+       ]
+      },
+      "t:048d93764179": {
+       "family": "f:367349273d88",
+       "hard": true,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "failure",
+        "failure"
+       ]
+      },
+      "t:23c5938d32d8": {
+       "family": "f:975924316429",
+       "hard": false,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "failure",
+        "infrastructure"
+       ]
+      },
+      "t:4c6c485add7a": {
+       "family": "f:227b3596a9d7",
+       "hard": true,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "failure",
+        "failure"
+       ]
+      },
+      "t:76af7ad1ded7": {
+       "family": "f:b835337ded52",
+       "hard": false,
+       "outcomes": [
+        1,
+        null,
+        1
+       ],
+       "classes": [
+        "success",
+        null,
+        "success"
+       ]
+      },
+      "t:63242bbd8461": {
+       "family": "f:afbe2a2c600f",
+       "hard": false,
+       "outcomes": [
+        null,
+        null,
+        0
+       ],
+       "classes": [
+        null,
+        null,
+        "failure"
+       ]
+      },
+      "t:23dbcb45e687": {
+       "family": "f:b0260eedae93",
+       "hard": true,
+       "outcomes": [
+        null,
+        1,
+        1
+       ],
+       "classes": [
+        null,
+        "success",
+        "success"
+       ]
+      },
+      "t:9683328267cf": {
+       "family": "f:35deb50aea88",
+       "hard": true,
+       "outcomes": [
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "failure"
+       ]
+      },
+      "t:c03c82e8053b": {
+       "family": "f:b0260eedae93",
+       "hard": true,
+       "outcomes": [
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "failure"
+       ]
+      },
+      "t:d5c95c8ac92d": {
+       "family": "f:2c12ad95c54e",
+       "hard": true,
+       "outcomes": [
+        0,
+        null,
+        0
+       ],
+       "classes": [
+        "failure",
+        null,
+        "failure"
+       ]
+      },
+      "t:f8658aa2cad6": {
+       "family": "f:faf2a0a9e32e",
+       "hard": true,
+       "outcomes": [
+        0,
+        1,
+        0
+       ],
+       "classes": [
+        "failure",
+        "success",
+        "failure"
+       ]
+      },
+      "t:a1d3555d8b1c": {
+       "family": "f:a0c5901addac",
+       "hard": false,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "failure",
+        "failure"
+       ]
+      },
+      "t:111287ad1810": {
+       "family": "f:08376235b611",
+       "hard": false,
+       "outcomes": [
+        1,
+        1,
+        1
+       ],
+       "classes": [
+        "success",
+        "success",
+        "success"
+       ]
+      },
+      "t:0ff390133dc6": {
+       "family": "f:df0f69f6044e",
+       "hard": false,
+       "outcomes": [
+        null,
+        0,
+        0
+       ],
+       "classes": [
+        null,
+        "failure",
+        "failure"
+       ]
+      },
+      "t:c512c27f2a8e": {
+       "family": "f:6a99425426eb",
+       "hard": true,
+       "outcomes": [
+        null,
+        null,
+        0
+       ],
+       "classes": [
+        null,
+        null,
+        "failure"
+       ]
+      },
+      "t:68e5c44f6ce4": {
+       "family": "f:811653ff8194",
+       "hard": true,
+       "outcomes": [
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "failure"
+       ]
+      },
+      "t:4192bae97091": {
+       "family": "f:a0c5901addac",
+       "hard": false,
+       "outcomes": [
+        null,
+        1,
+        1
+       ],
+       "classes": [
+        null,
+        "success",
+        "success"
+       ]
+      },
+      "t:1a8ff636aa16": {
+       "family": "f:faf2a0a9e32e",
+       "hard": true,
+       "outcomes": [
+        null,
+        0,
+        0
+       ],
+       "classes": [
+        null,
+        "failure",
+        "failure"
+       ]
+      },
+      "t:5a250a009723": {
+       "family": "f:fb867bc1a65d",
+       "hard": false,
+       "outcomes": [
+        1,
+        1,
+        1
+       ],
+       "classes": [
+        "success",
+        "success",
+        "success"
+       ]
+      },
+      "t:22765b18192c": {
+       "family": "f:b0260eedae93",
+       "hard": true,
+       "outcomes": [
+        null,
+        0
+       ],
+       "classes": [
+        null,
+        "failure"
+       ]
+      },
+      "t:be3cadb5538a": {
+       "family": "f:9bfe3e1a5d66",
+       "hard": true,
+       "outcomes": [
+        0,
+        null,
+        0
+       ],
+       "classes": [
+        "failure",
+        null,
+        "failure"
+       ]
+      },
+      "t:0d087f932efc": {
+       "family": "f:4d3b1c0d62d3",
+       "hard": false,
+       "outcomes": [
+        0
+       ],
+       "classes": [
+        "failure"
+       ]
+      },
+      "t:8baf8dac9c69": {
+       "family": "f:f3af0c8cf155",
+       "hard": false,
+       "outcomes": [
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "failure"
+       ]
+      },
+      "t:bb1a0781cc10": {
+       "family": "f:1e67c2b8665d",
+       "hard": false,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "failure",
+        "failure"
+       ]
+      },
+      "t:a1e60c19aaf8": {
+       "family": "f:afbe2a2c600f",
+       "hard": false,
+       "outcomes": [
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "failure"
+       ]
+      },
+      "t:f1c46fd6e2c8": {
+       "family": "f:4f3903b34c70",
+       "hard": true,
+       "outcomes": [
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "failure"
+       ]
+      },
+      "t:1f803e6cd9f5": {
+       "family": "f:027012f04ba1",
+       "hard": false,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "failure",
+        "failure"
+       ]
+      },
+      "t:81f4f0a65dc5": {
+       "family": "f:ad94ee420098",
+       "hard": false,
+       "outcomes": [
+        1
+       ],
+       "classes": [
+        "success"
+       ]
+      },
+      "t:cf079674d057": {
+       "family": "f:4e1846b1969a",
+       "hard": true,
+       "outcomes": [
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "failure"
+       ]
+      },
+      "t:506ede138617": {
+       "family": "f:ea9c7974d6d1",
+       "hard": false,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "integrity",
+        "integrity",
+        "integrity"
+       ]
+      },
+      "t:38e83abc8071": {
+       "family": "f:227b3596a9d7",
+       "hard": true,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "failure",
+        "failure"
+       ]
+      },
+      "t:6e7fe95a1dec": {
+       "family": "f:08376235b611",
+       "hard": true,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "failure",
+        "failure"
+       ]
+      },
+      "t:f6e21faf8ca3": {
+       "family": "f:93c6a83a62a1",
+       "hard": false,
+       "outcomes": [
+        null,
+        1,
+        1
+       ],
+       "classes": [
+        null,
+        "success",
+        "success"
+       ]
+      },
+      "t:a240934547c0": {
+       "family": "f:ef0725aede80",
+       "hard": false,
+       "outcomes": [
+        null,
+        0,
+        0
+       ],
+       "classes": [
+        null,
+        "failure",
+        "failure"
+       ]
+      },
+      "t:cc064bb90413": {
+       "family": "f:ea9c7974d6d1",
+       "hard": true,
+       "outcomes": [
+        null,
+        0,
+        0
+       ],
+       "classes": [
+        null,
+        "failure",
+        "failure"
+       ]
+      },
+      "t:7e7e21eac38f": {
+       "family": "f:df0f69f6044e",
+       "hard": true,
+       "outcomes": [
+        0,
+        null,
+        0
+       ],
+       "classes": [
+        "failure",
+        null,
+        "failure"
+       ]
+      },
+      "t:08850aa84e73": {
+       "family": "f:84cfc36eba85",
+       "hard": true,
+       "outcomes": [
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "failure"
+       ]
+      },
+      "t:bbdbd50aee25": {
+       "family": "f:3193edd6dfdc",
+       "hard": false,
+       "outcomes": [
+        null,
+        0,
+        0
+       ],
+       "classes": [
+        null,
+        "failure",
+        "failure"
+       ]
+      },
+      "t:b155802da653": {
+       "family": "f:2d699b66d71c",
+       "hard": false,
+       "outcomes": [
+        null,
+        0
+       ],
+       "classes": [
+        null,
+        "failure"
+       ]
+      },
+      "t:f265759c608c": {
+       "family": "f:dcdef61af7bb",
+       "hard": false,
+       "outcomes": [
+        0
+       ],
+       "classes": [
+        "failure"
+       ]
+      },
+      "t:b4c1a24e6781": {
+       "family": "f:2c12ad95c54e",
+       "hard": false,
+       "outcomes": [
+        1,
+        1
+       ],
+       "classes": [
+        "success",
+        "success"
+       ]
+      },
+      "t:f9dd6d14b2e8": {
+       "family": "f:b72e0dd8b4f8",
+       "hard": false,
+       "outcomes": [
+        null,
+        0,
+        0
+       ],
+       "classes": [
+        null,
+        "failure",
+        "failure"
+       ]
+      },
+      "t:a1ab129e34d2": {
+       "family": "f:1ddd527c200d",
+       "hard": true,
+       "outcomes": [
+        0,
+        null,
+        0
+       ],
+       "classes": [
+        "failure",
+        null,
+        "failure"
+       ]
+      },
+      "t:d3ea8dffdc10": {
+       "family": "f:08376235b611",
+       "hard": false,
+       "outcomes": [
+        null,
+        1,
+        1
+       ],
+       "classes": [
+        null,
+        "success",
+        "success"
+       ]
+      },
+      "t:680d2f238fec": {
+       "family": "f:227b3596a9d7",
+       "hard": true,
+       "outcomes": [
+        1,
+        1,
+        1
+       ],
+       "classes": [
+        "success",
+        "success",
+        "success"
+       ]
+      },
+      "t:c53757391853": {
+       "family": "f:6f9c6df2a12c",
+       "hard": false,
+       "outcomes": [
+        null,
+        null,
+        0
+       ],
+       "classes": [
+        null,
+        null,
+        "failure"
+       ]
+      },
+      "t:45d44d6c3bb5": {
+       "family": "f:07a2fcb9fcb1",
+       "hard": false,
+       "outcomes": [
+        1,
+        1
+       ],
+       "classes": [
+        "success",
+        "success"
+       ]
+      },
+      "t:b0e7ea4492d4": {
+       "family": "f:1e67c2b8665d",
+       "hard": true,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "failure",
+        "failure"
+       ]
+      },
+      "t:d78d8673682b": {
+       "family": "f:fefb35fec2c0",
+       "hard": false,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "failure",
+        "failure"
+       ]
+      },
+      "t:d5a22f2940fb": {
+       "family": "f:89ac7d1bf8ea",
+       "hard": false,
+       "outcomes": [
+        1,
+        null,
+        1
+       ],
+       "classes": [
+        "success",
+        null,
+        "success"
+       ]
+      },
+      "t:6559f6445ced": {
+       "family": "f:1e67c2b8665d",
+       "hard": false,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "failure",
+        "failure"
+       ]
+      },
+      "t:98cafae07f83": {
+       "family": "f:9bfe3e1a5d66",
+       "hard": true,
+       "outcomes": [
+        null,
+        0,
+        0
+       ],
+       "classes": [
+        null,
+        "failure",
+        "failure"
+       ]
+      },
+      "t:2a8ed719c4c8": {
+       "family": "f:4ff55cd53faf",
+       "hard": false,
+       "outcomes": [
+        1,
+        1
+       ],
+       "classes": [
+        "success",
+        "success"
+       ]
+      },
+      "t:813c6fff9784": {
+       "family": "f:29d69f5b6a68",
+       "hard": false,
+       "outcomes": [
+        null,
+        1
+       ],
+       "classes": [
+        null,
+        "success"
+       ]
+      },
+      "t:c5826b6248a7": {
+       "family": "f:fb867bc1a65d",
+       "hard": false,
+       "outcomes": [
+        0,
+        1
+       ],
+       "classes": [
+        "failure",
+        "success"
+       ]
+      },
+      "t:62ce4394445c": {
+       "family": "f:df0f69f6044e",
+       "hard": false,
+       "outcomes": [
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "failure"
+       ]
+      },
+      "t:ca65978914ce": {
+       "family": "f:4f3903b34c70",
+       "hard": true,
+       "outcomes": [
+        null,
+        0,
+        0
+       ],
+       "classes": [
+        null,
+        "failure",
+        "failure"
+       ]
+      },
+      "t:b6ff8c2503c2": {
+       "family": "f:fefb35fec2c0",
+       "hard": true,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "failure",
+        "failure"
+       ]
+      },
+      "t:44e1cb60ceaa": {
+       "family": "f:811653ff8194",
+       "hard": true,
+       "outcomes": [
+        null,
+        0,
+        0
+       ],
+       "classes": [
+        null,
+        "failure",
+        "failure"
+       ]
+      },
+      "t:6d05f496cf96": {
+       "family": "f:a0c5901addac",
+       "hard": false,
+       "outcomes": [
+        null,
+        1,
+        1
+       ],
+       "classes": [
+        null,
+        "success",
+        "success"
+       ]
+      },
+      "t:39ef7104a766": {
+       "family": "f:8108a0284b69",
+       "hard": false,
+       "outcomes": [
+        null,
+        1,
+        1
+       ],
+       "classes": [
+        null,
+        "success",
+        "success"
+       ]
+      },
+      "t:b542f04d337c": {
+       "family": "f:027012f04ba1",
+       "hard": false,
+       "outcomes": [
+        null,
+        0,
+        0
+       ],
+       "classes": [
+        null,
+        "failure",
+        "failure"
+       ]
+      },
+      "t:3be30976b7a6": {
+       "family": "f:29d69f5b6a68",
+       "hard": false,
+       "outcomes": [
+        1,
+        null,
+        1
+       ],
+       "classes": [
+        "success",
+        null,
+        "success"
+       ]
+      },
+      "t:797d0877e584": {
+       "family": "f:addfaa8446f2",
+       "hard": true,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "failure",
+        "failure"
+       ]
+      },
+      "t:5f6425aabd27": {
+       "family": "f:a251ba22bd47",
+       "hard": true,
+       "outcomes": [
+        null,
+        1,
+        0
+       ],
+       "classes": [
+        null,
+        "success",
+        "failure"
+       ]
+      },
+      "t:8df707d6f349": {
+       "family": "f:4f3903b34c70",
+       "hard": false,
+       "outcomes": [
+        null,
+        1
+       ],
+       "classes": [
+        null,
+        "success"
+       ]
+      },
+      "t:d093d6c5761b": {
+       "family": "f:c95cea280c03",
+       "hard": false,
+       "outcomes": [
+        null,
+        1,
+        1
+       ],
+       "classes": [
+        null,
+        "success",
+        "success"
+       ]
+      },
+      "t:88711845c74d": {
+       "family": "f:367349273d88",
+       "hard": true,
+       "outcomes": [
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "failure"
+       ]
+      },
+      "t:5c6a95a1de0e": {
+       "family": "f:eb5c0456ce70",
+       "hard": false,
+       "outcomes": [
+        1,
+        null,
+        1
+       ],
+       "classes": [
+        "success",
+        null,
+        "success"
+       ]
+      },
+      "t:f0c29437cd34": {
+       "family": "f:dcdef61af7bb",
+       "hard": false,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "failure",
+        "failure"
+       ]
+      },
+      "t:ad43b1c31e7e": {
+       "family": "f:2c12ad95c54e",
+       "hard": false,
+       "outcomes": [
+        0,
+        null,
+        0
+       ],
+       "classes": [
+        "failure",
+        null,
+        "failure"
+       ]
+      },
+      "t:fc8454e88df2": {
+       "family": "f:4cb6e959a3fc",
+       "hard": false,
+       "outcomes": [
+        null,
+        1
+       ],
+       "classes": [
+        null,
+        "success"
+       ]
+      },
+      "t:8e600c113945": {
+       "family": "f:faf2a0a9e32e",
+       "hard": true,
+       "outcomes": [
+        1
+       ],
+       "classes": [
+        "success"
+       ]
+      },
+      "t:01af098ba071": {
+       "family": "f:29d69f5b6a68",
+       "hard": false,
+       "outcomes": [
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "failure"
+       ]
+      },
+      "t:4b9cf3f718fb": {
+       "family": "f:20e5e953ee28",
+       "hard": true,
+       "outcomes": [
+        0,
+        null,
+        0
+       ],
+       "classes": [
+        "failure",
+        null,
+        "failure"
+       ]
+      },
+      "t:429cd6f1c202": {
+       "family": "f:e6d37236d0f9",
+       "hard": true,
+       "outcomes": [
+        null,
+        1
+       ],
+       "classes": [
+        null,
+        "success"
+       ]
+      },
+      "t:f0ad872980bd": {
+       "family": "f:2d699b66d71c",
+       "hard": true,
+       "outcomes": [
+        0,
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "failure",
+        "failure"
+       ]
+      },
+      "t:75e89214f078": {
+       "family": "f:5c628d4c458a",
+       "hard": false,
+       "outcomes": [
+        0,
+        null,
+        0
+       ],
+       "classes": [
+        "failure",
+        null,
+        "failure"
+       ]
+      },
+      "t:021c7aa26191": {
+       "family": "f:ddd3610f98fe",
+       "hard": false,
+       "outcomes": [
+        0,
+        null,
+        0
+       ],
+       "classes": [
+        "failure",
+        null,
+        "failure"
+       ]
+      },
+      "t:60c6434da4fa": {
+       "family": "f:ad94ee420098",
+       "hard": false,
+       "outcomes": [
+        0,
+        0
+       ],
+       "classes": [
+        "failure",
+        "failure"
+       ]
+      },
+      "t:0f4675f45a25": {
+       "family": "f:625b08cbdfc2",
+       "hard": false,
+       "outcomes": [
+        null,
+        0
+       ],
+       "classes": [
+        null,
+        "failure"
+       ]
+      },
+      "t:540c1ad8a12c": {
+       "family": "f:ddd3610f98fe",
+       "hard": false,
+       "outcomes": [
+        0,
+        null,
+        0
+       ],
+       "classes": [
+        "failure",
+        null,
+        "failure"
+       ]
+      },
+      "t:7a4fdc97258c": {
+       "family": "f:811653ff8194",
+       "hard": true,
+       "outcomes": [
+        null,
+        0
+       ],
+       "classes": [
+        null,
+        "failure"
+       ]
+      },
+      "t:422765382be9": {
+       "family": "f:9bfe3e1a5d66",
+       "hard": true,
+       "outcomes": [
+        null,
+        null,
+        0
+       ],
+       "classes": [
+        null,
+        null,
+        "failure"
+       ]
+      },
+      "t:740bcf025b93": {
+       "family": "f:ef0725aede80",
+       "hard": true,
+       "outcomes": [
+        null,
+        0
+       ],
+       "classes": [
+        null,
+        "failure"
+       ]
+      },
+      "t:5f8cde49d6e2": {
+       "family": "f:dcdef61af7bb",
+       "hard": false,
+       "outcomes": [
+        0
+       ],
+       "classes": [
+        "failure"
+       ]
+      }
+     },
+     "units": 176,
+     "success": 47,
+     "classes": {
+      "success": 47,
+      "failure": 124,
+      "integrity": 4,
+      "infrastructure": 1
+     },
+     "integrityRuns": 4,
+     "requestsPerUnit": 9.988636363636363
+    }
+   }
+  }
+ }
+}

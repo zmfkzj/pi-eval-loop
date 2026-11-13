@@ -1,0 +1,36 @@
+{
+  "schema": "pi-eval-loop/study@1",
+  "id": "confirmatory-1",
+  "protocol": "protocol.json",
+  "plan": {
+    "targetEffect": 0.1,
+    "designEffect": 0.15,
+    "requiredPower": 0.8,
+    "power": [
+      "power.json",
+      "power-focus.json"
+    ],
+    "note": "targetEffect = the typical observed intervention effect (RATIONALE.md section 3); adequacy is judged there, not at the design effect"
+  },
+  "calibration": {
+    "report": null,
+    "approval": "approval-2026-11-07.json",
+    "rule": {
+      "feature": "declared-tier",
+      "hardMaxRate": 0.5,
+      "minTasksPerLevel": 3,
+      "censoring": "infra-excluded@1"
+    },
+    "partition": "families ordered by sha256('confirmatory-1:partition:' + family); calibration takes families in that order until it holds >= 3 accepted tasks of each declared tier; the rest are holdout candidates (candidate- and outcome-blind)",
+    "budget": {
+      "ledger": "/home/arthur/Code/agent_workflow/runs/eval-loop-confirmatory-1/budget/target-model-requests.jsonl",
+      "limit": 4500,
+      "gatewayDb": "/home/arthur/Downloads/EasyCLIProxyAPI-v0.3.20-Linux-amd64/usage-records/usage.db",
+      "meterMargin": 300
+    }
+  },
+  "privateStorage": "/home/arthur/Code/agent_workflow/runs/eval-loop-confirmatory-1",
+  "overlapPools": [
+    "/home/arthur/Code/agent_workflow/runs/eval-loop-supply"
+  ]
+}

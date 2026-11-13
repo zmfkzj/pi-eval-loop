@@ -1,0 +1,59 @@
+{
+  "notes": "confirmatory-1 v3 (PROVISIONAL, frozen 2026-11-07 before any holdout outcome; supersedes protocol-v2.json for planning; v1 and v2 kept unchanged as earlier registrations). Rationale: DESIGN-v3.md (measured calibration, integrity-censored difficulty @2, power with the measured private baseline). Every gate value is identical to v2. Running, reserving, adopting or confirming remain separate operator decisions.",
+  "holdout": {
+    "repeats": 5,
+    "minTasks": 144,
+    "minFamilies": 48,
+    "acceptedProvenance": [
+      "external",
+      "private-reviewed"
+    ],
+    "hardBasis": [
+      "calibrated"
+    ],
+    "execution": "interleaved",
+    "maxOwnerShare": 0.5,
+    "priorFamilyReuse": "forbid",
+    "privateReview": "cross-provider"
+  },
+  "adoption": {
+    "requireFamilyLevel": true
+  },
+  "analysisPlan": {
+    "mode": "confirmatory",
+    "registeredAt": "2026-11-07T06:25:00Z",
+    "rationale": {
+      "document": "studies/confirmatory-1/DESIGN-v3.md",
+      "sha256": "e4ff7d1e664c83d34349f3f0f7f45f8e26d56b3b829ae5bd66dafb09b5586a4f"
+    },
+    "minEffect": 0.05,
+    "alpha": 0.0125,
+    "minTasks": 144,
+    "minFamilies": 48,
+    "minHardTasks": 48,
+    "permutationDraws": 20000,
+    "series": {
+      "id": "orche-confirmatory-series-1",
+      "ledger": "/home/arthur/Code/agent_workflow/runs/eval-loop-confirmatory-1/series/ledger.jsonl",
+      "alphaTotal": 0.05
+    },
+    "lowExposure": {
+      "required": true,
+      "minTasks": 72,
+      "provenance": [
+        "private-reviewed"
+      ]
+    },
+    "confirmation": {
+      "required": true,
+      "pool": "/home/arthur/Code/agent_workflow/runs/eval-loop-confirmatory-1/pool",
+      "alpha": 0.0125,
+      "minTasks": 144,
+      "minFamilies": 48
+    }
+  },
+  "datasets": {
+    "holdout": null,
+    "holdoutPool": "/home/arthur/Code/agent_workflow/runs/eval-loop-confirmatory-1/pool"
+  }
+}

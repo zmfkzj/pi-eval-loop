@@ -231,3 +231,12 @@ export function redact(text, secrets) {
   for (const secret of secrets) if (secret && secret.length >= 8) out = out.split(secret).join("<redacted>");
   return out;
 }
+
+/**
+ * Fault injection for crash tests (2026-11-07): when EVAL_LOOP_FAULT names this point, the process is killed with SIGKILL right
+ * here (no finally, no cleanup, lock files stay behind) -- the interruption a power loss or OOM kill would cause. A no-op otherwise.
+ * @param {string} name
+ */
+export function fault(name) {
+  if (process.env.EVAL_LOOP_FAULT === name) process.kill(process.pid, "SIGKILL");
+}

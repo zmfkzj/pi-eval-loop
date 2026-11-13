@@ -17,6 +17,7 @@ import { scriptedProposer } from "./proposer.mjs";
 import { SKILL_MARKER, startFauxUpstream } from "./faux-upstream.mjs";
 import { writeReport } from "./report.mjs";
 import { gitlinks } from "./deploy.mjs";
+import { sha256 } from "./util.mjs";
 
 const TRAIN_DEV = ["a1-rounding", "a2-discount-codes", "b1-static-traversal", "b2-patch-endpoint", "c1-timezone", "c2-since-flag-ko", "d3-money-migration-ko", "d7-config-reload"];
 const HOLDOUT = ["a6-typo-message", "b3-pagination", "c4-malformed-lines", "c6-csv-export", "p1-ticket-batch", "p3-library-features-ko"];
@@ -62,10 +63,16 @@ export async function selftest({ log = () => {}, keep = false, root } = {}) {
   const holdoutTasks = loadLocal(holdoutDir);
   const faux = await startFauxUpstream({ tasks: [...tasks, ...holdoutTasks].map(t => ({ ...t, policy: { solve: 0.3, solveWithMarker: 0.95 } })), model: DEFAULT_PROTOCOL.route.model, seed: "selftest" });
   const env = { ...env0, upstream: faux.url, keyOverride: "selftest-faux-key" };
+  // protocol-4 adopts only under a complete confirmatory plan: the selftest exercises the deploy path with a throwaway plan in its
+  // own temporary root (illustrative values, its own series ledger; never a recommendation and never shared with real experiments).
+  const rationale = "# selftest fixture: illustrative plan values to exercise the adoption path; not a sample-size justification\n";
+  writeFileSync(join(root, "selftest-rationale.md"), rationale);
   const protocol = merge(structuredClone(DEFAULT_PROTOCOL), {
     seed: "pi-eval-loop-selftest", target: { mode: "direct" }, parallelism: 4, unit: { wallMs: 120_000, graderMs: 60_000 },
-    screening: { tasks: 4 }, holdout: { acceptedProvenance: ["selftest-copy"] }, baselines: { multiAttempt: { k: 2 } },
+    screening: { tasks: 4 }, holdout: { acceptedProvenance: ["selftest-copy"], priorFamilyReuse: "forbid" }, baselines: { multiAttempt: { k: 2 } },
     watchdog: { noProgressCandidates: 2, maxCandidatesPerCycle: 4 },
+    analysisPlan: { mode: "confirmatory", registeredAt: new Date(started).toISOString(), rationale: { document: join(root, "selftest-rationale.md"), sha256: sha256(rationale) }, minEffect: 0.1, alpha: 0.05, minTasks: HOLDOUT.length, minFamilies: 4, minHardTasks: 1,
+      series: { id: "selftest", ledger: join(root, "selftest-series.jsonl"), alphaTotal: 0.05 }, lowExposure: { required: false }, confirmation: { required: false } },
   });
   const backend = realBackend(env);
   const run = backend.run;
