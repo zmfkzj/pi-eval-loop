@@ -26,10 +26,16 @@ export class Evaluator {
   /** @type {(line: string) => void} */ log;
   /**
    * @param {{ stateDir: string, protocol: any, protocolDigest: string, envDigest?: string, tasksById: Record<string, any>, grading?: any,
-   *   backend: { run(input: any): Promise<any>, simulated?: boolean }, log?: (line: string) => void }} options
+   *   backend: { run(input: any): Promise<any>, simulated?: boolean }, log?: (line: string) => void,
+   *   admission?: { reserve(info: any): Promise<{ id: string, amount: number } | null>, settle(ticket: any, used: number, detail?: any): Promise<void>, refusal?: string | null } }} options
+   *   admission (optional, src/request-budget.mjs): every ATTEMPT (first try and infrastructure retry) is admitted by a durable
+   *   reservation BEFORE its dispatch record; a refused reservation halts this evaluator (no dispatch, no record: the unit is
+   *   censored, never counted as a failure); after the attempt the reservation is settled with max(forwarded requests of the
+   *   record, POST starts in the attempt's wire journals). A failing settlement leaves the reservation charged in full and halts.
    */
-  constructor({ stateDir, protocol, protocolDigest, envDigest, tasksById, grading, backend, log = () => {} }) {
-    Object.assign(this, { stateDir, protocol, protocolDigest, envDigest, tasksById, grading, backend, log });
+  constructor({ stateDir, protocol, protocolDigest, envDigest, tasksById, grading, backend, log = () => {}, admission }) {
+    Object.assign(this, { stateDir, protocol, protocolDigest, envDigest, tasksById, grading, backend, log, admission });
+    /** @type {string | null} */ this.halted = null;
     this.ledger = new Ledger(join(stateDir, "runs.jsonl"));
     this.inflight = new Set();
   }
@@ -82,14 +88,32 @@ export class Evaluator {
     let next = 0;
     let stopped = Boolean(stopWhen?.());
     const worker = async () => {
-      while (!stopped && next < queue.length) {
+      while (!stopped && !this.halted && next < queue.length) {
         const unit = queue[next++];
         out.set(unit.key, await this.runOne(harness, unit, context));
-        if (stopWhen?.()) stopped = true;
+        if (this.halted || stopWhen?.()) stopped = true;
       }
     };
     await Promise.all(Array.from({ length: Math.max(1, Math.min(this.protocol.parallelism, queue.length)) }, worker));
     return queue.map(u => out.get(u.key));
+  }
+
+  /**
+   * Run (or reuse) a mixed-harness schedule as ONE queue, in its planned order (src/design.mjs interleavedSchedule): `items` =
+   * [{ harness, unit: { task, split, repeat, index?, block?, slot? } }]. Workers take items strictly in queue order, so the
+   * first-attempt dispatch records in the ledger follow the plan (a dispatch is appended synchronously before any await); a
+   * resumed run skips recorded units and reconciles dispatched-but-unrecorded ones exactly like `evaluate`. Returns the final
+   * records in item order.
+   * @param {Array<{ harness: any, unit: { task: string, split: string, repeat: number, index?: number, block?: number, slot?: number } }>} items @param {string} context
+   */
+  async evaluateScheduled(items, context) {
+    const queue = items.map(({ harness, unit }) => ({ harness, unit: { ...unit, key: this.keyOf(harness, unit.task, unit.split, unit.repeat) } }));
+    if (new Set(queue.map(q => q.unit.key)).size !== queue.length) throw new Error("evaluateScheduled: duplicate unit in the schedule");
+    const out = new Map();
+    let next = 0;
+    const worker = async () => { while (!this.halted && next < queue.length) { const { harness, unit } = queue[next++]; out.set(unit.key, await this.runOne(harness, unit, context)); } };
+    await Promise.all(Array.from({ length: Math.max(1, Math.min(this.protocol.parallelism, queue.length)) }, worker));
+    return queue.map(q => out.get(q.unit.key));
   }
 
   async runOne(harness, unit, context) {
@@ -101,12 +125,20 @@ export class Evaluator {
       state = this.unitState(unit.key);
       while (true) {
         if (state.last && !(retryable(state.last) && state.attempts <= this.protocol.infra.maxRetries)) return state.last;
+        if (this.halted) return state.last;
         const attempt = state.attempts + 1;
         const runId = `${harness.id}-${unit.task}-${unit.split}-r${unit.repeat}-a${attempt}-${unit.key.slice(0, 8)}`;
+        let ticket = null;
+        if (this.admission) {
+          const amount = this.protocol.unit.maxRequests * (harness.kind === "multi" ? harness.k : 1);
+          try { ticket = await this.admission.reserve(amount, { run_id: runId, unit_key: unit.key, attempt, task: unit.task, repeat: unit.repeat, harness: harness.id }); }
+          catch (error) { this.halted = `request accounting unavailable: ${String(error?.message ?? error).slice(0, 300)}`; return state.last; }
+          if (!ticket) { this.halted = this.admission.refusal ?? "request budget refused the reservation"; return state.last; }
+        }
         const controlDir = mkdtempSync(join(tmpdir(), "el-"));
         // The key prefix keeps evidence of another identity (environment, commit) of the same slot from being overwritten.
         const evidence = join(this.stateDir, "evidence", harness.id, `${unit.split}-${unit.task}-r${unit.repeat}-a${attempt}-${unit.key.slice(0, 8)}`);
-        this.ledger.append({ type: "dispatch", unit_key: unit.key, attempt, run_id: runId, controlDir, harness: { id: harness.id, kind: harness.kind, commit: harness.commit ?? null, mode: harness.mode ?? null }, task: unit.task, split: unit.split, repeat: unit.repeat, context, simulated: !!this.backend.simulated });
+        this.ledger.append({ type: "dispatch", unit_key: unit.key, attempt, run_id: runId, controlDir, harness: { id: harness.id, kind: harness.kind, commit: harness.commit ?? null, mode: harness.mode ?? null }, task: unit.task, split: unit.split, repeat: unit.repeat, context, simulated: !!this.backend.simulated, ...(ticket ? { reservation: ticket.id } : {}), ...(Number.isInteger(unit.index) ? { schedule: { index: unit.index, block: unit.block, slot: unit.slot } } : {}) });
         let record;
         try {
           record = await this.backend.run({ harness, task: this.tasksById[unit.task], repeat: unit.repeat, split: unit.split, context, protocol: this.protocol, protocolDigest: this.protocolDigest, envDigest: this.envDigest, scratch: join(controlDir, "scratch"), controlDir, evidence, attempt, unitKey: unit.key, runId, grading: this.grading[unit.task] });
@@ -121,6 +153,12 @@ export class Evaluator {
         record.attempt = attempt; record.unit_key = unit.key;
         this.ledger.append({ type: "result", unit_key: unit.key, record });
         this.log(`${harness.id} ${unit.split}/${unit.task}#${unit.repeat} a${attempt}: ${record.terminal_status}${record.task_success ? " PASS" : ""}`);
+        if (ticket) {
+          const starts = wireJournals(controlDir).flatMap(wireEntries).filter(e => e.phase === "start" && e.method === "POST").length;
+          const used = Math.max(record.model_requests ?? 0, starts);
+          try { await this.admission.settle(ticket, used, { run_id: runId, forwarded: record.model_requests ?? 0, wirePostStarts: starts, completed: record.model_requests_completed ?? 0, terminal: record.terminal_status }); }
+          catch (error) { this.halted = `request settlement failed (reservation stays charged in full): ${String(error?.message ?? error).slice(0, 300)}`; }
+        }
         rmSync(controlDir, { recursive: true, force: true });
         state = this.unitState(unit.key);
       }

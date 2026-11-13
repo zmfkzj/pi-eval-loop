@@ -266,7 +266,7 @@ test("targeting: recurring gate-blocking classes first; a single occurrence does
 
 test("no token, cost or money limit exists or can be configured; the non-financial safety limits are unchanged", () => {
   const p = structuredClone(DEFAULT_PROTOCOL);
-  assert.equal(p.version, "pi-eval-loop/protocol-3");
+  assert.equal(p.version, "pi-eval-loop/protocol-4"); // protocol-4 keeps every protocol-3 limit (asserted below) and adds stricter evaluation rules
   const text = JSON.stringify(p);
   assert.doesNotMatch(text, /token|budget|cost|usd|money/i);
   assert.throws(() => merge(p, { efficiency: { maxTokens: 1 } }), /unknown key maxTokens/);

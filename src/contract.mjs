@@ -56,6 +56,10 @@ export function validateState(state) {
   if (["adopt", "post-adopt"].includes(effective) && !(state.final?.adopt === true && typeof state.selection?.selected === "string" && state.final.candidate === state.selection.selected)) problems.push(`phase ${effective} without an ADOPT decision for the selection`);
   if (state.holdoutUse !== undefined && (typeof state.holdoutUse !== "object" || state.holdoutUse === null)) problems.push("holdoutUse is not an object");
   if (state.halted !== undefined && (typeof state.halted !== "string" || !state.halted)) problems.push("halted is not a reason string");
+  // protocol-4 records (absent in older states, which stay valid as they are).
+  if (state.holdoutSchedule !== undefined && !(state.holdoutSchedule && typeof state.holdoutSchedule.digest === "string" && state.holdoutSchedule.digest.length === 64)) problems.push("holdoutSchedule without a schedule digest");
+  if (state.confirmation !== undefined && !(state.confirmation && typeof state.confirmation.verdict === "string")) problems.push("confirmation without a verdict");
+  if (state.confirmation?.use && !(typeof state.selection?.selected === "string" && state.final?.adopt === true)) problems.push("confirmation use recorded without an adoption of the selection");
   return problems;
 }
 
@@ -207,8 +211,15 @@ export function stateSummary(state) {
     cycleComplete: state.phase === "done" && Boolean(state.cycleFingerprint),
     searchStop: state.phase === "search" ? null : state.searchStop ?? null,
     counters: { candidates: state.counters?.candidates ?? 0, noProgress: state.counters?.noProgress ?? 0 },
-    final: final ? { verdict: final.verdict ?? null, candidate: final.candidate ?? null, adopt: final.adopt === true, explorationOnly: final.explorationOnly === true, rolledBack: Boolean(final.rolledBack), reasonCount: Array.isArray(final.reasons) ? final.reasons.length : 0 } : null,
+    final: final ? { verdict: final.verdict ?? null, candidate: final.candidate ?? null, adopt: final.adopt === true, explorationOnly: final.explorationOnly === true, rolledBack: Boolean(final.rolledBack), reasonCount: Array.isArray(final.reasons) ? final.reasons.length : 0,
+      // protocol-4 evidence label (null for older states): exploratory | confirmatory, and whether a confirmatory claim was earned.
+      evidence: final.evidence ? { class: String(final.evidence.class ?? ""), confirmatoryClaim: final.evidence.confirmatoryClaim === true, confirmation: String(final.evidence.confirmation ?? "") } : null,
+      execution: final.execution ? String(final.execution.mode ?? "") : null } : null,
+    confirmation: state.confirmation ? { verdict: String(state.confirmation.verdict), at: state.confirmation.at ?? null } : null,
     adopted: state.adoption ? { at: state.adoption.at ?? null } : null,
+    // protocol-4 stages, kept apart for machine consumers: a candidate accepted as an exploratory measurement is not adopted; a
+    // production adoption is not confirmed until the independent confirmation says CONFIRMED (absent = "unconfirmed", never success).
+    acceptance: final ? acceptanceOf(state, final) : null,
     doneAt: state.doneAt ?? null, updatedAt: state.updatedAt ?? null,
     lastInterruption: last ? { at: last.at ?? null, signal: last.signal ?? null } : null,
   };
@@ -247,4 +258,20 @@ export function statusSummary(dir) {
  */
 export function outcomeRecord(outcome, { stateDir, state, ...extra }) {
   return { schema: OUTCOME_SCHEMA, outcome, exitCode: EXIT[outcome], stateDir, phase: state?.phase ?? null, cycle: state?.cycle ?? null, ...extra, status: state ? stateSummary(state) : null, at: new Date().toISOString() };
+}
+
+/**
+ * Acceptance stage of a finished decision (pure). stage: "not-accepted" | "candidate-accepted-exploratory" | "adoption-decided-not-applied" |
+ * "adopted-unconfirmed" | "adopted-confirmed" | "adopted-not-confirmed" | "rolled-back". `legacy`: recorded before protocol-4 (no
+ * evidence label): its adoption was never checked against a confirmatory plan.
+ * @param {any} state @param {any} final
+ */
+export function acceptanceOf(state, final) {
+  const productionAdopted = Boolean(state.adoption) && !final.rolledBack;
+  const confirmation = state.confirmation?.verdict ? String(state.confirmation.verdict) : null;
+  const stage = final.rolledBack ? "rolled-back"
+    : productionAdopted ? (confirmation === "CONFIRMED" ? "adopted-confirmed" : confirmation === "NOT_CONFIRMED" ? "adopted-not-confirmed" : "adopted-unconfirmed")
+    : final.adopt === true ? "adoption-decided-not-applied"
+    : final.verdict === "EXPLORATORY_SUPPORTED" ? "candidate-accepted-exploratory" : "not-accepted";
+  return { stage, candidateAccepted: final.candidateAccepted === true || final.adopt === true, productionAdopted, confirmed: confirmation === "CONFIRMED", confirmation, evidenceClass: final.evidence?.class ? String(final.evidence.class) : null, legacy: !final.evidence };
 }

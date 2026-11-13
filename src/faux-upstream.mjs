@@ -42,12 +42,17 @@ export async function startFauxUpstream({ tasks, model, seed = "faux", port = 0 
       if (req.method === "GET") { res.writeHead(200, { "content-type": "application/json" }); res.end(JSON.stringify({ models: MODELS })); return; }
       let body; try { body = JSON.parse(decode(req.headers["content-encoding"], Buffer.concat(chunks)).toString("utf8")); } catch { res.writeHead(400); res.end("{}"); return; }
       const session = String(body.prompt_cache_key ?? "none");
+      // The draw is seeded by the unit's stable identity, not the whole session id: the runner's session id ends with the unit key
+      // prefix (`el-<harness>-<task>-<split>-r<repeat>-a<attempt>-<key8>-<i>`), and the key hashes the protocol digest, which
+      // includes the per-run registration time - so seeding on it made every selftest draw different outcomes (2026-11-07:
+      // the same unit got keys 2bf632da vs 80cfe39c in two runs, c001 screening 0.56 vs 0.99).
+      const drawKey = session.replace(/-[0-9a-f]{8}-(\d+)$/, "-$1");
       const text = userText(body.input);
       const task = tasks.find(t => text.includes(t.instruction.slice(0, 120)));
       const marked = String(body.instructions ?? "").includes(SKILL_MARKER) || JSON.stringify(body.input ?? []).includes(SKILL_MARKER);
       requests.push({ session, task: task?.id, marked, path: req.url });
       if (!plans.has(session)) {
-        const rng = createRng(`${seed}:${session}`);
+        const rng = createRng(`${seed}:${drawKey}`);
         const policy = task?.policy ?? { solve: 0 };
         const p = marked && policy.solveWithMarker !== undefined ? policy.solveWithMarker : policy.solve;
         const steps = [];

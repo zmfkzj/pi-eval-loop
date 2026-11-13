@@ -87,12 +87,23 @@ export function buildReport(stateDir) {
     if (state.final.independence) L.push(`  - holdout independence at first use: ${state.final.independence.independent ? "yes" : "NO"} (${state.final.independence.why})`);
     if (state.final.holdout) L.push(`  - holdout overall delta ${num(state.final.holdout.delta.overall.mean)} [${num(state.final.holdout.delta.overall.lo95)}, ${num(state.final.holdout.delta.overall.hi95)}], adoption support ${num(state.final.holdout.support)} over ${state.final.holdout.tasks} tasks / ${state.final.holdout.families} families`);
     if (state.final.rolledBack) L.push(`  - automatic rollback at ${state.final.rolledBack.at}`);
+    // protocol-4 (absent in older states): execution order, family-level support, confirmatory checks and the evidence label.
+    const ex = state.final.execution;
+    if (ex) L.push(`  - holdout execution: ${ex.mode}${ex.mode === "interleaved" ? ` (schedule ${String(ex.scheduleDigest).slice(0, 12)}, ${ex.dispatched}/${ex.planned} first dispatches, ${ex.followsPlan ? "in planned order" : `**${ex.inversions} order inversion(s)**`}, ${ex.retries} retr${ex.retries === 1 ? "y" : "ies"})` : ` - ${ex.note}`}`);
+    if (state.final.holdout?.familySupport !== undefined) L.push(`  - family-clustered adoption support ${num(state.final.holdout.familySupport)}`);
+    const c = state.final.confirmatory;
+    if (c) L.push(`  - confirmatory checks: ${c.ok ? "passed" : "not passed"}; randomization p ${c.randomization?.valid ? num(c.randomization.p) : "n/a"} (${c.randomization?.discordantBlocks ?? 0} discordant blocks, smallest attainable p ${c.randomization?.minAttainableP !== undefined ? num(c.randomization.minAttainableP) : "n/a"})`);
+    const ev = state.final.evidence;
+    if (ev) L.push(`  - evidence: ${ev.class}${ev.confirmatoryClaim ? " (confirmatory claim on these tasks)" : ""}; ${ev.note}; independent confirmation: ${ev.confirmation}`);
+    if (state.confirmation) L.push(`  - independent post-adoption confirmation: ${state.confirmation.verdict}${state.confirmation.batch ? ` on batch ${state.confirmation.batch}` : ""}`);
   }
   if (history.length) { L.push("", "### Stable history (local refs only; never pushed)", ""); for (const h of history) L.push(`- ${h.at} ${h.type}${h.candidateId ? ` ${h.candidateId}` : ""}${h.commit ? ` orche ${h.commit.slice(0, 12)}` : ""}${h.reason ? `: ${h.reason}` : ""}${h.problems?.length ? ` problems: ${h.problems.join("; ")}` : ""}`); }
   L.push("", "## Resource usage (recorded only)", "", `Optimizer (proposer) requests ${proposerUsage.requests}, tokens in/out ${proposerUsage.input}/${proposerUsage.output}. Evaluated runs: ${finals.length} (all attempts: ${records.length}).`, "");
   L.push("## Integrity of the records", "", `runs ledger chain: ${integrity.runsLedger.length ? `**BROKEN** (${integrity.runsLedger.slice(0, 3).join("; ")})` : "intact"}; events ledger: ${integrity.events.length ? "**BROKEN**" : "intact"}.`, "");
   L.push("## Limitations", "", "- Bootstrap support is a posterior-predictive fraction under a Dirichlet model of THESE tasks and runs; it is not a probability of real-world generalization, and few runs remain few observations.", "- Screening support at level `execution` ignores task-sampling uncertainty (as in ParetoSaddler); development and adoption use task-level resampling.", "- Hard/medium/easy tiers of the suite tasks are a pre-registered prefix rule (a=easy, b/c=medium, d/p=hard), not a measured difficulty.", "- Suite tasks are exposed (used by earlier orche experiments): they are train/dev only and never an independent holdout.");
   if (state.final?.independence && !state.final.independence.independent) L.push("- The holdout used here was NOT independent; no adoption claim can rest on it.");
+  if (state.final?.evidence?.class === "exploratory" || (state.final && !state.final.evidence)) L.push("- Exploratory evidence only: no confirmatory or generalized-improvement claim is made from this cycle.");
+  L.push("- 'Unexposed' holdout tasks were not named in earlier experiments; absence from model training data is not established (public sources).");
   if (simulated) L.push("- Simulated records are not measurements.");
   L.push("");
   return { markdown: L.join("\n"), json };

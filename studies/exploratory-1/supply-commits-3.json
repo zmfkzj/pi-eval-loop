@@ -1,0 +1,3 @@
+{ "since": "2026-01-01T00:00:00Z",
+  "discovery": { "keywords": ["sort", "random", "uuid", "slug", "case", "bytes", "duration", "binary", "queue", "lru", "tree", "graph", "matrix", "geometry", "currency", "locale", "unicode", "base64", "http", "headers", "mime", "cookie", "env", "args", "argv", "retry", "throttle", "debounce", "merge", "clone", "equal", "compare", "schema", "ast", "tokenizer", "lexer", "sql", "xml", "ini", "toml", "svg", "range", "interval", "set", "map", "iterator", "generator", "bitset", "checksum", "pretty"], "perKeyword": 250, "maxRepos": 120, "maxReposPerOwner": 2, "preferUnscanned": true },
+  "commits": { "maxValidatePerRepo": 3 } }

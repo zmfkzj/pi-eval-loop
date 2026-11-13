@@ -4,7 +4,7 @@ import { existsSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 import { atomicWriteJson, ensureDir, readJson, sha256 } from "./util.mjs";
 
-export const STATUSES = ["created", "build_failed", "rejected_patch", "duplicate", "screening", "promoted", "rejected", "inconclusive", "dev_qualified", "dev_rejected", "selected", "holdout_kept_stable", "holdout_blocked", "adopted", "rolled_back", "baseline"];
+export const STATUSES = ["created", "build_failed", "rejected_patch", "duplicate", "screening", "promoted", "rejected", "inconclusive", "dev_qualified", "dev_rejected", "selected", "holdout_kept_stable", "holdout_exploratory_supported", "holdout_blocked", "adopted", "rolled_back", "baseline"];
 
 /** Normalized patch hash: ignores index lines, hunk offsets and whitespace-only differences. */
 export function patchKey(patch) {

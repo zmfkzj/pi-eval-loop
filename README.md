@@ -34,7 +34,8 @@ npm run eval:loop -- --selftest    # credential-free end-to-end run with a faux 
 npm run eval:loop -- --preflight --protocol FILE [--state DIR]   # read-only: holdout this experiment has/would get, eligible?
 node pi-eval-loop/bin/eval-loop-supply.mjs collect --pool DIR   # public-source holdout supply: collect, validate, seal a batch
 node pi-eval-loop/bin/eval-loop-supply.mjs status --pool DIR    # batches, reservations, uses, reason-code counts (non-secret)
-node pi-eval-loop/bin/eval-loop-supply.mjs collect-exercism --pool DIR [--no-seal]  # annotated source: Exercism JS hard exercises (difficulty 8-10)
+node pi-eval-loop/bin/eval-loop-supply.mjs collect-exercism --pool DIR [--track exercism/typescript] [--no-seal]  # annotated source: Exercism JS/TS hard exercises (difficulty 8-10)
+node pi-eval-loop/bin/eval-loop-supply.mjs refresh --pool DIR --protocol FILE   # unattended model-free pass: all sources + seal; exit 0 = eligible unused batch available, 2 = none, 3 = busy
 # options: --state DIR (default pi-eval-loop/state/default, git-ignored)  --protocol FILE (overrides; locked at first run)
 ```
 
@@ -179,12 +180,212 @@ This is intentional: continue in a new state directory, and never rewrite a reco
 | Efficiency (protocol-3, same gates) | Recurring gate-blocking failure classes (task-agent integrity, harness crash) are targeted first, with the critical reasons of recent rejected candidates as proposer evidence; harness checks (typecheck and the test suite under the adoption rule) run before any model run; once a critical problem is recorded no further screening/development unit of that candidate is dispatched (candidate before parent; a stopped round is never a sample or estimate); recorded outcomes are reused only for an identical unit key (harness commit, task, split, repeat, protocol and environment digest) and statistics use only the current identity. No token, cost or money limit exists (operator decision); the safety limits below are unchanged. Faux evidence: `test/efficiency.test.mjs`; savings on real runs are not measured yet |
 | Real measurements | `abc-real-1` (protocol-1): truncated exploratory evidence (time-motivated 4-candidate cap, 3 evaluated per arm). `explore-real-2` (protocol-2): exploration-only train/dev search to the pre-registered stop; see `docs/results-explore-real-2.md` |
 | Holdout | `holdout-v1` is implementer-authored and was consumed once by `abc-real-1`; it is not independent and is not reused |
-| Holdout supply | `eval-loop-supply` collects real upstream changes of public npm projects (license-checked, provenance-recorded, deduplicated, validated in the grading sandbox), seals candidate-blind batches in a pool outside the package, and a protocol with `datasets.holdoutPool` reserves one per experiment; the engine blocks before any run without an eligible unused batch (docs/design.md §4). Supply tiers are a size proxy and never count as the hard stratum (`holdout.hardBasis`), so the first real batch is structurally valid but BLOCKED (no accepted hard task). The hard stratum comes from `collect-exercism`: Exercism JavaScript exercises whose maintainers rate them 8-10 (hard by Exercism's documented rubric; `difficultyBasis: "source"` with the annotation pinned). Public code and exercises may be in pretraining data: not excluded |
+| Holdout supply | `eval-loop-supply` collects real upstream changes of public npm projects (license-checked, provenance-recorded, deduplicated, validated in the grading sandbox), seals candidate-blind batches in a pool outside the package, and a protocol with `datasets.holdoutPool` reserves one per experiment; the engine blocks before any run without an eligible unused batch (docs/design.md §4). Supply tiers are a size proxy and never count as the hard stratum (`holdout.hardBasis`), so the first real batch is structurally valid but BLOCKED (no accepted hard task). The hard stratum comes from `collect-exercism`: Exercism JavaScript and TypeScript exercises whose maintainers rate them 8-10 (hard by Exercism's documented rubric; `difficultyBasis: "source"` with the annotation pinned; one problem once per pool across tracks). Batches cap one account at half of the sealed tasks; discovery caps repositories per account and rotates to unscanned projects; tests importing packages unavailable offline are rejected before validation; `refresh` runs everything unattended. Public code and exercises may be in pretraining data: not excluded (other-language benchmark listings are recorded per task) |
 | Deployment | **BLOCKED**: no externally curated independent holdout exists. No adoption and no real performance improvement are claimed |
 | Operational limits | Cost and time are not optimization targets; safety limits only: 200 candidates/cycle backstop, 72 h hang watchdog, 10 failed proposals per failure class since the last progress (cannot fire before the 10-candidate patience with the defaults), infra stops, 120 requests / 30 min per proposer session, 4 files / 200 diff lines per patch, 20 min / 150 requests per task unit (exact list: `docs/results-explore-real-2.md`) |
 | Exploration quality | Not demonstrated: the 20 explore-real-2 proposals were variants of one hypothesis, and none targeted the integrity class that rejected them all (protocol-3 targets it first; whether that yields better candidates is not measured) |
 | Diagnostics | No package typecheck script; `node pi-eval-loop/scripts/checkjs-compare.mjs <base> <out>` compares tsc checkJs output (record: `records/explore-real-2/checks/checkjs/`) |
 | Packaging | Git submodule `pi-eval-loop/` of the umbrella (`zmfkzj/pi-eval-loop`, branch `main`). Its history continues the umbrella-directory commits it was converted from (`Imported-From:` trailers). The pinned commit must be pushed before fresh clones can initialize it |
+
+## Protocol-4 (2026-11-06; local, not deployed)
+
+- Default analysis plan is **exploratory**: the holdout still runs every protocol-3 gate plus a family-level check, but a
+  passing candidate is `EXPLORATORY_SUPPORTED` (`final.adopt` false, nothing deployed). Only a complete, pre-registered
+  **confirmatory** plan (`analysisPlan`, operator-written rationale document with sha256, effect size, alpha, coverage, shared
+  series error budget) can produce `ADOPT`, and only when its confirmatory checks pass in addition to every original gate.
+- Holdout arms run in one randomized, interleaved schedule frozen before the first run; `--confirm-adoption` re-measures an
+  adoption on a separate sealed, unused batch (dormant until configured; never scheduled).
+- `status@1` adds `final.evidence` and `acceptance` (candidate accepted / production adopted / confirmed kept apart; a missing
+  confirmation is never reported as success). Experiments recorded under protocol-3 are refused read-only.
+- Prerequisites of a confirmatory claim (2026-11-06): `studies/confirmatory-1/` holds the registered PROVISIONAL plan
+  (`RATIONALE.md`, `protocol.json`, simulation `power.mjs` on real ctrl-ablation-1 records), the bounded calibration runner
+  (`calibrate.mjs`, approval-gated) and `study.json`; private task material lives only in the git-ignored
+  `agent_workflow/runs/eval-loop-confirmatory-1/`. `eval-loop-supply readiness --protocol studies/confirmatory-1/protocol.json
+  --study studies/confirmatory-1/study.json` reports each prerequisite as fulfilled/provisional/blocked (read-only). Today:
+  plan provisional (underpowered at typical effects), private review/calibration/main/confirmation blocked. Details:
+  `docs/design.md` "Protocol-4".
+
+## Recurring exploration-only route (2026-11-07; implemented in this clone, not deployed, dormant)
+
+`bin/eval-loop-explore.mjs` (`src/explore-cycle.mjs`) speaks the same machine contract as `bin/eval-loop.mjs` for the modes the recurring orchestration uses. agent_workflow drives it with `evaluation: "exploration-only"`.
+
+- `--status --summary` returns status@1 with `layout: "explore"` and an allowlisted `exploration` block (`outcome`, `code`, `batch`).
+- `--preflight` returns preflight@1 with a `code`: `ok`, `supply-empty`, `runtime-wait`, `budget-exhausted`, `budget-unusable`, `prerequisite-failed` or `config-invalid`.
+- `--resume [--require-state]` runs one cycle and returns outcome@1.
+- `refresh --protocol` returns supply-refresh@1 (exit 0, 2 or 3).
+
+The `--protocol` file is a `pi-eval-loop/exploration@1` config. Every path in it must be absolute. It names:
+- the frozen candidate and stable harnesses, each with its runtime digest;
+- the accepted screen report and its sha256, plus the screening tasks;
+- the exploration pool;
+- the lineage sources (non-empty lists of supply registries and earlier holdout datasets);
+- the single budget ledger, with `limit`, `scope` and `minRemaining`;
+- the isolated runtime, which may be `simulated` only together with `simulation.enabled`, for offline tests.
+
+**How a cycle runs**
+1. On init, the cycle binds to the sha256 of its config and to every evaluator file in `protocol.lock.json`. Any change after that is a `state_error`.
+2. It re-checks lineage and retires contaminated, never-reserved batches with an evidence document.
+3. It takes the pool's first eligible batch, freezes `plan.json`, and runs ONE pass with `src/exploration.mjs` `runHoldout`. That pass reserves the batch and records its single use before the first run; a resume reuses both.
+
+Every final has `adopt: false`, `explorationOnly: true` and evidence class `exploratory`. Blocked paths get distinct codes and never dispatch a model call:
+- supply and runtime waits are retryable;
+- budget exhaustion and failed prerequisites are not.
+
+A budget refusal in the middle of a pass pauses the pass. It stays blocked with `budget-exhausted` and no further attempt is made.
+
+**Supply and evidence**
+- **Collectors never seal the pool.** The pool's `POLICY.json` has `autoSeal: false`, so collectors and the generic `seal` never form batches; `src/lineage.mjs` `selectAndSeal` is the only sealing route. It does three things:
+  - It reads every exclusion source, and fails closed if one is missing, has a broken hash chain, or is malformed or empty.
+  - It excludes families, task ids, repositories and Exercism problem equivalents from registries, datasets, every pool batch, retired tasks that were not restaged, and the screening tasks.
+  - It re-applies the same exclusion inside `sealBatch`, under the pool lock.
+- **Refresh.** Each refresh rotates its discovery keywords and skips repositories the lineage registries already hold, before cloning them.
+- **Evidence is never deleted at seal time.** Sealing moves each staged case byte for byte to `<pool>/evidence/<batch>/<id>` and registers the sha256 of every file the batch does not seal, such as `validation.private.json`.
+- **Restage.** `retireBatch` restages from those exact bytes and verifies them; on any mismatch it refuses. A batch sealed before this change has no preserved evidence, so its restage records an `evidenceGap`. Under `POLICY.requireEvidence` such a case is never sealable. Missing or corrupt required evidence also makes a case unsealable.
+
+**Required evidence (always enforced by the route, 2026-11-07).** Every case of an exploration batch must carry `validation.private.json` recording a PASSED validation (`{ok: true, code: "valid"}`). This holds whatever the pool's POLICY says: a config's `evidence.required` can only add files, and `evidence: false` or a malformed value is `config-invalid`.
+- Sealed batches are re-checked before use (`batchEvidenceProblems`): the archive must exist, match its hashes and hold the required content. This includes a restart in phase `selected`.
+- A batch that fails is retired without restaging and never consumed.
+- Cases sealed or restaged before 2026-11-07 have no preserved evidence, so this route can never use them. Their records are kept as they are.
+
+**Crash recovery.** `recoverPool` runs before every seal, retire, refresh and cycle init. It finishes interrupted seals (batch rename, batch record, evidence record, evidence move) and retirements (retire record, restage rename, restaged record):
+- only hash-verified bytes are moved;
+- orphan batch directories are moved aside, never used;
+- tasks that cannot be verified are withdrawn as `restage-interrupted`;
+- a second run changes nothing.
+
+`test/supply-crash.test.mjs` SIGKILLs a real child process at each point (`src/util.mjs` `fault`).
+
+**Real runtime path.** Every non-simulated cycle verifies the isolated runtime (`runtime.mode` live/test) and refuses to start in any of these cases:
+- a misbound ledger (path, limit or scope);
+- a foreign `EVAL_LOOP_UPSTREAM` or agent dir;
+- an expired token (any mode).
+
+It auto-starts the runtime when configured, and stops it when no other cycle uses it. It settles reservations left open by dead cycles at the attempt floor (`RequestBudget.reconcileDead`).
+
+`test/explore-runtime.test.mjs` runs the pinned binary in bwrap against a TLS stand-in and checks that the provider never receives more requests than the gate admitted against the fixture ledger, across:
+- expired credentials, a misbound ledger and a shared-gateway upstream;
+- a failed start;
+- a full pass with redirects and 500s;
+- a cycle killed mid-pass and resumed;
+- two concurrent cycles;
+- budget exhaustion mid-pass, plus a restart.
+
+The test is skipped, naming what is missing, without the pinned binary, bwrap or openssl.
+
+**Tests:** `test/explore-cycle.test.mjs` runs the real CLI with a simulated target model and covers:
+- two cycles on two different batches;
+- an idle retry;
+- an empty-supply wait;
+- budget exhaustion across restarts;
+- the fixed ledger cap;
+- config binding;
+- refresh exclusivity.
+
+`test/evidence-lifecycle.test.mjs` and `test/exploratory-selection.test.mjs` cover the evidence lifecycle and the lineage selection. agent_workflow `test/integration/evalLoopExploration.test.ts` drives the same CLI through Temporal: planning, supply wait and refresh, two cycles, a follow-up that does not enable the schedule, and a budget stop.
+
+**Rollout** (not executed; it needs human approval): agent_workflow `docs/운영-가이드.md` §8-9b.
+
+## Autonomous lifecycle route (2026-11-07; `mode: "autonomous"`)
+
+The same CLI (`bin/eval-loop-explore.mjs`) runs one durable state machine when the exploration config sets `mode: "autonomous"` and a `confirmation` section. agent_workflow drives it with `evaluation: "autonomous"` and its own schedule ID `aw-eval-loop-autonomous`. The three eval-loop schedule IDs are mutually exclusive: start, `aw schedule enable` and the follow-up all refuse while another one is enabled. The old adoptive route (`bin/eval-loop.mjs`, `aw-eval-loop`) is not used and stays paused.
+
+**Config `confirmation`** (all paths absolute):
+- `protocol` + `protocolSha256`: the registered confirmatory protocol (`analysisPlan.mode: confirmatory`, complete per `planCompleteness`).
+- `readiness`: the study readiness record. It must carry `protocolSha256` equal to the registered protocol, and its `analysis-plan` condition must be `fulfilled`. Otherwise the code is `confirmation-plan-not-ready`. Power is never assumed.
+- `attemptsPerUnit`: at least the measured per-unit maximum in `screen.runs` (`config-invalid` below it). `smokeAttempts`.
+- `deploy.dir`: the release store (`src/lifecycle.mjs` `Releases`).
+
+**Phases** (`explore.json` `phase`; status `lifecycle.stage`):
+1. **Exploration**: `init → selected → running`, as in exploration-only mode. Its readiness, run before any batch is reserved, also requires:
+   - the candidate differs from the deployed release (else `candidate-deployed`, stop);
+   - the registered confirmation is ready (else `confirmation-plan-not-ready`, model-free wait);
+   - the registered confirmation is affordable after this exploration from the same ledger, computed as 2 × (holdout + confirmation) minimum units × `attemptsPerUnit` + smoke (else `confirmation-infeasible`, stop; the cap is never raised);
+   - the series alpha ledger still admits it (`seriesFits`).
+2. **Promotion**: only a completed exploration with `EXPLORATORY_SUPPORTED` is promoted. The candidate arm must have no integrity or strict violations and no unmeasured units. Anything else ends as `explored-negative`.
+3. **`promoted`**: writes `registration.json` (0400, sha256 kept in the state) BEFORE any confirmatory outcome. It holds the candidate, the baseline (the deployed release), the protocol and readiness sha256, the exploration final sha256 and the budget sizing. A changed deployed release makes the exploration evidence stale (`explored-negative`). A changed candidate tree is `prerequisite-failed`.
+4. **`confirm-wait → confirm-selected → confirm-running`**:
+   - **Batch**: a fresh, unused, sealed, lineage-clean batch meeting the registered holdout minima (tasks, families, accepted-basis hard tasks). If none exists, the code is `confirmation-supply-empty` (a model-free wait), and the pool records `selection/demand-confirmatory.json` so that `refresh` seals a batch of the registered size instead of exploration-sized ones.
+   - **Headroom**: checked for the ACTUAL selected batch, plus the post-confirmation and smoke, before anything is reserved.
+   - **Pass**: the plan (`confirm-plan.json`, sha256 in state) is frozen before the batch is consumed. `runHoldout` then runs with `analysis.mode: confirmatory`: alpha is spent once in the series ledger before consumption, the batch is used once, and both the original gate and `confirmatoryChecks` apply.
+   - **Floors**: the protocol is merged over `exploreProtocol()`. `floorProblems` refuses any registered protocol that weakens holdout size, repeats, support, independence, hard stratum, family level, checks, owner share or prior-family reuse. Confirmation minima are `max`ed against the holdout floors.
+5. **Adoption**: only `ADOPT` with `adopt: true`, `confirmatoryClaim: true`, no candidate violations and nothing unmeasured moves to `adopting`. Everything else is `confirm-negative`, never deployed.
+6. **`adopting`**: `Releases.adopt` moves the release pointer by compare-and-swap from the registered baseline.
+7. **`smoke`**: one run of the RESOLVED deployed tree, through the same gate and ledger. On failure, `Releases.rollback` → `rolled-back`.
+8. **`postconfirm-wait → … → done`** (when `analysisPlan.confirmation.required`): the previous release is compared with the adopted one on a DIFFERENT fresh batch with the confirmation alpha. `CONFIRMED` gives `confirmed`. `NOT_CONFIRMED`, `INCONCLUSIVE` or a consumed `BLOCKED` gives rollback → `rolled-back`. Without a registered confirmation, the outcome is `adopted` with `confirmation: not-registered`.
+
+**Status** keeps the four facts apart:
+- `acceptance.stage`: `candidate-accepted-exploratory`, `adopted-unconfirmed`, `adopted-confirmed`, `rolled-back` or `not-accepted`;
+- `final.verdict`/`adopt`: the gate decision;
+- `lifecycle.deployed`: the release;
+- `lifecycle.confirmation`.
+
+**Releases** (`<deploy.dir>`, no git):
+- `releases/<runtimeDigest>/`: content-addressed copies, verified before the atomic rename.
+- `history.jsonl`: the hash-chained commit log (`init`/`adopt`/`rollback`, idempotent per key).
+- `current.json`: a derived pointer, repaired from the history under `.deploy.lock`.
+- SIGKILL at `release:after-store` / `release:after-record` converges to one consistent release (`test/lifecycle.test.mjs`).
+- The consumer, the next cycle's stable arm, resolves the deployed release from the history.
+
+**Tests**: `test/lifecycle.test.mjs` (simulated target model; real ledger, pool, seal, reservation, use, series and release code) covers:
+- the full positive path to `CONFIRMED`, with supply waits;
+- negative exploration;
+- confirmatory gate rejection;
+- smoke failure, `NOT_CONFIRMED` and `INCONCLUSIVE` rollbacks;
+- plan-not-ready, an unbound readiness record, weakening floors, an unaffordable confirmation and an under-measured `attemptsPerUnit`;
+- SIGKILL after the confirmatory use, with one use and one alpha spend;
+- a stale candidate;
+- ledger exhaustion before the confirmatory batch;
+- release crash points.
+
+agent_workflow `test/integration/evalLoopAutonomous.test.ts` drives it through Temporal.
+
+## Practical screening route (2026-11-08; `mode: "screening"`, non-adopting default)
+
+`src/screening.mjs`, run by the same CLI (`bin/eval-loop-explore.mjs`) when the exploration config sets `mode: "screening"` and a `screening` section. agent_workflow drives it with `evaluation: "screening"` and the schedule ID `aw-eval-loop-screening`. The four eval-loop schedule IDs exclude each other.
+
+**What it is.** A cheap, fixed-budget feedback loop over a bounded candidate source. It does not replace the confirmatory/adoptive standard. Every final has `adopt: false` and `explorationOnly: true`. The stable reference never changes; nothing is deployed, promoted, committed or scheduled.
+
+**Stages.** One cycle (one state directory) runs one action:
+1. **smoke** (every candidate, model-free): the frozen tree must match its identity; runtime changes only under `src/` and `prompts/`, at most 4 files; the arms' typecheck and tests, candidate vs stable. A failure ends the candidate as `SMOKE_REJECTED`, with zero target calls.
+2. **dev** (candidates that pass smoke, in the same cycle): one interleaved stable-vs-candidate pass on the configured reusable development tasks (`screening.dev.tasks`, frozen with per-task digests). Any candidate integrity problem stops further dispatch and gives `DEV_REJECTED`. Verdicts: `DEV_PROMISING` (net successes >= `promote.minNetSuccesses` and hidden passes not below the stable's), `DEV_NEGATIVE` (net <= 0), or `DEV_INCONCLUSIVE` (anything else, unmeasured units, cap/time stop, infrastructure errors). The evidence class is `development`: selection feedback, never confirmation, never a power claim.
+3. **holdout** (only `DEV_PROMISING`, at most once per candidate): one exploration-only pass (`runHoldout`, every existing gate and safeguard) on one fresh, sealed, unused, lineage-clean batch. The development tasks' families are excluded from batches. The best verdict is `EXPLORATORY_SUPPORTED`, never an adoption.
+
+**Candidates.** Sources are bounded by `maxCandidates`:
+- `archive`: an earlier loop's candidate archive. Default statuses: promoted, dev_qualified, selected, holdout_blocked, inconclusive. The patch chain is resolved through `parent` to the stable commit and applied with `git apply` to a copy of the stable tree under `workDir/trees`.
+- `tree`: a frozen tree with its identity.
+
+The series registry (`screening.registry`, hash-chained) is keyed by the runtime digest. It holds candidates, aliases, claims and stage results:
+- the same patch or digest is an alias and is never run twice;
+- the rotation follows registration order;
+- a retry or a new cycle never repeats a paid stage.
+
+`screening.history` records holdout exposures that happened before this route. A candidate already exposed to a final holdout never gets another one. Neither does a candidate created after a parent's exposure (tuned after a holdout result).
+
+**Budget.** All attempts go through the ONE ledger of the config (its ceiling is fixed at creation) and the isolated runtime's outbound gate. `CappedBudget` refuses a reservation when this route's charged attempts (settled + open worst case, read from that ledger, tagged `meta.route = "screening"`) would exceed any of these:
+- `caps.dev` / `caps.holdout` (per stage);
+- `caps.perCandidate`;
+- `caps.perCycle`;
+- `caps.cumulative`.
+
+It also refuses after the stage's persisted deadline (`dev.maxHours`, `holdout.maxHours`). Before any stage, the planner requires the whole stage cap as headroom. A qualified candidate waiting for supply keeps its holdout headroom reserved from further dev spending. In live mode, a ledger whose settled charges exceed its outbound attempts is refused. A series lock admits one screening cycle at a time.
+
+**Waits and stops** (`exploration.code`):
+- model-free waits: `no-candidate`, `supply-empty` (only a qualified candidate waiting; triggers the refresh), `runtime-wait`;
+- stops: `budget-exhausted` (caps or ledger cannot fund the next stage, or a cumulative/global refusal mid-pass), `time-exhausted` (holdout deadline), `prerequisite-failed` (immutable input drift, grader failure). Nothing expands a cap.
+- A cap or deadline hit during dev ends the stage cheaply as `DEV_INCONCLUSIVE`.
+
+**Tests:** `test/screening.test.mjs` runs the real CLI with a simulated target model. It covers:
+- smoke rejection without a model, archive dedupe;
+- dev negative, rejected (early elimination) and promising;
+- supply wait, then one holdout, then no second holdout even with fresh supply;
+- no-candidate wait;
+- exhausted cumulative cap, stage deadline, stage cap, cumulative refusal mid-pass;
+- series lock, SIGKILL mid-dev + resume;
+- candidate, dev-task and config drift;
+- never an adoption.
+
+agent_workflow `test/integration/evalLoopScreening.test.ts` drives it through Temporal.
+
 
 ## Layout
 
@@ -201,7 +402,7 @@ This is intentional: continue in a new state directory, and never rewrite a reco
 | `src/archive.mjs` | Lineage, dedup, Pareto front |
 | `src/datasets.mjs` | Splits, exposure scan, seal, holdout use ledger |
 | `src/supply.mjs`, `src/supply-cli.mjs`, `bin/eval-loop-supply.mjs` | Public-source holdout supply: discovery, adaptation, license/provenance, overlap, validation, sealed batches, reservations, preflight |
-| `src/supply-exercism.mjs` | Annotated holdout source: Exercism JavaScript track (maintainer difficulty + documented rubric -> `difficultyBasis: "source"`), node:test bridge for the unchanged jest spec with vendored `expect` |
+| `src/supply-exercism.mjs` | Annotated holdout source: Exercism JavaScript and TypeScript tracks (maintainer difficulty + documented rubric -> `difficultyBasis: "source"`), node:test bridge for the unchanged jest spec with vendored `expect`, cross-track problem dedupe, benchmark listings per language |
 | `src/sandbox.mjs` | Reuses orche `experiments/witness-replay` sandbox, proxy and bridge; adds the endpoint gate and runtime-only mounts |
 | `src/runner.mjs` | Sandboxed Pi runs, controller-derived terminal states |
 | `src/grader.mjs` | Sandboxed independent grading |

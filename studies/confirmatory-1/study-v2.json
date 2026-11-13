@@ -1,0 +1,37 @@
+{
+  "schema": "pi-eval-loop/study@1",
+  "id": "confirmatory-1",
+  "protocol": "protocol-v2.json",
+  "plan": {
+    "targetEffect": 0.15,
+    "requiredPower": 0.8,
+    "power": [
+      "power2-main.json"
+    ],
+    "candidateIntegrity": null,
+    "note": "v2 (DESIGN-v2.md): target 15 pp; adequacy = simulated adopt-and-confirm x integrity survival (n+1)/(n+1+K); candidateIntegrity {runs, violations} comes from a pre-holdout strict-integrity screen of the candidate"
+  },
+  "calibration": {
+    "report": null,
+    "approval": "approval-2026-11-07.json",
+    "rule": {
+      "feature": "declared-tier",
+      "hardMaxRate": 0.5,
+      "minTasksPerLevel": 3,
+      "censoring": "infra-excluded@1"
+    },
+    "partition": "families ordered by sha256('confirmatory-1:partition:' + family); calibration takes families in that order until it holds >= 3 accepted tasks of each declared tier; the rest are holdout candidates (candidate- and outcome-blind)",
+    "budget": {
+      "ledger": "/home/arthur/Code/agent_workflow/runs/eval-loop-confirmatory-1/budget/target-model-requests.jsonl",
+      "limit": 4500,
+      "unit": "provider request attempts incl. gateway-internal retries (forwarded x gatewayAttemptBound)",
+      "gatewayConfig": "/home/arthur/Downloads/EasyCLIProxyAPI-v0.3.20-Linux-amd64/cpa-core/config.yaml",
+      "requiresIsolatedGateway": true
+    },
+    "exclusions": "/home/arthur/Code/agent_workflow/runs/eval-loop-confirmatory-1/calibration/exclusions-v1.json"
+  },
+  "privateStorage": "/home/arthur/Code/agent_workflow/runs/eval-loop-confirmatory-1",
+  "overlapPools": [
+    "/home/arthur/Code/agent_workflow/runs/eval-loop-supply"
+  ]
+}

@@ -1,0 +1,3 @@
+{ "since": "2026-06-01T00:00:00Z",
+  "discovery": { "maxRepos": 89, "maxReposPerOwner": 2, "preferUnscanned": true },
+  "commits": { "maxValidatePerRepo": 3 } }

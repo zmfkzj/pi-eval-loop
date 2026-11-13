@@ -71,7 +71,15 @@ export function developmentDecision(cmp, protocol, critical) {
 
 /**
  * Deployment gate on the holdout comparison `cmp` (event "adoption", level task) plus non-statistical evidence.
- * Returns { adopt, verdict: ADOPT|KEEP_STABLE|INCONCLUSIVE|BLOCKED, reasons }.
+ * Returns { adopt, verdict: ADOPT|EXPLORATORY_SUPPORTED|KEEP_STABLE|INCONCLUSIVE|BLOCKED, reasons, candidateAccepted? }.
+ * protocol-4 adds checks that are ANDed onto the unchanged protocol-3 rules (each can only turn an ADOPT into another verdict):
+ *  - adoption.requireFamilyLevel: the same adoption event under the family-clustered bootstrap (`evidence.familyCmp`) must reach
+ *    adoption.support (missing comparison: BLOCKED);
+ *  - analysisPlan.mode "confirmatory": `evidence.confirmatory` (design.mjs confirmatoryChecks) must pass: missing or an
+ *    incomplete plan -> BLOCKED, data that cannot answer the plan -> INCONCLUSIVE, an unsupported answer -> KEEP_STABLE;
+ *  - any other plan (exploratory, the default): never ADOPT. A candidate that passes every protocol-3 rule and the family-level
+ *    check is EXPLORATORY_SUPPORTED (candidate accepted as a measurement, adopt false: nothing is deployed). Production adoption
+ *    needs a complete, pre-registered confirmatory plan and its checks.
  */
 export function adoptionDecision(cmp, protocol, evidence) {
   const reasons = [], blocked = [];
@@ -91,8 +99,21 @@ export function adoptionDecision(cmp, protocol, evidence) {
   const regressed = Object.entries(cmp.familyDelta).filter(([, d]) => d.probBelow >= a.familyRegressionSupport).map(([f, d]) => `${f} (P(delta < -${a.familyRegression}) = ${d.probBelow.toFixed(3)})`);
   if (regressed.length) return { adopt: false, verdict: "KEEP_STABLE", reasons: [...reasons, `family regression: ${regressed.join(", ")}`] };
   if (evidence.newCritical) return { adopt: false, verdict: "KEEP_STABLE", reasons: [...reasons, "new critical failures"] };
-  if (cmp.support >= a.support) return { adopt: true, verdict: "ADOPT", reasons };
-  return { adopt: false, verdict: "KEEP_STABLE", reasons: [...reasons, "improvement not supported at the adoption threshold (no improvement shown is a normal result)"] };
+  if (cmp.support < a.support) return { adopt: false, verdict: "KEEP_STABLE", reasons: [...reasons, "improvement not supported at the adoption threshold (no improvement shown is a normal result)"] };
+  // ---- protocol-4 additions (only ever stricter)
+  if (a.requireFamilyLevel) {
+    const f = evidence.familyCmp;
+    if (!f) return { adopt: false, verdict: "BLOCKED", reasons: [...reasons, "family-level comparison required (adoption.requireFamilyLevel) but missing"] };
+    reasons.push(`family-clustered adoption support ${f.support.toFixed(4)} (need >= ${a.support}; ${f.families} families)`);
+    if (f.support < a.support) return { adopt: false, verdict: "KEEP_STABLE", reasons: [...reasons, "improvement not supported once tasks of one family are resampled together"] };
+  }
+  if (protocol.analysisPlan?.mode !== "confirmatory") return { adopt: false, verdict: "EXPLORATORY_SUPPORTED", candidateAccepted: true, reasons: [...reasons, "exploratory analysis plan: the candidate passed the adoption gate as a measurement only; production adoption requires a complete, pre-registered confirmatory analysis plan and its checks (nothing deployed)"] };
+  const c = evidence.confirmatory;
+  if (!c) return { adopt: false, verdict: "BLOCKED", reasons: [...reasons, `confirmatory analysis plan: ${evidence.planProblems?.length ? evidence.planProblems.join("; ") : "confirmatory checks missing"}`] };
+  if (c.inconclusive.length) return { adopt: false, verdict: "INCONCLUSIVE", reasons: [...reasons, ...c.passed, ...c.failed, ...c.inconclusive.map(x => `confirmatory: ${x}`)] };
+  if (c.failed.length) return { adopt: false, verdict: "KEEP_STABLE", reasons: [...reasons, ...c.passed, ...c.failed.map(x => `confirmatory: ${x}`)] };
+  reasons.push(...c.passed.map(x => `confirmatory: ${x}`));
+  return { adopt: true, verdict: "ADOPT", candidateAccepted: true, reasons };
 }
 
 /** Convenience wrappers binding the protocol's settings. */
@@ -100,3 +121,5 @@ export const screeningCompare = (pairs, protocol, seed) => compare(pairs, { draw
 export const taskLevelPromotion = (pairs, protocol, seed) => compare(pairs, { draws: protocol.bootstrap.draws, seed, level: "task", event: "promotion", eps: protocol.gate.eps, minGain: protocol.gate.minGain, lossThreshold: protocol.gate.eps.overall });
 export const developmentCompare = (pairs, protocol, seed) => compare(pairs, { draws: protocol.bootstrap.draws, seed, level: protocol.development.level, event: "promotion", eps: protocol.gate.eps, minGain: protocol.gate.minGain, lossThreshold: protocol.gate.eps.overall });
 export const adoptionCompare = (pairs, protocol, seed) => compare(pairs, { draws: protocol.bootstrap.draws, seed, level: protocol.adoption.level, event: "adoption", eps: protocol.adoption.eps, minGain: protocol.adoption.minGain, lossThreshold: 0, familyLossThreshold: protocol.adoption.familyRegression });
+/** The adoption event under the family-clustered bootstrap (protocol-4 adoption.requireFamilyLevel). */
+export const familyAdoptionCompare = (pairs, protocol, seed) => compare(pairs, { draws: protocol.bootstrap.draws, seed, level: "family", event: "adoption", eps: protocol.adoption.eps, minGain: protocol.adoption.minGain, lossThreshold: 0, familyLossThreshold: protocol.adoption.familyRegression });

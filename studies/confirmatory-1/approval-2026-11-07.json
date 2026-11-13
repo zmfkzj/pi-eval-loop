@@ -1,0 +1,32 @@
+{
+  "schema": "pi-eval-loop/calibration-approval@2",
+  "maxRequests": 4500,
+  "monetaryCeilingUSD": null,
+  "approvedBy": "the operator (user) of this workspace, by an instruction relayed through the orchestrating session; not signed",
+  "approvedAt": "2026-11-06T22:42:18Z",
+  "approvedAtSource": "start of the orche assignment that carried the instruction (record 2026-11-06T22-42-18-609Z_task-7e6aff68); the instruction itself carries no timestamp",
+  "authorization": {
+    "kind": "relayed-instruction",
+    "signature": null,
+    "humanSignatory": false,
+    "verbatim": "금액 무제한. 요청 4500 유지. 사람 검토 없음. 방법 찾기. 재검토 수행.",
+    "interpretation": "No monetary ceiling. The request ceiling stays 4500 actual target-model requests for ALL calibration work of this study (first runs, resumes, retries, reruns, nested agent turns, failures and timeouts that may have reached the provider), not 4500 runs or tokens. Human review is not available; a non-human review method is to be found. The prospective design is to be reassessed.",
+    "relayedVia": "orche assignment to worker W4 (orchestrating session 01a1ae65-8846-769e-bd1e-7fd4e75793d7)",
+    "recordedBy": "W4 (AI agent; records the instruction, is not a signatory and approves nothing itself)",
+    "recordedAt": "2026-11-06T22:56:14Z"
+  },
+  "scope": {
+    "pool": "/home/arthur/Code/agent_workflow/runs/eval-loop-confirmatory-1/pool",
+    "batchSeal": "715eb3dbef4d51d2314fe7171571befa59bb24fc271cedf165552d8753d490ad",
+    "budgetLedger": "/home/arthur/Code/agent_workflow/runs/eval-loop-confirmatory-1/budget/target-model-requests.jsonl",
+    "targetModel": "cliproxyapi/gpt-6-luna (effort medium), the stable orche harness only",
+    "purpose": "difficulty calibration on calibration-purpose batches of this pool (never a holdout, never adoption or confirmation)",
+    "countingRule": "one request = one provider request ATTEMPT (gateway-internal retries and credential fallback included): each POST forwarded by a unit's route proxy is charged K = gatewayAttemptBound().perRequest attempts; unit.maxRequests x K reserved per attempt before dispatch; unsettled reservations count in full (revised 2026-11-07 by the recording agent: the earlier forwarded-request rule under-counted gateway retries)",
+    "excluded": "authoring/reviewer orchestration calls of other models are not calibration requests and are reported separately; they never carry target-model calibration work",
+    "countingRuleRevision2": {
+      "revisedAt": "2026-11-07T04:25:00Z",
+      "recordedBy": "W5 (AI agent; records, approves nothing)",
+      "rule": "one request = one provider request ATTEMPT that leaves the isolated calibration runtime (studies/confirmatory-1/isolated-runtime.mjs): the outbound gate admits each attempt (gateway retries, redirects, re-sends included) only against the same ledger (type attempt) while attempts + 1 <= charged; unit reservations are 150 x 2 before dispatch; settlements are raised to the actual attempt floor. The 4500 ceiling, the ledger and its scope are unchanged; the earlier K-multiplier rule applied to the shared gateway, which is no longer used."
+    }
+  }
+}

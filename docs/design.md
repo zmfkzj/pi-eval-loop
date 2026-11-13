@@ -195,7 +195,16 @@ uses `agent_workflow/runs/eval-loop-supply` (git-ignored, mode 0700).
   packages found by fixed keyword searches whose latest version's test script runs `node --test`, with no runtime dependencies,
   an accepted SPDX license and a GitHub repository. Upstream history: default branch, first parent, no merges, committed on/after
   `since`, not by a bot, a descriptive subject, added/modified files only (deletions/renames cannot be overlaid), no manifest or
-  lockfile change, text only, >= 1 runnable test file and >= 1 non-test code file changed, size bounds.
+  lockfile change, text only, >= 1 runnable test file and >= 1 non-test code file changed, size bounds. Diversity (2026-11-06): at
+  most `discovery.maxReposPerOwner` (3) repositories per GitHub account per collection, and never-scanned repositories first, then
+  the least recently scanned (registry `scan` records; failed clones/scans included; older pools: commit-case decision times), so
+  repeated collections move through new projects instead of re-reading the same capped set.
+- **Offline precheck** (before validation and its per-repository budget): a test file that `node --test` starts by default, or a
+  hidden test, that imports a package at statement level which is neither a Node builtin nor the package itself is rejected
+  (`test-imports-unavailable-package`, package names recorded). Dynamic/optional imports, `import type`, comments and `#imports`
+  are not counted (static reading never claims more than it can see); the sandbox validation stays authoritative for the rest.
+  On 2026-11-05, 56 of 130 decisions failed `original-visible-suite-not-passing-offline`, most of them on such imports (ava, tape,
+  delay, sinon, expect, ...).
 - **Adaptation without invention**: `repo/` = the upstream tree at the parent commit (with its license file); `hidden/` = the
   commit's own post-change test files (renamed to `*.holdout.test.*` only when the runner would not pick them up; the mapping is
   recorded); `reference/` = the commit's own post-change non-test files; instruction = a fixed preamble + the upstream commit message
@@ -209,10 +218,17 @@ uses `agent_workflow/runs/eval-loop-supply` (git-ignored, mode 0700).
 - **Mechanical validation** in the grading sandbox (no network), repeated (2x): the original's visible suite passes offline; the
   original FAILS the hidden tests with failing tests reported (timeouts rejected); the reference passes the hidden tests AND the
   visible suite (a task whose fix breaks old assertions is unsolvable without editing tests, which integrity forbids); identical
-  counts on every repeat. The engine validates every holdout task again at prepare.
-- **Batch** (candidate-blind): eligible cases ordered by `sha256(seed:id)`, the first accepted hard case first, at most
-  `maxPerFamily` per repository and `maxPerOwner` per GitHub account, up to `maxTasks`; sealed only when the protocol minima hold
-  (6 tasks, 4 families, a hard task with an accepted basis). `PROVENANCE.json` and `SEAL.json` are inside the sealed directory.
+  counts on every repeat. The engine validates every holdout task again at prepare. A grader error or timeout decides a case at
+  its first run (the remaining runs are skipped), and a repository with `commits.maxTimeoutsPerRepo` (2) timeouts in one
+  collection leaves its remaining commits undecided for a later one (budget only: acceptance still needs every run).
+- **Batch** (candidate-blind): eligible cases ordered by `sha256(seed:id)` (with `preferFreshFamilies`: families that were in no
+  earlier batch of the pool first, a preference that never relaxes a rule), the first accepted hard case first, at most
+  `maxPerFamily` per repository and `maxPerOwner` per GitHub account, up to `maxTasks`, and since 2026-11-06 no account above
+  `maxOwnerShare` (0.5) of the tasks actually sealed (the largest size T whose fill reaches T tasks with every account at most
+  floor(0.5 T)); sealed only when the protocol minima hold (6 tasks, 4 families, a hard task with an accepted basis).
+  `PROVENANCE.json` (rule, caps, coverage incl. `maxOwnerShare`, `familiesInEarlierBatches`) and `SEAL.json` are inside the
+  sealed directory. Existing batches are never re-selected or rewritten; the first eligible batch (4/6 one account) would not
+  seal under this rule today. `status` reports each batch's account shares and a read-only outlook of the next selection.
 - **Difficulty**: the commit source's tier is a size proxy of the upstream fix (`difficultyBasis: "size-proxy"`; a commit-built
   task.json cannot claim another basis except "source" with the annotation recorded). Patch size does not establish difficulty,
   so `holdout.hardBasis` (default declared/curator/source) never accepts it: such tasks are not hard for the holdout stratum,
@@ -220,7 +236,7 @@ uses `agent_workflow/runs/eval-loop-supply` (git-ignored, mode 0700).
   or revision, and a matching tier; `datasets.mjs` sourceAnnotated), otherwise it is "source-unannotated". Difficulty is never
   calibrated by running a model on holdout tasks. The first real batch (2026-11-05) is structurally valid but blocked for this
   reason; the hard stratum comes from the annotated source below.
-- **Annotated source: Exercism JavaScript track** (`eval-loop-supply collect-exercism`, `src/supply-exercism.mjs`). Each practice
+- **Annotated source: Exercism JavaScript and TypeScript tracks** (`eval-loop-supply collect-exercism [--track]`, `src/supply-exercism.mjs`). Each practice
   exercise carries a maintainer-assigned `difficulty` (1-10) in the track's config.json, and Exercism's documentation
   (exercism/docs `building/tracks/config-json.md`) fixes the reading 1-3 easy, 4-7 medium, 8-10 hard; the rubric text is verified
   at a pinned docs revision before any tier is assigned, and both revisions are recorded in `difficultySource`. Only the tiers in
@@ -233,10 +249,29 @@ uses `agent_workflow/runs/eval-loop-supply` (git-ignored, mode 0700).
   the bridge does not carry are rejected. Validation runs with `visibleSuite: "none"`: the visible run must pass and find no
   tests, and the original must execute as many hidden tests as the reference (failures on tests, not on loading); all other
   checks unchanged; the commit source keeps the default. Exposure: exercises listed in public benchmark sets (default: Aider's
-  polyglot benchmark, whose set was picked from model results) are excluded, an exercise is taken once per pool across
-  revisions (`sourceKey`), the usual family/name/content checks apply, and the whole track is one family (`gh:exercism/javascript`,
-  so at most `maxPerFamily` per batch). Limitation: these exercises and many solutions have been public for years, so pretraining
-  exposure is likely; the hard tier is a curator annotation, not a measured difficulty.
+  polyglot benchmark, whose set was picked from model results) for the track's benchmark language (JavaScript; TypeScript ports
+  are judged by the JavaScript list) are always excluded; listings in the benchmark's other languages (cpp, go, java, python,
+  rust) are recorded per task (`upstream.benchmarkListings`, registry `listedLanguages`, an extra limitation) and exclude the task
+  only with `exercism.excludeScope: "any-language"`. An exercise is taken once per pool across revisions (`sourceKey`), and an
+  Exercism *problem* once per pool across tracks: a case whose problem was already accepted from another track (eligible,
+  sealed, reserved or used; older registry records are read through their `sourceKey`) is rejected `problem-taken-in-supply`;
+  a rejected attempt does not take the problem. The usual family/name/content checks apply, and each track is one family
+  (`gh:exercism/javascript`, `gh:exercism/typescript`, both of the `exercism` account, so the account caps bind them together).
+  TypeScript (2026-11-06): Node >= 23 starts `*.test.ts` and `test-*.mjs` by default, so the student's copy of the spec is renamed
+  to the hidden copy's non-runner name (byte-identical, noted in the instruction) and Exercism's CLI runner `test-runner.mjs`
+  (corepack/yarn) is left out; exercises carry no LICENSE, so the verified track LICENSE is copied in; `expect` is vendored at
+  the TypeScript lockfile's version (29.7.0); spec and proof run unchanged under Node's built-in type stripping (no compiler, no
+  type check) and a proof that needs more (enums, parameter properties) fails validation. Limitation: these exercises and many
+  solutions have been public for years, so pretraining exposure is likely; the hard tier is a curator annotation, not a measured
+  difficulty; hard exercises are few (JavaScript 9, TypeScript 8, mostly the same problems, most of them benchmark-listed), so
+  this source supplies only a handful of hard tasks in total.
+- **Refresh** (`eval-loop-supply refresh`, model-free, for schedulers): commit source, every Exercism track, then seal batches
+  until the next would miss a minimum; a failing source is recorded and the others run; a pool `.refresh.lock` serializes runs
+  (exit 3 when busy). Exit 0 = an eligible, unreserved, unused batch is available afterwards (the engine's own
+  `firstEligibleBatch`), 2 = none. It never reserves (that stays `eval-loop --init`) and never touches sealed batches. With only
+  `--protocol` (no `--pool`), `refresh` and `status` use that protocol's `datasets.holdoutPool`, resolved like the engine does, so
+  an unattended caller cannot refresh a different pool than the one experiments reserve from. agent_workflow calls it this way
+  from its supply wait (`refreshEvalLoopSupply`, off unless its config `supplyRefresh.enabled`).
 - **Reservation and use**: a protocol with `datasets.holdoutPool` (and `holdout: null`) reserves, under the pool lock, the first
   unreserved, seal-intact, eligible batch for its state directory at the fresh initialization (a retry of the same experiment
   gets the same batch; another experiment never gets it). The resolved batch path is locked with the protocol: one batch per
@@ -334,3 +369,132 @@ another extension:
 - give tasks without executable grading a custom `grade.mjs`.
 
 Tasks that cannot be graded objectively must not be counted as successes from an LLM judgment alone.
+
+## Protocol-4: prospective analysis plan, interleaved holdout, low-exposure tier, confirmation (2026-11-06)
+
+Every protocol-3 gate, threshold and decision rule is kept and remains a NECESSARY condition; protocol-4 only adds checks.
+Code: `src/design.mjs`, `src/loop.mjs` (holdout, confirmAdoption), `src/gate.mjs` (adoptionDecision), `src/datasets.mjs`
+(holdoutStatus), `src/supply.mjs`, `src/calibration.mjs`. Tests: `test/design.test.mjs`, `test/protocol4.test.mjs`,
+`test/supply-safeguards.test.mjs`.
+
+- **Interleaved execution** (`holdout.execution: "interleaved"`, default): blocks (task, repeat) with one unit per arm; block
+  order and arm order inside a block drawn from the seed and the frozen selection; one shared queue; schedule frozen
+  (`holdout-schedule.json`, `state.holdoutSchedule.digest`) before the first dispatch and bound to selection, protocol,
+  environment, holdout seal and arm commits. A resumed pass re-derives it (a different one halts), reuses recorded units and
+  reconciles dispatched-but-unrecorded ones; dispatch records carry the planned index; `final.execution` reports whether first
+  dispatches followed the plan. `"sequential"` keeps the protocol-3 order and is labelled as time-confounded.
+- **Family dependence** (`adoption.requireFamilyLevel: true`): the adoption event must also reach `adoption.support` under the
+  family-clustered Bayesian bootstrap. Model-based and approximate with few families; never an error rate.
+- **Analysis plan** (`analysisPlan`). `exploratory` (default): NEVER a production adoption. Every protocol-3 rule and the
+  family-level check still apply; a candidate that passes them all gets verdict `EXPLORATORY_SUPPORTED` (`final.adopt` false,
+  `final.candidateAccepted` true, archive status `holdout_exploratory_supported`): a labelled measurement, nothing deployed, no
+  confirmatory or generalized claim. `confirmatory` (the only way to ADOPT): every value is operator-supplied with a
+  written rationale document whose sha256 is registered (no sample size, effect size or alpha is defaulted); missing items,
+  coverage below the plan, or an exhausted series budget BLOCK before the search; at use the alpha is spent first. Checks ANDed
+  onto the gate: a one-sided randomization (within-block sign-flip) test of the SHARP null "arm labels exchangeable within each
+  (task, repeat) block" (repeats averaged within task, tasks weighted equally; exact up to 2^16 patterns, Monte Carlo
+  (1+hits)/(1+draws) beyond; smallest attainable p = 2^-discordant blocks; valid for THESE tasks only, not a minimum-effect or
+  population claim), family-clustered P(delta>0) >= 1-alpha, plug-in delta >= minEffect (descriptive), leave-one-family-out
+  (sensitivity only), optional low-exposure stratum agreement. Unanswerable -> INCONCLUSIVE, unsupported -> KEEP_STABLE.
+- **Series error budget** (`analysisPlan.series`): a shared hash-chained ledger outside any state directory; each confirmatory
+  test spends its alpha before outcomes exist (union bound over the series, valid under dependence), locked across processes,
+  idempotent per frozen binding, never refunded; damaged ledgers refuse.
+- **Eligibility boundary**: `holdoutStatus` (preflight, pool eligibility, moment of use) re-checks account concentration
+  (`holdout.maxOwnerShare`, 0.5), prior-family reuse when `holdout.priorFamilyReuse: "forbid"` (families of used/reserved/
+  calibration batches and used package datasets; a batch is never its own prior; unknown -> fail closed), dataset purpose,
+  review records of `private-reviewed` tasks and calibrated difficulty references. "Unexposed" = not named in earlier
+  experiments; public provenance never establishes training non-exposure.
+- **Supply overlap**: repository root commits (forks/mirrors; only with complete history, shallow = unknown) and lexical
+  near-duplicates of reference code in OTHER families (identifier-abstracted 6-token shingles, Jaccard >= 0.7) are rejected.
+  Lexical only: semantic independence is not established.
+- **Low-exposure tier**: `eval-loop-supply intake-private --src DIR [--overlap-pool DIR ...]` takes newly authored tasks with
+  provenance `private-reviewed`, a complete review record and the usual mechanical validation; tasks with an upstream origin
+  are refused. Record (2026-11-06, `datasets.mjs reviewProblems`): named problem/test/reference authors with their kind
+  (`human` | `ai-agent`), tests not by the reference author, family `private:<accountable author>/<project>` (all tasks of one
+  author or one model/provider are ONE account for the concentration cap), reviewers who authored nothing, each with kind,
+  time, an `accept` verdict and the items THEY checked; every required item must be attributable to a reviewer's own check or
+  to an attestation of a named non-author that states its method (e.g. the operator's publication check); the review document
+  lives under the task's `review/` directory, travels into the pool and the sealed batch, and its sha256 is re-verified at
+  intake and at every eligibility check. `holdout.privateReview: "human"` (default) makes a task without a human reviewer
+  ineligible; `"ai-allowed"` is an explicit operator decision (visible in the lock). `--overlap-pool` adds other pools (for
+  example the live supply pool) READ-ONLY to the id/content/near-duplicate checks. The record is still an attestation:
+  separate AI sessions are not independent people, and nothing here proves absence from model training data.
+- **Non-human review** (2026-11-07, operator decision "no human review"; `holdout.privateReview: "cross-provider"`,
+  `datasets.mjs crossProviderProblems`, harness `studies/confirmatory-1/review.mjs`): instead of a human reviewer a private
+  task needs verified cross-provider evidence, re-read from documents under its `review/` directory (sha256 in task.json):
+  (1) BLIND tests written from instruction + starting repository only by an AI reviewer of a provider that is neither an
+  author's nor the target model's, running as pure Pi in the evaluator's bubblewrap sandbox (filesystem-enforced: the mount set
+  holds only the bundle; a denial probe with positive controls in the same mount set records every withheld path - task
+  directory, hidden tests, reference, review notes, private storage, agent transcripts, credentials - as absent); the reference
+  must pass them twice and the starting repository must fail them; (2) an ADVERSARIAL review by a third provider (full task)
+  whose mutants (plausible wrong solutions) are run against the official hidden tests; (3) every mutant the official tests
+  accept and every non-accept verdict resolved by an adjudication of a non-author provider. Each document names the reviewed
+  task-content digest (instruction, repo, hidden, reference): any change of the task voids its reviews (a new version needs new
+  reviews; relabelling is not evidence). Response models in the wire journal must belong to the claimed provider. What it
+  does not establish: independence of the providers' training data, training non-exposure (every reviewer provider received the
+  content), or independent AUTHORSHIP - review never changes the account of the author (one authoring source = one account).
+- **Difficulty calibration**: `seal --purpose calibration` creates a set that is never eligible as a holdout;
+  `buildCalibrationReport` turns measured baseline outcomes of that set into a rule (named feature, 0/1 outcomes only, every
+  task measured); later tasks may use basis `calibrated` only with a verified report: sha256, calibration purpose, disjoint
+  task ids and families, rule makes the level hard, AND (2026-11-06) `verifyCalibrationReport` re-derives it from the runner
+  ledger it names (sha256, hash chain, no simulated record, recorded harness commit, no unresolved infrastructure failure, same
+  outcomes digest, levels and hard levels recomputed from the pre-registered rule). Hand-supplied (`fixture`) reports are never
+  accepted. `studies/confirmatory-1/calibrate.mjs` is the bounded runner. (2026-11-07) Unit classes are pre-registered
+  (`calibration.mjs unitClass`): success / failure (completed, agent_error incl. request budget, timeout) / integrity (a valid
+  failure, reported apart) / infrastructure (infra_error, model_unavailable, model_error, aborted, grader_error) / harness-fault
+  (harness_crash, route_violation) / censored (never dispatched or unresolved). Under censoring `infra-excluded@1` infrastructure
+  and harness-fault units carry no difficulty evidence (left out, never counted as 0); a task with no remaining outcome is
+  unmeasured. Pre-registered exclusions (task, reason, evidence sha256) are part of the calibration plan digest, so they are fixed
+  before the first dispatch; an excluded (grader-invalid) task is NOT dispatched, and the runner refuses to start while a task
+  with a known grader defect in its cross-provider triage is not excluded (`calibrate.mjs knownDefectProblems`). A partial run writes
+  `calibration-status.json` (unit classes, budget) and no report.
+- **Request budget** (2026-11-07, `src/request-budget.mjs`): one durable, hash-chained, locked ledger shared by every
+  calibration run, resume and rerun of a study (never per state directory); its ceiling is fixed by its first record. The
+  accounting unit is a provider request ATTEMPT, gateway-internal retries and credential fallback included. `gatewayAttemptBound`
+  derives K = (request-retry + 1) rounds x eligible credentials from the gateway's config and auth directory, following the
+  retry contract of the verified build (CLIProxyAPI 8.0.57 c2f402b4, non-Home); anything that makes it unknowable refuses.
+  The evaluator's admission hook reserves unit.maxRequests x K per ATTEMPT before its dispatch record and settles forwarded x K
+  (internal retries are not observable, so every forwarded request is charged its worst case; a bound that changed during the
+  attempt is charged at the larger K and halts). Unsettled reservations stay charged in full; a corrupt, edited or truncated
+  ledger, a changed ceiling or unwritable storage refuse. K is invariant during an attempt only if nobody can change the
+  gateway's config or credentials meanwhile: a real run therefore requires an ISOLATED gateway (the process serving the route
+  runs the verified executable with a config inside the study's private storage); the shared live gateway is refused
+  (`gatewayIsolationProblems`). Peer protection (429/503 failures halt) is not part of the accounting.
+- **Readiness** (`eval-loop-supply readiness --protocol FILE --study FILE [--overlap-pool DIR ...]`, `src/readiness.mjs`):
+  read-only, model-free report of a confirmatory study's prerequisites (analysis plan incl. its simulated power at the target
+  effect, series budget, private review, calibration, main and confirmation holdouts, cross-pool overlap), each
+  fulfilled / provisional / blocked with reasons and evidence; exit 0 only when all are fulfilled. It never reserves, seals,
+  consumes, runs or writes.
+- **Independent confirmation** (`eval-loop --confirm-adoption`): re-measures previous vs adopted commits on a separate,
+  unused, eligible batch reserved under `<state>#confirmation` (own seal excluded), spends `confirmation.alpha`, runs
+  interleaved, applies the confirmatory checks; CONFIRMED / NOT_CONFIRMED / INCONCLUSIVE / BLOCKED (dormant without a
+  confirmatory plan or batch: nothing consumed). `--verify-stable` is refused under a confirmatory plan; its absence of a
+  supported regression is never a confirmation.
+- **Older experiments**: a state locked under another protocol version is refused read-only (nothing saved, bound, reserved
+  or reported); its recorded files stay byte-identical (`test/protocol4.test.mjs`). Start new experiments in new state
+  directories.
+- **Deployer guard**: `Loop.adopt()` (also on resume) halts unless the decision is ADOPT under a confirmatory plan with a
+  confirmatory evidence label and passing confirmatory checks.
+- **Machine-consumed stages** (`status@1` `acceptance`, `src/contract.mjs` acceptanceOf): `candidate-accepted-exploratory`,
+  `adoption-decided-not-applied`, `adopted-unconfirmed`, `adopted-confirmed`, `adopted-not-confirmed`, `rolled-back`,
+  `not-accepted`; `confirmed` is true only after `--confirm-adoption` returned CONFIRMED (absence is never success);
+  `legacy` = recorded without a protocol-4 evidence label. agent_workflow treats EXPLORATORY_SUPPORTED, ADOPT without the
+  confirmatory label, and an adoption whose planned confirmation is not CONFIRMED as not-normal (no schedule enabling, no
+  rotation, no automatic repair); an incomplete plan or exhausted budget is "external input required", not a supply shortage.
+
+### Rollout (not done; needs a separate human decision)
+1. Until a confirmatory plan is registered, protocol-4 produces exploratory measurements only; no adoption happens.
+2. Experiments recorded under protocol-3 (for example `state/aw-scheduled`) are refused read-only by the protocol-4 CLI;
+   the scheduled series then stops for a human decision (new experiment directory) instead of resuming them.
+3. Confirmation stays dormant (`BLOCKED`, nothing consumed) until a plan with `confirmation.required` and a pool holding a
+   separate sealed unused batch exist; it is run by hand (`eval-loop --confirm-adoption`), never by a schedule.
+
+### Required external inputs and their state (2026-11-06, study `studies/confirmatory-1/`)
+1. Rationale: registered (`RATIONALE.md`, simulation `power.mjs` on real ctrl-ablation-1 records) but PROVISIONAL: adequate
+   power only for effects >= 0.15 under the homogeneous model; <= 0.34 adopt-and-confirm at the typical effect 0.10.
+2. Series ledger and total alpha: chosen in the plan (0.05, two experiments); an operator may replace them by a new version.
+3. Private tasks: 18 authored, 17 accepted and taken in (10 calibration, 7 holdout candidates) by AI-agent sessions of one
+   model with separated roles; no human reviewer, one account -> not eligible under `privateReview: "human"` and the 0.5 cap.
+4. Calibration: batch sealed (calibration purpose); not measured: needs an operator-approved request ceiling for ~30 units.
+5. Main and confirmation batches: not sealed (288 tasks needed, 7 eligible candidates, one account).
+6. Deployment of this code to the live checkout and any schedule change: separate human approval.

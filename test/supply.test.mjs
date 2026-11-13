@@ -6,7 +6,7 @@ import assert from "node:assert/strict";
 import { execFileSync, spawnSync } from "node:child_process";
 import { appendFileSync, existsSync, mkdirSync, readdirSync, readFileSync, renameSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
-import { edit, HOLDOUT, makeHoldout, makeLoop, rmSync, tempDir, testProtocol, skillOf } from "./helpers.mjs";
+import { adoptableProtocol, edit, HOLDOUT, makeHoldout, makeLoop, rmSync, tempDir, testProtocol, skillOf } from "./helpers.mjs";
 import { acquireLock, Ledger, LockBusyError } from "../src/util.mjs";
 import { verifySeal } from "../src/datasets.mjs";
 import { simulatedBackend } from "../src/evaluator.mjs";
@@ -170,7 +170,7 @@ test("seal: candidate-blind selection, coverage minima, tamper detection, idempo
   try {
     const { pool, sealed } = await sealedPool(root);
     assert.ok(sealed.batch, JSON.stringify(sealed));
-    assert.deepEqual(sealed.coverage, { tasks: 3, families: 3, owners: 3, hard: 0, hardByUnacceptedBasis: 0 });
+    assert.deepEqual(sealed.coverage, { tasks: 3, families: 3, owners: 3, hard: 0, hardByUnacceptedBasis: 0, maxOwnerTasks: 1, maxOwnerShare: 0.333, familiesInEarlierBatches: 0 });
     assert.equal(verifySeal(sealed.dir).ok, true);
     assert.ok(existsSync(join(sealed.dir, "PROVENANCE.json")));
     assert.equal(readdirSync(join(pool, "cases")).length, 0, "batched cases leave the staging area");
@@ -211,7 +211,7 @@ function addBatch(root, pool, name) {
   registryOf(pool).append({ type: "batch", batch: name, tasks: HOLDOUT.map(h => h[0]), sealDigest: verifySeal(join(pool, "batches", name)).seal.digest });
 }
 function poolWithBatch(root) { const pool = join(root, "pool"); addBatch(root, pool, "b1"); return pool; }
-const poolProtocol = (pool) => testProtocol({ datasets: { holdout: null, holdoutPool: pool } });
+const poolProtocol = (pool) => adoptableProtocol({ datasets: { holdout: null, holdoutPool: pool } });
 function counter() { let runs = 0; const sim = simulatedBackend({ skill: skillOf, seed: "test" }); return { backend: { simulated: true, run: (i) => { runs++; return sim.run(i); } }, get runs() { return runs; } }; }
 
 test("engine: a fresh experiment reserves an unused batch, locks it with the protocol and consumes it once; its next cycle is blocked", async () => {
@@ -329,21 +329,58 @@ test("runtime boundary: a model-facing sandbox (no pool bind) cannot read the po
   } finally { rmSync(root, { recursive: true, force: true }); }
 });
 
-test("per-account cap: a pool dominated by one account seals at most maxPerOwner of its tasks (registry aggregate == PROVENANCE)", async () => {
+test("per-account cap: a pool dominated by one account seals at most maxPerOwner of its tasks and at most maxOwnerShare of the sealed size (registry aggregate == PROVENANCE)", async () => {
   const root = tempDir();
   try {
     const repos = [...Array.from({ length: 6 }, (_, i) => padRepo(root, `solo/pkg${i}`, { date: `2026-05-0${i + 1}T00:00:00Z` })), padRepo(root, "other1/a"), padRepo(root, "other2/b")];
     const pool = join(root, "pool");
+    // maxReposPerOwner is a discovery cap; explicit repository lists are taken as given.
     await collect({ pool, cfg: CFG, repos, orcheDir: fakeOrche(root), packageDir: join(root, "pkg"), validate: fakeValidate() });
-    const cfg = mergeSupply({ ...CFG, batch: { maxTasks: 12, maxPerFamily: 2, maxPerOwner: 4, seed: "test" } });
-    const sealed = sealBatch({ pool, cfg, minima: { minTasks: 2, minFamilies: 2, requireHard: false } });
-    const prov = JSON.parse(readFileSync(join(sealed.dir, "PROVENANCE.json"), "utf8"));
-    const owners = {};
-    for (const t of prov.tasks) { const o = t.upstream.repository.split("/")[3]; owners[o] = (owners[o] ?? 0) + 1; }
-    assert.deepEqual(owners, { solo: 4, other1: 1, other2: 1 });
-    assert.equal(sealed.coverage.owners, 3);
-    assert.equal(poolStatus(pool, structuredClone(DEFAULT_PROTOCOL), { orcheDir: fakeOrche(root) }).unbatchedEligible, 2, "the solo account's surplus stays unbatched");
+    const ownersOf = (dir) => { const prov = JSON.parse(readFileSync(join(dir, "PROVENANCE.json"), "utf8")); const owners = {}; for (const t of prov.tasks) { const o = t.upstream.repository.split("/")[3]; owners[o] = (owners[o] ?? 0) + 1; } return { owners, prov }; };
+    // Default policy: no account above half of the tasks actually sealed (8 eligible, 6 of one account -> 2 + 1 + 1).
+    const sealed = sealBatch({ pool, cfg: mergeSupply({ ...CFG, batch: { maxTasks: 12, maxPerFamily: 2, maxPerOwner: 4, seed: "test" } }), minima: { minTasks: 2, minFamilies: 2, requireHard: false } });
+    const { owners, prov } = ownersOf(sealed.dir);
+    assert.deepEqual(owners, { solo: 2, other1: 1, other2: 1 });
+    assert.equal(sealed.coverage.owners, 3); assert.equal(sealed.coverage.maxOwnerShare, 0.5); assert.equal(sealed.coverage.maxOwnerTasks, 2);
+    assert.equal(prov.selection.maxOwnerShare, 0.5); assert.match(prov.selection.rule, /maxOwnerShare of the sealed size/);
+    const status = poolStatus(pool, structuredClone(DEFAULT_PROTOCOL), { orcheDir: fakeOrche(root), cfg: CFG });
+    assert.equal(status.unbatchedEligible, 4, "the solo account's surplus stays unbatched");
+    assert.deepEqual(status.batches[0].owners, { solo: 2, other1: 1, other2: 1 }); assert.equal(status.batches[0].maxOwnerShare, 0.5);
+    assert.deepEqual(status.outlook.byOwner, { solo: 4 }); assert.equal(status.outlook.nextBatch.ok, false, "a one-account remainder never seals");
+    // Share disabled (1): the per-account count cap alone binds, as before 2026-11-06.
+    const pool2 = join(root, "pool2");
+    await collect({ pool: pool2, cfg: CFG, repos, orcheDir: fakeOrche(root), packageDir: join(root, "pkg"), validate: fakeValidate() });
+    const loose = sealBatch({ pool: pool2, cfg: mergeSupply({ ...CFG, batch: { maxTasks: 12, maxPerFamily: 2, maxPerOwner: 4, maxOwnerShare: 1, seed: "test" } }), minima: { minTasks: 2, minFamilies: 2, requireHard: false } });
+    assert.deepEqual(ownersOf(loose.dir).owners, { solo: 4, other1: 1, other2: 1 });
   } finally { rmSync(root, { recursive: true, force: true }); }
+});
+
+test("selection: owner share against the sealed size, competing hard cases, insufficient supply, fresh families first, legacy records", () => {
+  const hb = { minTasks: 6, minFamilies: 4, requireHard: true, hardBasis: ["source"] };
+  const cfg = { batch: { seed: "s", maxTasks: 12, maxPerFamily: 2, maxPerOwner: 4, maxOwnerShare: 0.5, preferFreshFamilies: true } };
+  const c = (caseId, family, tier = "easy", difficultyBasis) => ({ caseId, family, tier, ...(difficultyBasis ? { difficultyBasis } : {}) });
+  // Six-task concentration: 4 of one account + 2 others can never be a 6-task batch at share 0.5 -> blocked, not truncated silently.
+  const conc = selectBatch([c("a1", "gh:o1/a"), c("a2", "gh:o1/b"), c("a3", "gh:o1/c"), c("a4", "gh:o1/d", "hard", "source"), c("b1", "gh:o2/x"), c("b2", "gh:o3/y")], cfg, hb);
+  assert.equal(conc.ok, false); assert.match(conc.why, /tasks \d < 6/); assert.ok(conc.coverage.maxOwnerShare <= 0.5);
+  // The same supply plus two more accounts seals 6+ tasks with no account above half.
+  const ok = selectBatch([c("a1", "gh:o1/a"), c("a2", "gh:o1/b"), c("a3", "gh:o1/c"), c("a4", "gh:o1/d", "hard", "source"), c("b1", "gh:o2/x"), c("b2", "gh:o3/y"), c("b3", "gh:o4/z"), c("b4", "gh:o5/w")], cfg, hb);
+  assert.equal(ok.ok, true, ok.why); assert.ok(ok.coverage.tasks >= 6); assert.ok(ok.coverage.maxOwnerTasks <= Math.floor(ok.coverage.tasks / 2)); assert.equal(ok.coverage.hard >= 1, true);
+  // Competing hard cases: one hard case always leads; size-proxy hard never counts.
+  const hard = selectBatch([c("p1", "gh:o1/a", "hard"), c("p2", "gh:o2/b", "hard", "size-proxy"), c("s1", "gh:o3/c", "hard", "source"), c("s2", "gh:o4/d", "hard", "source"), c("e1", "gh:o5/e"), c("e2", "gh:o6/f")], cfg, hb);
+  assert.ok(["s1", "s2"].includes(hard.ids[0])); assert.equal(hard.coverage.hard, 2); assert.equal(hard.coverage.hardByUnacceptedBasis, 2);
+  const noHard = selectBatch([c("p1", "gh:o1/a", "hard"), c("p2", "gh:o2/b", "hard", "size-proxy"), c("e1", "gh:o3/c"), c("e2", "gh:o4/d"), c("e3", "gh:o5/e"), c("e4", "gh:o6/f")], cfg, hb);
+  assert.equal(noHard.ok, false); assert.match(noHard.why, /no hard task with an accepted difficulty basis/);
+  // Insufficient supply.
+  assert.match(selectBatch([c("x", "gh:o1/a", "hard", "source")], cfg, hb).why, /tasks [01] < 6/);
+  assert.equal(selectBatch([], cfg, hb).coverage.tasks, 0);
+  // Fresh families first: with room for 2 of 4 equally-capped candidates, the families of no earlier batch are taken.
+  const fresh = selectBatch([c("r1", "gh:o1/used"), c("r2", "gh:o2/used2"), c("f1", "gh:o3/new"), c("f2", "gh:o4/new2")], { batch: { ...cfg.batch, maxTasks: 2 } }, { minTasks: 2, minFamilies: 2 }, { priorFamilies: new Set(["gh:o1/used", "gh:o2/used2"]) });
+  assert.deepEqual([...fresh.ids].sort(), ["f1", "f2"]); assert.equal(fresh.coverage.familiesInEarlierBatches, 0);
+  const stale = selectBatch([c("r1", "gh:o1/used"), c("r2", "gh:o2/used2")], { batch: { ...cfg.batch, maxTasks: 2 } }, { minTasks: 2, minFamilies: 2 }, { priorFamilies: new Set(["gh:o1/used", "gh:o2/used2"]) });
+  assert.equal(stale.ok, true, "a preference, never a block"); assert.equal(stale.coverage.familiesInEarlierBatches, 2);
+  // Legacy batch config (no maxOwnerShare / preferFreshFamilies): unchanged greedy behaviour.
+  const legacy = selectBatch([c("a1", "gh:o1/a"), c("a2", "gh:o1/b"), c("a3", "gh:o1/c"), c("b1", "gh:o2/x")], { batch: { seed: "s", maxTasks: 10, maxPerFamily: 2, maxPerOwner: 4 } }, { minTasks: 1, minFamilies: 1 });
+  assert.equal(legacy.coverage.tasks, 4); assert.equal(legacy.coverage.maxOwnerTasks, 3);
 });
 
 test("difficulty: size-proxy hard tiers never make a hard stratum (seal, eligibility, preflight, engine); declared/source tiers do", async () => {
@@ -415,5 +452,74 @@ test("engine: a holdout whose only hard tasks are size-proxy is blocked by the p
     const st = await loop.runCycle();
     assert.equal(st.phase, "blocked"); assert.match(st.blocked.preflight.reasons.join(" "), /no hard stratum.*size-proxy/); assert.equal(st.blocked.preflight.coverage.hardUnverified, 3);
     assert.equal(c.runs, 0);
+  } finally { rmSync(root, { recursive: true, force: true }); }
+});
+
+test("commit source: tests that import packages unavailable offline are rejected before validation; builtins, self-imports, #imports and dynamic imports are not", async () => {
+  const root = tempDir();
+  try {
+    const ava = (slug) => `// ${slug}\nimport test from "ava";\nimport { pad } from "./index.js";\ntest("pads", t => t.is(pad(1, 3), "  1"));\n`;
+    const viaAva = padRepo(root, "devdep/pad", { testText: ava("devdep/pad") });
+    const fine = padRepo(root, "fine/pad", { testText: `// fine/pad\nimport { test } from "node:test";\nimport assert from "assert/strict";\nimport self from "pad";\nimport priv from "#internal";\nconst maybe = async () => { try { return await import("optional-dep"); } catch { return null; } };\nimport { pad } from "./index.js";\ntest("pads", () => assert.equal(pad(1, 3), "  1"));\ntest("pads with a custom fill", () => assert.equal(pad(1, 3, "0"), "001"));\n` });
+    const pool = join(root, "pool");
+    const validated = [];
+    const validate = async (dir) => { validated.push(dir); return { ok: true, code: "valid", expected: { hiddenTests: 2 }, detail: {} }; };
+    const s = await collect({ pool, cfg: CFG, repos: [viaAva, fine], orcheDir: fakeOrche(root), packageDir: join(root, "pkg"), validate });
+    assert.equal(s.caseRejects["test-imports-unavailable-package"], 1);
+    assert.equal(validated.length, 1, "the doomed case costs no validation (and no per-repository validation budget)");
+    assert.deepEqual(s.eligible.map(e => e.id.split("-").slice(1, 3).join("/")), ["fine/pad"]);
+    const rec = poolState(pool).records.find(r => r.type === "case" && r.code === "test-imports-unavailable-package");
+    assert.deepEqual(rec.missing, ["ava"]);
+    // Every scanned repository leaves a non-secret scan record (rotation input).
+    const scans = poolState(pool).records.filter(r => r.type === "scan");
+    assert.deepEqual(scans.map(r => r.repo).sort(), ["devdep/pad", "fine/pad"]); assert.ok(scans.every(r => /^[0-9a-f]{40}$/.test(r.head)));
+  } finally { rmSync(root, { recursive: true, force: true }); }
+});
+
+test("discovery: at most maxReposPerOwner per account; never-scanned repositories first, then the least recently scanned (failed scans included), before truncation", async () => {
+  const { bareImports, discoverRepos, isNodeDefaultTest, lastScans, orderRepos } = await import("../src/supply.mjs");
+  const r = (slug) => ({ slug });
+  const repos = ["big/a", "big/b", "big/c", "big/d", "big/e", "x/a", "y/a", "z/a"].map(r);
+  const d = { maxRepos: 5, maxReposPerOwner: 3, preferUnscanned: true };
+  assert.deepEqual(orderRepos(repos, d).map(x => x.slug), ["big/a", "big/b", "big/c", "x/a", "y/a"]);
+  // Run 2: what run 1 scanned (failed clone included) goes last; the rest of the queue comes first.
+  const last = lastScans([{ type: "scan", repo: "big/a", at: "2026-11-06T01:00:00Z" }, { type: "scan", repo: "big/b", at: "2026-11-06T01:00:01Z", error: "clone-failed" }, { type: "scan", repo: "big/c", at: "2026-11-06T01:00:02Z" }, { type: "scan", repo: "x/a", at: "2026-11-06T01:00:03Z" }, { type: "scan", repo: "y/a", at: "2026-11-06T01:00:04Z" }]);
+  assert.deepEqual(orderRepos(repos, d, last).map(x => x.slug), ["big/d", "big/e", "z/a", "big/a", "x/a"]);
+  // Legacy pools (commit-case decisions, no scan records) count as scanned at their decision time; exercism records do not.
+  assert.deepEqual([...lastScans([{ type: "case", repo: "x/a", commit: "c1", at: "2026-11-05T08:00:00Z" }, { type: "case", repo: "x/a", commit: "c2", at: "2026-11-05T07:00:00Z" }, { type: "case", repo: "exercism/javascript", sourceKey: "k", at: "2026-11-05T09:00:00Z" }])], [["x/a", "2026-11-05T08:00:00Z"]]);
+  assert.deepEqual(orderRepos(repos, { ...d, preferUnscanned: false }, last).map(x => x.slug), ["big/a", "big/b", "big/c", "x/a", "y/a"], "rotation off: discovery order");
+  // discoverRepos applies the same ordering after its registry filters (no network: a fake registry).
+  const pkgs = ["big/a", "big/b", "x/a", "deps/a"].map((slug, i) => ({ name: `p${i}`, slug }));
+  const fetchJson = async (url) => url.includes("/-/v1/search") ? { objects: pkgs.map(p => ({ package: { name: p.name, date: "2026-01-01" } })) } : (() => { const p = pkgs.find(x => url.endsWith(`/${x.name}/latest`)); return { name: p.name, version: "1.0.0", license: "MIT", scripts: { test: "node --test" }, dependencies: p.slug.startsWith("deps") ? { x: "1" } : {}, repository: { url: `git+https://github.com/${p.slug}.git` } }; })();
+  const found = await discoverRepos(mergeSupply({ discovery: { keywords: ["k"], perKeyword: 4, delayMs: 0, maxRepos: 2, maxReposPerOwner: 1 } }), { fetchJson, lastScan: new Map([["big/a", "2026-11-06T00:00:00Z"]]) });
+  assert.deepEqual(found.map(x => x.slug), ["big/b", "x/a"]);
+  // Static reading is conservative: only certain, statement-level loads of bare packages count.
+  assert.deepEqual(bareImports("import a from 'ava';\nimport type { T } from 'expect';\n// import b from 'gone';\nconst c = require('sinon');\nif (x) require('opt');\nconst d = await import('dyn');\nimport e from '#priv';\nimport f from 'node:fs';\nimport g from '@scope/pkg/sub';\n"), ["ava", "sinon", "@scope/pkg"]);
+  assert.deepEqual(["test.js", "test/a.js", "a.test.ts", "test-runner.mjs", "x_test.cjs", "a.spec.js", "src/a.js", "node_modules/test/a.js", "test/types.d.ts"].map(isNodeDefaultTest), [true, true, true, true, true, false, false, false, false]);
+});
+
+test("validation budget: a timeout or grader error ends a case's validation early; a repository that timed out twice is left for later (undecided)", async () => {
+  const root = tempDir();
+  try {
+    // validateCase stops at the first decisive run.
+    const calls = [];
+    const fake = (result) => async ({ workspace }) => { calls.push(workspace); return result; };
+    mkdirSync(join(root, "case/repo"), { recursive: true }); mkdirSync(join(root, "case/hidden"), { recursive: true }); mkdirSync(join(root, "case/reference"), { recursive: true });
+    const v1 = await validateCase(join(root, "case"), { env: {}, scratch: join(root, "s1"), repeats: 2, gradeWorkspace: fake({ visible: { pass: true, tests: 1, timeout: true }, hidden: { pass: false, tests: 0, failed: 0, failing: [], timeout: false } }) });
+    assert.equal(v1.code, "timeout"); assert.equal(calls.length, 1, "one run instead of four");
+    calls.length = 0;
+    const v2 = await validateCase(join(root, "case"), { env: {}, scratch: join(root, "s2"), repeats: 2, gradeWorkspace: fake({ error: "boom" }) });
+    assert.equal(v2.code, "grader-error"); assert.equal(calls.length, 1);
+    // collect: after two timeouts in one repository the rest of its commits wait for a later collection.
+    const h = "// slow/pad\n";
+    const slow = upstream(root, "slow/pad", { commits: [
+      { message: "Initial import", date: "2025-01-01T00:00:00Z", files: { "index.js": h + PAD0, "pad.test.js": h + PT0 } },
+      ...[1, 2, 3, 4].map(i => ({ message: `Support padding variant number ${i} for values`, date: `2026-04-0${i}T00:00:00Z`, files: { "index.js": `${h}${PAD1}// v${i}\n`, "pad.test.js": `${h}${PT1}// v${i}\n` } })),
+    ] });
+    const pool = join(root, "pool");
+    let validated = 0;
+    const s = await collect({ pool, cfg: CFG, repos: [slow], orcheDir: fakeOrche(root), packageDir: join(root, "pkg"), validate: async () => { validated++; return { ok: false, code: "timeout", detail: {} }; } });
+    assert.equal(validated, 2); assert.equal(s.caseRejects.timeout, 2); assert.equal(s.caseRejects["repository-skipped-after-timeouts"], 1);
+    assert.equal(poolState(pool).records.filter(r => r.type === "case").length, 2, "the skipped commits stay undecided");
   } finally { rmSync(root, { recursive: true, force: true }); }
 });
