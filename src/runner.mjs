@@ -2,30 +2,47 @@
 // the pinned route, then the independent grader and the mechanical integrity checks. Everything that decides the record comes
 // from the controller's own observations: the process exit, the JSON event stream it captured, the wire journal its proxy wrote
 // outside the sandbox and the sandboxed grader.
-import { cpSync, existsSync, readFileSync, readdirSync, rmSync, writeFileSync, copyFileSync, mkdtempSync } from "node:fs";
+import { chmodSync, cpSync, existsSync, readFileSync, readdirSync, rmSync, writeFileSync, copyFileSync, mkdtempSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 import { execFileSync } from "node:child_process";
 import { ensureDir, textMap, treeDigest, walkFiles, sha256, redact } from "./util.mjs";
-import { BRIDGE, BRIDGE_PORT, LAUNCH, MOUNTS, PLACEHOLDER_KEY, completedModelCalls, harnessBinds, runSandboxed, startModelPath, wireEntries } from "./sandbox.mjs";
+import { BRIDGE, BRIDGE_PORT, LAUNCH, MOUNTS, PLACEHOLDER_KEY, boxView, completedModelCalls, harnessBinds, runSandboxed, startModelPath, wireEntries } from "./sandbox.mjs";
 import { gradeWorkspace } from "./grader.mjs";
 import { stageWorkspace } from "./datasets.mjs";
 import { makeRecord } from "./metrics.mjs";
 import { workspaceIntegrity, leakScan, sessionToolCalls, strictTestIntegrity } from "./integrity.mjs";
 import { classifyFailure } from "./analysis.mjs";
+import { unitTelemetry } from "./telemetry.mjs";
 
 export const BOX = "/tmp/box";
 export const TASK_SUFFIX = "\n\nWork in the current directory (a git repository with the project). Make the change the task asks for and keep the existing tests passing. Do not commit. Stop when you are done.";
 
-/** Private orche config of a run: every model tier pinned to the one route, product defaults otherwise. */
-export function orcheConfig(route, mode, unit) {
-  const ref = { model: `${route.provider}/${route.model}`, thinking: route.effort };
+/**
+ * Private orche config of a run: every model tier pinned to the one route, product defaults otherwise. `overlay` (an experiment
+ * arm's explicit runtime settings, e.g. `single.ledger`, `thinkingPolicy`, `workerCompaction`) is merged over these defaults key
+ * by key (objects deeply, everything else replaced); it can never change the pinned route, the tiers or the unit limits.
+ * `route.extendedContext` (optional) is applied to the default and every tier like an operator's config would.
+ */
+export function orcheConfig(route, mode, unit, overlay = undefined) {
+  const ref = { model: `${route.provider}/${route.model}`, thinking: route.effort, ...(route.extendedContext !== undefined ? { extendedContext: route.extendedContext } : {}) };
   const tiers = ["main", "orchestrator", "worker", "strong-orchestrator", "strong-worker", "advisor", "strong-advisor"];
-  return {
+  const base = {
     mainMode: mode, routes: {}, default: { ...ref }, models: Object.fromEntries(tiers.map(tier => [tier, { ...ref }])),
     single: { ledger: false, spawn: true, advisor: false }, concurrentSessions: { enabled: false }, bashReview: { enabled: false },
     limits: { overallMs: unit.wallMs, assignmentMs: unit.wallMs, assignmentRequests: unit.maxRequests },
   };
+  if (overlay === undefined || overlay === null) return base;
+  const fixed = ["mainMode", "routes", "default", "models", "limits"];
+  const bad = Object.keys(overlay).filter(key => fixed.includes(key));
+  if (bad.length) throw new Error(`orche config overlay may not set ${bad.join(", ")} (the route, tiers and unit limits are pinned by the protocol)`);
+  const merge = (a, b) => {
+    if (!b || typeof b !== "object" || Array.isArray(b) || !a || typeof a !== "object" || Array.isArray(a)) return structuredClone(b);
+    const out = { ...a };
+    for (const [key, value] of Object.entries(b)) out[key] = merge(a[key], value);
+    return out;
+  };
+  return merge(base, overlay);
 }
 
 export const piSettings = (route) => ({ defaultProvider: route.provider, defaultModel: route.model, defaultThinkingLevel: route.effort, quietStartup: true, transport: "sse" });
@@ -68,66 +85,105 @@ export function terminalOf({ run, events, wire, totals, gateRefusals, stderr }) 
 
 /** Every mount of a task agent's sandbox (exported so the isolation tests probe exactly this set). */
 export function agentBinds({ env, box, launch, socket, harness }) {
+  const view = boxView(env); // a frozen node / pi tree is mounted where the host's trees are (same in-box paths)
   const binds = [
-    { from: env.nodeDir }, { from: env.piModules }, { from: box, to: BOX, rw: true },
+    view.nodeBind, view.piBind, { from: box, to: BOX, rw: true },
     { from: env.provider, to: MOUNTS.provider }, { from: BRIDGE, to: MOUNTS.bridge }, { from: launch, to: MOUNTS.launch }, { from: socket, to: MOUNTS.socket, rw: true },
   ];
-  if (harness.kind === "orche") binds.push(...harnessBinds(harness.dir, MOUNTS.harness), { from: join(env.orche, "node_modules"), to: `${MOUNTS.harness}/node_modules` });
+  if (harness.kind === "orche") binds.push(...harnessBinds(harness.dir, MOUNTS.harness), { from: env.orcheModules ?? join(env.orche, "node_modules"), to: `${MOUNTS.harness}/node_modules` });
   return binds;
 }
 
-/** One Pi invocation in the sandbox; returns observations and leaves the workspace in place. */
+/** Numeric totals of several model paths (one per turn) added key by key; nested counters (refused) too. */
+export function addTotals(a, b) {
+  const out = { ...a };
+  for (const [key, value] of Object.entries(b ?? {})) {
+    if (typeof value === "number") out[key] = (out[key] ?? 0) + value;
+    else if (value && typeof value === "object" && !Array.isArray(value)) out[key] = addTotals(out[key] ?? {}, value);
+    else if (!(key in out)) out[key] = value;
+  }
+  return out;
+}
+
+/**
+ * The user turns of one attempt: the task instruction, then the task's `turns` (follow-up user messages, e.g. an amended
+ * constraint). Every turn is a separate Pi process resuming the SAME session (`--session-id`): a real process restart and session
+ * resume, with orche's workers re-created from its records. The task suffix is appended to every turn.
+ */
+export const userTurns = (task) => [task.instruction, ...(Array.isArray(task.turns) ? task.turns : [])].map(text => `${text}${TASK_SUFFIX}`);
+
+/** One attempt in the sandbox (one Pi process per user turn, same session and box); returns observations and leaves the workspace in place. */
 async function piAttempt({ harness, task, route, unit, env, box, evidence, sessionId, signalPids, control, capture = false }) {
   const ws = join(box, "ws"), agent = join(box, "agent"), sessions = join(box, "sessions"), home = join(box, "home"), tmp = join(box, "tmp");
   rmSync(box, { recursive: true, force: true });
   for (const dir of [agent, sessions, home, tmp]) ensureDir(dir);
   stageWorkspace(task, ws);
-  for (const name of ["cliproxyapi-models.json", "models.json"]) if (existsSync(join(env.agentDir, name))) copyFileSync(join(env.agentDir, name), join(agent, name));
+  for (const name of ["cliproxyapi-models.json", "models.json"]) { const from = join(env.catalogDir ?? env.agentDir, name); if (existsSync(from)) { copyFileSync(from, join(agent, name)); chmodSync(join(agent, name), 0o600); } } // writable private copy (the provider refreshes it), also from a read-only snapshot
   const bridgeUrl = `http://127.0.0.1:${BRIDGE_PORT}`;
   writeFileSync(join(agent, "cliproxyapi.json"), JSON.stringify({ apiKey: PLACEHOLDER_KEY, baseUrl: bridgeUrl, providerId: "cliproxyapi", providerName: "CLIProxyAPI" }), { mode: 0o600 });
   writeFileSync(join(agent, "settings.json"), JSON.stringify(piSettings(route), null, 2));
-  if (harness.kind === "orche") writeFileSync(join(agent, "orche.config.json"), JSON.stringify(orcheConfig(route, harness.mode, unit), null, 2));
+  const runtimeConfig = harness.kind === "orche" ? orcheConfig(route, harness.mode, unit, harness.orcheConfig) : undefined;
+  if (runtimeConfig) writeFileSync(join(agent, "orche.config.json"), JSON.stringify(runtimeConfig, null, 2));
   // Short private control directory (unix socket paths are limited to ~108 bytes); the evaluator records it before dispatch so a
   // crash can be reconciled from the wire journal kept here.
   ensureDir(control);
   const launch = join(control, "launch.sh");
   writeFileSync(launch, LAUNCH, { mode: 0o555 });
-  const model = await startModelPath({ dir: join(control, "model"), route, maxRequests: unit.maxRequests, upstream: env.upstream, agentDir: env.agentDir, keyOverride: env.keyOverride });
   const inside = (p) => p.replace(box, BOX);
-  const binds = agentBinds({ env, box, launch, socket: model.socket, harness });
-  const piArgs = [env.piCli, "--mode", "json", "-p", "--no-extensions", "--no-skills", "--no-prompt-templates", "--no-mcp", "--no-approve", "--no-context-files", "--offline",
-    "-e", `${MOUNTS.provider}/extensions/index.ts`];
-  if (harness.kind === "orche") piArgs.push("-e", `${MOUNTS.harness}/src/extension/index.ts`);
-  piArgs.push("--model", `${route.provider}/${route.model}`, "--thinking", route.effort, "--session-dir", inside(sessions), "--session-id", sessionId, "--", `${task.instruction}${TASK_SUFFIX}`);
   const sandboxEnv = {
-    PATH: `${env.nodeDir}/bin:/usr/local/bin:/usr/bin:/bin`, HOME: inside(home), TMPDIR: inside(tmp), LANG: "C.UTF-8", LC_ALL: "C.UTF-8", TERM: "dumb", TZ: "UTC",
+    PATH: `${boxView(env).nodeDir}/bin:/usr/local/bin:/usr/bin:/bin`, HOME: inside(home), TMPDIR: inside(tmp), LANG: "C.UTF-8", LC_ALL: "C.UTF-8", TERM: "dumb", TZ: "UTC",
     PI_CODING_AGENT_DIR: inside(agent), PI_CODING_AGENT_SESSION_DIR: inside(sessions), PI_SKIP_VERSION_CHECK: "1", PI_TELEMETRY: "0", PI_OFFLINE: "1",
-    CLIPROXYAPI_BASE_URL: bridgeUrl, CLIPROXYAPI_API_KEY: PLACEHOLDER_KEY, CLIPROXYAPI_FAST: "0", EL_NODE: env.node, EL_BRIDGE_READY: `${inside(tmp)}/.bridge-ready`,
+    CLIPROXYAPI_BASE_URL: bridgeUrl, CLIPROXYAPI_API_KEY: PLACEHOLDER_KEY, CLIPROXYAPI_FAST: "0", EL_NODE: boxView(env).node, EL_BRIDGE_READY: `${inside(tmp)}/.bridge-ready`,
   };
-  const eventsPath = join(evidence, `events-${sessionId}.jsonl`), stderrPath = join(evidence, `stderr-${sessionId}.txt`);
+  const prompts = userTurns(task);
   const started = Date.now();
-  let run, sandboxPid;
-  try {
-    run = await runSandboxed({ binds, env: sandboxEnv, cwd: inside(ws), command: ["/bin/sh", MOUNTS.launch, env.node, ...piArgs] }, { guardMs: unit.wallMs, stdout: eventsPath, stderr: stderrPath, keep: 64 * 1024, onSpawn: pid => { sandboxPid = pid; signalPids?.add(pid); } });
-  } finally {
-    // A finished sandbox's process-group id may be reused later: the signal cleanup must never target it.
-    if (sandboxPid !== undefined) signalPids?.delete(sandboxPid);
-    await model.stop();
+  let run, totals = {}, terminal, gateRefusals = [], stderrTail = "", eventsText = "";
+  const wire = [], turnLog = [];
+  for (let turn = 0; turn < prompts.length; turn++) {
+    // The unit's request and wall limits cover all turns together.
+    const requestsLeft = unit.maxRequests - (totals.forwarded ?? 0), wallLeft = unit.wallMs - (Date.now() - started);
+    if (turn > 0 && (requestsLeft <= 0 || wallLeft <= 0)) { terminal = requestsLeft <= 0 ? { status: "agent_error", detail: `request budget exhausted before turn ${turn + 1}` } : { status: "timeout", detail: `unit wall-time guard before turn ${turn + 1}` }; break; }
+    const suffix = turn === 0 ? "" : `-t${turn}`;
+    const model = await startModelPath({ dir: join(control, `model${turn || ""}`), route, maxRequests: requestsLeft, upstream: env.upstream, agentDir: env.agentDir, keyOverride: env.keyOverride });
+    const binds = agentBinds({ env, box, launch, socket: model.socket, harness });
+    const piArgs = [boxView(env).piCli, "--mode", "json", "-p", "--no-extensions", "--no-skills", "--no-prompt-templates", "--no-mcp", "--no-approve", "--no-context-files", "--offline",
+      "-e", `${MOUNTS.provider}/extensions/index.ts`];
+    if (harness.kind === "orche") piArgs.push("-e", `${MOUNTS.harness}/src/extension/index.ts`);
+    // A harness-level system-prompt addition (an experiment arm such as pure Pi + a rule); the same flag Pi documents for users.
+    if (harness.appendSystemPrompt) piArgs.push("--append-system-prompt", harness.appendSystemPrompt);
+    piArgs.push("--model", `${route.provider}/${route.model}`, "--thinking", route.effort, "--session-dir", inside(sessions), "--session-id", sessionId, "--", prompts[turn]);
+    const eventsPath = join(evidence, `events-${sessionId}${suffix}.jsonl`), stderrPath = join(evidence, `stderr-${sessionId}${suffix}.txt`);
+    const turnStarted = Date.now();
+    let sandboxPid;
+    try {
+      run = await runSandboxed({ binds, env: sandboxEnv, cwd: inside(ws), command: ["/bin/sh", MOUNTS.launch, boxView(env).node, ...piArgs] }, { guardMs: turn === 0 ? unit.wallMs : wallLeft, stdout: eventsPath, stderr: stderrPath, keep: 64 * 1024, onSpawn: pid => { sandboxPid = pid; signalPids?.add(pid); } });
+    } finally {
+      // A finished sandbox's process-group id may be reused later: the signal cleanup must never target it.
+      if (sandboxPid !== undefined) signalPids?.delete(sandboxPid);
+      await model.stop();
+    }
+    const turnWire = wireEntries(model.wireLog);
+    const turnTotals = model.totals();
+    wire.push(...turnWire);
+    totals = addTotals(totals, turnTotals);
+    cpSync(model.wireLog, join(evidence, `wire-${sessionId}${suffix}.jsonl`), { force: true });
+    if (existsSync(`${model.wireLog}.totals.json`)) cpSync(`${model.wireLog}.totals.json`, join(evidence, `wire-${sessionId}${suffix}.totals.json`), { force: true });
+    const turnEvents = existsSync(eventsPath) ? readFileSync(eventsPath, "utf8") : "";
+    const stderr = existsSync(stderrPath) ? readFileSync(stderrPath, "utf8") : "";
+    eventsText += turnEvents.endsWith("\n") || !turnEvents ? turnEvents : `${turnEvents}\n`;
+    gateRefusals = [...gateRefusals, ...model.gateRefusals()];
+    stderrTail = stderr.slice(-2000);
+    terminal = terminalOf({ run, events: lastAssistant(turnEvents), wire: turnWire, totals: turnTotals, gateRefusals: model.gateRefusals(), stderr });
+    turnLog.push({ turn: turn + 1, status: terminal.status, requests: turnTotals.forwarded ?? 0, wallMs: Date.now() - turnStarted, resumed: turn > 0 });
+    if (terminal.status !== "completed") break;
   }
-  const wire = wireEntries(model.wireLog);
-  const totals = model.totals();
-  cpSync(model.wireLog, join(evidence, `wire-${sessionId}.jsonl`), { force: true });
-  if (existsSync(`${model.wireLog}.totals.json`)) cpSync(`${model.wireLog}.totals.json`, join(evidence, `wire-${sessionId}.totals.json`), { force: true });
-  const eventsText = existsSync(eventsPath) ? readFileSync(eventsPath, "utf8") : "";
-  const stderr = existsSync(stderrPath) ? readFileSync(stderrPath, "utf8") : "";
   const events = lastAssistant(eventsText);
-  const terminal = terminalOf({ run, events, wire, totals, gateRefusals: model.gateRefusals(), stderr });
-  // capture (protocol.capture.transcripts): every transcript of the attempt, the main session AND orche's sub-sessions and run
-  // records (`<agent dir>/orche/records/**`), is kept and leak-scanned; without it only the main session is scanned.
+  // capture: every session transcript of the attempt, the main session AND orche's sub-sessions (workers, sub-workers, advisors:
+  // `<agent dir>/orche/records/**`), is kept and leak-scanned; without it only the main session is scanned (the loop's behaviour).
   const transcripts = transcriptFiles(box, capture);
   const sessionText = transcripts.filter(f => f.endsWith(".jsonl")).map(f => readFileSync(join(box, f), "utf8")).join("\n");
   rmSync(launch, { force: true });
-  return { ws, box, transcripts, run, wallMs: Date.now() - started, totals, wire, completed: completedModelCalls(wire), events, terminal, sessionText, gateRefusals: model.gateRefusals(), stderrTail: stderr.slice(-2000) };
+  return { ws, box, transcripts, runtimeConfig, run, wallMs: Date.now() - started, totals, wire, completed: completedModelCalls(wire), events, terminal, sessionText, gateRefusals, stderrTail, turns: turnLog };
 }
 
 /** Transcript files of one attempt relative to its box: the main session directory and, with `all`, orche's records. */
@@ -174,10 +230,6 @@ export async function runUnit({ harness, task, repeat, split, context, protocol,
     integrity.violations = [...new Set([...integrity.violations, ...strict.violations])];
     writeFileSync(join(evidence, "tests.json"), JSON.stringify(strict.hashes, null, 2));
   }
-  if (protocol.capture?.transcripts) {
-    // Every attempt's transcripts (main session, orche workers/sub-workers/advisors, orche run records), secrets redacted.
-    tries.forEach((t, i) => { for (const f of t.transcripts) { const to = join(evidence, "transcripts", `try${i}`, f); ensureDir(dirname(to)); writeFileSync(to, redact(readFileSync(join(t.box, f), "utf8"), [env.keyOverride].filter(Boolean))); } });
-  }
   const leaks = leakScan(chosen.sessionText, chosen.events);
   integrity.leakHits = leaks;
   let grade = { hiddenPass: false };
@@ -202,11 +254,21 @@ export async function runUnit({ harness, task, repeat, split, context, protocol,
     input_tokens: sumOf(t => t.totals.input ?? 0), output_tokens: sumOf(t => t.totals.output ?? 0), cache_tokens: sumOf(t => t.totals.cached ?? 0), cache_write_tokens: sumOf(t => t.totals.cacheWrite ?? 0),
     wall_time: sumOf(t => t.wallMs), attempts_used: tries.length, evidence_dir: evidence, started_at: startedAt,
   });
+  // Explicit runtime settings of the run (what the harness was configured with, beyond the protocol route) and, with transcript
+  // capture, the attributable telemetry (src/telemetry.mjs): observed vs estimated tokens, task vs summary requests, compactions.
+  record.runtime_settings = { route: { ...route }, orche: chosen.runtimeConfig ?? null, appendSystemPrompt: harness.appendSystemPrompt ? true : false };
+  // Multi-turn tasks: what every user turn (a separate, resumed Pi process) ended with.
+  if (Array.isArray(task.turns) && task.turns.length) record.turns = chosen.turns;
+  if (protocol.capture?.transcripts) record.telemetry = unitTelemetry({ files: chosen.transcripts.map(f => ({ path: f, text: readFileSync(join(chosen.box, f), "utf8") })), wire: chosen.wire, runtime: { orcheOverlay: harness.orcheConfig ?? null } });
   const ranTests = sessionToolCalls(chosen.sessionText).some(call => call.name === "bash" && /\btest\b|--test/.test(JSON.stringify(call.arguments ?? {})));
   record.failure_class = classifyFailure(record, { ranTests, tools: chosen.events.tools, toolNames: chosen.events.toolNames, toolErrors: chosen.events.toolErrors, diffBytes: diff.length, grade });
   record.final_text_excerpt = chosen.events.finalText.slice(0, 600);
   record.workspace_digest = treeDigest(chosen.ws);
   writeFileSync(join(evidence, "record.json"), JSON.stringify(record, null, 2));
+  if (protocol.capture?.transcripts) {
+    // Every attempt's transcripts (main session, orche workers/sub-workers/advisors, orche run records), secrets redacted.
+    tries.forEach((t, i) => { for (const f of t.transcripts) { const to = join(evidence, "transcripts", `try${i}`, f); ensureDir(dirname(to)); writeFileSync(to, redact(readFileSync(join(t.box, f), "utf8"), [env.keyOverride].filter(Boolean))); } });
+  }
   for (let i = 0; i < tries.length; i++) rmSync(join(scratch, `box-${i}`), { recursive: true, force: true });
   return record;
 }

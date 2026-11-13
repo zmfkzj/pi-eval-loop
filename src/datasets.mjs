@@ -27,7 +27,7 @@ export function loadSuite(suiteDir) {
     if (!hidden && !customGrader) continue;
     const pkg = JSON.parse(readFileSync(join(dir, "repo/package.json"), "utf8"));
     const tier = TIER_BY_PREFIX[id[0]] ?? "medium";
-    tasks.push({ id, source: "suite", dir, repo: join(dir, "repo"), hidden, customGrader, family: FAMILY_OVERRIDES[id] ?? `pkg:${pkg.name}`, tier, hard: tier === "hard", instruction: manifest.instruction, timeoutSec: manifest.timeoutSec, provenance: "orche-fixtures-suite" });
+    tasks.push({ id, source: "suite", dir, repo: join(dir, "repo"), hidden, customGrader, family: FAMILY_OVERRIDES[id] ?? `pkg:${pkg.name}`, tier, hard: tier === "hard", instruction: manifest.instruction, ...(Array.isArray(manifest.turns) && manifest.turns.every(t => typeof t === "string" && t.trim()) && manifest.turns.length ? { turns: manifest.turns } : {}), timeoutSec: manifest.timeoutSec, provenance: "orche-fixtures-suite" });
   }
   return tasks;
 }
