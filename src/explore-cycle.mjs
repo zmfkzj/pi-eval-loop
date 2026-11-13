@@ -87,6 +87,13 @@ export function loadExploration(file) {
   if (sim && !c.runtime?.simulated) p.push("simulation.enabled needs runtime.simulated (offline only)");
   if (!sim && c.runtime?.simulated) p.push("runtime.simulated needs simulation.enabled");
   if (!sim) abs(c.runtime?.dir, "runtime.dir");
+  // Simulated-only fault controls (offline rehearsal of the rollback routes): accepted only by a simulated cycle, never by a
+  // live one and never by mode screening (whose backend ignores them); see simulatedFromConfig.
+  if (c.simulation?.crash !== undefined || c.simulation?.byPhase !== undefined) {
+    if (!sim || c.runtime?.simulated !== true) p.push("simulation.crash / simulation.byPhase are simulated-only fault controls: they need simulation.enabled and runtime.simulated");
+    if (scr) p.push("simulation.crash / simulation.byPhase are not supported by mode screening");
+    p.push(...simulationFaultProblems(c.simulation));
+  }
   // mode autonomous (lifecycle): exploration -> registered confirmation -> gate-driven adoption -> smoke -> post-adoption check.
   if (c.mode !== undefined && !["exploration-only", "autonomous", "screening"].includes(c.mode)) p.push("mode must be exploration-only, autonomous or screening");
   if (c.mode === "autonomous") {
@@ -293,7 +300,7 @@ export async function runExploreCycle(cfgFile, stateDir, { requireState = false,
         bound = r0.bound;
       }
       const live = cfg.simulated || (deps.backend && deps.validate && deps.checks && deps.envDigest) ? null : await liveDeps(cfg, stateDir, forPlan);
-      const backend = deps.backend ?? (cfg.simulated ? await simulatedFromConfig(cfg) : live.backend);
+      const backend = deps.backend ?? (cfg.simulated ? await simulatedFromConfig(cfg, () => s?.phase) : live.backend);
       rtMemo = { bound, backend,
         validate: deps.validate ?? (cfg.simulated ? async () => ({ ok: true, expected: {}, baselineFailing: [] }) : live.validate),
         checks: deps.checks ?? (cfg.simulated ? async () => ({ pass: true, problems: [] }) : live.checks),
@@ -532,10 +539,48 @@ function otherRuntimeUsers(users) {
 
 function save(dir, s) { atomicWriteJson(join(dir, STATE), { ...s, updatedAt: new Date().toISOString() }); }
 
-async function simulatedFromConfig(cfg) {
+/** Lifecycle phase -> simulation.byPhase key (null: no override applies in that phase). */
+export const SIMULATION_FAULT_PHASES = Object.freeze(["exploration", "confirm", "smoke", "postconfirm"]);
+export function simulationFaultPhase(phase) {
+  if (phase === "selected" || phase === "running") return "exploration";
+  if (phase === "smoke") return "smoke";
+  if (typeof phase === "string" && phase.startsWith("postconfirm-")) return "postconfirm";
+  if (typeof phase === "string" && phase.startsWith("confirm-")) return "confirm";
+  return null;
+}
+const HARNESS_ID = /^[A-Za-z0-9._-]{1,64}$/;
+const plainObject = (v) => v !== null && typeof v === "object" && !Array.isArray(v);
+/** Shape problems of simulation.crash ([harness ids]) and simulation.byPhase ({phase: {harness id: p in [0,1]}}). */
+function simulationFaultProblems(sim) {
+  const p = [];
+  if (sim.crash !== undefined && !(Array.isArray(sim.crash) && sim.crash.length > 0 && sim.crash.every(x => typeof x === "string" && HARNESS_ID.test(x))))
+    p.push("simulation.crash must be a non-empty array of harness ids (e.g. [\"deployed\"])");
+  if (sim.byPhase !== undefined) {
+    if (!plainObject(sim.byPhase) || !Object.keys(sim.byPhase).length) p.push(`simulation.byPhase must be a non-empty object keyed by ${SIMULATION_FAULT_PHASES.join(" / ")}`);
+    else for (const [k, v] of Object.entries(sim.byPhase)) {
+      if (!SIMULATION_FAULT_PHASES.includes(k)) p.push(`simulation.byPhase.${k}: unknown phase (one of ${SIMULATION_FAULT_PHASES.join(", ")})`);
+      else if (!plainObject(v) || !Object.keys(v).length || !Object.entries(v).every(([h, q]) => HARNESS_ID.test(h) && typeof q === "number" && Number.isFinite(q) && q >= 0 && q <= 1)) p.push(`simulation.byPhase.${k} must map harness ids to success probabilities in [0, 1]`);
+    }
+  }
+  return p;
+}
+
+/**
+ * The simulated target model of a simulated cycle (cfg.simulated only; a live cycle never reaches this). simulation.p sets each
+ * harness's success probability (default 0.5) and simulation.violate marks harnesses with an integrity violation. Fault controls:
+ * simulation.crash lists harness ids whose every attempt ends harness_crash (the post-adoption smoke runs harness "deployed");
+ * simulation.byPhase.<exploration|confirm|smoke|postconfirm> replaces p for the listed harnesses while the cycle is in that phase
+ * (read live through `phaseOf`, so one config can rehearse a later failure, e.g. a post-adoption confirmation that is worse).
+ */
+async function simulatedFromConfig(cfg, phaseOf = () => null) {
   const { simulatedBackend } = await import("./evaluator.mjs");
   const p = cfg.simulation.p ?? {};
-  return simulatedBackend({ seed: cfg.simulation.seed ?? "sim", skill: (h) => ({ p: p[h.id] ?? 0.5, violation: (cfg.simulation.violate ?? []).includes(h.id) }) });
+  const crash = new Set(cfg.simulation.crash ?? []);
+  const byPhase = cfg.simulation.byPhase ?? {};
+  return simulatedBackend({ seed: cfg.simulation.seed ?? "sim", skill: (h) => {
+    const over = byPhase[simulationFaultPhase(phaseOf())] ?? {};
+    return { p: over[h.id] ?? p[h.id] ?? 0.5, violation: (cfg.simulation.violate ?? []).includes(h.id), ...(crash.has(h.id) ? { crash: true } : {}) };
+  } });
 }
 
 async function liveDeps(cfg, stateDir, plan) {

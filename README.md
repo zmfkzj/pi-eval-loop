@@ -222,6 +222,20 @@ The `--protocol` file is a `pi-eval-loop/exploration@1` config. Every path in it
 - the single budget ledger, with `limit`, `scope` and `minRemaining`;
 - the isolated runtime, which may be `simulated` only together with `simulation.enabled`, for offline tests.
 
+**Simulated-only fault controls** (offline rehearsal of the rollback routes through the real CLI). A simulated cycle
+(`simulation.enabled: true` and `runtime.simulated: true`) runs a simulated target model: `simulation.p` sets each
+harness's success probability (default 0.5), `simulation.violate` lists harnesses with an integrity violation and `simulation.seed`
+seeds it. Two more keys inject faults:
+- `simulation.crash`: a non-empty array of harness ids whose every attempt ends `harness_crash`. The post-adoption smoke runs
+  harness `deployed`, so `["deployed"]` makes the smoke fail and the lifecycle roll the release back.
+- `simulation.byPhase`: `{ <phase>: { <harness id>: p } }` with phase `exploration`, `confirm`, `smoke` or `postconfirm`
+  and p in [0, 1]. While the cycle is in that phase the listed probabilities replace `simulation.p` (e.g.
+  `{ "postconfirm": { "c1": 0, "stable": 0.95 } }` makes the independent post-adoption confirmation fail and roll back).
+
+The config is rejected (`usage`) when either key is present without `simulation.enabled` and `runtime.simulated`, in mode
+`screening`, or with a malformed value. A live cycle never builds the simulated model, so these keys can never reach a live
+backend, the gates or the budget rules; injected test backends (`deps.backend`) take precedence over them.
+
 **How a cycle runs**
 1. On init, the cycle binds to the sha256 of its config and to every evaluator file in `protocol.lock.json`. Any change after that is a `state_error`.
 2. It re-checks lineage and retires contaminated, never-reserved batches with an evidence document.
